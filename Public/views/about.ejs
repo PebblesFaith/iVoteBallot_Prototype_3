@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>About iVoteBallot</title>
+
+	<link rel="stylesheet" type="text/css" href="../styles/about.css" />
+
+</head>
+
+<!--
+	The Developer, Sarai Hannah Ajai written her HTML codes language for the about.ejs file;
+	in order to contains information about the iVoteBallot system. The file includes a title
+	and a link to the iVoteBallot page, which is accessible through the URL 
+	http://localhost:8080/iVoteBallot. 	And, the page also contains a section titled "About,"
+	which is marked by a heading and separated from the rest of the content by a blue horizontal 
+	line. The main content of the page is structured using a flex container and includes a column
+	titled "Our Mission." This column explains that in order to participate in iVoteBallot, 
+	individuals must have a valid state identification card and provides information about how 
+	registration cards are distributed. Overall, Ms. Ajai had written the about.ejs file that 
+	provides a concise overview of the iVoteBallot system and its requirements.
+-->
+	<body>
+		<header>
+			<%- include('../common/header') %>
+		</header>
+
+		<p id="iVoteBallot_Title">
+			<a id="iVoteBallot_Title" href="http://localhost:8080/iVoteBallot">iVoteBallot </a>
+		</p>
+		
+		<p id="iVoteBallot_About_Title">About</p>
+		<br>
+		<hr id="hr_Blue_line_02">
+		<br>
+
+		<div id="flex_Container">
+			<div id="flex_Container_Row">
+				<div id="flex_Container_Column">
+					
+					<p id="column_Title_01">
+						Our Mission 
+					</p>
+					<div id="first_Column">
+						<hr id="hr_Red_line_02">
+						<p id="about_Paragraph_01">
+							We are dedicated in safeguarding the democratic rights of all American citizens
+							through our iVoteBallot.com secure online platform. Our iVoteBallot.com web application
+							utilizes cryptographic algorithms; in order to secure and maintain the anonymity and 
+							privacy rights of all voters during all states and Federal elections. And, our iVoteBallot's 
+							voters have privilege accesses to our iVoteBallot.com web application is only granted through
+							a state-issued iVoteBallot’s Identification card, which is assigned to a unique cryptographic
+							identifier to further ensure the protection rights of our users' information.
+						</p>
+					</div>
+				</div>
+				
+				</div>
+			</div>
+		</div>
+
+
+		<footer>
+			<%- include('../common/footer') %>
+		</footer>
+		
+	</body>
+</html>
