@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Header Section</title>
+
+	<link rel="stylesheet" type="text/css" href="../styles/header.css" />
+	
+</head>
+
+<!--
+	The Developer, Sarai Hannah Ajai had written her HTML codes for the header.ejs file is
+	responsible for defining the header section of the HTML page that contains the logo, slogan,
+	and navigation bar. In the given HTML code, the header.ejs file defines the layout and
+	styling of the header section using flexbox containers. The .left_Column, .middle_Column, and
+	.right_Column classes define the layout of the header's three columns that contain the logo,
+	slogan, and navigation bar, respectively. The slogan_01 paragraph tag defines the slogan text
+	that appears in the middle column of the header. The navigational_Bar_01 unordered list defines
+	the navigation bar that appears in the right column of the header. The header.ejs file, also,
+	includes image tags that define the icons used in the navigation bar. Finally, the hr_Red_line
+	horizontal rule tag creates a red line below the header section to separate it from the rest of
+	the page's content. Overall, Ms. Ajai written HTML codes for the header.ejs file plays an
+	essential role in creating the visual and functional design of the iVoteBallot home page's header
+	section.
+-->
+	<body>
+		
+		<div class="flex_Container">
+			<div class="flex_Container_Row">
+				<div class="flex_Container_Column">
+
+					<div class="left_Column">	
+						
+						<a class="header_Image_01" href="http://localhost:8080/iVoteBallot"><img  src="../images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png" /></a>					
+					
+					</div>			
+				</div>
+
+				<div class="flex_Container_Column">
+
+					<div class="middle_Column">	
+						
+						<p id="slogan_01">
+							Your ballot, your decision, your power
+						</p>
+					
+					</div>			
+				</div>
+
+				<div class="flex_Container_Column">
+
+					<div class="right_Column">
+						<div class="flex_Container_Navgational_Bar">
+			
+							<ul class="navigational_Bar_01">	
+
+								<li>
+									<li><img class="icon_Finder_01" src="../images/free_Icon_Finder/103716_statistics_icon.png" >
+									<a href="http://localhost:8080/about">Results</a>
+								</li>
+
+								<li>
+									<li><img class="icon_Finder_01" src="../images/paid_Icon_Finder/1909634_about_about us_company_group_info_icon-5.png" >
+									<a href="http://localhost:8080/about">About Us</a>
+								</li>
+
+								<li>
+									<img class="icon_Finder_01" src="../images/free_Icon_Finder/9133514_signup_register_login_icon-2.png" >	
+
+									<a href="http://localhost:8080/alabama_SignUporLogIn_01">Sign Up | Log In</a>
+									
+								</li>
+								<br>								
+
+							</ul>
+							
+						</div>					
+							
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<br>
+
+		<hr class="hr_Red_line">		
+		
+	</body>
+</html>
