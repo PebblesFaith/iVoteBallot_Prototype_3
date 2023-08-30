@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>iVoteBallot | Help Center</title>
+
+	<link rel="stylesheet" type="text/css" href="../styles/helpCenter.css" />
+</head>
+
+<!--
+	The Developer, Sarai Hannah Ajai have written her HTML coded language for the helpCenter.ejs file 
+	for which contains HTML code for the Help Center web page. It includes a title ("Help Center") 
+	and a horizontal line. And, the content includes links to several web pages, including 
+	"iVoteBallot", "Contact Us | Customer Care", "How iVoteBallot Works", and "Terms and Policies",
+	which are organized in a flexible layout container. 	
+-->
+	<body>
+		<header>
+			<%- include('../common/header') %>
+		</header>
+
+		<p id="contactUs_Title_01">
+			Help Center
+		</p>
+			
+		<p id="contactUs_Title_02">
+			
+		</p>
+	
+		<hr id="hr_Blue_line_02">
+		<br>
+		
+		<div id="flex_Container">
+			<div id="flex_Container_Row">
+				<div id="flex_Container_Column">
+					<div id="first_Column">
+					   
+						<a href="http://localhost:8080/iVoteBallot">iVoteBallot</a>
+
+					</div>
+				</div>   				
+
+				<div id="flex_Container_Column">
+					<div id="second_Column">
+
+						<div id="flex_Box">
+							<p id="name_Flex_Box_1">
+								<a href ="http://localhost:8080/contactUs_01">Contact Us | Customer Care</a>
+							</p>
+						</div>
+						
+						<div id="flex_Box">
+							<p id="name_Flex_Box_2">
+								<a href ="view_HumanCapitalManagement.html">How iVoteBallot Works</a>
+							</p>
+						</div>  
+						
+						<div id="flex_Box">
+							<p id="name_Flex_Box_3">
+								<a href ="">Terms and Policies</a>
+							</p>
+						</div>  
+	
+						<div id="flex_Box">
+							<p id="name_Flex_Box_4">
+								<a href ="">Empty Flex Box</a>
+							</p>
+						</div> 
+						
+					</div>
+				</div>	
+			</div>
+		</div>
+		<br>
+
+		<footer>
+			<%- include('../common/footer') %>
+		</footer>
+		
+	</body>
+</html>
