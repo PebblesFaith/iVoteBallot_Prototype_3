@@ -9,8 +9,6 @@ iVoteBallot.com was designed to offer a more precise and streamlined method of t
  
  The iVoteBallot.com team is committed to ensuring that the voting process is fair, accessible, and secure for all American citizens. We continuously work to improve our electronic voting system and incorporate the latest technology to enhance the voting experience. With our online forms and electronic submission, voters can rest assured that their votes will be counted accurately and efficiently. Join us in our mission to revolutionize the voting process and make democracy accessible to all.
 
- Dated 04-16-23
-
  --------------------------------
 
  Dated 08-29-23
