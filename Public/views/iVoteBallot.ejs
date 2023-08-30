@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>iVoteBallot</title>
+
+	<link rel="stylesheet" type="text/css" href="../styles/ivoteBallot.css" />
+	
+</head>
+
+<!--
+	The Developer, Sarai Hannah Ajai written her HTML codes for the iVoteBallot home page which is responsible for
+	creating the structure and content of the web page that users see when they visit the iVoteBallot
+	website. The code includes various elements such as headings, paragraphs, images, and links that are
+	used to convey information about the iVoteBallot services and allow users to interact with the site
+	through hyperlinks. The HTML codes, also includes metadata such as title tags, meta descriptions, and
+	meta keywords that provide information about the page's content to search engines and other web services.
+	Overall, Sarai Hannah Ajai written HTML codes for the iVoteBallot home page plays a critical role in
+	creating a user-friendly and informative website that effectively communicates the benefits of the
+	iVoteBallot services to potential users.
+-->
+<body>
+
+	<header>
+		<%- include('../common/header') %>
+	</header>	
+
+	<p id="iVoteBallot_Title">
+		<a id="iVoteBallot_Title" href="http://localhost:8080/iVoteBallot">iVoteBallot </a>
+	</p>
+		
+	<p id="iVoteBallot_HowItWorks_Title">How It Works</p>
+	<br>
+	<hr id="hr_Blue_line_02">
+	
+	<div id="flex_Container">
+		<div id="flex_Container_Row">
+			<div id="flex_Container_Column">
+
+				<p id="column_Title_01">
+					<img id="iVoteBallot_Image_01" src="../images/free_Unsplash_Images/rupixen-com-Q59HmzK38eQ-unsplash.jpg" />					
+					Step 1:
+				</p>
+				<p id="column_Title_02">
+					Check your Eligibility
+				</p>
+				<div id="first_Column">
+					<hr id="hr_Red_line_02">
+					<p>
+						To be eligible for iVoteBallot, you must have a valid state identification card, such as a valid
+						state ID, Military ID, driver's license or real ID driver's license. If you have one, your State's
+						Department of Motor Vehicle in collaboration with the your State Voting Commission will send you an 
+						official iVoteBallot registration card via the United States Postal Service delivery.
+					</p>
+				</div>
+			</div>
+			<div id="flex_Container_Column">
+				<p id="column_Title_01">
+					<img id="iVoteBallot_Image_01" src="../images/free_Unsplash_Images/jose-m-w0eMOcfV2MQ-unsplash.jpg" />
+					Step 2:
+				</p>
+				<p id="column_Title_02">
+					Register Online
+				</p>
+				<div id="second_Column">					
+					<hr id="hr_Red_line_02">
+					<p>
+						Once you have receive your iVoteBallot registration card then go to the iVoteBallot.com website and 
+						register your iVoteBallot registration card; in order to create your State online election account. 
+						This will verify your identity and ensure that you're eligible to vote online. 						
+					</p>
+				</div>
+			</div>
+			<div id="flex_Container_Column">
+				<p id="column_Title_01">
+					<img id="iVoteBallot_Image_01" src="../images/free_Unsplash_Images/chad-stembridge-smaioVbs6kY-unsplash.jpg" />					
+					Step 3:
+				</p>
+				<p id="column_Title_02">
+					Set Up your Account
+				</p>
+				<div id="third_Column">
+					<hr id="hr_Red_line_02">
+					<p>
+						You will be prompted to set up your email address, password and enter your debit or credit card
+						information; in order to pay a one-time fee of $5 in order to register to vote online.
+					</p>
+				</div>
+			</div>
+			<div id="flex_Container_Column">
+				<p id="column_Title_01">
+					<img id="iVoteBallot_Image_01" src="../images/free_Unsplash_Images/nordwood-themes-q8U1YgBaRQk-unsplash.jpg" />					
+					Step 4:
+				</p>
+				<p id="column_Title_02">
+					Cast your Vote
+				</p>
+				<div id="fourth_Column">
+					<hr id="hr_Red_line_02">
+					<p>
+						After, you have entered your State's iVoteBallot registration card information and identification
+						card numbers, and if they both match your State's Department of Motor Vehicle database details then
+						you can officially vote for each of your State and Federal elections from the comfort of your home
+						online for an online service fee of $5 for each election.
+					</p>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<%- include('../common/footer') %>
+	</footer>
+	
+</body>
+</html>
