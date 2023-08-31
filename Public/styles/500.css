@@ -1,0 +1,349 @@
+/*
+    This CSS code defines a custom font called "Megrim-Regular" using the TrueType font format.
+    The font-weight property is set to normal, indicating that the font should be displayed with
+    the standard weight. This code is useful for creating a consistent and unique visual style
+    for the iVoteBallot website or application.
+*/
+@font-face {
+    font-family: "Megrim-Regular";
+    src: url(fonts/Megrim-Regular.ttf) format('truetype');
+    font-weight: normal;
+}
+
+/*
+    The CSS code block uses the "@media" rule to apply styles to the "body" element only when the
+    screen width is at least 250 pixels. The specified styles set a padding and margin of 25 pixels
+    each and a background color of white to the body element
+*/
+@media screen and (min-width: 250px) {
+    body {
+        padding: 25px;
+        margin: 25px;        
+        background-color: rgb(255, 255, 255);
+    }    
+}
+
+/*
+    The CSS style for #error500_Title_01 is used to style the appearance of a particular element
+    on a web page that has an ID of "error500_Title_01". The style includes various properties such
+    as display, flex-flow, text-align, justify-content, list-style, background-color, width,
+    margin-top, margin-bottom, font-family, font-size, and color, which are used to define the layout,
+    typography, and color scheme of the element.
+*/
+#error500_Title_01 {
+    display: flex;
+    flex-flow: row wrap;    
+    text-align: center;    
+    justify-content: center;    
+    list-style: none;   
+    background-color: transparent;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: 5px;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(13px, 3vw, 75px);
+    color: rgb(13, 65, 255);
+}
+
+/*
+    The CSS style for #error500_Title_02 is used to style the appearance of a particular element
+    on a web page that has an ID of "error500_Title_02". The style includes various properties such
+    as display, flex-flow, text-align, justify-content, list-style, background-color, width,
+    margin-top, margin-bottom, font-family, font-size, and color, which are used to define the layout,
+    typography, and color scheme of the element.
+*/
+#error500_Title_02 {
+    display: flex;
+    flex-flow: row wrap;    
+    text-align: center;    
+    justify-content: center;  
+    list-style: none;   
+    background-color: transparent;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 35px);
+    color: rgb(201, 24, 24);
+}
+
+/*
+    The CSS style code creates a horizontal line with a solid border of blue color using
+    the RGB value. The line has no borders on the left and right sides but has a top and
+    bottom margin of 5 pixels.
+*/
+#hr_Blue_line_02 {
+    border-color: rgb(13, 65, 255); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/*
+    The CSS styles in this code block are used to create a flexible container with a red
+    background color, center-aligned content, and a row direction. The "flex-wrap: wrap"
+    property allows the container to wrap its items onto multiple lines if necessary. The
+    "align-items: center" and "justify-content: center" properties ensure that the items are
+    both vertically and horizontally centered within the container.
+*/
+#flex_Container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: rgb(201, 24, 24);
+    align-items: center;
+    justify-content: center;
+}
+
+/*
+    This CSS style defines a flexible container with a horizontal layout that wraps its content
+    if necessary. It also sets the container to stretch its items to fit the full width of the
+    container. Overall, this style is designed to create a responsive and adaptive layout for
+    web page elements.
+*/
+#flex_Container_Row {
+    display: flex;
+    flex-direction: row;    
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+}
+
+/*
+    The CSS code style aims to apply the flexbox layout to all direct child div elements of a
+    container with an ID of "flex_Container_Row". The "flex: 1" property assigns equal flex grow
+    value to each child element, allowing them to fill the available horizontal space evenly.
+*/
+#flex_Container_Row > div {
+    display: flex;
+    flex: 1;  
+}
+
+/*
+    The CSS style defines how to create a flex container with a column layout. The "display:
+    flex" property specifies that the container should use flexbox layout, while "flex-direction:
+    column" arranges the flex items vertically. Finally, "flex-basis: 100%" sets the initial size
+    of the flex items to 100% of the container's width.
+*/
+#flex_Container_Column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;  
+}
+
+/*
+    This CSS style is used to create a flexible layout with a container element and multiple
+    child elements displayed as columns. The "flex" property is used to distribute the available
+    space among the child elements evenly, and the "display" property is set to "flex" to enable
+    flexbox layout.
+*/
+#flex_Container_Column > div {
+    display: flex;
+    flex: 1;
+}
+
+/*
+    The CSS style code sets the properties of an HTML element with the ID "first_Column" to create
+    a flexible container that wraps its contents in a column layout. The style also defines the
+    background color, height, width, text alignment, margin, padding, font family, size, and color
+    of the element, as well as its content justification and absence of a border.
+*/
+#first_Column {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);   
+    height: auto;
+    width: auto;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    color: rgb(13, 65, 255);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 16px);   
+    justify-content: center;  
+    border: none;
+}
+
+/*
+    This CSS style code is used to style a specific HTML element with the ID "error500_Title_03".
+    The purpose of this code is to set the text alignment to the left, add margins to the left,
+    right, and bottom, specify a font size that scales with the viewport width, set a font family, 
+    and apply a blue color to the text. Additionally, the "padding: auto;" property has no effect 
+    and can be removed.
+*/
+#error500_Title_03 {
+    text-align: left;
+    margin-left: 20px;
+    margin-right: 50px;
+    margin-bottom: 2px;
+    font-size: clamp(14px, 2vw, 16px); 
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(13, 65, 255); 
+    padding: auto;      
+}
+
+/*
+    This CSS style is used to align the content of Section 01 to the left, display bullet
+    points using a disc style, set the font color to a shade of blue, use a font family that
+    includes Cambria, Cochin, Georgia, Times, Times New Roman, or serif, set the font size to 
+    a value that is responsive to the viewport width, and automatically set the padding.
+*/
+#align_Section_01 {
+    text-align: left;
+    list-style-type: disc;
+    color: rgb(13, 65, 255);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 14px);
+    padding: auto;    
+ }
+
+/*
+    The CSS style code sets the visual appearance and layout properties of the element with
+    the ID "paragraph_Section_01". Specifically, it aligns the text to the left, sets the font
+    color to a shade of blue, specifies a font family and size range, adds a margin on both sides,
+    and sets the padding to "auto" (which centers the content horizontally within its container).
+*/
+#paragraph_Section_01 {
+    text-align: left;
+    color: rgb(13, 65, 255);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 14px);   
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: auto;    
+}
+
+/*
+    The CSS style defined for #error500_Link_01 serves the purpose of styling a hyperlink that
+    displays an error 500 message on a webpage. It specifies the font family, size, color, and
+    text decoration properties to give the hyperlink a specific look and feel that is consistent
+    with the overall design of the webpage.
+*/
+#error500_Link_01 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 14px); 
+    color: rgb(13, 65, 255);
+    text-decoration: underline;
+}
+
+/*
+    The CSS style code above is intended to change the color and text decoration of a hyperlink
+    with the ID "error500_Link_01" when the user hovers over it. Specifically, the text color is
+    changed to a shade of red, and an underline is added to the text.
+*/
+a#error500_Link_01:hover {
+    color: rgb(201, 24, 24);
+    text-decoration: underline;
+}
+
+/*
+    The CSS style defined for #error500_Link_02 serves the purpose of styling a hyperlink that
+    displays an error 500 message on a webpage. It specifies the font family, size, color, and
+    text decoration properties to give the hyperlink a specific look and feel that is consistent
+    with the overall design of the webpage.
+*/
+#error500_Link_02 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 14px); 
+    color: rgb(13, 65, 255);
+    text-decoration: underline;
+}
+
+/*
+    The CSS style code above is intended to change the color and text decoration of a hyperlink
+    with the ID "error500_Link_02" when the user hovers over it. Specifically, the text color is
+    changed to a shade of red, and an underline is added to the text.
+*/
+a#error500_Link_02:hover {
+    color: rgb(201, 24, 24);
+    text-decoration: underline;
+}
+
+/*
+    The CSS style code sets the properties of an HTML element with the ID "second_Column" to create
+    a flexible container that wraps its contents in a column layout. The style also defines the
+    background color, height, width, text alignment, margin, padding, font family, size, and color
+    of the element, as well as its content justification and absence of a border.
+*/
+#second_Column {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column; 
+	background-color: rgb(201, 24, 24);
+    color:rgb(255, 255, 255);
+    height: auto;
+    width: auto;
+    text-align: center;    
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(18px, 5vw, 100px);     
+    justify-content: center;
+    border: none;
+}
+
+/*
+    This CSS style targets all anchor tags within the second column and removes the default
+    underline decoration while displaying them as block elements with padding. It also sets
+    the text color to white using RGB values.
+*/
+#second_Column a {
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+    color:rgb(255, 255, 255);
+}
+
+/*
+    The CSS style code defines a hover effect on links within the second column of a webpage.
+    When a user hovers over the link, the text color changes to a specific shade of blue, as
+    defined by the RGB color value.  
+*/
+#second_Column a:hover {
+    color: rgb(13, 65, 255);
+}
+
+/*
+    The CSS code style below uses a media query to target devices with a maximum screen width
+    of 992 pixels. It then applies a style to the element with the ID "flex_Container", setting
+    its width to 100% of the viewport. This is done to ensure that the element expands to fill
+    the width of the screen on smaller devices, improving the user experience for mobile and
+    tablet devices.
+*/
+@media all and (max-width: 992px) {
+    #flex_Container {
+      width: 100%;
+    }
+}
+  
+/*
+    The CSS code style below uses a media query to target devices with a maximum screen width
+    of 600 pixels. It then applies a style to the element with the ID "flex_Container", setting
+    its width to 100% of the viewport. This is done to ensure that the element expands to fill
+    the width of the screen on smaller devices, improving the user experience for mobile and
+    tablet devices.
+*/
+@media all and (max-width: 600px) {
+    #flex_Container {
+      width: 100%;
+    }
+}
+
+/*
+    The CSS style defined within the "@media print" rule is designed to control how a web page
+    will appear when printed. In this specific example, it sets the background color to white 
+    and the text color to black for the body element when printing the iVoteBallot webpage.
+*/
+@media print {
+    body {        
+     background-color: rgb(255, 255, 255);
+     color: rgb(0, 0, 0);
+    }	    
+}
