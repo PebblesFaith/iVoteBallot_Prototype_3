@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>iVoteBallot | Error 535</title>
+
+	<link rel="stylesheet" type="text/css" href="../styles/535.css" />
+
+</head>
+
+<!--
+	Sarai Hannah Ajai have written her HTML codes language for the 535.ejs file which provides
+	information about the SMTP Error 535: Authentication Failed. It explains that when an user 
+	use the Simple Mail Transfer Protocol (SMTP) to send emails, a server generates an error
+	message. And, if it detects inappropriate authentication by an user. The 535.ejs file lists
+	several possible reasons why this error may occur, including incorrect username or password,
+	disabled account, connection encryption, or unsupported authentication methods. It also provides 
+	a link to return to the iVoteBallot homepage and contact information if the user continues to 
+	experience the error. Finally, the file includes common header and footer code using the EJS 
+	templating engine to maintain consistency across the website.
+-->
+
+	<body>
+	
+		<header>
+			<%- include('../common/header') %>
+		</header>	
+		
+		<p id="error535_Title_01">
+			What happen?
+		</p>
+			
+		<p id="error535_Title_02">
+			Error 535: Authentication Failed
+		</p>
+
+		<hr id="hr_Blue_line_02">
+		<br>
+		
+		<div id="flex_Container">
+			<div id="flex_Container_Row">
+				<div id="flex_Container_Column">
+					<div id="first_Column">
+						
+						<p id="error535_Title_03">   
+							When using Simple Mail Transfer Protocol (SMTP) to send emails, a server generates an error
+							message if it detects inappropriate authentication. The exact error message may differ depending
+							on the email program being used, and some servers may not show any message at all. One common
+							error message is "SMTP Error 535 Authentication Failed," which can occur for a variety of reasons,
+							including:
+						</p> 
+							
+						<ul id="align_Section_01">
+							<li>
+								Incorrect Username or Password: If you enter the wrong username or password in your email program,
+								the SMTP server may generate an authentication error. Typically, you will use the same username
+								and password as your email address to log in to your mail server, but some servers may require 
+								different credentials. If you're unsure, contact your mail server administrator for assistance.
+							</li>
+							<li>
+								Disabled Account: If your account is temporarily or permanently disabled due to issues like
+								spamming or unpaid bills, you may receive an authentication failed message. To ensure your account
+								is active, check its status and reach out to your server support team if you need help.
+							</li>
+							<li>
+								Connection Encryption: Some servers require you to enable SSL/TLS encryption for the connection. 
+								If you've disabled this option, you may receive an SMTP error 535 authentication failed message.
+							</li>
+							<li>
+								Unsupported Authentication Methods: If your mail server doesn't support the authentication methods
+								you're using, it may generate an error message. This can include IP-based authentication, which is
+								rare but can still result in an SMTP error 535 authentication failed message. To resolve this issue,
+								check the status of your account and ensure that any authentication methods you're using are
+								supported by your server.
+							</li>							
+						</ul>	
+						<p id="paragraph_Section_01">
+							To continue, please return to the iVoteBallot homepage by clicking on this link: <a id="error535_Link_01"
+							href="http://localhost:8080/iVoteBallot">iVoteBallot</a>.
+						</p>
+						<p id="paragraph_Section_01">
+							To continue, please return to the iVoteBallot homepage by clicking on this link: <a id="error535_Link_01"
+							href="http://localhost:8080/iVoteBallot">iVoteBallot</a>. 
+
+							If you continue to experience this error, please send us an email at <a id="error535_Link_02" 
+							href="http://localhost:8080/contactUs">Contact Us</a> and we'll do our best to get back to you as soon as 
+							possible. You could also try again later.
+
+							We apologize for any inconvenience and appreciate your patience while we work to resolve this issue.
+						</p>
+						
+					</div>
+				</div>   				
+
+				<div id="flex_Container_Column">
+					<div id="second_Column">
+						<a href="http://localhost:8080/iVoteBallot">iVoteBallot</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<br>
+
+		<footer>
+			<%- include('../common/footer') %>
+		</footer>
+		
+	</body>
+</html>
