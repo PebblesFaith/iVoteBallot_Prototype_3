@@ -1,0 +1,391 @@
+/*
+    This CSS style language codes defines a custom font family called "Megrim-Regular"
+    and specifies the path for the font file in the "src" property. The "font-weight"
+    property sets the font weight to "normal."
+*/
+@font-face {
+    font-family: "Megrim-Regular";
+    src: url(../fonts/Source_Code_Pro/SourceCodePro-SemiBold.ttf) format('truetype');
+    font-weight: normal;
+}
+
+/*
+    The CSS style language codes sets a blue solid border for an HTML element identified
+    by "hr_Blue_line_02", while removing the left and right borders. Additionally, it adds
+    a top and bottom margin of 5 pixels to the element. This styling is used to
+    create a visual separation between sections on the webpage.
+*/
+#hr_Blue_line_02 {
+    border-color: rgb(13, 65, 255); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/*
+    The CSS style language codes sets a red solid border for an HTML element identified
+    by "hr_Red_line_02", while removing the left and right borders. Additionally, it adds
+    a top and bottom margin of 5 pixels to the element. This styling is used to
+    create a visual separation between sections on the webpage.
+*/
+#hr_Red_line_02 {
+    border-color: rgb(201, 24, 24); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/*
+    The iVoteBallot_Title on the homepage is styled to be displayed as a flex container
+    with its items wrapped in a row. It has a transparent background, uses the Megrim-Regular
+    font, and its font size adjusts based on the viewport width. The text color is a shade of
+    blue.
+*/
+#iVoteBallot_Title {
+    display: flex;
+    flex-flow: row wrap;    
+    text-align: center;    
+    justify-content: center;   
+    cursor: pointer;
+    cursor: 14px;
+    list-style: none;   
+    background-color: transparent;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(14px, 4vw, 125px);
+    color: rgb(13, 65, 255);
+}
+
+/*
+    This CSS code is styling the links in the iVoteBallot_Title of the header on the homepage.
+    It removes the underline decoration from the links, sets the background color to transparent,
+    and adds some padding. Additionally, it changes the link text color to blue.
+*/
+#iVoteBallot_Title  a {    
+    text-decoration: none;    
+    background-color: inherit;    
+    color: rgb(13, 65, 255);
+}
+
+/*
+    This CSS code language sets the background color and text color of anchor elements in
+    the iVoteBallot_Title to red and white respectively when the user hovers over them,
+    providing a visual cue of interaction.
+*/
+#iVoteBallot_Title a:hover {
+    background-color: rgb(201, 24, 24);
+    color: rgb(255, 255, 255);
+}
+
+/*
+    The CSS rule above targets screens with a maximum width of 800px and adjusts the iVoteBallot_Title's
+    layout by distributing its items with equal space around them. This helps improve the
+    iVoteBallot_Title's readability and usability on smaller screens.
+*/
+@media all and (max-width: 800px) {
+    #iVoteBallot_Title {
+        justify-content: space-around;
+    }
+}
+
+/*
+    The CSS code language adjusts the iVoteBallot_Title to display in a vertical column with
+    wrapping items and no padding when the screen width is less than or equal to 600 pixels.
+*/
+@media all and (max-width: 600px) {
+    #iVoteBallot_Title {
+        flex-flow: column wrap;
+        padding: 0%;        
+    }
+}
+
+/*
+    The CSS rules for "iVoteBallot_Title a" center-aligns the text and adds 10 pixels of
+    padding to each side of the link for improved readability and visual aesthetics.
+*/
+#iVoteBallot_Title a {
+    text-align: center;   
+}
+
+/*
+    The iVoteBallot homepage's "How It Works" title is styled with centered text alignment,
+    a red font color, and a dynamic font size that adapts to the user's viewport width. The
+    font choice is 'Megrim-Regular' with fallbacks to Cambria, Cochin, Georgia, Times, and 
+    Times New Roman, and the background color is set to transparent. The title is also vertically
+    centered using margin-top and margin-bottom set to "auto," and the parent container uses
+    justify-content to center the title horizontally.
+*/
+#iVoteBallot_HowItWorks_Title {
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: transparent;  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(13px, 2vw, 75px);
+    color: rgb(201, 24, 24);
+    text-align: center;
+    justify-content: center;
+}
+
+/*
+    The "flex_Container" element is set to display as a flex container with its contents wrapping
+    to the next line when necessary. The items inside will be aligned horizontally, with the background
+    color set as transparent. The items will also be centered both vertically and horizontally within
+    the container.
+*/
+#flex_Container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center;     
+}
+
+/*
+    The CSS language code is defining a flexible container element with a row direction and wrap property
+    that allows the content to wrap to the next line. The align-items property is set to stretch the
+    content to the full height of the container. Finally, a border color of RGB value (201, 24, 24) is
+    applied to the element to create a visual border.
+*/
+#flex_Container_Row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+    border-color: rgb(201, 24, 24);   
+}
+
+/*
+    The CSS language code creates a flex container with a column direction and a width of 100%.
+    The "flex: 1" property distributes available space equally among its child elements.
+*/
+#flex_Container_Column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;   
+}
+
+/*
+    The CSS language code is setting up a flex container with a column layout for the div elements
+    inside it. The "flex: 1" property makes each div element take up equal space within the container,
+    while "display: block" ensures that each div element is displayed as a block-level element.
+*/
+#flex_Container_Column > div {
+    display: flex;
+    flex: 1;
+    display: block;    
+}
+
+/*
+    The title section of the iVoteBallot homepage is styled using flexbox properties to align content
+    in a column layout. The text color is set to blue, and the font style is Times New Roman. The font
+    size is responsive and adjusts based on the screen size. The background color is transparent, and
+    the section has a padding of 10 pixels.
+*/
+#column_Title_01 {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(13, 65, 255);    
+    text-align: center;
+    line-height: none;
+    margin-top: auto;
+    margin-bottom: auto;      
+    font-family: 'Times New Roman', Times, serif;
+    font-size: clamp(13px, 2vw, 20px);   
+    justify-content: center;  
+    background-color: transparent;
+    padding: 10px;
+}
+
+/*
+    The title section of the iVoteBallot homepage is styled using flexbox properties to align content
+    in a column layout. The text color is set to blue, and the font style is Times New Roman. The font
+    size is responsive and adjusts based on the screen size. The background color is transparent, and
+    the section has a padding of 10 pixels.
+*/
+#column_Title_02 {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(13, 65, 255);    
+    text-align: center;
+    line-height: none;
+    margin-top: auto;
+    margin-bottom: auto;      
+    font-family: 'Times New Roman', Times, serif;
+    font-size: clamp(13px, 2vw, 18px);   
+    justify-content: center;  
+    background-color: transparent;
+    padding: 10px;    
+}
+
+/*
+    The first column on the iVoteBallot homepage is styled to display its contents in a column
+    format with a left text alignment and a red font color. And, the text is set in Times New
+    Roman font with a responsive font size range of 12px to 2vw. The column is centered using
+    justify-content and has transparent background with 10px padding.
+*/
+#first_Column {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(201, 24, 24);    
+    text-align: left;
+    line-height: none;
+    margin-top: auto;
+    margin-bottom: auto;      
+    font-family: 'Times New Roman', Times, serif;
+    font-size: clamp(12px, 2vw, 16px);   
+    justify-content: center;  
+    background-color: transparent;
+    padding: 10px;
+}
+
+/*
+    The second column on the iVoteBallot homepage is styled to display its contents in a column
+    format with a left text alignment and a red font color. And, the text is set in Times New
+    Roman font with a responsive font size range of 12px to 2vw. The column is centered using
+    justify-content and has transparent background with 10px padding.
+*/
+#second_Column {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(201, 24, 24);    
+    text-align: left;
+    line-height: none;
+    margin-top: auto;
+    margin-bottom: auto;      
+    font-family: 'Times New Roman', Times, serif;
+    font-size: clamp(12px, 2vw, 16px);   
+    justify-content: center;  
+    background-color: transparent;
+    padding: 10px;
+}
+
+/*
+    The third column on the iVoteBallot homepage is styled to display its contents in a column
+    format with a left text alignment and a red font color. And, the text is set in Times New
+    Roman font with a responsive font size range of 12px to 2vw. The column is centered using
+    justify-content and has transparent background with 10px padding.
+*/
+#third_Column {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(201, 24, 24);    
+    text-align: left;
+    line-height: none;
+    margin-top: auto;
+    margin-bottom: auto;      
+    font-family: 'Times New Roman', Times, serif;
+    font-size: clamp(12px, 2vw, 16px);   
+    justify-content: center;  
+    background-color: transparent;
+    padding: 10px;   
+}
+
+/*
+    The fourth column on the iVoteBallot homepage is styled to display its contents in a column
+    format with a left text alignment and a red font color. And, the text is set in Times New
+    Roman font with a responsive font size range of 12px to 2vw. The column is centered using
+    justify-content and has transparent background with 10px padding.
+*/
+#fourth_Column {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(201, 24, 24);    
+    text-align: left;
+    line-height: none;
+    margin-top: auto;
+    margin-bottom: auto;      
+    font-family: 'Times New Roman', Times, serif;
+    font-size: clamp(12px, 2vw, 16px);   
+    justify-content: center;  
+    background-color: transparent;
+    padding: 10px;
+}
+
+/*
+   
+*/
+#column_Title_Image_01 {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(13, 65, 255);    
+    text-align: center;
+    line-height: none;
+    margin-top: 10px;
+    margin-bottom: 10px;              
+    justify-content: center;  
+    background-color: transparent;    
+    width: clamp(210px, 2vw, 400px);    
+}
+
+/*
+   
+*/
+#column_Title_Image_02 {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(13, 65, 255);    
+    text-align: center;
+    line-height: none;
+    margin-top: 10px;
+    margin-bottom: 10px;              
+    justify-content: center;  
+    background-color: transparent;    
+    width: clamp(210px, 2vw, 400px);    
+}
+
+/*
+   
+*/
+#column_Title_Image_03 {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(13, 65, 255);    
+    text-align: center;
+    line-height: none;
+    margin-top: 10px;
+    margin-bottom: 10px;              
+    justify-content: center;  
+    background-color: transparent;    
+    width: clamp(210px, 2vw, 400px);    
+}
+
+/*
+   
+*/
+#column_Title_Image_04 {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(13, 65, 255);    
+    text-align: center;
+    line-height: none;
+    margin-top: 10px;
+    margin-bottom: 10px;              
+    justify-content: center;  
+    background-color: transparent;    
+    width: clamp(210px, 2vw, 400px);    
+}
+
+#iVoteBallot_Image_01 {
+    width: 100%;
+    height: 50%;
+    object-fit: fill;
+  }
