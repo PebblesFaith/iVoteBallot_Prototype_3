@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>iVoteBallot | Error 500</title>
+
+	<link rel="stylesheet" type="text/css" href="../styles/500.css" />
+
+</head>
+
+<!--
+	Sarai Hannah Ajai have written her 500.ejs file for the sole purpose to display an error message
+	when an user requests a page that does not exist. The HTML code in the file is styled using CSS to ensure
+	that the error message is presented in a clear and visually appealing manner. The CSS styling is applied
+	to various elements in the file, including the title, headings, paragraphs, and links. And, Ms. Ajai
+	overall aim is to provide users with a helpful message that explains why they are seeing the error and
+	what they can do to resolve the issue.
+-->
+	<body>
+
+		<header>
+			<%- include('../common/header') %>
+		</header>	
+		
+		<p id="error500_Title_01">
+			This Error is Not Your Fault!
+		</p>
+			
+		<p id="error500_Title_02">
+			Error 500: Internal Server Error
+		</p>
+	
+		<hr id="hr_Blue_line_02">
+		<br>
+		
+		<div id="flex_Container">
+			<div id="flex_Container_Row">
+				<div id="flex_Container_Column">
+					<div id="first_Column">
+					   
+						<p id="error500_Title_03">   
+							What happen?
+						</p> 
+						  
+						<ul id="align_Section_01">
+							<li>
+								Server Errors: HTTP 500 errors are typically caused by server-side errors, such as problems
+								with the web server or database that is hosting the iVoteBallot website. This can include issues
+								with the server's hardware or software, configuration errors, or problems with the server's
+								network connection.
+							</li>
+							<li>
+								Application Errors: The iVoteBallot application itself may be experiencing errors that are
+								causing the HTTP 500 error message to appear. This can include coding errors, bugs in the
+								application's functionality, or issues with the application's database.
+							</li>
+							<li>
+								Database Errors: If the iVoteBallot website relies heavily on a database to store and retrieve
+								information, errors with the database can cause HTTP 500 errors. This can include problems with
+								the database's schema, data corruption, or issues with the database's connectivity.
+							</li>
+							<li>
+								Configuration Errors: HTTP 500 errors can also occur if there are issues with the configuration
+								of the iVoteBallot website, such as incorrect file permissions, misconfigured web server settings,
+								or problems with the website's DNS configuration.
+							</li>
+							<li>
+								Traffic Overload: If the iVoteBallot website is experiencing a high volume of traffic, it may
+								be overwhelmed and unable to handle the requests it is receiving. This can cause the web server
+								to fail and result in HTTP 500 errors for users trying to access the site.
+							</li>
+						</ul>	
+						<p id="paragraph_Section_01">
+							To continue, please return to the iVoteBallot homepage by clicking on this link: <a id="error500_Link_01"
+							href="http://localhost:8080/iVoteBallot">iVoteBallot</a>.
+						</p>
+						<p id="paragraph_Section_01">
+							To continue, please return to the iVoteBallot homepage by clicking on this link: <a id="error500_Link_01"
+							href="http://localhost:8080/iVoteBallot">iVoteBallot</a>. 
+
+							If you continue to experience this error, please send us an email at <a id="error500_Link_02" 
+							href="http://localhost:8080/contactUs">Contact Us</a> and we'll do our best to get back to you as soon as 
+							possible. You could also try again later.
+
+							We apologize for any inconvenience and appreciate your patience while we work to resolve this issue.
+						</p>
+						
+					</div>
+				</div>   				
+
+				<div id="flex_Container_Column">
+					<div id="second_Column">
+						<a href="http://localhost:8080/iVoteBallot">iVoteBallot</a>
+					</div>
+				</div>
+	
+			</div>
+		</div>
+		<br>
+	
+		<footer>
+			<%- include('../common/footer') %>
+		</footer>
+
+	</body>
+</html>
