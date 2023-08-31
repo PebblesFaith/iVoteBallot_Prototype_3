@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>iVoteBallot | Sign Up Alabama</title>
+
+	<link rel="stylesheet" type="text/css" href="../styles/alabama_SignUp_01.css" />
+
+</head>
+
+<!--
+	The Developer, Sarai Hannah Ajai have written her HTML and JavaScript codes languages for
+	the purpose of the alabama_SignUp_01.ejs file to which provide an interface for front-end
+	users to sign up for an account onto the iVoteBallot's website or web application specifically
+    for the state of Alabama. The alabama_SignUp_01 web page includes a sign-up form with various
+	input fields and options for users to provide their information.
+
+	The The alabama_SignUp_01 web page starts with a header section that includes common header
+	elements shared across multiple pages. The main content of the page is contained within a 
+	flex container, which is divided into two columns. The first column contains the sign-up 
+	functionality, while the second column contains the login functionality.
+
+	In the first column, there is a "Sign Up | Alabama" button that triggers a pop-up sign-up
+	menu when clicked. The sign-up menu includes a form where users can enter their Alabama 
+	AlphaNumeric card codes, Alabama identification card information, email address, confirm 
+	email address, and phone number. The sign up form also includes validation checks for the
+	users entered data information.
+
+	The second column contains a "Log In | Alabama" button that triggers a pop-up login menu
+	when clicked. The login menu includes a form where users can enter their email address and
+	password in order to log in to their account. And, both forms also includes a "Forgot Password?" 
+	link for password recovery and a link to the sign-up page for new users.
+
+	Overall, the Alabama_SignUp_01 web page serves, as an entry point for the users in the state of
+	Alabama to sign up for an account on the iVoteBallot website or web application, providing a
+	user-friendly interface and ensuring data validations for the user entered data information.
+-->
+
+	<body>
+		<header>
+			<%- include('../common/header') %>
+		</header>	
+
+		<div id="flex_Container">
+			<div id="flex_Container_Row">
+				<div id="flex_Container_Column">
+					<div id="first_Column">
+
+						<button class="signUpButton_01" onclick="document.getElementById('popUpSignUpMenu').style.display='block'" style="width:auto;">Sign Up | Alabama</button>
+						
+						<div id="popUpSignUpMenu" class="signUp_Form_01">
+						
+							<form class="form_SignUp_01 animate" name="signUpForm" onsubmit="return validateSignUpForm()" action="/dashboard_01" method="POST">
+
+								<div class="imageContainer">
+									<a href="http://localhost:8080/iVoteBallot"><img class="header_Image_01" src="../images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png" /></a> 
+									<p id="titleSignUp_01"> Sign Up | Alabama</p>
+									<span class="close" onclick="document.getElementById('popUpSignUpMenu').style.display='none'" title="Close Sign Up Form">&times;</span>
+								
+								</div>
+
+								<div class="signUp_Container_01">  
+									
+									<p id="descriptive_Paragraph_01">What is your Alabama AlphaNumeric card codes including dashes, sent to you by way of the USPS from the Department of Motor Vehicles in collaboration with your State Voting Commission?</label>
+									<p id="voter_Card_01">
+										<img id="voter_Card_Image" src="../images/states_Icon_Photographs/iVoteBallot - Example Card.png" />					
+									</p> 								
+									<label>What is your iVoteBallot Id Card? |</label>									
+									<input id="registrationCodeSignUp_01" type="text" name="userRegistrationCode" maxlength="75">									
+									<span id="userRegistrationCodeSignUp_01ErrorMessage"></span>	
+									<br>
+									
+                                    <label>What type of Alabama identification Card do you have? |</label>                                    
+                                    <input id="idTypesSignUp_01" type="text" multiple name="userIdType" list="voterIdList" size="64" />
+
+                                    <datalist id="voterIdList">
+                                        <option value="" disable selected hidden></option>
+                                            <option value="Alabama Driver License"></option>
+                                            <option value="Alabama Real ID Driver License"></option>
+                                            <option value="Alabama State ID Card"></option> 
+                                            <option value="Military ID"></option> 
+                                            <option value="Tribal ID"></option>              
+                                    </datalist>                                  
+                                    <span id="userIdTypesSignUp_01ErrorMessage"></span>
+                                    <br>
+
+                                    <label>What is your Alabama Identification Card Number? |</label>                                   
+                                    <input id="idTypeNumberSignUp_01" type="text" name="userIdTypeNumber" maxlength="40" />                                   
+                                    <span id="userIdTypeNumberSignUp_01ErrorMessage"></span>                             
+                                    <br>
+
+									<label for="email">Email Address |</label>
+									<input id="emailSignUp_01" type="text" name="userEmail" maxlength="250">					
+									<span id="userEmailSignUp_01ErrorMessage"></span>
+									<br>
+									
+									<label>Confirm Email Address |</label>									
+									<input id="confirmEmailSignUp_01" type="text" name="userConfirm" maxlength="250">									
+									<span id="userConfirmEmailSignUp_01ErrorMessage"></span>
+									<br>
+
+                                    <label>Phone Number |</label>
+                                    <p id="phoneNumber_Style_01">(Enter your phone number in the format of xxx-xxx-xxxx.)</p>								
+									<input id="phoneNumberSignUp_01" type="text" name="userPhoneNumber" maxlength="15">									
+									<span id="userPhoneNumberSignUp_01ErrorMessage"></span>	
+									
+									<br>
+									<hr class="hr_Red_line_01">
+
+									<a class="forgotPassword_SignUp_01" href="http://localhost:8080/alabama_ForgotPassword_01">Forgot Password?</a>
+
+									<hr id="hr_Blue_line_02">
+									<p id="memberQuestion_01">
+										Are you already an iVoteBallot's member?
+										<a class="signUp_LogIn_01" href="http://localhost:8080/alabama_SignUporLogIn_01">Access your account.</a>
+									</p>									
+
+									<span id = "userPasswordSignUp_01ErrorMessage"></span>	
+									
+									<br>									
+								
+									<button id="signUpSubmitButton" type="submit">Sign Up</button>
+									
+								</div>
+
+								<div class="signUp_Container_01" style="background-color:#f1f1f1">
+									<button class="cancelButtonSignUp_01" type="button" onclick="document.getElementById('popUpSignUpMenu').style.display='none'" >Cancel</button>
+								</div>
+
+							</form>
+
+						</div>
+					</div>
+				</div>
+
+				<div id="flex_Container_Column">
+					<div id="second_Column">
+
+						<button class="logInButton_01" onclick="document.getElementById('popUpLogInMenu').style.display='block'" style="width:auto;">Log In | Alabama</button>
+						
+						<div id="popUpLogInMenu" class="logIn_Form_01">
+						
+							<form class="form_LogIn_01 animate" name="logInForm" onsubmit="return validateLogInForm()" action="/dashboard_01" method="POST">
+
+								<div class="imageContainer">
+									<a href="http://localhost:8080/iVoteBallot"><img class="header_Image_01" src="../images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png" /></a> 
+									<p id="titleLogIn_01"> Log In | Alabama</p>
+									<span class="close" onclick="document.getElementById('popUpLogInMenu').style.display='none'" title="Close Log In Form">&times;</span>
+								
+								</div>
+
+								<div class="logIn_Container_01">  
+
+									<label for="email">Email Address |</label>
+									<input id="emailLogIn_01" type="text" name="userEmail" maxlength="250">					
+									<span id="userEmailLogIn_01ErrorMessage"></span>
+									<br>	
+													
+									<label for="password">Password | </label>					
+									<input id="passwordLogIn_01" type="password" name="userPassword" value="" maxlength="250" >
+									<span id = "userPasswordLogIn_01ErrorMessage"></span>								
+									<a id="showHideLogIn_01" href="#" onclick="toggle_InputPasswordCheckBox_LogIn_01()">Show Password </a>
+									
+									<br>
+									<hr class="hr_Red_line_01">
+								
+									<a class="forgotPassword_LogIn_01" href="http://localhost:8080/alabama_ForgotPassword_01">Forgot Password?</a>
+
+									<hr id="hr_Blue_line_02">
+
+									<p id="memberQuestion_01">
+										New to iVoteBallot platform? 
+										<a class="signUp_LogIn_01" href="http://localhost:8080/alabama_SignUporLogIn_01">Sign Up for an Account.</a>
+									</p>								
+									
+									<br>
+								
+									<button id="logInSubmitButton" type="submit">Log In</button>
+									
+								</div>
+
+								<div class="logIn_Container_01" style="background-color:#f1f1f1">
+									<button class="cancelButtonLogIn_01" type="button" onclick="document.getElementById('popUpLogInMenu').style.display='none'" >Cancel</button>
+								</div>
+							</form>
+
+						</div>
+
+					</div>
+
+				</div>
+								
+			</div>
+		</div>
+
+		<footer>
+			<%- include('../common/footer') %>
+		</footer>
+
+		<script>
+			
+			function toggle_InputPasswordCheckBox_SignUp_01() {
+				const inputPassword_SignUp_01 = document.getElementById('passwordSignUp_01');
+				const userShowHide_SignUp_01 = document.getElementById('showHideSignUp_01');
+
+					if (userShowHide_SignUp_01.innerText === 'Show Password') {
+						inputPassword_SignUp_01.setAttribute('type', 'text');
+						userShowHide_SignUp_01.innerText = ('Hide Password');
+					} else {
+						inputPassword_SignUp_01.setAttribute('type', 'password');
+						userShowHide_SignUp_01.innerText = 'Show Password';
+					}
+			}
+
+			function toggle_InputPasswordCheckBox_LogIn_01() {
+				const inputPassword_LogIn_01 = document.getElementById('passwordLogIn_01');
+				const userShowHide_LogIn_01 = document.getElementById('showHideLogIn_01');
+
+					if (userShowHide_LogIn_01.innerText === 'Show Password') {
+						inputPassword_LogIn_01.setAttribute('type', 'text');
+						userShowHide_LogIn_01.innerText = ('Hide Password');
+					} else {
+						inputPassword_LogIn_01.setAttribute('type', 'password');
+						userShowHide_LogIn_01.innerText = 'Show Password';
+					}
+			}
+ 
+			const validateSignUpForm = (e) => { 
+
+				const userRegistrationCode = document.getElementById('registrationCodeSignUp_01').value.trim();
+
+				const regExRegistrationCode = /\d{2}[A-Z]{1}\d{1}\-\d{1}[A-Z]{1}\d{1}\-[A-Z]{2}\-\d{3}[A-Z]{2}\d{6}\-\d{2}/;				
+
+				const userIdType = document.getElementById('idTypesSignUp_01').value.trim();
+
+				const userIdTypeNumber = document.getElementById('idTypeNumberSignUp_01').value.trim();				
+
+				const regExAlabamaId = /(^\d{7}$)|(^\d{8}$)/;
+
+				const userEmail = document.getElementById('emailSignUp_01').value.trim();				
+
+                const userConfirmEmail = document.getElementById('confirmEmailSignUp_01').value.trim();
+
+				const regExEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;			
+			
+				const userPhoneNumber = document.getElementById('phoneNumberSignUp_01').value.trim();
+
+				const regExPhoneNumber = /^\d{3}\-\d{3}\-\d{4}$/; 
+
+				if (userRegistrationCode === '' || userRegistrationCode == null || !userRegistrationCode.match(regExRegistrationCode)) {                                                               
+					document.getElementById('userRegistrationCodeSignUp_01ErrorMessage').textContent = 'Your voter registration code is a required input field or you have entered the correct alphanumeric characters into the required input field.';
+
+					setTimeout(function() {
+						document.getElementById('userRegistrationCodeSignUp_01ErrorMessage').textContent = '';
+					},
+					9000)
+
+					return false;					
+									
+				} 		
+				
+				if (userIdType === '' || userIdType == null) {
+					document.getElementById('userIdTypesSignUp_01ErrorMessage').textContent = 'Your Alabama\s identification card type is a required select option field and you must select your correct Alabama\s identification card type from the option require field.';
+
+					setTimeout(function() {
+						document.getElementById('userIdTypesSignUp_01ErrorMessage').textContent = '';
+					},
+					9000)    	
+				
+					return false;  
+
+				}
+
+				if (userIdTypeNumber === '' || userIdTypeNumber == null || !userIdTypeNumber.match(regExAlabamaId))  {                                                               
+					document.getElementById('userIdTypeNumberSignUp_01ErrorMessage').textContent =  'Your Alabama numeric identification card characters are a required field or you must enter the correct Alabama numeric identification card characters from your Alabama\s identification card into the required field.';
+
+					setTimeout(function() {
+						document.getElementById('userIdTypeNumberSignUp_01ErrorMessage').textContent = '';
+					},
+					9000)
+
+					return false;
+
+				} 				
+				
+				if (userEmail === '' || userEmail == null || userEmail.length <= 6 || !userEmail.match(regExEmail)) {
+					document.getElementById('userEmailSignUp_01ErrorMessage').textContent = 'Your email address is a required input field and you must enter the correct email address format into the require input field.';
+
+					setTimeout(function() {
+						document.getElementById('userEmailSignUp_01ErrorMessage').textContent = '';
+					},
+					9000)
+
+					return false;
+
+				}
+
+                if (userConfirmEmail === '' || userConfirmEmail == null || userConfirmEmail.length <= 6 || !userConfirmEmail.match(regExEmail)) {
+					document.getElementById('userConfirmEmailSignUp_01ErrorMessage').textContent = 'Your confirm email address is a required input field and you must enter the correct confirm email address format into the require input field.';
+
+					setTimeout(function() {
+						document.getElementById('userConfirmEmailSignUp_01ErrorMessage').textContent = '';
+					},
+					9000)
+
+					return false;
+
+				}
+                    
+				if (userEmail != userConfirmEmail) {
+					document.getElementById('userConfirmEmailSignUp_01ErrorMessage').textContent = 'Your email address does not match to your confirm email address which are required input fields.';
+
+					setTimeout(function() {
+						document.getElementById('userConfirmEmailSignUp_01ErrorMessage').textContent = '';
+					},
+					9000)
+
+					return false;
+
+				}
+				
+				if (userPhoneNumber === '' || userPhoneNumber == null || userPhoneNumber.length <= 10 || !userPhoneNumber.match(regExPhoneNumber))  {                                                               
+					document.getElementById('userPhoneNumberSignUp_01ErrorMessage').textContent = 'Your phone number is a required input field or you must enter exactly twelve number digits into the phone number required input field.';
+
+					setTimeout(function() {
+						document.getElementById('userPhoneNumberSignUp_01ErrorMessage').textContent = '';
+					},
+					9000)
+
+					return false;				
+
+				}				
+            
+				e.preventDefault();  
+							
+                form.addEventListener('submit', validateSignUpForm);
+
+                return true;     		
+
+			}
+
+			const validateLogInForm = (e) => { 
+
+				const userEmail_Login_01 = document.getElementById('emailLogIn_01').value.trim();
+				const userPassword_Login_01 = document.getElementById('passwordLogIn_01').value.trim();
+
+				const regExEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;  
+				const regExPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,32}$/;
+
+
+				if (userEmail_Login_01 === '' || userEmail_Login_01 == null || userEmail_Login_01.length <= 6 || !userEmail_Login_01.match(regExEmail)) {
+					document.getElementById('userEmailLogIn_01ErrorMessage').textContent = 'Your email address is a required input field and you must enter the correct email address format into the require input field.';
+
+					setTimeout(function() {
+						document.getElementById('userEmailLogIn_01ErrorMessage').textContent = '';
+					},
+					9000)
+
+					return false;
+
+				}
+
+				if (userPassword_Login_01 === '' || userPassword_Login_01 == null || userPassword_Login_01.length <= 7 || !userPassword_Login_01.match(regExPassword)) {
+					document.getElementById('userPasswordLogIn_01ErrorMessage').textContent = 'Your password is a required input field and you must enter the correct password format into the require input field.';
+
+					setTimeout(function() {
+						document.getElementById('userPasswordLogIn_01ErrorMessage').textContent = '';
+					},
+					9000)
+
+				return false;
+
+				}
+
+				e.preventDefault();  
+							
+                form.addEventListener('submit', validateLogInForm);
+
+                return true;         
+
+			} 
+
+		</script>
+		
+	</body>
+</html>
