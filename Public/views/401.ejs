@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>iVoteBallot | Error 401</title>
+
+	<link rel="stylesheet" type="text/css" href="../styles/401.css" />
+
+</head>
+
+<!--
+	Sarai Hannah Ajai have written her HTML coded language for the 401.ejs error page for which is
+	designed to inform users that they have encountered a 401 Unauthorized Access Error, which is
+	part of the 4XX error code family. This error message indicates that there is an issue with the
+	client's request, specifically when the server is unable to recognize the client. This type of error
+	typically occurs due to incorrect login credentials, attempting to access a restricted page without
+	authentication, or using an expired token or session ID. It can also occur when accessing iVoteBallot website 
+	or application from a new device that has not yet been authenticated. The 401.ejs error page provides
+	users with information about the error and guidance on how to resolve it.
+-->
+	<body>
+
+		<header>
+			<%- include('../common/header') %>
+		</header>	
+		
+		<p id="error401_Title_01">
+			Oops, Something Went Wrong!
+		</p>
+			
+		<p id="error401_Title_02">
+			Error 401: Unauthorized Access
+		</p>
+	
+		<hr id="hr_Blue_line_02">
+		<br>
+		
+		<div id="flex_Container">
+			<div id="flex_Container_Row">
+				<div id="flex_Container_Column">
+					<div id="first_Column">
+					   
+						<p id="error401_Title_03">   
+							The 401 Unauthorized Access Error is part of the 4XX error code family, indicating
+							an issue with the client's request. This error code specifically occurs when the 
+							server is unable to recognize the client.							
+						</p>
+						<p id="error401_Title_03">   
+							Typically, this error message occurs when there is an incorrect URL, password, or an
+							expired session cookie. Some common examples of this type of error include:
+						</p>
+						  
+						<ul id="align_Section_01">
+							<li>Typing the wrong login credentials when trying to access a restricted website or application.</li>
+							<li>Attempting to access a page or resource that requires authentication without first logging in.</li>
+							<li>Trying to use an expired token or session ID to access a website or application.</li>
+							<li>Accessing a website or application from a new device that has not yet been authenticated.</li>							
+						</ul>	
+						<p id="paragraph_Section_01">
+							To continue, please return to the iVoteBallot homepage by clicking on this link: <a id="error401_Link_01"
+							href="http://localhost:8080/iVoteBallot">iVoteBallot</a>.
+						</p>
+						<p id="paragraph_Section_01">
+							To continue, please return to the iVoteBallot homepage by clicking on this link: <a id="error401_Link_01"
+							href="http://localhost:8080/iVoteBallot">iVoteBallot</a>. 
+
+							If you continue to experience this error, please send us an email at <a id="error401_Link_02" 
+							href="http://localhost:8080/contactUs">Contact Us</a> and we'll do our best to get back to you as soon as 
+							possible. You could also try again later.
+
+							We apologize for any inconvenience and appreciate your patience while we work to resolve this issue.
+						</p>
+						
+					</div>
+				</div>   				
+
+				<div id="flex_Container_Column">
+					<div id="second_Column">
+						<a href="http://localhost:8080/iVoteBallot">iVoteBallot</a>
+					</div>
+				</div>
+	
+			</div>
+		</div>
+		<br>
+
+		<footer>
+			<%- include('../common/footer') %>
+		</footer>
+		
+	</body>
+</html>
