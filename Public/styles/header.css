@@ -1,0 +1,387 @@
+/*
+    This CSS language code sets the width of the scrollbar to 15 pixels on webkit-based
+    browsers like Safari and Chrome for the footer section of the homepage.
+*/
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+/*
+    The CSS styling for the ::-webkit-scrollbar-track element on the footer of the homepage
+    includes a border-radius of 5 pixels and a box-shadow with an inset of 10 pixels and an
+    opacity of 0.3, which creates a visual effect of a sunken track for the scrollbar.
+*/
+::-webkit-scrollbar-track {
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px rgba(172, 10, 10, 0.3); 
+}
+
+/*
+    The CSS rule sets the style for the scrollbar thumb in webkit-based browsers. It adds a
+    border-radius of 5px and sets the background color to a shade of red (rgb(201, 24, 24)).
+*/
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: rgb(201, 24, 24);
+}
+
+/*
+    The CSS rule is for styling the hover state of the scrollbar thumb in webkit-based browsers.
+    The background color of the thumb is changed to a semi-transparent red (with an RGB value of
+    172, 10, 10) when it is hovered over.
+*/
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(172, 10, 10, 0.3); ;    
+}
+
+/*
+    This CSS style language codes defines a custom font family called "Megrim-Regular"
+    and specifies the path for the font file in the "src" property. The "font-weight"
+    property sets the font weight to "normal."
+*/
+@font-face {
+    font-family: "Megrim-Regular";
+    src: url(../fonts/Source_Code_Pro/SourceCodePro-SemiBold.ttf) format('truetype');
+    font-weight: normal;
+}
+
+/*
+    The CSS rules for .hr_Red_line in footer.ejs create a solid border with a red color
+    (rgb(201, 24, 24)) and no border on the left and right sides. Additionally, the margins
+    on the top and bottom are set to 5 pixels.
+*/
+.hr_Red_line {
+    border-color: rgb(201, 24, 24); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/*
+    The "flex_Container" element is set to display as a flex container with its contents wrapping
+    to the next line when necessary. The items inside will be aligned horizontally, with the background
+    color set as transparent. The items will also be centered both vertically and horizontally within
+    the container.
+*/
+.flex_Container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center;     
+}
+
+/*
+    The CSS language code is defining a flexible container element with a row direction and wrap property
+    that allows the content to wrap to the next line. The align-items property is set to stretch the
+    content to the full height of the container. Finally, a border color of RGB value (201, 24, 24) is
+    applied to the element to create a visual border.
+*/
+.flex_Container_Row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+    border-color: rgb(201, 24, 24);   
+}
+
+/*
+    The CSS language code creates a flex container with a column direction and a width of 100%.
+    The "flex: 1" property distributes available space equally among its child elements.
+*/
+.flex_Container_Column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+}
+
+/*
+    The CSS language code is setting up a flex container with a column layout for the div elements
+    inside it. The "flex: 1" property makes each div element take up equal space within the container,
+    while "display: block" ensures that each div element is displayed as a block-level element.
+*/
+.flex_Container_Column > div {
+    display: flex;
+    flex: 1;
+    display: block;    
+}
+
+/*
+    The left column of the header on the homepage uses flexbox to display its content as a
+    column with wrapped rows. The text is centered and styled in a red color, with a custom
+    font and size. The column is vertically centered with equal margin top and bottom, and
+    has a transparent background.
+*/
+.left_Column {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(201, 24, 24);    
+    text-align: center;
+    line-height: none;
+    margin-top: auto;
+    margin-bottom: auto;      
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(14px, 3vw, 18px);   
+    justify-content: center;  
+    background-color: transparent;
+}
+
+/*
+    This CSS styling for the .header_Image_01 element on the homepage sets it to display as
+    a flex container with column direction, centers the content, and applies a blue color with
+    transparent background. The width is set to a minimum of 125 pixels and maximum of 250
+    pixels, with a fluid scaling between 3 viewport units.
+*/
+.header_Image_01 {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(13, 65, 255);    
+    text-align: center;
+    line-height: none;
+    margin-top: 20px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+    justify-content: center;  
+    background-color: transparent;    
+    width: clamp(125px, 3vw, 250px);  
+    border-right-style: solid; 
+    border-color: rgb(201, 24, 24);
+    border: 0, 2px, 0, 0;
+}
+
+/*
+    The middle column of the homepage is styled using flexbox, with items wrapping in a column
+    direction. The font is set to 'Megrim-Regular' with a fallback to other serif fonts. The font
+    size is responsive using a clamp function. The text is centered, with a red color and no
+    line-height, and the background-color is transparent.
+*/
+.middle_Column {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(201, 24, 24);    
+    text-align: center;
+    line-height: none;
+    margin-top: auto;
+    margin-bottom: auto;      
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(14px, 3vw, 18px);   
+    justify-content: center;  
+    background-color: transparent;
+}
+
+/*
+    The header.ejs homepage CSS styles for the #slogan_01 element displays the flex in a column direction
+    with center alignment and red color. It also sets a custom font-family, font-size using a
+    responsive unit, and adjusts margins to create spacing. The background-color is transparent to
+    allow for a flexible design.
+*/
+#slogan_01 {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(201, 24, 24);    
+    text-align: center;
+    line-height: none;
+    margin-top: 60px;
+    margin-bottom: 0;      
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(14px, 3vw, 18px);   
+    justify-content: center;  
+    background-color: transparent;  
+}
+
+/*
+    The right column of the homepage is styled using flexbox to display items in a column
+    direction with center justification, a blue color scheme, and auto top and bottom margins.
+    The font family is set to 'Megrim-Regular' with a responsive font size that adjusts based
+    on the viewport width, and a transparent background with a 5px border top and bottom.
+*/
+.right_Column {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;  
+    justify-items: center;
+    color: rgb(13, 65, 255);    
+    margin-top: auto;
+    margin-bottom: auto;    
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(14px, 3vw, 18px); 
+    background-color: transparent;
+    border-top: 5px;     
+    border-bottom: 5px;  
+}
+
+/*
+    The "flex_Container_Navagational_Bar" is styled with Flexbox properties to display its
+    child elements in a row, wrap when necessary, and distribute them evenly with space between.
+    The border is removed, and the width is set to auto to adapt to the content's size.
+*/
+.flex_Container_Navgational_Bar {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;      
+    border-style: none;
+	width: auto;	
+}
+
+/*
+    The navigational bar on the homepage is styled to be displayed as a flex container
+    with its items wrapped in a row. It has a transparent background, uses the Megrim-Regular
+    font, and its font size adjusts based on the viewport width. The text color is a shade of
+    blue.
+*/
+.navigational_Bar_01 {
+    display: flex;
+    flex-flow: row wrap;    
+   justify-content: center;  
+    justify-content: space-between;   
+    cursor: pointer;
+    cursor: 14px;
+    list-style: none;   
+    background-color: transparent;
+    width: 100%;
+    margin-top: 45px;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 14px);   
+    color: rgb(13, 65, 255);
+}
+
+/*
+    This CSS code is styling the links in the navigational bar of the header on the homepage.
+    It removes the underline decoration from the links, sets the background color to transparent,
+    and adds some padding. Additionally, it changes the link text color to blue.
+*/
+.navigational_Bar_01  a {    
+    text-decoration: none;
+    display: block;
+    background-color: inherit;
+    padding: 5px;
+    color: rgb(13, 65, 255);
+}
+
+/*
+    This CSS code language sets the background color and text color of anchor elements in
+    the navigational bar to red and white respectively when the user hovers over them,
+    providing a visual cue of interaction.
+*/
+.navigational_Bar_01 a:hover {
+    background-color: rgb(201, 24, 24);
+    color: rgb(255, 255, 255);
+}
+
+/*
+    The CSS rule above targets screens with a maximum width of 800px and adjusts the navigation
+    bar's layout by distributing its items with equal space around them. This helps improve the
+    navigation bar's readability and usability on smaller screens.
+*/
+@media all and (max-width: 800px) {
+    .navigational_Bar_01 {
+        justify-content: space-around;
+    }
+}
+
+/*
+    The CSS code language adjusts the navigation bar to display in a vertical column with
+    wrapping items and no padding when the screen width is less than or equal to 600 pixels.
+*/
+@media all and (max-width: 600px) {
+    .navigational_Bar_01 {
+        flex-flow: column wrap;
+        padding: 0%;        
+    }
+}
+
+/*
+    The CSS rules for "navigational_Bar_01 a" center-aligns the text and adds 10 pixels of
+    padding to each side of the link for improved readability and visual aesthetics.
+*/
+.navigational_Bar_01 a {
+    text-align: center;
+    padding: 10px;   
+}
+
+/*
+    This CSS rule targets the last anchor tag in the list items of the navigational bar and
+    removes its bottom border, creating a visual separation between the last item and the rest
+    of the list.
+*/
+.navigational_Bar_01 li:last-of-type a {
+    border-bottom: none;
+}
+
+/*
+    This CSS code language block and modifies the layout of the ".navigational_Bar_01" element
+    to a vertical column when the viewport width is 500px or less, allowing for better display
+    on smaller screens such as mobile devices.
+*/
+@media all and (max-width: 500px) {
+    .navigational_Bar_01 {
+        flex-direction: column;     
+    }
+}
+
+/*
+    The CSS rule targets elements with the class "icon_Finder_01" and applies flexbox properties to it.
+    The display property sets it to flex, allowing for flexible layout options. The flex-wrap property 
+    with a value of "row wrap" allows the flex items to wrap to new lines if necessary, and the flex-direction
+    property with a value of "column" aligns the items vertically. The margin property is set to "auto" to
+    horizontally center the element within its parent container.
+*/
+.icon_Finder_01 {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;  
+    margin: auto;
+    width: clamp(16px, 2vw, 25px);  
+}
+
+/*
+    The CSS style codes that defines the styling for a select element with an id of "states". It
+    sets the element's display to flex, with a flex-direction of column, and flex-wrap of row
+    wrap. The font family is set to a list of fallback fonts, and the font size is calculated 
+    using the clamp() function. The element's color, border, and background color are set to a 
+    specific shade of blue, and it has no visible border. The min-width and max-width properties
+    are set to control the width of the element, and margin properties are used to position the 
+    element. The outline property is set to none, and the cursor property is set to pointer.
+*/
+#states {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;    
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 14px); 
+    color: rgb(13, 65, 255); 
+    border-style: none none none none;    
+    border-width: 0 0 0 0;
+    border-color:  rgb(13, 65, 255);
+    background-color: transparent;    
+    outline: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    cursor: pointer;
+    cursor: 14px;
+    margin-top: 11px;
+    margin-bottom: 0;
+    margin-left: 0px;
+    
+    /*
+        This works in Chrome, Firefox and Edge. The trick is here to push 
+        the text from the left to the center, then subtract the half of 
+        length in px, em or whatever of the option text.
+    */
+   
+    min-width: 85px;
+    max-width: 85px;
+    margin-left: calc(50% - 28px);
+}
+
