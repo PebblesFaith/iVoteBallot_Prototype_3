@@ -1,0 +1,151 @@
+/*
+    The CSS rules for .hr_Red_line in footer.ejs create a solid border with a red color
+    (rgb(201, 24, 24)) and no border on the left and right sides. Additionally, the margins
+    on the top and bottom are set to 5 pixels.
+*/
+.hr_Red_line {
+    border-color: rgb(201, 24, 24); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/*
+    The CSS rules for .hr_Blue_line in footer.ejs create a solid border with a blue color
+    (rgb(201, 24, 24)) and no border on the left and right sides. Additionally, the margins
+    on the top and bottom are set to 5 pixels.
+*/
+.hr_Blue_line {
+    border-color: rgb(13, 65, 255); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}  
+
+/*
+    The CSS for #socialMedias_01 in the footer.ejs file on the homepage includes flexbox properties
+    to arrange the social media icons in a row with space around them, and sets font-family and
+    font-size for the text. Additionally, it sets the background-color to transparent, sets the width
+    to auto, and adds padding to the element to create space between the icons.
+*/
+.socialMedias_01 {
+    display: flex;
+    flex-flow: row wrap;   
+    align-items: center;
+    justify-content: space-around;
+    padding: 14px 14px;
+    cursor: pointer;
+    cursor: 14px;
+    list-style: none;   
+    background-color: transparent;  
+    width: auto;   
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 16px); 
+    text-align: center;    
+}
+
+/*
+    The footer social media links are styled to have no text decoration, block display,
+    inherit background color, 15px padding, and a red color (rgb(201, 24, 24)).
+*/
+.socialMedias_01 a {    
+    text-decoration: none;
+    display: block;
+    background-color: inherit;
+    padding: 15px;
+    color: rgb(201, 24, 24);
+}
+
+/*
+    The CSS rule sets the background color and text color of social media links in the
+    footer to a lighter shade of blue with a slight transparency and changes the text color
+    to a darker blue when hovered over.
+*/
+.socialMedias_01 a:hover {
+    background-color: rgba(165, 182, 232, 0.238);
+    color: rgb(13, 65, 255);
+}
+
+/*
+    The iVoteBallot_Footer_Insignia_01 on the homepage is styled with flexbox for responsive
+    layout, has red background color, uses Megrim-Regular font with a minimum font size of 12px
+    and maximum font size of 50px, and has zero top and bottom margins with padding of 4px on
+    the top and bottom and 14px on the sides.
+*/
+.iVoteBallot_Footer_Insignia_01 {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-around;
+    padding: 4px 14px;    
+    list-style: none;   
+    background-color: rgb(201, 24, 24);
+    width: auto;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 1vw, 20px); 
+    margin-top: 0px; 
+    margin-bottom: 0px; 
+    text-align: center;  
+}
+
+/*
+    This CSS code language sets the display to flex for images within a list item in the footer section
+    of a webpage, with flex-wrap properties to allow for wrapping when necessary. The flex-direction
+    is set to row, and the background-color is transparent, while the align-items and justify-content
+    are centered for proper alignment.
+*/
+.footer_flex_container > ul li img {
+    display: -webkit-flex;
+    -webkit-flex-wrap: wrap;    
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center;
+}
+
+/*
+    This CSS code language styles a link element within the iVoteBallot footer section of the
+    homepage. The styling includes removing text decoration, setting the text color to a light
+    gray, centering the text, and providing padding of 10px on all sides.
+*/
+.iVoteBallot_Footer_Insignia_01 a {    
+    text-decoration: none;    
+    padding: 5px;
+    color: rgb(234, 233, 233);
+    text-align: center;
+    padding: 10px;   
+}
+
+/*
+    This CSS rule removes the bottom border from the last link element in a list contained
+    within a specific element with the class "iVoteBallot_Footer_Insignia_01", in order to 
+    improve visual spacing and alignment.
+*/
+.iVoteBallot_Footer_Insignia_01 li:last-of-type a {
+    border-bottom: none;
+}
+
+/*
+    The .footer_Image_01 class sets the width of the image in the footer using a CSS
+    clamp function. The width will be at least 15px, but will not exceed 25px or 3vw
+    (viewport width), whichever is smaller.
+*/
+.footer_Image_01 {
+    width: clamp(10px, 2vw, 20px);    
+}
+
+/*
+    The CSS rule inside the media query targets screens with a maximum width of 992px. It sets
+    the width of the element with the class "flex_Container_StarsAndStrips" to 100% to ensure 
+    it takes up the full width of the screen on smaller devices.
+*/
+@media all and (max-width: 992px) {
+    .flex_Container_StarsAndStrips {
+      width: 100%;
+    }
+  }
