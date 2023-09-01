@@ -1,0 +1,539 @@
+/*
+    The @font-face rule is used to declare a custom font family that can be used throughout
+    iVoteBallot contactUs_01 web page. And, in this specific code, it declares a font family
+    named "Megrim-Regular" with the font file located in the "fonts" folder and with the
+    format of TrueType font file. The font-weight property specifies the weight of the font,
+    in this case, it is set to normal.
+*/
+@font-face {
+    font-family: "Megrim-Regular";
+    src: url(fonts/Megrim-Regular.ttf) format('truetype');
+    font-weight: normal;
+}
+
+/*
+    The CSS @media rule specifies a set of styles to apply to a document based on the
+    characteristics of the device or screen CSS @media is being displayed on. In this case,
+    the styles are applied only when the screen width is at least 250 pixels wide. The body
+    element in the document will have a white background color when the screen meets this
+    condition.
+*/
+@media only screen and (min-width: 250px) {
+    bod y {           
+        background-color: rgb(255, 255, 255);
+    }    
+}
+
+/*
+    This CSS statement applies various styles to the HTML element with the ID "contactUs_Title_01".
+    And, the ID "contactUs_Title_02" sets the display to flex and specifies a row wrapping layout,
+    centers the text horizontally  and vertically within the element, removes the bullet points 
+    for the list items, sets the background color to transparent, sets the width to 100%, adds a
+    margin at the top and bottom of the element, sets the font family to a combination of fonts,
+    adjusts the font size to be responsive based on viewport width, and sets the text color to a
+    shade of blue.
+*/
+#contactUs_Title_01 {
+    display: flex;
+    flex-flow: row wrap;    
+    text-align: center;    
+    justify-content: center;    
+    list-style: none;   
+    background-color: transparent;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: 5px;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(13px, 3vw, 75px);
+    color: rgb(13, 65, 255);
+}
+
+/*
+    This CSS statement applies various styles to the HTML element with the ID "contactUs_Title_02".
+    And, the ID "contactUs_Title_02" sets the display to flex and specifies a row wrapping layout,
+    centers the text horizontally  and vertically within the element, removes the bullet points 
+    for the list items, sets the background color to transparent, sets the width to 100%, adds a
+    margin at the top and bottom of the element, sets the font family to a combination of fonts,
+    adjusts the font size to be responsive based on viewport width, and sets the text color to a
+    shade of red.
+*/
+#contactUs_Title_02 {
+    display: flex;
+    flex-flow: row wrap;    
+    text-align: center;    
+    justify-content: center;  
+    list-style: none;   
+    background-color: transparent;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 35px);
+    color: rgb(201, 24, 24);
+}
+
+/*
+    The CSS style code creates a horizontal line with a solid border of blue color using
+    the RGB value. The line has no borders on the left and right sides but has a top and
+    bottom margin of 5 pixels.
+*/
+#hr_Blue_line_02 {
+    border-color: rgb(13, 65, 255); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/*
+    The CSS styles in this code block are used to create a flexible container with a blue
+    background color, center-aligned content, and a row direction. The "flex-wrap: wrap"
+    property allows the container to wrap its items onto multiple lines if necessary. The
+    "align-items: center" and "justify-content: center" properties ensure that the items are
+    both vertically and horizontally centered within the container.
+*/
+#flex_Container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: rgb(13, 65, 255);
+    align-items: center;
+    justify-content: center;
+}
+
+/*
+    This CSS style defines a flexible container with a horizontal layout that wraps its content
+    if necessary. It also sets the container to stretch its items to fit the full width of the
+    container. Overall, this style is designed to create a responsive and adaptive layout for
+    web page elements.
+*/
+#flex_Container_Row {
+    display: flex;
+    flex-direction: row;    
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+}
+
+/*
+    The CSS code style aims to apply the flexbox layout to all direct child div elements of a
+    container with an ID of "flex_Container_Row". The "flex: 1" property assigns equal flex grow
+    value to each child element, allowing them to fill the available horizontal space evenly.
+*/
+#flex_Container_Row > div {
+    display: flex;
+    flex: 1;  
+}
+
+/*
+    The CSS style defines how to create a flex container with a column layout. The "display:
+    flex" property specifies that the container should use flexbox layout, while "flex-direction:
+    column" arranges the flex items vertically. Finally, "flex-basis: 100%" sets the initial size
+    of the flex items to 100% of the container's width.
+*/
+
+#flex_Container_Column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;  
+}
+
+/*
+    This CSS style is used to create a flexible layout with a container element and multiple
+    child elements displayed as columns. The "flex" property is used to distribute the available
+    space among the child elements evenly, and the "display" property is set to "flex" to enable
+    flexbox layout.
+*/
+#flex_Container_Column > div {
+    display: flex;
+    flex: 1;
+}
+
+/*
+    The CSS style code sets the properties of an HTML element with the ID "first_Column" to create
+    a flexible container that wraps its contents in a column layout. The style also defines the
+    background color, height, width, text alignment, margin, padding, font family, size, and color
+    of the element, as well as its content justification and absence of a border.
+*/
+#first_Column {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column; 
+	background-color: rgb(201, 24, 24);
+    color:rgb(255, 255, 255);
+    height: auto;
+    width: auto;
+    text-align: center;    
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(18px, 5vw, 100px);     
+    justify-content: center;
+    
+}
+
+/*
+    The CSS statement targets all anchor tags (a) within the first_Column element and removes
+    the underline decoration (text-decoration: none), sets the display property to block 
+    (display: block). So, the anchor takes the full width of its container, adds 5px 
+    padding around the anchor (padding: 5px), and sets the font color to white (color: 
+    rgb(255, 255, 255)).
+*/
+#first_Column a {
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+    color:rgb(255, 255, 255);
+}
+
+/*
+    This CSS statement changes the color of a hyperlink when the user hovers his/her cursor 
+    over the #first_Column a:hover element of contact us webpage. Specifically, the 
+    #first_Column a:hover element sets the color to a shade of blue defined by the RGB 
+    values (13, 65, 255). And, the ":hover" pseudo-class is used to target the hyperlink
+    when the #first_Column a:hover element is in the hover state.
+*/
+#first_Column a:hover {
+    color: rgb(13, 65, 255);
+}
+
+/*
+    The CSS style code sets the properties of an HTML element with the ID "second_Column" to create
+    a flexible container that wraps its contents in a column layout. The style also defines the
+    background color, height, width, text alignment, margin, padding, font family, size, and color
+    of the element, as well as its content justification and absence of a border.
+*/
+#second_Column {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);   
+    height: auto;
+    width: auto;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-left: 5px;
+    padding-right: 5px;    
+    color: rgb(13, 65, 255);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 16px); 
+    justify-content: center;  
+    
+}
+
+/*
+    This CSS statement applies a set of styling rules to an HTML element with the ID
+    "contactUs_Form" element. The "display: flex;" rule sets the element to use flexbox
+    layout, "flex-wrap: row wrap;" allows the contents to wrap onto new lines,
+    and "flex-direction: column;" sets the direction of the main axis as vertical. The 
+    statement also sets the background color, height, width, text alignment, color, 
+    font family, font size, justification, and border properties of the element.
+*/
+#contactUs_Form {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);   
+    height: auto;
+    width: auto;
+    text-align: center; 
+    color: rgb(13, 65, 255);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 16px); 
+    justify-content: center;  
+   
+}
+
+/*
+    The CSS statement sets the display property of the label element to inline-block, 
+    which allows it to be displayed inline with other elements while still retaining its
+    block-level characteristics, such as the ability to set a width. It also sets the
+    width property to 80%, which specifies the width of the element relative to its containing 
+    block, and the text-align property to left, which aligns the text content of the label 
+    element to the left of the element's box.
+*/
+label {   
+    display: inline-block;
+    width: 80%;
+    text-align: left;            
+}
+
+/*
+    This CSS code sets various styles for input elements. It hides the top, right, and left 
+    borders of the input element, while giving the bottom border a solid style with a blue 
+    color. The text color is set to a shade of blue, and the background color is set to 
+    inherit from the parent element. The input element is given a width of 100% of its parent
+    container, with a 5px margin to the right and bottom. Finally, the border color of the 
+    input element is set to the same shade of blue used for the text.
+
+    The CSS statement sets the outline property of multiple HTML elements (identified by their
+    ID attributes) to none. This means that when any of these elements receive focus (for
+    example, when the user clicks on HTML element), no visible outline will be displayed around
+    them. And, this can be useful to improve the visual appearance of a web page, as some 
+    browsers may add default outlines that can be distracting or clash with the page design.
+*/
+
+#firstName, #middleName, #lastName, #email, #confirmEmail, #question, #concern, #textMessage, #contactUsFormEndTime {
+    outline: none; 
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: solid;
+    color: rgb(13, 65, 255);
+    background-color: inherit;
+    width: 100%;    
+    margin-top: 5px; 
+    margin-right: 5px;   
+    margin-bottom: 5px;
+    border-color: rgb(13, 65, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 16px);
+    cursor: pointer;
+    cursor: 14px;
+    
+}
+
+/*
+    The CSS statement applies several styling rules to a group of HTML elements with the IDs
+    "firstName", "middleName", "lastName", "email", "confirmEmail", "question", "concern", 
+    "textMessage", and "contactUsFormEndTime". And, the group of HTML elements sets the
+    display property to flex and applies a row wrap layout with a column direction. the group
+    of HTML element, also specifies the font family, font size, text color, and white space
+    properties. Finally, it sets the background color to inherit from the parent element.
+*/
+#firstName, #middleName, #lastName, #email, #confirmEmail, #question, #concern, #textMessage, #contactUsFormEndTime {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 16px); 
+    color: rgb(13, 65, 255); 
+    background-color: inherit;
+    white-space: normal;   
+}
+
+/*
+    The CSS code sets a transition effect for the properties of the HTML elements with IDs of
+    "firstName", "middleName", "lastName", "email", "confirmEmail", "question", "concern", 
+    "textMessage", and "contactUsFormEndTime". The transition effect will last for 0.5 seconds 
+    and will be applied when there is a change in the properties of these elements.
+
+    The "-webkit-transition" property sets the transition effect for browsers that use the WebKit
+    rendering engine (such as Safari and Chrome), while the "transition" property sets the 
+    transition effect for other browsers.
+*/
+#firstName, #middleName, #lastName, #email, #confirmEmail, #question, #concern, #textMessage, #contactUsFormEndTime {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+/*
+    This CSS statement applies a styling to a group of HTML elements that includes the IDs 
+    #firstName, #middleName, #lastName, #email, #confirmEmail, #question, #concern, #textMessage,
+    and #contactUsFormEndTime when they are in focus. When any of these elements receive focus,
+    a 3-pixel border with a solid bottom and hidden top, right, and left sides are applied, along
+    with a slightly transparent background color. And, the width of each element is set to 75%.
+*/
+#firstName:focus, #middleName:focus, #lastName:focus, #email:focus, #confirmEmail:focus, #question:focus, #concern:focus, #textMessage:focus, #contactUsFormEndTime:focus {
+    border:3px solid rgb(205, 214, 249);
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: solid;
+    background-color: rgba(205, 220, 235, 0.20);    
+    width: 75%;  
+}
+
+/*
+    The CSS statement sets the font family to be used for the elements with the IDs 
+    "userFirstNameErrorMessage", "userMiddleNameErrorMessage", "userLastNameErrorMessage", 
+    "userEmailErrorMessage", "userConfirmEmailErrorMessage", "userQuestionErrorMessage", 
+    "userConcernErrorMessage", "userTextErrorMessage", and "userFormEndTimeErrorMessage". 
+    It also sets the font size to be responsive to the viewport width, with a range of 9px to
+    13px. The color of the text is set to a shade of red, and the text alignment is set to left.
+    Additionally, the white-space property is set to normal, which allows the text to wrap 
+    according to the width of the container.
+*/
+#userFirstNameErrorMessage, #userMiddleNameErrorMessage, #userLastNameErrorMessage, #userEmailErrorMessage, #userConfirmEmailErrorMessage, #userQuestionErrorMessage, #userConcernErrorMessage, #userTextErrorMessage, #userFormEndTimeErrorMessage { 
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(9px, 2vw, 13px); 
+    color: rgb(201, 24, 24);    
+    text-align: left;
+    white-space: normal; 
+}
+
+/*
+    This CSS statement changes the color of the hyperlink text when the user hovers over it. 
+    The new color that is set is an RGB value of (201, 24, 24), which is a shade of red. The 
+    selector used in this statement targets the anchor element (a) that is a child of the element
+    with the ID userConcernList. When the user hovers over this hyperlink, its color will change
+    to the specified shade of red.
+*/
+#userConcernList a:hover {
+    color:rgb(201, 24, 24);
+}
+
+/*
+    The CSS statement defines the styling for a textarea element on a web page. The resize: 
+    vertical property allows the user to resize the textarea vertically, while word-wrap: break-word
+    ensures that long words are broken and wrapped to fit within the element's width. The other 
+    properties specify the element's width, background color, font family, font size, text color, 
+    border color, and outline style.
+*/
+textarea {
+    resize: vertical;       
+    word-wrap: break-word;
+    width: 100%;
+    background-color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 16px); 
+    color: rgb(13, 65, 255);
+    border-color: rgb(13, 65, 255);
+    outline: none;    
+}
+
+/*
+    This CSS statement sets the width of the scrollbar of a textarea element to 5 pixels when
+    viewed in a webkit-based browser (such as Safari or Chrome). The double colon (::) notation 
+    before "webkit-scrollbar" indicates that this is a pseudo-element used to style the scrollbar
+    of the element.
+*/
+textarea::-webkit-scrollbar {
+    width: 5px;
+}
+
+/*
+    This CSS statement sets the border-radius of the track of the scrollbar to 5 pixels, 
+    creating rounded edges. It also applies a box-shadow effect to the track when the user 
+    hovers over it, creating a subtle 3D effect using a dark gray color with a transparency 
+    value of 0.30. The prefix "-webkit-" is used to target the WebKit engine used by some 
+    browsers, such as Google Chrome and Safari.
+*/
+textarea::-webkit-scrollbar-track {
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px rgba(136, 125, 125, 0.30); 
+}
+
+/*
+    The CSS statement textarea::-webkit-scrollbar-thumb selects the scrollbar thumb element
+    of a textarea in WebKit browsers. The border-radius property sets the radius of the 
+    corners of the scrollbar thumb to 5 pixels, while the background-color property sets the 
+    background color of the scrollbar thumb to a shade of grey with RGB values of (136, 125, 125).
+*/
+textarea::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: rgb(136, 125, 125);
+}
+
+/*
+    The CSS code block sets the font family to be used for the element with the ID of 
+    "textareaRemainingCharacters" to be either Cambria, Cochin, Georgia, Times, 'Times New 
+    Roman', or any other serif font. The font size is set to be responsive, where it will be
+    between 9 pixels and 2 viewport width units, but will not exceed 12 pixels. The text color 
+    is set to an RGB value of (13, 65, 255), which is a shade of blue. Finally, the align-items
+    property is set to center, which aligns the content of the element vertically in the center.
+*/
+#textareaRemainingCharacters {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(9px, 2vw, 12px); 
+    color: rgb(13, 65, 255);
+    align-items: center;
+}
+
+/*
+    The CSS statement sets the style properties for the HTML element with the ID 
+    "userTextCountMessage". It specifies the font family to be used for the element's text, 
+    the font size to be responsive and adjust based on the viewport width, the text color to 
+    be a shade of blue, and sets the alignment of any child elements to center.
+*/
+#userTextCountMessage {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(9px, 2vw, 12px); 
+    color: rgb(13, 65, 255);
+    align-items: center;
+} 
+
+/*
+    The CSS rules for the #userCountMessage selector sets the font family to Cambria, Cochin, 
+    Georgia, Times, 'Times New Roman', serif. It also sets the font size to a range between 9 
+    pixels and 2% of the viewport width, with a minimum of 9 pixels and a maximum of 12 pixels. 
+    The text color is set to a shade of blue using the RGB color model, and align-items property 
+    centers the text vertically within its container.
+*/
+#userCountMessage {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(9px, 2vw, 12px); 
+    color: rgb(13, 65, 255);
+    align-items: center;
+}
+
+/*
+    The #submitButton CSS selector targets an HTML element with the ID of "submitButton". The
+    display: block; property sets the element to display as a block-level element, taking up the 
+    full width available. height, width, background-color, font-family, color, font-size, and 
+    text-align properties define various visual aspects of the element, such as its height, 
+    background color, font family, font size, and alignment. Finally, the border: none; property
+    removes any border around the element.
+*/
+#submitButton {
+    display: block;
+    height: 40px;
+    width: 100%;
+    background-color: rgb(201, 24, 24);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(255, 255, 255);
+    font-size: clamp(12px, 2vw, 16px);
+    text-align: center;
+    border: none;  
+}
+
+/* 
+    Extra large devices (large laptops and desktops, 1200px and up)
+*/
+@media only screen and (min-width: 1200px) {
+    #flex_Container {
+      width: 100%;
+    }
+}
+
+/* 
+    Large devices (laptops/desktops, 992px and up) 
+*/
+@media only screen and (min-width: 992px) {
+    #flex_Container {
+      width: 100%;
+    }
+}
+
+/* 
+    Medium devices (landscape tablets, 768px and up)
+*/
+@media only screen and (min-width: 768px) {
+    #flex_Container {
+      width: 100%;
+    }
+}
+
+/* 
+    Small devices (portrait tablets and large phones, 600px and up)
+*/
+@media only screen and (min-width: 600px) {
+    #flex_Container {
+      width: 100%;
+    }
+}
+  
+/* 
+    Extra small devices (phones, 600px and down)
+*/
+@media only screen and (max-width: 600px) {
+    #flex_Container {
+      width: 100%;
+    }
+}
+
+ 
