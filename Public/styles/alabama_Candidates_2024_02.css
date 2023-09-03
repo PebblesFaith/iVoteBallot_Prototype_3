@@ -1,0 +1,4709 @@
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+
+::-webkit-scrollbar-track {
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px rgba(172, 10, 10, 0.3); 
+}
+
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: rgb(13, 65, 255);
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(172, 10, 10, 0.3); ;    
+}
+
+
+@font-face {
+    font-family: "Megrim-Regular";
+    src: url(../fonts/Source_Code_Pro/SourceCodePro-SemiBold.ttf) format('truetype');
+    font-weight: normal;
+}
+
+.flex_Container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center;     
+}
+
+.flex_Container_Row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+    border-color: rgb(201, 24, 24);  
+}
+
+.flex_Container_Column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.flex_Container_Column > div {
+    display: flex;
+    flex: 1;
+    display: block;    
+}
+
+
+.columns_3 {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.columns_3 > * {
+    width: 100%; 
+
+}
+
+/* 
+    The @media query is very important because the query targets the users screen devices
+    with minimum width for smaller computer devices.
+*/
+@media (min-width: 500px) {
+    .columns_3 > * {
+        width:calc(100% / 3);
+     }
+   }
+  
+  body {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	background-color:  rgb(255, 255, 255);;
+  }
+  
+  .container {
+	max-width: 1200px;
+	margin-top: 25px;
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+  }
+
+  .stateElection_Title_01 {
+	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(18px, 2vw, 75px);
+	text-align: center;
+	color: rgb(13, 65, 255);
+	margin-bottom: 20px;
+}
+   
+  .panels.panel-default {
+	padding: 0 15px;
+  }
+  
+  .relative {
+	position: relative;
+  }
+  
+  .panels {
+	padding-bottom: 0px;
+  }
+  
+  .panel-heading {
+	padding-left: 15px;
+	padding-right: 15px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: 30px;
+	background-color: transparent;
+	border-radius: 4px;
+	margin-bottom: 0px;
+	cursor: pointer;
+	font-size: 28px;
+	border: 2px solid #fff;
+	color: rgb(0, 0, 0);
+	border-radius: 4px;
+	background: rgb(201, 24, 24);
+	/*box-shadow: inset 20px 20px 60px #bebebe, inset -20px -20px 60px #ffffff;*/
+  }
+  
+  .panel_Title {
+	position: relative;
+	margin-bottom: 0;
+	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 16px);
+	color: rgb(255, 255, 255);
+	font-weight: 200;
+	letter-spacing: 1px;
+	margin-top: 2px;
+  }
+
+    
+  .panel-heading:after {
+	content: "\253C";
+	color: rgb(255, 255, 255);
+	top: calc(50% - 19px);
+    font-size: clamp(10px, 2vw, 16px);
+    top: 5px;
+    right: 20px;
+    font-weight:bold;
+	position: absolute;
+	transition: all 0.3s ease;
+	transform-origin: 10px 19px;
+  }
+  
+  .panel-heading.change_icon::after {
+	content: "\2502";
+	transform: rotate(90deg);
+	transition: all 0.3s ease;
+  }
+  
+  .panel-body__list li {
+	list-style-type: none;
+	margin-bottom: 4px;
+	line-height: 21px;
+	letter-spacing: 1.2px;
+	position: relative;
+	color: #000;
+	font-size: 15px;
+	font-weight: 400;
+	padding: 15px;
+	border-radius: 4px;
+	background: #fcfcfc;
+	box-shadow: -8px 10px 30px #fff, 0 15px 25px rgb(68, 68, 68);
+  }
+  
+  .panels .panel-collapse {
+	position: relative;
+	overflow-y: auto;
+	max-height: 0;
+	transition: max-height 0.3s ease, margin-bottom 0.2s ease-in;
+   
+  }
+  
+  .panel-collapse.collapse {
+	max-height: 100%; /* was 1000px */
+    
+  }
+  
+  @media only screen and (max-width: 768px) {
+	.container {
+	  max-width: 100%;
+	  width: auto;
+	}
+  
+	.title {
+	  font-size: 45px;
+	}
+  }
+  
+
+.section_Title {
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	color: rgb(255, 255, 255);
+    font-size: clamp(12px, 2vw, 14px);
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+#hr_Blue_line_02 {
+    border-color: rgb(13, 65, 255); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
+}
+
+#hr_Red_line_02 {
+    border-color: rgb(201, 24, 24); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    width: auto;
+}  
+
+#hr_Grey_line_02 {
+    color: rgb(195, 195, 195);
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
+}
+
+#partiesRed_Title_01 {
+	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	color: rgb(201, 24, 24);
+    font-size: clamp(14px, 2vw, 35px);
+	text-align: center;	
+}
+
+#partiesGrey_Title_01 {
+	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	color: rgb(195, 195, 195);
+    font-size: clamp(14px, 2vw, 35px);
+	text-align: center;	
+}
+
+#partiesBlue_Title_01 {
+	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(14px, 2vw, 35px);
+	color: rgb(13, 65, 255);
+	text-align: center;
+}
+
+.alignCandidates_01 {
+	display: flex;
+    flex-flow: row wrap;   
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 10px;
+    cursor: pointer;
+    cursor: 14px;
+    list-style: none;   
+    background-color: transparent;  
+    width: auto;   
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 16px); 
+    text-align: center;  
+}
+
+.alignCandidates_01 a {
+	text-decoration: none;
+    display: block;
+    background-color: inherit;
+    padding: 15px;
+    color: rgb(201, 24, 24);
+}
+
+.labelExpanded_01 {	 
+	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 16px);	
+   
+}
+
+.labelExpanded_01 > input {	
+	display: none;
+}
+
+.labelExpanded_01 input:checked + .radio_Buttons_01 {
+	display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column; 
+	background-color: rgba(145, 223, 126, 0.30);
+	color: rgb(255, 255, 255);	   
+    
+}
+
+.radio_Buttons_01 {  
+	width: 75px;
+	height: 165px;
+	border-radius: 15px;	
+	text-align: center;
+	padding: 5px 15px;
+	box-shadow: 1px 1px 1px 1px rgb(195, 195, 195);
+	cursor: pointer;
+	background-color: rgb(250, 250, 250);
+	color: rgb(201, 24, 24);	
+	margin-bottom: 5px;	
+    align-items: center;
+}
+
+p {
+	color: rgb(201, 24, 24);
+	font-size: clamp(10px, 2vw, 12px);
+	
+}
+.radio_Buttons_01 > img {
+	width: 80px;
+	height: 80px;
+}
+
+#userSelectedCandidates_2024 {
+    display: block;
+    align-content: center;
+    height: 40px;
+    width: 100%;
+    background-color: rgb(211, 211, 211);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(201, 24, 24);
+    font-size: clamp(12px, 2vw, 16px);
+    text-align: center;
+    border: none;  
+
+}
+
+#userSelectedCandidates_SubmitButton {
+    display: block;
+    align-content: center;
+    height: 40px;
+    width: 100%;
+    background-color: rgb(211, 211, 211);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(201, 24, 24);
+    font-size: clamp(12px, 2vw, 16px);
+    text-align: center;
+    border: none;  
+
+}
+
+#resetButton {
+    display: block;
+    align-content: center;
+    white-space: normal;
+    height: 40px;
+    width: 100%;
+    background-color: rgb(13, 65, 255);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(255, 255, 255);
+    font-size: clamp(12px, 2vw, 16px);
+    text-align: center;
+    border: none; 
+}
+
+#submitButton {
+    display: block;
+    align-content: center;
+    height: 40px;
+    width: 100%;
+    background-color: rgb(13, 65, 255);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(255, 255, 255);
+    font-size: clamp(12px, 2vw, 16px);
+    text-align: center;
+    border: none;  
+}
+
+#errorMessageContainer { 
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(9px, 2vw, 13px); 
+    color: rgb(13, 65, 255);    
+    text-align: left;
+    white-space: normal; 
+    margin-top: 5px;    
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+#result {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: rgb(245, 245, 245);
+    align-items: center;
+    justify-content: center; 
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px);
+    color: rgb(201, 24, 24); 
+    cursor:pointer;
+}
+
+.popupModal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 5px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(245, 245, 245); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */ 
+}
+
+.popupModal_Content {
+    background-color: rgb(255, 255, 255);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: rgb(201, 24, 24);
+    float: right;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px);
+    font-weight: bold;	
+}
+
+.close:hover,
+.close:focus {
+    color: rgb(13, 65, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#downloadPDF {
+    display: block;
+    align-content: center;
+    height: 40px;
+    width: 100%;
+    background-color: rgb(13, 65, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(255, 255, 255);
+    font-size: clamp(12px, 2vw, 16px);
+    text-align: center;
+    border: none;  
+    cursor: pointer;
+}
+
+#printPDF {
+    display: block;
+    align-content: center;    
+    height: 40px;
+    width: 100%;
+    background-color: rgb(201, 24, 24);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(255, 255, 255);
+    font-size: clamp(12px, 2vw, 16px);
+    text-align: center;
+    border: none;  
+    cursor: pointer;
+}
+
+#header_Image_02 {       
+    display: inline-block;
+}
+
+#wrapImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+
+#imageTitle {
+    color: rgb(13, 65, 255);
+    font-family: Megrim-Regular, Cambria, Cochin, Georgia, Times, serif;
+    font-size: clamp(16px, 2vw, 18px);
+    text-align: center;
+}
+
+.sideBar_Navigation {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+    left: 0px;      
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 25px;  
+    /*
+    overflow: scroll;
+    scrollbar-color: rgb(201, 24, 24);
+    scrollbar-width: thin;
+    */
+    
+  }
+  
+.sideBar_Navigation a {
+    padding: 8px 8px 8px 15px;
+    text-decoration: none;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 16px); 
+    color: rgb(13, 65, 255);
+    display: block;
+    transition: 0.3s;
+  }
+  
+.sideBar_Navigation a:hover {
+    color: rgb(201, 24, 24);
+  }
+  
+.sideBar_Navigation .closeButton {
+    position: absolute;
+    top: 0;
+    right: 30px;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 35px); 
+    margin-left: 100px;
+    color: rgb(201, 24, 24);
+  }
+  
+@media screen and (max-height: 450px) {
+    .sideBar_Navigation {padding-top: 15px;}
+    .sideBar_Navigation a {font-size: 18px;}
+  }
+
+#shoppingCart_Image_01 {
+    display: inline-block;
+    width: 100px;
+    height: 100px;  
+    font-size: clamp(12px, 2vw, 100px); 
+    text-align: center;
+}
+
+.wrap_TotalSelectedCandidates {
+    position: relative;
+    width: 75px;
+    height: auto;
+    margin: auto;
+    text-align: center;
+}
+
+#totalSelectedCandidates_Icon {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 45px;
+    bottom: 0;
+    height: auto;
+    color: rgb(255, 255, 255);    
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 15px); 
+    height: 13px;
+
+}
+
+.shoppingCart_Image_02 {   
+    display: flex;
+    width: clamp(30px, 2vw, 100px); 
+    justify-content: right;
+
+}
+
+#shoppingCart_Title_01 {
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px);     
+    color: rgb(13, 65, 255);
+    text-align: center;
+}
+
+/*
+.flex_ShoppingCart_Container {
+    display: flex;
+    flex-direction: row;    
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+}
+
+.flex_ShoppingCart_Container > div {
+    display: flex;
+    flex: 1;  
+    background-color: rgb(255, 255, 255);
+    width: 100px;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    
+}
+
+*/
+
+
+#userPresidentErrorMessage, 
+#userGovernorErrorMessage,
+#userLtGovernorErrorMessage,
+#userAttyGeneralErrorMessage,
+#userSecofStateErrorMessage,
+#userStateTreasurerErrorMessage,
+#userStateAuditorErrorMessage,
+#userAgricultureErrorMessage,
+#userSenatorErrorMessage,
+#userUS1stCongDistrictErrorMessage,
+#userUS2ndCongDistrictErrorMessage,
+#userUS3rdCongDistrictErrorMessage,
+#userUS4thCongDistrictErrorMessage,
+#userUS5thCongDistrictErrorMessage,
+#userUS6thCongDistrictErrorMessage,
+#userUS7thCongDistrictErrorMessage,
+#userPublicSerCommissonPlace_1ErrorMessage,
+#userPublicSerCommissonPlace_2ErrorMessage,
+#userStateBoardofEduPlace_2ErrorMessage,
+#userStateBoardofEduPlace_4ErrorMessage,
+#userStateBoardofEduPlace_6ErrorMessage,
+#userStateBoardofEduPlace_8ErrorMessage,
+#userSupremeCourtPlace_5ErrorMessage,
+#userSupremeCourtPlace_6ErrorMessage {
+
+    position: relative;
+	margin-bottom: 0;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(9px, 2vw, 12px);
+	color: rgb(255, 255, 255);
+	font-weight: 200;
+	letter-spacing: 1px;
+	margin-top: 2px;
+
+}
+
+.cart_Button {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center;  
+}
+
+#emptyCart { 
+    height: 40px;
+    width: 10%;
+    background-color: rgb(13, 65, 255);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(255, 255, 255);
+    font-size: clamp(12px, 2vw, 16px);
+    text-align: center;
+    border: none;    
+    margin: 25px;  
+}
+
+#checkOut {         
+    height: 40px;
+    width: 10%;
+    background-color: rgb(201, 24, 24);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(255, 255, 255);
+    font-size: clamp(12px, 2vw, 16px);
+    text-align: center;
+    border: none;  
+    margin: 25px;     
+}
+
+.container_ShoppingCart {
+    display: flex;
+    flex-direction: row;    
+    flex-wrap: wrap;    
+    width: 100%;
+}
+
+.container_ShoppingCart > div {
+    display: flex;
+    flex: 1 0 calc(20%); 
+    background-color: rgb(255, 255, 255);
+    width: auto;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;    
+    
+}
+
+#candidateTexts_Category {
+    display: block;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(13, 65, 255);
+    margin-bottom: 0px;
+   
+}
+   
+#candidateTexts_Name {
+    display: block;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(201, 24, 24);
+    margin-top: 1px;
+    
+}
+
+#candidate_ShoppingCart_Images {
+    display: block; /* Change flex to block */
+    margin: 0 auto; /* Add margin: 0 auto; to horizontally center the image */
+    width: 75px;
+    height: 75px;
+    
+}
+
+#wrap_ShoppingCart_Images > div {
+    display: flex;  
+    flex: wrap; 
+   
+}
+
+/*
+#wrap_ShoppingCart_Images > div  {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+   
+}
+*/
+
+#candidate_ShoppingCart_Container {
+    display: flex;
+    flex-direction: row;    
+    flex-wrap: wrap;    
+    width: 100%;
+
+}
+
+#candidate_ShoppingCart_Container_Row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+    border-color: rgb(201, 24, 24);    
+
+}
+
+#candidate_ShoppingCart_Container_Column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    flex-wrap: wrap;    
+
+}
+
+#candidate_ShoppingCart_Container_Column > div {
+    display: flex;
+    flex: 1;
+    display: block;  
+    border-color: rgb(13, 65, 255);
+
+}
+
+.trash_Button {
+    background-color: rgb(255, 255, 255);
+    border: none;
+    margin: 0;
+    width: clamp(20px, 2vw, 30px); 
+    padding: 0;
+   
+}
+
+.trash_Container {
+    position: relative;
+    margin: 0;
+    border: none;
+    padding: 0;
+    
+}
+
+  
+/* Styles for the image with class "trash" */
+  .trash_Close_Icon {
+    display: block;
+    margin: 0 auto; 
+    border: none;
+    background: rgb(255, 255, 255);
+    cursor: none;
+    width: clamp(20px, 2vw, 30px); 
+   
+   
+  }
+  
+.trash_Open_Overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .3s ease;
+    width: clamp(20px, 2vw, 30px); 
+   
+}
+
+.trash_Container:hover .trash_Open_Overlay {
+    opacity: 1;
+   
+    
+}
+
+.icon {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-55%, -55%);
+    -ms-transform: translate(-55%, -55%);
+    text-align: center;
+   
+    
+}
+
+.trash_Open_Icon:hover {
+    display: block;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    width: clamp(20px, 2vw, 30px);   
+   
+}
+
+#paragraph_TotalSelectedCandidates {
+    display: block;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    text-align: left;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(13, 65, 255);
+    padding: 5px;
+    margin-left: 25px;
+}
+
+#paragraph_CostPerCandidate {
+    display: block;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(201, 24, 24);
+    padding: 5px;
+    margin-left: 25px;
+}
+
+#paragraph_ActualTotalCost {
+    display: block;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(13, 65, 255);  
+    padding: 5px;
+    margin-left: 25px;    
+}
+
+#paragraph_TotalCost {
+    display: block;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(201, 24, 24);  
+    padding: 5px;   
+    margin-left: 25px;
+}
+
+#totalSelectedCandidates {
+    display: inline-block;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(13, 65, 255);
+    padding: 5px;
+   
+}
+
+#actualTotalCost {
+    display: inline-block;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(13, 65, 255); 
+    padding: 5px;
+    
+}
+  
+#totalCost {
+    display: inline-block;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(201, 24, 24);
+    padding: 5px;   
+   
+}
+
+.shoppingCart_Flex_Container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center; 
+}
+
+.shoppingCart_Flex_Container_Row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;    
+}
+
+.shoppingCart_Flex_Container_Column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;    
+}
+
+.leftSide_ShoppingCart {
+    background-color: rgb(123, 126, 136, .10);
+}
+
+
+
+
+#candidateButton_FC001,
+#candidateButton_FC002,
+#candidateButton_FC003,
+#candidateButton_FC004,
+#candidateButton_FC005,
+#candidateButton_FC006,
+#candidateButton_FC007,
+#candidateButton_FC008,
+#candidateButton_FC009,
+#candidateButton_FC010,
+#candidateButton_FC011,
+#candidateButton_FC012,
+#candidateButton_FC013,
+#candidateButton_FC014,
+#candidateButton_FC015,
+#candidateButton_FC016 {
+    background-color: rgb(13, 65, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px);
+    color: rgb(255, 255, 255);
+    border: none; 
+}
+
+#candidateButton_FC001:hover,
+#candidateButton_FC001:focus, 
+#candidateButton_FC002:hover,
+#candidateButton_FC002:focus,
+#candidateButton_FC003:hover,
+#candidateButton_FC003:focus,
+#candidateButton_FC004:hover,
+#candidateButton_FC004:focus,    
+#candidateButton_FC005:hover,
+#candidateButton_FC005:focus,
+#candidateButton_FC006:hover,
+#candidateButton_FC006:focus,
+#candidateButton_FC007:hover,
+#candidateButton_FC007:focus,
+#candidateButton_FC008:hover,
+#candidateButton_FC008:focus,
+#candidateButton_FC009:hover,
+#candidateButton_FC009:focus,
+#candidateButton_FC010:hover,
+#candidateButton_FC010:focus,
+#candidateButton_FC011:hover,
+#candidateButton_FC011:focus,
+#candidateButton_FC012:hover,
+#candidateButton_FC012:focus,
+#candidateButton_FC013:hover,
+#candidateButton_FC013:focus,
+#candidateButton_FC014:hover,
+#candidateButton_FC014:focus,
+#candidateButton_FC015:hover,
+#candidateButton_FC015:focus,
+#candidateButton_FC016:hover,
+#candidateButton_FC016:focus
+{
+    background-color: rgb(201, 24, 24);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_CandidateScoreSheet_FC001,
+.modal_CandidateScoreSheet_FC002,
+.modal_CandidateScoreSheet_FC003,
+.modal_CandidateScoreSheet_FC004,
+.modal_CandidateScoreSheet_FC005,
+.modal_CandidateScoreSheet_FC006,
+.modal_CandidateScoreSheet_FC007,
+.modal_CandidateScoreSheet_FC008,
+.modal_CandidateScoreSheet_FC009,
+.modal_CandidateScoreSheet_FC010,
+.modal_CandidateScoreSheet_FC011,
+.modal_CandidateScoreSheet_FC012,
+.modal_CandidateScoreSheet_FC013,
+.modal_CandidateScoreSheet_FC014,
+.modal_CandidateScoreSheet_FC015,
+.modal_CandidateScoreSheet_FC016 {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 30px;    
+    left: 0;
+    top: 0;   
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    /*background-color: rgba(0, 0, 0, 0.4); */
+}
+
+.modal_Content_ScoreSheet_FC001,
+.modal_Content_ScoreSheet_FC002,
+.modal_Content_ScoreSheet_FC003,
+.modal_Content_ScoreSheet_FC004,
+.modal_Content_ScoreSheet_FC005,
+.modal_Content_ScoreSheet_FC006,
+.modal_Content_ScoreSheet_FC007,
+.modal_Content_ScoreSheet_FC008,
+.modal_Content_ScoreSheet_FC009,
+.modal_Content_ScoreSheet_FC010,
+.modal_Content_ScoreSheet_FC011,
+.modal_Content_ScoreSheet_FC012,
+.modal_Content_ScoreSheet_FC013,
+.modal_Content_ScoreSheet_FC014,
+.modal_Content_ScoreSheet_FC015,
+.modal_Content_ScoreSheet_FC016 {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    /* border: 1px solid #888; */
+    border: none;
+    width: 80%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: ScoreSheetAnimateTop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: ScoreSheetAnimateTop_01;
+    animation-duration: .05s;
+    margin-bottom: 40px;
+
+}
+
+@-webkit-keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.close_ScoreSheet_FC001, 
+.close_ScoreSheet_FC002,
+.close_ScoreSheet_FC003,
+.close_ScoreSheet_FC004,
+.close_ScoreSheet_FC005,
+.close_ScoreSheet_FC006,
+.close_ScoreSheet_FC007,
+.close_ScoreSheet_FC008,
+.close_ScoreSheet_FC009,
+.close_ScoreSheet_FC010,
+.close_ScoreSheet_FC011,
+.close_ScoreSheet_FC012,
+.close_ScoreSheet_FC013,
+.close_ScoreSheet_FC014,
+.close_ScoreSheet_FC015,
+.close_ScoreSheet_FC016 {
+    color: rgb(139, 134, 134);
+    float: none;
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 25px;    
+}
+
+.close_ScoreSheet_FC001:hover,
+.close_ScoreSheet_FC001:focus, 
+.close_ScoreSheet_FC002:hover,
+.close_ScoreSheet_FC002:focus,
+.close_ScoreSheet_FC003:hover,
+.close_ScoreSheet_FC003:focus,
+.close_ScoreSheet_FC004:hover,
+.close_ScoreSheet_FC004:focus,
+.close_ScoreSheet_FC005:hover,
+.close_ScoreSheet_FC005:focus,
+.close_ScoreSheet_FC006:hover,
+.close_ScoreSheet_FC006:focus,
+.close_ScoreSheet_FC007:hover,
+.close_ScoreSheet_FC007:focus,
+.close_ScoreSheet_FC008:hover,
+.close_ScoreSheet_FC008:focus, 
+.close_ScoreSheet_FC009:hover,
+.close_ScoreSheet_FC009:focus,
+.close_ScoreSheet_FC010:hover,
+.close_ScoreSheet_FC010:focus,
+.close_ScoreSheet_FC011:hover,
+.close_ScoreSheet_FC011:focus,
+.close_ScoreSheet_FC012:hover,
+.close_ScoreSheet_FC012:focus,
+.close_ScoreSheet_FC013:hover,
+.close_ScoreSheet_FC013:focus,
+.close_ScoreSheet_FC014:hover,
+.close_ScoreSheet_FC014:focus,
+.close_ScoreSheet_FC015:hover,
+.close_ScoreSheet_FC015:focus,
+.close_ScoreSheet_FC016:hover,
+.close_ScoreSheet_FC016:focus                      
+{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_ScoreSheet_Header_FC001,
+.modal_ScoreSheet_Header_FC002,
+.modal_ScoreSheet_Header_FC003,
+.modal_ScoreSheet_Header_FC004,
+.modal_ScoreSheet_Header_FC005,
+.modal_ScoreSheet_Header_FC006,
+.modal_ScoreSheet_Header_FC007,
+.modal_ScoreSheet_Header_FC008,
+.modal_ScoreSheet_Header_FC009,
+.modal_ScoreSheet_Header_FC010,
+.modal_ScoreSheet_Header_FC011,
+.modal_ScoreSheet_Header_FC012,
+.modal_ScoreSheet_Header_FC013,
+.modal_ScoreSheet_Header_FC014,
+.modal_ScoreSheet_Header_FC015,
+.modal_ScoreSheet_Header_FC016 {
+    padding: 2px 16px;
+    background-color: rgb(201, 24, 24);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255)
+}
+
+.modal_ScoreSheet_Body_FC001,
+.modal_ScoreSheet_Body_FC002,
+.modal_ScoreSheet_Body_FC003,
+.modal_ScoreSheet_Body_FC004,
+.modal_ScoreSheet_Body_FC005,
+.modal_ScoreSheet_Body_FC006,
+.modal_ScoreSheet_Body_FC007,
+.modal_ScoreSheet_Body_FC008,
+.modal_ScoreSheet_Body_FC009,
+.modal_ScoreSheet_Body_FC010,
+.modal_ScoreSheet_Body_FC011,
+.modal_ScoreSheet_Body_FC012,
+.modal_ScoreSheet_Body_FC013,
+.modal_ScoreSheet_Body_FC014,
+.modal_ScoreSheet_Body_FC015,
+.modal_ScoreSheet_Body_FC016 {
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 25px); 
+    color: rgb(201, 24, 24);
+    text-align: left;
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+.modal_ScoreSheet_Footer_FC001,
+.modal_ScoreSheet_Footer_FC002,
+.modal_ScoreSheet_Footer_FC003,
+.modal_ScoreSheet_Footer_FC004,
+.modal_ScoreSheet_Footer_FC005, 
+.modal_ScoreSheet_Footer_FC006,
+.modal_ScoreSheet_Footer_FC007,
+.modal_ScoreSheet_Footer_FC008,
+.modal_ScoreSheet_Footer_FC009,
+.modal_ScoreSheet_Footer_FC010,
+.modal_ScoreSheet_Footer_FC011,
+.modal_ScoreSheet_Footer_FC012,
+.modal_ScoreSheet_Footer_FC013,
+.modal_ScoreSheet_Footer_FC014,
+.modal_ScoreSheet_Footer_FC015,
+.modal_ScoreSheet_Footer_FC016 {
+    padding: 2px 16px;
+    background-color: rgb(13, 65, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);
+}
+
+#president_ScoreSheet_Title_FC001,
+#president_ScoreSheet_Title_FC002,
+#president_ScoreSheet_Title_FC003,
+#president_ScoreSheet_Title_FC004,
+#president_ScoreSheet_Title_FC005,
+#president_ScoreSheet_Title_FC006,
+#president_ScoreSheet_Title_FC007,
+#president_ScoreSheet_Title_FC008,
+#president_ScoreSheet_Title_FC009,
+#president_ScoreSheet_Title_FC010,
+#president_ScoreSheet_Title_FC011,
+#president_ScoreSheet_Title_FC012,
+#president_ScoreSheet_Title_FC013,
+#president_ScoreSheet_Title_FC014,
+#president_ScoreSheet_Title_FC015,
+#president_ScoreSheet_Title_FC016 {  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(14px, 2vw, 25px); 
+    color: rgb(255, 255, 255);
+}
+
+#president_ScoreSheet_Subtitle_01_FC001,
+#president_ScoreSheet_Subtitle_01_FC002,
+#president_ScoreSheet_Subtitle_01_FC003,
+#president_ScoreSheet_Subtitle_01_FC004,
+#president_ScoreSheet_Subtitle_01_FC005,
+#president_ScoreSheet_Subtitle_01_FC006,
+#president_ScoreSheet_Subtitle_01_FC007,
+#president_ScoreSheet_Subtitle_01_FC008,
+#president_ScoreSheet_Subtitle_01_FC009,
+#president_ScoreSheet_Subtitle_01_FC010,
+#president_ScoreSheet_Subtitle_01_FC011,
+#president_ScoreSheet_Subtitle_01_FC012,
+#president_ScoreSheet_Subtitle_01_FC013,
+#president_ScoreSheet_Subtitle_01_FC014,
+#president_ScoreSheet_Subtitle_01_FC015,
+#president_ScoreSheet_Subtitle_01_FC016 {
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(13, 65, 255);
+    text-align: center;
+}
+
+#president_ScoreSheet_Subtitle_02_FC001,
+#president_ScoreSheet_Subtitle_02_FC002,
+#president_ScoreSheet_Subtitle_02_FC003,
+#president_ScoreSheet_Subtitle_02_FC004,
+#president_ScoreSheet_Subtitle_02_FC005,
+#president_ScoreSheet_Subtitle_02_FC006,
+#president_ScoreSheet_Subtitle_02_FC007,
+#president_ScoreSheet_Subtitle_02_FC008,
+#president_ScoreSheet_Subtitle_02_FC009,
+#president_ScoreSheet_Subtitle_02_FC010,
+#president_ScoreSheet_Subtitle_02_FC011,
+#president_ScoreSheet_Subtitle_02_FC012,
+#president_ScoreSheet_Subtitle_02_FC013,
+#president_ScoreSheet_Subtitle_02_FC014,
+#president_ScoreSheet_Subtitle_02_FC015,
+#president_ScoreSheet_Subtitle_02_FC016 {  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(201, 24, 24);
+    text-align: center;
+}
+
+#president_ScoreSheet_BodyContents_FC001,
+#president_ScoreSheet_BodyContents_FC002,
+#president_ScoreSheet_BodyContents_FC003,
+#president_ScoreSheet_BodyContents_FC004,
+#president_ScoreSheet_BodyContents_FC005,
+#president_ScoreSheet_BodyContents_FC006,
+#president_ScoreSheet_BodyContents_FC007,
+#president_ScoreSheet_BodyContents_FC008,
+#president_ScoreSheet_BodyContents_FC009,
+#president_ScoreSheet_BodyContents_FC010,
+#president_ScoreSheet_BodyContents_FC011,
+#president_ScoreSheet_BodyContents_FC012,
+#president_ScoreSheet_BodyContents_FC013,
+#president_ScoreSheet_BodyContents_FC014,
+#president_ScoreSheet_BodyContents_FC015,
+#president_ScoreSheet_BodyContents_FC016 {
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(13, 65, 255);
+    text-align: left;
+}
+
+
+
+
+
+
+.scoreSheet_Flex_Container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center; 
+}
+
+.scoreSheet_Flex_Container_Row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;    
+}
+
+.scoreSheet_Flex_Container_Column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;    
+}
+
+.scoreSheet_Flex_Container_Column {
+    background-color: rgb(255, 255, 255);
+}
+
+.leftSide_ScoreSheet {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    height: auto;
+    width: auto;
+    
+    
+}
+
+.rightSide_ScoreSheet {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column; 	
+    color:rgb(255, 255, 255);    
+    text-align: center;           
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(18px, 5vw, 100px);     
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    
+  
+
+   
+}
+
+#hr_CrimsonRed_line_01 {
+    color: rgb(134, 25, 25);
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
+}
+
+#hr_Gold_line_01 {
+    color: rgb(213, 179, 39);
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
+}
+
+#candidateButton_AL001_24,
+#candidateButton_AL002_24,
+#candidateButton_AL003_24,
+#candidateButton_AL004_24,
+#candidateButton_AL005_24,
+#candidateButton_AL006_24,
+#candidateButton_AL007_24,
+#candidateButton_AL008_24,
+#candidateButton_AL009_24,
+#candidateButton_AL010_24,
+#candidateButton_AL011_24,
+#candidateButton_AL012_24,
+#candidateButton_AL013_24,
+#candidateButton_AL014_24,
+#candidateButton_AL015_24
+{
+    background-color: rgb(13, 65, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px);
+    color: rgb(255, 255, 255);
+    border: none; 
+}
+
+#candidateButton_AL001_24:hover,
+#candidateButton_AL001_24:focus,
+#candidateButton_AL002_24:hover,
+#candidateButton_AL002_24:focus,
+#candidateButton_AL003_24:hover,
+#candidateButton_AL003_24:focus,
+#candidateButton_AL004_24:hover,
+#candidateButton_AL004_24:focus,
+#candidateButton_AL005_24:hover,
+#candidateButton_AL005_24:focus,
+#candidateButton_AL006_24:hover,
+#candidateButton_AL006_24:focus,
+#candidateButton_AL007_24:hover,
+#candidateButton_AL007_24:focus,
+#candidateButton_AL008_24:hover,
+#candidateButton_AL008_24:focus,
+#candidateButton_AL009_24:hover,
+#candidateButton_AL009_24:focus,
+#candidateButton_AL010_24:hover,
+#candidateButton_AL010_24:focus,
+#candidateButton_AL011_24:hover,
+#candidateButton_AL011_24:focus,
+#candidateButton_AL012_24:hover,
+#candidateButton_AL012_24:focus,
+#candidateButton_AL013_24:hover,
+#candidateButton_AL013_24:focus,
+#candidateButton_AL014_24:hover,
+#candidateButton_AL014_24:focus,
+#candidateButton_AL015_24:hover,
+#candidateButton_AL015_24:focus
+
+{
+    background-color: rgb(201, 24, 24);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_CandidateScoreSheet_AL001_24,
+.modal_CandidateScoreSheet_AL002_24,
+.modal_CandidateScoreSheet_AL003_24,
+.modal_CandidateScoreSheet_AL004_24,
+.modal_CandidateScoreSheet_AL005_24,
+.modal_CandidateScoreSheet_AL006_24,
+.modal_CandidateScoreSheet_AL007_24,
+.modal_CandidateScoreSheet_AL008_24,
+.modal_CandidateScoreSheet_AL009_24,
+.modal_CandidateScoreSheet_AL010_24,
+.modal_CandidateScoreSheet_AL011_24,
+.modal_CandidateScoreSheet_AL012_24,
+.modal_CandidateScoreSheet_AL013_24,
+.modal_CandidateScoreSheet_AL014_24,
+.modal_CandidateScoreSheet_AL015_24
+{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 30px;    
+    left: 0;
+    top: 0;   
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    /*background-color: rgba(0, 0, 0, 0.4); */
+}
+
+.modal_Content_ScoreSheet_AL001_24,
+.modal_Content_ScoreSheet_AL002_24,
+.modal_Content_ScoreSheet_AL003_24,
+.modal_Content_ScoreSheet_AL004_24,
+.modal_Content_ScoreSheet_AL005_24,
+.modal_Content_ScoreSheet_AL006_24,
+.modal_Content_ScoreSheet_AL007_24,
+.modal_Content_ScoreSheet_AL008_24,
+.modal_Content_ScoreSheet_AL009_24,
+.modal_Content_ScoreSheet_AL010_24,
+.modal_Content_ScoreSheet_AL011_24,
+.modal_Content_ScoreSheet_AL012_24,
+.modal_Content_ScoreSheet_AL013_24,
+.modal_Content_ScoreSheet_AL014_24,
+.modal_Content_ScoreSheet_AL015_24
+{
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    /* border: 1px solid #888; */
+    border: none;
+    width: 80%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: ScoreSheetAnimateTop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: ScoreSheetAnimateTop_01;
+    animation-duration: .05s;
+    margin-bottom: 40px;
+
+}
+
+@-webkit-keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.close_ScoreSheet_AL001_24,
+.close_ScoreSheet_AL002_24,
+.close_ScoreSheet_AL003_24,
+.close_ScoreSheet_AL004_24,
+.close_ScoreSheet_AL005_24,
+.close_ScoreSheet_AL006_24,
+.close_ScoreSheet_AL007_24,
+.close_ScoreSheet_AL008_24,
+.close_ScoreSheet_AL009_24,
+.close_ScoreSheet_AL010_24,
+.close_ScoreSheet_AL011_24,
+.close_ScoreSheet_AL012_24,
+.close_ScoreSheet_AL013_24,
+.close_ScoreSheet_AL014_24,
+.close_ScoreSheet_AL015_24
+{
+    color: rgb(139, 134, 134);
+    float: none;
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 25px;    
+}
+
+.close_ScoreSheet_AL001_24:hover,
+.close_ScoreSheet_AL001_24:focus,
+.close_ScoreSheet_AL002_24:hover,
+.close_ScoreSheet_AL002_24:focus,
+.close_ScoreSheet_AL003_24:hover,
+.close_ScoreSheet_AL003_24:focus,
+.close_ScoreSheet_AL004_24:hover,
+.close_ScoreSheet_AL004_24:focus,
+.close_ScoreSheet_AL005_24:hover,
+.close_ScoreSheet_AL005_24:focus,
+.close_ScoreSheet_AL006_24:hover,
+.close_ScoreSheet_AL006_24:focus,
+.close_ScoreSheet_AL007_24:hover,
+.close_ScoreSheet_AL007_24:focus,
+.close_ScoreSheet_AL008_24:hover,
+.close_ScoreSheet_AL008_24:focus,
+.close_ScoreSheet_AL009_24:hover,
+.close_ScoreSheet_AL009_24:focus,
+.close_ScoreSheet_AL010_24:hover,
+.close_ScoreSheet_AL010_24:focus, 
+.close_ScoreSheet_AL011_24:hover,
+.close_ScoreSheet_AL011_24:focus,
+.close_ScoreSheet_AL012_24:hover,
+.close_ScoreSheet_AL012_24:focus,
+.close_ScoreSheet_AL013_24:hover,
+.close_ScoreSheet_AL013_24:focus,
+.close_ScoreSheet_AL014_24:hover,
+.close_ScoreSheet_AL014_24:focus,
+.close_ScoreSheet_AL015_24:hover,
+.close_ScoreSheet_AL015_24:focus                             
+{
+    color: rgb(134, 25, 25);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#alabama_StateSeal 
+{
+    display: inline-block;
+    width: 100px;
+    height: 100px;  
+    background-color: rgb(255, 255, 255);
+}
+
+.modal_ScoreSheet_Header_AL001_24,
+.modal_ScoreSheet_Header_AL002_24,
+.modal_ScoreSheet_Header_AL003_24,
+.modal_ScoreSheet_Header_AL004_24,
+.modal_ScoreSheet_Header_AL005_24,
+.modal_ScoreSheet_Header_AL006_24,
+.modal_ScoreSheet_Header_AL007_24,
+.modal_ScoreSheet_Header_AL008_24,
+.modal_ScoreSheet_Header_AL009_24,
+.modal_ScoreSheet_Header_AL010_24,
+.modal_ScoreSheet_Header_AL011_24,
+.modal_ScoreSheet_Header_AL012_24,
+.modal_ScoreSheet_Header_AL013_24,
+.modal_ScoreSheet_Header_AL014_24,
+.modal_ScoreSheet_Header_AL015_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(97, 5, 5);
+}
+
+.modal_ScoreSheet_Body_AL001_24,
+.modal_ScoreSheet_Body_AL002_24,
+.modal_ScoreSheet_Body_AL003_24,
+.modal_ScoreSheet_Body_AL004_24,
+.modal_ScoreSheet_Body_AL005_24,
+.modal_ScoreSheet_Body_AL006_24,
+.modal_ScoreSheet_Body_AL007_24,
+.modal_ScoreSheet_Body_AL008_24,
+.modal_ScoreSheet_Body_AL009_24,
+.modal_ScoreSheet_Body_AL010_24,
+.modal_ScoreSheet_Body_AL011_24,
+.modal_ScoreSheet_Body_AL012_24,
+.modal_ScoreSheet_Body_AL013_24,
+.modal_ScoreSheet_Body_AL014_24,
+.modal_ScoreSheet_Body_AL015_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 25px); 
+    color: rgb(201, 24, 24);
+    text-align: left;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.modal_ScoreSheet_Footer_AL001_24,
+.modal_ScoreSheet_Footer_AL002_24,
+.modal_ScoreSheet_Footer_AL003_24,
+.modal_ScoreSheet_Footer_AL004_24,
+.modal_ScoreSheet_Footer_AL005_24,
+.modal_ScoreSheet_Footer_AL006_24,
+.modal_ScoreSheet_Footer_AL007_24,
+.modal_ScoreSheet_Footer_AL008_24,
+.modal_ScoreSheet_Footer_AL009_24,
+.modal_ScoreSheet_Footer_AL010_24,
+.modal_ScoreSheet_Footer_AL011_24,
+.modal_ScoreSheet_Footer_AL012_24,
+.modal_ScoreSheet_Footer_AL013_24,
+.modal_ScoreSheet_Footer_AL014_24,
+.modal_ScoreSheet_Footer_AL015_24
+{
+    padding: 2px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);
+    width: auto;
+    height: auto;
+}
+
+#governor_Footer_Title_AL001_24,
+#governor_Footer_Title_AL002_24,
+#governor_Footer_Title_AL003_24,
+#governor_Footer_Title_AL004_24,
+#governor_Footer_Title_AL005_24,
+#governor_Footer_Title_AL006_24,
+#governor_Footer_Title_AL007_24,
+#governor_Footer_Title_AL008_24,
+#governor_Footer_Title_AL009_24,
+#governor_Footer_Title_AL010_24,
+#governor_Footer_Title_AL011_24,
+#governor_Footer_Title_AL012_24,
+#governor_Footer_Title_AL013_24,
+#governor_Footer_Title_AL014_24,
+#governor_Footer_Title_AL015_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+}
+
+#governor_ScoreSheet_Title_AL001_24,
+#governor_ScoreSheet_Title_AL002_24,
+#governor_ScoreSheet_Title_AL003_24,
+#governor_ScoreSheet_Title_AL004_24,
+#governor_ScoreSheet_Title_AL005_24,
+#governor_ScoreSheet_Title_AL006_24,
+#governor_ScoreSheet_Title_AL007_24,
+#governor_ScoreSheet_Title_AL008_24,
+#governor_ScoreSheet_Title_AL009_24,
+#governor_ScoreSheet_Title_AL010_24,
+#governor_ScoreSheet_Title_AL011_24,
+#governor_ScoreSheet_Title_AL012_24,
+#governor_ScoreSheet_Title_AL013_24,
+#governor_ScoreSheet_Title_AL014_24,
+#governor_ScoreSheet_Title_AL015_24
+{  
+    padding: 16px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);    
+}
+
+#governor_ScoreSheet_Image_AL001_24,
+#governor_ScoreSheet_Image_AL002_24,
+#governor_ScoreSheet_Image_AL003_24,
+#governor_ScoreSheet_Image_AL004_24,
+#governor_ScoreSheet_Image_AL005_24,
+#governor_ScoreSheet_Image_AL006_24,
+#governor_ScoreSheet_Image_AL007_24,
+#governor_ScoreSheet_Image_AL008_24,
+#governor_ScoreSheet_Image_AL009_24,
+#governor_ScoreSheet_Image_AL010_24,
+#governor_ScoreSheet_Image_AL011_24,
+#governor_ScoreSheet_Image_AL012_24,
+#governor_ScoreSheet_Image_AL013_24,
+#governor_ScoreSheet_Image_AL014_24,
+#governor_ScoreSheet_Image_AL015_24
+{
+    display: inline-block;
+    margin: 0 auto;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    width: clamp(100px, 100%, 400px);
+    
+    line-height: none;
+    margin-top: 20px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+    justify-content: center;  
+    background-color: transparent;    
+
+    /*
+    width: 100%;
+    height: auto; 
+   */
+
+    border: 0, 2px, 0, 0;
+}
+
+#governor_ScoreSheet_Subtitle_01_AL001_24,
+#governor_ScoreSheet_Subtitle_01_AL002_24,
+#governor_ScoreSheet_Subtitle_01_AL003_24,
+#governor_ScoreSheet_Subtitle_01_AL004_24,
+#governor_ScoreSheet_Subtitle_01_AL005_24,
+#governor_ScoreSheet_Subtitle_01_AL006_24,
+#governor_ScoreSheet_Subtitle_01_AL007_24,
+#governor_ScoreSheet_Subtitle_01_AL008_24,
+#governor_ScoreSheet_Subtitle_01_AL009_24,
+#governor_ScoreSheet_Subtitle_01_AL010_24,
+#governor_ScoreSheet_Subtitle_01_AL011_24,
+#governor_ScoreSheet_Subtitle_01_AL012_24,
+#governor_ScoreSheet_Subtitle_01_AL013_24,
+#governor_ScoreSheet_Subtitle_01_AL014_24,
+#governor_ScoreSheet_Subtitle_01_AL015_24
+{
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(213, 179, 39);
+    text-align: center;
+}
+
+#governor_ScoreSheet_Subtitle_02_AL001_24,
+#governor_ScoreSheet_Subtitle_02_AL002_24,
+#governor_ScoreSheet_Subtitle_02_AL003_24,
+#governor_ScoreSheet_Subtitle_02_AL004_24,
+#governor_ScoreSheet_Subtitle_02_AL005_24,
+#governor_ScoreSheet_Subtitle_02_AL006_24,
+#governor_ScoreSheet_Subtitle_02_AL007_24,
+#governor_ScoreSheet_Subtitle_02_AL008_24,
+#governor_ScoreSheet_Subtitle_02_AL009_24,
+#governor_ScoreSheet_Subtitle_02_AL010_24,
+#governor_ScoreSheet_Subtitle_02_AL011_24,
+#governor_ScoreSheet_Subtitle_02_AL012_24,
+#governor_ScoreSheet_Subtitle_02_AL013_24,
+#governor_ScoreSheet_Subtitle_02_AL014_24,
+#governor_ScoreSheet_Subtitle_02_AL015_24
+{  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(134, 25, 25);
+    text-align: center;
+}
+
+#governor_ScoreSheet_CampaignWebsite_AL001_24,
+#governor_ScoreSheet_CampaignWebsite_AL002_24,
+#governor_ScoreSheet_CampaignWebsite_AL003_24,
+#governor_ScoreSheet_CampaignWebsite_AL004_24,
+#governor_ScoreSheet_CampaignWebsite_AL005_24,
+#governor_ScoreSheet_CampaignWebsite_AL006_24,
+#governor_ScoreSheet_CampaignWebsite_AL007_24,
+#governor_ScoreSheet_CampaignWebsite_AL008_24,
+#governor_ScoreSheet_CampaignWebsite_AL009_24,
+#governor_ScoreSheet_CampaignWebsite_AL010_24,
+#governor_ScoreSheet_CampaignWebsite_AL011_24,
+#governor_ScoreSheet_CampaignWebsite_AL012_24,
+#governor_ScoreSheet_CampaignWebsite_AL013_24,
+#governor_ScoreSheet_CampaignWebsite_AL014_24,
+#governor_ScoreSheet_CampaignWebsite_AL015_24 
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(213, 179, 39);
+
+}
+
+#governor_ScoreSheet_CampaignWebsite_AL001_24:hover,
+#governor_ScoreSheet_CampaignWebsite_AL002_24:hover,
+#governor_ScoreSheet_CampaignWebsite_AL003_24:hover,
+#governor_ScoreSheet_CampaignWebsite_AL004_24:hover,
+#governor_ScoreSheet_CampaignWebsite_AL005_24:hover,
+#governor_ScoreSheet_CampaignWebsite_AL006_24:hover,
+#governor_ScoreSheet_CampaignWebsite_AL007_24:hover,
+#governor_ScoreSheet_CampaignWebsite_AL008_24:hover,
+#governor_ScoreSheet_CampaignWebsite_AL009_24:hover,
+#governor_ScoreSheet_CampaignWebsite_AL010_24:hover,
+#governor_ScoreSheet_CampaignWebsite_AL011_24:hover,
+#governor_ScoreSheet_CampaignWebsite_AL012_24:hover,
+#governor_ScoreSheet_CampaignWebsite_AL013_24:hover,
+#governor_ScoreSheet_CampaignWebsite_AL014_24:hover,
+#governor_ScoreSheet_CampaignWebsite_AL015_24:hover
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+
+}
+
+#governor_ScoreSheet_BodyContents_AL001_24,
+#governor_ScoreSheet_BodyContents_AL002_24,
+#governor_ScoreSheet_BodyContents_AL003_24,
+#governor_ScoreSheet_BodyContents_AL004_24,
+#governor_ScoreSheet_BodyContents_AL005_24,
+#governor_ScoreSheet_BodyContents_AL006_24,
+#governor_ScoreSheet_BodyContents_AL007_24,
+#governor_ScoreSheet_BodyContents_AL008_24,
+#governor_ScoreSheet_BodyContents_AL009_24,
+#governor_ScoreSheet_BodyContents_AL010_24,
+#governor_ScoreSheet_BodyContents_AL011_24,
+#governor_ScoreSheet_BodyContents_AL012_24,
+#governor_ScoreSheet_BodyContents_AL013_24,
+#governor_ScoreSheet_BodyContents_AL014_24,
+#governor_ScoreSheet_BodyContents_AL015_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px); 
+    color: rgb(213, 179, 39);
+    text-align: left;
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* lieutenant Governor */
+#candidateButton_AL016_24
+{
+    background-color: rgb(13, 65, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px);
+    color: rgb(255, 255, 255);
+    border: none; 
+}
+
+#candidateButton_AL016:hover,
+#candidateButton_AL016:focus
+{
+    background-color: rgb(201, 24, 24);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_CandidateScoreSheet_AL016_24
+{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 30px;    
+    left: 0;
+    top: 0;   
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    /*background-color: rgba(0, 0, 0, 0.4); */
+}
+
+.modal_Content_ScoreSheet_AL016_24
+{
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    /* border: 1px solid #888; */
+    border: none;
+    width: 80%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: ScoreSheetAnimateTop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: ScoreSheetAnimateTop_01;
+    animation-duration: .05s;
+    margin-bottom: 40px;
+}
+
+@-webkit-keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.close_ScoreSheet_AL016_24
+{
+    color: rgb(139, 134, 134);
+    float: none;
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 25px;    
+}
+
+.close_ScoreSheet_AL016_24:hover,
+.close_ScoreSheet_AL016_24:focus                             
+{
+    color: rgb(134, 25, 25);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#alabama_StateSeal 
+{
+    display: inline-block;
+    width: 100px;
+    height: 100px;  
+    background-color: rgb(255, 255, 255);
+}
+
+.modal_ScoreSheet_Header_AL016_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(97, 5, 5);
+}
+
+.modal_ScoreSheet_Body_AL016_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 25px); 
+    color: rgb(201, 24, 24);
+    text-align: left;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.modal_ScoreSheet_Footer_AL016_24
+{
+    padding: 2px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);
+    width: auto;
+    height: auto;
+}
+
+#lieutenantGovernor_Footer_Title_AL016_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+}
+
+#lieutenantGovernor_ScoreSheet_Title_AL016_24
+{  
+    padding: 16px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);    
+}
+
+#lieutenantGovernor_ScoreSheet_Image_AL016_24
+{
+    display: inline-block;
+    margin: 0 auto;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    width: clamp(100px, 100%, 400px);
+    
+    line-height: none;
+    margin-top: 20px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+    justify-content: center;  
+    background-color: transparent;    
+
+    /*
+    width: 100%;
+    height: auto; 
+   */
+
+    border: 0, 2px, 0, 0;
+}
+
+#lieutenantGovernor_ScoreSheet_Subtitle_01_AL016_24
+{
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(213, 179, 39);
+    text-align: center;
+}
+
+#lieutenantGovernor_ScoreSheet_Subtitle_02_AL016_24
+{  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(134, 25, 25);
+    text-align: center;
+}
+
+#lieutenantGovernor_ScoreSheet_CampaignWebsite_AL016_24 
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(213, 179, 39);
+
+}
+
+#lieutenantGovernor_ScoreSheet_CampaignWebsite_AL016_24:hover
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+
+}
+
+#lieutenantGovernor_ScoreSheet_BodyContents_AL016_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px); 
+    color: rgb(213, 179, 39);
+    text-align: left;
+ 
+}
+
+
+/* Attorney General */
+#candidateButton_AL017_24,
+#candidateButton_AL018_24,
+#candidateButton_AL019_24
+{
+    background-color: rgb(13, 65, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px);
+    color: rgb(255, 255, 255);
+    border: none; 
+}
+
+#candidateButton_AL017:hover,
+#candidateButton_AL017:focus,
+#candidateButton_AL018:hover,
+#candidateButton_AL018:focus,
+#candidateButton_AL019:hover,
+#candidateButton_AL019:focus
+{
+    background-color: rgb(201, 24, 24);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_CandidateScoreSheet_AL017_24,
+.modal_CandidateScoreSheet_AL018_24,
+.modal_CandidateScoreSheet_AL019_24
+{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 30px;    
+    left: 0;
+    top: 0;   
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    /*background-color: rgba(0, 0, 0, 0.4); */
+}
+
+.modal_Content_ScoreSheet_AL017_24,
+.modal_Content_ScoreSheet_AL018_24,
+.modal_Content_ScoreSheet_AL019_24
+{
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    /* border: 1px solid #888; */
+    border: none;
+    width: 80%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: ScoreSheetAnimateTop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: ScoreSheetAnimateTop_01;
+    animation-duration: .05s;
+    margin-bottom: 40px;
+}
+
+@-webkit-keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.close_ScoreSheet_AL017_24,
+.close_ScoreSheet_AL018_24,
+.close_ScoreSheet_AL019_24
+{
+    color: rgb(139, 134, 134);
+    float: none;
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 25px;    
+}
+
+.close_ScoreSheet_AL017_24:hover,
+.close_ScoreSheet_AL017_24:focus,
+.close_ScoreSheet_AL018_24:hover,
+.close_ScoreSheet_AL018_24:focus,
+.close_ScoreSheet_AL019_24:hover,
+.close_ScoreSheet_AL019_24:focus                                
+{
+    color: rgb(134, 25, 25);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#alabama_StateSeal 
+{
+    display: inline-block;
+    width: 100px;
+    height: 100px;  
+    background-color: rgb(255, 255, 255);
+}
+
+.modal_ScoreSheet_Header_AL017_24,
+.modal_ScoreSheet_Header_AL018_24,
+.modal_ScoreSheet_Header_AL019_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(97, 5, 5);
+}
+
+.modal_ScoreSheet_Body_AL017_24,
+.modal_ScoreSheet_Body_AL018_24,
+.modal_ScoreSheet_Body_AL019_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 25px); 
+    color: rgb(201, 24, 24);
+    text-align: left;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.modal_ScoreSheet_Footer_AL017_24,
+.modal_ScoreSheet_Footer_AL018_24,
+.modal_ScoreSheet_Footer_AL019_24
+{
+    padding: 2px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);
+    width: auto;
+    height: auto;
+}
+
+#attorneyGeneral_Footer_Title_AL017_24,
+#attorneyGeneral_Footer_Title_AL018_24,
+#attorneyGeneral_Footer_Title_AL019_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+}
+
+#attorneyGeneral_ScoreSheet_Title_AL017_24,
+#attorneyGeneral_ScoreSheet_Title_AL018_24,
+#attorneyGeneral_ScoreSheet_Title_AL019_24
+{  
+    padding: 16px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);    
+}
+
+#attorneyGeneral_ScoreSheet_Image_AL017_24,
+#attorneyGeneral_ScoreSheet_Image_AL018_24,
+#attorneyGeneral_ScoreSheet_Image_AL019_24
+{
+    display: inline-block;
+    margin: 0 auto;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    width: clamp(100px, 100%, 400px);
+    
+    line-height: none;
+    margin-top: 20px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+    justify-content: center;  
+    background-color: transparent;    
+
+    /*
+    width: 100%;
+    height: auto; 
+   */
+
+    border: 0, 2px, 0, 0;
+}
+
+#attorneyGeneral_ScoreSheet_Subtitle_01_AL017_24,
+#attorneyGeneral_ScoreSheet_Subtitle_01_AL018_24,
+#attorneyGeneral_ScoreSheet_Subtitle_01_AL019_24
+{
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(213, 179, 39);
+    text-align: center;
+}
+
+#attorneyGeneral_ScoreSheet_Subtitle_02_AL017_24,
+#attorneyGeneral_ScoreSheet_Subtitle_02_AL018_24,
+#attorneyGeneral_ScoreSheet_Subtitle_03_AL018_24
+{  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(134, 25, 25);
+    text-align: center;
+}
+
+#attorneyGeneral_ScoreSheet_CampaignWebsite_AL017_24,
+#attorneyGeneral_ScoreSheet_CampaignWebsite_AL018_24,
+#attorneyGeneral_ScoreSheet_CampaignWebsite_AL019_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(213, 179, 39);
+
+}
+
+#attorneyGeneral_ScoreSheet_CampaignWebsite_AL017_24:hover,
+#attorneyGeneral_ScoreSheet_CampaignWebsite_AL018_24:hover,
+#attorneyGeneral_ScoreSheet_CampaignWebsite_AL019_24:hover
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+
+}
+
+#attorneyGeneral_ScoreSheet_BodyContents_AL017_24,
+#attorneyGeneral_ScoreSheet_BodyContents_AL018_24,
+#attorneyGeneral_ScoreSheet_BodyContents_AL019_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px); 
+    color: rgb(213, 179, 39);
+    text-align: left;
+ 
+}
+
+/* Secretary of State */
+#candidateButton_AL020_24,
+#candidateButton_AL021_24,
+#candidateButton_AL022_24,
+#candidateButton_AL023_24,
+#candidateButton_AL024_24
+{
+    background-color: rgb(13, 65, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px);
+    color: rgb(255, 255, 255);
+    border: none; 
+}
+
+#candidateButton_AL020:hover,
+#candidateButton_AL020:focus,
+#candidateButton_AL021:hover,
+#candidateButton_AL021:focus,
+#candidateButton_AL022:hover,
+#candidateButton_AL022:focus,
+#candidateButton_AL023:hover,
+#candidateButton_AL023:focus,
+#candidateButton_AL024:hover,
+#candidateButton_AL024:focus
+{
+    background-color: rgb(201, 24, 24);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_CandidateScoreSheet_AL020_24,
+.modal_CandidateScoreSheet_AL021_24,
+.modal_CandidateScoreSheet_AL022_24,
+.modal_CandidateScoreSheet_AL023_24,
+.modal_CandidateScoreSheet_AL024_24
+{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 30px;    
+    left: 0;
+    top: 0;   
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    /*background-color: rgba(0, 0, 0, 0.4); */
+}
+
+.modal_Content_ScoreSheet_AL020_24,
+.modal_Content_ScoreSheet_AL021_24,
+.modal_Content_ScoreSheet_AL022_24,
+.modal_Content_ScoreSheet_AL023_24,
+.modal_Content_ScoreSheet_AL024_24
+{
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    /* border: 1px solid #888; */
+    border: none;
+    width: 80%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: ScoreSheetAnimateTop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: ScoreSheetAnimateTop_01;
+    animation-duration: .05s;
+    margin-bottom: 40px;
+}
+
+@-webkit-keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.close_ScoreSheet_AL020_24,
+.close_ScoreSheet_AL021_24,
+.close_ScoreSheet_AL022_24,
+.close_ScoreSheet_AL023_24,
+.close_ScoreSheet_AL024_24
+{
+    color: rgb(139, 134, 134);
+    float: none;
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 25px;    
+}
+
+.close_ScoreSheet_AL020_24:hover,
+.close_ScoreSheet_AL020_24:focus,
+.close_ScoreSheet_AL021_24:hover,
+.close_ScoreSheet_AL021_24:focus,
+.close_ScoreSheet_AL022_24:hover,
+.close_ScoreSheet_AL022_24:focus,
+.close_ScoreSheet_AL023_24:hover,
+.close_ScoreSheet_AL023_24:focus,
+.close_ScoreSheet_AL024_24:hover,
+.close_ScoreSheet_AL024_24:focus                    
+{
+    color: rgb(134, 25, 25);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#alabama_StateSeal 
+{
+    display: inline-block;
+    width: 100px;
+    height: 100px;  
+    background-color: rgb(255, 255, 255);
+}
+
+.modal_ScoreSheet_Header_AL020_24,
+.modal_ScoreSheet_Header_AL021_24,
+.modal_ScoreSheet_Header_AL022_24,
+.modal_ScoreSheet_Header_AL023_24,
+.modal_ScoreSheet_Header_AL024_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(97, 5, 5);
+}
+
+.modal_ScoreSheet_Body_AL020_24,
+.modal_ScoreSheet_Body_AL021_24,
+.modal_ScoreSheet_Body_AL022_24,
+.modal_ScoreSheet_Body_AL023_24,
+.modal_ScoreSheet_Body_AL024_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 25px); 
+    color: rgb(201, 24, 24);
+    text-align: left;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.modal_ScoreSheet_Footer_AL020_24,
+.modal_ScoreSheet_Footer_AL021_24,
+.modal_ScoreSheet_Footer_AL022_24,
+.modal_ScoreSheet_Footer_AL023_24,
+.modal_ScoreSheet_Footer_AL024_24
+{
+    padding: 2px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);
+    width: auto;
+    height: auto;
+}
+
+#secretaryOfState_Footer_Title_AL020_24,
+#secretaryOfState_Footer_Title_AL021_24,
+#secretaryOfState_Footer_Title_AL022_24,
+#secretaryOfState_Footer_Title_AL023_24,
+#secretaryOfState_Footer_Title_AL024_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+}
+
+#secretaryOfState_ScoreSheet_Title_AL020_24,
+#secretaryOfState_ScoreSheet_Title_AL021_24,
+#secretaryOfState_ScoreSheet_Title_AL022_24,
+#secretaryOfState_ScoreSheet_Title_AL023_24,
+#secretaryOfState_ScoreSheet_Title_AL024_24
+{  
+    padding: 16px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);    
+}
+
+#secretaryOfState_ScoreSheet_Image_AL020_24,
+#secretaryOfState_ScoreSheet_Image_AL021_24,
+#secretaryOfState_ScoreSheet_Image_AL022_24,
+#secretaryOfState_ScoreSheet_Image_AL023_24,
+#secretaryOfState_ScoreSheet_Image_AL024_24
+{
+    display: inline-block;
+    margin: 0 auto;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    width: clamp(100px, 100%, 400px);
+    
+    line-height: none;
+    margin-top: 20px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+    justify-content: center;  
+    background-color: transparent;    
+
+    /*
+    width: 100%;
+    height: auto; 
+   */
+
+    border: 0, 2px, 0, 0;
+}
+
+#secretaryOfState_ScoreSheet_Subtitle_01_AL020_24,
+#secretaryOfState_ScoreSheet_Subtitle_01_AL021_24,
+#secretaryOfState_ScoreSheet_Subtitle_01_AL022_24,
+#secretaryOfState_ScoreSheet_Subtitle_01_AL023_24,
+#secretaryOfState_ScoreSheet_Subtitle_01_AL024_24
+{
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(213, 179, 39);
+    text-align: center;
+}
+
+#secretaryOfState_ScoreSheet_Subtitle_03_AL020_24,
+#secretaryOfState_ScoreSheet_Subtitle_03_AL021_24,
+#secretaryOfState_ScoreSheet_Subtitle_03_AL022_24,
+#secretaryOfState_ScoreSheet_Subtitle_03_AL023_24,
+#secretaryOfState_ScoreSheet_Subtitle_03_AL024_24
+{  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(134, 25, 25);
+    text-align: center;
+}
+
+#secretaryOfState_ScoreSheet_CampaignWebsite_AL020_24,
+#secretaryOfState_ScoreSheet_CampaignWebsite_AL021_24,
+#secretaryOfState_ScoreSheet_CampaignWebsite_AL022_24,
+#secretaryOfState_ScoreSheet_CampaignWebsite_AL023_24,
+#secretaryOfState_ScoreSheet_CampaignWebsite_AL024_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(213, 179, 39);
+
+}
+
+#secretaryOfState_ScoreSheet_CampaignWebsite_AL020_24:hover,
+#secretaryOfState_ScoreSheet_CampaignWebsite_AL021_24:hover,
+#secretaryOfState_ScoreSheet_CampaignWebsite_AL022_24:hover,
+#secretaryOfState_ScoreSheet_CampaignWebsite_AL023_24:hover,
+#secretaryOfState_ScoreSheet_CampaignWebsite_AL024_24:hover
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+
+}
+
+#secretaryOfState_ScoreSheet_BodyContents_AL020_24,
+#secretaryOfState_ScoreSheet_BodyContents_AL021_24,
+#secretaryOfState_ScoreSheet_BodyContents_AL022_24,
+#secretaryOfState_ScoreSheet_BodyContents_AL023_24,
+#secretaryOfState_ScoreSheet_BodyContents_AL024_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px); 
+    color: rgb(213, 179, 39);
+    text-align: left;
+ 
+}
+
+
+
+
+
+
+
+/* State Treasurer */
+#candidateButton_AL025_24
+{
+    background-color: rgb(13, 65, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px);
+    color: rgb(255, 255, 255);
+    border: none; 
+}
+
+#candidateButton_AL025:hover,
+#candidateButton_AL025:focus
+{
+    background-color: rgb(201, 24, 24);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_CandidateScoreSheet_AL025_24
+{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 30px;    
+    left: 0;
+    top: 0;   
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    /*background-color: rgba(0, 0, 0, 0.4); */
+}
+
+.modal_Content_ScoreSheet_AL025_24
+{
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    /* border: 1px solid #888; */
+    border: none;
+    width: 80%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: ScoreSheetAnimateTop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: ScoreSheetAnimateTop_01;
+    animation-duration: .05s;
+    margin-bottom: 40px;
+}
+
+@-webkit-keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.close_ScoreSheet_AL025_24
+{
+    color: rgb(139, 134, 134);
+    float: none;
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 25px;    
+}
+
+.close_ScoreSheet_AL024_25:hover,
+.close_ScoreSheet_AL024_25:focus                    
+{
+    color: rgb(134, 25, 25);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#alabama_StateSeal 
+{
+    display: inline-block;
+    width: 100px;
+    height: 100px;  
+    background-color: rgb(255, 255, 255);
+}
+
+.modal_ScoreSheet_Header_AL025_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(97, 5, 5);
+}
+
+.modal_ScoreSheet_Body_AL025_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 25px); 
+    color: rgb(201, 24, 24);
+    text-align: left;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+.modal_ScoreSheet_Footer_AL025_24
+{
+    padding: 2px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);
+    width: auto;
+    height: auto;
+}
+
+#stateTreasurer_Footer_Title_AL025_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+}
+
+#stateTreasurer_ScoreSheet_Title_AL025_24
+{  
+    padding: 16px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);    
+}
+
+#stateTreasurer_ScoreSheet_Image_AL025_24
+{
+    display: inline-block;
+    margin: 0 auto;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    width: clamp(100px, 100%, 400px);
+    
+    line-height: none;
+    margin-top: 20px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+    justify-content: center;  
+    background-color: transparent;    
+
+    /*
+    width: 100%;
+    height: auto; 
+   */
+
+    border: 0, 2px, 0, 0;
+}
+
+#stateTreasurer_ScoreSheet_Subtitle_01_AL025_24
+{
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(213, 179, 39);
+    text-align: center;
+}
+
+#stateTreasurer_ScoreSheet_Subtitle_03_AL025_24
+{  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(134, 25, 25);
+    text-align: center;
+}
+
+#stateTreasurer_ScoreSheet_CampaignWebsite_AL025_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(213, 179, 39);
+
+}
+
+#stateTreasurer_ScoreSheet_CampaignWebsite_AL025_24:hover
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+
+}
+
+#stateTreasurer_ScoreSheet_BodyContents_AL025_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px); 
+    color: rgb(213, 179, 39);
+    text-align: left;
+ 
+}
+
+
+/* State Auditor */
+#candidateButton_AL026_24,
+#candidateButton_AL027_24,
+#candidateButton_AL028_24
+{
+    background-color: rgb(13, 65, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px);
+    color: rgb(255, 255, 255);
+    border: none; 
+}
+
+#candidateButton_AL026:hover,
+#candidateButton_AL026:focus,
+#candidateButton_AL027:hover,
+#candidateButton_AL027:focus,
+#candidateButton_AL028:hover,
+#candidateButton_AL028:focus
+{
+    background-color: rgb(201, 24, 24);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_CandidateScoreSheet_AL026_24,
+.modal_CandidateScoreSheet_AL027_24,
+.modal_CandidateScoreSheet_AL028_24
+{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 30px;    
+    left: 0;
+    top: 0;   
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    /*background-color: rgba(0, 0, 0, 0.4); */
+}
+
+.modal_Content_ScoreSheet_AL026_24,
+.modal_Content_ScoreSheet_AL027_24,
+.modal_Content_ScoreSheet_AL028_24
+{
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    /* border: 1px solid #888; */
+    border: none;
+    width: 80%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: ScoreSheetAnimateTop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: ScoreSheetAnimateTop_01;
+    animation-duration: .05s;
+    margin-bottom: 40px;
+}
+
+@-webkit-keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.close_ScoreSheet_AL026_24,
+.close_ScoreSheet_AL027_24,
+.close_ScoreSheet_AL028_24
+{
+    color: rgb(139, 134, 134);
+    float: none;
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 25px;    
+}
+
+.close_ScoreSheet_AL024_26:hover,
+.close_ScoreSheet_AL024_26:focus,
+.close_ScoreSheet_AL024_27:hover,
+.close_ScoreSheet_AL024_27:focus,
+.close_ScoreSheet_AL024_28:hover,
+.close_ScoreSheet_AL024_28:focus                       
+{
+    color: rgb(134, 25, 25);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#alabama_StateSeal 
+{
+    display: inline-block;
+    width: 100px;
+    height: 100px;  
+    background-color: rgb(255, 255, 255);
+}
+
+.modal_ScoreSheet_Header_AL026_24,
+.modal_ScoreSheet_Header_AL027_24,
+.modal_ScoreSheet_Header_AL028_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(97, 5, 5);
+}
+
+.modal_ScoreSheet_Body_AL026_24,
+.modal_ScoreSheet_Body_AL027_24,
+.modal_ScoreSheet_Body_AL028_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 25px); 
+    color: rgb(201, 24, 24);
+    text-align: left;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+.modal_ScoreSheet_Footer_AL026_24,
+.modal_ScoreSheet_Footer_AL027_24,
+.modal_ScoreSheet_Footer_AL028_24
+{
+    padding: 2px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);
+    width: auto;
+    height: auto;
+}
+
+#stateAuditor_Footer_Title_AL026_24,
+#stateAuditor_Footer_Title_AL027_24,
+#stateAuditor_Footer_Title_AL028_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+}
+
+#stateAuditor_ScoreSheet_Title_AL026_24,
+#stateAuditor_ScoreSheet_Title_AL027_24,
+#stateAuditor_ScoreSheet_Title_AL028_24
+{  
+    padding: 16px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);    
+}
+
+#stateAuditor_ScoreSheet_Image_AL026_24,
+#stateAuditor_ScoreSheet_Image_AL027_24,
+#stateAuditor_ScoreSheet_Image_AL028_24
+{
+    display: inline-block;
+    margin: 0 auto;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    width: clamp(100px, 100%, 400px);
+    
+    line-height: none;
+    margin-top: 20px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+    justify-content: center;  
+    background-color: transparent;    
+
+    /*
+    width: 100%;
+    height: auto; 
+   */
+
+    border: 0, 2px, 0, 0;
+}
+
+#stateAuditor_ScoreSheet_Subtitle_01_AL026_24,
+#stateAuditor_ScoreSheet_Subtitle_01_AL027_24,
+#stateAuditor_ScoreSheet_Subtitle_01_AL028_24
+{
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(213, 179, 39);
+    text-align: center;
+}
+
+#stateAuditor_ScoreSheet_Subtitle_03_AL026_24,
+#stateAuditor_ScoreSheet_Subtitle_03_AL027_24,
+#stateAuditor_ScoreSheet_Subtitle_03_AL028_24
+{  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(134, 25, 25);
+    text-align: center;
+}
+
+#stateAuditor_ScoreSheet_CampaignWebsite_AL026_24,
+#stateAuditor_ScoreSheet_CampaignWebsite_AL027_24,
+#stateAuditor_ScoreSheet_CampaignWebsite_AL028_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(213, 179, 39);
+
+}
+
+#stateAuditor_ScoreSheet_CampaignWebsite_AL026_24:hover,
+#stateAuditor_ScoreSheet_CampaignWebsite_AL027_24:hover,
+#stateAuditor_ScoreSheet_CampaignWebsite_AL028_24:hover
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+
+}
+
+#stateAuditor_ScoreSheet_BodyContents_AL026_24,
+#stateAuditor_ScoreSheet_BodyContents_AL027_24,
+#stateAuditor_ScoreSheet_BodyContents_AL028_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px); 
+    color: rgb(213, 179, 39);
+    text-align: left;
+ 
+}
+
+
+
+
+
+/* Agriculture */
+#candidateButton_AL029_24
+{
+    background-color: rgb(13, 65, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px);
+    color: rgb(255, 255, 255);
+    border: none; 
+}
+
+#candidateButton_AL029:hover,
+#candidateButton_AL029:focus
+{
+    background-color: rgb(201, 24, 24);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_CandidateScoreSheet_AL029_24
+{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 30px;    
+    left: 0;
+    top: 0;   
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    /*background-color: rgba(0, 0, 0, 0.4); */
+}
+
+.modal_Content_ScoreSheet_AL029_24
+{
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    /* border: 1px solid #888; */
+    border: none;
+    width: 80%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: ScoreSheetAnimateTop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: ScoreSheetAnimateTop_01;
+    animation-duration: .05s;
+    margin-bottom: 40px;
+}
+
+@-webkit-keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.close_ScoreSheet_AL029_24
+{
+    color: rgb(139, 134, 134);
+    float: none;
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 25px;    
+}
+
+.close_ScoreSheet_AL029_24:hover,
+.close_ScoreSheet_AL029_24:focus                       
+{
+    color: rgb(134, 25, 25);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#alabama_StateSeal 
+{
+    display: inline-block;
+    width: 100px;
+    height: 100px;  
+    background-color: rgb(255, 255, 255);
+}
+
+.modal_ScoreSheet_Header_AL029_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(97, 5, 5);
+}
+
+.modal_ScoreSheet_Body_AL029_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 25px); 
+    color: rgb(201, 24, 24);
+    text-align: left;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.modal_ScoreSheet_Footer_AL029_24
+{
+    padding: 2px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);
+    width: auto;
+    height: auto;
+}
+
+#agriculture_Footer_Title_AL029_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+}
+
+#agriculture_ScoreSheet_Title_AL029_24
+{  
+    padding: 16px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);    
+}
+
+#agriculture_ScoreSheet_Image_AL029_24
+{
+    display: inline-block;
+    margin: 0 auto;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    width: clamp(100px, 100%, 400px);
+    
+    line-height: none;
+    margin-top: 20px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+    justify-content: center;  
+    background-color: transparent;    
+
+    /*
+    width: 100%;
+    height: auto; 
+   */
+
+    border: 0, 2px, 0, 0;
+}
+
+#agriculture_ScoreSheet_Subtitle_01_AL029_24
+{
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(213, 179, 39);
+    text-align: center;
+}
+
+#agriculture_ScoreSheet_Subtitle_03_AL029_24
+{  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(134, 25, 25);
+    text-align: center;
+}
+
+#agriculture_ScoreSheet_CampaignWebsite_AL029_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(213, 179, 39);
+
+}
+
+#agriculture_ScoreSheet_CampaignWebsite_AL029_24:hover
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+
+}
+
+#agriculture_ScoreSheet_BodyContents_AL029_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px); 
+    color: rgb(213, 179, 39);
+    text-align: left;
+ 
+}
+
+
+/* Senator */
+#candidateButton_AL030_24,
+#candidateButton_AL031_24,
+#candidateButton_AL032_24,
+#candidateButton_AL033_24,
+#candidateButton_AL034_24,
+#candidateButton_AL035_24,
+#candidateButton_AL036_24,
+#candidateButton_AL037_24,
+#candidateButton_AL038_24
+{
+    background-color: rgb(13, 65, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px);
+    color: rgb(255, 255, 255);
+    border: none; 
+}
+
+#candidateButton_AL030:hover,
+#candidateButton_AL030:focus,
+#candidateButton_AL031:hover,
+#candidateButton_AL031:focus,
+#candidateButton_AL032:hover,
+#candidateButton_AL032:focus,
+#candidateButton_AL033:hover,
+#candidateButton_AL033:focus,
+#candidateButton_AL034:hover,
+#candidateButton_AL034:focus,
+#candidateButton_AL035:hover,
+#candidateButton_AL035:focus,
+#candidateButton_AL036:hover,
+#candidateButton_AL036:focus,
+#candidateButton_AL037:hover,
+#candidateButton_AL037:focus,
+#candidateButton_AL038:hover,
+#candidateButton_AL038:focus
+{
+    background-color: rgb(201, 24, 24);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_CandidateScoreSheet_AL030_24,
+.modal_CandidateScoreSheet_AL031_24,
+.modal_CandidateScoreSheet_AL032_24,
+.modal_CandidateScoreSheet_AL033_24,
+.modal_CandidateScoreSheet_AL034_24,
+.modal_CandidateScoreSheet_AL035_24,
+.modal_CandidateScoreSheet_AL036_24,
+.modal_CandidateScoreSheet_AL037_24,
+.modal_CandidateScoreSheet_AL038_24
+{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 30px;    
+    left: 0;
+    top: 0;   
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    /*background-color: rgba(0, 0, 0, 0.4); */
+}
+
+.modal_Content_ScoreSheet_AL030_24,
+.modal_Content_ScoreSheet_AL031_24,
+.modal_Content_ScoreSheet_AL032_24,
+.modal_Content_ScoreSheet_AL033_24,
+.modal_Content_ScoreSheet_AL034_24,
+.modal_Content_ScoreSheet_AL035_24,
+.modal_Content_ScoreSheet_AL036_24,
+.modal_Content_ScoreSheet_AL037_24,
+.modal_Content_ScoreSheet_AL038_24
+{
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    /* border: 1px solid #888; */
+    border: none;
+    width: 80%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: ScoreSheetAnimateTop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: ScoreSheetAnimateTop_01;
+    animation-duration: .05s;
+    margin-bottom: 40px;
+}
+
+@-webkit-keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.close_ScoreSheet_AL030_24,
+.close_ScoreSheet_AL031_24,
+.close_ScoreSheet_AL032_24,
+.close_ScoreSheet_AL033_24,
+.close_ScoreSheet_AL034_24,
+.close_ScoreSheet_AL035_24,
+.close_ScoreSheet_AL036_24,
+.close_ScoreSheet_AL037_24,
+.close_ScoreSheet_AL038_24
+{
+    color: rgb(139, 134, 134);
+    float: none;
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 25px;    
+}
+
+.close_ScoreSheet_AL030_24:hover,
+.close_ScoreSheet_AL030_24:focus,
+.close_ScoreSheet_AL031_24:hover,
+.close_ScoreSheet_AL031_24:focus,
+.close_ScoreSheet_AL032_24:hover,
+.close_ScoreSheet_AL032_24:focus,
+.close_ScoreSheet_AL033_24:hover,
+.close_ScoreSheet_AL033_24:focus,
+.close_ScoreSheet_AL034_24:hover,
+.close_ScoreSheet_AL034_24:focus,
+.close_ScoreSheet_AL035_24:hover,
+.close_ScoreSheet_AL035_24:focus,
+.close_ScoreSheet_AL036_24:hover,
+.close_ScoreSheet_AL036_24:focus,
+.close_ScoreSheet_AL037_24:hover,
+.close_ScoreSheet_AL037_24:focus,
+.close_ScoreSheet_AL038_24:hover,
+.close_ScoreSheet_AL038_24:focus     
+{
+    color: rgb(134, 25, 25);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#alabama_StateSeal 
+{
+    display: inline-block;
+    width: 100px;
+    height: 100px;  
+    background-color: rgb(255, 255, 255);
+}
+
+.modal_ScoreSheet_Header_AL030_24,
+.modal_ScoreSheet_Header_AL031_24,
+.modal_ScoreSheet_Header_AL032_24,
+.modal_ScoreSheet_Header_AL033_24,
+.modal_ScoreSheet_Header_AL034_24,
+.modal_ScoreSheet_Header_AL035_24,
+.modal_ScoreSheet_Header_AL036_24,
+.modal_ScoreSheet_Header_AL037_24,
+.modal_ScoreSheet_Header_AL038_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(97, 5, 5);
+}
+
+.modal_ScoreSheet_Body_AL030_24,
+.modal_ScoreSheet_Body_AL031_24,
+.modal_ScoreSheet_Body_AL032_24,
+.modal_ScoreSheet_Body_AL033_24,
+.modal_ScoreSheet_Body_AL034_24,
+.modal_ScoreSheet_Body_AL035_24,
+.modal_ScoreSheet_Body_AL036_24,
+.modal_ScoreSheet_Body_AL037_24,
+.modal_ScoreSheet_Body_AL038_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 25px); 
+    color: rgb(201, 24, 24);
+    text-align: left;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.modal_ScoreSheet_Footer_AL030_24,
+.modal_ScoreSheet_Footer_AL031_24,
+.modal_ScoreSheet_Footer_AL032_24,
+.modal_ScoreSheet_Footer_AL033_24,
+.modal_ScoreSheet_Footer_AL034_24,
+.modal_ScoreSheet_Footer_AL035_24,
+.modal_ScoreSheet_Footer_AL036_24,
+.modal_ScoreSheet_Footer_AL037_24,
+.modal_ScoreSheet_Footer_AL038_24
+{
+    padding: 2px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);
+    width: auto;
+    height: auto;
+}
+
+#senator_Footer_Title_AL030_24,
+#senator_Footer_Title_AL031_24,
+#senator_Footer_Title_AL032_24,
+#senator_Footer_Title_AL033_24,
+#senator_Footer_Title_AL034_24,
+#senator_Footer_Title_AL035_24,
+#senator_Footer_Title_AL036_24,
+#senator_Footer_Title_AL037_24,
+#senator_Footer_Title_AL038_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+}
+
+#senator_ScoreSheet_Title_AL030_24,
+#senator_ScoreSheet_Title_AL031_24,
+#senator_ScoreSheet_Title_AL032_24,
+#senator_ScoreSheet_Title_AL033_24,
+#senator_ScoreSheet_Title_AL034_24,
+#senator_ScoreSheet_Title_AL035_24,
+#senator_ScoreSheet_Title_AL036_24,
+#senator_ScoreSheet_Title_AL037_24,
+#senator_ScoreSheet_Title_AL038_24
+{  
+    padding: 16px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);    
+}
+
+#senator_ScoreSheet_Image_AL030_24,
+#senator_ScoreSheet_Image_AL031_24,
+#senator_ScoreSheet_Image_AL032_24,
+#senator_ScoreSheet_Image_AL033_24,
+#senator_ScoreSheet_Image_AL034_24,
+#senator_ScoreSheet_Image_AL035_24,
+#senator_ScoreSheet_Image_AL036_24,
+#senator_ScoreSheet_Image_AL037_24,
+#senator_ScoreSheet_Image_AL038_24
+{
+    display: inline-block;
+    margin: 0 auto;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    width: clamp(100px, 100%, 400px);
+    
+    line-height: none;
+    margin-top: 20px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+    justify-content: center;  
+    background-color: transparent;    
+
+    /*
+    width: 100%;
+    height: auto; 
+   */
+
+    border: 0, 2px, 0, 0;
+}
+
+#senator_ScoreSheet_Subtitle_01_AL030_24,
+#senator_ScoreSheet_Subtitle_01_AL031_24,
+#senator_ScoreSheet_Subtitle_01_AL032_24,
+#senator_ScoreSheet_Subtitle_01_AL033_24,
+#senator_ScoreSheet_Subtitle_01_AL034_24,
+#senator_ScoreSheet_Subtitle_01_AL035_24,
+#senator_ScoreSheet_Subtitle_01_AL036_24,
+#senator_ScoreSheet_Subtitle_01_AL037_24,
+#senator_ScoreSheet_Subtitle_01_AL038_24
+{
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(213, 179, 39);
+    text-align: center;
+}
+
+#senator_ScoreSheet_Subtitle_03_AL030_24,
+#senator_ScoreSheet_Subtitle_03_AL031_24,
+#senator_ScoreSheet_Subtitle_03_AL032_24,
+#senator_ScoreSheet_Subtitle_03_AL033_24,
+#senator_ScoreSheet_Subtitle_03_AL034_24,
+#senator_ScoreSheet_Subtitle_03_AL035_24,
+#senator_ScoreSheet_Subtitle_03_AL036_24,
+#senator_ScoreSheet_Subtitle_03_AL037_24,
+#senator_ScoreSheet_Subtitle_03_AL038_24
+{  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(134, 25, 25);
+    text-align: center;
+}
+
+#senator_ScoreSheet_CampaignWebsite_AL030_24,
+#senator_ScoreSheet_CampaignWebsite_AL031_24,
+#senator_ScoreSheet_CampaignWebsite_AL032_24,
+#senator_ScoreSheet_CampaignWebsite_AL033_24,
+#senator_ScoreSheet_CampaignWebsite_AL034_24,
+#senator_ScoreSheet_CampaignWebsite_AL035_24,
+#senator_ScoreSheet_CampaignWebsite_AL036_24,
+#senator_ScoreSheet_CampaignWebsite_AL037_24,
+#senator_ScoreSheet_CampaignWebsite_AL038_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(213, 179, 39);
+
+}
+
+#senator_ScoreSheet_CampaignWebsite_AL030_24:hover,
+#senator_ScoreSheet_CampaignWebsite_AL031_24:hover,
+#senator_ScoreSheet_CampaignWebsite_AL032_24:hover,
+#senator_ScoreSheet_CampaignWebsite_AL033_24:hover,
+#senator_ScoreSheet_CampaignWebsite_AL034_24:hover,
+#senator_ScoreSheet_CampaignWebsite_AL035_24:hover,
+#senator_ScoreSheet_CampaignWebsite_AL036_24:hover,
+#senator_ScoreSheet_CampaignWebsite_AL037_24:hover,
+#senator_ScoreSheet_CampaignWebsite_AL038_24:hover
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+
+}
+
+#senator_ScoreSheet_BodyContents_AL030_24,
+#senator_ScoreSheet_BodyContents_AL031_24,
+#senator_ScoreSheet_BodyContents_AL032_24,
+#senator_ScoreSheet_BodyContents_AL033_24,
+#senator_ScoreSheet_BodyContents_AL034_24,
+#senator_ScoreSheet_BodyContents_AL035_24,
+#senator_ScoreSheet_BodyContents_AL036_24,
+#senator_ScoreSheet_BodyContents_AL037_24,
+#senator_ScoreSheet_BodyContents_AL038_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px); 
+    color: rgb(213, 179, 39);
+    text-align: left;
+ 
+}
+
+
+
+
+
+
+
+hr.hr_Blue_line_03 {
+    color: rgb(13, 65, 255);
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
+}
+
+hr.hr_Red_line_03 {
+    border-color: rgb(201, 24, 24); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    width: auto;
+}  
+
+hr.hr_Grey_line_03 {
+    color: rgb(195, 195, 195);
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
+}
+
+hr.hr_White_line_03 {
+    color: rgb(255, 255, 255);
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
+}
+
+
+/* United States Congressional Districts */
+#candidateButton_FC017_24,
+#candidateButton_FC018_24,
+#candidateButton_FC019_24,
+#candidateButton_FC020_24,
+#candidateButton_FC021_24,
+#candidateButton_FC022_24,
+#candidateButton_FC023_24,
+#candidateButton_FC024_24,
+#candidateButton_FC025_24,
+#candidateButton_FC026_24,
+#candidateButton_FC027_24,
+#candidateButton_FC028_24,
+#candidateButton_FC029_24,
+#candidateButton_FC030_24,
+#candidateButton_FC031_24,
+#candidateButton_FC032_24,
+#candidateButton_FC033_24,
+#candidateButton_FC034_24,
+#candidateButton_FC035_24,
+#candidateButton_FC036_24,
+#candidateButton_FC037_24
+
+{
+    background-color: rgb(13, 65, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px);
+    color: rgb(255, 255, 255);
+    border: none; 
+}
+
+#candidateButton_FC017:hover,
+#candidateButton_FC017:focus,
+#candidateButton_FC018:hover,
+#candidateButton_FC018:focus,
+#candidateButton_FC019:hover,
+#candidateButton_FC019:focus,
+#candidateButton_FC020:hover,
+#candidateButton_FC020:focus,
+#candidateButton_FC021:hover,
+#candidateButton_FC021:focus,
+#candidateButton_FC022:hover,
+#candidateButton_FC022:focus,
+#candidateButton_FC023:hover,
+#candidateButton_FC023:focus,
+#candidateButton_FC024:hover,
+#candidateButton_FC024:focus,
+#candidateButton_FC025:hover,
+#candidateButton_FC025:focus,
+#candidateButton_FC026:hover,
+#candidateButton_FC026:focus,
+#candidateButton_FC027:hover,
+#candidateButton_FC027:focus,
+#candidateButton_FC028:hover,
+#candidateButton_FC028:focus,
+#candidateButton_FC029:hover,
+#candidateButton_FC029:focus,
+#candidateButton_FC030:hover,
+#candidateButton_FC030:focus,
+#candidateButton_FC031:hover,
+#candidateButton_FC031:focus,
+#candidateButton_FC032:hover,
+#candidateButton_FC032:focus,
+#candidateButton_FC033:hover,
+#candidateButton_FC033:focus,
+#candidateButton_FC034:hover,
+#candidateButton_FC034:focus,
+#candidateButton_FC035:hover,
+#candidateButton_FC035:focus,
+#candidateButton_FC036:hover,
+#candidateButton_FC036:focus,
+#candidateButton_FC037:hover,
+#candidateButton_FC037:focus
+{
+    background-color: rgb(201, 24, 24);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_CandidateScoreSheet_FC017_24,
+.modal_CandidateScoreSheet_FC018_24,
+.modal_CandidateScoreSheet_FC019_24,
+.modal_CandidateScoreSheet_FC020_24,
+.modal_CandidateScoreSheet_FC021_24,
+.modal_CandidateScoreSheet_FC022_24,
+.modal_CandidateScoreSheet_FC023_24,
+.modal_CandidateScoreSheet_FC024_24,
+.modal_CandidateScoreSheet_FC025_24,
+.modal_CandidateScoreSheet_FC026_24,
+.modal_CandidateScoreSheet_FC027_24,
+.modal_CandidateScoreSheet_FC028_24,
+.modal_CandidateScoreSheet_FC029_24,
+.modal_CandidateScoreSheet_FC030_24,
+.modal_CandidateScoreSheet_FC031_24,
+.modal_CandidateScoreSheet_FC032_24,
+.modal_CandidateScoreSheet_FC033_24,
+.modal_CandidateScoreSheet_FC034_24,
+.modal_CandidateScoreSheet_FC035_24,
+.modal_CandidateScoreSheet_FC036_24,
+.modal_CandidateScoreSheet_FC037_24
+{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 30px;    
+    left: 0;
+    top: 0;   
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    /*background-color: rgba(0, 0, 0, 0.4); */
+}
+
+.modal_Content_ScoreSheet_FC017_24,
+.modal_Content_ScoreSheet_FC018_24,
+.modal_Content_ScoreSheet_FC019_24,
+.modal_Content_ScoreSheet_FC020_24,
+.modal_Content_ScoreSheet_FC021_24,
+.modal_Content_ScoreSheet_FC022_24,
+.modal_Content_ScoreSheet_FC023_24,
+.modal_Content_ScoreSheet_FC024_24,
+.modal_Content_ScoreSheet_FC025_24,
+.modal_Content_ScoreSheet_FC026_24,
+.modal_Content_ScoreSheet_FC027_24,
+.modal_Content_ScoreSheet_FC028_24,
+.modal_Content_ScoreSheet_FC029_24,
+.modal_Content_ScoreSheet_FC030_24,
+.modal_Content_ScoreSheet_FC031_24,
+.modal_Content_ScoreSheet_FC032_24,
+.modal_Content_ScoreSheet_FC033_24,
+.modal_Content_ScoreSheet_FC034_24,
+.modal_Content_ScoreSheet_FC035_24,
+.modal_Content_ScoreSheet_FC036_24,
+.modal_Content_ScoreSheet_FC037_24
+{
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    /* border: 1px solid #888; */
+    border: none;
+    width: 80%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: ScoreSheetAnimateTop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: ScoreSheetAnimateTop_01;
+    animation-duration: .05s;
+    margin-bottom: 40px;
+}
+
+@-webkit-keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.close_ScoreSheet_FC017_24,
+.close_ScoreSheet_FC018_24,
+.close_ScoreSheet_FC019_24,
+.close_ScoreSheet_FC020_24,
+.close_ScoreSheet_FC021_24,
+.close_ScoreSheet_FC022_24,
+.close_ScoreSheet_FC023_24,
+.close_ScoreSheet_FC024_24,
+.close_ScoreSheet_FC025_24,
+.close_ScoreSheet_FC026_24,
+.close_ScoreSheet_FC027_24,
+.close_ScoreSheet_FC028_24,
+.close_ScoreSheet_FC029_24,
+.close_ScoreSheet_FC030_24,
+.close_ScoreSheet_FC031_24,
+.close_ScoreSheet_FC032_24,
+.close_ScoreSheet_FC033_24,
+.close_ScoreSheet_FC034_24,
+.close_ScoreSheet_FC035_24,
+.close_ScoreSheet_FC036_24,
+.close_ScoreSheet_FC037_24
+{
+    color: rgb(139, 134, 134);
+    float: none;
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 25px;    
+}
+
+.close_ScoreSheet_FC017_24:hover,
+.close_ScoreSheet_FC017_24:focus,
+.close_ScoreSheet_FC018_24:hover,
+.close_ScoreSheet_FC018_24:focus,
+.close_ScoreSheet_FC019_24:hover,
+.close_ScoreSheet_FC019_24:focus,
+.close_ScoreSheet_FC020_24:hover,
+.close_ScoreSheet_FC020_24:focus, 
+.close_ScoreSheet_FC021_24:hover,
+.close_ScoreSheet_FC021_24:focus,
+.close_ScoreSheet_FC022_24:hover,
+.close_ScoreSheet_FC022_24:focus,
+.close_ScoreSheet_FC023_24:hover,
+.close_ScoreSheet_FC023_24:focus,
+.close_ScoreSheet_FC024_24:hover,
+.close_ScoreSheet_FC024_24:focus,
+.close_ScoreSheet_FC025_24:hover,
+.close_ScoreSheet_FC025_24:focus,
+.close_ScoreSheet_FC026_24:hover,
+.close_ScoreSheet_FC026_24:focus,
+.close_ScoreSheet_FC027_24:hover,
+.close_ScoreSheet_FC027_24:focus,
+.close_ScoreSheet_FC028_24:hover,
+.close_ScoreSheet_FC028_24:focus,
+.close_ScoreSheet_FC029_24:hover,
+.close_ScoreSheet_FC029_24:focus,
+.close_ScoreSheet_FC030_24:hover,
+.close_ScoreSheet_FC030_24:focus,
+.close_ScoreSheet_FC031_24:hover,
+.close_ScoreSheet_FC031_24:focus,
+.close_ScoreSheet_FC032_24:hover,
+.close_ScoreSheet_FC032_24:focus,
+.close_ScoreSheet_FC033_24:hover,
+.close_ScoreSheet_FC033_24:focus,
+.close_ScoreSheet_FC034_24:hover,
+.close_ScoreSheet_FC034_24:focus,
+.close_ScoreSheet_FC035_24:hover,
+.close_ScoreSheet_FC035_24:focus,
+.close_ScoreSheet_FC036_24:hover,
+.close_ScoreSheet_FC036_24:focus,
+.close_ScoreSheet_FC037_24:hover,
+.close_ScoreSheet_FC037_24:focus   
+{
+    color: rgb(134, 25, 25);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#alabama_StateSeal 
+{
+    display: inline-block;
+    width: 100px;
+    height: 100px;  
+    background-color: rgb(255, 255, 255);
+}
+
+.modal_ScoreSheet_Header_FC017_24,
+.modal_ScoreSheet_Header_FC018_24,
+.modal_ScoreSheet_Header_FC019_24,
+.modal_ScoreSheet_Header_FC020_24,
+.modal_ScoreSheet_Header_FC021_24,
+.modal_ScoreSheet_Header_FC022_24,
+.modal_ScoreSheet_Header_FC023_24,
+.modal_ScoreSheet_Header_FC024_24,
+.modal_ScoreSheet_Header_FC025_24,
+.modal_ScoreSheet_Header_FC026_24,
+.modal_ScoreSheet_Header_FC027_24,
+.modal_ScoreSheet_Header_FC028_24,
+.modal_ScoreSheet_Header_FC029_24,
+.modal_ScoreSheet_Header_FC030_24,
+.modal_ScoreSheet_Header_FC031_24,
+.modal_ScoreSheet_Header_FC032_24,
+.modal_ScoreSheet_Header_FC033_24,
+.modal_ScoreSheet_Header_FC034_24,
+.modal_ScoreSheet_Header_FC035_24,
+.modal_ScoreSheet_Header_FC036_24,
+.modal_ScoreSheet_Header_FC037_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(97, 5, 5);
+}
+
+.modal_ScoreSheet_Body_FC017_24,
+.modal_ScoreSheet_Body_FC018_24,
+.modal_ScoreSheet_Body_FC019_24,
+.modal_ScoreSheet_Body_FC020_24,
+.modal_ScoreSheet_Body_FC021_24,
+.modal_ScoreSheet_Body_FC022_24,
+.modal_ScoreSheet_Body_FC023_24,
+.modal_ScoreSheet_Body_FC024_24,
+.modal_ScoreSheet_Body_FC025_24,
+.modal_ScoreSheet_Body_FC026_24,
+.modal_ScoreSheet_Body_FC027_24,
+.modal_ScoreSheet_Body_FC028_24,
+.modal_ScoreSheet_Body_FC029_24,
+.modal_ScoreSheet_Body_FC030_24,
+.modal_ScoreSheet_Body_FC031_24,
+.modal_ScoreSheet_Body_FC032_24,
+.modal_ScoreSheet_Body_FC033_24,
+.modal_ScoreSheet_Body_FC034_24,
+.modal_ScoreSheet_Body_FC035_24,
+.modal_ScoreSheet_Body_FC036_24,
+.modal_ScoreSheet_Body_FC037_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 25px); 
+    color: rgb(201, 24, 24);
+    text-align: left;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.modal_ScoreSheet_Footer_FC017_24_Gray,
+.modal_ScoreSheet_Footer_FC018_24_Gray,
+.modal_ScoreSheet_Footer_FC022_24_Gray,
+.modal_ScoreSheet_Footer_FC024_24_Gray,
+.modal_ScoreSheet_Footer_FC035_24_Gray,
+.modal_ScoreSheet_Footer_FC037_24_Gray
+{
+    padding: 2px 16px;
+    background-color: rgb(211, 211, 211);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(134, 25, 25);
+    width: auto;
+    height: auto;
+}
+
+.modal_ScoreSheet_Footer_FC019_24_Blue,
+.modal_ScoreSheet_Footer_FC020_24_Blue,
+.modal_ScoreSheet_Footer_FC023_24_Blue,
+.modal_ScoreSheet_Footer_FC025_24_Blue,
+.modal_ScoreSheet_Footer_FC026_24_Blue,
+.modal_ScoreSheet_Footer_FC033_24_Blue,
+.modal_ScoreSheet_Footer_FC034_24_Blue
+{
+    padding: 2px 16px;
+    background-color: rgb(13, 65, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);
+    width: auto;
+    height: auto;
+}
+
+.modal_ScoreSheet_Footer_FC021_24_Red,
+.modal_ScoreSheet_Footer_FC027_24_Red,
+.modal_ScoreSheet_Footer_FC028_24_Red,
+.modal_ScoreSheet_Footer_FC029_24_Red,
+.modal_ScoreSheet_Footer_FC030_24_Red,
+.modal_ScoreSheet_Footer_FC031_24_Red,
+.modal_ScoreSheet_Footer_FC032_24_Red,
+.modal_ScoreSheet_Footer_FC036_24_Red
+
+{
+    padding: 2px 16px;
+    background-color: rgb(201, 24, 24);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);
+    width: auto;
+    height: auto;
+}
+
+#usCongressionalDistrict_Footer_Title_FC017_24_Gray,
+#usCongressionalDistrict_Footer_Title_FC018_24_Gray,
+#usCongressionalDistrict_Footer_Title_FC022_24_Gray,
+#usCongressionalDistrict_Footer_Title_FC024_24_Gray,
+#usCongressionalDistrict_Footer_Title_FC035_24_Gray,
+#usCongressionalDistrict_Footer_Title_FC037_24_Gray
+{  
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(134, 25, 25);
+}
+
+#usCongressionalDistrict_Footer_Title_FC019_24_Blue,
+#usCongressionalDistrict_Footer_Title_FC020_24_Blue,
+#usCongressionalDistrict_Footer_Title_FC023_24_Blue,
+#usCongressionalDistrict_Footer_Title_FC025_24_Blue,
+#usCongressionalDistrict_Footer_Title_FC026_24_Blue,
+#usCongressionalDistrict_Footer_Title_FC033_24_Blue,
+#usCongressionalDistrict_Footer_Title_FC034_24_Blue
+{  
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+}
+
+#usCongressionalDistrict_Footer_Title_FC021_24_Red,
+#usCongressionalDistrict_Footer_Title_FC027_24_Red,
+#usCongressionalDistrict_Footer_Title_FC028_24_Red,
+#usCongressionalDistrict_Footer_Title_FC029_24_Red,
+#usCongressionalDistrict_Footer_Title_FC030_24_Red,
+#usCongressionalDistrict_Footer_Title_FC031_24_Red,
+#usCongressionalDistrict_Footer_Title_FC032_24_Red,
+#usCongressionalDistrict_Footer_Title_FC036_24_Red
+
+{  
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+}
+
+#usCongressionalDistrict_ScoreSheet_Title_FC017_24_Gray,
+#usCongressionalDistrict_ScoreSheet_Title_FC018_24_Gray,
+#usCongressionalDistrict_ScoreSheet_Title_FC022_24_Gray,
+#usCongressionalDistrict_ScoreSheet_Title_FC024_24_Gray,
+#usCongressionalDistrict_ScoreSheet_Title_FC035_24_Gray,
+#usCongressionalDistrict_ScoreSheet_Title_FC037_24_Gray
+{  
+    padding: 16px 16px;
+    background-color: rgb(211, 211, 211);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(134, 25, 25);    
+}
+
+#usCongressionalDistrict_ScoreSheet_Title_FC019_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Title_FC020_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Title_FC023_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Title_FC025_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Title_FC026_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Title_FC033_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Title_FC034_24_Blue
+{  
+    padding: 16px 16px;
+    background-color: rgb(13, 65, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);    
+}
+
+#usCongressionalDistrict_ScoreSheet_Title_FC021_24_Red,
+#usCongressionalDistrict_ScoreSheet_Title_FC027_24_Red,
+#usCongressionalDistrict_ScoreSheet_Title_FC028_24_Red,
+#usCongressionalDistrict_ScoreSheet_Title_FC029_24_Red,
+#usCongressionalDistrict_ScoreSheet_Title_FC030_24_Red,
+#usCongressionalDistrict_ScoreSheet_Title_FC031_24_Red,
+#usCongressionalDistrict_ScoreSheet_Title_FC032_24_Red,
+#usCongressionalDistrict_ScoreSheet_Title_FC036_24_Red
+
+{  
+    padding: 16px 16px;
+    background-color: rgb(201, 24, 24);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);    
+}
+
+#usCongressionalDistrict_ScoreSheet_Image_FC017_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC018_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC019_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC020_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC021_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC022_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC023_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC024_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC025_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC026_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC027_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC028_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC029_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC030_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC031_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC032_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC033_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC034_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC035_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC036_24,
+#usCongressionalDistrict_ScoreSheet_Image_FC037_24
+{
+    display: inline-block;
+    margin: 0 auto;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    width: clamp(100px, 100%, 400px);
+    
+    line-height: none;
+    margin-top: 20px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+    justify-content: center;  
+    background-color: transparent;    
+
+    /*
+    width: 100%;
+    height: auto; 
+   */
+
+    border: 0, 2px, 0, 0;
+}
+
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC017_24_Gray,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC018_24_Gray,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC022_24_Gray,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC024_24_Gray,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC035_24_Gray,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC037_24_Gray
+{
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(13, 65, 255);
+    text-align: center;
+}
+
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC019_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC020_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC023_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC025_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC026_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC033_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC034_24_Blue
+{
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(134, 25, 25);
+    text-align: center;
+}
+
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC021_24_Red,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC027_24_Red,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC028_24_Red,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC029_24_Red,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC030_24_Red,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC031_24_Red,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC032_24_Red,
+#usCongressionalDistrict_ScoreSheet_Subtitle_01_FC036_24_Red
+
+{
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(13, 65, 255);
+    text-align: center;
+}
+
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC017_24_Gray,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC018_24_Gray,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC022_24_Gray,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC024_24_Gray,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC035_24_Gray,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC037_24_Gray
+{  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(134, 25, 25);
+    text-align: center;
+}
+
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC019_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC020_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC023_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC025_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC026_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC033_24_Blue,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC034_24_Blue
+{  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(13, 65, 255);
+    text-align: center;
+}
+
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC021_24_Red,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC027_24_Red,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC028_24_Red,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC029_24_Red,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC030_24_Red,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC031_24_Red,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC032_24_Red,
+#usCongressionalDistrict_ScoreSheet_Subtitle_02_FC036_24_Red
+
+{  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(201, 24, 24);
+    text-align: center;
+}
+
+
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC017_24_Gray,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC018_24_Gray,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC022_24_Gray,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC024_24_Gray,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC035_24_Gray,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC037_24_Gray
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(13, 65, 255);
+
+}
+
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC019_24_Blue,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC020_24_Blue,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC023_24_Blue,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC025_24_Blue,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC026_24_Blue,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC033_24_Blue,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC034_24_Blue
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+
+}
+
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC021_24_Red,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC027_24_Red,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC028_24_Red,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC029_24_Red,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC030_24_Red,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC031_24_Red,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC032_24_Red,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC036_24_Red
+
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+
+}
+
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC017_24_Gray:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC018_24_Gray:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC022_24_Gray:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC024_24_Gray:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC035_24_Gray:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC037_24_Gray:hover
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(134, 25, 25);
+    cursor: pointer;
+
+}
+
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC019_24_Blue:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC020_24_Blue:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC023_24_Blue:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC025_24_Blue:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC026_24_Blue:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC033_24_Blue:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC034_24_Blue:hover
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(195, 195, 195);
+    cursor: pointer;
+
+}
+
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC021_24_Red:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC027_24_Red:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC028_24_Red:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC029_24_Red:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC030_24_Red:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC031_24_Red:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC032_24_Red:hover,
+#usCongressionalDistrict_ScoreSheet_CampaignWebsite_FC036_24_Red:hover
+
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(195, 195, 195);
+    cursor: pointer;
+
+}
+
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC017_24_Gray,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC018_24_Gray,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC022_24_Gray,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC024_24_Gray,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC035_24_Gray,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC037_24_Gray
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px); 
+    color: rgb(13, 65, 255);
+    text-align: left;
+ 
+}
+
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC019_24_Blue,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC020_24_Blue,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC023_24_Blue,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC025_24_Blue,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC026_24_Blue,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC033_24_Blue,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC034_24_Blue
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px); 
+    color: rgb(134, 25, 25);
+    text-align: left;
+ 
+}
+
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC021_24_Red,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC027_24_Red,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC028_24_Red,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC029_24_Red,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC030_24_Red,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC031_24_Red,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC032_24_Red,
+#usCongressionalDistrict_ScoreSheet_BodyContents_FC036_24_Red
+
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px); 
+    color: rgb(13, 65, 255);
+    text-align: left;
+ 
+}
+
+
+
+
+
+
+
+
+/* Public Service Commission */                                                    */
+#candidateButton_AL030_24,
+#candidateButton_AL031_24,
+#candidateButton_AL032_24,
+#candidateButton_AL033_24,
+#candidateButton_AL034_24,
+#candidateButton_AL035_24,
+#candidateButton_AL036_24
+{
+    background-color: rgb(13, 65, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px);
+    color: rgb(255, 255, 255);
+    border: none; 
+}
+
+#candidateButton_AL030:hover,
+#candidateButton_AL030:focus,
+#candidateButton_AL031:hover,
+#candidateButton_AL031:focus,
+#candidateButton_AL032:hover,
+#candidateButton_AL032:focus,
+#candidateButton_AL033:hover,
+#candidateButton_AL033:focus,
+#candidateButton_AL034:hover,
+#candidateButton_AL034:focus,
+#candidateButton_AL035:hover,
+#candidateButton_AL035:focus,
+#candidateButton_AL036:hover,
+#candidateButton_AL036:focus
+{
+    background-color: rgb(201, 24, 24);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_CandidateScoreSheet_AL030_24,
+.modal_CandidateScoreSheet_AL031_24,
+.modal_CandidateScoreSheet_AL032_24,
+.modal_CandidateScoreSheet_AL033_24,
+.modal_CandidateScoreSheet_AL034_24,
+.modal_CandidateScoreSheet_AL035_24,
+.modal_CandidateScoreSheet_AL036_24
+{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 30px;    
+    left: 0;
+    top: 0;   
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    /*background-color: rgba(0, 0, 0, 0.4); */
+}
+
+.modal_Content_ScoreSheet_AL030_24,
+.modal_Content_ScoreSheet_AL031_24,
+.modal_Content_ScoreSheet_AL032_24,
+.modal_Content_ScoreSheet_AL033_24,
+.modal_Content_ScoreSheet_AL034_24,
+.modal_Content_ScoreSheet_AL035_24,
+.modal_Content_ScoreSheet_AL036_24
+{
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    /* border: 1px solid #888; */
+    border: none;
+    width: 80%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: ScoreSheetAnimateTop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: ScoreSheetAnimateTop_01;
+    animation-duration: .05s;
+    margin-bottom: 40px;
+}
+
+@-webkit-keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.close_ScoreSheet_AL030_24,
+.close_ScoreSheet_AL031_24,
+.close_ScoreSheet_AL032_24,
+.close_ScoreSheet_AL033_24,
+.close_ScoreSheet_AL034_24,
+.close_ScoreSheet_AL035_24,
+.close_ScoreSheet_AL036_24
+{
+    color: rgb(139, 134, 134);
+    float: none;
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 25px;    
+}
+
+.close_ScoreSheet_AL030_24:hover,
+.close_ScoreSheet_AL030_24:focus,
+.close_ScoreSheet_AL031_24:hover,
+.close_ScoreSheet_AL031_24:focus,
+.close_ScoreSheet_AL032_24:hover,
+.close_ScoreSheet_AL032_24:focus,
+.close_ScoreSheet_AL033_24:hover,
+.close_ScoreSheet_AL033_24:focus,
+.close_ScoreSheet_AL034_24:hover,
+.close_ScoreSheet_AL034_24:focus,
+.close_ScoreSheet_AL035_24:hover,
+.close_ScoreSheet_AL035_24:focus,
+.close_ScoreSheet_AL036_24:hover,
+.close_ScoreSheet_AL036_24:focus 
+{
+    color: rgb(134, 25, 25);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#alabama_StateSeal 
+{
+    display: inline-block;
+    width: 100px;
+    height: 100px;  
+    background-color: rgb(255, 255, 255);
+}
+
+.modal_ScoreSheet_Header_AL030_24,
+.modal_ScoreSheet_Header_AL031_24,
+.modal_ScoreSheet_Header_AL032_24,
+.modal_ScoreSheet_Header_AL033_24,
+.modal_ScoreSheet_Header_AL034_24,
+.modal_ScoreSheet_Header_AL035_24,
+.modal_ScoreSheet_Header_AL036_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(97, 5, 5);
+}
+
+.modal_ScoreSheet_Body_AL030_24,
+.modal_ScoreSheet_Body_AL031_24,
+.modal_ScoreSheet_Body_AL032_24,
+.modal_ScoreSheet_Body_AL033_24,
+.modal_ScoreSheet_Body_AL034_24,
+.modal_ScoreSheet_Body_AL035_24,
+.modal_ScoreSheet_Body_AL035_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 25px); 
+    color: rgb(201, 24, 24);
+    text-align: left;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.modal_ScoreSheet_Footer_AL030_24,
+.modal_ScoreSheet_Footer_AL031_24,
+.modal_ScoreSheet_Footer_AL032_24,
+.modal_ScoreSheet_Footer_AL033_24,
+.modal_ScoreSheet_Footer_AL034_24,
+.modal_ScoreSheet_Footer_AL035_24,
+.modal_ScoreSheet_Footer_AL036_24
+{
+    padding: 2px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);
+    width: auto;
+    height: auto;
+}
+
+#publicServiceCommission_Place1_Footer_Title_AL030_24,
+#publicServiceCommission_Place1_Footer_Title_AL031_24,
+#publicServiceCommission_Place1_Footer_Title_AL032_24,
+#publicServiceCommission_Place1_Footer_Title_AL033_24,
+#publicServiceCommission_Place2_Footer_Title_AL034_24,
+#publicServiceCommission_Place2_Footer_Title_AL035_24,
+#publicServiceCommission_Place2_Footer_Title_AL036_24
+
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+}
+
+#publicServiceCommission_Place1_ScoreSheet_Title_AL030_24,
+#publicServiceCommission_Place1_ScoreSheet_Title_AL031_24,
+#publicServiceCommission_Place1_ScoreSheet_Title_AL032_24,
+#publicServiceCommission_Place1_ScoreSheet_Title_AL033_24,
+#publicServiceCommission_Place2_ScoreSheet_Title_AL034_24,
+#publicServiceCommission_Place2_ScoreSheet_Title_AL035_24,
+#publicServiceCommission_Place2_ScoreSheet_Title_AL036_24
+{  
+    padding: 16px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);    
+}
+
+#publicServiceCommission_Place1_ScoreSheet_Image_AL030_24,
+#publicServiceCommission_Place1_ScoreSheet_Image_AL031_24,
+#publicServiceCommission_Place1_ScoreSheet_Image_AL032_24,
+#publicServiceCommission_Place1_ScoreSheet_Image_AL033_24,
+#publicServiceCommission_Place2_ScoreSheet_Image_AL034_24,
+#publicServiceCommission_Place2_ScoreSheet_Image_AL035_24,
+#publicServiceCommission_Place2_ScoreSheet_Image_AL036_24
+{
+    display: inline-block;
+    margin: 0 auto;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    width: clamp(100px, 100%, 400px);
+    
+    line-height: none;
+    margin-top: 20px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+    justify-content: center;  
+    background-color: transparent;    
+
+    /*
+    width: 100%;
+    height: auto; 
+   */
+
+    border: 0, 2px, 0, 0;
+}
+
+#publicServiceCommission_Place1_ScoreSheet_Subtitle_01_AL030_24,
+#publicServiceCommission_Place1_ScoreSheet_Subtitle_01_AL031_24,
+#publicServiceCommission_Place1_ScoreSheet_Subtitle_01_AL032_24,
+#publicServiceCommission_Place1_ScoreSheet_Subtitle_01_AL033_24,
+#publicServiceCommission_Place2_ScoreSheet_Subtitle_01_AL034_24,
+#publicServiceCommission_Place2_ScoreSheet_Subtitle_01_AL035_24,
+#publicServiceCommission_Place2_ScoreSheet_Subtitle_01_AL036_24
+{
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(213, 179, 39);
+    text-align: center;
+}
+
+#publicServiceCommission_Place1_ScoreSheet_Subtitle_03_AL030_24,
+#publicServiceCommission_Place1_ScoreSheet_Subtitle_03_AL031_24,
+#publicServiceCommission_Place1_ScoreSheet_Subtitle_03_AL032_24,
+#publicServiceCommission_Place1_ScoreSheet_Subtitle_03_AL033_24,
+#publicServiceCommission_Place2_ScoreSheet_Subtitle_03_AL034_24,
+#publicServiceCommission_Place2_ScoreSheet_Subtitle_03_AL035_24,
+#publicServiceCommission_Place2_ScoreSheet_Subtitle_03_AL036_24
+{  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(134, 25, 25);
+    text-align: center;
+}
+
+#publicServiceCommission_Place1_ScoreSheet_CampaignWebsite_AL030_24,
+#publicServiceCommission_Place1_ScoreSheet_CampaignWebsite_AL031_24,
+#publicServiceCommission_Place1_ScoreSheet_CampaignWebsite_AL032_24,
+#publicServiceCommission_Place1_ScoreSheet_CampaignWebsite_AL033_24,
+#publicServiceCommission_Place2_ScoreSheet_CampaignWebsite_AL034_24,
+#publicServiceCommission_Place2_ScoreSheet_CampaignWebsite_AL035_24,
+#publicServiceCommission_Place2_ScoreSheet_CampaignWebsite_AL036_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(213, 179, 39);
+
+}
+
+#publicServiceCommission_Place1_ScoreSheet_CampaignWebsite_AL030_24:hover,
+#publicServiceCommission_Place1_ScoreSheet_CampaignWebsite_AL031_24:hover,
+#publicServiceCommission_Place1_ScoreSheet_CampaignWebsite_AL032_24:hover,
+#publicServiceCommission_Place1_ScoreSheet_CampaignWebsite_AL033_24:hover,
+#publicServiceCommission_Place2_ScoreSheet_CampaignWebsite_AL034_24:hover,
+#publicServiceCommission_Place2_ScoreSheet_CampaignWebsite_AL035_24:hover,
+#publicServiceCommission_Place2_ScoreSheet_CampaignWebsite_AL036_24:hover
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+
+}
+
+#publicServiceCommission_Place1_ScoreSheet_BodyContents_AL030_24,
+#publicServiceCommission_Place1_ScoreSheet_BodyContents_AL031_24,
+#publicServiceCommission_Place1_ScoreSheet_BodyContents_AL032_24,
+#publicServiceCommission_Place1_ScoreSheet_BodyContents_AL033_24,
+#publicServiceCommission_Place2_ScoreSheet_BodyContents_AL034_24,
+#publicServiceCommission_Place2_ScoreSheet_BodyContents_AL035_24,
+#publicServiceCommission_Place2_ScoreSheet_BodyContents_AL036_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px); 
+    color: rgb(213, 179, 39);
+    text-align: left;
+ 
+}
+
+
+
+
+
+
+
+
+
