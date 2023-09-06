@@ -4343,17 +4343,8 @@ hr.hr_White_line_03 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 10px); 
     color: rgb(213, 179, 39);
-    text-align: left;
- 
+    text-align: left; 
 }
-
-
-
-
-
-
-
-
 
 /* State Board of Education */                                            
 #candidateButton_AL037_24,
@@ -4661,6 +4652,215 @@ hr.hr_White_line_03 {
 #stateBoardofEdu_Place6_ScoreSheet_BodyContents_AL041_24,
 #stateBoardofEdu_Place8_ScoreSheet_BodyContents_AL042_24,
 #stateBoardofEdu_Place8_ScoreSheet_BodyContents_AL043_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px); 
+    color: rgb(213, 179, 39);
+    text-align: left;
+ 
+}
+
+
+
+
+
+
+
+
+
+/* Supreme Court */                                            
+#candidateButton_AL044_24
+{
+    background-color: rgb(13, 65, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px);
+    color: rgb(255, 255, 255);
+    border: none; 
+}
+
+#candidateButton_AL044_24:hover,
+#candidateButton_AL044_24:focus
+{
+    background-color: rgb(201, 24, 24);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_CandidateScoreSheet_AL044_24
+{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 30px;    
+    left: 0;
+    top: 0;   
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    /*background-color: rgba(0, 0, 0, 0.4); */
+}
+
+.modal_Content_ScoreSheet_AL044_24
+{
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    /* border: 1px solid #888; */
+    border: none;
+    width: 80%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: ScoreSheetAnimateTop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: ScoreSheetAnimateTop_01;
+    animation-duration: .05s;
+    margin-bottom: 40px;
+}
+
+@-webkit-keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.close_ScoreSheet_AL044_24
+{
+    color: rgb(139, 134, 134);
+    float: none;
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 25px;    
+}
+
+.close_ScoreSheet_AL044_24:hover,
+.close_ScoreSheet_AL044_24:focus 
+{
+    color: rgb(134, 25, 25);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#alabama_StateSeal 
+{
+    display: inline-block;
+    width: 100px;
+    height: 100px;  
+    background-color: rgb(255, 255, 255);
+}
+
+.modal_ScoreSheet_Header_AL044_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(97, 5, 5);
+}
+
+.modal_ScoreSheet_Body_AL044_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 25px); 
+    color: rgb(201, 24, 24);
+    text-align: left;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.modal_ScoreSheet_Footer_AL044_24
+{
+    padding: 2px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);
+    width: auto;
+    height: auto;
+}
+
+
+#supremeCourt_Place5_Footer_Title_AL044_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+}
+
+#supremeCourt_Place5_ScoreSheet_Title_AL044_24
+{  
+    padding: 16px 16px;
+    background-color: rgb(134, 25, 25);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);    
+}
+
+#supremeCourt_Place5_ScoreSheet_Image_AL044_24
+{
+    display: inline-block;
+    margin: 0 auto;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    width: clamp(100px, 100%, 400px);
+    
+    line-height: none;
+    margin-top: 20px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+    justify-content: center;  
+    background-color: transparent;    
+
+    /*
+    width: 100%;
+    height: auto; 
+   */
+
+    border: 0, 2px, 0, 0;
+}
+
+#supremeCourt_Place5_ScoreSheet_Subtitle_01_AL044_24
+{
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(213, 179, 39);
+    text-align: center;
+}
+
+#supremeCourt_Place5_ScoreSheet_Subtitle_03_AL044_24
+{  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(134, 25, 25);
+    text-align: center;
+}
+
+#supremeCourt_Place5_ScoreSheet_CampaignWebsite_AL044_24
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(213, 179, 39);
+
+}
+
+#supremeCourt_Place5_ScoreSheet_CampaignWebsite_AL044_24:hover
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+
+}
+
+#supremeCourt_Place5_ScoreSheet_BodyContents_AL044_24
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 10px); 
