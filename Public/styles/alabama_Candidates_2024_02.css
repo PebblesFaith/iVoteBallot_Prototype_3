@@ -4359,7 +4359,8 @@ hr.hr_White_line_03 {
 #candidateButton_AL037_24,
 #candidateButton_AL038_24,
 #candidateButton_AL039_24,
-#candidateButton_AL040_24
+#candidateButton_AL040_24,
+#candidateButton_AL041_24
 {
     background-color: rgb(13, 65, 255);
     font-family: Georgia, Times, 'Times New Roman', serif;
@@ -4375,7 +4376,9 @@ hr.hr_White_line_03 {
 #candidateButton_AL039_24:hover,
 #candidateButton_AL039_24:focus,
 #candidateButton_AL040_24:hover,
-#candidateButton_AL040_24:focus
+#candidateButton_AL040_24:focus,
+#candidateButton_AL041_24:hover,
+#candidateButton_AL041_24:focus
 {
     background-color: rgb(201, 24, 24);
     color: rgb(255, 255, 255);
@@ -4386,7 +4389,8 @@ hr.hr_White_line_03 {
 .modal_CandidateScoreSheet_AL037_24,
 .modal_CandidateScoreSheet_AL038_24,
 .modal_CandidateScoreSheet_AL039_24,
-.modal_CandidateScoreSheet_AL040_24
+.modal_CandidateScoreSheet_AL040_24,
+.modal_CandidateScoreSheet_AL041_24
 {
     display: none;
     position: fixed;
@@ -4404,7 +4408,8 @@ hr.hr_White_line_03 {
 .modal_Content_ScoreSheet_AL037_24,
 .modal_Content_ScoreSheet_AL038_24,
 .modal_Content_ScoreSheet_AL039_24,
-.modal_Content_ScoreSheet_AL040_24
+.modal_Content_ScoreSheet_AL040_24,
+.modal_Content_ScoreSheet_AL041_24
 {
     position: relative;
     background-color: #fefefe;
@@ -4435,7 +4440,8 @@ hr.hr_White_line_03 {
 .close_ScoreSheet_AL037_24,
 .close_ScoreSheet_AL038_24,
 .close_ScoreSheet_AL039_24,
-.close_ScoreSheet_AL040_24
+.close_ScoreSheet_AL040_24,
+.close_ScoreSheet_AL041_24
 {
     color: rgb(139, 134, 134);
     float: none;
@@ -4451,7 +4457,9 @@ hr.hr_White_line_03 {
 .close_ScoreSheet_AL039_24:hover,
 .close_ScoreSheet_AL039_24:focus,
 .close_ScoreSheet_AL040_24:hover,
-.close_ScoreSheet_AL040_24:focus 
+.close_ScoreSheet_AL040_24:focus,
+.close_ScoreSheet_AL041_24:hover,
+.close_ScoreSheet_AL041_24:focus 
 {
     color: rgb(134, 25, 25);
     text-decoration: none;
@@ -4469,7 +4477,8 @@ hr.hr_White_line_03 {
 .modal_ScoreSheet_Header_AL037_24,
 .modal_ScoreSheet_Header_AL038_24,
 .modal_ScoreSheet_Header_AL039_24,
-.modal_ScoreSheet_Header_AL040_24
+.modal_ScoreSheet_Header_AL040_24,
+.modal_ScoreSheet_Header_AL041_24
 {
     padding: 2px 16px;
     background-color: rgb(255, 255, 255);
@@ -4481,7 +4490,8 @@ hr.hr_White_line_03 {
 .modal_ScoreSheet_Body_AL037_24,
 .modal_ScoreSheet_Body_AL038_24,
 .modal_ScoreSheet_Body_AL039_24,
-.modal_ScoreSheet_Body_AL040_24
+.modal_ScoreSheet_Body_AL040_24,
+.modal_ScoreSheet_Body_AL041_24
 {
     padding: 2px 16px;
     background-color: rgb(255, 255, 255);
@@ -4496,7 +4506,8 @@ hr.hr_White_line_03 {
 .modal_ScoreSheet_Footer_AL037_24,
 .modal_ScoreSheet_Footer_AL038_24,
 .modal_ScoreSheet_Footer_AL039_24,
-.modal_ScoreSheet_Footer_AL040_24
+.modal_ScoreSheet_Footer_AL040_24,
+.modal_ScoreSheet_Footer_AL041_24
 {
     padding: 2px 16px;
     background-color: rgb(134, 25, 25);
@@ -4510,7 +4521,8 @@ hr.hr_White_line_03 {
 #stateBoardofEdu_Place2_Footer_Title_AL037_24,
 #stateBoardofEdu_Place2_Footer_Title_AL038_24,
 #stateBoardofEdu_Place4_Footer_Title_AL039_24,
-#stateBoardofEdu_Place6_Footer_Title_AL040_24
+#stateBoardofEdu_Place6_Footer_Title_AL040_24,
+#stateBoardofEdu_Place6_Footer_Title_AL041_24
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -4520,7 +4532,8 @@ hr.hr_White_line_03 {
 #stateBoardofEdu_Place2_ScoreSheet_Title_AL037_24,
 #stateBoardofEdu_Place2_ScoreSheet_Title_AL038_24,
 #stateBoardofEdu_Place4_ScoreSheet_Title_AL039_24,
-#stateBoardofEdu_Place6_ScoreSheet_Title_AL040_24
+#stateBoardofEdu_Place6_ScoreSheet_Title_AL040_24,
+#stateBoardofEdu_Place6_ScoreSheet_Title_AL041_24
 {  
     padding: 16px 16px;
     background-color: rgb(134, 25, 25);
@@ -4532,7 +4545,8 @@ hr.hr_White_line_03 {
 #stateBoardofEdu_Place2_ScoreSheet_Image_AL037_24,
 #stateBoardofEdu_Place2_ScoreSheet_Image_AL038_24,
 #stateBoardofEdu_Place4_ScoreSheet_Image_AL039_24,
-#stateBoardofEdu_Place6_ScoreSheet_Image_AL040_24
+#stateBoardofEdu_Place6_ScoreSheet_Image_AL040_24,
+#stateBoardofEdu_Place6_ScoreSheet_Image_AL041_24
 {
     display: inline-block;
     margin: 0 auto;
@@ -4558,7 +4572,8 @@ hr.hr_White_line_03 {
 #stateBoardofEdu_Place2_ScoreSheet_Subtitle_01_AL037_24,
 #stateBoardofEdu_Place2_ScoreSheet_Subtitle_01_AL038_24,
 #stateBoardofEdu_Place4_ScoreSheet_Subtitle_01_AL039_24,
-#stateBoardofEdu_Place6_ScoreSheet_Subtitle_01_AL040_24
+#stateBoardofEdu_Place6_ScoreSheet_Subtitle_01_AL040_24,
+#stateBoardofEdu_Place6_ScoreSheet_Subtitle_01_AL041_24
 {
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(12px, 2vw, 18px); 
@@ -4569,7 +4584,8 @@ hr.hr_White_line_03 {
 #stateBoardofEdu_Place2_ScoreSheet_Subtitle_03_AL037_24,
 #stateBoardofEdu_Place2_ScoreSheet_Subtitle_03_AL038_24,
 #stateBoardofEdu_Place4_ScoreSheet_Subtitle_03_AL039_24,
-#stateBoardofEdu_Place6_ScoreSheet_Subtitle_03_AL040_24
+#stateBoardofEdu_Place6_ScoreSheet_Subtitle_03_AL040_24,
+#stateBoardofEdu_Place6_ScoreSheet_Subtitle_03_AL041_24
 {  
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(10px, 2vw, 14px); 
@@ -4580,7 +4596,8 @@ hr.hr_White_line_03 {
 #stateBoardofEdu_Place2_ScoreSheet_CampaignWebsite_AL037_24,
 #stateBoardofEdu_Place2_ScoreSheet_CampaignWebsite_AL038_24,
 #stateBoardofEdu_Place4_ScoreSheet_CampaignWebsite_AL039_24,
-#stateBoardofEdu_Place6_ScoreSheet_CampaignWebsite_AL040_24
+#stateBoardofEdu_Place6_ScoreSheet_CampaignWebsite_AL040_24,
+#stateBoardofEdu_Place6_ScoreSheet_CampaignWebsite_AL041_24
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -4591,7 +4608,8 @@ hr.hr_White_line_03 {
 #stateBoardofEdu_Place2_ScoreSheet_CampaignWebsite_AL037_24:hover,
 #stateBoardofEdu_Place2_ScoreSheet_CampaignWebsite_AL038_24:hover,
 #stateBoardofEdu_Place4_ScoreSheet_CampaignWebsite_AL039_24:hover,
-#stateBoardofEdu_Place6_ScoreSheet_CampaignWebsite_AL040_24:hover
+#stateBoardofEdu_Place6_ScoreSheet_CampaignWebsite_AL040_24:hover,
+#stateBoardofEdu_Place6_ScoreSheet_CampaignWebsite_AL041_24:hover
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -4603,7 +4621,8 @@ hr.hr_White_line_03 {
 #stateBoardofEdu_Place2_ScoreSheet_BodyContents_AL037_24,
 #stateBoardofEdu_Place2_ScoreSheet_BodyContents_AL038_24,
 #stateBoardofEdu_Place4_ScoreSheet_BodyContents_AL039_24,
-#stateBoardofEdu_Place6_ScoreSheet_BodyContents_AL040_24
+#stateBoardofEdu_Place6_ScoreSheet_BodyContents_AL040_24,
+#stateBoardofEdu_Place6_ScoreSheet_BodyContents_AL041_24
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 10px); 
