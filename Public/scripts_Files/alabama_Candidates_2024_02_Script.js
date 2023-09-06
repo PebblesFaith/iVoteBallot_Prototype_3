@@ -1701,6 +1701,9 @@ const candidateScoreSheet_Modal_AL041_24 = document.getElementById('candidateSco
 const candidateScoreSheet_Modal_AL042_24 = document.getElementById('candidateScoreSheet_Modal_AL042_24');
 const candidateScoreSheet_Modal_AL043_24 = document.getElementById('candidateScoreSheet_Modal_AL043_24');
 
+/* Get Supreme Court Candidates ScoreSheet Modals. */
+const candidateScoreSheet_Modal_AL044_24 = document.getElementById('candidateScoreSheet_Modal_AL044_24');
+
 /* Get Presidential candidates ScoreSheet button which will open their modals. */
 const candidateButton_FC001 = document.getElementById('candidateButton_FC001');
 const candidateButton_FC002 = document.getElementById('candidateButton_FC002');
@@ -1912,6 +1915,9 @@ const close_ScoreSheet_AL040_24 = document.getElementsByClassName('close_ScoreSh
 const close_ScoreSheet_AL041_24 = document.getElementsByClassName('close_ScoreSheet_AL041_24')[0];
 const close_ScoreSheet_AL042_24 = document.getElementsByClassName('close_ScoreSheet_AL042_24')[0];
 const close_ScoreSheet_AL043_24 = document.getElementsByClassName('close_ScoreSheet_AL043_24')[0];
+
+/* Get Supreme Court <span> elements which will close their modals. */
+const close_ScoreSheet_AL044_24 = document.getElementsByClassName('close_ScoreSheet_AL044_24')[0];
 
 /* When the users clicks onto the Presidential candidates' buttons than their modals will pop up. */
 
@@ -2326,8 +2332,14 @@ candidateButton_AL043_24.onclick = function(event){
 	candidateScoreSheet_Modal_AL043_24.style.display = "block";
 }
 
+/* When the users clicks onto the Supreme Court candidates' buttons than their modals will pop up. */
+candidateButton_AL044_24.onclick = function(event){
+	event.preventDefault();  
+	candidateScoreSheet_Modal_AL044_24.style.display = "block";
+}
 
-/* When the users clicks onto the Presidential candidantes <span> element "X" than their modals will close the candidates' ScoreSheets. */
+
+/* When the users clicks onto the Presidential candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
 close_ScoreSheet_FC001.onclick = function() {
 	candidateScoreSheet_Modal_FC001.style.display = "none";
 }
@@ -2392,7 +2404,7 @@ close_ScoreSheet_FC016.onclick = function() {
 	candidateScoreSheet_Modal_FC016.style.display = "none";
 }
 
-/* When the users clicks onto the Governor candidantes <span> element "X" than their modals will close the candidates' ScoreSheets. */
+/* When the users clicks onto the Governor candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
 close_ScoreSheet_AL001_24.onclick = function() {
 	candidateScoreSheet_Modal_AL001_24.style.display = "none";
 }
@@ -2453,12 +2465,12 @@ close_ScoreSheet_AL015_24.onclick = function() {
 	candidateScoreSheet_Modal_AL015_24.style.display = "none";
 }
 
-/* When the users clicks onto the Lieutenant Governor candidantes <span> element "X" than their modals will close the candidates' ScoreSheets. */
+/* When the users clicks onto the Lieutenant Governor candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
 close_ScoreSheet_AL016_24.onclick = function() {
 	candidateScoreSheet_Modal_AL016_24.style.display = "none";
 }
 
-/* When the users clicks onto the Attorney General candidantes <span> element "X" than their modals will close the candidates' ScoreSheets. */
+/* When the users clicks onto the Attorney General candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
 close_ScoreSheet_AL017_24.onclick = function() {
 	candidateScoreSheet_Modal_AL017_24.style.display = "none";
 }
@@ -2471,7 +2483,7 @@ close_ScoreSheet_AL019_24.onclick = function() {
 	candidateScoreSheet_Modal_AL019_24.style.display = "none";
 }
 
-/* When the users clicks onto the Secretary of State candidantes <span> element "X" than their modals will close the candidates' ScoreSheets. */
+/* When the users clicks onto the Secretary of State candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
 close_ScoreSheet_AL020_24.onclick = function() {
 	candidateScoreSheet_Modal_AL020_24.style.display = "none";
 }
@@ -2492,12 +2504,12 @@ close_ScoreSheet_AL024_24.onclick = function() {
 	candidateScoreSheet_Modal_AL024_24.style.display = "none";
 }
 
-/* When the users clicks onto the State Treasurer candidantes <span> element "X" than their modals will close the candidates' ScoreSheets. */
+/* When the users clicks onto the State Treasurer candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
 close_ScoreSheet_AL025_24.onclick = function() {
 	candidateScoreSheet_Modal_AL025_24.style.display = "none";
 }
 
-/* When the users clicks onto the State Auditor candidantes <span> element "X" than their modals will close the candidates' ScoreSheets. */
+/* When the users clicks onto the State Auditor candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
 close_ScoreSheet_AL026_24.onclick = function() {
 	candidateScoreSheet_Modal_AL026_24.style.display = "none";
 }
@@ -2510,12 +2522,12 @@ close_ScoreSheet_AL028_24.onclick = function() {
 	candidateScoreSheet_Modal_AL028_24.style.display = "none";
 }
 
-/* When the users clicks onto the Agriculture candidantes <span> element "X" than their modals will close the candidates' ScoreSheets. */
+/* When the users clicks onto the Agriculture candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
 close_ScoreSheet_AL029_24.onclick = function() {
 	candidateScoreSheet_Modal_AL029_24.style.display = "none";
 }
 
-/* When the users clicks onto the U.S. Congressional District candidantes <span> element "X" than their modals will close the candidates' ScoreSheets. */
+/* When the users clicks onto the U.S. Congressional District candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
 close_ScoreSheet_FC017_24.onclick = function() {
 	candidateScoreSheet_Modal_FC017_24.style.display = "none";
 }
@@ -2600,7 +2612,7 @@ close_ScoreSheet_FC037_24.onclick = function() {
 	candidateScoreSheet_Modal_FC037_24.style.display = "none";
 }
 
-/* When the users clicks onto the Public Service Commission candidantes <span> element "X" than their modals will close the candidates' ScoreSheets. */
+/* When the users clicks onto the Public Service Commission candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
 close_ScoreSheet_AL030_24.onclick = function() {
 	candidateScoreSheet_Modal_AL030_24.style.display = "none";
 }
@@ -2629,7 +2641,7 @@ close_ScoreSheet_AL036_24.onclick = function() {
 	candidateScoreSheet_Modal_AL036_24.style.display = "none";
 }
 
-/* When the users clicks onto the State Board of Education candidantes <span> element "X" than their modals will close the candidates' ScoreSheets. */
+/* When the users clicks onto the State Board of Education candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
 close_ScoreSheet_AL037_24.onclick = function() {
 	candidateScoreSheet_Modal_AL037_24.style.display = "none";
 }
@@ -2658,7 +2670,10 @@ close_ScoreSheet_AL043_24.onclick = function() {
 	candidateScoreSheet_Modal_AL043_24.style.display = "none";
 }
 
-
+/* When the users clicks onto the Supremen Court candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
+close_ScoreSheet_AL044_24.onclick = function() {
+	candidateScoreSheet_Modal_AL044_24.style.display = "none";
+}
 
 /*
 function addToCart() {
