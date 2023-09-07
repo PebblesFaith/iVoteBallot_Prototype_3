@@ -4670,7 +4670,8 @@ hr.hr_White_line_03 {
 
 /* Supreme Court */                                            
 #candidateButton_AL044_24,
-#candidateButton_AL045_24
+#candidateButton_AL045_24,
+#candidateButton_AL046_24
 {
     background-color: rgb(13, 65, 255);
     font-family: Georgia, Times, 'Times New Roman', serif;
@@ -4682,7 +4683,9 @@ hr.hr_White_line_03 {
 #candidateButton_AL044_24:hover,
 #candidateButton_AL044_24:focus,
 #candidateButton_AL045_24:hover,
-#candidateButton_AL045_24:focus
+#candidateButton_AL045_24:focus,
+#candidateButton_AL046_24:hover,
+#candidateButton_AL046_24:focus
 {
     background-color: rgb(201, 24, 24);
     color: rgb(255, 255, 255);
@@ -4691,7 +4694,8 @@ hr.hr_White_line_03 {
 }
 
 .modal_CandidateScoreSheet_AL044_24,
-.modal_CandidateScoreSheet_AL045_24
+.modal_CandidateScoreSheet_AL045_24,
+.modal_CandidateScoreSheet_AL046_24
 {
     display: none;
     position: fixed;
@@ -4707,7 +4711,8 @@ hr.hr_White_line_03 {
 }
 
 .modal_Content_ScoreSheet_AL044_24,
-.modal_Content_ScoreSheet_AL045_24
+.modal_Content_ScoreSheet_AL045_24,
+.modal_Content_ScoreSheet_AL046_24
 {
     position: relative;
     background-color: #fefefe;
@@ -4736,7 +4741,8 @@ hr.hr_White_line_03 {
 }
 
 .close_ScoreSheet_AL044_24,
-.close_ScoreSheet_AL045_24
+.close_ScoreSheet_AL045_24,
+.close_ScoreSheet_AL046_24
 {
     color: rgb(139, 134, 134);
     float: none;
@@ -4748,7 +4754,9 @@ hr.hr_White_line_03 {
 .close_ScoreSheet_AL044_24:hover,
 .close_ScoreSheet_AL044_24:focus,
 .close_ScoreSheet_AL045_24:hover,
-.close_ScoreSheet_AL045_24:focus 
+.close_ScoreSheet_AL045_24:focus,
+.close_ScoreSheet_AL046_24:hover,
+.close_ScoreSheet_AL046_24:focus 
 {
     color: rgb(134, 25, 25);
     text-decoration: none;
@@ -4764,7 +4772,8 @@ hr.hr_White_line_03 {
 }
 
 .modal_ScoreSheet_Header_AL044_24,
-.modal_ScoreSheet_Header_AL045_24
+.modal_ScoreSheet_Header_AL045_24,
+.modal_ScoreSheet_Header_AL046_24
 {
     padding: 2px 16px;
     background-color: rgb(255, 255, 255);
@@ -4774,7 +4783,8 @@ hr.hr_White_line_03 {
 }
 
 .modal_ScoreSheet_Body_AL044_24,
-.modal_ScoreSheet_Body_AL045_24
+.modal_ScoreSheet_Body_AL045_24,
+.modal_ScoreSheet_Body_AL046_24
 {
     padding: 2px 16px;
     background-color: rgb(255, 255, 255);
@@ -4787,7 +4797,8 @@ hr.hr_White_line_03 {
 }
 
 .modal_ScoreSheet_Footer_AL044_24,
-.modal_ScoreSheet_Footer_AL045_24
+.modal_ScoreSheet_Footer_AL045_24,
+.modal_ScoreSheet_Footer_AL046_24
 {
     padding: 2px 16px;
     background-color: rgb(134, 25, 25);
@@ -4800,7 +4811,8 @@ hr.hr_White_line_03 {
 
 
 #supremeCourt_Place5_Footer_Title_AL044_24,
-#supremeCourt_Place5_Footer_Title_AL045_24
+#supremeCourt_Place5_Footer_Title_AL045_24,
+#supremeCourt_Place5_Footer_Title_AL046_24
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -4808,7 +4820,8 @@ hr.hr_White_line_03 {
 }
 
 #supremeCourt_Place5_ScoreSheet_Title_AL044_24,
-#supremeCourt_Place5_ScoreSheet_Title_AL045_24
+#supremeCourt_Place5_ScoreSheet_Title_AL045_24,
+#supremeCourt_Place5_ScoreSheet_Title_AL046_24
 {  
     padding: 16px 16px;
     background-color: rgb(134, 25, 25);
@@ -4818,7 +4831,8 @@ hr.hr_White_line_03 {
 }
 
 #supremeCourt_Place5_ScoreSheet_Image_AL044_24,
-#supremeCourt_Place5_ScoreSheet_Image_AL045_24
+#supremeCourt_Place5_ScoreSheet_Image_AL045_24,
+#supremeCourt_Place5_ScoreSheet_Image_AL046_24
 {
     display: inline-block;
     margin: 0 auto;
@@ -4842,7 +4856,8 @@ hr.hr_White_line_03 {
 }
 
 #supremeCourt_Place5_ScoreSheet_Subtitle_01_AL044_24,
-#supremeCourt_Place5_ScoreSheet_Subtitle_01_AL045_24
+#supremeCourt_Place5_ScoreSheet_Subtitle_01_AL045_24,
+#supremeCourt_Place5_ScoreSheet_Subtitle_01_AL046_24
 {
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(12px, 2vw, 18px); 
@@ -4851,7 +4866,8 @@ hr.hr_White_line_03 {
 }
 
 #supremeCourt_Place5_ScoreSheet_Subtitle_03_AL044_24,
-#supremeCourt_Place5_ScoreSheet_Subtitle_03_AL045_24
+#supremeCourt_Place5_ScoreSheet_Subtitle_03_AL045_24,
+#supremeCourt_Place5_ScoreSheet_Subtitle_03_AL046_24
 {  
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(10px, 2vw, 14px); 
@@ -4860,7 +4876,8 @@ hr.hr_White_line_03 {
 }
 
 #supremeCourt_Place5_ScoreSheet_CampaignWebsite_AL044_24,
-#supremeCourt_Place5_ScoreSheet_CampaignWebsite_AL045_24
+#supremeCourt_Place5_ScoreSheet_CampaignWebsite_AL045_24,
+#supremeCourt_Place5_ScoreSheet_CampaignWebsite_AL046_24
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -4869,7 +4886,8 @@ hr.hr_White_line_03 {
 }
 
 #supremeCourt_Place5_ScoreSheet_CampaignWebsite_AL044_24:hover,
-#supremeCourt_Place5_ScoreSheet_CampaignWebsite_AL045_24:hover
+#supremeCourt_Place5_ScoreSheet_CampaignWebsite_AL045_24:hover,
+#supremeCourt_Place5_ScoreSheet_CampaignWebsite_AL046_24:hover
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -4879,7 +4897,8 @@ hr.hr_White_line_03 {
 }
 
 #supremeCourt_Place5_ScoreSheet_BodyContents_AL044_24,
-#supremeCourt_Place5_ScoreSheet_BodyContents_AL045_24
+#supremeCourt_Place5_ScoreSheet_BodyContents_AL045_24,
+#supremeCourt_Place5_ScoreSheet_BodyContents_AL046_24
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 10px); 
