@@ -1705,6 +1705,8 @@ const candidateScoreSheet_Modal_AL043_24 = document.getElementById('candidateSco
 const candidateScoreSheet_Modal_AL044_24 = document.getElementById('candidateScoreSheet_Modal_AL044_24');
 const candidateScoreSheet_Modal_AL045_24 = document.getElementById('candidateScoreSheet_Modal_AL045_24');
 const candidateScoreSheet_Modal_AL046_24 = document.getElementById('candidateScoreSheet_Modal_AL046_24');
+const candidateScoreSheet_Modal_AL047_24 = document.getElementById('candidateScoreSheet_Modal_AL047_24');
+
 
 /* Get Presidential candidates ScoreSheet button which will open their modals. */
 const candidateButton_FC001 = document.getElementById('candidateButton_FC001');
@@ -1816,6 +1818,7 @@ const candidateButton_AL043_24 = document.getElementById('candidateButton_AL043_
 const candidateButton_AL044_24 = document.getElementById('candidateButton_AL044_24');
 const candidateButton_AL045_24 = document.getElementById('candidateButton_AL045_24');
 const candidateButton_AL046_24 = document.getElementById('candidateButton_AL046_24');
+const candidateButton_AL047_24 = document.getElementById('candidateButton_AL047_24');
 
 /* Get Presidential <span> elements which will close their modals. */
 const close_ScoreSheet_FC001 = document.getElementsByClassName('close_ScoreSheet_FC001')[0];
@@ -1927,6 +1930,7 @@ const close_ScoreSheet_AL043_24 = document.getElementsByClassName('close_ScoreSh
 const close_ScoreSheet_AL044_24 = document.getElementsByClassName('close_ScoreSheet_AL044_24')[0];
 const close_ScoreSheet_AL045_24 = document.getElementsByClassName('close_ScoreSheet_AL045_24')[0];
 const close_ScoreSheet_AL046_24 = document.getElementsByClassName('close_ScoreSheet_AL046_24')[0];
+const close_ScoreSheet_AL047_24 = document.getElementsByClassName('close_ScoreSheet_AL047_24')[0];
 
 /* When the users clicks onto the Presidential candidates' buttons than their modals will pop up. */
 
@@ -2357,6 +2361,11 @@ candidateButton_AL046_24.onclick = function(event){
 	candidateScoreSheet_Modal_AL046_24.style.display = "block";
 }
 
+candidateButton_AL047_24.onclick = function(event){
+	event.preventDefault();  
+	candidateScoreSheet_Modal_AL047_24.style.display = "block";
+}
+
 
 /* When the users clicks onto the Presidential candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
 close_ScoreSheet_FC001.onclick = function() {
@@ -2700,6 +2709,10 @@ close_ScoreSheet_AL045_24.onclick = function() {
 
 close_ScoreSheet_AL046_24.onclick = function() {
 	candidateScoreSheet_Modal_AL046_24.style.display = "none";
+}
+
+close_ScoreSheet_AL047_24.onclick = function() {
+	candidateScoreSheet_Modal_AL047_24.style.display = "none";
 }
 
 /*
