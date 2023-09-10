@@ -1597,22 +1597,7 @@ function removeFromCart(button) {
 }
 
 /* Get Presidential Candidates ScoreSheet Modals. */
-const candidateScoreSheet_Modal_FC001 = document.getElementById('candidateScoreSheet_Modal_FC001');
-const candidateScoreSheet_Modal_FC002 = document.getElementById('candidateScoreSheet_Modal_FC002');
-const candidateScoreSheet_Modal_FC003 = document.getElementById('candidateScoreSheet_Modal_FC003');
-const candidateScoreSheet_Modal_FC004 = document.getElementById('candidateScoreSheet_Modal_FC004');
-const candidateScoreSheet_Modal_FC005 = document.getElementById('candidateScoreSheet_Modal_FC005');
-const candidateScoreSheet_Modal_FC006 = document.getElementById('candidateScoreSheet_Modal_FC006');
-const candidateScoreSheet_Modal_FC007 = document.getElementById('candidateScoreSheet_Modal_FC007');
-const candidateScoreSheet_Modal_FC008 = document.getElementById('candidateScoreSheet_Modal_FC008');
-const candidateScoreSheet_Modal_FC009 = document.getElementById('candidateScoreSheet_Modal_FC009');
-const candidateScoreSheet_Modal_FC010 = document.getElementById('candidateScoreSheet_Modal_FC010');
-const candidateScoreSheet_Modal_FC011 = document.getElementById('candidateScoreSheet_Modal_FC011');
-const candidateScoreSheet_Modal_FC012 = document.getElementById('candidateScoreSheet_Modal_FC012');
-const candidateScoreSheet_Modal_FC013 = document.getElementById('candidateScoreSheet_Modal_FC013');
-const candidateScoreSheet_Modal_FC014 = document.getElementById('candidateScoreSheet_Modal_FC014');
-const candidateScoreSheet_Modal_FC015 = document.getElementById('candidateScoreSheet_Modal_FC015');
-const candidateScoreSheet_Modal_FC016 = document.getElementById('candidateScoreSheet_Modal_FC016');
+
 
 /* Get Governor Candidates ScoreSheet Modals. */
 const candidateScoreSheet_Modal_AL001_24 = document.getElementById('candidateScoreSheet_Modal_AL001_24');
@@ -1709,22 +1694,7 @@ const candidateScoreSheet_Modal_AL047_24 = document.getElementById('candidateSco
 
 
 /* Get Presidential candidates ScoreSheet button which will open their modals. */
-const candidateButton_FC001 = document.getElementById('candidateButton_FC001');
-const candidateButton_FC002 = document.getElementById('candidateButton_FC002');
-const candidateButton_FC003 = document.getElementById('candidateButton_FC003');
-const candidateButton_FC004 = document.getElementById('candidateButton_FC004');
-const candidateButton_FC005 = document.getElementById('candidateButton_FC005');
-const candidateButton_FC006 = document.getElementById('candidateButton_FC006');
-const candidateButton_FC007 = document.getElementById('candidateButton_FC007');
-const candidateButton_FC008 = document.getElementById('candidateButton_FC008');
-const candidateButton_FC009 = document.getElementById('candidateButton_FC009');
-const candidateButton_FC010 = document.getElementById('candidateButton_FC010');
-const candidateButton_FC011 = document.getElementById('candidateButton_FC011');
-const candidateButton_FC012 = document.getElementById('candidateButton_FC012');
-const candidateButton_FC013 = document.getElementById('candidateButton_FC013');
-const candidateButton_FC014 = document.getElementById('candidateButton_FC014');
-const candidateButton_FC015 = document.getElementById('candidateButton_FC015');
-const candidateButton_FC016 = document.getElementById('candidateButton_FC016');
+
 
 /* Get Governor candidates ScoreSheet button which will open their modals. */
 const candidateButton_AL001_24 = document.getElementById('candidateButton_AL001_24');
@@ -1821,22 +1791,7 @@ const candidateButton_AL046_24 = document.getElementById('candidateButton_AL046_
 const candidateButton_AL047_24 = document.getElementById('candidateButton_AL047_24');
 
 /* Get Presidential <span> elements which will close their modals. */
-const close_ScoreSheet_FC001 = document.getElementsByClassName('close_ScoreSheet_FC001')[0];
-const close_ScoreSheet_FC002 = document.getElementsByClassName('close_ScoreSheet_FC002')[0];
-const close_ScoreSheet_FC003 = document.getElementsByClassName('close_ScoreSheet_FC003')[0];
-const close_ScoreSheet_FC004 = document.getElementsByClassName('close_ScoreSheet_FC004')[0];
-const close_ScoreSheet_FC005 = document.getElementsByClassName('close_ScoreSheet_FC005')[0];
-const close_ScoreSheet_FC006 = document.getElementsByClassName('close_ScoreSheet_FC006')[0];
-const close_ScoreSheet_FC007 = document.getElementsByClassName('close_ScoreSheet_FC007')[0];
-const close_ScoreSheet_FC008 = document.getElementsByClassName('close_ScoreSheet_FC008')[0];
-const close_ScoreSheet_FC009 = document.getElementsByClassName('close_ScoreSheet_FC009')[0];
-const close_ScoreSheet_FC010 = document.getElementsByClassName('close_ScoreSheet_FC010')[0];
-const close_ScoreSheet_FC011 = document.getElementsByClassName('close_ScoreSheet_FC011')[0];
-const close_ScoreSheet_FC012 = document.getElementsByClassName('close_ScoreSheet_FC012')[0];
-const close_ScoreSheet_FC013 = document.getElementsByClassName('close_ScoreSheet_FC013')[0];
-const close_ScoreSheet_FC014 = document.getElementsByClassName('close_ScoreSheet_FC014')[0];
-const close_ScoreSheet_FC015 = document.getElementsByClassName('close_ScoreSheet_FC015')[0];
-const close_ScoreSheet_FC016 = document.getElementsByClassName('close_ScoreSheet_FC016')[0];
+
 
 /* Get Governor <span> elements which will close their modals. */
 const close_ScoreSheet_AL001_24 = document.getElementsByClassName('close_ScoreSheet_AL001_24')[0];
@@ -1934,85 +1889,6 @@ const close_ScoreSheet_AL047_24 = document.getElementsByClassName('close_ScoreSh
 
 /* When the users clicks onto the Presidential candidates' buttons than their modals will pop up. */
 
-candidateButton_FC001.onclick = function(event){
-	event.preventDefault();  
-	candidateScoreSheet_Modal_FC001.style.display = "block";
-}  
-
-candidateButton_FC002.onclick = function(event){
-	event.preventDefault();  
-	candidateScoreSheet_Modal_FC002.style.display = "block";
-}  
-
-candidateButton_FC003.onclick = function(event){
-	event.preventDefault();  
-	candidateScoreSheet_Modal_FC003.style.display = "block";
-}  
-
-candidateButton_FC004.onclick = function(event){
-	event.preventDefault();  
-	candidateScoreSheet_Modal_FC004.style.display = "block";
-}  
-
-candidateButton_FC005.onclick = function(event){
-	event.preventDefault();  
-	candidateScoreSheet_Modal_FC005.style.display = "block";
-}  
-
-candidateButton_FC006.onclick = function(event){
-	event.preventDefault();  
-	candidateScoreSheet_Modal_FC006.style.display = "block";
-} 
-
-candidateButton_FC007.onclick = function(event){
-	event.preventDefault();  
-	candidateScoreSheet_Modal_FC007.style.display = "block";
-} 
-
-candidateButton_FC008.onclick = function(event){
-	event.preventDefault();  
-	candidateScoreSheet_Modal_FC008.style.display = "block";
-} 
-
-candidateButton_FC009.onclick = function(event){
-	event.preventDefault();  
-	candidateScoreSheet_Modal_FC009.style.display = "block";
-} 
-
-candidateButton_FC010.onclick = function(event){
-	event.preventDefault();  
-	candidateScoreSheet_Modal_FC010.style.display = "block";
-} 
-
-candidateButton_FC011.onclick = function(event){
-	event.preventDefault();  
-	candidateScoreSheet_Modal_FC011.style.display = "block";
-}
-
-candidateButton_FC012.onclick = function(event){
-	event.preventDefault();  
-	candidateScoreSheet_Modal_FC012.style.display = "block";
-}
-
-candidateButton_FC013.onclick = function(event){
-	event.preventDefault();  
-	candidateScoreSheet_Modal_FC013.style.display = "block";
-}
-
-candidateButton_FC014.onclick = function(event){
-	event.preventDefault();  
-	candidateScoreSheet_Modal_FC014.style.display = "block";
-}
-
-candidateButton_FC015.onclick = function(event){
-	event.preventDefault();  
-	candidateScoreSheet_Modal_FC015.style.display = "block";
-}
-
-candidateButton_FC016.onclick = function(event){
-	event.preventDefault();  
-	candidateScoreSheet_Modal_FC016.style.display = "block";
-}
 
 /* When the users clicks onto the Governor candidates' buttons than their modals will pop up. */
 candidateButton_AL001_24.onclick = function(event){
@@ -2368,69 +2244,7 @@ candidateButton_AL047_24.onclick = function(event){
 
 
 /* When the users clicks onto the Presidential candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
-close_ScoreSheet_FC001.onclick = function() {
-	candidateScoreSheet_Modal_FC001.style.display = "none";
-}
 
-close_ScoreSheet_FC002.onclick = function() {
-	candidateScoreSheet_Modal_FC002.style.display = "none";
-}
-
-close_ScoreSheet_FC003.onclick = function() {
-	candidateScoreSheet_Modal_FC003.style.display = "none";
-}
-
-close_ScoreSheet_FC004.onclick = function() {
-	candidateScoreSheet_Modal_FC004.style.display = "none";
-}
-
-close_ScoreSheet_FC005.onclick = function() {
-	candidateScoreSheet_Modal_FC005.style.display = "none";
-}
-
-close_ScoreSheet_FC006.onclick = function() {
-	candidateScoreSheet_Modal_FC006.style.display = "none";
-}
-
-close_ScoreSheet_FC007.onclick = function() {
-	candidateScoreSheet_Modal_FC007.style.display = "none";
-}
-
-close_ScoreSheet_FC008.onclick = function() {
-	candidateScoreSheet_Modal_FC008.style.display = "none";
-}
-
-close_ScoreSheet_FC009.onclick = function() {
-	candidateScoreSheet_Modal_FC009.style.display = "none";
-}
-
-close_ScoreSheet_FC010.onclick = function() {
-	candidateScoreSheet_Modal_FC010.style.display = "none";
-}
-
-close_ScoreSheet_FC011.onclick = function() {
-	candidateScoreSheet_Modal_FC011.style.display = "none";
-}
-
-close_ScoreSheet_FC012.onclick = function() {
-	candidateScoreSheet_Modal_FC012.style.display = "none";
-}
-	
-close_ScoreSheet_FC013.onclick = function() {
-	candidateScoreSheet_Modal_FC013.style.display = "none";
-}
-
-close_ScoreSheet_FC014.onclick = function() {
-	candidateScoreSheet_Modal_FC014.style.display = "none";
-}
-
-close_ScoreSheet_FC015.onclick = function() {
-	candidateScoreSheet_Modal_FC015.style.display = "none";
-}
-
-close_ScoreSheet_FC016.onclick = function() {
-	candidateScoreSheet_Modal_FC016.style.display = "none";
-}
 
 /* When the users clicks onto the Governor candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
 close_ScoreSheet_AL001_24.onclick = function() {
