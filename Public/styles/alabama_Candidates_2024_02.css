@@ -967,7 +967,8 @@ p {
 
 /* United States Presidential */
 #candidateButton_FC001_24,
-#candidateButton_FC002_24
+#candidateButton_FC002_24,
+#candidateButton_FC003_24
 {
     background-color: rgb(13, 65, 255);
     font-family: Georgia, Times, 'Times New Roman', serif;
@@ -979,7 +980,9 @@ p {
 #candidateButton_FC001:hover,
 #candidateButton_FC001:focus,
 #candidateButton_FC002:hover,
-#candidateButton_FC002:focus
+#candidateButton_FC002:focus,
+#candidateButton_FC003:hover,
+#candidateButton_FC003:focus
 {
     background-color: rgb(201, 24, 24);
     color: rgb(255, 255, 255);
@@ -988,7 +991,8 @@ p {
 }
 
 .modal_CandidateScoreSheet_FC001_24,
-.modal_CandidateScoreSheet_FC002_24
+.modal_CandidateScoreSheet_FC002_24,
+.modal_CandidateScoreSheet_FC003_24
 {
     display: none;
     position: fixed;
@@ -1004,7 +1008,8 @@ p {
 }
 
 .modal_Content_ScoreSheet_FC001_24,
-.modal_Content_ScoreSheet_FC002_24
+.modal_Content_ScoreSheet_FC002_24,
+.modal_Content_ScoreSheet_FC003_24
 {
     position: relative;
     background-color: #fefefe;
@@ -1033,7 +1038,8 @@ p {
 }
 
 .close_ScoreSheet_FC001_24,
-.close_ScoreSheet_FC002_24
+.close_ScoreSheet_FC002_24,
+.close_ScoreSheet_FC003_24
 {
     color: rgb(139, 134, 134);
     float: none;
@@ -1045,7 +1051,9 @@ p {
 .close_ScoreSheet_FC001_24:hover,
 .close_ScoreSheet_FC001_24:focus,
 .close_ScoreSheet_FC002_24:hover,
-.close_ScoreSheet_FC002_24:focus
+.close_ScoreSheet_FC002_24:focus,
+.close_ScoreSheet_FC003_24:hover,
+.close_ScoreSheet_FC003_24:focus
 {
     color: rgb(134, 25, 25);
     text-decoration: none;
@@ -1061,7 +1069,8 @@ p {
 }
 
 .modal_ScoreSheet_Header_FC001_24,
-.modal_ScoreSheet_Header_FC002_24
+.modal_ScoreSheet_Header_FC002_24,
+.modal_ScoreSheet_Header_FC003_24
 {
     padding: 2px 16px;
     background-color: rgb(255, 255, 255);
@@ -1071,7 +1080,8 @@ p {
 }
 
 .modal_ScoreSheet_Body_FC001_24,
-.modal_ScoreSheet_Body_FC002_24
+.modal_ScoreSheet_Body_FC002_24,
+.modal_ScoreSheet_Body_FC003_24
 {
     padding: 2px 16px;
     background-color: rgb(255, 255, 255);
@@ -1112,7 +1122,8 @@ p {
 */
 
 .modal_ScoreSheet_Footer_FC001_24_Red,
-.modal_ScoreSheet_Footer_FC002_24_Red
+.modal_ScoreSheet_Footer_FC002_24_Red,
+.modal_ScoreSheet_Footer_FC003_24_Red
 {
     padding: 2px 16px;
     background-color: rgb(201, 24, 24);
@@ -1144,7 +1155,8 @@ p {
 */
 
 #usPresidential_Footer_Title_FC001_24_Red,
-#usPresidential_Footer_Title_FC002_24_Red
+#usPresidential_Footer_Title_FC002_24_Red,
+#usPresidential_Footer_Title_FC003_24_Red
 {  
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -1175,7 +1187,8 @@ p {
 
 
 #usPresidential_ScoreSheet_Title_FC001_24_Red,
-#usPresidential_ScoreSheet_Title_FC002_24_Red
+#usPresidential_ScoreSheet_Title_FC002_24_Red,
+#usPresidential_ScoreSheet_Title_FC003_24_Red
 {  
     padding: 16px 16px;
     background-color: rgb(201, 24, 24);
@@ -1185,7 +1198,8 @@ p {
 }
 
 #usPresidential_ScoreSheet_Image_FC001_24,
-#usPresidential_ScoreSheet_Image_FC002_24
+#usPresidential_ScoreSheet_Image_FC002_24,
+#usPresidential_ScoreSheet_Image_FC003_24
 {
     display: inline-block;
     margin: 0 auto;
@@ -1229,7 +1243,8 @@ p {
 */
 
 #usPresidential_ScoreSheet_Subtitle_01_FC001_24_Red,
-#usPresidential_ScoreSheet_Subtitle_01_FC002_24_Red
+#usPresidential_ScoreSheet_Subtitle_01_FC002_24_Red,
+#usPresidential_ScoreSheet_Subtitle_01_FC003_24_Red
 {
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(12px, 2vw, 18px); 
@@ -1261,7 +1276,8 @@ p {
 */
 
 #usPresidential_ScoreSheet_Subtitle_02_FC001_24_Red,
-#usPresidential_ScoreSheet_Subtitle_02_FC002_24_Red
+#usPresidential_ScoreSheet_Subtitle_02_FC002_24_Red,
+#usPresidential_ScoreSheet_Subtitle_02_FC003_24_Red
 {  
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(10px, 2vw, 14px); 
@@ -1292,7 +1308,8 @@ p {
 */
 
 #usPresidential_ScoreSheet_CampaignWebsite_FC001_24_Red,
-#usPresidential_ScoreSheet_CampaignWebsite_FC002_24_Red
+#usPresidential_ScoreSheet_CampaignWebsite_FC002_24_Red,
+#usPresidential_ScoreSheet_CampaignWebsite_FC003_24_Red
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -1323,7 +1340,8 @@ p {
 */
 
 #usPresidential_ScoreSheet_CampaignWebsite_FC001_24_Red,
-#usPresidential_ScoreSheet_CampaignWebsite_FC002_24_Red
+#usPresidential_ScoreSheet_CampaignWebsite_FC002_24_Red,
+#usPresidential_ScoreSheet_CampaignWebsite_FC003_24_Red
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -1357,7 +1375,8 @@ p {
 */
 
 #usPresidential_ScoreSheet_BodyContents_FC001_24_Red,
-#usPresidential_ScoreSheet_BodyContents_FC002_24_Red
+#usPresidential_ScoreSheet_BodyContents_FC002_24_Red,
+#usPresidential_ScoreSheet_BodyContents_FC003_24_Red
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 10px); 
