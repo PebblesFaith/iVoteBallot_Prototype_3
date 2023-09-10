@@ -965,6 +965,409 @@ p {
 
 
 
+/* United States Presidential */
+#candidateButton_FC001_24
+{
+    background-color: rgb(13, 65, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px);
+    color: rgb(255, 255, 255);
+    border: none; 
+}
+
+#candidateButton_FC001:hover,
+#candidateButton_FC001:focus
+{
+    background-color: rgb(201, 24, 24);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_CandidateScoreSheet_FC001_24
+{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 30px;    
+    left: 0;
+    top: 0;   
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    /*background-color: rgba(0, 0, 0, 0.4); */
+}
+
+.modal_Content_ScoreSheet_FC001_24
+{
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    /* border: 1px solid #888; */
+    border: none;
+    width: 80%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: ScoreSheetAnimateTop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: ScoreSheetAnimateTop_01;
+    animation-duration: .05s;
+    margin-bottom: 40px;
+}
+
+@-webkit-keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes ScoreSheetAnimateTop_01 {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.close_ScoreSheet_FC001_24
+{
+    color: rgb(139, 134, 134);
+    float: none;
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 25px;    
+}
+
+.close_ScoreSheet_FC001_24:hover,
+.close_ScoreSheet_FC001_24:focus
+{
+    color: rgb(134, 25, 25);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#alabama_StateSeal 
+{
+    display: inline-block;
+    width: 100px;
+    height: 100px;  
+    background-color: rgb(255, 255, 255);
+}
+
+.modal_ScoreSheet_Header_FC001_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(97, 5, 5);
+}
+
+.modal_ScoreSheet_Body_FC001_24
+{
+    padding: 2px 16px;
+    background-color: rgb(255, 255, 255);
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 25px); 
+    color: rgb(201, 24, 24);
+    text-align: left;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+/*
+.modal_ScoreSheet_Footer_FC000_24_Gray
+
+{
+    padding: 2px 16px;
+    background-color: rgb(211, 211, 211);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(134, 25, 25);
+    width: auto;
+    height: auto;
+}
+*/
+
+/*
+.modal_ScoreSheet_Footer_FC019_24_Blue
+
+{
+    padding: 2px 16px;
+    background-color: rgb(13, 65, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);
+    width: auto;
+    height: auto;
+}
+*/
+
+.modal_ScoreSheet_Footer_FC001_24_Red
+{
+    padding: 2px 16px;
+    background-color: rgb(201, 24, 24);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);
+    width: auto;
+    height: auto;
+}
+
+/*
+#usPresidential_Footer_Title_FC000_24_Gray
+
+{  
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(134, 25, 25);
+}
+
+*/
+
+/*
+#usPresidential_Footer_Title_FC000_24_Blue
+{  
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+}
+*/
+
+#usPresidential_Footer_Title_FC001_24_Red
+{  
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+}
+
+/*
+#usPresidential_ScoreSheet_Title_FC000_24_Gray
+{  
+    padding: 16px 16px;
+    background-color: rgb(211, 211, 211);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(134, 25, 25);    
+}
+*/
+
+/*
+#usPresidential_ScoreSheet_Title_FC000_24_Blue
+{  
+    padding: 16px 16px;
+    background-color: rgb(13, 65, 255);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);    
+}
+*/
+
+
+#usPresidential_ScoreSheet_Title_FC001_24_Red
+{  
+    padding: 16px 16px;
+    background-color: rgb(201, 24, 24);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(255, 255, 255);    
+}
+
+#usPresidential_ScoreSheet_Image_FC001_24
+{
+    display: inline-block;
+    margin: 0 auto;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    width: clamp(100px, 100%, 400px);
+    
+    line-height: none;
+    margin-top: 20px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+    justify-content: center;  
+    background-color: transparent;    
+
+    /*
+    width: 100%;
+    height: auto; 
+   */
+
+    border: 0, 2px, 0, 0;
+}
+
+/*
+#usPresidential_ScoreSheet_Subtitle_01_FC000_24_Gray
+{
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(13, 65, 255);
+    text-align: center;
+}
+*/
+
+/*
+#usPresidential_ScoreSheet_Subtitle_01_FC000_24_Blue
+{
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(134, 25, 25);
+    text-align: center;
+}
+*/
+
+#usPresidential_ScoreSheet_Subtitle_01_FC001_24_Red
+{
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(13, 65, 255);
+    text-align: center;
+}
+
+/*
+#usPresidential_ScoreSheet_Subtitle_02_FC000_24_Gray
+{  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(134, 25, 25);
+    text-align: center;
+}
+
+*/
+
+/*
+
+#usPresidential_ScoreSheet_Subtitle_02_FC000_24_Blue
+{  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(13, 65, 255);
+    text-align: center;
+}
+
+*/
+
+#usPresidential_ScoreSheet_Subtitle_02_FC001_24_Red
+
+{  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    color: rgb(201, 24, 24);
+    text-align: center;
+}
+
+/*
+#usPresidential_ScoreSheet_CampaignWebsite_FC000_24_Gray
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(13, 65, 255);
+
+}
+*/
+
+/*
+
+#usPresidential_ScoreSheet_CampaignWebsite_FC000_24_Blue
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+
+}
+
+*/
+
+#usPresidential_ScoreSheet_CampaignWebsite_FC001_24_Red
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(255, 255, 255);
+
+}
+
+/*
+#usPresidential_ScoreSheet_CampaignWebsite_FC000_24_Gray:hover
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(134, 25, 25);
+    cursor: pointer;
+
+}
+*/
+
+/*
+#usPresidential_ScoreSheet_CampaignWebsite_FC000_24_Blue:hover
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(195, 195, 195);
+    cursor: pointer;
+
+}
+*/
+
+#usPresidential_ScoreSheet_CampaignWebsite_FC001_24_Red:hover
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(195, 195, 195);
+    cursor: pointer;
+
+}
+
+/*
+#usPresidential_ScoreSheet_BodyContents_FC000_24_Gray
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px); 
+    color: rgb(13, 65, 255);
+    text-align: left;
+ 
+}
+*/
+
+/*
+
+#usPresidential_ScoreSheet_BodyContents_FC000_24_Blue
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px); 
+    color: rgb(134, 25, 25);
+    text-align: left;
+ 
+}
+
+*/
+
+#usPresidential_ScoreSheet_BodyContents_FC001_24_Red
+{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 10px); 
+    color: rgb(13, 65, 255);
+    text-align: left;
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
