@@ -972,7 +972,8 @@ p {
 #candidateButton_FC004_24,
 #candidateButton_FC005_24,
 #candidateButton_FC006_24,
-#candidateButton_FC007_24
+#candidateButton_FC007_24,
+#candidateButton_FC008_24
 {
     background-color: rgb(13, 65, 255);
     font-family: Georgia, Times, 'Times New Roman', serif;
@@ -994,7 +995,9 @@ p {
 #candidateButton_FC006:hover,
 #candidateButton_FC006:focus,
 #candidateButton_FC007:hover,
-#candidateButton_FC007:focus
+#candidateButton_FC007:focus,
+#candidateButton_FC008:hover,
+#candidateButton_FC008:focus
 {
     background-color: rgb(201, 24, 24);
     color: rgb(255, 255, 255);
@@ -1008,7 +1011,8 @@ p {
 .modal_CandidateScoreSheet_FC004_24,
 .modal_CandidateScoreSheet_FC005_24,
 .modal_CandidateScoreSheet_FC006_24,
-.modal_CandidateScoreSheet_FC007_24
+.modal_CandidateScoreSheet_FC007_24,
+.modal_CandidateScoreSheet_FC008_24
 {
     display: none;
     position: fixed;
@@ -1029,8 +1033,8 @@ p {
 .modal_Content_ScoreSheet_FC004_24,
 .modal_Content_ScoreSheet_FC005_24,
 .modal_Content_ScoreSheet_FC006_24,
-.modal_Content_ScoreSheet_FC007_24
-
+.modal_Content_ScoreSheet_FC007_24,
+.modal_Content_ScoreSheet_FC008_24
 {
     position: relative;
     background-color: #fefefe;
@@ -1064,7 +1068,8 @@ p {
 .close_ScoreSheet_FC004_24,
 .close_ScoreSheet_FC005_24,
 .close_ScoreSheet_FC006_24,
-.close_ScoreSheet_FC007_24
+.close_ScoreSheet_FC007_24,
+.close_ScoreSheet_FC008_24
 {
     color: rgb(139, 134, 134);
     float: none;
@@ -1086,7 +1091,9 @@ p {
 .close_ScoreSheet_FC006_24:hover,
 .close_ScoreSheet_FC006_24:focus,
 .close_ScoreSheet_FC007_24:hover,
-.close_ScoreSheet_FC007_24:focus
+.close_ScoreSheet_FC007_24:focus,
+.close_ScoreSheet_FC008_24:hover,
+.close_ScoreSheet_FC008_24:focus
 {
     color: rgb(134, 25, 25);
     text-decoration: none;
@@ -1107,7 +1114,8 @@ p {
 .modal_ScoreSheet_Header_FC004_24,
 .modal_ScoreSheet_Header_FC005_24,
 .modal_ScoreSheet_Header_FC006_24,
-.modal_ScoreSheet_Header_FC007_24
+.modal_ScoreSheet_Header_FC007_24,
+.modal_ScoreSheet_Header_FC008_24
 {
     padding: 2px 16px;
     background-color: rgb(255, 255, 255);
@@ -1122,7 +1130,8 @@ p {
 .modal_ScoreSheet_Body_FC004_24,
 .modal_ScoreSheet_Body_FC005_24,
 .modal_ScoreSheet_Body_FC006_24,
-.modal_ScoreSheet_Body_FC007_24
+.modal_ScoreSheet_Body_FC007_24,
+.modal_ScoreSheet_Body_FC008_24
 {
     padding: 2px 16px;
     background-color: rgb(255, 255, 255);
@@ -1168,7 +1177,8 @@ p {
 .modal_ScoreSheet_Footer_FC004_24_Red,
 .modal_ScoreSheet_Footer_FC005_24_Red,
 .modal_ScoreSheet_Footer_FC006_24_Red,
-.modal_ScoreSheet_Footer_FC007_24_Red
+.modal_ScoreSheet_Footer_FC007_24_Red,
+.modal_ScoreSheet_Footer_FC008_24_Red
 {
     padding: 2px 16px;
     background-color: rgb(201, 24, 24);
@@ -1205,7 +1215,8 @@ p {
 #usPresidential_Footer_Title_FC004_24_Red,
 #usPresidential_Footer_Title_FC005_24_Red,
 #usPresidential_Footer_Title_FC006_24_Red,
-#usPresidential_Footer_Title_FC007_24_Red
+#usPresidential_Footer_Title_FC007_24_Red,
+#usPresidential_Footer_Title_FC008_24_Red
 {  
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -1241,7 +1252,8 @@ p {
 #usPresidential_ScoreSheet_Title_FC004_24_Red,
 #usPresidential_ScoreSheet_Title_FC005_24_Red,
 #usPresidential_ScoreSheet_Title_FC006_24_Red,
-#usPresidential_ScoreSheet_Title_FC007_24_Red
+#usPresidential_ScoreSheet_Title_FC007_24_Red,
+#usPresidential_ScoreSheet_Title_FC008_24_Red
 {  
     padding: 16px 16px;
     background-color: rgb(201, 24, 24);
@@ -1256,7 +1268,8 @@ p {
 #usPresidential_ScoreSheet_Image_FC004_24,
 #usPresidential_ScoreSheet_Image_FC005_24,
 #usPresidential_ScoreSheet_Image_FC006_24,
-#usPresidential_ScoreSheet_Image_FC007_24
+#usPresidential_ScoreSheet_Image_FC007_24,
+#usPresidential_ScoreSheet_Image_FC008_24
 {
     display: inline-block;
     margin: 0 auto;
@@ -1305,7 +1318,8 @@ p {
 #usPresidential_ScoreSheet_Subtitle_01_FC004_24_Red,
 #usPresidential_ScoreSheet_Subtitle_01_FC005_24_Red,
 #usPresidential_ScoreSheet_Subtitle_01_FC006_24_Red,
-#usPresidential_ScoreSheet_Subtitle_01_FC007_24_Red
+#usPresidential_ScoreSheet_Subtitle_01_FC007_24_Red,
+#usPresidential_ScoreSheet_Subtitle_01_FC008_24_Red
 {
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(12px, 2vw, 18px); 
@@ -1342,7 +1356,8 @@ p {
 #usPresidential_ScoreSheet_Subtitle_02_FC004_24_Red,
 #usPresidential_ScoreSheet_Subtitle_02_FC005_24_Red,
 #usPresidential_ScoreSheet_Subtitle_02_FC006_24_Red,
-#usPresidential_ScoreSheet_Subtitle_02_FC007_24_Red
+#usPresidential_ScoreSheet_Subtitle_02_FC007_24_Red,
+#usPresidential_ScoreSheet_Subtitle_02_FC008_24_Red
 {  
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(10px, 2vw, 14px); 
@@ -1378,7 +1393,8 @@ p {
 #usPresidential_ScoreSheet_CampaignWebsite_FC004_24_Red,
 #usPresidential_ScoreSheet_CampaignWebsite_FC005_24_Red,
 #usPresidential_ScoreSheet_CampaignWebsite_FC006_24_Red,
-#usPresidential_ScoreSheet_CampaignWebsite_FC007_24_Red
+#usPresidential_ScoreSheet_CampaignWebsite_FC007_24_Red,
+#usPresidential_ScoreSheet_CampaignWebsite_FC008_24_Red
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -1414,7 +1430,8 @@ p {
 #usPresidential_ScoreSheet_CampaignWebsite_FC004_24_Red:hover,
 #usPresidential_ScoreSheet_CampaignWebsite_FC005_24_Red:hover,
 #usPresidential_ScoreSheet_CampaignWebsite_FC006_24_Red:hover,
-#usPresidential_ScoreSheet_CampaignWebsite_FC007_24_Red:hover
+#usPresidential_ScoreSheet_CampaignWebsite_FC007_24_Red:hover,
+#usPresidential_ScoreSheet_CampaignWebsite_FC008_24_Red:hover
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -1453,7 +1470,8 @@ p {
 #usPresidential_ScoreSheet_BodyContents_FC004_24_Red,
 #usPresidential_ScoreSheet_BodyContents_FC005_24_Red,
 #usPresidential_ScoreSheet_BodyContents_FC006_24_Red,
-#usPresidential_ScoreSheet_BodyContents_FC007_24_Red
+#usPresidential_ScoreSheet_BodyContents_FC007_24_Red,
+#usPresidential_ScoreSheet_BodyContents_FC008_24_Red
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 10px); 
