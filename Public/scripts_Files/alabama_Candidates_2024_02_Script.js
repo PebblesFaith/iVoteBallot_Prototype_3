@@ -1607,6 +1607,7 @@ const candidateScoreSheet_Modal_FC007_24 = document.getElementById('candidateSco
 const candidateScoreSheet_Modal_FC008_24 = document.getElementById('candidateScoreSheet_Modal_FC008_24');
 const candidateScoreSheet_Modal_FC009_24 = document.getElementById('candidateScoreSheet_Modal_FC009_24');
 const candidateScoreSheet_Modal_FC010_24 = document.getElementById('candidateScoreSheet_Modal_FC010_24');
+const candidateScoreSheet_Modal_FC011_24 = document.getElementById('candidateScoreSheet_Modal_FC011_24');
 
 /* Get Governor Candidates ScoreSheet Modals. */
 const candidateScoreSheet_Modal_AL001_24 = document.getElementById('candidateScoreSheet_Modal_AL001_24');
@@ -1713,6 +1714,7 @@ const candidateButton_FC007_24 = document.getElementById('candidateButton_FC007_
 const candidateButton_FC008_24 = document.getElementById('candidateButton_FC008_24');
 const candidateButton_FC009_24 = document.getElementById('candidateButton_FC009_24');
 const candidateButton_FC010_24 = document.getElementById('candidateButton_FC010_24');
+const candidateButton_FC011_24 = document.getElementById('candidateButton_FC011_24');
 
 /* Get Governor candidates ScoreSheet button which will open their modals. */
 const candidateButton_AL001_24 = document.getElementById('candidateButton_AL001_24');
@@ -1819,6 +1821,7 @@ const close_ScoreSheet_FC007_24 = document.getElementsByClassName('close_ScoreSh
 const close_ScoreSheet_FC008_24 = document.getElementsByClassName('close_ScoreSheet_FC008_24')[0];
 const close_ScoreSheet_FC009_24 = document.getElementsByClassName('close_ScoreSheet_FC009_24')[0];
 const close_ScoreSheet_FC010_24 = document.getElementsByClassName('close_ScoreSheet_FC010_24')[0];
+const close_ScoreSheet_FC011_24 = document.getElementsByClassName('close_ScoreSheet_FC011_24')[0];
 
 /* Get Governor <span> elements which will close their modals. */
 const close_ScoreSheet_AL001_24 = document.getElementsByClassName('close_ScoreSheet_AL001_24')[0];
@@ -1963,6 +1966,11 @@ candidateButton_FC009_24.onclick = function(event){
 candidateButton_FC010_24.onclick = function(event){
 	event.preventDefault();  
 	candidateScoreSheet_Modal_FC010_24.style.display = "block";
+}
+
+candidateButton_FC011_24.onclick = function(event){
+	event.preventDefault();  
+	candidateScoreSheet_Modal_FC011_24.style.display = "block";
 }
 
 
@@ -2359,6 +2367,10 @@ close_ScoreSheet_FC009_24.onclick = function() {
 
 close_ScoreSheet_FC010_24.onclick = function() {
 	candidateScoreSheet_Modal_FC010_24.style.display = "none";
+}
+
+close_ScoreSheet_FC011_24.onclick = function() {
+	candidateScoreSheet_Modal_FC011_24.style.display = "none";
 }
 
 /* When the users clicks onto the Governor candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
