@@ -976,7 +976,8 @@ p {
 #candidateButton_FC008_24,
 #candidateButton_FC009_24,
 #candidateButton_FC010_24,
-#candidateButton_FC011_24
+#candidateButton_FC011_24,
+#candidateButton_FC012_24
 {
     background-color: rgb(13, 65, 255);
     font-family: Georgia, Times, 'Times New Roman', serif;
@@ -1006,7 +1007,9 @@ p {
 #candidateButton_FC010:hover,
 #candidateButton_FC010:focus,
 #candidateButton_FC011:hover,
-#candidateButton_FC011:focus
+#candidateButton_FC011:focus,
+#candidateButton_FC012:hover,
+#candidateButton_FC012:focus
 {
     background-color: rgb(201, 24, 24);
     color: rgb(255, 255, 255);
@@ -1024,7 +1027,8 @@ p {
 .modal_CandidateScoreSheet_FC008_24,
 .modal_CandidateScoreSheet_FC009_24,
 .modal_CandidateScoreSheet_FC010_24,
-.modal_CandidateScoreSheet_FC011_24
+.modal_CandidateScoreSheet_FC011_24,
+.modal_CandidateScoreSheet_FC012_24
 {
     display: none;
     position: fixed;
@@ -1049,7 +1053,8 @@ p {
 .modal_Content_ScoreSheet_FC008_24,
 .modal_Content_ScoreSheet_FC009_24,
 .modal_Content_ScoreSheet_FC010_24,
-.modal_Content_ScoreSheet_FC011_24
+.modal_Content_ScoreSheet_FC011_24,
+.modal_Content_ScoreSheet_FC012_24
 {
     position: relative;
     background-color: #fefefe;
@@ -1087,7 +1092,8 @@ p {
 .close_ScoreSheet_FC008_24,
 .close_ScoreSheet_FC009_24,
 .close_ScoreSheet_FC010_24,
-.close_ScoreSheet_FC011_24
+.close_ScoreSheet_FC011_24,
+.close_ScoreSheet_FC012_24
 {
     color: rgb(139, 134, 134);
     float: none;
@@ -1117,7 +1123,9 @@ p {
 .close_ScoreSheet_FC010_24:hover,
 .close_ScoreSheet_FC010_24:focus,
 .close_ScoreSheet_FC011_24:hover,
-.close_ScoreSheet_FC011_24:focus
+.close_ScoreSheet_FC011_24:focus,
+.close_ScoreSheet_FC012_24:hover,
+.close_ScoreSheet_FC012_24:focus
 {
     color: rgb(134, 25, 25);
     text-decoration: none;
@@ -1142,7 +1150,8 @@ p {
 .modal_ScoreSheet_Header_FC008_24,
 .modal_ScoreSheet_Header_FC009_24,
 .modal_ScoreSheet_Header_FC010_24,
-.modal_ScoreSheet_Header_FC011_24
+.modal_ScoreSheet_Header_FC011_24,
+.modal_ScoreSheet_Header_FC012_24
 {
     padding: 2px 16px;
     background-color: rgb(255, 255, 255);
@@ -1161,7 +1170,8 @@ p {
 .modal_ScoreSheet_Body_FC008_24,
 .modal_ScoreSheet_Body_FC009_24,
 .modal_ScoreSheet_Body_FC010_24,
-.modal_ScoreSheet_Body_FC011_24
+.modal_ScoreSheet_Body_FC011_24,
+.modal_ScoreSheet_Body_FC012_24
 {
     padding: 2px 16px;
     background-color: rgb(255, 255, 255);
@@ -1187,8 +1197,8 @@ p {
 }
 
 
-/*
-.modal_ScoreSheet_Footer_FC019_24_Blue
+
+.modal_ScoreSheet_Footer_FC012_24_Blue
 
 {
     padding: 2px 16px;
@@ -1199,7 +1209,7 @@ p {
     width: auto;
     height: auto;
 }
-*/
+
 
 .modal_ScoreSheet_Footer_FC001_24_Red,
 .modal_ScoreSheet_Footer_FC002_24_Red,
@@ -1232,14 +1242,14 @@ p {
 
 
 
-/*
-#usPresidential_Footer_Title_FC000_24_Blue
+
+#usPresidential_Footer_Title_FC012_24_Blue
 {  
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
     color: rgb(255, 255, 255);
 }
-*/
+
 
 #usPresidential_Footer_Title_FC001_24_Red,
 #usPresidential_Footer_Title_FC002_24_Red,
@@ -1266,8 +1276,8 @@ p {
     color: rgb(134, 25, 25);    
 }
 
-/*
-#usPresidential_ScoreSheet_Title_FC000_24_Blue
+
+#usPresidential_ScoreSheet_Title_FC012_24_Blue
 {  
     padding: 16px 16px;
     background-color: rgb(13, 65, 255);
@@ -1275,7 +1285,7 @@ p {
     font-size: clamp(10px, 2vw, 14px); 
     color: rgb(255, 255, 255);    
 }
-*/
+
 
 
 #usPresidential_ScoreSheet_Title_FC001_24_Red,
@@ -1306,7 +1316,8 @@ p {
 #usPresidential_ScoreSheet_Image_FC008_24,
 #usPresidential_ScoreSheet_Image_FC009_24,
 #usPresidential_ScoreSheet_Image_FC010_24,
-#usPresidential_ScoreSheet_Image_FC011_24
+#usPresidential_ScoreSheet_Image_FC011_24,
+#usPresidential_ScoreSheet_Image_FC012_24
 {
     display: inline-block;
     margin: 0 auto;
@@ -1339,15 +1350,15 @@ p {
 }
 
 
-/*
-#usPresidential_ScoreSheet_Subtitle_01_FC000_24_Blue
+
+#usPresidential_ScoreSheet_Subtitle_01_FC012_24_Blue
 {
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(12px, 2vw, 18px); 
     color: rgb(134, 25, 25);
     text-align: center;
 }
-*/
+
 
 #usPresidential_ScoreSheet_Subtitle_01_FC001_24_Red,
 #usPresidential_ScoreSheet_Subtitle_01_FC002_24_Red,
@@ -1377,9 +1388,7 @@ p {
 
 
 
-/*
-
-#usPresidential_ScoreSheet_Subtitle_02_FC000_24_Blue
+#usPresidential_ScoreSheet_Subtitle_02_FC011_24_Blue
 {  
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(10px, 2vw, 14px); 
@@ -1387,7 +1396,6 @@ p {
     text-align: center;
 }
 
-*/
 
 #usPresidential_ScoreSheet_Subtitle_02_FC001_24_Red,
 #usPresidential_ScoreSheet_Subtitle_02_FC002_24_Red,
@@ -1416,9 +1424,7 @@ p {
 }
 
 
-/*
-
-#usPresidential_ScoreSheet_CampaignWebsite_FC000_24_Blue
+#usPresidential_ScoreSheet_CampaignWebsite_FC012_24_Blue
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -1426,7 +1432,7 @@ p {
 
 }
 
-*/
+
 
 #usPresidential_ScoreSheet_CampaignWebsite_FC001_24_Red,
 #usPresidential_ScoreSheet_CampaignWebsite_FC002_24_Red,
@@ -1456,8 +1462,8 @@ p {
 }
 
 
-/*
-#usPresidential_ScoreSheet_CampaignWebsite_FC000_24_Blue:hover
+
+#usPresidential_ScoreSheet_CampaignWebsite_FC012_24_Blue:hover
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -1465,7 +1471,7 @@ p {
     cursor: pointer;
 
 }
-*/
+
 
 #usPresidential_ScoreSheet_CampaignWebsite_FC001_24_Red:hover,
 #usPresidential_ScoreSheet_CampaignWebsite_FC002_24_Red:hover,
@@ -1496,9 +1502,7 @@ p {
 }
 
 
-
-/*
-#usPresidential_ScoreSheet_BodyContents_FC000_24_Blue
+#usPresidential_ScoreSheet_BodyContents_FC012_24_Blue
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 10px); 
@@ -1507,7 +1511,7 @@ p {
  
 }
 
-*/
+
 
 #usPresidential_ScoreSheet_BodyContents_FC001_24_Red,
 #usPresidential_ScoreSheet_BodyContents_FC002_24_Red,
