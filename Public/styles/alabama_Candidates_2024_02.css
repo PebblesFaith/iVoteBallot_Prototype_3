@@ -1551,7 +1551,9 @@ p {
 #candidateButton_FC016_24,
 #candidateButton_FC038_24,
 #candidateButton_FC039_24,
-#candidateButton_FC040_24
+#candidateButton_FC040_24,
+#candidateButton_FC041_24,
+#candidateButton_FC042_24
 {
     background-color: rgb(13, 65, 255);
     font-family: Georgia, Times, 'Times New Roman', serif;
@@ -1569,7 +1571,11 @@ p {
 #candidateButton_FC039:hover,
 #candidateButton_FC039:focus,
 #candidateButton_FC040:hover,
-#candidateButton_FC040:focus
+#candidateButton_FC040:focus,
+#candidateButton_FC041:hover,
+#candidateButton_FC041:focus,
+#candidateButton_FC042:hover,
+#candidateButton_FC042:focus
 {
     background-color: rgb(201, 24, 24);
     color: rgb(255, 255, 255);
@@ -1581,7 +1587,9 @@ p {
 .modal_CandidateScoreSheet_FC016_24,
 .modal_CandidateScoreSheet_FC038_24,
 .modal_CandidateScoreSheet_FC039_24,
-.modal_CandidateScoreSheet_FC040_24
+.modal_CandidateScoreSheet_FC040_24,
+.modal_CandidateScoreSheet_FC041_24,
+.modal_CandidateScoreSheet_FC042_24
 {
     display: none;
     position: fixed;
@@ -1600,7 +1608,9 @@ p {
 .modal_Content_ScoreSheet_FC016_24,
 .modal_Content_ScoreSheet_FC038_24,
 .modal_Content_ScoreSheet_FC039_24,
-.modal_Content_ScoreSheet_FC040_24
+.modal_Content_ScoreSheet_FC040_24,
+.modal_Content_ScoreSheet_FC041_24,
+.modal_Content_ScoreSheet_FC042_24
 {
     position: relative;
     background-color: #fefefe;
@@ -1632,7 +1642,9 @@ p {
 .close_ScoreSheet_FC016_24,
 .close_ScoreSheet_FC038_24,
 .close_ScoreSheet_FC039_24,
-.close_ScoreSheet_FC040_24
+.close_ScoreSheet_FC040_24,
+.close_ScoreSheet_FC041_24,
+.close_ScoreSheet_FC042_24
 {
     color: rgb(139, 134, 134);
     float: none;
@@ -1650,7 +1662,11 @@ p {
 .close_ScoreSheet_FC039_24:hover,
 .close_ScoreSheet_FC039_24:focus,
 .close_ScoreSheet_FC040_24:hover,
-.close_ScoreSheet_FC040_24:focus
+.close_ScoreSheet_FC040_24:focus,
+.close_ScoreSheet_FC041_24:hover,
+.close_ScoreSheet_FC041_24:focus,
+.close_ScoreSheet_FC042_24:hover,
+.close_ScoreSheet_FC042_24:focus
 {
     color: rgb(134, 25, 25);
     text-decoration: none;
@@ -1669,7 +1685,9 @@ p {
 .modal_ScoreSheet_Header_FC016_24,
 .modal_ScoreSheet_Header_FC038_24,
 .modal_ScoreSheet_Header_FC039_24,
-.modal_ScoreSheet_Header_FC040_24
+.modal_ScoreSheet_Header_FC040_24,
+.modal_ScoreSheet_Header_FC041_24,
+.modal_ScoreSheet_Header_FC042_24
 {
     padding: 2px 16px;
     background-color: rgb(255, 255, 255);
@@ -1682,7 +1700,9 @@ p {
 .modal_ScoreSheet_Body_FC016_24,
 .modal_ScoreSheet_Body_FC038_24,
 .modal_ScoreSheet_Body_FC039_24,
-.modal_ScoreSheet_Body_FC040_24
+.modal_ScoreSheet_Body_FC040_24,
+.modal_ScoreSheet_Body_FC041_24,
+.modal_ScoreSheet_Body_FC042_24
 {
     padding: 2px 16px;
     background-color: rgb(255, 255, 255);
@@ -1708,9 +1728,8 @@ p {
 }
 */
 
-/*
-.modal_ScoreSheet_Footer_FC000_24_Blue
 
+.modal_ScoreSheet_Footer_FC042_24_Blue
 {
     padding: 2px 16px;
     background-color: rgb(13, 65, 255);
@@ -1721,13 +1740,12 @@ p {
     height: auto;
 }
 
-*/
-
 .modal_ScoreSheet_Footer_FC015_24_Red,
 .modal_ScoreSheet_Footer_FC016_24_Red,
 .modal_ScoreSheet_Footer_FC038_24_Red,
 .modal_ScoreSheet_Footer_FC039_24_Red,
-.modal_ScoreSheet_Footer_FC040_24_Red
+.modal_ScoreSheet_Footer_FC040_24_Red,
+.modal_ScoreSheet_Footer_FC041_24_Red
 {
     padding: 2px 16px;
     background-color: rgb(201, 24, 24);
@@ -1748,20 +1766,20 @@ p {
 
 */
 
-/*
-#usSenator_Footer_Title_FC000_24_Blue
+
+#usSenator_Footer_Title_FC042_24_Blue
 {  
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
     color: rgb(255, 255, 255);
 }
-*/
 
 #usSenator_Footer_Title_FC015_24_Red,
 #usSenator_Footer_Title_FC016_24_Red,
 #usSenator_Footer_Title_FC038_24_Red,
 #usSenator_Footer_Title_FC039_24_Red,
-#usSenator_Footer_Title_FC040_24_Red
+#usSenator_Footer_Title_FC040_24_Red,
+#usSenator_Footer_Title_FC041_24_Red
 {  
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -1779,8 +1797,8 @@ p {
 }
 */
 
-/*
-#usSenator_ScoreSheet_Title_FC000_24_Blue
+
+#usSenator_ScoreSheet_Title_FC042_24_Blue
 {  
     padding: 16px 16px;
     background-color: rgb(13, 65, 255);
@@ -1788,13 +1806,14 @@ p {
     font-size: clamp(10px, 2vw, 14px); 
     color: rgb(255, 255, 255);    
 }
-*/
+
 
 #usSenator_ScoreSheet_Title_FC015_24_Red,
 #usSenator_ScoreSheet_Title_FC016_24_Red,
 #usSenator_ScoreSheet_Title_FC038_24_Red,
 #usSenator_ScoreSheet_Title_FC039_24_Red,
-#usSenator_ScoreSheet_Title_FC040_24_Red
+#usSenator_ScoreSheet_Title_FC040_24_Red,
+#usSenator_ScoreSheet_Title_FC041_24_Red
 {  
     padding: 16px 16px;
     background-color: rgb(201, 24, 24);
@@ -1807,7 +1826,9 @@ p {
 #usSenator_ScoreSheet_Image_FC016_24,
 #usSenator_ScoreSheet_Image_FC038_24,
 #usSenator_ScoreSheet_Image_FC039_24,
-#usSenator_ScoreSheet_Image_FC040_24
+#usSenator_ScoreSheet_Image_FC040_24,
+#usSenator_ScoreSheet_Image_FC041_24,
+#usSenator_ScoreSheet_Image_FC042_24
 {
     display: inline-block;
     margin: 0 auto;
@@ -1840,21 +1861,22 @@ p {
 }
 */
 
-/*
-#usSenator_ScoreSheet_Subtitle_01_FC000_24_Blue
+
+#usSenator_ScoreSheet_Subtitle_01_FC042_24_Blue
 {
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(12px, 2vw, 18px); 
     color: rgb(134, 25, 25);
     text-align: center;
 }
-*/
+
 
 #usSenator_ScoreSheet_Subtitle_01_FC015_24_Red,
 #usSenator_ScoreSheet_Subtitle_01_FC016_24_Red,
 #usSenator_ScoreSheet_Subtitle_01_FC038_24_Red,
 #usSenator_ScoreSheet_Subtitle_01_FC039_24_Red,
-#usSenator_ScoreSheet_Subtitle_01_FC040_24_Red
+#usSenator_ScoreSheet_Subtitle_01_FC040_24_Red,
+#usSenator_ScoreSheet_Subtitle_01_FC041_24_Red
 {
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(12px, 2vw, 18px); 
@@ -1872,21 +1894,22 @@ p {
 }
 */
 
-/*
-#usSenator_ScoreSheet_Subtitle_02_FC000_24_Blue
+
+#usSenator_ScoreSheet_Subtitle_02_FC042_24_Blue
 {  
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(10px, 2vw, 14px); 
     color: rgb(13, 65, 255);
     text-align: center;
 }
-*/
+
 
 #usSenator_ScoreSheet_Subtitle_02_FC015_24_Red,
 #usSenator_ScoreSheet_Subtitle_02_FC016_24_Red,
 #usSenator_ScoreSheet_Subtitle_02_FC038_24_Red,
 #usSenator_ScoreSheet_Subtitle_02_FC039_24_Red,
-#usSenator_ScoreSheet_Subtitle_02_FC040_24_Red
+#usSenator_ScoreSheet_Subtitle_02_FC040_24_Red,
+#usSenator_ScoreSheet_Subtitle_02_FC041_24_Red
 {  
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(10px, 2vw, 14px); 
@@ -1904,8 +1927,8 @@ p {
 }
 */
 
-/*
-#usSenator_ScoreSheet_CampaignWebsite_FC000_24_Blue
+
+#usSenator_ScoreSheet_CampaignWebsite_FC042_24_Blue
 
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
@@ -1913,14 +1936,13 @@ p {
     color: rgb(255, 255, 255);
 
 }
-*/
-
 
 #usSenator_ScoreSheet_CampaignWebsite_FC015_24_Red,
 #usSenator_ScoreSheet_CampaignWebsite_FC016_24_Red,
 #usSenator_ScoreSheet_CampaignWebsite_FC038_24_Red,
 #usSenator_ScoreSheet_CampaignWebsite_FC039_24_Red,
-#usSenator_ScoreSheet_CampaignWebsite_FC040_24_Red
+#usSenator_ScoreSheet_CampaignWebsite_FC040_24_Red,
+#usSenator_ScoreSheet_CampaignWebsite_FC041_24_Red
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -1940,8 +1962,8 @@ p {
 
 */
 
-/*
-#usSenator_ScoreSheet_CampaignWebsite_FC000_24_Blue:hover
+
+#usSenator_ScoreSheet_CampaignWebsite_FC042_24_Blue:hover
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -1949,13 +1971,13 @@ p {
     cursor: pointer;
 
 }
-*/
 
 #usSenator_ScoreSheet_CampaignWebsite_FC015_24_Red:hover,
 #usSenator_ScoreSheet_CampaignWebsite_FC016_24_Red:hover,
 #usSenator_ScoreSheet_CampaignWebsite_FC038_24_Red:hover,
 #usSenator_ScoreSheet_CampaignWebsite_FC039_24_Red:hover,
-#usSenator_ScoreSheet_CampaignWebsite_FC040_24_Red:hover
+#usSenator_ScoreSheet_CampaignWebsite_FC040_24_Red:hover,
+#usSenator_ScoreSheet_CampaignWebsite_FC041_24_Red:hover
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -1975,8 +1997,8 @@ p {
 }
 */
 
-/*
-#usSenator_ScoreSheet_BodyContents_FC000_24_Blue
+
+#usSenator_ScoreSheet_BodyContents_FC042_24_Blue
 
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
@@ -1985,13 +2007,13 @@ p {
     text-align: left;
  
 }
-*/
 
 #usSenator_ScoreSheet_BodyContents_FC015_24_Red,
 #usSenator_ScoreSheet_BodyContents_FC016_24_Red,
 #usSenator_ScoreSheet_BodyContents_FC038_24_Red,
 #usSenator_ScoreSheet_BodyContents_FC039_24_Red,
-#usSenator_ScoreSheet_BodyContents_FC040_24_Red
+#usSenator_ScoreSheet_BodyContents_FC040_24_Red,
+#usSenator_ScoreSheet_BodyContents_FC041_24_Red
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 10px); 
