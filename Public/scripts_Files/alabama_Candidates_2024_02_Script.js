@@ -1657,6 +1657,7 @@ const candidateScoreSheet_Modal_AL029_24 = document.getElementById('candidateSco
 
 /* Get Senator Candidates ScoreSheet Modals. */
 const candidateScoreSheet_Modal_FC015_24 = document.getElementById('candidateScoreSheet_Modal_FC015_24');
+const candidateScoreSheet_Modal_FC016_24 = document.getElementById('candidateScoreSheet_Modal_FC016_24');
 
 /* Get U.S. Congressional District Candidates ScoreSheet Modals. */
 const candidateScoreSheet_Modal_FC017_24 = document.getElementById('candidateScoreSheet_Modal_FC017_24');
@@ -1767,6 +1768,7 @@ const candidateButton_AL029_24 = document.getElementById('candidateButton_AL029_
 
 /* Get Senator candidates ScoreSheet button which will open their modals. */
 const candidateButton_FC015_24 = document.getElementById('candidateButton_FC015_24');
+const candidateButton_FC016_24 = document.getElementById('candidateButton_FC016_24');
 
 
 /* Get U.S. Congressional District candidates ScoreSheet button which will open their modals. */
@@ -1877,6 +1879,7 @@ const close_ScoreSheet_AL029_24 = document.getElementsByClassName('close_ScoreSh
 
 /* Get Senator <span> elements which will close their modals. */
 const close_ScoreSheet_FC015_24 = document.getElementsByClassName('close_ScoreSheet_FC015_24')[0];
+const close_ScoreSheet_FC016_24 = document.getElementsByClassName('close_ScoreSheet_FC016_24')[0];
 
 
 /* Get U.S. Congressional District <span> elements which will close their modals. */
@@ -2154,6 +2157,11 @@ candidateButton_AL029_24.onclick = function(event){
 candidateButton_FC015_24.onclick = function(event){
 	event.preventDefault();  
 	candidateScoreSheet_Modal_FC015_24.style.display = "block";
+}
+
+candidateButton_FC016_24.onclick = function(event){
+	event.preventDefault();  
+	candidateScoreSheet_Modal_FC016_24.style.display = "block";
 }
 
 /* When the users clicks onto the U.S. Congressional District candidates' buttons than their modals will pop up. */
@@ -2539,6 +2547,10 @@ close_ScoreSheet_AL029_24.onclick = function() {
 /* When the users clicks onto the Senator candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
 close_ScoreSheet_FC015_24.onclick = function() {
 	candidateScoreSheet_Modal_FC015_24.style.display = "none";
+}
+
+close_ScoreSheet_FC016_24.onclick = function() {
+	candidateScoreSheet_Modal_FC016_24.style.display = "none";
 }
 
 /* When the users clicks onto the U.S. Congressional District candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
