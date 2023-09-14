@@ -1663,6 +1663,7 @@ const candidateScoreSheet_Modal_FC039_24 = document.getElementById('candidateSco
 const candidateScoreSheet_Modal_FC040_24 = document.getElementById('candidateScoreSheet_Modal_FC040_24');
 const candidateScoreSheet_Modal_FC041_24 = document.getElementById('candidateScoreSheet_Modal_FC041_24');
 const candidateScoreSheet_Modal_FC042_24 = document.getElementById('candidateScoreSheet_Modal_FC042_24');
+const candidateScoreSheet_Modal_FC043_24 = document.getElementById('candidateScoreSheet_Modal_FC043_24');
 
 /* Get U.S. Congressional District Candidates ScoreSheet Modals. */
 const candidateScoreSheet_Modal_FC017_24 = document.getElementById('candidateScoreSheet_Modal_FC017_24');
@@ -1779,6 +1780,7 @@ const candidateButton_FC039_24 = document.getElementById('candidateButton_FC039_
 const candidateButton_FC040_24 = document.getElementById('candidateButton_FC040_24');
 const candidateButton_FC041_24 = document.getElementById('candidateButton_FC041_24');
 const candidateButton_FC042_24 = document.getElementById('candidateButton_FC042_24');
+const candidateButton_FC043_24 = document.getElementById('candidateButton_FC043_24');
 
 /* Get U.S. Congressional District candidates ScoreSheet button which will open their modals. */
 const candidateButton_FC017_24 = document.getElementById('candidateButton_FC017_24');
@@ -1820,6 +1822,7 @@ const candidateButton_AL040_24 = document.getElementById('candidateButton_AL040_
 const candidateButton_AL041_24 = document.getElementById('candidateButton_AL041_24');
 const candidateButton_AL042_24 = document.getElementById('candidateButton_AL042_24');
 const candidateButton_AL043_24 = document.getElementById('candidateButton_AL043_24');
+
 
 /* Get Supreme Court candidates ScoreSheet button which will open their modals. */
 const candidateButton_AL044_24 = document.getElementById('candidateButton_AL044_24');
@@ -1894,6 +1897,7 @@ const close_ScoreSheet_FC039_24 = document.getElementsByClassName('close_ScoreSh
 const close_ScoreSheet_FC040_24 = document.getElementsByClassName('close_ScoreSheet_FC040_24')[0];
 const close_ScoreSheet_FC041_24 = document.getElementsByClassName('close_ScoreSheet_FC041_24')[0];
 const close_ScoreSheet_FC042_24 = document.getElementsByClassName('close_ScoreSheet_FC042_24')[0];
+const close_ScoreSheet_FC043_24 = document.getElementsByClassName('close_ScoreSheet_FC043_24')[0];
 
 /* Get U.S. Congressional District <span> elements which will close their modals. */
 const close_ScoreSheet_FC017_24 = document.getElementsByClassName('close_ScoreSheet_FC017_24')[0];
@@ -2200,6 +2204,11 @@ candidateButton_FC041_24.onclick = function(event){
 candidateButton_FC042_24.onclick = function(event){
 	event.preventDefault();  
 	candidateScoreSheet_Modal_FC042_24.style.display = "block";
+}
+
+candidateButton_FC043_24.onclick = function(event){
+	event.preventDefault();  
+	candidateScoreSheet_Modal_FC043_24.style.display = "block";
 }
 
 /* When the users clicks onto the U.S. Congressional District candidates' buttons than their modals will pop up. */
@@ -2611,6 +2620,9 @@ close_ScoreSheet_FC042_24.onclick = function() {
 	candidateScoreSheet_Modal_FC042_24.style.display = "none";
 }
 
+close_ScoreSheet_FC043_24.onclick = function() {
+	candidateScoreSheet_Modal_FC043_24.style.display = "none";
+}
 
 /* When the users clicks onto the U.S. Congressional District candidates <span> element "X" than their modals will close the candidates' ScoreSheets. */
 close_ScoreSheet_FC017_24.onclick = function() {
