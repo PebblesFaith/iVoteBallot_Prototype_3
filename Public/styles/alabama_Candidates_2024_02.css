@@ -1553,7 +1553,8 @@ p {
 #candidateButton_FC039_24,
 #candidateButton_FC040_24,
 #candidateButton_FC041_24,
-#candidateButton_FC042_24
+#candidateButton_FC042_24,
+#candidateButton_FC043_24
 {
     background-color: rgb(13, 65, 255);
     font-family: Georgia, Times, 'Times New Roman', serif;
@@ -1575,7 +1576,9 @@ p {
 #candidateButton_FC041:hover,
 #candidateButton_FC041:focus,
 #candidateButton_FC042:hover,
-#candidateButton_FC042:focus
+#candidateButton_FC042:focus,
+#candidateButton_FC043:hover,
+#candidateButton_FC043:focus
 {
     background-color: rgb(201, 24, 24);
     color: rgb(255, 255, 255);
@@ -1589,7 +1592,8 @@ p {
 .modal_CandidateScoreSheet_FC039_24,
 .modal_CandidateScoreSheet_FC040_24,
 .modal_CandidateScoreSheet_FC041_24,
-.modal_CandidateScoreSheet_FC042_24
+.modal_CandidateScoreSheet_FC042_24,
+.modal_CandidateScoreSheet_FC043_24
 {
     display: none;
     position: fixed;
@@ -1610,7 +1614,8 @@ p {
 .modal_Content_ScoreSheet_FC039_24,
 .modal_Content_ScoreSheet_FC040_24,
 .modal_Content_ScoreSheet_FC041_24,
-.modal_Content_ScoreSheet_FC042_24
+.modal_Content_ScoreSheet_FC042_24,
+.modal_Content_ScoreSheet_FC043_24
 {
     position: relative;
     background-color: #fefefe;
@@ -1644,7 +1649,8 @@ p {
 .close_ScoreSheet_FC039_24,
 .close_ScoreSheet_FC040_24,
 .close_ScoreSheet_FC041_24,
-.close_ScoreSheet_FC042_24
+.close_ScoreSheet_FC042_24,
+.close_ScoreSheet_FC043_24
 {
     color: rgb(139, 134, 134);
     float: none;
@@ -1666,7 +1672,9 @@ p {
 .close_ScoreSheet_FC041_24:hover,
 .close_ScoreSheet_FC041_24:focus,
 .close_ScoreSheet_FC042_24:hover,
-.close_ScoreSheet_FC042_24:focus
+.close_ScoreSheet_FC042_24:focus,
+.close_ScoreSheet_FC043_24:hover,
+.close_ScoreSheet_FC043_24:focus
 {
     color: rgb(134, 25, 25);
     text-decoration: none;
@@ -1687,7 +1695,8 @@ p {
 .modal_ScoreSheet_Header_FC039_24,
 .modal_ScoreSheet_Header_FC040_24,
 .modal_ScoreSheet_Header_FC041_24,
-.modal_ScoreSheet_Header_FC042_24
+.modal_ScoreSheet_Header_FC042_24,
+.modal_ScoreSheet_Header_FC043_24
 {
     padding: 2px 16px;
     background-color: rgb(255, 255, 255);
@@ -1702,7 +1711,8 @@ p {
 .modal_ScoreSheet_Body_FC039_24,
 .modal_ScoreSheet_Body_FC040_24,
 .modal_ScoreSheet_Body_FC041_24,
-.modal_ScoreSheet_Body_FC042_24
+.modal_ScoreSheet_Body_FC042_24,
+.modal_ScoreSheet_Body_FC043_24
 {
     padding: 2px 16px;
     background-color: rgb(255, 255, 255);
@@ -1729,7 +1739,8 @@ p {
 */
 
 
-.modal_ScoreSheet_Footer_FC042_24_Blue
+.modal_ScoreSheet_Footer_FC042_24_Blue,
+.modal_ScoreSheet_Footer_FC043_24_Blue
 {
     padding: 2px 16px;
     background-color: rgb(13, 65, 255);
@@ -1767,7 +1778,8 @@ p {
 */
 
 
-#usSenator_Footer_Title_FC042_24_Blue
+#usSenator_Footer_Title_FC042_24_Blue,
+#usSenator_Footer_Title_FC043_24_Blue
 {  
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -1798,7 +1810,8 @@ p {
 */
 
 
-#usSenator_ScoreSheet_Title_FC042_24_Blue
+#usSenator_ScoreSheet_Title_FC042_24_Blue,
+#usSenator_ScoreSheet_Title_FC043_24_Blue
 {  
     padding: 16px 16px;
     background-color: rgb(13, 65, 255);
@@ -1828,7 +1841,8 @@ p {
 #usSenator_ScoreSheet_Image_FC039_24,
 #usSenator_ScoreSheet_Image_FC040_24,
 #usSenator_ScoreSheet_Image_FC041_24,
-#usSenator_ScoreSheet_Image_FC042_24
+#usSenator_ScoreSheet_Image_FC042_24,
+#usSenator_ScoreSheet_Image_FC043_24
 {
     display: inline-block;
     margin: 0 auto;
@@ -1862,7 +1876,8 @@ p {
 */
 
 
-#usSenator_ScoreSheet_Subtitle_01_FC042_24_Blue
+#usSenator_ScoreSheet_Subtitle_01_FC042_24_Blue,
+#usSenator_ScoreSheet_Subtitle_01_FC043_24_Blue
 {
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(12px, 2vw, 18px); 
@@ -1928,7 +1943,8 @@ p {
 */
 
 
-#usSenator_ScoreSheet_CampaignWebsite_FC042_24_Blue
+#usSenator_ScoreSheet_CampaignWebsite_FC042_24_Blue,
+#usSenator_ScoreSheet_CampaignWebsite_FC043_24_Blue
 
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
@@ -1963,7 +1979,8 @@ p {
 */
 
 
-#usSenator_ScoreSheet_CampaignWebsite_FC042_24_Blue:hover
+#usSenator_ScoreSheet_CampaignWebsite_FC042_24_Blue:hover,
+#usSenator_ScoreSheet_CampaignWebsite_FC043_24_Blue:hover
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
@@ -1998,7 +2015,8 @@ p {
 */
 
 
-#usSenator_ScoreSheet_BodyContents_FC042_24_Blue
+#usSenator_ScoreSheet_BodyContents_FC042_24_Blue,
+#usSenator_ScoreSheet_BodyContents_FC043_24_Blue
 
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
