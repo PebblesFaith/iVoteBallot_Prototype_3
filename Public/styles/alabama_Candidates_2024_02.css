@@ -5684,3 +5684,28 @@ hr.hr_White_line_03 {
     text-align: left;
  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+#checkoutButton {
+    display: block;
+    align-content: center;
+    height: 40px;
+    width: 100%;
+    background-color: rgb(201, 24, 24);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(255, 255, 255);
+    font-size: clamp(12px, 2vw, 16px);
+    text-align: center;
+    border: none;  
+}
