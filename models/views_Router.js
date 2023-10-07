@@ -83,4 +83,7 @@ router
 router
     .get('/test', views_Controller.view_Test);
 
+router
+    .get('/alabama_Create_Checkout_session', views_Controller.view_Alabama_Create_Checkout_Session);   
+
 module.exports = router;
