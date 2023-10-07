@@ -107,6 +107,10 @@ const view_Test = (req, res) => {
 	res.render('test');
 }
 
+const view_Alabama_Create_Checkout_Session = (req, res) => {
+	res.render('alabama_Create_Checkout_session');
+}
+
 module.exports = {	
 	view_401,
 	view_404,
@@ -128,5 +132,6 @@ module.exports = {
 	view_Header,
 	view_HelpCenter,
 	view_iVoteBallot,
-	view_Test	
+	view_Test,
+	view_Alabama_Create_Checkout_Session
 }
