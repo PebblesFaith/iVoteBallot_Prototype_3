@@ -656,25 +656,86 @@
    
 }
 
+/*
+    The CSS style code sets the properties of an HTML element with the ID "left_Row_01" to create
+    a flexible container that wraps its contents in a column layout. The style also defines the
+    background color, height, width, text alignment, margin, padding, font family, size, and color
+    of the element, as well as its content justification and absence of a border.
+*/
 #left_Row_01 {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
     justify-content: space-around;
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: clamp(12px, 2vw, 14px); 
+    font-size: clamp(12px, 2vw, 18px); 
     color: rgb(201, 24, 24);
-  }
+}
 
+/*
+    The CSS statement targets all anchor tags (a) within the left_Row_01 element and removes
+    the underline decoration (text-decoration: none), sets the display property to block 
+    (display: block). So, the anchor takes the full width of its container, adds 5px 
+    padding around the anchor (padding: 5px), and sets the font color to red (color: 
+    rgb(201, 24, 24)).
+*/
+#left_Row_01 a {
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+    color: rgb(201, 24, 24);
+} 
+
+/*
+    This CSS statement changes the color of a hyperlink when the user hovers his/her cursor 
+    over the #left_Row_01 a:hover element of contact us webpage. Specifically, the 
+    #left_Row_01 a:hover element sets the color to a shade of blue defined by the RGB 
+    values (13, 65, 255). And, the ":hover" pseudo-class is used to target the hyperlink
+    when the #left_Row_01 a:hover element is in the hover state.
+*/
+#left_Row_01 a:hover {
+    color: rgb(13, 65, 255);
+}
+
+/*
+    The CSS style code sets the properties of an HTML element with the ID "left_Row_02" to create
+    a flexible container that wraps its contents in a column layout. The style also defines the
+    background color, height, width, text alignment, margin, padding, font family, size, and color
+    of the element, as well as its content justification and absence of a border.
+*/
 #left_Row_02 {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
     justify-content: space-around;
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: clamp(12px, 2vw, 14px); 
+    font-size: clamp(12px, 2vw, 18px); 
     color: rgb(13, 65, 255);
+}
 
+/*
+    The CSS statement targets all anchor tags (a) within the left_Row_02 element and removes
+    the underline decoration (text-decoration: none), sets the display property to block 
+    (display: block). So, the anchor takes the full width of its container, adds 5px 
+    padding around the anchor (padding: 5px), and sets the font color to blue (color: 
+    rgb(13, 65, 255)).
+*/
+#left_Row_02 a {
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+    color: rgb(13, 65, 255);
+} 
+
+/*
+    This CSS statement changes the color of a hyperlink when the user hovers his/her cursor 
+    over the #left_Row_02 a:hover element of contact us webpage. Specifically, the 
+    #left_Row_02 a:hover element sets the color to a shade of blue defined by the RGB 
+    values (201, 24, 24). And, the ":hover" pseudo-class is used to target the hyperlink
+    when the #left_Row_02 a:hover element is in the hover state.
+*/
+#left_Row_02 a:hover {
+    color: rgb(201, 24, 24);
 }
 
 /*
@@ -687,3 +748,39 @@
       width: 100%;
     }
   }
+
+
+#textStyle_01 {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-around;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(201, 24, 24);
+}
+
+  /*
+    The CSS statement targets all anchor tags (a) within the first_Column element and removes
+    the underline decoration (text-decoration: none), sets the display property to block 
+    (display: block). So, the anchor takes the full width of its container, adds 5px 
+    padding around the anchor (padding: 5px), and sets the font color to white (color: 
+    rgb(255, 255, 255)).
+*/
+#textStyle_01 a {
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+    color: rgb(13, 65, 255);
+}
+
+/*
+    This CSS statement changes the color of a hyperlink when the user hovers his/her cursor 
+    over the #first_Column a:hover element of contact us webpage. Specifically, the 
+    #first_Column a:hover element sets the color to a shade of blue defined by the RGB 
+    values (13, 65, 255). And, the ":hover" pseudo-class is used to target the hyperlink
+    when the #first_Column a:hover element is in the hover state.
+*/
+#textStyle_01 a:hover {
+    color: rgb(13, 65, 255);
+}
