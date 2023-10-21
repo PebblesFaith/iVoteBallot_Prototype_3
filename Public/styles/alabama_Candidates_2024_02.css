@@ -292,7 +292,7 @@
     color: rgb(201, 24, 24);
 }
 
-.labelExpanded_01 {	 
+.labelExpanded_01 {	     
 	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(12px, 2vw, 16px);	
    
@@ -300,9 +300,11 @@
 
 .labelExpanded_01 > input {	
 	display: none;
+   
 }
 
 .labelExpanded_01 input:checked + .radio_Buttons_01 {
+    
 	display: flex;
     flex-wrap: row wrap;
     flex-direction: column; 
@@ -310,6 +312,8 @@
 	color: rgb(255, 255, 255);	   
     
 }
+
+
 
 .radio_Buttons_01 {  
 	width: 75px;
@@ -5709,3 +5713,5 @@ hr.hr_White_line_03 {
     text-align: center;
     border: none;  
 }
+
+
