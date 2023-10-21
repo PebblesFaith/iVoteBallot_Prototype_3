@@ -215,16 +215,18 @@ const alabamaSelectedCandidates2024Form = (e) => {
 	printContent();
 
 
-	//e.target.submit()
+	e.target.submit()
 
-	//form.addEventListner('submit', printContent, alabamaSelectedCandidates2024Form);
+	form.addEventListner('submit', printContent, alabamaSelectedCandidates2024Form);
 	//return true; 
 
 } 
 
 */
 
+
 /*
+
 const alabamaSelectedCandidates2024Form = (e) => {
 
 	const presidentSelected = document.querySelector(`input[name="userPresident"]:checked`);
@@ -587,34 +589,29 @@ const alabamaSelectedCandidates2024Form = (e) => {
 
 	}
 
+	// Check if the selected candidates are in the shopping cart.
+	if (!isCandidateInShoppingCart(presidentSelected)) {
+		document.getElementById('userPresidentErrorMessage').textContent = 'You have not selected a Presidential candidate for your United States President.';
 
+	}
 
+e.preventDefault();                                      
 
-
-
-
-
-
-
-
-
-//e.preventDefault();                                      
-
-//form.addEventListner('submit', displayShoppingCart());
-//return true; 
+form.addEventListner('submit', displayShoppingCart());
+return true; 
 	
 }
+
 
 */
 
 
-/*
 
 // Add event listener for the submit button
 const submitButton = document.getElementById('submitButton');
 submitButton.addEventListener('click', userCandidatesVerification_2024);	
 
-*/
+
 
 /*
 const shoppingCartButton = document.getElementById('userSelectedCandidates_SubmitButton');
@@ -1346,6 +1343,10 @@ function displayShoppingCart() {
 
 */
 
+
+
+  
+
 const selectedCandidates = {
     userPresident: null,
     userGovernor: null,
@@ -1398,6 +1399,7 @@ const selectedCandidates = {
 
 };
 
+
 function addToCart() {
 	const form = document.getElementById('alabamaSelected_Candidates2024_Form');
 	
@@ -1406,35 +1408,37 @@ function addToCart() {
 	if (!selectedCandidate) {
 	  alert("Please select a candidate before adding to the cart.");
 	  return;
-	}
+	}	  
   
 	const category = selectedCandidate.getAttribute('data-category');
 	const candidateText = selectedCandidate.parentElement.textContent.trim();
 	const candidateImageSrc = selectedCandidate.parentElement.querySelector('img').src;	
   
 	const selectedCandidateData = selectedCandidates[category];
-	
   
 	if (selectedCandidateData !== null) {
 	  alert(`A candidate for ${category} is already selected. If you want to update your selected ${category}, go to your shopping cart and remove your selected ${category} than you are able select a new ${category}.`);
 	  return;
 	}
-  
+
+/* Add the selected candidate to the shopping cart. */
 	selectedCandidates[category] = {
 	  candidateText: candidateText,
 	  candidateImageSrc: candidateImageSrc,
-	};
-  
+	}; 
+
 	const cart = document.getElementById('shoppingCart');
 	const listItem = createListItem(candidateText, candidateImageSrc, category);
 	cart.appendChild(listItem);
   
-	// Reset the radio buttons for each category after adding to the cart
+	
+	// Reset the radio buttons for each category after adding to the cart	
 	const radioButtons = form.querySelectorAll(`input[type="radio"][data-category="${category}"]`);
 	for (const radioButton of radioButtons) {
 	  radioButton.checked = false;
 	}
-	 
+	
+
 	// Update the total number of selected candidates and the total cost
 	updateTotalSelectedCandidates();
 	updateTotalCostForAllCandidates();
@@ -1595,6 +1599,17 @@ function removeFromCart(button) {
 	  updateTotalCostForAllCandidates();
 	}
 }
+
+function checkAllCategoriesSelected() {
+	for (const category in selectedCandidates) {
+	  if (selectedCandidates[category] === null) {
+		alert(`Please select a candidate for the ${category} category before checking out.`);
+		return false;
+	  }
+	}
+	return true;
+}
+  
 
 /* Get Presidential Candidates ScoreSheet Modals. */
 const candidateScoreSheet_Modal_FC001_24 = document.getElementById('candidateScoreSheet_Modal_FC001_24');
@@ -2911,6 +2926,7 @@ function removeFromCart(button) {
     }
 }
 */
+
 
 
 
