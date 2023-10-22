@@ -85,8 +85,7 @@ function displaySelections() {
 		userCandidatesSelectionsModal.style.display = 'none';
 	}
 
-}	
-
+}
 
 /*
 
@@ -224,386 +223,6 @@ const alabamaSelectedCandidates2024Form = (e) => {
 
 */
 
-
-/*
-
-const alabamaSelectedCandidates2024Form = (e) => {
-
-	const presidentSelected = document.querySelector(`input[name="userPresident"]:checked`);
-
-	if (presidentSelected === '' || presidentSelected == null) {
-
-		document.getElementById('userPresidentErrorMessage').textContent = 'You have not selected a Presidential candidate for your United States President.';
-
-		setTimeout (function() {
-			document.getElementById('userPresidentErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const governorSelected = document.querySelector(`input[name="userGovernor"]:checked`);
-
-	if (governorSelected === '' || governorSelected == null) {
-
-		document.getElementById('userGovernorErrorMessage').textContent = 'You have not selected a Governor candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userGovernorErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const ltGovernorSelected = document.querySelector(`input[name="userLieutenantGovernor"]:checked`);
-
-	if (ltGovernorSelected === '' || ltGovernorSelected == null) {
-
-		document.getElementById('userLtGovernorErrorMessage').textContent = 'You have not selected a Lieutenant Governor candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userLtGovernorErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const attyGeneralSelected = document.querySelector(`input[name="userAttorneyGeneral"]:checked`);
-
-	if (attyGeneralSelected === '' || attyGeneralSelected == null) {
-
-		document.getElementById('userAttyGeneralErrorMessage').textContent = 'You have not selected an Attorney General candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userAttyGeneralErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-	
-	const secofStateSelected = document.querySelector(`input[name="userSecretaryofState"]:checked`);
-
-	if (secofStateSelected === '' || secofStateSelected == null) {
-
-		document.getElementById('userSecofStateErrorMessage').textContent = 'You have not selected a Secretary of State candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userSecofStateErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const stateTreasurerSelected = document.querySelector(`input[name="userStateTreasurer"]:checked`);
-
-	if (stateTreasurerSelected === '' || stateTreasurerSelected == null) {
-
-		document.getElementById('userStateTreasurerErrorMessage').textContent = 'You have not selected a State Treasurer candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userStateTreasurerErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const stateAuditorSelected = document.querySelector(`input[name="userStateAuditor"]:checked`);
-
-	if (stateAuditorSelected === '' || stateAuditorSelected == null) {
-
-		document.getElementById('userStateAuditorErrorMessage').textContent = 'You have not selected a State Auditor candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userStateAuditorErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const agricultureSelected = document.querySelector(`input[name="userAgriculture"]:checked`);
-
-	if (agricultureSelected === '' || agricultureSelected == null) {
-
-		document.getElementById('userArgricultureErrorMessage').textContent = 'You have not selected an Argriculture candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userArgricultureErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const senatorSelected = document.querySelector(`input[name="userSenator"]:checked`);
-
-	if (senatorSelected === '' || senatorSelected == null) {
-
-		document.getElementById('userSenatorErrorMessage').textContent = 'You have not selected a Senator candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userSenatorErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const us1stCongDistrictSelected = document.querySelector(`input[name="userUS1stCongressionalDist"]:checked`);
-
-	if (us1stCongDistrictSelected === '' || us1stCongDistrictSelected == null) {
-
-		document.getElementById('userUS1stCongDistrictErrorMessage').textContent = 'You have not selected an US 1st Congressional District candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userUS1stCongDistrictErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const us2ndCongDistrictSelected = document.querySelector(`input[name="userUS2ndCongressionalDist"]:checked`);
-
-	if (us2ndCongDistrictSelected === '' || us2ndCongDistrictSelected == null) {
-
-		document.getElementById('userUS2ndCongDistrictErrorMessage').textContent = 'You have not selected an US 2nd Congressional District candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userUS2ndCongDistrictErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const us3rdCongDistrictSelected = document.querySelector(`input[name="userUS3rdCongressionalDist"]:checked`);
-
-	if (us3rdCongDistrictSelected === '' || us3rdCongDistrictSelected == null) {
-
-		document.getElementById('userUS3rdCongDistrictErrorMessage').textContent = 'You have not selected an US 3rd Congressional District candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userUS3rdCongDistrictErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const us4thCongDistrictSelected = document.querySelector(`input[name="userUS4thCongressionalDist"]:checked`);
-
-	if (us4thCongDistrictSelected === '' || us4thCongDistrictSelected == null) {
-
-		document.getElementById('userUS4thCongDistrictErrorMessage').textContent = 'You have not selected an US 4th Congressional District candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userUS4thCongDistrictErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const us5thCongDistrictSelected = document.querySelector(`input[name="userUS5thCongressionalDist"]:checked`);
-
-	if (us5thCongDistrictSelected === '' || us5thCongDistrictSelected == null) {
-
-		document.getElementById('userUS5thCongDistrictErrorMessage').textContent = 'You have not selected an US 5th Congressional District candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userUS5thCongDistrictErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const us6thCongDistrictSelected = document.querySelector(`input[name="userUS6thCongressionalDist"]:checked`);
-
-	if (us6thCongDistrictSelected === '' || us6thCongDistrictSelected == null) {
-
-		document.getElementById('userUS6thCongDistrictErrorMessage').textContent = 'You have not selected an US 6th Congressional District candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userUS6thCongDistrictErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const us7thCongDistrictSelected = document.querySelector(`input[name="userUS7thCongressionalDist"]:checked`);
-
-	if (us7thCongDistrictSelected === '' || us7thCongDistrictSelected == null) {
-
-		document.getElementById('userUS7thCongDistrictErrorMessage').textContent = 'You have not selected an US 7th Congressional District candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userUS7thCongDistrictErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const publicSerCommissionPlace_1Selected = document.querySelector(`input[name="userPublicServiceCommission_Place_1"]:checked`);
-
-	if (publicSerCommissionPlace_1Selected === '' || publicSerCommissionPlace_1Selected == null) {
-
-		document.getElementById('userPublicSerCommissonPlace_1ErrorMessage').textContent = 'You have not selected a Public Service Commission - Place 1 candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userPublicSerCommissonPlace_1ErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const publicSerCommissionPlace_2Selected = document.querySelector(`input[name="userPublicServiceCommission_Place_2"]:checked`);
-
-	if (publicSerCommissionPlace_2Selected === '' || publicSerCommissionPlace_2Selected == null) {
-
-		document.getElementById('userPublicSerCommissonPlace_2ErrorMessage').textContent = 'You have not selected a Public Service Commission - Place 2 candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userPublicSerCommissonPlace_2ErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const stateBoardofEduPlace_2Selected = document.querySelector(`input[name="userStateBoardofEducation_Place_2"]:checked`);
-
-	if (stateBoardofEduPlace_2Selected === '' || stateBoardofEduPlace_2Selected == null) {
-
-		document.getElementById('userStateBoardofEduPlace_2ErrorMessage').textContent = 'You have not selected a State Board of Education - Place 2 candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userStateBoardofEduPlace_2ErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const stateBoardofEduPlace_4Selected = document.querySelector(`input[name="userStateBoardofEducation_Place_4"]:checked`);
-
-	if (stateBoardofEduPlace_4Selected === '' || stateBoardofEduPlace_4Selected == null) {
-
-		document.getElementById('userStateBoardofEduPlace_4ErrorMessage').textContent = 'You have not selected a State Board of Education - Place 4 candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userStateBoardofEduPlace_4ErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const stateBoardofEduPlace_6Selected = document.querySelector(`input[name="userStateBoardofEducation_Place_6"]:checked`);
-
-	if (stateBoardofEduPlace_6Selected === '' || stateBoardofEduPlace_6Selected == null) {
-
-		document.getElementById('userStateBoardofEduPlace_6ErrorMessage').textContent = 'You have not selected a State Board of Education - Place 6 candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userStateBoardofEduPlace_6ErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const stateBoardofEduPlace_8Selected = document.querySelector(`input[name="userStateBoardofEducation_Place_8"]:checked`);
-
-	if (stateBoardofEduPlace_8Selected === '' || stateBoardofEduPlace_8Selected == null) {
-
-		document.getElementById('userStateBoardofEduPlace_8ErrorMessage').textContent = 'You have not selected a State Board of Education - Place 8 candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userStateBoardofEduPlace_8ErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const supremeCourtPlace_5Selected = document.querySelector(`input[name="userSupremeCourt_Place_5"]:checked`);
-
-	if (supremeCourtPlace_5Selected === '' || supremeCourtPlace_5Selected == null) {
-
-		document.getElementById('userSupremeCourtPlace_5ErrorMessage').textContent = 'You have not selected a Supreme Court - Place 5 candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userSupremeCourtPlace_5ErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	const supremeCourtPlace_6Selected = document.querySelector(`input[name="userSupremeCourt_Place_6"]:checked`);
-
-	if (supremeCourtPlace_6Selected === '' || supremeCourtPlace_6Selected == null) {
-
-		document.getElementById('userSupremeCourtPlace_6ErrorMessage').textContent = 'You have not selected a Supreme Court - Place 6 candidate for your Alabama State.';
-
-		setTimeout (function() {
-			document.getElementById('userSupremeCourtPlace_6ErrorMessage').textContent = '';
-
-		}, 9000)
-		
-		return false;
-
-	}
-
-	// Check if the selected candidates are in the shopping cart.
-	if (!isCandidateInShoppingCart(presidentSelected)) {
-		document.getElementById('userPresidentErrorMessage').textContent = 'You have not selected a Presidential candidate for your United States President.';
-
-	}
-
-e.preventDefault();                                      
-
-form.addEventListner('submit', displayShoppingCart());
-return true; 
-	
-}
-
-
-*/
 
 
 
@@ -1343,10 +962,6 @@ function displayShoppingCart() {
 
 */
 
-
-
-  
-
 const selectedCandidates = {
     userPresident: null,
     userGovernor: null,
@@ -1399,23 +1014,22 @@ const selectedCandidates = {
 
 };
 
-
 function addToCart() {
 	const form = document.getElementById('alabamaSelected_Candidates2024_Form');
 	
-	const selectedCandidate = form.querySelector('input[type="radio"]:checked');
-  
+	const selectedCandidate = form.querySelector('input[type="radio"]:checked');  
+	
 	if (!selectedCandidate) {
 	  alert("Please select a candidate before adding to the cart.");
 	  return;
-	}	  
+	}		  
   
 	const category = selectedCandidate.getAttribute('data-category');
 	const candidateText = selectedCandidate.parentElement.textContent.trim();
 	const candidateImageSrc = selectedCandidate.parentElement.querySelector('img').src;	
   
 	const selectedCandidateData = selectedCandidates[category];
-  
+ 
 	if (selectedCandidateData !== null) {
 	  alert(`A candidate for ${category} is already selected. If you want to update your selected ${category}, go to your shopping cart and remove your selected ${category} than you are able select a new ${category}.`);
 	  return;
@@ -1430,13 +1044,14 @@ function addToCart() {
 	const cart = document.getElementById('shoppingCart');
 	const listItem = createListItem(candidateText, candidateImageSrc, category);
 	cart.appendChild(listItem);
-  
-	
+
+
+  	
 	// Reset the radio buttons for each category after adding to the cart	
 	const radioButtons = form.querySelectorAll(`input[type="radio"][data-category="${category}"]`);
 	for (const radioButton of radioButtons) {
 	  radioButton.checked = false;
-	}
+	}	
 	
 
 	// Update the total number of selected candidates and the total cost
@@ -1526,7 +1141,6 @@ function createListItem(candidateText, candidateImageSrc, category) {
 	return listItem;	
 }
 
-
 // Function to calculate the total number of selected candidates
 function updateTotalSelectedCandidates() {
 	const totalSelectedCandidates = getTotalSelectedCandidates();
@@ -1598,18 +1212,59 @@ function removeFromCart(button) {
 	  updateTotalSelectedCandidates();
 	  updateTotalCostForAllCandidates();
 	}
+
 }
 
 function checkAllCategoriesSelected() {
-	for (const category in selectedCandidates) {
-	  if (selectedCandidates[category] === null) {
-		alert(`Please select a candidate for the ${category} category before checking out.`);
+	const categories = [
+	  "President",
+	  "Governor",
+	  "Lieutenant Governor",
+	  "Attorney General",
+	  "Secretary of State",
+	  "State Treasurer",
+	  "State Auditor",
+	  "Agriculture",
+	  "Senator",
+	  "U.S. 1st Congressional District",
+	  "U.S. 2nd Congressional District",
+	  "U.S. 3rd Congressional District",
+	  "U.S. 4th Congressional District",
+	  "U.S. 5th Congressional District",
+	  "U.S. 6th Congressional District",
+	  "U.S. 7th Congressional District",
+	  "Public Service Commission - Place 1",
+	  "Public Service Commission - Place 2",
+	  "State Board of Education - Place 2",
+	  "State Board of Education - Place 4",
+	  "State Board of Education - Place 6",
+	  "State Board of Education - Place 8",
+	  "Supreme Court - Place 5",
+	  "Supreme Court - Place 6",
+	];
+  
+	for (const category of categories) {
+	  if (!isCategorySelected(category)) {
+		alert(`Please select a candidate for the ${category} category.`);
 		return false;
 	  }
 	}
-	return true;
-}
   
+	// If candidates from all categories are selected, allow checkout.
+	return true;
+  }
+  
+  function isCategorySelected(category) {
+	const selectedCandidate = selectedCandidates[category];
+	return selectedCandidate !== null && selectedCandidate !== undefined;
+  }
+  
+  // Example usage:
+  document.getElementById('checkoutButton').addEventListener('click', function() {
+	if (checkAllCategoriesSelected()) {
+	  // Proceed to checkout.
+	}
+  });  
 
 /* Get Presidential Candidates ScoreSheet Modals. */
 const candidateScoreSheet_Modal_FC001_24 = document.getElementById('candidateScoreSheet_Modal_FC001_24');
