@@ -1,4 +1,7 @@
-
+body{
+    padding-top: 25px;
+    padding-top: 15px;
+}
 ::-webkit-scrollbar {
     width: 15px;
 }
@@ -589,10 +592,32 @@ p {
 
 }
 
+#shoppingCart_Title {
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 23px);     
+    color: rgb(201, 24, 24);
+    text-align: center;
+}
+
+#shoppingCart_subTitle {
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(9px, 2vw, 15px);     
+    color: rgb(139, 134, 134);
+    text-align: left;
+    margin-left: 25px;
+}
+
 #shoppingCart_Title_01 {
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(12px, 2vw, 18px);     
     color: rgb(13, 65, 255);
+    text-align: center;
+}
+
+#shoppingCart_Title_02 {
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px);     
+    color: rgb(201, 24, 24);
     text-align: center;
 }
 
@@ -962,6 +987,10 @@ p {
 
 .leftSide_ShoppingCart {
     background-color: rgb(123, 126, 136, .10);
+}
+
+.rightSide_ShoppingCart {
+    background-color: rgb(255, 255, 255);
 }
 
 
