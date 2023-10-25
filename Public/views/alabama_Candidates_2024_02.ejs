@@ -124,16 +124,18 @@
 					<form id="alabamaSelected_Candidates2024_Form"					
 						name="alabamaSelected_Candidates2024Form"
 						onsubmit="return checkAllCategoriesSelected()"
-						action="/create-checkout-session"
+						action="/create-payment-intent"
 						method="POST" >		
 
 						<div id="side_Navigational" class="sideBar_Navigation">
+							<div>
+								<br>
+								<a href="javascript:void(0)" class="closeButton" onclick="close_Navigational_Bar()">&times;</a>
+														
+							</div>
 
 							<hr id="hr_Red_line_02">
-							<br>
-							<div>
-								<a href="javascript:void(0)" class="closeButton" onclick="close_Navigational_Bar()">&times;</a>
-							</div>
+							<br>							
 							
 							<div id="wrapImage">
 								<img id="shoppingCart_Image_01" src="../images/free_Canva_Created_Images/iVoteBallotLogo.png"/>
@@ -141,6 +143,47 @@
 							<br>
 
 							<hr id="hr_Blue_line_02">
+							
+							<p id="shoppingCart_Title">Checkout</H2>
+							<p id="shoppingCart_subTitle">Billing Address</H2>
+
+							<br>
+							
+							<div class="three_Input_Container_01">
+								<label>First Name |
+									<input id="alabama_Checkout_FirstName" type="text" name="userFirstName" >
+								</label>
+								<label>Middle Name |
+									<input id="alabama_Checkout_MiddleName" type="text" name="userMiddleName" >
+								</label>
+								<label>Last Name |
+									<input id="alabama_Checkout_LastName" type="text" name="userLastName">
+								</label>
+							</div>
+
+							<label>Address 1 |
+								<input id="alabama_Checkout_Address" type="text" name="userAddress" >
+							</label>
+
+							<br>
+
+							<label>Street |
+								<input id="alabama_Checkout_Street" type="text" name="userStreet" >
+							</label>
+
+							<div class="three_Input_Container_02">
+								<label>City |
+									<input id="alabama_Checkout_City" type="text" name="userCity" >
+								</label>
+								<label>State |
+									<input id="alabama_Checkout_State" type="text" name="userState" >
+								</label>
+								<label>Zip Code |
+									<input id="alabama_Checkout_ZipCode" type="text" name="userZipCode" >
+								</label>
+							</div>
+
+							<br>
 
 							<div class="shoppingCart_Flex_Container">
 
@@ -152,37 +195,46 @@
 							
 											<hr id="hr_Red_line_02">
 											
-											<p id="shoppingCart_Title_01">Shopping Cart</p>								
+											<p id="shoppingCart_Title_01"> Your Shopping Cart</p>								
 								
 											<!-- <p id="selectedCandidatesShoppingCart"></p> -->
+
+											<hr id="hr_Red_line_02">
 										
 											<div class="container_ShoppingCart" id="shoppingCart"></div>
-
+											
 											<hr id="hr_Red_line_02">
 
 										</div>
 
 									</div>
 										
-									<div class="shoppingCart_Flex_Container_Column">										
+									<div class="shoppingCart_Flex_Container_Column">
+										<div class="rightSide_ShoppingCart">									
 
-										<hr id="hr_Red_line_02">
-										<br>
-										<p id="paragraph_TotalSelectedCandidates">TOTAL SELECTED CANDIDATES: <span id="totalSelectedCandidates">0</span></p>
-										
-										<hr id="hr_Blue_line_02">										
-										<p id="paragraph_TotalCost">SUBTOTAL of iVOTEBALLOT ROUNDED UP TO THE NEAREST WHOLE DOLLARS FOR ALL SELECTED CANDIDATES: $<span id="totalCost">0</span></p>										
-										<hr id="hr_Red_line_02">	
+											<hr id="hr_Blue_line_02">
+											
+											<p id="shoppingCart_Title_02">Your Total Bill</p>		
+											
+											<hr id="hr_Blue_line_02">
 
-										<p id="paragraph_CostPerCandidate">COST PER CANDIDATE $ 0.625</p>
-										<br>
-										<p id="paragraph_ActualTotalCost">TOTAL COST to You FOR ALL SELECTED CANDIDATES: $<span id="actualTotalCost">0</span></p>
+											<p id="paragraph_TotalSelectedCandidates">TOTAL SELECTED CANDIDATES: <span id="totalSelectedCandidates">0</span></p>											
+											
+											<p id="paragraph_TotalCost">SUBTOTAL of iVOTEBALLOT ROUNDED UP TO THE NEAREST WHOLE DOLLARS FOR ALL SELECTED CANDIDATES: $<span id="totalCost">0</span></p>	
+
+											<p id="paragraph_CostPerCandidate">COST PER CANDIDATE $ 0.625</p>
+											<br>
+											<p id="paragraph_ActualTotalCost">TOTAL COST to You FOR ALL SELECTED CANDIDATES: $<span id="actualTotalCost">0</span></p>
+											
+											<!--
+											<button id="userSelectedCandidates_SubmitButton" type="submit" onclick="displayShoppingCart()">UPDATE CANDIDATES</button>
+											-->												
 										
-										<!--
-										<button id="userSelectedCandidates_SubmitButton" type="submit" onclick="displayShoppingCart()">UPDATE CANDIDATES</button>
-										-->												
-										
-										<button id="checkoutButton" type="submit" onclick="return checkAllCategoriesSelected">Checkout</button>
+											<button id="checkoutButton" type="submit" onclick="return checkAllCategoriesSelected">Checkout</button>
+
+											<hr id="hr_Blue_line_02">
+
+										</div>
 									
 									</div>
 
