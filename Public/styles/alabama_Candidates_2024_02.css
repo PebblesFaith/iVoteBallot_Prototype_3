@@ -621,6 +621,137 @@ p {
     text-align: center;
 }
 
+.input_Container_01 {
+    margin-left: 25px;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 16px);
+    color: rgb(13, 65, 255);    
+}
+
+
+
+/*
+    The CSS statement sets the display property of the label element to inline-block, 
+    which allows it to be displayed inline with other elements while still retaining its
+    block-level characteristics, such as the ability to set a width. It also sets the
+    width property to 80%, which specifies the width of the element relative to its containing 
+    block, and the text-align property to left, which aligns the text content of the label 
+    element to the left of the element's box.
+*/
+#label_Checkout {   
+    display: inline-block;
+    width: 30%;
+    text-align: left;  
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 16px);
+    color: rgb(13, 65, 255);          
+}
+
+/*
+    This CSS code sets various styles for input elements. It hides the top, right, and left 
+    borders of the input element, while giving the bottom border a solid style with a blue 
+    color. The text color is set to a shade of blue, and the background color is set to 
+    inherit from the parent element. The input element is given a width of 100% of its parent
+    container, with a 5px margin to the right and bottom. Finally, the border color of the 
+    input element is set to the same shade of blue used for the text.
+
+    The CSS statement sets the outline property of multiple HTML elements (identified by their
+    ID attributes) to none. This means that when any of these elements receive focus (for
+    example, when the user clicks on HTML element), no visible outline will be displayed around
+    them. And, this can be useful to improve the visual appearance of a web page, as some 
+    browsers may add default outlines that can be distracting or clash with the page design.
+*/
+
+#firstName, #middleName, #lastName, #address, #city, #state, #zipCode, #suffix, #unitType, #unitTypeNumber, #countrySelect, #stateSelect, #countySelect, #citySelect, #zipSelect {
+    outline: none; 
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: solid;
+    color: rgb(13, 65, 255);
+    background-color: inherit;
+    width: 97%;    
+    margin-top: 5px; 
+    margin-right: 5px;   
+    margin-bottom: 5px;
+    border-color: rgb(201, 24, 24);
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 16px);
+    cursor: pointer;
+    cursor: 14px;
+    
+}
+
+/*
+    The CSS statement applies several styling rules to a group of HTML elements with the IDs
+    "firstName", "middleName", "lastName", "email", "confirmEmail", "question", "concern", 
+    "textMessage", and "contactUsFormEndTime". And, the group of HTML elements sets the
+    display property to flex and applies a row wrap layout with a column direction. the group
+    of HTML element, also specifies the font family, font size, text color, and white space
+    properties. Finally, it sets the background color to inherit from the parent element.
+*/
+#firstName, #middleName, #lastName, #address, #city, #state, #zipCode, #suffix, #unitType, #unitTypeNumber, #countrySelect, #stateSelect, #countySelect, #citySelect, #zipSelect {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 16px); 
+    color: rgb(13, 65, 255); 
+    background-color: inherit;
+    white-space: normal;   
+}
+
+/*
+    The CSS code sets a transition effect for the properties of the HTML elements with IDs of
+    "firstName", "middleName", "lastName", "email", "confirmEmail", "question", "concern", 
+    "textMessage", and "contactUsFormEndTime". The transition effect will last for 0.5 seconds 
+    and will be applied when there is a change in the properties of these elements.
+
+    The "-webkit-transition" property sets the transition effect for browsers that use the WebKit
+    rendering engine (such as Safari and Chrome), while the "transition" property sets the 
+    transition effect for other browsers.
+*/
+#firstName, #middleName, #lastName, #address, #city, #state, #zipCode, #suffix, #unitType, #unitTypeNumber, #countrySelect, #stateSelect, #countySelect, #citySelect, #zipSelect {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+/*
+    This CSS statement applies a styling to a group of HTML elements that includes the IDs 
+    #firstName, #middleName, #lastName, #email, #confirmEmail, #question, #concern, #textMessage,
+    and #contactUsFormEndTime when they are in focus. When any of these elements receive focus,
+    a 3-pixel border with a solid bottom and hidden top, right, and left sides are applied, along
+    with a slightly transparent background color. And, the width of each element is set to 75%.
+*/
+#firstName:focus, #middleName:focus, #lastName:focus, #address:focus, #city:focus, #state:focus, #zipCode:focus, #suffix:focus, #unitType:focus, #unitTypeNumber:focus, #countrySelect:focus, #stateSelect:focus, #countySelect:focus, #citySelect:focus, #zipSelect:focus {
+    border:3px solid rgb(205, 214, 249);
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: solid;
+    background-color: rgba(205, 220, 235, 0.20);    
+    width: 45%;  
+}
+
+/*
+    The CSS statement sets the font family to be used for the elements with the IDs 
+    "userFirstNameErrorMessage", "userMiddleNameErrorMessage", "userLastNameErrorMessage", 
+    "userEmailErrorMessage", "userConfirmEmailErrorMessage", "userQuestionErrorMessage", 
+    "userConcernErrorMessage", "userTextErrorMessage", and "userFormEndTimeErrorMessage". 
+    It also sets the font size to be responsive to the viewport width, with a range of 9px to
+    13px. The color of the text is set to a shade of red, and the text alignment is set to left.
+    Additionally, the white-space property is set to normal, which allows the text to wrap 
+    according to the width of the container.
+*/
+#userFirstNameErrorMessage, #userMiddleNameErrorMessage, #userLastNameErrorMessage, #userAddressErrorMessage, #userUnitTypeErrorMessage, #userCityErrorMessage, #userStateErrorMessage, #userSuffixErrorMessage, #userUnitTypeNumberErrorMessage, #userCountrySelectionErrorMessage, #userStateSelectionErrorMessage, #userCountySelectionErrorMessage, #userCitySelectionErrorMessage, #userZipSelectionErrorMessage { 
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(9px, 2vw, 13px); 
+    color: rgb(201, 24, 24);    
+    text-align: left;
+    white-space: normal; 
+}
+
+
 /*
 .flex_ShoppingCart_Container {
     display: flex;
