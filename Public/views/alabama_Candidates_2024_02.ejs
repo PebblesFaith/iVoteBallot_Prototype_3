@@ -145,43 +145,110 @@
 							<hr id="hr_Blue_line_02">
 							
 							<p id="shoppingCart_Title">Checkout</H2>
-							<p id="shoppingCart_subTitle">Billing Address</H2>
+							<p id="shoppingCart_subTitle">Billing Information</H2>
 
 							<br>
 							
-							<div class="three_Input_Container_01">
-								<label>First Name |
-									<input id="alabama_Checkout_FirstName" type="text" name="userFirstName" >
-								</label>
-								<label>Middle Name |
-									<input id="alabama_Checkout_MiddleName" type="text" name="userMiddleName" >
-								</label>
-								<label>Last Name |
-									<input id="alabama_Checkout_LastName" type="text" name="userLastName">
-								</label>
+							<div class="input_Container_01">
+								<label id="label_Checkout">First Name |  </label>                                         
+								<input id="firstName" type="text" name="userFirstName" maxlength="75">                            
+								<span id = "userFirstNameErrorMessage"></span>								
+								<br>
+								<label id="label_Checkout">Middle Name |</label>                            
+								<input id="middleName" type="text" name="userMiddleName" maxlength="75">                            
+								<span id = "userMiddleNameErrorMessage"></span>
+								<br>
+								<label id="label_Checkout">Last Name |</label>                            
+								<input id="lastName" type="text" name="userLastName" maxlength="75">                           
+								<span id = "userLastNameErrorMessage"></span>
+								<br>
+								<select id="suffix" name="userSuffix">
+									<option id="selectBackground" value="" disable selected hidden>Suffix (optional)</option>
+										<option value = JR>JR</option>
+										<option value = SR>SR</option>
+										<option value = I>I</option>
+										<option value = II>II</option>
+										<option value = III>III</option>
+										<option value = IV>IV</option>
+										<option value = V>V</option>
+								</select>																
+								<span id = "userSuffixErrorMessage"></span>
+								<br>
+								
+								<label id="label_Checkout">Address |</label>                            
+								<input id="address" type="text" name="userAddress" maxlength="75">                           
+								<span id = "userAddressErrorMessage"></span>
+								<br>
+
+								<select id="unitType" name="userUnitType">
+									<option id="selectBackground" value="" disable selected hidden>Address Unit Type</option>
+										<option value = Apartment>Apartment</option>
+										<option value = Building>Building</option>
+										<option value = Basement>Basement</option>
+										<option value = Floor>Floor</option>
+										<option value = Front>Front</option>
+										<option value = Hanger>Hanger</option>
+										<option value = House>House</option>
+										<option value = Key>Key</option>
+										<option value = Lot>Lot</option>
+										<option value = Lower>Lower</option>
+										<option value = Office>Office</option>
+										<option value = Penthouse>Penthouse</option>
+										<option value = Pier>Pier</option>
+										<option value = Rear>Rear</option>
+										<option value = Room>Room</option>
+										<option value = Side>Side</option>
+										<option value = Slip>Slip</option>
+										<option value = Space>Space</option>
+										<option value = Suite>Suite</option>
+										<option value = Trailer>Trailer</option>
+										<option value = Unit>Unit</option>
+										<option value = Upper>Upper</option>
+								</select>								
+								<span id="userUnitTypeErrorMessage"></span>
+								<br>
+
+								<label>Unit Type Number |</label>   
+								<br>               
+								<input id="unitTypeNumber" type="text" name="userUnitTypeNumber" maxlength="75">								
+								<span id="userUnitTypeNumberErrorMessage"></span>
+								<br>
+
+								<select id="countrySelect" name="userCountrySelection" size="1">
+								<option value="" selected="selected">Select Country</option>
+								</select>							
+								<span id="userCountrySelectionErrorMessage"></span>
+								<br>                                
+								
+								<select id="stateSelect" name="userStateSelection" size="1">
+									<option value="" selected="selected">Select State</option>
+								</select>							
+								<span id="userStateSelectionErrorMessage"></span>
+								<br>
+								
+								<select id="countySelect" name="userCountySelection" size="1">
+									<option value="" selected="selected">Select County</option>
+								</select>								
+								<span id="userCountySelectionErrorMessage"></span>
+								<br>                                
+																
+								<select id="citySelect" name="userCitySelection" size="1">
+									<option value="" selected="selected">Select City</option>
+								</select>								
+								<span id="userCitySelectionErrorMessage"></span>
+								<br>                            
+
+								<select id="zipSelect" name="userZipSelection" size="1">
+									<option value="" selected="selected">Select Zip</option>
+								</select>
+								<br>
+								<span id="userZipSelectionErrorMessage"></span>                                  
+								<br>
+								<br>
+								
+
 							</div>
-
-							<label>Address 1 |
-								<input id="alabama_Checkout_Address" type="text" name="userAddress" >
-							</label>
-
-							<br>
-
-							<label>Street |
-								<input id="alabama_Checkout_Street" type="text" name="userStreet" >
-							</label>
-
-							<div class="three_Input_Container_02">
-								<label>City |
-									<input id="alabama_Checkout_City" type="text" name="userCity" >
-								</label>
-								<label>State |
-									<input id="alabama_Checkout_State" type="text" name="userState" >
-								</label>
-								<label>Zip Code |
-									<input id="alabama_Checkout_ZipCode" type="text" name="userZipCode" >
-								</label>
-							</div>
+					
 
 							<br>
 
@@ -233,6 +300,9 @@
 											<button id="checkoutButton" type="submit" onclick="return checkAllCategoriesSelected">Checkout</button>
 
 											<hr id="hr_Blue_line_02">
+
+											<br>
+											<br>
 
 										</div>
 									
