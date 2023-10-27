@@ -26,7 +26,7 @@ function toggle_InputPasswordCheckBox_LogIn_01() {
 		}
 }
 
-const validateSignUpForm = (e) => { 
+const validateAlabamaSignUpForm = (e) => { 
 
 	const userRegistrationCode = document.getElementById('registrationCodeSignUp_01').value.trim();
 
@@ -134,7 +134,7 @@ const validateSignUpForm = (e) => {
 
 	e.preventDefault();  
 				
-	form.addEventListener('submit', validateSignUpForm);
+	form.addEventListener('submit', validateAlabamaSignUpForm);
 
 	return true;     		
 
