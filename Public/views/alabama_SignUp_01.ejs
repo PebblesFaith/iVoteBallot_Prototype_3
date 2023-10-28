@@ -107,12 +107,18 @@
 									<br>
 
 									<label>Create Your Password |</label>
-									<input id="passwordSignUp_01" type="password" name="userPassword" maxlength="250">					
+										<div class="password_Container">										
+											<input id="passwordSignUp_01" type="password" name="userPassword" maxlength="250">	
+											<a href="#" id="showHide_01" onclick="toggle_InputPasswordCheckBox()">Show</a>
+										</div>				
 									<span id="userPasswordSignUp_01ErrorMessage"></span>
 									<br>
 									
-									<label>Confirm Your Password |</label>									
-									<input id="confirmPasswordSignUp_01" type="password" name="userConfirmPassword" maxlength="250">									
+									<label>Confirm Your Password |</label>
+										<div class="confirmPassword_Container">									
+											<input id="confirmPasswordSignUp_01" type="password" name="userConfirmPassword" maxlength="250">
+											<a href="#" id="showHide_02" onclick="toggle_InputConfirmPasswordCheckBox()">Show</a>	
+										</div>						
 									<span id="userConfirmPasswordSignUp_01ErrorMessage"></span>
 									<br>
 
@@ -173,10 +179,11 @@
 									<span id="userEmailLogIn_01ErrorMessage"></span>
 									<br>	
 													
-									<label for="password">Password | </label>					
+									<label for="password">Password | </label>
 									<input id="passwordLogIn_01" type="password" name="userPassword" value="" maxlength="250" >
+									<a id="showHideLogIn_01" href="#" onclick="toggle_InputPasswordCheckBox_LogIn_01()">Show Password </a> 										
 									<span id = "userPasswordLogIn_01ErrorMessage"></span>								
-									<a id="showHideLogIn_01" href="#" onclick="toggle_InputPasswordCheckBox_LogIn_01()">Show Password </a>
+									
 									
 									<br>
 									<hr class="hr_Red_line_01">
