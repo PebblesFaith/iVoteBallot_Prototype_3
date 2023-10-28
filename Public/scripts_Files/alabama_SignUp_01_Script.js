@@ -1,30 +1,30 @@
+function toggle_InputPasswordCheckBox() {
+	const inputPassword = document.getElementById('passwordSignUp_01');
+	const userShowHide = document.getElementById('showHide_01')
+
+		if (userShowHide.innerText === 'Show') {
+			inputPassword.setAttribute('type', 'text');
+			userShowHide.innerText = ('Hide');
+		} else {
+			inputPassword.setAttribute('type', 'password');
+			userShowHide.innerText = 'Show';
+		}
+}
+
+function toggle_InputConfirmPasswordCheckBox() {
+	const inputConfirmPassword = document.getElementById('confirmPasswordSignUp_01');
+	const userShowHide = document.getElementById('showHide_02')
+
+		if (userShowHide.innerText === 'Show') {
+			inputConfirmPassword.setAttribute('type', 'text');
+			userShowHide.innerText = ('Hide');
+		} else {
+			inputConfirmPassword.setAttribute('type', 'password');
+			userShowHide.innerText = 'Show';
+		}
+}
 
 			
-function toggle_InputPasswordCheckBox_SignUp_01() {
-	const inputPassword_SignUp_01 = document.getElementById('passwordSignUp_01');
-	const userShowHide_SignUp_01 = document.getElementById('showHideSignUp_01');
-
-		if (userShowHide_SignUp_01.innerText === 'Show Password') {
-			inputPassword_SignUp_01.setAttribute('type', 'text');
-			userShowHide_SignUp_01.innerText = ('Hide Password');
-		} else {
-			inputPassword_SignUp_01.setAttribute('type', 'password');
-			userShowHide_SignUp_01.innerText = 'Show Password';
-		}
-}
-
-function toggle_InputPasswordCheckBox_LogIn_01() {
-	const inputPassword_LogIn_01 = document.getElementById('passwordLogIn_01');
-	const userShowHide_LogIn_01 = document.getElementById('showHideLogIn_01');
-
-		if (userShowHide_LogIn_01.innerText === 'Show Password') {
-			inputPassword_LogIn_01.setAttribute('type', 'text');
-			userShowHide_LogIn_01.innerText = ('Hide Password');
-		} else {
-			inputPassword_LogIn_01.setAttribute('type', 'password');
-			userShowHide_LogIn_01.innerText = 'Show Password';
-		}
-}
 
 const validateAlabamaSignUpForm = (e) => { 
 
@@ -34,7 +34,9 @@ const validateAlabamaSignUpForm = (e) => {
 
 	const userIdType = document.getElementById('idTypesSignUp_01').value.trim();
 
-	const userIdTypeNumber = document.getElementById('idTypeNumberSignUp_01').value.trim();				
+	const userIdTypeNumber = document.getElementById('idTypeNumberSignUp_01').value.trim();
+	
+	const userConfirmIdTypeNumberSignUp = document.getElementById('confirmIdTypeNumberSignUp_01').value.trim();
 
 	const regExAlabamaId = /(^\d{7}$)|(^\d{8}$)/;
 
@@ -42,8 +44,14 @@ const validateAlabamaSignUpForm = (e) => {
 
 	const userConfirmEmail = document.getElementById('confirmEmailSignUp_01').value.trim();
 
-	const regExEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;			
+	const regExEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;	
+	
+	const userPassword = document.getElementById('passwordSignUp_01').value.trim();				
+	
+	const userConfirmPassword = document.getElementById('confirmPasswordSignUp_01').value.trim();
 
+	const regExPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,32}$/;
+	
 	const userPhoneNumber = document.getElementById('phoneNumberSignUp_01').value.trim();
 
 	const regExPhoneNumber = /^\d{3}\-\d{3}\-\d{4}$/; 
@@ -82,7 +90,31 @@ const validateAlabamaSignUpForm = (e) => {
 
 		return false;
 
-	} 				
+	} 		
+	
+	if (userConfirmIdTypeNumberSignUp === '' || userConfirmIdTypeNumberSignUp == null || !userConfirmIdTypeNumberSignUp.match(regExAlabamaId))  {                                                               
+		document.getElementById('userConfirmIdTypeNumberSignUp_01ErrorMessage').textContent =  'Your Alabama confirm numeric identification card characters are a required field or you must enter the correct Alabama numeric identification card characters from your Alabama\s identification card into the required field.';
+
+		setTimeout(function() {
+			document.getElementById('userConfirmIdTypeNumberSignUp_01ErrorMessage').textContent = '';
+		},
+		9000)
+
+		return false;
+
+	} 
+	
+	if (userIdTypeNumber != userConfirmIdTypeNumberSignUp) {
+		document.getElementById('userConfirmIdTypeNumberSignUp_01ErrorMessage').textContent = 'Your Alabama Identification Card Number does not match to your confirm Alabama Identification Card Number which are required input fields.';
+
+		setTimeout(function() {
+			document.getElementById('userConfirmIdTypeNumberSignUp_01ErrorMessage').textContent = '';
+		},
+		9000)
+
+		return false;
+
+	}
 	
 	if (userEmail === '' || userEmail == null || userEmail.length <= 6 || !userEmail.match(regExEmail)) {
 		document.getElementById('userEmailSignUp_01ErrorMessage').textContent = 'Your email address is a required input field and you must enter the correct email address format into the require input field.';
@@ -119,6 +151,53 @@ const validateAlabamaSignUpForm = (e) => {
 		return false;
 
 	}
+
+	if (userPassword === '' || userPassword == null || userPassword.length <= 7 || !userPassword.match(regExPassword)) {
+		document.getElementById('userPasswordSignUp_01ErrorMessage').textContent = 'Your password is a required input field and you must enter the correct password format into the require input field.';
+	
+		setTimeout(function() {
+			document.getElementById('userPasswordSignUp_01ErrorMessage').textContent = '';
+		},
+		9000)
+	
+		return false;
+	
+	} 
+	
+	if (userConfirmPassword === '' || userConfirmPassword == null || userConfirmPassword.length <= 7 || !userConfirmPassword.match(regExPassword)) {
+		document.getElementById('userConfirmPasswordSignUp_01ErrorMessage').textContent = 'Your confirm password is a required input field and you must enter the correct confirm password format into the require input field.';
+	
+		setTimeout(function() {
+			document.getElementById('userConfirmPasswordSignUp_01ErrorMessage').textContent = '';
+		},
+		9000)
+	
+	return false;
+	
+	} 
+
+	if (userPassword != userConfirmPassword) {
+		document.getElementById('userConfirmPasswordSignUp_01ErrorMessage').textContent = 'Your password does not match to your confirm password which are required input fields.';
+
+		setTimeout(function() {
+			document.getElementById('userConfirmPasswordSignUp_01ErrorMessage').textContent = '';
+		},
+		9000)
+
+		return false;
+
+	}
+	
+	
+
+
+
+
+
+
+
+
+
 	
 	if (userPhoneNumber === '' || userPhoneNumber == null || userPhoneNumber.length <= 10 || !userPhoneNumber.match(regExPhoneNumber))  {                                                               
 		document.getElementById('userPhoneNumberSignUp_01ErrorMessage').textContent = 'Your phone number is a required input field or you must enter exactly twelve number digits into the phone number required input field.';
