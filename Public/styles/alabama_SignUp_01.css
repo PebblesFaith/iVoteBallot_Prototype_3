@@ -531,8 +531,11 @@ label {
 #registrationCodeSignUp_01, 
 #idTypesSignUp_01, 
 #idTypeNumberSignUp_01, 
+#confirmIdTypeNumberSignUp_01,
 #emailSignUp_01,
 #confirmEmailSignUp_01, 
+#passwordSignUp_01,
+#confirmPasswordSignUp_01,
 #phoneNumberSignUp_01, 
 #emailLogIn_01,
 #passwordLogIn_01  {
@@ -558,8 +561,11 @@ label {
 #registrationCodeSignUp_01, 
 #idTypesSignUp_01, 
 #idTypeNumberSignUp_01, 
+#confirmIdTypeNumberSignUp_01,
 #emailSignUp_01, 
 #confirmEmailSignUp_01, 
+#passwordSignUp_01,
+#confirmPasswordSignUp_01,
 #phoneNumberSignUp_01, 
 #emailLogIn_01, 
 #passwordLogIn_01 {
@@ -576,8 +582,11 @@ label {
 #registrationCodeSignUp_01, 
 #idTypesSignUp_01, 
 #idTypeNumberSignUp_01, 
+#confirmIdTypeNumberSignUp_01,
 #emailSignUp_01, 
 #confirmEmailSignUp_01, 
+#passwordSignUp_01,
+#confirmPasswordSignUp_01,
 #phoneNumberSignUp_01, 
 #emailLogIn_01, 
 #passwordLogIn_01 {
@@ -588,8 +597,11 @@ label {
 #registrationCodeSignUp_01:focus, 
 #idTypesSignUp_01:focus, 
 #idTypeNumberSignUp_01:focus, 
+#confirmIdTypeNumberSignUp_01:focus,
 #emailSignUp_01:focus, 
-#confirmEmailSignUp_01:focus, 
+#confirmEmailSignUp_01:focus,
+#passwordSignUp_01:focus,
+#confirmPasswordSignUp_01:focus,
 #phoneNumberSignUp_01:focus, 
 #emailLogIn_01:focus, 
 #passwordLogIn_01:focus  {
@@ -601,13 +613,15 @@ label {
 	background-color: rgba(205, 220, 235, 0.20);    
 	width: 75%;  
 }
-  
-  
+
 #userRegistrationCodeSignUp_01ErrorMessage, 
 #userIdTypesSignUp_01ErrorMessage, 
 #userIdTypeNumberSignUp_01ErrorMessage,
+#userConfirmIdTypeNumberSignUp_01ErrorMessage,
 #userEmailSignUp_01ErrorMessage, 
 #userConfirmEmailSignUp_01ErrorMessage,
+#userPasswordSignUp_01ErrorMessage,
+#userConfirmPasswordSignUp_01ErrorMessage,
 #userPhoneNumberSignUp_01ErrorMessage, 
 #userEmailLogIn_01ErrorMessage, 
 #userPasswordLogIn_01ErrorMessage { 
@@ -617,6 +631,20 @@ label {
 	text-align: left;
 	white-space: normal; 
 }
+
+.password_Container {
+    display: flex;
+    align-items: center;
+}
+
+.confirmPassword_Container {
+	display: flex;
+    align-items: center;
+}
+
+
+
+
   
 .signUp_LogIn_01 {
 	display: flex;
