@@ -537,8 +537,9 @@ label {
 #passwordSignUp_01,
 #confirmPasswordSignUp_01,
 #phoneNumberSignUp_01, 
+#temporaryPassword,
 #emailLogIn_01,
-#passwordLogIn_01  {
+#passwordLogIn_01 {
 	outline: none; 
 	border-top-style: hidden;
 	border-right-style: hidden;
@@ -555,8 +556,7 @@ label {
 	font-size: clamp(12px, 2vw, 16px);
 	cursor: pointer;
 	cursor: 14px;  
-}
-  
+}  
   
 #registrationCodeSignUp_01, 
 #idTypesSignUp_01, 
@@ -567,6 +567,7 @@ label {
 #passwordSignUp_01,
 #confirmPasswordSignUp_01,
 #phoneNumberSignUp_01, 
+#temporaryPassword,
 #emailLogIn_01, 
 #passwordLogIn_01 {
 	display: flex;
@@ -588,6 +589,7 @@ label {
 #passwordSignUp_01,
 #confirmPasswordSignUp_01,
 #phoneNumberSignUp_01, 
+#temporaryPassword,
 #emailLogIn_01, 
 #passwordLogIn_01 {
 	-webkit-transition: 0.5s;
@@ -602,7 +604,8 @@ label {
 #confirmEmailSignUp_01:focus,
 #passwordSignUp_01:focus,
 #confirmPasswordSignUp_01:focus,
-#phoneNumberSignUp_01:focus, 
+#phoneNumberSignUp_01:focus,
+#temporaryPassword:focus, 
 #emailLogIn_01:focus, 
 #passwordLogIn_01:focus  {
 	border:3px solid rgb(205, 214, 249);
@@ -623,6 +626,7 @@ label {
 #userPasswordSignUp_01ErrorMessage,
 #userConfirmPasswordSignUp_01ErrorMessage,
 #userPhoneNumberSignUp_01ErrorMessage, 
+#userTemporaryPasswordErrorMessage,
 #userEmailLogIn_01ErrorMessage, 
 #userPasswordLogIn_01ErrorMessage { 
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -671,3 +675,49 @@ a:hover {
 	text-decoration: none;
 	text-align: center;
 }
+
+/*
+    The CSS style code sets the properties of an HTML element with the ID "showHide_01" to create
+    a flexible container that wraps its contents in a column layout. The style also defines the
+    background color, height, width, text alignment, margin, padding, font family, size, and color
+    of the element, as well as its content justification and absence of a border.
+*/
+#showHide_01,
+#showHide_02
+ {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-around;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 14px); 
+    color: rgb(201, 24, 24);
+	text-decoration: none;   
+}
+
+/*
+    The CSS statement targets all anchor tags (a) within the showHide_01 element and removes
+    the underline decoration (text-decoration: none), sets the display property to block 
+    (display: block). So, the anchor takes the full width of its container, adds 5px 
+    padding around the anchor (padding: 5px), and sets the font color to red (color: 
+    rgb(13, 65, 255)).
+*/
+#showHide_01 a,
+#showHide_02 a  {
+    text-decoration: none;   
+    padding: 5px;
+    color: rgb(13, 65, 255);
+} 
+
+/*
+    This CSS statement changes the color of a hyperlink when the user hovers his/her cursor 
+    over the showHide_01 a:hover element of contact us webpage. Specifically, the 
+    #showHide_01 a:hover element sets the color to a shade of blue defined by the RGB 
+    values (13, 65, 255). And, the ":hover" pseudo-class is used to target the hyperlink
+    when the #left_Row_01 a:hover element is in the hover state.
+*/
+#showHide_01 a:hover,
+#showHide_02 a:hover  {
+    color: rgb(13, 65, 255);
+}
+
