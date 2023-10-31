@@ -22,9 +22,7 @@ function toggle_InputConfirmPasswordCheckBox() {
 			inputConfirmPassword.setAttribute('type', 'password');
 			userShowHide.innerText = 'Show';
 		}
-}
-
-			
+}			
 
 const validateAlabamaSignUpForm = (e) => { 
 
@@ -55,6 +53,8 @@ const validateAlabamaSignUpForm = (e) => {
 	const userPhoneNumber = document.getElementById('phoneNumberSignUp_01').value.trim();
 
 	const regExPhoneNumber = /^\d{3}\-\d{3}\-\d{4}$/; 
+
+	const userTemporaryPassword = document.getElementById('temporaryPassword').value.trim();
 
 	if (userRegistrationCode === '' || userRegistrationCode == null || !userRegistrationCode.match(regExRegistrationCode)) {                                                               
 		document.getElementById('userRegistrationCodeSignUp_01ErrorMessage').textContent = 'Your voter registration code is a required input field or you have entered the correct alphanumeric characters into the required input field.';
@@ -188,17 +188,6 @@ const validateAlabamaSignUpForm = (e) => {
 
 	}
 	
-	
-
-
-
-
-
-
-
-
-
-	
 	if (userPhoneNumber === '' || userPhoneNumber == null || userPhoneNumber.length <= 10 || !userPhoneNumber.match(regExPhoneNumber))  {                                                               
 		document.getElementById('userPhoneNumberSignUp_01ErrorMessage').textContent = 'Your phone number is a required input field or you must enter exactly twelve number digits into the phone number required input field.';
 
@@ -209,7 +198,13 @@ const validateAlabamaSignUpForm = (e) => {
 
 		return false;				
 
-	}				
+	}		
+			
+	if (userTemporaryPassword === '' || userTemporaryPassword == null)  {                                                               
+					
+		return false;				
+		
+	}		
 
 	e.preventDefault();  
 				
