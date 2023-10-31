@@ -41,7 +41,10 @@
 	<body>
 		<header>
 			<%- include('../common/header') %>
-		</header>	
+		</header>
+		
+		
+		  
 
 		<div id="flex_Container">
 			<div id="flex_Container_Row">
@@ -125,9 +128,14 @@
                                     <label>Phone Number |</label>
                                     <p id="phoneNumber_Style_01">(Enter your phone number in the format of xxx-xxx-xxxx.)</p>								
 									<input id="phoneNumberSignUp_01" type="text" name="userPhoneNumber" maxlength="15">									
-									<span id="userPhoneNumberSignUp_01ErrorMessage"></span>	
+									<span id="userPhoneNumberSignUp_01ErrorMessage"></span>										
+									<br>		
 									
+									<input type="hidden" id="temporaryPassword" size="75" name="userTemporaryPassword" value="dummyTemporaryPassword">
 									<br>
+									<span id="userTemporaryPasswordErrorMessage"></span>
+									<br>	
+
 									<hr class="hr_Red_line_01">
 
 									<a class="forgotPassword_SignUp_01" href="http://localhost:8080/alabama_ForgotPassword_01">Forgot Password?</a>
@@ -182,8 +190,7 @@
 									<label for="password">Password | </label>
 									<input id="passwordLogIn_01" type="password" name="userPassword" value="" maxlength="250" >
 									<a id="showHideLogIn_01" href="#" onclick="toggle_InputPasswordCheckBox_LogIn_01()">Show Password </a> 										
-									<span id = "userPasswordLogIn_01ErrorMessage"></span>								
-									
+									<span id = "userPasswordLogIn_01ErrorMessage"></span>	
 									
 									<br>
 									<hr class="hr_Red_line_01">
