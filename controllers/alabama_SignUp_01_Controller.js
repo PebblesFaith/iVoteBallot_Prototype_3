@@ -83,40 +83,38 @@ const IONOS_SECRET_KEY = process.env.IONOS_SECRET_KEY;
 passport.use(
     'signup1',
     new LocalStrategy({
-    usernameField: 'Alabama_Id_Card_Number',
-    passwordField: 'iVoteBallot_Id_Number',
+	usernameField: 'email',
+	passwordField: 'password',
     passReqToCallback: true // To allow request object to be passed to callback
 },   
-    async (req, Alabama_Id_Card_Number, iVoteBallot_Id_Number, done) => {
-        console.log('The user passport.use(login1) Alabama Voter\s State Id number is: ' + Alabama_Id_Card_Number + '.');
-        console.log('The user passport.use(login1) Alabama Voter\s iVoteBallot Card Identifiable code is: ' + iVoteBallot_Id_Number + '.');
-        
-        if (!iVoteBallot_Id_Number) {
-            console.log('User\s Alabama Voter\s State Id number field:' + iVoteBallot_Id_Number + '.');            
-            console.log('The user passport.use LocalStrategy for Alabama Voter\s iVoteBallot Card Identifiable code does not match.');
-            return done(null, false, { message: 'Your Alabama Voter\s iVoteBallot Card Identifiable code and confirm Voter\s iVoteBallot Card Identifiable code does not match.'})
-            
-        } else 
-         await db1.get(`SELECT * FROM users WHERE Alabama_Id_Card_Number = ?`, Alabama_Id_Card_Number, (err, row) => {
-
-            if (err) {
-                return done(err);
-            }
-          
-            if (!row) {
-                return done(null, false, { message: 'You have entered the incorrect Alabama Voter\s State Id number.'});
-            }
-            
-             bcrypt.compare(iVoteBallot_Id_Number, row.iVoteBallot_Id_Number, (err, result) => {
-               
-                if (err) {
-                    return done(err);
-                }
-				
-                if (!result) {
-                    return done(null, false, { message: 'You have entered the incorrect Alabama Voter\s iVoteBallot Card Identifiable code.'});
-                }
-                //return done(null, row);
+async (req, email, password, done) => {
+	console.log('The passport.use(login1) email is: ' + email);
+	console.log('The passport.use(login1) password: ' + password);
+	
+	if (!password) {
+		console.log('User password enter onto the login field:' + password);            
+		console.log('The user passport.use LocalStrategy password and confirm password does not match');
+		return done(null, false, { message: 'Your password and confirm password does not match.'})
+		
+	} else 
+	 await db1.get(`SELECT * FROM users WHERE email = ?`, email,(err, row) => {
+		if (err) {
+			return done(err);
+		}
+	  
+		if (!row) {
+			return done(null, false, { message: 'You have entered the incorrect email address.'});
+		}
+		
+		 bcrypt.compare(password, row.password, (err, result) => {
+		   
+			if (err) {
+				return done(err);
+			}
+			if (!result) {
+				return done(null, false, { message: 'You have entered the incorrect password.'});
+			}
+			//return done(null, row);
 
                 return done(null, {
 					id: row.id,
@@ -148,8 +146,8 @@ passport.use(
 					userConfirmIdTypeNumber: row.userConfirmIdTypeNumber,
 					userEmail: row.userEmail,
 					userConfirmEmail: row.userConfirmEamil,
-					userPassword: row.userPassword,
-					userConfirmIdTypeNumber: row.userConfirmPassword,
+					userPassword: row.userPassword,			
+					userConfirmPassword: row.userConfirmPassword,
 					userPhoneNumber: row.userPhoneNumber,
 					userTemporaryPassword: row.userTemporaryPassword,	
 
@@ -212,7 +210,7 @@ passport.deserializeUser(function(id, done) {
 		userDMV_Race: row.userDMV_Race,
 		userDMV_SSN: row.userDMV_SSN,
 		userDMV_EmailAddress: row.userDMV_EmailAddress,
-		userDMV_PhoneNumber: row.userDMV_PhoneNumber,
+		userDMV_PhoneNumber: userDMV_PhoneNumber,
 		userDMV_Address: row.userDMV_Address,
 		userDMV_AddressUnitType: row.userDMV_AddressUnitType,
 		userDMV_UnitTypeNumber: row.userDMV_UnitTypeNumber,
@@ -223,7 +221,7 @@ passport.deserializeUser(function(id, done) {
 		userDMV_ZipCode: row.userDMV_ZipCode,
 		userDMV_AlabamaStateIdType: row.userDMV_AlabamaStateIdType,
 		userDMV_AlabamaIdCardNumber: row.userDMV_AlabamaIdCardNumber,
-		userDMV_IvoteballotIdIdentifierCode: row.userDMV_IvoteballotIdIdentifierCode,
+		userDMV_IvoteballotIdNumber: row.userDMV_IvoteballotIdNumber,
 		userRegistrationCode: row.userRegistrationCode,
 		userIdType: row.userIdType, 
 		userIdTypeNumber: row.userIdTypeNumber,
@@ -231,9 +229,9 @@ passport.deserializeUser(function(id, done) {
 		userEmail: row.userEmail,
 		userConfirmEmail: row.userConfirmEamil,
 		userPassword: row.userPassword,
-		userConfirmIdTypeNumber: row.userConfirmPassword,
+		userConfirmPassword: row.userConfirmPassword,
 		userPhoneNumber: row.userPhoneNumber,
-		userTemporaryPassword: row.userTemporaryPassword,		
+		userTemporaryPassword: row.userTemporaryPassword,
 		
 		isAuthenticated: true });
     });
@@ -358,15 +356,25 @@ db1.serialize( () => {
 });
 
 /*
-	The given JavaScript coded language defines an asynchronous function createAlabamaSignUp_01_Database
-	that handles a POST request to a index.js (server) file. The function extracts data from the
-	request body and logs it to the console, and inserts the data into an SQLite3 database table
-	named "alabama_SignUp_01.db" then sends two emails using NodeMailer library:
-		1. first one to the iVoteBallot website owner and 
-		2  second one to the user who submitted the form. 
-	The first email notifies the IVoteBallot website owner of the new contact form submission, 
-	and the second email sends a confirmation message to the user. And, the function also handles
-	errors than redirects the user to appropriate web pages.
+The given JavaScript codes language defines a route for signing up a new users using
+the HTTP POST method. When an user submits a signup form, the back-end server extracts 
+the form data (first name, last name, username, email, password, and confirmPassword) 
+from the request body using the req.body object.
+
+The JavaScript codes language then logs each user input to the console, and prints 
+their values using string concatenation. It also logs the req.session object, which
+may contain session data specific to the user.
+
+The user's password and confirm password fields are then hashed using the bcrypt
+algorithm, with the bcrypt library. The same salt is used to hash both fields, 
+and the hashed values are stored in separate variables. The two hashes are compared 
+using the bcrypt.compare() method to ensure they match, and if they do not, the user
+is redirected to the signup page with an error message.
+
+If the passwords match, the user's data is inserted into a SQLite3 database using an
+SQLite3 query. The query is executed using the db1.run() method, and the results are
+returned either as a successful redirect to the login page, or an error page if
+something goes wrong.
 */
 const createAlabamaIvoteballotDatabase = 
 	async (req, res, next) => {   	
@@ -399,6 +407,8 @@ const createAlabamaIvoteballotDatabase =
 		userConfirmIdTypeNumber: req.body.userConfirmIdTypeNumber,
 		userEmail: req.body.userEmail,
 		userConfirmEmail: req.body.userConfirmEmail,
+		userPassword: req.body.userPassword,
+		userConfirmPassword: req.body.userPassword,
 		userPhoneNumber: req.body.userPhoneNumber,
 		userTemporaryPassword: req.body.userTemporaryPassword
 	}    
@@ -599,105 +609,6 @@ const createAlabamaIvoteballotDatabase =
 		
 	});			
 };
-
-
-
-
-
-/*
-The given JavaScript codes language defines a route for signing up a new users using
-the HTTP POST method. When an user submits a signup form, the back-end server extracts 
-the form data (first name, last name, username, email, password, and confirmPassword) 
-from the request body using the req.body object.
-
-The JavaScript codes language then logs each user input to the console, and prints 
-their values using string concatenation. It also logs the req.session object, which
-may contain session data specific to the user.
-
-The user's password and confirm password fields are then hashed using the bcrypt
-algorithm, with the bcrypt library. The same salt is used to hash both fields, 
-and the hashed values are stored in separate variables. The two hashes are compared 
-using the bcrypt.compare() method to ensure they match, and if they do not, the user
-is redirected to the signup page with an error message.
-
-If the passwords match, the user's data is inserted into a SQLite3 database using an
-SQLite3 query. The query is executed using the db1.run() method, and the results are
-returned either as a successful redirect to the login page, or an error page if
-something goes wrong.
-*/
-
-app.post('/signup', 
-    async (req, res) => {
-        const firstName = req.body.firstName;
-        const lastName = req.body.lastName;
-        const userName = req.body.userName;
-        const email = req.body.email;
-        const password = req.body.password;
-        const confirmPassword = req.body.confirmPassword;
-        const temporary_Password = req.body.temporary_Password;
-
-        console.log(req.body);
-        console.log('User first name: ' + firstName + '.');
-        console.log('User last name is: ' + lastName + '.');
-        console.log('User username is: ' + userName + '.');
-        console.log('User email is: ' + email + '.');
-        console.log('User password is: ' + password + '.');
-        console.log('User confirm password is: ' + confirmPassword + '.');
-        console.log('User temporary password is: ' + temporary_Password + '.');
-        console.log(req.session);
-
-        // User input data information validation.
-        if (!firstName || !lastName || !userName|| !email || !password || !confirmPassword) {
-            req.flash('error', 'Please fill in all fields');
-            return res.redirect('/signup');           
-        
-        } 
-
-        if (password !== confirmPassword) {
-            req.flash('error', 'Password and confirm password do not match.');
-            return res.redirect('/signup');        
-
-        } else {
-            console.log('The user passwordHashed and confirmPasswordHashed successfully match, and the user is successfully authenticated to the passport and session.');
-        }   
-
-        // Hash the password field using bcrypt.
-        const salt = await bcrypt.genSalt(13);  
-        const passwordHashed = await bcrypt.hash(req.body.password, salt); 
-
-        // Hash the confirmPassword field using the same salt, as the password field.
-        const confirmPasswordHashed = await bcrypt.hash(req.body.confirmPassword, salt); 
-
-        const newUser = {
-            firstName,
-            lastName, 
-            userName,
-            email,
-            password: passwordHashed,
-            confirmPassword: confirmPasswordHashed,
-            temporary_Password
-        };
-
-        await db1.run(
-            `INSERT INTO users (firstName, lastName, userName, email, password, confirmPassword, temporary_Password) VALUES (?,?,?,?,?,?,?)`,
-            [newUser.firstName, newUser.lastName, newUser.userName, newUser.email, newUser.password, newUser.confirmPassword, newUser.temporary_Password]  
-        );
-
-        req.flash('Success', 'You are registered and can log in');
-        res.redirect('/login');
-
-});
-
-
-
-
-
-
-
-
-
-
-
 
 /*
 	The given JavaScript coded language exports a module with multiple components, including
