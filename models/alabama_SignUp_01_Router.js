@@ -178,7 +178,7 @@ router.use(passport.session());
 */
 
 /*
-	Middleware to set req.isUnauthenticated for the first use of the '/alabama_SignUp_01' URL bar.
+	Middleware to set req.isUnauthenticated for the users' first use of the '/alabama_SignUp_01' URL bar.
 */
 iVoteBallotApp.use('/alabama_SignUp_01', (req, res, next) => {
 	// Check if user is already authenticated.
@@ -186,7 +186,44 @@ iVoteBallotApp.use('/alabama_SignUp_01', (req, res, next) => {
 		req.isUnauthenticated = true;
 	}
 	next();
-})
+});
+
+/*
+    The constant redirectDashboard is a middleware function that checks if the user is already
+    logged in by verifying the existence of a userId property in the user's session. If the user
+    is logged in, the function redirects them to the dashboard page; otherwise, it allows the
+    request to proceed to the next middleware function. This middleware is commonly used to restrict
+    access to certain routes for authenticated users.
+*/
+const redirectDashboard = (req, res, next) => {
+    if(req.session.userId) {
+        res.redirect('/dashboard_01');
+    } else {
+        next();
+    }
+}
+
+
+iVoteBallotApp.get('/alabama_SignUp_01', )
+// User route signup
+iVoteBallotApp.get('/alabama_SignUp_01', redirectDashboard, (req, res) => {    
+    // Check if user already authenticated.
+    if (req.session.isAuthenticated) {
+        return alert('You are already logged in!');
+    }
+    console.log(req.session);
+    // Check if this is the user first use of '/alabama_SignUp_01' route URL bar
+    if (req.isUnauthenticated) {
+        console.log(req.flash());
+        res.render('alabama_SignUp_01', { messages: (req.flash()) })        
+        
+    } else {
+        console.log(req.flash());        
+       
+    }  
+});
+
+
 
 router
     .post('/alabama_SignUp_01', alabama_SignUp_01_Controller.createAlabamaIvoteballotDatabase);
