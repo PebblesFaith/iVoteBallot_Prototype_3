@@ -177,7 +177,16 @@ router.use(passport.session());
 	within the same controller module.
 */
 
-
+/*
+	Middleware to set req.isUnauthenticated for the first use of the '/alabama_SignUp_01' URL bar.
+*/
+iVoteBallotApp.use('/alabama_SignUp_01', (req, res, next) => {
+	// Check if user is already authenticated.
+	if (!req.session.isAuthenicated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+})
 
 router
     .post('/alabama_SignUp_01', alabama_SignUp_01_Controller.createAlabamaIvoteballotDatabase);
