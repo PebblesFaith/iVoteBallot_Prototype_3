@@ -6,6 +6,8 @@
 */
 const express = require('express');
 
+const iVoteBallotApp = express();
+
 /*
 	The alabama_SignUp_01_Router.js file is a router module that handles requests related to the
 	contact us form web page within an iVoteBallot web applications in Node.js. The
@@ -85,7 +87,7 @@ const Sqlite3SignUpSessionStore = require('better-sqlite3-session-store')(sessio
 	been successfully created')". This function call logs a message to the console
 	indicating that the database has been successfully created.
 */
-const db = new sqlite3SignUpDB('alabama_SignUp_01_Session.db', { verbose: console.log('The alabama_SignUp_01_Session have been successfully created') });
+const db = new sqlite3SignUpDB('alabama_SignUp_01_Session.db', { verbose: console.log('The alabama_SignUp_01_Session have been successfully created')  });
 
 /*
 	This statement sets up a middleware function within iVoteBallot web application 
@@ -128,6 +130,20 @@ router.use(
 */
 router.use([passport.initialize()]);
 
+iVoteBallotApp.use('/iVoteBallot', (req, res, next) => {
+	//Check if user is already authenticated.
+	if (!req.session.isAuthenicated) {
+		req.isUnauthenticated = true;
+	}
+});
+
+iVoteBallotApp.use('/alabama_SignUp_01', (req, res, next) => {
+	//Check if user is already authenticated.
+	if (!req.session.isAuthenicated) {
+		req.isUnauthenticated = true;
+	}
+});
+
 /*
 	The statement router.use(passport.session()) is used within the iVoteBallot web
 	application from the Node.js API; in order to enable user's authentication using
@@ -160,8 +176,11 @@ router.use(passport.session());
 	login1 functionality, and maps the request to a function called contactUs_01_PassportPost
 	within the same controller module.
 */
+
+
+
 router
-    .post('/dashboard_01', alabama_SignUp_01_Controller.createAlabamaSignUp_01_Database);
+    .post('/alabama_SignUp_01', alabama_SignUp_01_Controller.createAlabamaIvoteballotDatabase);
 
 router
     .get('/signup1', alabama_SignUp_01_Controller.alabamaSignUp_01_PassportGet);
