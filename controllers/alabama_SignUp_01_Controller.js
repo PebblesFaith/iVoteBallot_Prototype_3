@@ -83,69 +83,83 @@ const IONOS_SECRET_KEY = process.env.IONOS_SECRET_KEY;
 passport.use(
     'signup1',
     new LocalStrategy({
-    usernameField: 'iVoteBallot_Id_Number',
-    passwordField: 'Alabama_Id_Card_Number',
+    usernameField: 'Alabama_Id_Card_Number',
+    passwordField: 'iVoteBallot_Id_Number',
     passReqToCallback: true // To allow request object to be passed to callback
 },   
-    async (req, email, password, done) => {
-        console.log('The user passport.use(login1) iVoteBallot Id Card Identifier Code is: ' + iVoteBallot_Id_Number);
-        console.log('The user passport.use(login1) Alabama Identification Card Number is: ' + Alabama_Id_Card_Number);
+    async (req, Alabama_Id_Card_Number, iVoteBallot_Id_Number, done) => {
+        console.log('The user passport.use(login1) Alabama Voter\s State Id number is: ' + Alabama_Id_Card_Number + '.');
+        console.log('The user passport.use(login1) Alabama Voter\s iVoteBallot Card Identifiable code is: ' + iVoteBallot_Id_Number + '.');
         
-        if (!Alabama_Id_Card_Number) {
-            console.log('User\s Alabama Identification Card Number enter onto the "What is your Alabama Identification Card Number" field:' + Alabama_Id_Card_Number);            
-            console.log('The user passport.use LocalStrategy Alabama Identification Card Number and confirm Alabama Identification Card Number does not match');
-            return done(null, false, { message: 'Your Alabama Identification Card Number and confirm  Alabama Identification Card Number does not match.'})
+        if (!iVoteBallot_Id_Number) {
+            console.log('User\s Alabama Voter\s State Id number field:' + iVoteBallot_Id_Number + '.');            
+            console.log('The user passport.use LocalStrategy for Alabama Voter\s iVoteBallot Card Identifiable code does not match.');
+            return done(null, false, { message: 'Your Alabama Voter\s iVoteBallot Card Identifiable code and confirm Voter\s iVoteBallot Card Identifiable code does not match.'})
             
         } else 
-         await db1.get(`SELECT * FROM users WHERE iVoteBallot_Id_Number = ?`, iVoteBallot_Id_Number,(err, row) => {
+         await db1.get(`SELECT * FROM users WHERE Alabama_Id_Card_Number = ?`, Alabama_Id_Card_Number, (err, row) => {
+
             if (err) {
                 return done(err);
             }
           
             if (!row) {
-                return done(null, false, { message: 'You have entered the incorrect iVoteBallot_Id_Number.'});
+                return done(null, false, { message: 'You have entered the incorrect Alabama Voter\s State Id number.'});
             }
             
-             bcrypt.compare(Alabama_Id_Card_Number, row.Alabama_Id_Card_Number, (err, result) => {
+             bcrypt.compare(iVoteBallot_Id_Number, row.iVoteBallot_Id_Number, (err, result) => {
                
                 if (err) {
                     return done(err);
                 }
+				
                 if (!result) {
-                    return done(null, false, { message: 'You have entered the incorrect Alabama Identification Card Number.'});
+                    return done(null, false, { message: 'You have entered the incorrect Alabama Voter\s iVoteBallot Card Identifiable code.'});
                 }
                 //return done(null, row);
 
-                return done(null, { id: row.id,
-					 iVoteBallot_Id_Number: row.iVoteBallot_Id_Number,
-					 First_Name: row.First_Name, 
-					 Middle_Name: row.Middle_Name,
-					 Last_Name: row.Last_Name, 
-					 Suffix: row.Suffix,
-					 Date_Of_Birth: row.Date_Of_Birth,
-					 Birth_Sex: row.Birth_Sex,
-					 Gender_Identity: row.Gender_Identity,
-					 Race: row.Race,
-					 Social_Security_Number: row.Social_Security_Number,
-					 Email_Address: row.Email_Address,
-					 Phone_Number: row.Phone_Number,
-					 Address: row.Address,
-					 Address_Unit_Type: row.Address_Unit_Type,
-					 Unit_Type_Number: row.Unit_Type_Number,
-					 Country: row.Country,
-					 State: row.State,
-					 County: row.County,
-					 City: row.City,
-					 Zip_Code: row.Zip_Column,
-					 Alabama_State_Id_Type: row.Alabama_State_Id_Type,
-					 Alabama_Id_Card_Number: row.Alabama_Id_Card_Number,
+                return done(null, {
+					id: row.id,
+					userDMV_FirstName: row.userFirstName,					 
+					userDMV_MiddleName: row.userMiddleName,
+					userDMV_LastName: row.userLastName, 
+					userDMV_Suffix: row.userSuffix,
+					userDMV_DateOfBirth: row.userDateOfBirth,
+					userDMV_BirthSex: row.userBirthSex,
+					userDMV_GenderIdentity: row.userGenderIdentity,
+					userDMV_Race: row.userRace,
+					userDMV_SSN: row.userSocialSecurityNumber,
+					userDMV_EmailAddress: row.userEmailAddress,
+					userDMV_PhoneNumber: userPhoneNumber,
+					userDMV_Address: row.userAddress,
+					userDMV_AddressUnitType: row.userAddressUnitType,
+					userDMV_UnitTypeNumber: row.userUnitTypeNumber,
+					userDMV_Country: row.userCountry,
+					userDMV_State: row.userState,
+					userDMV_County: row.userCounty,
+					userDMV_City: row.userCity,
+					userDMV_ZipCode: row.userZipCode,
+					userDMV_AlabamaStateIdType: row.userAddressUnitType,
+					userDMV_AlabamaIdCardNumber: row.userAlabamaIdCardNumber,
+					userDMV_IvoteballotIdNumber: row.userIvoteballotIdNumber,
+					userRegistrationCode: row.userRegistrationCode,
+					userIdType: row.userIdType, 
+					userIdTypeNumber: row.userIdTypeNumber,
+					userConfirmIdTypeNumber: row.userConfirmIdTypeNumber,
+					userEmail: row.userEmail,
+					userConfirmEmail: row.userConfirmEamil,
+					userPassword: row.userPassword,
+					userConfirmIdTypeNumber: row.userConfirmPassword,
+					userPhoneNumber: row.userPhoneNumber,
+					userTemporaryPassword: row.userTemporaryPassword,	
 
-					 isAuthenticated: true });
+					isAuthenticated: true });
 
             });                
         });       
     }
 ));
+
 
 /*
 	The provided JavaScript coded language defines a function called passport.serializeUser
@@ -186,29 +200,40 @@ passport.deserializeUser(function(id, done) {
       if (!row) { 
         return done(null, false); 
     }
-      return done(null, { id: row.id,
-		iVoteBallot_Id_Number: row.iVoteBallot_Id_Number,
-		First_Name: row.First_Name, 
-		Middle_Name: row.Middle_Name,
-		Last_Name: row.Last_Name, 
-		Suffix: row.Suffix,
-		Date_Of_Birth: row.Date_Of_Birth,
-		Birth_Sex: row.Birth_Sex,
-		Gender_Identity: row.Gender_Identity,
-		Race: row.Race,
-		Social_Security_Number: row.Social_Security_Number,
-		Email_Address: row.Email_Address,
-		Phone_Number: row.Phone_Number,
-		Address: row.Address,
-		Address_Unit_Type: row.Address_Unit_Type,
-		Unit_Type_Number: row.Unit_Type_Number,
-		Country: row.Country,
-		State: row.State,
-		County: row.County,
-		City: row.City,
-		Zip_Code: row.Zip_Column,
-		Alabama_State_Id_Type: row.Alabama_State_Id_Type,
-		Alabama_Id_Card_Number: row.Alabama_Id_Card_Number,		
+      return done(null, { 
+		id: row.id,
+		userDMV_FirstName: row.userFirstName,					 
+		userDMV_MiddleName: row.userMiddleName,
+		userDMV_LastName: row.userLastName, 
+		userDMV_Suffix: row.userSuffix,
+		userDMV_DateOfBirth: row.userDateOfBirth,
+		userDMV_BirthSex: row.userBirthSex,
+		userDMV_GenderIdentity: row.userGenderIdentity,
+		userDMV_Race: row.userRace,
+		userDMV_SSN: row.userSocialSecurityNumber,
+		userDMV_EmailAddress: row.userEmailAddress,
+		userDMV_PhoneNumber: userPhoneNumber,
+		userDMV_Address: row.userAddress,
+		userDMV_AddressUnitType: row.userAddressUnitType,
+		userDMV_UnitTypeNumber: row.userUnitTypeNumber,
+		userDMV_Country: row.userCountry,
+		userDMV_State: row.userState,
+		userDMV_County: row.userCounty,
+		userDMV_City: row.userCity,
+		userDMV_ZipCode: row.userZipCode,
+		userDMV_AlabamaStateIdType: row.userAddressUnitType,
+		userDMV_AlabamaIdCardNumber: row.userAlabamaIdCardNumber,
+		userDMV_IvoteballotIdIdentifierCode: row.userDMV_IvoteballotIdIdentifierCode,
+		userRegistrationCode: row.userRegistrationCode,
+		userIdType: row.userIdType, 
+		userIdTypeNumber: row.userIdTypeNumber,
+		userConfirmIdTypeNumber: row.userConfirmIdTypeNumber,
+		userEmail: row.userEmail,
+		userConfirmEmail: row.userConfirmEamil,
+		userPassword: row.userPassword,
+		userConfirmIdTypeNumber: row.userConfirmPassword,
+		userPhoneNumber: row.userPhoneNumber,
+		userTemporaryPassword: row.userTemporaryPassword,		
 		
 		isAuthenticated: true });
     });
@@ -264,11 +289,11 @@ const alabamaSignUp_01_PassportPost = (
 	in order to interact with SQLite3 databases, which are lightweight and commonly used for
 	local back-end storage.
 */
-const db_Alabama_SignUp = new sqlite3.Database('alabama_SignUp_01.db', err => {
+const db1 = new sqlite3.Database('alabamaIvoteballotDatabase.db', err => {
     if (err) {
-        console.log('Developer has created the SQLite3 database connection from her JavaScript codes language which has a generated an error, as ' + err + '.');
+        console.log('Developer has created the constant db1 SQLite3 alabamaDMVDatabase database connection from her JavaScript codes language which has a generated an error, as ' + err + '.');
     }else {
-        console.log('Developer has created the SQLite3 database connection from her JavaScript codes language which has a generated successfully connection.');
+        console.log('Developer has created the constant db1 SQLite3 alabamaDMVDatabase database connection from her JavaScript codes language which has a generated successfully connection.');
     }
 });
 
@@ -281,30 +306,53 @@ const db_Alabama_SignUp = new sqlite3.Database('alabama_SignUp_01.db', err => {
 	uses the SQLite3 library and the db1 object; in order to serialize the creation of the table,
 	and ensuring that the schemas code executes in the correct order. The code also includes
 	error handling, with console.log statements that report whether the table was created
-	successfully or if an error occurred.
+	successfully or if an error occurred.	
 */
-db_Alabama_SignUp.serialize( () => {
-	const sqlite3_SignUpTable =  (`CREATE TABLE IF NOT EXISTS alabama_SignUp_01 (
+
+db1.serialize( () => {
+	const sqlTable =  (`CREATE TABLE IF NOT EXISTS alabamaIvoteballotDatabase (
 		ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
 		userDate DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
-		userRegistrationCode VARCHAR (25) NOT NULL, 
-		userIdType VARCHAR (75) NOT NULL, 
-		userIdTypeNumber VARCHAR (12) NOT NULL, 
-		userConfirmIdTypeNumber VARCHAR (12) NOT NULL,
-		userEmail VARCHAR (150) NOT NULL, 
-		userConfirmEmail VARCHAR (150) NOT NULL, 
-		userPassword VARCHAR (50) NOT NULL, 
-		userConfirmPassword VARCHAR (50) NOT NULL, 
-		userPhoneNumber VARCHAR (15) NOT NULL, 
-		userTemporaryPassword VARCHAR(50) NOT NULL
+		userDMV_FirstName VARCHAR (100) NOT NULL, 
+		userDMV_MiddleName VARCHAR (100) NOT NULL,
+		userDMV_LastName VARCHAR (100) NOT NULL,  
+		userDMV_Suffix VARCHAR (50) NOT NULL, 
+		userDMV_DateOfBirth VARCHAR (25) NOT NULL, 
+		userDMV_BirthSex VARCHAR (25) NOT NULL,
+		userDMV_GenderIdentity VARCHAR (50) NOT NULL, 
+		userDMV_Race VARCHAR (50) NOT NULL, 
+		userDMV_SSN VARCHAR (25) NOT NULL, 
+		userDMV_EmailAddress VARCHAR (100) NOT NULL, 
+		userDMV_Address VARCHAR (150) NOT NULL, 
+		userDMV_AddressUnitType VARCHAR (50) NOT NULL,
+		userDMV_UnitTypeNumber VARCHAR (100) NOT NULL,
+		userDMV_Country VARCHAR (200) NOT NULL,
+		userDMV_State VARCHAR (100) NOT NULL,
+		userDMV_County VARCHAR (100) NOT NULL,
+		userDMV_City VARCHAR (100) NOT NULL,
+		userDMV_ZipCode VARCHAR (25) NOT NULL,
+		userDMV_AlabamaStateIdType VARCHAR (100) NOT NULL,
+		userDMV_AlabamaIdCardNumber VARCHAR (25) NOT NULL,
+		userDMV_IvoteballotIdIdentifierCode VARCHAR (75) NOT NULL,
+		userRegistrationCode VARCHAR (50) NOT NULL,
+		userIdType VARCHAR (100) NOT NULL,
+		userIdTypeNumber VARCHAR (25) NOT NULL,
+		userConfirmIdTypeNumber VARCHAR (25) NOT NULL,
+		userEmail VARCHAR (150) NOT NULL,
+		userConfirmEmail VARCHAR (150) NOT NULL,
+		userPassword VARCHAR (100) NOT NULL,
+		userConfirmPassword VARCHAR (100) NOT NULL,
+		userPhoneNumber VARCHAR (25) NOT NULL,
+		userTemporaryPassword VARCHAR (100) NOT NULL
+
 	)`);
 		
-	db_Alabama_SignUp.run(sqlite3_SignUpTable, (err) => {       
+	db1.run(sqlTable, (err) => {       
 	
 		if (err) {
-			console.log('Developer created database table is not programmatically coded with an: ' + error + '!');
+			console.log('Developer created the SQLite3 alabamaDMVDatabase database table is not programmatically coded with an: ' + error + '!');
 		} else {
-			console.log('Developer has created a Sqlite3 database table which was programmatically coded successfully!');   
+			console.log('Developer has created the Sqlite3 alabamaDMVDatabase database table which was programmatically coded successfully!');   
 		}
 	});        
 });
@@ -320,46 +368,87 @@ db_Alabama_SignUp.serialize( () => {
 	and the second email sends a confirmation message to the user. And, the function also handles
 	errors than redirects the user to appropriate web pages.
 */
-const createAlabamaSignUp_01_Database = 
+const createAlabamaIvoteballotDatabase = 
 	async (req, res, next) => {   	
 
 	const data = {		
+		userDMV_FirstName: req.body.userDMV_FirstName,
+		userDMV_MiddleName: req.body.userDMV_MiddleName, 
+		userDMV_LastName: req.body.userDMV_LastName,
+		userDMV_Suffix: req.body.userDMV_Suffix,
+		userDMV_DateOfBirth: req.body.userDMV_DateOfBirth,
+		userDMV_BirthSex: req.body.userDMV_BirthSex,
+		userDMV_GenderIdentity: req.body.userDMV_GenderIdentity,
+		userDMV_Race: req.body.userDMV_Race,
+		userDMV_SSN: req.body.userDMV_SSN,		
+		userDMV_EmailAddress: req.body.userDMV_EmailAddress,
+		userDMV_Address: req.body.userDMV_Address,
+		userDMV_AddressUnitType: req.body.userDMV_AddressUnitType,
+		userDMV_UnitTypeNumber: req.body.userDMV_UnitTypeNumber,
+		userDMV_Country: req.body.userDMV_Country ,
+		userDMV_State: req.body.userDMV_State,
+		userDMV_County: req.body.userDMV_County,
+		userDMV_City: req.body.userDMV_City,
+		userDMV_ZipCode: req.body.userDMV_ZipCode,
+		userDMV_AlabamaStateIdType: req.body.userDMV_AlabamaStateIdType,
+		userDMV_AlabamaIdCardNumber: req.body.userDMV_AlabamaIdCardNumber,
+		userDMV_IvoteballotIdIdentifierCode: req.body.userDMV_IvoteballotIdIdentifierCode,
 		userRegistrationCode: req.body.userRegistrationCode,
-		userIdType: req.body.userIdType, 
+		userIdType: req.body.userIdType,
 		userIdTypeNumber: req.body.userIdTypeNumber,
 		userConfirmIdTypeNumber: req.body.userConfirmIdTypeNumber,
 		userEmail: req.body.userEmail,
 		userConfirmEmail: req.body.userConfirmEmail,
-		userPassword: req.body.userPassword,
-		userConfirmPassword: req.body.userConfirmPassword,
-		userPhoneNumber: req.body.userPhoneNumber,		
-		userTemporaryPassword: req.body.userTemporaryPassword			
+		userPhoneNumber: req.body.userPhoneNumber,
+		userTemporaryPassword: req.body.userTemporaryPassword
 	}    
 			
 	console.log(req.body);
 
-	console.log('User registration code is: ' + data.userRegistrationCode + '.');
-	console.log('User Id Type name is: ' + data.userIdType + '.');
-	console.log('User Id Type Number is: ' + data.userIdTypeNumber + '.');
-	console.log('User confirm Id Type Number is: ' + data.userConfirmIdTypeNumber + '.');
-	console.log('User email address is: ' + data.userEmail + '.');
-	console.log('User confirm email address is: ' + data.userConfirmEmail + '.');
-	console.log('User password is: ' + data.userPassword + '.');
-	console.log('User confirm password is: ' + data.userConfirmPassword + '.');
-	console.log('User phone number is: ' + data.userPhoneNumber + '.');		
-	console.log('User temporary password is: ' + data.userTemporaryPassword + '.');	
+	console.log('User first name is: ' + data.userDMV_FirstName + '.');
+	console.log('User middle name is: ' + data.userDMV_MiddleName + '.');
+	console.log('User last name is: ' + data.userDMV_LastName + '.');
+	console.log('User suffix is: ' + data.userDMV_Suffix + '.');
+	console.log('User date of birth is: ' + data.userDMV_DateOfBirth + '.');
+	console.log('User birth sex is: ' + data.userDMV_BirthSex + '.');
+	console.log('User gender identity is: ' + data.userDMV_GenderIdentity + '.');
+	console.log('User race is: ' + data.userDMV_Race + '.');
+	console.log('User social security number is: ' + data.userDMV_SSN + '.');		
+	console.log('User email address is: ' + data.userDMV_EmailAddress + '.');	
+	console.log('User address is: ' + data.userDMV_Address + '.');	
+	console.log('User address unit type is: ' + data.userDMV_AddressUnitType + '.');	
+	console.log('User unit type number is: ' + data.userDMV_UnitTypeNumber + '.');	
+	console.log('User country is: ' + data.userDMV_Country + '.');	
+	console.log('User state is: ' + data.userDMV_State + '.');	
+	console.log('User county is: ' + data.userDMV_County + '.');	
+	console.log('User city is: ' + data.userDMV_City + '.');	
+	console.log('User zip code is: ' + data.userDMV_ZipCode + '.');	
+	console.log('User\s Alabama state id type is: ' + data.userDMV_AlabamaStateIdType + '.');	
+	console.log('User\s Alabama Id card number is: ' + data.userDMV_AlabamaIdCardNumber + '.');
+	console.log('User\s Alabama iVoteBallot number is: ' + data.userDMV_IvoteballotIdIdentifierCode + '.');	
+	console.log('User\s registration code is: ' + data.userRegistrationCode + '.');
+	console.log('User\s Id type is: ' + data.userIdType + '.');
+	console.log('User\s Id type number is: ' + data.userIdTypeNumber + '.');
+	console.log('User\s confirm Id type number is: ' + data.userConfirmIdTypeNumber + '.');
+	console.log('User\s email address is: ' + data.userEmail + '.');
+	console.log('User\s confirm email address is: ' + data.userConfirmEmail + '.');
+	console.log('User\s password is: ' + data.userPassword + '.');
+	console.log('User\s confirm password is: ' + data.userConfirmPassword + '.');
+	console.log('User\s phone number is: ' + data.userPhoneNumber + '.');
+	console.log('User\s temporary password is: ' + data.userTemporaryPassword + '.');
+
 	console.log(req.session);
 
-	const sqlInsert = 'INSERT INTO alabama_SignUp_01 (userRegistrationCode, userIdType, userIdTypeNumber, userConfirmIdTypeNumber, userEmail, userConfirmEmail, userPassword, userConfirmPassword, userPhoneNumber, userTemporaryPassword) VALUES (?,?,?,?,?,?,?,?,?,?)';
-	const params = [data.userRegistrationCode, data.userIdType, data.userIdTypeNumber, data.userConfirmIdTypeNumber, data.userEmail, data.userConfirmEmail, data.userPassword, data.userConfirmPassword, data.userPhoneNumber, data.userTemporaryPassword];
+	const sqlInsert = 'INSERT INTO alabamaIvoteballotDatabase (userDMV_FirstName, userDMV_MiddleName, userDMV_LastName, userDMV_Suffix, userDMV_DateOfBirth, userDMV_BirthSex, userDMV_GenderIdentity, userDMV_Race, userDMV_SSN, userDMV_EmailAddress, userDMV_Address, userDMV_AddressUnitType, userDMV_UnitTypeNumber, userDMV_Country, userDMV_State, userDMV_County, userDMV_City, userDMV_ZipCode, userDMV_AlabamaStateIdType, userDMV_AlabamaIdCardNumber, userDMV_IvoteballotIdIdentifierCode, userRegistrationCode, userIdType, userIdTypeNumber, userConfirmIdTypeNumber, userEmail, userConfirmEmail, userPassword, userConfirmPassword, userPhoneNumber, userTemporaryPassword) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+	const params = [data.userDMV_FirstName, data.userDMV_MiddleName, data.userDMV_LastName, data.userDMV_Suffix, data.userDMV_DateOfBirth, data.userDMV_BirthSex, data.userDMV_GenderIdentity, data.userDMV_Race, data.userDMV_SSN, data.userDMV_EmailAddress, data.userDMV_Address, data.userDMV_AddressUnitType, data.userDMV_UnitTypeNumber, data.userDMV_Country, data.userDMV_State, data.userDMV_County, data.userDMV_City, data.userDMV_ZipCode, data.userDMV_AlabamaStateIdType, data.userDMV_AlabamaIdCardNumber, data.userDMV_IvoteballotIdIdentifierCode, data.userRegistrationCode, data.userIdType, data.userIdTypeNumber, data.userConfirmIdTypeNumber, data.userEmail, data.userConfirmEmail, data.userPassword, data.userConfirmPassword, data.userPhoneNumber, data.userTemporaryPassword];
 	
-	await db_Alabama_SignUp.run(sqlInsert, params, function (err, result) {
+	await db1.run(sqlInsert, params, function (err, result) {
 		if (err) {
 			res.redirect('/500');
-			console.log('An syntax error has occurred during Alabama user\s signup input fields from DOM submission with a 500 error message webpage display onto the user device screen.'); 
+			console.log('An syntax error has occurred during Alabama user\s DMV input fields from DOM submission with a 500 error message webpage display onto the user device screen.'); 
 						
 		} else {
-			console.log('The user data information typed into the input fields section has been successfully parsed into the alabama_SignUp_01 SQLite3 database. ' + Date());
+			console.log('The user Alabama data information typed into the sign up input fields webpage has been successfully parsed into the iVoteBallot\s Sign Up database. ' + Date());
 			res.redirect('/iVoteBallot');
 		}
 
@@ -511,13 +600,6 @@ const createAlabamaSignUp_01_Database =
 	});			
 };
 
-
-
-
-
-
-
-
 /*
 	The given JavaScript coded language exports a module with multiple components, including
 	a router, Passport authentication functions for GET and POST requests, a database instance, 
@@ -531,11 +613,9 @@ module.exports = {
 	alabama_SignUp_01_Router,
 	alabamaSignUp_01_PassportGet,
 	alabamaSignUp_01_PassportPost,
-	db_Alabama_SignUp,
-	createAlabamaSignUp_01_Database
-
-
+	db1,
 	
+	createAlabamaIvoteballotDatabase	
 }
   
 
