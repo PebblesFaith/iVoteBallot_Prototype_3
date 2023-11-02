@@ -600,6 +600,105 @@ const createAlabamaIvoteballotDatabase =
 	});			
 };
 
+
+
+
+
+/*
+The given JavaScript codes language defines a route for signing up a new users using
+the HTTP POST method. When an user submits a signup form, the back-end server extracts 
+the form data (first name, last name, username, email, password, and confirmPassword) 
+from the request body using the req.body object.
+
+The JavaScript codes language then logs each user input to the console, and prints 
+their values using string concatenation. It also logs the req.session object, which
+may contain session data specific to the user.
+
+The user's password and confirm password fields are then hashed using the bcrypt
+algorithm, with the bcrypt library. The same salt is used to hash both fields, 
+and the hashed values are stored in separate variables. The two hashes are compared 
+using the bcrypt.compare() method to ensure they match, and if they do not, the user
+is redirected to the signup page with an error message.
+
+If the passwords match, the user's data is inserted into a SQLite3 database using an
+SQLite3 query. The query is executed using the db1.run() method, and the results are
+returned either as a successful redirect to the login page, or an error page if
+something goes wrong.
+*/
+
+app.post('/signup', 
+    async (req, res) => {
+        const firstName = req.body.firstName;
+        const lastName = req.body.lastName;
+        const userName = req.body.userName;
+        const email = req.body.email;
+        const password = req.body.password;
+        const confirmPassword = req.body.confirmPassword;
+        const temporary_Password = req.body.temporary_Password;
+
+        console.log(req.body);
+        console.log('User first name: ' + firstName + '.');
+        console.log('User last name is: ' + lastName + '.');
+        console.log('User username is: ' + userName + '.');
+        console.log('User email is: ' + email + '.');
+        console.log('User password is: ' + password + '.');
+        console.log('User confirm password is: ' + confirmPassword + '.');
+        console.log('User temporary password is: ' + temporary_Password + '.');
+        console.log(req.session);
+
+        // User input data information validation.
+        if (!firstName || !lastName || !userName|| !email || !password || !confirmPassword) {
+            req.flash('error', 'Please fill in all fields');
+            return res.redirect('/signup');           
+        
+        } 
+
+        if (password !== confirmPassword) {
+            req.flash('error', 'Password and confirm password do not match.');
+            return res.redirect('/signup');        
+
+        } else {
+            console.log('The user passwordHashed and confirmPasswordHashed successfully match, and the user is successfully authenticated to the passport and session.');
+        }   
+
+        // Hash the password field using bcrypt.
+        const salt = await bcrypt.genSalt(13);  
+        const passwordHashed = await bcrypt.hash(req.body.password, salt); 
+
+        // Hash the confirmPassword field using the same salt, as the password field.
+        const confirmPasswordHashed = await bcrypt.hash(req.body.confirmPassword, salt); 
+
+        const newUser = {
+            firstName,
+            lastName, 
+            userName,
+            email,
+            password: passwordHashed,
+            confirmPassword: confirmPasswordHashed,
+            temporary_Password
+        };
+
+        await db1.run(
+            `INSERT INTO users (firstName, lastName, userName, email, password, confirmPassword, temporary_Password) VALUES (?,?,?,?,?,?,?)`,
+            [newUser.firstName, newUser.lastName, newUser.userName, newUser.email, newUser.password, newUser.confirmPassword, newUser.temporary_Password]  
+        );
+
+        req.flash('Success', 'You are registered and can log in');
+        res.redirect('/login');
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 	The given JavaScript coded language exports a module with multiple components, including
 	a router, Passport authentication functions for GET and POST requests, a database instance, 
