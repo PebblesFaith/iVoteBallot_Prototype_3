@@ -89,7 +89,7 @@ const flash = require('express-flash');
 	been successfully created')". This function call logs a message to the console
 	indicating that the database has been successfully created.
 */
-const db = new sqlite3SignUpDB('alabama_SignUp_01_Session.db', { verbose: console.log('The alabama_SignUp_01_Session have been successfully created')  });
+const db = new sqlite3SignUpDB('alabama_SignUp_01_Session.db', { verbose: console.log('The alabama_SignUp_01_Session have been successfully created ' + Date() + '.')  });
 
 /*
 	This statement sets up a middleware function within iVoteBallot web application 
@@ -131,6 +131,13 @@ router.use(
 	will have access to Passport.js authentication functionality.
 */
 router.use([passport.initialize()]);
+
+/*
+	Overall, this middleware provides a way to work around the limitations of HTML/EJS forms and the use
+	all the HTTP methods in an 'alabama_SignUp_01_Controller.js' and 'alabama_SignUp_01_Router.js' files,
+	making it easier to build RESTful APIs and perform CRUD operations.
+*/
+iVoteBallotApp.use(flash());
 
 /*
 	Middleware to set req.isUnauthenticated for the user first use of the '/dashboard_01' URL bar.
