@@ -98,26 +98,7 @@ async (req, userDMV_AlabamaCardNumber, userDMV_IvoteballotIdIdentifierCode, done
 			return done(null, false, { message: 'You have entered the incorrect Alabama Identification Card Number.'});
 		}
 
-		bcrypt.compare()
-
-	});
-	
-	if (!userDMV_IvoteballotIdIdentifierCode) {
-		console.log('User DMV assigned iVoteBallot Id Identifier Code enter onto the login field is:' + userDMV_IvoteballotIdIdentifierCode);            
-		console.log('The user passport.use LocalStrategy DMV assigned iVoteBallot Id Identifier Code and does not match the user iVoteballot Id Identifier Code enter onto the field.');
-		return done(null, false, { message: 'Your actual iVoteBallot\s Id Identifier Codes does not match your iVoteBallot\s Id Identifier Codes you have entered onto the input field.'})
-		
-	} else 
-	 await db1.get(`SELECT * FROM users WHERE email = ?`, userDMV_AlabamaCardNumber, (err, row) => {
-		if (err) {
-			return done(err);
-		}
-	  
-		if (!row) {
-			return done(null, false, { message: 'You have entered the incorrect Alabama Card Number.'});
-		}
-		
-		 bcrypt.compare(userDMV_IvoteballotIdIdentifierCode, row.userDMV_IvoteballotIdIdentifierCode, (err, result) => {
+		bcrypt.compare(userDMV_IvoteballotIdIdentifierCode, row.userDMV_IvoteballotIdIdentifierCode, (err, result) => {
 		   
 			if (err) {
 				console.log('The front-end users\s Alabama DMV Card Number and iVoteBallot ID Identifier Code had successfully matched to the Alabama DMV database');
@@ -129,42 +110,42 @@ async (req, userDMV_AlabamaCardNumber, userDMV_IvoteballotIdIdentifierCode, done
 			}
 			//return done(null, row);
 
-                return done(null, {
-					id: row.id,
-					userDMV_FirstName: row.userDMV_FirstName,					 
-					userDMV_MiddleName: row.userDMV_MiddleName,
-					userDMV_LastName: row.userDMV_LastName, 
-					userDMV_Suffix: row.userDMV_Suffix,
-					userDMV_DateOfBirth: row.userDMV_DateOfBirth,
-					userDMV_BirthSex: row.userDMV_BirthSex,
-					userDMV_GenderIdentity: row.userDMV_GenderIdentity,
-					userDMV_Race: row.userDMV_Race,
-					userDMV_SSN: row.userDMV_SSN,
-					userDMV_EmailAddress: row.userDMV_EmailAddress,
-					userDMV_PhoneNumber: userDMV_PhoneNumber,
-					userDMV_Address: row.userDMV_Address,
-					userDMV_AddressUnitType: row.userDMV_AddressUnitType,
-					userDMV_UnitTypeNumber: row.userDMV_UnitTypeNumber,
-					userDMV_Country: row.userDMV_Country,
-					userDMV_State: row.userDMV_State,
-					userDMV_County: row.userDMV_County,
-					userDMV_City: row.userDMV_City,
-					userDMV_ZipCode: row.userDMV_ZipCode,
-					userDMV_AlabamaStateIdType: row.userDMV_AlabamaStateIdType,
-					userDMV_AlabamaIdCardNumber: row.userDMV_AlabamaIdCardNumber,
-					userDMV_IvoteballotIdNumber: row.userDMV_IvoteballotIdNumber,
-					userDMV_IvoteballotIdIdentifierCode: row.userDMV_IvoteballotIdIdentifierCode,
-					userIdType: row.userIdType, 
-					userIdTypeNumber: row.userIdTypeNumber,
-					userConfirmIdTypeNumber: row.userConfirmIdTypeNumber,
-					userEmail: row.userEmail,
-					userConfirmEmail: row.userConfirmEamil,
-					userPassword: row.userPassword,			
-					userConfirmPassword: row.userConfirmPassword,
-					userPhoneNumber: row.userPhoneNumber,
-					userTemporaryPassword: row.userTemporaryPassword,	
+			return done(null, {
+				id: row.id,
+				userDMV_FirstName: row.userDMV_FirstName,					 
+				userDMV_MiddleName: row.userDMV_MiddleName,
+				userDMV_LastName: row.userDMV_LastName, 
+				userDMV_Suffix: row.userDMV_Suffix,
+				userDMV_DateOfBirth: row.userDMV_DateOfBirth,
+				userDMV_BirthSex: row.userDMV_BirthSex,
+				userDMV_GenderIdentity: row.userDMV_GenderIdentity,
+				userDMV_Race: row.userDMV_Race,
+				userDMV_SSN: row.userDMV_SSN,
+				userDMV_EmailAddress: row.userDMV_EmailAddress,
+				userDMV_PhoneNumber: userDMV_PhoneNumber,
+				userDMV_Address: row.userDMV_Address,
+				userDMV_AddressUnitType: row.userDMV_AddressUnitType,
+				userDMV_UnitTypeNumber: row.userDMV_UnitTypeNumber,
+				userDMV_Country: row.userDMV_Country,
+				userDMV_State: row.userDMV_State,
+				userDMV_County: row.userDMV_County,
+				userDMV_City: row.userDMV_City,
+				userDMV_ZipCode: row.userDMV_ZipCode,
+				userDMV_AlabamaStateIdType: row.userDMV_AlabamaStateIdType,
+				userDMV_AlabamaIdCardNumber: row.userDMV_AlabamaIdCardNumber,
+				userDMV_IvoteballotIdNumber: row.userDMV_IvoteballotIdNumber,
+				userDMV_IvoteballotIdIdentifierCode: row.userDMV_IvoteballotIdIdentifierCode,
+				userIdType: row.userIdType, 
+				userIdTypeNumber: row.userIdTypeNumber,
+				userConfirmIdTypeNumber: row.userConfirmIdTypeNumber,
+				userEmail: row.userEmail,
+				userConfirmEmail: row.userConfirmEamil,
+				userPassword: row.userPassword,			
+				userConfirmPassword: row.userConfirmPassword,
+				userPhoneNumber: row.userPhoneNumber,
+				userTemporaryPassword: row.userTemporaryPassword,	
 
-					isAuthenticated: true });
+				isAuthenticated: true });
 
             });                
         });       
@@ -247,7 +228,7 @@ passport.deserializeUser(function(id, done) {
 		
 		isAuthenticated: true });
     });
-  });
+});
 
   /*
 	The given JavaScript coded language is defining a route handler function for a POST request
