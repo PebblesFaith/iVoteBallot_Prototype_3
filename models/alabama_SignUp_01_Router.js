@@ -220,9 +220,30 @@ iVoteBallotApp.get('/alabama_SignUp_01', redirectDashboard, (req, res) => {
     }  
 });
 
+/*
+	The iVoteBallotApp function in order to handles the HTTP GET request to the '/dashboard_01' route, with
+	a redirectLogin, as the middleware. The function checks, if the front-end users are authenticated by calling the 
+	'req.isAuthenticated()'. If the front-end users are authenticated than the middleware renders the 'dashboard_01'
+	web page or template with the front-end users' data information; otherwise, if the front-end users are not 
+	authenticated than the middle will renders the 'alabama_LogIn_01' web page or template and logs an error message
+	which will indicates that the front-end users are not authenticated.
+*/
+
+iVoteBallotApp.get('/dashboard_01', (req, res) => {
+	if (req._construct.isAuthenticated) {
+		console.log(req.user);
+		console.log(req.session);
+		console.log('The front-end users had been successfully authenticated within the SESSION COOKIE through the PASSPORT LOCAL STRATEGY from the frontend users logins.');
+		
+		res.render('dashboard_01', { firstName: req.userDMV_FirstName, middleName: req.user.userDMV_MiddleName, lastName: req.user.userDMV_LastName });
 
 
+	} else if (req.isAuthenticated) {
+		console.log('The front-end users are not successfully authenticated within the SESSION COOKIE through the PASSPORT LOCAL STRATEGY from the frontend users logins.')
 
+		res.render('/alabama_LogIn_01');
+	}
+});
 
 router
     .post('/alabama_SignUp_01', alabama_SignUp_01_Controller.createSignUp_01_Database);
