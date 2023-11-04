@@ -169,6 +169,7 @@ iVoteBallotApp.use('/alabama_SignUp_01', (req, res, next) => {
 		if (!req.session.isAuthenticated) {
 			req.isUnauthenticated = true;
 		}
+		next();
 });
 
 /*
