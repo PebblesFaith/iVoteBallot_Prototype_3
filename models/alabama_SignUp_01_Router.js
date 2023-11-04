@@ -79,6 +79,8 @@ const sqlite3SignUpDB = require('better-sqlite3');
 */
 const Sqlite3SignUpSessionStore = require('better-sqlite3-session-store')(session);
 
+const flash = require('express-flash');
+
 /*
 	This statement creates a new instance of an SQLites database object called "db" with
 	the name "alabama_SignUp_01_Session.db". The optional second argument specifies a 
