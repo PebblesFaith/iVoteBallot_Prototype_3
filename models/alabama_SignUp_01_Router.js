@@ -89,7 +89,7 @@ const flash = require('express-flash');
 	been successfully created')". This function call logs a message to the console
 	indicating that the database has been successfully created.
 */
-const db = new sqlite3SignUpDB('alabama_SignUp_01_Session.db', { verbose: console.log('The alabama_SignUp_01_Session have been successfully created ' + Date() + '.')  });
+const dbSignUp_01 = new sqlite3SignUpDB('alabama_SignUp_01_Session.db', { verbose: console.log('The alabama_SignUp_01_Session have been successfully created. ')  });
 
 /*
 	This statement sets up a middleware function within iVoteBallot web application 
@@ -99,19 +99,19 @@ const db = new sqlite3SignUpDB('alabama_SignUp_01_Session.db', { verbose: consol
 	cookie within a maximum age of 30 minutes. The secret option sets the key used
 	to sign the session ID cookie.
 */
-router.use(
+router.use('/alabama_SignUp_01',
 	session({
 		store: new Sqlite3SignUpSessionStore ({
-			client: db,
+			client: dbSignUp_01,
 			dir:'alabama_SignUp_01_Database_Session.db',
-			name:'SESSION_NAME',
+			name:'SIGNUPSESSION',
 			cookie: {
 				secure: true,
 				httpOnly: true,
 				sameSite: true,
 				resave: false,
 				saveUninitialized: false,
-				maxAge: 'SESSION_MAX_AGE' // 30 minuites in milliseconds
+				maxAge: 'SESSION_MAX_AGE' // 30 minutes in milliseconds
 			}
 		}),
 		secret: 'EXPRESS_SESSION_KEY'
@@ -133,11 +133,39 @@ router.use(
 router.use([passport.initialize()]);
 
 /*
+	The statement router.use(passport.session()) is used within the iVoteBallot web
+	application from the Node.js API; in order to enable user's authentication using
+	the Passport library. Specifically, the router.use(passport.session()) is configuring 
+	the router to use the Passport's session-based authentication strategy, which allows
+	users to be authenticated across multiple requests by persisting user data in the
+	session store.
+
+	The router.use() method is used to register middleware functions for a specific route
+	or group of routes. In this case, passport.session() is a middleware function provided
+	by Passport library that retrieves user's data information from the session store and
+	deserializes it into a user object (email and password). This middleware is typically 
+	used after Passport's authentication middleware has been invoked.
+*/
+router.use(passport.session());
+
+
+/*
 	Overall, this middleware provides a way to work around the limitations of HTML/EJS forms and the use
 	all the HTTP methods in an 'alabama_SignUp_01_Controller.js' and 'alabama_SignUp_01_Router.js' files,
 	making it easier to build RESTful APIs and perform CRUD operations.
 */
 iVoteBallotApp.use(flash());
+
+/*
+	Middleware to set req.isUnauthenticated for the user first use of the '/500' URL bar.
+*/
+iVoteBallotApp.use('/500', (req, res, next) => {
+	//Check if user is already authenticated.
+		if (!req.session.isAuthenticated) {
+			req.isUnauthenticated = true;
+		}
+		next();
+});
 
 /*
 	Middleware to set req.isUnauthenticated for the user first use of the '/dashboard_01' URL bar.
@@ -172,21 +200,6 @@ iVoteBallotApp.use('/alabama_SignUp_01', (req, res, next) => {
 		next();
 });
 
-/*
-	The statement router.use(passport.session()) is used within the iVoteBallot web
-	application from the Node.js API; in order to enable user's authentication using
-	the Passport library. Specifically, the router.use(passport.session()) is configuring 
-	the router to use the Passport's session-based authentication strategy, which allows
-	users to be authenticated across multiple requests by persisting user data in the
-	session store.
-
-	The router.use() method is used to register middleware functions for a specific route
-	or group of routes. In this case, passport.session() is a middleware function provided
-	by Passport library that retrieves user's data information from the session store and
-	deserializes it into a user object (email and password). This middleware is typically 
-	used after Passport's authentication middleware has been invoked.
-*/
-router.use(passport.session());
 
 /*
     The constant redirectDashboard is a middleware function that checks if the user is already
@@ -223,7 +236,7 @@ iVoteBallotApp.get('/alabama_SignUp_01', redirectDashboard, (req, res) => {
 /*
 	The iVoteBallotApp function in order to handles the HTTP GET request to the '/dashboard_01' route, with
 	a redirectLogin, as the middleware. The function checks, if the front-end users are authenticated by calling the 
-	'req.isAuthenticated()'. If the front-end users are authenticated than the middleware renders the 'dashboard_01'
+	'req.isAuthenticated()'. If the front-end users are authenticated than  the middleware renders the 'dashboard_01'
 	web page or template with the front-end users' data information; otherwise, if the front-end users are not 
 	authenticated than the middle will renders the 'alabama_LogIn_01' web page or template and logs an error message
 	which will indicates that the front-end users are not authenticated.
@@ -245,14 +258,23 @@ iVoteBallotApp.get('/dashboard_01', (req, res) => {
 	}
 });
 
-router
-    .post('/alabama_SignUp_01', alabama_SignUp_01_Controller.createSignUp_01_Database);
+iVoteBallotApp.post(
+	'/login2',
+	passport.authenticate('login2', {
+		successRedirect: '/dashboard_01',
+		failureRedirect: '/login2',
+		failureFlash: true
+	})
+);
 
 router
-    .get('/signup1', alabama_SignUp_01_Controller.alabamaSignUp_01_PassportGet);
+    .post('/login2', alabama_SignUp_01_Controller.createSignUp_01_Database);
 
 router
-    .post('/signup1', alabama_SignUp_01_Controller.alabamaSignUp_01_PassportPost);
+    .get('/login2', alabama_SignUp_01_Controller.alabamaSignUp_01_PassportGet);
+
+router
+    .post('/login2', alabama_SignUp_01_Controller.alabamaSignUp_01_PassportPost);
  
 /*
 	In a Node.js application, the module.exports is used to expose a module, as a single object
