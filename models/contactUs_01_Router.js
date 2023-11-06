@@ -95,7 +95,7 @@ const db = new sqliteDB('contactUs_01_Session.db', { verbose: console.log('The c
 	cookie within a maximum age of 30 minutes. The secret option sets the key used
 	to sign the session ID cookie.
 */
-router.use(
+router.use('/contactUs_01',
 	session({
 		store: new Sqlite3ContactUsSessionStore({
 			client: db,
