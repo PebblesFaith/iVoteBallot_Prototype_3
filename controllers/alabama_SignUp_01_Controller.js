@@ -8,6 +8,8 @@
 */
 const alabama_SignUp_01_Router = require('../models/alabama_SignUp_01_Router');
 
+const bcrypt = require('bcrypt');
+
 /*
 	This line of JavaScript coded language imports the Passport library by assigning
 	it to a constant variable called "passport". The Passport library is typically used
@@ -65,211 +67,12 @@ if (process.env.NODE_ !== 'production') {
 	keys used to secure sessions data. And, the IONOS_SECRET_KEY constant is used for accessing
 	sensitive data or services protected by an API key or other credentials.
 */
-const SESSION_NAME = process.env.SESSION_NAME;
+const SESSION_NAME = process.env.SIGNUPSESSION;
 const SESSION_MAX_AGE = process.env.SESSION_MAX_AGE;
 const EXPRESS_SESSION_KEY = process.env.EXPRESS_SESSION_KEY;
 const IONOS_SECRET_KEY = process.env.IONOS_SECRET_KEY;
 
-/*
-	The passport.use Local Strategy (login1) checks, if the front-end users, 'userDMV_AlabamaCardNumber' and
-	'userDMV_IvoteballotIdIdentifierCode' data information exists onto the SQLite3, 'alabamaIvoteballotDatabase'
-	file to which passes the front-end users data information through the SESSION COOKIE for the front-end users' 
-	authentication permissions for which must be match to the SQLite3, database 'userDMV_AlabamaCardNumber' and
-	'userDMV_IvoteballotIdIdentifierCode' columns. If the front-end users' passport.use Local Strategy (login1)
-	does not match the SESSION COOKIE authentications than the SESSION COOKIE will not authenticate the front-end
-	users data information.	
-*/
-passport.use(
-    'login1',
-    new LocalStrategy({
-	usernameField: 'userDMV_AlabamaCardNumber',
-	passwordField: 'userDMV_IvoteballotIdIdentifierCode',
-    passReqToCallback: true // To allow request object to be passed to callback
-},   
-async (req, userDMV_AlabamaCardNumber, userDMV_IvoteballotIdIdentifierCode, done) => {
-	console.log('The user passport.use(login1) DMV\s Alabama Card Number is: ' + userDMV_AlabamaCardNumber);
-	console.log('The user passport.use(login1) DMV assiged iVoteBallot Id Identifier Code: ' + userDMV_IvoteballotIdIdentifierCode);
-
-	db1.get(`SELECT * FROM users WHERE userDMV_AlabamaCardNumber = ?`, userDMV_AlabamaCardNumber, (err, row) => {
-		if (err) {
-			return done(err);
-		}
-		if (!row) {
-			return done(null, false, { message: 'You have entered the incorrect Alabama Identification Card Number.'});
-		}
-
-		bcrypt.compare(userDMV_IvoteballotIdIdentifierCode, row.userDMV_IvoteballotIdIdentifierCode, (err, result) => {
-		   
-			if (err) {
-				console.log('The front-end users\s Alabama DMV Card Number and iVoteBallot ID Identifier Code had successfully matched to the Alabama DMV database');
-				return done(err);
-			}
-			if (!result) {
-				console.log('The front-end users\s Alabama DMV Card Number and iVoteBallot ID Identifier Code had not successfully matched to the Alabama DMV database');
-				return done(null, false, { message: 'You have entered the incorrect Alabama\s IvoteBallot Id Identifier Code.'});
-			}
-			//return done(null, row);
-
-			return done(null, {
-				id: row.id,
-				userDMV_FirstName: row.userDMV_FirstName,					 
-				userDMV_MiddleName: row.userDMV_MiddleName,
-				userDMV_LastName: row.userDMV_LastName, 
-				userDMV_Suffix: row.userDMV_Suffix,
-				userDMV_DateOfBirth: row.userDMV_DateOfBirth,
-				userDMV_BirthSex: row.userDMV_BirthSex,
-				userDMV_GenderIdentity: row.userDMV_GenderIdentity,
-				userDMV_Race: row.userDMV_Race,
-				userDMV_SSN: row.userDMV_SSN,
-				userDMV_EmailAddress: row.userDMV_EmailAddress,
-				userDMV_PhoneNumber: userDMV_PhoneNumber,
-				userDMV_Address: row.userDMV_Address,
-				userDMV_AddressUnitType: row.userDMV_AddressUnitType,
-				userDMV_UnitTypeNumber: row.userDMV_UnitTypeNumber,
-				userDMV_Country: row.userDMV_Country,
-				userDMV_State: row.userDMV_State,
-				userDMV_County: row.userDMV_County,
-				userDMV_City: row.userDMV_City,
-				userDMV_ZipCode: row.userDMV_ZipCode,
-				userDMV_AlabamaStateIdType: row.userDMV_AlabamaStateIdType,
-				userDMV_AlabamaIdCardNumber: row.userDMV_AlabamaIdCardNumber,
-				userDMV_IvoteballotIdNumber: row.userDMV_IvoteballotIdNumber,
-				userDMV_IvoteballotIdIdentifierCode: row.userDMV_IvoteballotIdIdentifierCode,
-				userIdType: row.userIdType, 
-				userIdTypeNumber: row.userIdTypeNumber,
-				userConfirmIdTypeNumber: row.userConfirmIdTypeNumber,
-				userEmail: row.userEmail,
-				userConfirmEmail: row.userConfirmEamil,
-				userPassword: row.userPassword,			
-				userConfirmPassword: row.userConfirmPassword,
-				userPhoneNumber: row.userPhoneNumber,
-				userTemporaryPassword: row.userTemporaryPassword,	
-
-				isAuthenticated: true });
-
-            });                
-        });       
-    }
-));
-
-/*
-	The provided JavaScript coded language defines a function called passport.serializeUser
-	which is a part of the Passport.js authentication library. This function takes two
-	arguments: user and done. The purpose of this function is to serialize the users' objects
-	(iVoteBallot_Id_Number and Alabama_Id_Card_Number) and store its with an unique identifier
-	(user ID) in a sessions. The console logs are used for debugging purposes; in order to log
-	a message indicating that the users are being serialized which should only be once for each
-	users' passport authentication process sessions.
-*/
-passport.serializeUser(function (user, done) {
-    console.log('Serializing user...');
-    console.log('user');
-    done(null, user.id);
-});
-
-/*
-	This JavaScript coded language snippet is implementing the passport.deserializeUser function, 
-	which is responsible for retrieving an users' objects (iVoteBallot_Id_Number and Alabama_Id_Card_Number)
-	from the SQLite3 database based on the users' ID provided. The function takes two parameters: the users'
-	ID and a callback function called "done". The code first logs a message to the console; in order
-	to indicate that the users are being deserialized (in the case, an users can be deserialized many times
-	within the same passport's session). It then queries the SQLite3 database using the users' ID; 
-	in order to retrieve the corresponding users' objects (iVoteBallot_Id_Number and Alabama_Id_Card_Number).
-	If an error occurs during the query, it returns the error via the "done" callback. And, if the users are
-	not found, it returns null and false via the "done" callback. If the user is found, it constructs an
-	users' objects and returns it via the "done" callback. The users' objects contains various fields such 
-	as the users' iVoteBallot_Id_Number, Alabama_State_Id_Type, Alabama_Id_Card_Number, Email_Address
-	and other properties.
-*/
-passport.deserializeUser(function(id, done) {
-    console.log('Deserializing user...')
-    console.log(id);   
-    db1.get('SELECT * FROM users WHERE id = ?', id, (err, row) => {
-      if (err) { 
-        return done(err); 
-    }
-      if (!row) { 
-        return done(null, false); 
-    }
-      return done(null, { 
-		id: row.id,
-		userDMV_FirstName: row.userDMV_FirstName,					 
-		userDMV_MiddleName: row.userDMV_MiddleName,
-		userDMV_LastName: row.userDMV_LastName, 
-		userDMV_Suffix: row.userDMV_Suffix,
-		userDMV_DateOfBirth: row.userDMV_DateOfBirth,
-		userDMV_BirthSex: row.userDMV_BirthSex,
-		userDMV_GenderIdentity: row.userDMV_GenderIdentity,
-		userDMV_Race: row.userDMV_Race,
-		userDMV_SSN: row.userDMV_SSN,
-		userDMV_EmailAddress: row.userDMV_EmailAddress,
-		userDMV_PhoneNumber: userDMV_PhoneNumber,
-		userDMV_Address: row.userDMV_Address,
-		userDMV_AddressUnitType: row.userDMV_AddressUnitType,
-		userDMV_UnitTypeNumber: row.userDMV_UnitTypeNumber,
-		userDMV_Country: row.userDMV_Country,
-		userDMV_State: row.userDMV_State,
-		userDMV_County: row.userDMV_County,
-		userDMV_City: row.userDMV_City,
-		userDMV_ZipCode: row.userDMV_ZipCode,
-		userDMV_AlabamaStateIdType: row.userDMV_AlabamaStateIdType,
-		userDMV_AlabamaIdCardNumber: row.userDMV_AlabamaIdCardNumber,
-		userDMV_IvoteballotIdIdentifierCode: row.userDMV_IvoteballotIdIdentifierCode,
-		userRegistrationCode: row.userRegistrationCode,
-		userIdType: row.userIdType, 
-		userIdTypeNumber: row.userIdTypeNumber,
-		userConfirmIdTypeNumber: row.userConfirmIdTypeNumber,
-		userEmail: row.userEmail,
-		userConfirmEmail: row.userConfirmEamil,
-		userPassword: row.userPassword,
-		userConfirmPassword: row.userConfirmPassword,
-		userPhoneNumber: row.userPhoneNumber,
-		userTemporaryPassword: row.userTemporaryPassword,
-		
-		isAuthenticated: true });
-    });
-});
-
-  /*
-	The given JavaScript coded language is defining a route handler function for a POST request
-	to the "/signup1" URL path. This function checks, if the users' requests are authenticated using
-	the PassportJS middleware by calling the req.isAuthenticated() function. And, if the requests are
-	authenticated, it is logged information within the sessions which is related to the users' data
-	information, and renders the "signup1" template. Otherwise, it renders the "error500" template,
-	and logs an error message indicating that the users are not authenticated within the sessions 
-	using PassportJS middleware. This code is used for handling users' authentication and 
-	rendering appropriate responses based on the authentications status of the POST requests.
-*/
-const alabamaSignUp_01_PassportGet = ('/login1', (req, res) => {
-    if (req.isAuthenticated()) {
-        console.log(req.user);
-        console.log('Request Session:' + req.session)
-        console.log('' + req.logIn);
-        console.log('The User had been successfully authenticated within the Session through the passport from reset password webpage!');
-        res.render('signup1');
-    } else {
-        res.render('error500')       
-        console.log('The user is not successfully authenticated within the session through the passport from reset password webpage!');
-    }
-});
-
-/*
-	This JavaScript coded language defines a route handler for the '/signup1' endpoint in
-	an iVoteballot web application that uses the PassportJS authentication middleware. And, 
-	when an users' submits a login form, the passport.authenticate function will attempt to
-	authenticate the user using the 'signup1' strategy. If users' authentication are
-	successful than the users will be redirected to the '/dashboard_01' endpoint. If users'
-	authentication fails than the users will be redirected to the '/alabama_SignUp_01' endpoint
-	and a failure message will be displayed onto users' device screens. The failureFlash option
-	indicates that a message should be displayed to the users, if users' authentication fails.
-*/
-const alabamaSignUp_01_PassportPost = (
-    '/login1',
-    passport.authenticate('login1', {
-        successRedirect: '/dashboard_01',
-        failureRedirect: '/alabama_SignUp_01',
-        failureFlash: true 
-}));
+const flash = require('express-flash');
 
 /*
 	This JavaScript coded language creates a connection to the SQLite3 database with the
@@ -280,7 +83,7 @@ const alabamaSignUp_01_PassportPost = (
 	in order to interact with SQLite3 databases, which are lightweight and commonly used for
 	local back-end storage.
 */
-const db1 = new sqlite3.Database('alabamaIvoteballotDatabase.db', err => {
+const db2 = new sqlite3.Database('alabamaIvoteballotDatabase.db', err => {
     if (err) {
         console.log('Developer has created the constant db1 SQLite3 alabamaDMVDatabase database connection from her JavaScript codes language which has a generated an error, as ' + err + '.');
     }else {
@@ -300,7 +103,7 @@ const db1 = new sqlite3.Database('alabamaIvoteballotDatabase.db', err => {
 	successfully or if an error occurred.	
 */
 
-db1.serialize( () => {
+db2.serialize( () => {
 	const sqlTable =  (`CREATE TABLE IF NOT EXISTS alabamaIvoteballotDatabase (
 		ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
 		userDate DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
@@ -338,7 +141,7 @@ db1.serialize( () => {
 
 	)`);
 		
-	db1.run(sqlTable, (err) => {       
+	db2.run(sqlTable, (err) => {       
 	
 		if (err) {
 			console.log('Developer created the SQLite3 alabamaDMVDatabase database table is not programmatically coded with an: ' + error + '!');
@@ -349,260 +152,340 @@ db1.serialize( () => {
 });
 
 /*
-The given JavaScript codes language defines a route for signing up a new users using
-the HTTP POST method. When an user submits a signup form, the back-end server extracts 
-the form data (first name, last name, username, email, password, and confirmPassword) 
-from the request body using the req.body object.
-
-The JavaScript codes language then logs each user input to the console, and prints 
-their values using string concatenation. It also logs the req.session object, which
-may contain session data specific to the user.
-
-The user's password and confirm password fields are then hashed using the bcrypt
-algorithm, with the bcrypt library. The same salt is used to hash both fields, 
-and the hashed values are stored in separate variables. The two hashes are compared 
-using the bcrypt.compare() method to ensure they match, and if they do not, the user
-is redirected to the signup page with an error message.
-
-If the passwords match, the user's data is inserted into a SQLite3 database using an
-SQLite3 query. The query is executed using the db1.run() method, and the results are
-returned either as a successful redirect to the login page, or an error page if
-something goes wrong.
+	The passport.use Local Strategy (login1) checks, if the front-end users, 'userDMV_AlabamaCardNumber' and
+	'userDMV_IvoteballotIdIdentifierCode' data information exists onto the SQLite3, 'alabamaIvoteballotDatabase'
+	file to which passes the front-end users data information through the SESSION COOKIE for the front-end users' 
+	authentication permissions for which must be match to the SQLite3, database 'userDMV_AlabamaCardNumber' and
+	'userDMV_IvoteballotIdIdentifierCode' columns. If the front-end users' passport.use Local Strategy (login1)
+	does not match the SESSION COOKIE authentications than the SESSION COOKIE will not authenticate the front-end
+	users data information.	
 */
-const createSignUp_01_Database = 
-	async (req, res, next) => {   	
+passport.use(
+    'login2',
+    new LocalStrategy({
+	usernameField: 'userDMV_AlabamaIdCardNumber',
+	passwordField: 'userDMV_IvoteballotIdIdentifierCode',
 
-	const data = {		
-		userDMV_FirstName: req.body.userDMV_FirstName,
-		userDMV_MiddleName: req.body.userDMV_MiddleName, 
-		userDMV_LastName: req.body.userDMV_LastName,
-		userDMV_Suffix: req.body.userDMV_Suffix,
-		userDMV_DateOfBirth: req.body.userDMV_DateOfBirth,
-		userDMV_BirthSex: req.body.userDMV_BirthSex,
-		userDMV_GenderIdentity: req.body.userDMV_GenderIdentity,
-		userDMV_Race: req.body.userDMV_Race,
-		userDMV_SSN: req.body.userDMV_SSN,		
-		userDMV_EmailAddress: req.body.userDMV_EmailAddress,
-		userDMV_Address: req.body.userDMV_Address,
-		userDMV_AddressUnitType: req.body.userDMV_AddressUnitType,
-		userDMV_UnitTypeNumber: req.body.userDMV_UnitTypeNumber,
-		userDMV_Country: req.body.userDMV_Country ,
-		userDMV_State: req.body.userDMV_State,
-		userDMV_County: req.body.userDMV_County,
-		userDMV_City: req.body.userDMV_City,
-		userDMV_ZipCode: req.body.userDMV_ZipCode,
-		userDMV_AlabamaStateIdType: req.body.userDMV_AlabamaStateIdType,
-		userDMV_AlabamaIdCardNumber: req.body.userDMV_AlabamaIdCardNumber,
-		userDMV_IvoteballotIdIdentifierCode: req.body.userDMV_IvoteballotIdIdentifierCode,
-		userRegistrationCode: req.body.userRegistrationCode,
-		userIdType: req.body.userIdType,
-		userIdTypeNumber: req.body.userIdTypeNumber,
-		userConfirmIdTypeNumber: req.body.userConfirmIdTypeNumber,
-		userEmail: req.body.userEmail,
-		userConfirmEmail: req.body.userConfirmEmail,
-		userPassword: req.body.userPassword,
-		userConfirmPassword: req.body.userPassword,
-		userPhoneNumber: req.body.userPhoneNumber,
-		userTemporaryPassword: req.body.userTemporaryPassword
-	}    
-			
-	console.log(req.body);
+    passReqToCallback: true // To allow request object to be passed to callback
+},   
 
-	console.log('User first name is: ' + data.userDMV_FirstName + '.');
-	console.log('User middle name is: ' + data.userDMV_MiddleName + '.');
-	console.log('User last name is: ' + data.userDMV_LastName + '.');
-	console.log('User suffix is: ' + data.userDMV_Suffix + '.');
-	console.log('User date of birth is: ' + data.userDMV_DateOfBirth + '.');
-	console.log('User birth sex is: ' + data.userDMV_BirthSex + '.');
-	console.log('User gender identity is: ' + data.userDMV_GenderIdentity + '.');
-	console.log('User race is: ' + data.userDMV_Race + '.');
-	console.log('User social security number is: ' + data.userDMV_SSN + '.');		
-	console.log('User email address is: ' + data.userDMV_EmailAddress + '.');	
-	console.log('User address is: ' + data.userDMV_Address + '.');	
-	console.log('User address unit type is: ' + data.userDMV_AddressUnitType + '.');	
-	console.log('User unit type number is: ' + data.userDMV_UnitTypeNumber + '.');	
-	console.log('User country is: ' + data.userDMV_Country + '.');	
-	console.log('User state is: ' + data.userDMV_State + '.');	
-	console.log('User county is: ' + data.userDMV_County + '.');	
-	console.log('User city is: ' + data.userDMV_City + '.');	
-	console.log('User zip code is: ' + data.userDMV_ZipCode + '.');	
-	console.log('User\s Alabama state id type is: ' + data.userDMV_AlabamaStateIdType + '.');	
-	console.log('User\s Alabama Id card number is: ' + data.userDMV_AlabamaIdCardNumber + '.');
-	console.log('User\s Alabama iVoteBallot number is: ' + data.userDMV_IvoteballotIdIdentifierCode + '.');	
-	console.log('User\s registration code is: ' + data.userRegistrationCode + '.');
-	console.log('User\s Id type is: ' + data.userIdType + '.');
-	console.log('User\s Id type number is: ' + data.userIdTypeNumber + '.');
-	console.log('User\s confirm Id type number is: ' + data.userConfirmIdTypeNumber + '.');
-	console.log('User\s email address is: ' + data.userEmail + '.');
-	console.log('User\s confirm email address is: ' + data.userConfirmEmail + '.');
-	console.log('User\s password is: ' + data.userPassword + '.');
-	console.log('User\s confirm password is: ' + data.userConfirmPassword + '.');
-	console.log('User\s phone number is: ' + data.userPhoneNumber + '.');
-	console.log('User\s temporary password is: ' + data.userTemporaryPassword + '.');
+async (req, userDMV_AlabamaIdCardNumber, userDMV_IvoteballotIdIdentifierCode, done) => {
+	console.log('The user passport.use(login2) DMV\s Alabama Card Number is: ' + userDMV_AlabamaIdCardNumber);
+	console.log('The user passport.use(login2) DMV assiged iVoteBallot Id Identifier Code: ' + userDMV_IvoteballotIdIdentifierCode);
 
-	console.log(req.session);
-
-	const sqlInsert = 'INSERT INTO alabamaIvoteballotDatabase (userDMV_FirstName, userDMV_MiddleName, userDMV_LastName, userDMV_Suffix, userDMV_DateOfBirth, userDMV_BirthSex, userDMV_GenderIdentity, userDMV_Race, userDMV_SSN, userDMV_EmailAddress, userDMV_Address, userDMV_AddressUnitType, userDMV_UnitTypeNumber, userDMV_Country, userDMV_State, userDMV_County, userDMV_City, userDMV_ZipCode, userDMV_AlabamaStateIdType, userDMV_AlabamaIdCardNumber, userDMV_IvoteballotIdIdentifierCode, userRegistrationCode, userIdType, userIdTypeNumber, userConfirmIdTypeNumber, userEmail, userConfirmEmail, userPassword, userConfirmPassword, userPhoneNumber, userTemporaryPassword) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-	const params = [data.userDMV_FirstName, data.userDMV_MiddleName, data.userDMV_LastName, data.userDMV_Suffix, data.userDMV_DateOfBirth, data.userDMV_BirthSex, data.userDMV_GenderIdentity, data.userDMV_Race, data.userDMV_SSN, data.userDMV_EmailAddress, data.userDMV_Address, data.userDMV_AddressUnitType, data.userDMV_UnitTypeNumber, data.userDMV_Country, data.userDMV_State, data.userDMV_County, data.userDMV_City, data.userDMV_ZipCode, data.userDMV_AlabamaStateIdType, data.userDMV_AlabamaIdCardNumber, data.userDMV_IvoteballotIdIdentifierCode, data.userRegistrationCode, data.userIdType, data.userIdTypeNumber, data.userConfirmIdTypeNumber, data.userEmail, data.userConfirmEmail, data.userPassword, data.userConfirmPassword, data.userPhoneNumber, data.userTemporaryPassword];
+	if (!userDMV_IvoteballotIdIdentifierCode) {
+		console.log('The user\s IvoteBallot Id Identifier Code entered into the sign up field is: ' + userDMV_IvoteballotIdIdentifierCode + '.');
+		console.log('The user\s passport.use LocalStrategy IvoteBallot Id Identifier Code from the session Sign Up database does not match to the user\s entered field IvoteBallot Id Identifier Code.');
+		
+		return done(null, false, { message: 'Your entered iVoteBallot Id Identifier Code does not match to the iVoteBallot Id Identifier Code within our database. Please try again.'});
 	
-	await db1.run(sqlInsert, params, function (err, result) {
-		if (err) {
-			res.redirect('/500');
-			console.log('An syntax error has occurred during Alabama user\s DMV input fields from DOM submission with a 500 error message webpage display onto the user device screen.'); 
-						
-		} else {
-			console.log('The user Alabama data information typed into the sign up input fields webpage has been successfully parsed into the iVoteBallot\s Sign Up database. ' + Date());
-			res.redirect('/iVoteBallot');
+	} else 
+		await db2.get(`SELECT * FROM users WHERE userDMV_AlabamaIdCardNumber = ?`, userDMV_AlabamaIdCardNumber, (err, row) => {
+
+			if (err) {
+				return done(err);
+			}
+	
+			if (!row) {
+				return done(null, false, { message: 'You have entered the incorrect Alabama Identification Card Number.'});
+			}
+
+			bcrypt.compare(userDMV_IvoteballotIdIdentifierCode, row.userDMV_IvoteballotIdIdentifierCode, (err, result) => {
+		   
+				if (err) {
+					console.log('The front-end users\s Alabama DMV iVoteBallot Id Identifier Code from the passport.use LocalStrategy that passes through the Sign Up session cookie and, the user\s iVoteBallot ID Identifier Code entered into the Sign Up field have successfully matched to the Alabama DMV database');
+					return done(err);
+				}
+	
+				if (!result) {
+					console.log('The front-end users\s Alabama DMV iVoteBallot ID Identifier Code have not successfully matched to the passport.use LocalStrategy that passes through the Sign Up session cookie Alabama DMV database');
+					return done(null, false, { message: 'You have entered the incorrect Alabama\s IvoteBallot Id Identifier Code.'});
+				}
+				//return done(null, row);
+	
+				return done(null, {
+					id: row.id,
+					userDMV_FirstName: row.userDMV_FirstName,					 
+					userDMV_MiddleName: row.userDMV_MiddleName,
+					userDMV_LastName: row.userDMV_LastName, 
+					userDMV_Suffix: row.userDMV_Suffix,
+					userDMV_DateOfBirth: row.userDMV_DateOfBirth,
+					userDMV_BirthSex: row.userDMV_BirthSex,
+					userDMV_GenderIdentity: row.userDMV_GenderIdentity,
+					userDMV_Race: row.userDMV_Race,
+					userDMV_SSN: row.userDMV_SSN,
+					userDMV_EmailAddress: row.userDMV_EmailAddress,
+					userDMV_PhoneNumber: userDMV_PhoneNumber,
+					userDMV_Address: row.userDMV_Address,
+					userDMV_AddressUnitType: row.userDMV_AddressUnitType,
+					userDMV_UnitTypeNumber: row.userDMV_UnitTypeNumber,
+					userDMV_Country: row.userDMV_Country,
+					userDMV_State: row.userDMV_State,
+					userDMV_County: row.userDMV_County,
+					userDMV_City: row.userDMV_City,
+					userDMV_ZipCode: row.userDMV_ZipCode,
+					userDMV_AlabamaStateIdType: row.userDMV_AlabamaStateIdType,
+					userDMV_AlabamaIdCardNumber: row.userDMV_AlabamaIdCardNumber,
+					userDMV_IvoteballotIdNumber: row.userDMV_IvoteballotIdNumber,
+					userDMV_IvoteballotIdIdentifierCode: row.userDMV_IvoteballotIdIdentifierCode,
+					userIdType: row.userIdType, 
+					userIdTypeNumber: row.userIdTypeNumber,
+					userConfirmIdTypeNumber: row.userConfirmIdTypeNumber,
+					userEmail: row.userEmail,
+					userConfirmEmail: row.userConfirmEamil,
+					userPassword: row.userPassword,			
+					userConfirmPassword: row.userConfirmPassword,
+					userPhoneNumber: row.userPhoneNumber,
+					userTemporaryPassword: row.userTemporaryPassword,	
+	
+					isAuthenticated: true
+				 });
+			});	
+
+        });                
+          
+    }
+));
+
+/*
+	The provided JavaScript coded language defines a function called passport.serializeUser
+	which is a part of the Passport.js authentication library. This function takes two
+	arguments: user and done. The purpose of this function is to serialize the users' objects
+	(iVoteBallot_Id_Number and Alabama_Id_Card_Number) and store its with an unique identifier
+	(user ID) in a sessions. The console logs are used for debugging purposes; in order to log
+	a message indicating that the users are being serialized which should only be once for each
+	users' passport authentication process sessions.
+*/
+passport.serializeUser(function (user, done) {
+    console.log('Serializing user...');
+    console.log('user');
+    done(null, user.id);
+});
+
+/*
+	This JavaScript coded language snippet is implementing the passport.deserializeUser function, 
+	which is responsible for retrieving an users' objects (iVoteBallot_Id_Number and Alabama_Id_Card_Number)
+	from the SQLite3 database based on the users' ID provided. The function takes two parameters: the users'
+	ID and a callback function called "done". The code first logs a message to the console; in order
+	to indicate that the users are being deserialized (in the case, an users can be deserialized many times
+	within the same passport's session). It then queries the SQLite3 database using the users' ID; 
+	in order to retrieve the corresponding users' objects (iVoteBallot_Id_Number and Alabama_Id_Card_Number).
+	If an error occurs during the query, it returns the error via the "done" callback. And, if the users are
+	not found, it returns null and false via the "done" callback. If the user is found, it constructs an
+	users' objects and returns it via the "done" callback. The users' objects contains various fields such 
+	as the users' iVoteBallot_Id_Number, Alabama_State_Id_Type, Alabama_Id_Card_Number, Email_Address
+	and other properties.
+*/
+passport.deserializeUser(function(id, done) {
+    console.log('Deserializing user...')
+    console.log(id);   
+    db2.get('SELECT * FROM users WHERE id = ?', id, (err, row) => {
+		if (err) { 
+			return done(err); 
 		}
-
-		const transporter = nodemailer.createTransport ({
-			host: 'smtp.ionos.com',
-			port: 587,
-			secure: false,
-			auth: {
-				user: 'testdevelopmentenvcustomercare@ivoteballot.com',
-				pass: IONOS_SECRET_KEY,
-			}
-		}); 
-		
-		const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
-
-		const mailOptions_01 = {
-			from: req.body.userEmail,
-			to: 'testdevelopmentenvcustomercare@ivoteballot.com', 
-			subject: `CEO/Sign Up Manager | The iVoteBallot have received a New User Sign Up Email`,  
-			html: ` 
+		if (!row) { 
+			return done(null, false); 
+		}
+		return done(null, { 
+			id: row.id,
+			userDMV_FirstName: row.userDMV_FirstName,					 
+			userDMV_MiddleName: row.userDMV_MiddleName,
+			userDMV_LastName: row.userDMV_LastName, 
+			userDMV_Suffix: row.userDMV_Suffix,
+			userDMV_DateOfBirth: row.userDMV_DateOfBirth,
+			userDMV_BirthSex: row.userDMV_BirthSex,
+			userDMV_GenderIdentity: row.userDMV_GenderIdentity,
+			userDMV_Race: row.userDMV_Race,
+			userDMV_SSN: row.userDMV_SSN,
+			userDMV_EmailAddress: row.userDMV_EmailAddress,
+			userDMV_PhoneNumber: userDMV_PhoneNumber,
+			userDMV_Address: row.userDMV_Address,
+			userDMV_AddressUnitType: row.userDMV_AddressUnitType,
+			userDMV_UnitTypeNumber: row.userDMV_UnitTypeNumber,
+			userDMV_Country: row.userDMV_Country,
+			userDMV_State: row.userDMV_State,
+			userDMV_County: row.userDMV_County,
+			userDMV_City: row.userDMV_City,
+			userDMV_ZipCode: row.userDMV_ZipCode,
+			userDMV_AlabamaStateIdType: row.userDMV_AlabamaStateIdType,
+			userDMV_AlabamaIdCardNumber: row.userDMV_AlabamaIdCardNumber,
+			userDMV_IvoteballotIdIdentifierCode: row.userDMV_IvoteballotIdIdentifierCode,
+			userRegistrationCode: row.userRegistrationCode,
+			userIdType: row.userIdType, 
+			userIdTypeNumber: row.userIdTypeNumber,
+			userConfirmIdTypeNumber: row.userConfirmIdTypeNumber,
+			userEmail: row.userEmail,
+			userConfirmEmail: row.userConfirmEamil,
+			userPassword: row.userPassword,
+			userConfirmPassword: row.userConfirmPassword,
+			userPhoneNumber: row.userPhoneNumber,
+			userTemporaryPassword: row.userTemporaryPassword,
 			
-				<p>iVoteBallot have received a new Voter Sign Up Email</p>
-				<ul>
-					<li>
-						Registration Code: ${req.body.userRegistrationCode} 
-					</li>
-					<li>
-						Email: ${req.body.userEmail}
-					</li>					
-					
-				</ul>
-
-				<p>
-					
-				</p>
-
-				<img src="cid:iVoteBallot Canva - Logo Dated 05-05-23 copy" />
-				`,		
-				
-			attachments: [
-				{
-					filename: 'iVoteBallot Canva - Logo Dated 05-05-23 copy.png',
-					path: imagePath,					
-					cid: 'iVoteBallot Canva - Logo Dated 05-05-23 copy'
-				}
-			]
-		};
-
-		const mailOptions_02 = {
-			from: 'testdevelopmentenvcustomercare@ivoteballot.com',
-			to: req.body.userEmail, 
-			subject: `Welcome to iVoteBallot - Your Voice, Your Vote!`,			
-			html: 			
-				`			
-				<p>Dear Voter</p>
-				
-				<p>
-					Welcome to iVoteBallot, your trusted platform for participating in the
-					democratic process. We're excited to have you join our community of engaged
-					voters who are committed to making a difference through their votes.										
-				</p>
-							
-				<p>
-					Here at iVoteBallot, we believe that every voice matters, and we're dedicated 
-					to making the voting process as accessible and convenient as possible for you. 
-					Whether you're a seasoned voter or a first-time participant, we're here to support 
-					you every step of the way.
-				</p>
-				
-				<p>
-					Here's what you can expect from iVoteBallot:
-				</p>
-
-				<p>
-					1.	Easy Registration: Our user-friendly platform makes it simple to sign up and 
-					    start voting. We've designed the process to be hassle-free and secure.
-
-					2.	Voting Information: Stay informed about upcoming elections, candidates, and 
-					    ballot measures. We provide resources and reminders to ensure you never miss 
-						an opportunity to make your voice heard.
-					
-					3.	Secure and Private: Your privacy and security are our top priorities. We use 
-					    state-of-the-art technology to safeguard your data and maintain the confidentiality
-						of your vote.
-					
-					4.	Community Engagement: Connect with like-minded individuals who share your passion
-					    for civic engagement. We offer forums, discussions, and events to help you stay 
-						involved.
-				</p>
-
-				<p>
-					To get started, simply log in to your iVoteBallot account using the credentials you 
-					provided during registration. Once you're in, you'll have access to all the tools and 
-					information you need to cast your vote.
-				</p>
-
-				<p>
-					If you ever have questions or need assistance, our iVoteBallot Customer Caret team 
-					is just an email or message away. We're here to help you have a smooth and positive 
-					voting experience.
-				</p>
-
-				<p>
-					Thank you for choosing iVoteBallot to be your partner in democracy. Your voice is 
-					important, and your vote can make a real difference. Together, we can create a better 
-					future.
-				</p>
-
-				<p>
-					Let's get started!
-				</p>	
-					
-				<p>Sincerely</p>			
-				
-				<p>Sarai Hannah Ajai, CEO, iVoteBallot</p>
-
-				<img src="cid:iVoteBallot Canva - Logo Dated 05-05-23 copy" />
-				
-				`,   
-				
-			attachments: [
-				{
-					filename: 'iVoteBallot Canva - Logo Dated 05-05-23 copy.png',
-					path: imagePath,					
-					cid: 'iVoteBallot Canva - Logo Dated 05-05-23 copy'
-				}
-			]
-		};
-
-		transporter.sendMail(mailOptions_01, (error, info) => {
-			if (error) {				
-				console.log('The nodemailer have received an error message for the mailOptions_01:' + error + '.');
-				res.render('535');
-			} else {
-				console.log('Email Sent successfully: ' + info.response);			
-			}
-		});                
-
-		transporter.sendMail(mailOptions_02, (error, info) => {
-			if (error) {
-				console.log('The nodemailer have received an error message for the mailOptions_02:' + error + '.');
-				res.render('535');				
-			} else {
-				console.log('Email Sent successfully: ' + info.response);
-				
-			}
+			isAuthenticated: true
 		});
+    });
+});
+
+  /*
+	The given JavaScript coded language is defining a route handler function for a POST request
+	to the "/signup1" URL path. This function checks, if the users' requests are authenticated using
+	the PassportJS middleware by calling the req.isAuthenticated() function. And, if the requests are
+	authenticated, it is logged information within the sessions which is related to the users' data
+	information, and renders the "signup1" template. Otherwise, it renders the "error500" template,
+	and logs an error message indicating that the users are not authenticated within the sessions 
+	using PassportJS middleware. This code is used for handling users' authentication and 
+	rendering appropriate responses based on the authentications status of the POST requests.
+*/
+const alabamaSignUp_01_PassportGet = ('/login2', (req, res) => {
+    if (req.isAuthenticated()) {
+        console.log(req.user);
+        console.log('Request Session:' + req.session)
+        console.log('' + req.logIn);
+        console.log('The User had been successfully authenticated within the Session through the passport from reset password webpage!');
+        res.render('signup1');
+    } else {
+        res.render('error500')       
+        console.log('The user is not successfully authenticated within the session through the passport from reset password webpage!');
+    }
+});
+
+/*
+	This JavaScript coded language defines a route handler for the '/signup1' endpoint in
+	an iVoteballot web application that uses the PassportJS authentication middleware. And, 
+	when an users' submits a login form, the passport.authenticate function will attempt to
+	authenticate the user using the 'signup1' strategy. If users' authentication are
+	successful than the users will be redirected to the '/dashboard_01' endpoint. If users'
+	authentication fails than the users will be redirected to the '/alabama_SignUp_01' endpoint
+	and a failure message will be displayed onto users' device screens. The failureFlash option
+	indicates that a message should be displayed to the users, if users' authentication fails.
+*/
+const alabamaSignUp_01_PassportPost = (
+    '/login2',
+    passport.authenticate('login2', {
+        successRedirect: '/dashboard_01',
+        failureRedirect: '/alabama_SignUp_01',
+        failureFlash: true 
+}));
+
+
+/*
+    The code defines a function called generateNewPassword() that generates a new random
+    password string. Here is the programmatic logic behind it:
+
+    1. Declare a constant length equal to 20, which represents the length of the new password.
+    2. Declare a constant charset which contains all the characters that can be used to
+       generate the password. This includes lowercase and uppercase letters, numbers, and special characters.
+    3. Declare a variable newPassword as an empty string to store the generated password.
+    4. Start a for loop that iterates length times. In each iteration, do the following:
+        a. Generate a random index between 0 and the length of charset using 
+           Math.floor(Math.random() * n), where n is the length of charset.
+        b. Use charAt() method to retrieve the character at the generated index from charset.
+        c. Append the retrieved character to the newPassword variable.
+    5. After the for loop completes, return the generated newPassword string.
+
+    In summary, the function generates a new random password by selecting random characters
+    from a predefined set of characters (i.e. charset) and concatenating them to form a password
+    of length 20.
+
+    Here is a caveat for you. If the new random password string does not contain one number when
+    sent to the user email address from nodemailer than then resetPassword.ejs file will alert
+    the user of a password error.
+*/
+
+function generateNewPassword() {
+    const length = 20;
+    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-={}[]:";?,./~';
+    let newPassword = '';
+    for (let i = 0, n = charset.length; i < length; i++) {
+      newPassword += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return newPassword;
+}
+
+/*
+    1. The code shows a JavaScript Express route for a POST request to '/login2', which handles user
+       login information submitted via a form.
+    2. The code uses the async/await syntax to handle the asynchronous operations in a synchronous
+       manner, making the code easier to read and maintain.
+    3. The code retrieves the email, temporary password, password, and confirm password fields from 
+       the request body using the req.body object.
+    4. The code then hashes the password and confirm password fields using the bcrypt library, with
+       the same salt value to ensure consistent hashing.
+    5. Finally, the code performs a database query to check if the user's email exists, and if so,
+       updates the user's password and confirm password fields with the hashed values, and redirects
+       the user to the '/login' route upon success. If there is an error with the database query, the
+       code renders an error500 page.
+*/
+
+
+const createSignUp_01_Database = 	
+	async (req, res) => {  	
 		
-	});			
+		const userDMV_AlabamaIdCardNumber = req.body.userDMV_AlabamaIdCardNumber;
+		const userDMV_IvoteballotIdIdentifierCode = req.body.userDMV_IvoteballotIdIdentifierCode;
+
+		const userRegistrationCode = req.body.userRegistrationCode;
+		const userIdType = req.body.userIdType;
+		const userIdTypeNumber = req.body.userIdTypeNumber;
+		const userConfirmIdTypeNumber = req.body.userConfirmIdTypeNumber;
+		const userEmail = req.body.userEmail;
+		const userConfirmEmail = req.body.userConfirmEmail;
+		const userPassword = req.body.userPassword;
+		const userConfirmPassword = req.body.userConfirmPassword;
+		const userPhoneNumber = req.body.userPhoneNumber;		    
+				
+		console.log(req.body);	
+		
+		console.log('User\s Alabama Id card number is: ' + userDMV_AlabamaIdCardNumber + '.');
+		console.log('User\s Alabama iVoteBallot number is: ' + userDMV_IvoteballotIdIdentifierCode + '.');
+
+		console.log('User\s registration code is: ' + userRegistrationCode + '.');
+		console.log('User\s Id type is: ' + userIdType + '.');
+		console.log('User\s Id type number is: ' + userIdTypeNumber + '.');
+		console.log('User\s confirm Id type number is: ' + userConfirmIdTypeNumber + '.');		
+		console.log('User\s email address is: ' + userEmail + '.');
+		console.log('User\s confirm email address is: ' + userConfirmEmail + '.');
+		console.log('User\s password is: ' + userPassword + '.');
+		console.log('User\s confirm password is: ' + userConfirmPassword + '.');
+		console.log('User\s phone number is: ' + userPhoneNumber + '.');        
+		
+        console.log('The request session: ' + req.session);
+
+        // Hash the password field using bcrypt.
+        const salt = await bcrypt.genSalt(13);  
+        const passwordHashed = await bcrypt.hash(userPassword, salt); 
+
+        // Hash the confirmPassword field using the same salt, as the password field.
+        const confirmPasswordHashed = await bcrypt.hash(userConfirmEmail, salt); 
+
+        // Check, if the user's email exists onto the passport serialization through the session.
+        db2.get('SELECT * FROM users WHERE userDMV_AlabamaIdCardNumber = ?', userDMV_AlabamaIdCardNumber, (err, row) => {
+            if (err) {
+                console.error(err);
+                console.log('The user\s passport and session was not successfully executed causing an 500 error message due from Developer\s programmatic coding language problems.');
+                res.render('500');
+            } else if (!row) {
+                console.log('The user\s email address is not successfully found within the passport serialization authenticated processes through the session.');
+                res.render('alabama_SignUp_01');
+            } else {
+                
+			db1.run('UPDATE users SET userRegistrationCode = ?, userIdType = ?, userIdTypeNumber = ?, userConfirmIdTypeNumber = ?, userEmail = ?, userConfirmEmail = ?, userPassword = ?, userConfirmPassword = ?, userPhoneNumber = ? WHERE userDMV_AlabamaIdCardNumber = ?', row.userRegistrationCode, row.userIdType, row.userIdTypeNumber, row.userConfirmIdTypeNumber, row.userEmail, row.userConfirmEmai,  passwordHashed, confirmPasswordHashed, row.userPhoneNumber, row.userDMV_AlabamaIdCardNumber, (err) => {
+				if (err) {
+					console.error(err);
+					console.log('The user\s passport and session was not successfully executed causing an 500 error message due from Developer\s programmatic coding language problems.');
+					res.render('500');                     
+				} else {
+					console.log('The user\s email address is successfully found within the passport serialization authenticated processes through the session.');
+					res.redirect('/alabama_LogIn_01');
+				}  
+					
+			});
+		}
+	});
 };
 
+
+		
 /*
 	The given JavaScript coded language exports a module with multiple components, including
 	a router, Passport authentication functions for GET and POST requests, a database instance, 
@@ -616,7 +499,7 @@ module.exports = {
 	alabama_SignUp_01_Router,
 	alabamaSignUp_01_PassportGet,
 	alabamaSignUp_01_PassportPost,
-	db1,
+	db2,
 	
 	createSignUp_01_Database	
 }
