@@ -41,10 +41,7 @@
 	<body>
 		<header>
 			<%- include('../common/header') %>
-		</header>
-		
-		
-		  
+		</header>		  
 
 		<div id="flex_Container">
 			<div id="flex_Container_Row">
@@ -66,76 +63,20 @@
 
 								<div class="signUp_Container_01">  
 									
+									<label>What is Your Alabama Identification Card Number |</label>                                   
+                                    <input id="idTypeNumberSignUp_01" type="text" name="userDMV_AlabamaIdCardNumber" maxlength="40" />                                   
+                                    <span id="userIdTypeNumberSignUp_01ErrorMessage"></span>                             
+                                    <br>
+
 									<p id="descriptive_Paragraph_01">What is your Alabama AlphaNumeric card codes including dashes, sent to you by way of the USPS from the Department of Motor Vehicles in collaboration with your State Voting Commission?</label>
 									<p id="voter_Card_01">
 										<img id="voter_Card_Image" src="../images/states_Icon_Photographs/iVoteBallot - Example Card.png" />					
 									</p> 								
 									<label>What is your iVoteBallot ID Identifier Code? |</label>									
-									<input id="registrationCodeSignUp_01" type="text" name="userRegistrationCode" maxlength="75">									
+									<input id="registrationCodeSignUp_01" type="text" name="userDMVIvoteballotIdIdentiferCode" maxlength="75">									
 									<span id="userRegistrationCodeSignUp_01ErrorMessage"></span>	
-									<br>
-									
-                                    <label>What type of Alabama identification Card do you have? |</label>                                    
-                                    <input id="idTypesSignUp_01" type="text" multiple name="userIdType" list="voterIdList" size="64" />
-
-                                    <datalist id="voterIdList">
-                                        <option value="" disable selected hidden></option>
-                                            <option value="Alabama Driver License"></option>
-                                            <option value="Alabama Real ID Driver License"></option>
-                                            <option value="Alabama State ID Card"></option> 
-                                            <option value="Military ID"></option> 
-                                            <option value="Tribal ID"></option>              
-                                    </datalist>                                  
-                                    <span id="userIdTypesSignUp_01ErrorMessage"></span>
-                                    <br>
-
-                                    <label>What is your Alabama Identification Card Number? |</label>                                   
-                                    <input id="idTypeNumberSignUp_01" type="text" name="userIdTypeNumber" maxlength="40" />                                   
-                                    <span id="userIdTypeNumberSignUp_01ErrorMessage"></span>                             
-                                    <br>
-
-									<label>Confirm Your Alabama Identification Card Number |</label>                                   
-                                    <input id="confirmIdTypeNumberSignUp_01" type="text" name="userConfirmIdTypeNumber" maxlength="40" />                                   
-                                    <span id="userConfirmIdTypeNumberSignUp_01ErrorMessage"></span>                             
-                                    <br>
-
-									<label>Email Your Address |</label>
-									<input id="emailSignUp_01" type="text" name="userEmail" maxlength="250">					
-									<span id="userEmailSignUp_01ErrorMessage"></span>
-									<br>
-									
-									<label>Confirm Your Email Address |</label>									
-									<input id="confirmEmailSignUp_01" type="text" name="userConfirmEmail" maxlength="250">									
-									<span id="userConfirmEmailSignUp_01ErrorMessage"></span>
-									<br>
-
-									<label>Create Your Password |</label>
-										<div class="password_Container">										
-											<input id="passwordSignUp_01" type="password" name="userPassword" maxlength="250">	
-											<a href="#" id="showHide_01" onclick="toggle_InputPasswordCheckBox()">Show</a>
-										</div>				
-									<span id="userPasswordSignUp_01ErrorMessage"></span>
-									<br>
-									
-									<label>Confirm Your Password |</label>
-										<div class="confirmPassword_Container">									
-											<input id="confirmPasswordSignUp_01" type="password" name="userConfirmPassword" maxlength="250">
-											<a href="#" id="showHide_02" onclick="toggle_InputConfirmPasswordCheckBox()">Show</a>	
-										</div>						
-									<span id="userConfirmPasswordSignUp_01ErrorMessage"></span>
-									<br>
-
-                                    <label>Phone Number |</label>
-                                    <p id="phoneNumber_Style_01">(Enter your phone number in the format of xxx-xxx-xxxx.)</p>								
-									<input id="phoneNumberSignUp_01" type="text" name="userPhoneNumber" maxlength="15">									
-									<span id="userPhoneNumberSignUp_01ErrorMessage"></span>										
-									<br>		
-									
-									<input type="text" id="temporaryPassword" size="75" name="userTemporaryPassword" value="userTemporaryPassword">
-									<br>
-									<span id="userTemporaryPasswordErrorMessage"></span>
-									<br>	
-
+									<br>									
+                                  
 									<hr class="hr_Red_line_01">
 
 									<a class="forgotPassword_SignUp_01" href="http://localhost:8080/alabama_ForgotPassword_01">Forgot Password?</a>
@@ -144,9 +85,7 @@
 									<p id="memberQuestion_01">
 										Are you already an iVoteBallot's member?
 										<a class="signUp_LogIn_01" href="http://localhost:8080/alabama_SignUporLogIn_01">Access your account.</a>
-									</p>									
-
-									<span id = "userPasswordSignUp_01ErrorMessage"></span>	
+									</p>		
 									
 									<br>									
 								
@@ -170,7 +109,7 @@
 						<button class="logInButton_01" onclick="document.getElementById('popUpLogInMenu').style.display='block'" style="width:auto;">Log In | Alabama</button>
 						
 						<div id="popUpLogInMenu" class="logIn_Form_01">
-						
+					
 							<form class="form_LogIn_01 animate" name="logInForm" onsubmit="return validateLogInForm()" action="/dashboard_01" method="POST">
 
 								<div class="imageContainer">
@@ -214,7 +153,7 @@
 									<button class="cancelButtonLogIn_01" type="button" onclick="document.getElementById('popUpLogInMenu').style.display='none'" >Cancel</button>
 								</div>
 
-							</form>
+							</form>						
 
 						</div>
 
