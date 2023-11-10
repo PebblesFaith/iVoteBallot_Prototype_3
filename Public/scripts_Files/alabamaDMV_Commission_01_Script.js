@@ -7,8 +7,11 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	
 	const userDMV_FirstName = document.getElementById('firstName').value.trim(); 
 	const userDMV_MiddleName = document.getElementById('middleName').value.trim();  
-	const userDMV_LastName = document.getElementById('lastName').value.trim();               
-	             
+	const userDMV_LastName = document.getElementById('lastName').value.trim(); 
+	const userDMV_Suffix = document.getElementById('suffix').value.trim();   
+	const userDMV_DateOfBirth = document.getElementById('dateOfBirth').value.trim();    
+	const userDMV_BirthSex = document.getElementById('birthSex').value.trim();   
+	const userDMV_GenderIdentity = document.getElementById('genderIdentity').value.trim();      
 	                                
 	
 	const regExName = /^[A-Za-z\s]+$/;
@@ -57,6 +60,63 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		return false;
 	
 	}
+
+	if (userDMV_Suffix === '' || userDMV_Suffix == null) {
+		document.getElementById('userDMV_SuffixErrorMessage').textContent = 'Do the user have a suffix name? If so, please type in the user suffix name into the input field or skip the user suffix name input field entirety.';
+
+		setTimeout(function() {
+			document.getElementById('userDMV_SuffixErrorMessage').textContent = '';
+		},
+		9000)                                           
+							
+		} else if (userDMV_Suffix.length <= 0 || !userDMV_Suffix.match(regExName)) {
+		document.getElementById('userDMV_SuffixErrorMessage').textContent = 'The user suffix name is an optional input field; however, you must enter more than one characters into the user suffix name required input field.';
+
+		setTimeout(function() {
+			document.getElementById('userDMV_SuffixErrorMessage').textContent = '';
+		},
+		9000)
+	
+		return false;  
+
+	}
+
+	if (userDMV_DateOfBirth === '' || userDMV_DateOfBirth == null) {                                                               
+		document.getElementById('userDMV_DateOfBirthErrorMessage').innerHTML = 'The user date of birth is a required input field.';
+	
+		setTimeout(function() {
+			document.getElementById('userDMV_DateOfBirthErrorMessage').innerHTML = '';
+		},
+		9000)
+	
+		return false;		
+
+	}
+
+	if (userDMV_BirthSex === '' || userDMV_BirthSex == null) {                                                               
+		document.getElementById('userDMV_BirthSexErrorMessage').innerHTML = 'The user birth sex is a required input field.';
+	
+		setTimeout(function() {
+			document.getElementById('userDMV_BirthSexErrorMessage').innerHTML = '';
+		},
+		9000)
+	
+		return false;		
+
+	}
+
+	if (userDMV_GenderIdentity === '' || userDMV_GenderIdentity == null) {                                                               
+		document.getElementById('userDMV_GenderIdentityErrorMessage').innerHTML = 'The user gender identity is a required input field.';
+	
+		setTimeout(function() {
+			document.getElementById('userDMV_GenderIdentityErrorMessage').innerHTML = '';
+		},
+		9000)
+	
+		return false;		
+
+	}
+
 
 
 
