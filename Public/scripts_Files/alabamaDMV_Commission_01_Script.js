@@ -11,11 +11,18 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	const userDMV_Suffix = document.getElementById('suffix').value.trim();   
 	const userDMV_DateOfBirth = document.getElementById('dateOfBirth').value.trim();    
 	const userDMV_BirthSex = document.getElementById('birthSex').value.trim();   
-	const userDMV_GenderIdentity = document.getElementById('genderIdentity').value.trim();      
+	const userDMV_GenderIdentity = document.getElementById('genderIdentity').value.trim();  
+	const userDMV_Race = document.getElementById('race').value.trim();  
+	const userDMV_SSN = document.getElementById('ssn').value.trim(); 
+	const userDMV_Email = document.getElementById('email').value.trim();
+	const userDMV_ConfirmEmail = document.getElementById('confirmEmail').value.trim();  
+	const userDMV_PhoneNumber = document.getElementById('phoneNumber').value.trim();
 	                                
 	
 	const regExName = /^[A-Za-z\s]+$/;
-	//const regExEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;                                           
+	const regExSSN =  /^\d{3}\-\d{2}\-\d{4}$/;  
+	const regExEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;      
+	const regExPhoneNumber = /^\d{3}\-\d{3}\-\d{4}$/;                                      
 									   
 	if (userDMV_FirstName === '' || userDMV_FirstName == null || userDMV_FirstName.length <= 2 || !userDMV_FirstName.match(regExName)) {                                                               
 		document.getElementById('userDMV_FirstNameErrorMessage').innerHTML = 'The user first name is a required input field or you must enter more than two characters into the userfirst name required input field.';
@@ -116,6 +123,81 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		return false;		
 
 	}
+
+	if (userDMV_Race === '' || userDMV_Race == null) {                                                               
+		document.getElementById('userDMV_RaceErrorMessage').innerHTML = 'The user race is a required input field.';
+	
+		setTimeout(function() {
+			document.getElementById('userDMV_RaceErrorMessage').innerHTML = '';
+		},
+		9000)
+	
+		return false;		
+
+	}
+
+	if (userDMV_SSN === '' || userDMV_SSN == null || !userDMV_SSN.match(regExSSN)) {                                                               
+		document.getElementById('userDMV_SSNErrorMessage').innerHTML = 'The user SSN is a required input field or you must enter more than two characters into the userfirst name required input field.';
+	
+		setTimeout(function() {
+			document.getElementById('userDMV_SSNErrorMessage').innerHTML = '';
+		},
+		9000)
+	
+		return false;		
+
+	}
+
+	if (userDMV_Email === '' || userDMV_Email == null || userDMV_Email.length <= 6 || !userDMV_Email.match(regExEmail)) {
+		document.getElementById('userDMV_EmailErrorMessage').textContent = 'The user\s email address is a required input field and you must enter the correct user\s email address format into the require input field.';
+
+		setTimeout(function() {
+			document.getElementById('userDMV_EmailErrorMessage').textContent = '';
+		},
+		9000)
+
+		return false;
+
+	}
+
+	if (userDMV_ConfirmEmail === '' || userDMV_ConfirmEmail == null || userDMV_ConfirmEmail.length <= 6 || !userDMV_ConfirmEmail.match(regExEmail)) {
+		document.getElementById('userDMV_ConfirmEmailErrorMessage').textContent = 'The user\s confirm email address is a required input field and you must enter the correct user\s confirm email address format into the require input field.';
+
+		setTimeout(function() {
+			document.getElementById('userDMV_ConfirmEmailErrorMessage').textContent = '';
+		},
+		9000)
+
+		return false;
+
+	}
+	
+	if (userDMV_Email != userDMV_ConfirmEmail) {
+		document.getElementById('userDMV_ConfirmEmailErrorMessage').textContent = 'The user\s email address does not match to his/her confirm email address which are required input fields.';
+
+		setTimeout(function() {
+			document.getElementById('userDMV_ConfirmEmailErrorMessage').textContent = '';
+		},
+		9000)
+
+		return false;
+
+	}
+
+	if (userDMV_PhoneNumber === '' || userDMV_PhoneNumber == null || userDMV_PhoneNumber.length <= 10 || !userDMV_PhoneNumber.match(regExPhoneNumber))  {                                                               
+		document.getElementById('userDMV_PhoneNumberErrorMessage').textContent = 'Your phone number is a required input field or you must enter exactly twelve number digits into the phone number required input field.';
+
+		setTimeout(function() {
+			document.getElementById('userDMV_PhoneNumberErrorMessage').textContent = '';
+		},
+		9000)
+
+		return false;				
+
+	}	
+
+
+
 
 
 
