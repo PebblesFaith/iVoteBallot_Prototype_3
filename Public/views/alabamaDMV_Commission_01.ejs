@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>iVoteBallot | Alabama DMV </title>
+
+	<link rel="stylesheet" type="text/css" href="../styles/alabamaDMV_Commission_01.css" />
+
+	<script defer src="../scripts_Files/alabamaDMV_Commission_01_Script.js"></script>	
+
+</head>
+
+	<body>
+		<header>
+			<%- include('../common/iVoteBallot_EmployeesHeader') %>
+		</header>		  
+
+		<div id="flex_Container">
+			<div id="flex_Container_Row">
+				<div id="flex_Container_Column">
+					<div id="first_Column">
+
+						<button class="dmv_CommissionButton_01" onclick="document.getElementById('popUpDMV_CommissionMenu').style.display='block'" style="width:auto;">DMV Commission - Voters' Details Information | Alabama</button>
+						
+						<div id="popUpDMV_CommissionMenu" class="dmvCommission_Form_01">
+						
+							<form 
+								class="form_AlabamaDMV_Commission animate"
+								name="alabamaDMV_CommissionForm" 
+								onsubmit="return validateAlabamaDMV_CommissionForm()" 	
+								action="/alabamaDMV_Commission_01" 	
+								method="POST">
+
+								<div class="imageContainer">
+									
+									<a href="http://localhost:8080/iVoteBallot"><img class="header_Image_01" src="../images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png" /></a>
+
+									<hr class="hr_Grey_line_01">
+									<hr class="hr_Red_line_01">
+									<p id="titleDMVCommission_01">Election Assure Experts</p>
+									<hr class="hr_Red_line_01">
+									<hr class="hr_Grey_line_01">
+
+									<p id="titleDMVCommission_02"> Add Voter Data Information | Alabama</p>
+									<span class="close" onclick="document.getElementById('popUpDMV_CommissionMenu').style.display='none'" title="Close Sign Up Form">&times;</span>
+								</div>
+
+								<div class="dmvCommission_Container_01">  
+
+									<label>First Name |</label>                                           
+									<input id="firstName" type="text" name="userDMV_FirstName" maxlength="75"> 								                          
+									<span id = "userDMV_FirstNameErrorMessage"></span>																					
+
+									<br>
+									<br>
+									<input id="dmv_CommissionButton" type="submit" value="ADD VOTER INFORMATION"></button>
+									<br> 
+
+								</div>
+								
+							</form>
+
+						</div>
+					
+					</div>
+
+				</div>
+								
+			</div>
+
+		</div>		
+
+		<footer>
+			<%- include('../common/footer') %>
+		</footer>		
+		
+	</body>
+</html>
