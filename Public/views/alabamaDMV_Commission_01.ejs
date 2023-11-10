@@ -51,15 +51,55 @@
 
 									<label>First Name |</label>                                           
 									<input id="firstName" type="text" name="userDMV_FirstName" maxlength="75"> 								                          
-									<span id = "userDMV_FirstNameErrorMessage"></span>
+									<span id="userDMV_FirstNameErrorMessage"></span>
 									<br>
+
 									<label>Middle Name |</label>                            
 									<input id="middleName" type="text" name="userDMV_MiddleName" maxlength="75">                            
-									<span id = "userDMV_MiddleNameErrorMessage"></span>
+									<span id="userDMV_MiddleNameErrorMessage"></span>
 									<br>
+								
 									<label>Last Name |</label>                            
 									<input id="lastName" type="text" name="userDMV_LastName" maxlength="75">                           
-									<span id = "userDMV_LastNameErrorMessage"></span>
+									<span id="userDMV_LastNameErrorMessage"></span>
+									<br>
+
+									<select id="suffix" name="userDMV_Suffix">
+										<option id="selectBackground" value="" disable selected hidden>Suffix (optional)</option>
+											<option value = JR>JR</option>
+											<option value = SR>SR</option>
+											<option value = I>I</option>
+											<option value = II>II</option>
+											<option value = III>III</option>
+											<option value = IV>IV</option>
+											<option value = V>V</option>
+									</select>																
+									<span id = "userDMV_SuffixErrorMessage"></span>
+									<br>
+
+									<label>Date of Birth</label>
+									<input id="dateOfBirth" type="date" name="userDMV_DateOfBirth" min="1900-01-01" max="2005-11-30" maxlength="75">
+									<span id="userDMV_DateOfBirthErrorMessage"></span>
+									<br>
+
+									<select id="birthSex" name="userDMV_BirthSex">
+										<option id="selectBackground" value="" disable selected hidden>Birth Sex</option>
+											<option value = Female>Female</option>
+											<option value = Male>Male</option>											
+									</select>																
+									<span id = "userDMV_BirthSexErrorMessage"></span>
+									<br>
+
+									<select id="genderIdentity" name="userDMV_GenderIdentity">
+										<option id="selectBackground" value="" disable selected hidden>Gender Identity</option>
+											<option value = Female>Female</option>
+											<option value = Male>Male</option>	
+											<option value = X>X</option>											
+									</select>																
+									<span id = "userDMV_GenderIdentityErrorMessage"></span>
+									<br>
+
+									
                          
 									
 									
