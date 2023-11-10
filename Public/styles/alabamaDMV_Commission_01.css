@@ -331,7 +331,9 @@ span.forgot_Password {
 	border: none;  
 }
 
-#firstName 
+#firstName,
+#middleName,
+#lastName
 {
 	outline: none; 
 	border-top-style: hidden;
@@ -351,7 +353,9 @@ span.forgot_Password {
 	cursor: 14px;  
 }  
   
-#firstName
+#firstName,
+#middleName,
+#lastName
 {
 	display: flex;
 	flex-wrap: row wrap;
@@ -363,13 +367,17 @@ span.forgot_Password {
 	white-space: normal;   
 }
   
-#firstName 
+#firstName,
+#middleName,
+#lastName
 {
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
 }
   
-#firstName:focus 
+#firstName:focus,
+#middleName:focus,
+#lastName:focus
 {
 	border:3px solid rgb(205, 214, 249);
 	border-top-style: hidden;
@@ -380,7 +388,9 @@ span.forgot_Password {
 	width: 75%;  
 }
 
-#userDMV_FirstNameErrorMessage 
+#userDMV_FirstNameErrorMessage,
+#userDMV_MiddleNameErrorMessage,
+#userDMV_LastNameErrorMessage
 { 
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: clamp(9px, 2vw, 13px); 
