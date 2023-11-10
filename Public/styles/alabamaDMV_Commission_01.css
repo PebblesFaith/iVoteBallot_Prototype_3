@@ -333,7 +333,11 @@ span.forgot_Password {
 
 #firstName,
 #middleName,
-#lastName
+#lastName,
+#suffix,
+#dateOfBirth,
+#birthSex,
+#genderIdentity
 {
 	outline: none; 
 	border-top-style: hidden;
@@ -355,7 +359,11 @@ span.forgot_Password {
   
 #firstName,
 #middleName,
-#lastName
+#lastName,
+#suffix,
+#dateOfBirth,
+#birthSex,
+#genderIdentity
 {
 	display: flex;
 	flex-wrap: row wrap;
@@ -369,7 +377,11 @@ span.forgot_Password {
   
 #firstName,
 #middleName,
-#lastName
+#lastName,
+#suffix,
+#dateOfBirth,
+#birthSex,
+#genderIdentity
 {
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
@@ -377,7 +389,11 @@ span.forgot_Password {
   
 #firstName:focus,
 #middleName:focus,
-#lastName:focus
+#lastName:focus,
+#suffix:focus,
+#dateOfBirth:focus,
+#birthSex:focus,
+#genderIdentity:focus
 {
 	border:3px solid rgb(205, 214, 249);
 	border-top-style: hidden;
@@ -390,7 +406,11 @@ span.forgot_Password {
 
 #userDMV_FirstNameErrorMessage,
 #userDMV_MiddleNameErrorMessage,
-#userDMV_LastNameErrorMessage
+#userDMV_LastNameErrorMessage,
+#userDMV_SuffixErrorMessage,
+#userDMV_DateOfBirthErrorMessage,
+#userDMV_BirthSexErrorMessage,
+#userDMV_GenderIdentityErrorMessage
 { 
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: clamp(9px, 2vw, 13px); 
