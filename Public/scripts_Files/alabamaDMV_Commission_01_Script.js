@@ -16,8 +16,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	const userDMV_SSN = document.getElementById('ssn').value.trim(); 
 	const userDMV_Email = document.getElementById('email').value.trim();
 	const userDMV_ConfirmEmail = document.getElementById('confirmEmail').value.trim();  
-	const userDMV_PhoneNumber = document.getElementById('phoneNumber').value.trim();
-	                                
+	const userDMV_PhoneNumber = document.getElementById('phoneNumber').value.trim();		
 	
 	const regExName = /^[A-Za-z\s]+$/;
 	const regExSSN =  /^\d{3}\-\d{2}\-\d{4}$/;  
