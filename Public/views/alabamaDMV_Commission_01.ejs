@@ -133,14 +133,13 @@
 
 									<label>Phone Number | Enter user's phone number in the format of xxx-xxx-xxxx.</label>							
 									<input id="phoneNumber" type="text" name="userDMV_PhoneNumber" maxlength="15">								
-									<span id="userDMV_PhoneNumberErrorMessage"></span>	
-
-									
-                         
-									
-									
-
-
+									<span id="userDMV_PhoneNumberErrorMessage"></span>
+									<br>
+								
+									<label>Address | Please enter user complete address, as it appears onto the user's state governmental issued ID card.</label>                                    
+                                    <input id="address" type="text" name="userDMV_Address" maxlength="250">                                  
+                                    <span id="userDMV_AddressErrorMessage"></span>
+                                    <br>  
 
 									<br>
 									<br>
@@ -163,7 +162,7 @@
 
 		<footer>
 			<%- include('../common/footer') %>
-		</footer>		
-		
+		</footer>	
+			
 	</body>
 </html>
