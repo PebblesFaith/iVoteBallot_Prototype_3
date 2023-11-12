@@ -24,6 +24,10 @@ const validateAlabamaDMV_CommissionForm = (e) => {
     const userDMV_CountySelection = document.getElementById('countySelect').value.trim();
 	const userDMV_CitySelection = document.getElementById('citySelect').value.trim();
 	const userDMV_ZipSelection = document.getElementById('zipSelect').value.trim();
+    const userDMV_IdType = document.getElementById('idType').value.trim();
+    const userDMV_IdTypeNumber = document.getElementById('idTypeNumber').value.trim();
+    const userCommission_IvoteBallotIdIdentifierCode = document.getElementById('iVoteBallotIdIdentifierCode').value.trim();
+    const userCommission_IvoteBallotIdCodeBcryptic = document.getElementById('iVoteBallotIdCodeHidden_Bcryptic').value.trim();
 	
 	
 	const regExName = /^[A-Za-z\s]+$/;
@@ -33,6 +37,8 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	const regExAddress = /^\d+[ ](?:[A-Za-z0-9.-]+[ ]?)+(?:Avenue|Alley|Anex|Arcade|Boyou|Beach|Bend|Bluffs|Bottom|Branch|Brook|Bridge|Burg|Burgs|Bypass|Camp|Canyon|Cape|Causeway|Parkway|Pkwy|Center|Centers|Circle|Circles|Cliff|Cliffs|Club|Corner|Cove|Creek|Cresent|Crest|Crossing|XING|Dale|Dam|Divide|Estate|Expressway|Expy|Express|Fall|Falls|Ferry|Field|Fields|Forest|Fork|Freeway|Garden|Gardens|Gateway|Glen|Glens|Greens|Grove|Harbor|Harbors|Haven|Heights|Highway|Hill|Hills|Hollow|Inlet|Island|Islands|Isle|Junction|Key|Keys|Quay|Knoll|Knolls|Lake|Lakes|Land|Landing|Lock|Locks|Lodge|Loop|Mall|Manor|Manors|Meadow|Meadows|Mews|Mill|Mills|Mission|Motorway|Mountain|Mountains|Neck|Orchard|Oval|Overpass|Park|Parks|Parkways|Pass|Passage|Path|Pike|Plaza|Port|Ports|Ramp|Ranch|Ridge|River|Route|Row|Run|Shoal|Shore|Shores|Skyway|Springs|Springs|Square|Squares|SQ|Station|Stravenue|STRA|Stream|Summit|SMT|Terrace|TRCE|Throughway|TRWY|Trail|TRL|Tunnel|TUNL|Turnpike|TPKE|Underpass|UPAS|Union|UN|Unions|UNS|Valley|VLY|Viaduct|VIA|Village|View|Views|VW|Ville|Vista|VL|VIS|Walk|Walks|Way|Ways|Well|Wells|WL|WLS|Lane|Road|Boulevard|Drive|Street|Place|Ave|Dr|Rd|Blvd|Ln|St|Cir|South|S|North|N|West|W|East|E|nd|st|rd|th)\.?/;                                
 	const regExUnitTypeNumber = /^[0-9a-zA-Z-]+$/;
 	const regExUnitIdTypeDetails = /^(House)$/;
+    const regExAlabamaId = /(^\d{7}$)|(^\d{8}$)/;
+    const regIvoteballotIdIdentifierCode = /\d{2}[A-Z]{1}\d{1}\-\d{1}[A-Z]{1}\d{1}\-[A-Z]{2}\-\d{3}[A-Z]{2}\d{6}\-\d{2}/;
 	
 	if (userDMV_FirstName === '' || userDMV_FirstName == null || userDMV_FirstName.length <= 2 || !userDMV_FirstName.match(regExName)) {                                                               
 		document.getElementById('userDMV_FirstNameErrorMessage').innerHTML = 'The user first name is a required input field or you must enter more than two characters into the userfirst name required input field.';
@@ -316,7 +322,72 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	
 		return false;  
 
-	}    
+	} 
+
+    if (userDMV_IdType === '' || userDMV_IdType == null) {
+        document.getElementById('userDMV_IdTypeErrorMessage').textContent = 'The user\'s Alabama identification card type is a required option field and you must select the user correct Alabama\'s identification card type from the option require field.';
+
+        setTimeout(function() {
+            document.getElementById('userDMV_IdTypeErrorMessage').textContent = '';
+        },
+        9000)    	
+    
+        return false;  
+
+    }
+
+    if (userDMV_IdTypeNumber === '' || userDMV_IdTypeNumber == null || !userDMV_IdTypeNumber.match(regExAlabamaId))  {                                                               
+        document.getElementById('userDMV_IdTypeNumberErrorMessage').textContent =  'The user\'s Alabama numeric identification card characters are a required field or you must enter the user correct Alabama numeric identification card characters from his or her Alabama\'s identification card into the required field.';
+
+        setTimeout(function() {
+            document.getElementById('userDMV_IdTypeNumberErrorMessage').textContent = '';
+        },
+        9000)
+
+        return false;
+
+    }  
+    
+    if (userDMV_IdTypeNumber === '' || userDMV_IdTypeNumber == null || !userDMV_IdTypeNumber.match(regExAlabamaId))  {                                                               
+        document.getElementById('userDMV_IdTypeNumberErrorMessage').textContent =  'The user\'s Alabama numeric identification card characters are a required field or you must enter the user correct Alabama numeric identification card characters from his or her Alabama\'s identification card into the required field.';
+
+        setTimeout(function() {
+            document.getElementById('userDMV_IdTypeNumberErrorMessage').textContent = '';
+        },
+        9000)
+
+        return false;
+
+    } 
+    
+    if (userCommission_IvoteBallotIdIdentifierCode  === '' || userCommission_IvoteBallotIdIdentifierCode  == null || !userCommission_IvoteBallotIdIdentifierCode.match(regIvoteballotIdIdentifierCode)) {                                                               
+        document.getElementById('userCommission_iVoteBallotIdIdentifierCodeErrorMessage').textContent = 'The user\'s iVoteBallot Id Identifier is a required input field and you must enter the user correct alphanumeric characters format into the required input field.';
+
+        setTimeout(function() {
+            document.getElementById('userCommission_iVoteBallotIdIdentifierCodeErrorMessage').textContent = '';
+        },
+        9000)
+
+        return false;					
+                            
+    } 
+
+    
+			
+    if (userCommission_IvoteBallotIdCodeBcryptic === '' || userCommission_IvoteBallotIdCodeBcryptic == null)  {                                                               
+                
+    return false;				
+    
+    }
+
+
+
+
+    
+    
+                                           
+    
+    
 																
 				                                                                  
 	
