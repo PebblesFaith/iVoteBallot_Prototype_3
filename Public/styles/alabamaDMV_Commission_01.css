@@ -342,7 +342,8 @@ span.forgot_Password {
 #ssn,
 #email,
 #confirmEmail,
-#phoneNumber
+#phoneNumber,
+#address
 {
 	outline: none; 
 	border-top-style: hidden;
@@ -373,7 +374,8 @@ span.forgot_Password {
 #ssn,
 #email,
 #confirmEmail,
-#phoneNumber
+#phoneNumber,
+#address
 {
 	display: flex;
 	flex-wrap: row wrap;
@@ -396,7 +398,8 @@ span.forgot_Password {
 #ssn,
 #email,
 #confirmEmail,
-#phoneNumber
+#phoneNumber,
+#address
 {
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
@@ -413,7 +416,8 @@ span.forgot_Password {
 #ssn:focus,
 #email:focus,
 #confirmEmail:focus,
-#phoneNumber:focus
+#phoneNumber:focus,
+#address:focus
 {
 	border:3px solid rgb(205, 214, 249);
 	border-top-style: hidden;
@@ -435,7 +439,8 @@ span.forgot_Password {
 #userDMV_SSNErrorMessage,
 #userDMV_EmailErrorMessage,
 #userDMV_ConfirmEmailErrorMessage,
-#userDMV_PhoneNumberErrorMessage
+#userDMV_PhoneNumberErrorMessage,
+#userDMV_AddressErrorMessage
 { 
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: clamp(9px, 2vw, 13px); 
