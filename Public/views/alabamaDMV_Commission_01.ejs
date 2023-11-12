@@ -204,6 +204,38 @@
 									<span id="userDMV_ZipSelectionErrorMessage"></span>                                  
 									<br>
 
+									<label for="text">What type of Alabama identification Card do the user have? |</label>                                 
+                                    <input id="idType" type="text" multiple name="userDMV_IdType" list="voterIdList" size="75" />
+
+                                    <datalist id="voterIdList">
+                                        <option value="" disable selected hidden></option>
+                                            <option value="Alabama Driver License"></option>
+                                            <option value="Alabama Real ID Driver License"></option>
+                                            <option value="Alabama State ID Card"></option> 
+                                            <option value="Military ID"></option> 
+                                            <option value="Tribal ID"></option>              
+                                    </datalist>
+                                    <span id="userDMV_IdTypeErrorMessage"></span>
+									<br>
+
+									<label>What is the user's Alabama Identification Card Number? |</label>                                    
+                                    <input id="idTypeNumber" type="text" name="userDMV_IdTypeNumber" maxlength="75" />                                 
+                                    <span id="userDMV_IdTypeNumberErrorMessage"></span>                             
+                                    <br>
+
+									<label>What is the user's IvoteBallot Id Identifier Code? | Include dashes with user's IvoteBallot Id Identifier Code.</label>                                    
+                                    <input id="iVoteBallotIdIdentifierCode" type="text" name="userCommission_IvoteBallotIdIdentifierCode" maxlength="75" />                                 
+                                    <span id="userCommission_iVoteBallotIdIdentifierCodeErrorMessage"></span>                             
+                                    <br>
+
+									<input id="iVoteBallotIdCodeHidden_Bcryptic" type="hidden"  size="75" name="userCommission_IvoteBallotIdCodeBcryptic" value="userCommission_IvoteBallotIDCodeBcryptic">
+									<br>
+									<span id="userCommission_IvoteBallotIdCodeBcrypticErrorMessage"></span>
+										
+                                    
+
+
+
 									<br>
 									<input id="dmv_CommissionButton" type="submit" value="ADD VOTER INFORMATION"></button>
 									<br> 
