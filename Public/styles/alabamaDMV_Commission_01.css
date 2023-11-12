@@ -346,7 +346,11 @@ span.forgot_Password {
 #address,
 #unitType,
 #unitTypeNumber,
-#countrySelect
+#countrySelect,
+#stateSelect,
+#countySelect,
+#citySelect,
+#zipSelect
 {
 	outline: none; 
 	border-top-style: hidden;
@@ -381,7 +385,11 @@ span.forgot_Password {
 #address,
 #unitType,
 #unitTypeNumber,
-#countrySelect
+#countrySelect,
+#stateSelect,
+#countySelect,
+#citySelect,
+#zipSelect
 {
 	display: flex;
 	flex-wrap: row wrap;
@@ -408,7 +416,11 @@ span.forgot_Password {
 #address,
 #unitType,
 #unitTypeNumber,
-#countrySelect
+#countrySelect,
+#stateSelect,
+#countySelect,
+#citySelect,
+#zipSelect
 {
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
@@ -429,7 +441,11 @@ span.forgot_Password {
 #address:focus,
 #unitType:focus,
 #unitTypeNumber:focus,
-#countrySelect:focus
+#countrySelect:focus,
+#stateSelect:focus,
+#countySelect:focus,
+#citySelect:focus,
+#zipSelect:focus
 {
 	border:3px solid rgb(205, 214, 249);
 	border-top-style: hidden;
@@ -455,7 +471,11 @@ span.forgot_Password {
 #userDMV_AddressErrorMessage,
 #userDMV_UnitTypeErrorMessage,
 #userDMV_UnitTypeNumberErrorMessage,
-#userDMV_CountrySelectionErrorMessage
+#userDMV_CountrySelectionErrorMessage,
+#userDMV_StateSelectionErrorMessage,
+#userDMV_CountySelectionErrorMessage,
+#userDMV_CitySelectionErrorMessage,
+#userDMV_ZipSelectionErrorMessage
 { 
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: clamp(9px, 2vw, 13px); 
