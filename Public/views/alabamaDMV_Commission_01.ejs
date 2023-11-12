@@ -139,9 +139,47 @@
 									<label>Address | Please enter user complete address, as it appears onto the user's state governmental issued ID card.</label>                                    
                                     <input id="address" type="text" name="userDMV_Address" maxlength="250">                                  
                                     <span id="userDMV_AddressErrorMessage"></span>
-                                    <br>  
-
+                                    <br> 
+									
+									<select id="unitType" name="userDMV_UnitType">
+										<option id="selectBackground" value="" disable selected hidden>Address Unit Type</option>
+											<option value = Apartment>Apartment</option>
+											<option value = Building>Building</option>
+											<option value = Basement>Basement</option>
+											<option value = Floor>Floor</option>
+											<option value = Front>Front</option>
+											<option value = Hanger>Hanger</option>
+											<option value = House>House</option>
+											<option value = Key>Key</option>
+											<option value = Lot>Lot</option>
+											<option value = Lower>Lower</option>
+											<option value = Office>Office</option>
+											<option value = Penthouse>Penthouse</option>
+											<option value = Pier>Pier</option>
+											<option value = Rear>Rear</option>
+											<option value = Room>Room</option>
+											<option value = Side>Side</option>
+											<option value = Slip>Slip</option>
+											<option value = Space>Space</option>
+											<option value = Suite>Suite</option>
+											<option value = Trailer>Trailer</option>
+											<option value = Unit>Unit</option>
+											<option value = Upper>Upper</option>
+									</select>
+									<span id="userDMV_UnitTypeErrorMessage"></span>
 									<br>
+
+									<label>Unit Type Number |</label>  								              
+									<input id="unitTypeNumber" type="text" name="userDMV_UnitTypeNumber" maxlength="75">									
+									<span id="userDMV_UnitTypeNumberErrorMessage"></span>
+									<br>
+
+									<select id="countrySelect" name="userDMV_CountrySelection" size="1">
+                                        <option value="" selected="selected">Select Country</option>
+                                    </select>                                  
+                                    <span id="userDMV_CountrySelectionErrorMessage"></span>
+                                         
+
 									<br>
 									<input id="dmv_CommissionButton" type="submit" value="ADD VOTER INFORMATION"></button>
 									<br> 
