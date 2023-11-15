@@ -1,5 +1,9 @@
 const express = require('express');
 
+const flash2 = require('connect-flash');
+
+const flash = require('express-flash');
+
 const iVoteBallotApp = express();
 
 const path = require('path');
@@ -24,9 +28,7 @@ const session = require('express-session');
 
 const AlabamaSqlite3SessionStore = require('better-sqlite3-session-store')(session);
 
-const flash2 = require('connect-flash');
 
-const flash = require('express-flash');
 
 const nodemailer = require('nodemailer');
 
@@ -78,7 +80,7 @@ iVoteBallotApp.use(express.json());
 
 iVoteBallotApp.use(express.static(path.join(__dirname, 'public')));
 
-//iVoteBallotApp.use(flash());
+
 //iVoteBallotApp.use(flash2());
 
 iVoteBallotApp.use('/', require('./models/views_Router'));
@@ -194,6 +196,9 @@ iVoteBallotApp.use([passport.initialize()]);
 
 iVoteBallotApp.use(passport.session());
 
+iVoteBallotApp.use(flash());
+
+
 passport.use(
     'login2',
     new LocalStrategy({
@@ -202,8 +207,8 @@ passport.use(
     passReqToCallback: true // To allow request object to be passed to callback
 },   
     async (req, userDMV_Email, userCommission_IvoteBallotIdIdentifierCode, done) => {
-        console.log('The passport.use(login1) email is: ' + userDMV_Email);
-        console.log('The passport.use(login1) password: ' + userCommission_IvoteBallotIdIdentifierCode);
+        console.log('The passport.use(login2) email is: ' + userDMV_Email);
+        console.log('The passport.use(login2) password: ' + userCommission_IvoteBallotIdIdentifierCode);
         
         if (!userCommission_IvoteBallotIdIdentifierCode) {
             console.log('User password enter onto the login field:' + userCommission_IvoteBallotIdIdentifierCode);            
@@ -230,7 +235,7 @@ passport.use(
                 }
                 //return done(null, row);
 
-                return done(null, { id: row.id, userDMV_Email: row.userDMV_Email, isAuthenticated: true });
+                return done(null, { id: row.id, userDMV_Email:row.userDMV_Email, isAuthenticated: true });
 
             });                
         });       
@@ -253,10 +258,25 @@ passport.deserializeUser(function(id, done) {
       if (!row) { 
         return done(null, false); 
     }
-      return done(null, { id: row.id, userDMV_Email: row.userDMV_Email, isAuthenticated: true });
+      return done(null, { id: row.id, userDMV_Email:row.userDMV_Email, isAuthenticated: true });
     });
   });
                
+
+  / User route /
+  iVoteBallotApp.get('/', (req, res) => {
+	  // Check if user already authenticated.
+	  if (req.session.isAuthenticated) {
+		  return alert('You are already logged in!');
+	  }
+	  // Check if this is the first use of '/ivoteballot' route URL bar
+	  if (req.isUnauthenticated) {
+		  res.render('ivoteballot');
+	  } else {
+		  // Render signup page for new users
+		  res.render('error404')
+	  }  
+  });
 
 // User route signup
 iVoteBallotApp.get('/alabamaDMV_Commission_01',  (req, res) => {    
