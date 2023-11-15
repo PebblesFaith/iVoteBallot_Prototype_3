@@ -6,7 +6,7 @@
 	contactUs_01_Controller script is part of a larger iVoteBallot index.js (server) file
 	that handles user contact us form submissions.
 */
-const contactUs_01_Router = require('../models/contactUs_01_Router');
+const alabama_Session_Router = require('../models/alabama_Session_Router');
 
 /*
 	This line of JavaScript coded language imports the Passport library by assigning
@@ -64,7 +64,7 @@ if (process.env.NODE_ !== 'production') {
 	keys used to secure sessions data. And, the IONOS_SECRET_KEY constant is used for accessing
 	sensitive data or services protected by an API key or other credentials.
 */
-const SESSION_NAME = process.env.SESSION_NAME;
+const ALABAMA_SESSION = process.env.ALABAMA_SESSION;
 const SESSION_MAX_AGE = process.env.SESSION_MAX_AGE;
 const EXPRESS_SESSION_KEY = process.env.EXPRESS_SESSION_KEY;
 const IONOS_SECRET_KEY = process.env.IONOS_SECRET_KEY;
@@ -440,7 +440,7 @@ const createContactUs_01_Database =
 	and utilized in other parts of the iVoteBallot web application.
 */
 module.exports = {
-	contactUs_01_Router,
+	alabama_Session_Router,
 	contactUs_01_PassportGet,
 	contactUs_01_PassportPost,
 	db1,	
