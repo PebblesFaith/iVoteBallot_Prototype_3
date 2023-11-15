@@ -15,7 +15,9 @@
 	<body>
 		<header>
 			<%- include('../common/iVoteBallot_EmployeesHeader') %>
-		</header>		  
+		</header>	
+		
+		
 
 		<div id="flex_Container">
 			<div id="flex_Container_Row">
@@ -25,6 +27,22 @@
 						<button class="dmv_CommissionButton_01" onclick="document.getElementById('popUpDMV_CommissionMenu').style.display='block'" style="width:auto;">DMV Commission - Voters' Details Information | Alabama</button>
 						
 						<div id="popUpDMV_CommissionMenu" class="dmvCommission_Form_01">
+
+							<% if (messages.success) { %>
+								<div class="alert alert-success">
+								  <% messages.success.forEach(function(message) { %>
+									<%= message %>
+								  <% }); %>
+								</div>
+							  <% } %>
+							  
+							  <% if (messages.error) { %>
+								<div class="alert alert-danger">
+								  <% messages.error.forEach(function(message) { %>
+									<%= message %>
+								  <% }); %>
+								</div>
+							  <% } %>
 						
 							<form 
 								class="form_AlabamaDMV_Commission animate"
@@ -223,12 +241,13 @@
                                     <span id="userDMV_IdTypeNumberErrorMessage"></span>                             
                                     <br>
 
-									<label>What is the user's IvoteBallot Id Identifier Code? | Include dashes with user's IvoteBallot Id Identifier Code.</label>                                    
+									<label>What is the user's iVoteBallot Id Identifier Code? | Include dashes with user's IvoteBallot Id Identifier Code.</label>                                    
                                     <input id="iVoteBallotIdIdentifierCode" type="text" name="userCommission_IvoteBallotIdIdentifierCode" maxlength="75" />                                 
                                     <span id="userCommission_iVoteBallotIdIdentifierCodeErrorMessage"></span>                             
                                     <br>
 
-									<input id="iVoteBallotIdCodeHidden_Bcryptic" type="hidden"  size="75" name="userCommission_IvoteBallotIdCodeBcryptic" value="userCommission_IvoteBallotIDCodeBcryptic">
+									<label>Confirm user's iVoteballot Id Identifier Code |</label>
+									<input id="iVoteBallotIdCodeHidden_Bcryptic" type="text"  name="userCommission_IvoteBallotIdCodeBcryptic" maxlength="75" >
 									<br>
 									<span id="userCommission_IvoteBallotIdCodeBcrypticErrorMessage"></span>
 										
