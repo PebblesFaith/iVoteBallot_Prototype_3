@@ -1,7 +1,5 @@
 const express = require('express');
 
-const flash2 = require('connect-flash');
-
 const flash = require('express-flash');
 
 const iVoteBallotApp = express();
@@ -45,7 +43,7 @@ const port = 8080;
 
 iVoteBallotApp.listen(port, '0.0.0.0', function(err) {
     if (err) {
-        console.log('There is a problem loading iVoteBallot prototype 2 port 8080' + err);
+        console.log('There is a problem loading iVoteBallot prototype 3 port 8080' + err);
     } else {    
         console.log('The Nodejs in conjunction with Express framework is listening onto port ' + port + ' from express\' iVoteBallotApp prototype 3.');
     }
