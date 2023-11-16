@@ -172,7 +172,7 @@ passport.deserializeUser(function(id, done) {
 	using PassportJS middleware. This code is used for handling user's authentication and 
 	rendering appropriate responses based on the authentication status of the POST request.
 */
-  const contactUs_01_PassportGet = ('/login1', (req, res) => {
+  const contactUs_01_PassportGet = ('/contactUs_01', (req, res) => {
     if (req.isAuthenticated()) {
         console.log(req.user);
         console.log('Request Session:' + req.session)
@@ -196,7 +196,7 @@ passport.deserializeUser(function(id, done) {
 	indicates that a message should be displayed to the user, if user's authentication fails.
 */
 const contactUs_01_PassportPost = (
-    '/login1',
+    '/contactUs_01',
     passport.authenticate('login1', {
         successRedirect: '/iVoteBallot',
         failureRedirect: '/contactUs_01',
@@ -214,9 +214,9 @@ const contactUs_01_PassportPost = (
 */
 const db1 = new sqlite3.Database('contactUs_01.db', err => {
     if (err) {
-        console.log('Developer has created the SQLite3 database connection from her JavaScript codes language which has a generated an error, as ' + err + '.');
+        console.log('Sarai Hannah Ajai has created the SQLite3 database connection from her written JavaScript coded language for \'contactUs_01\' which has a generated an error, as ' + err + '.');
     }else {
-        console.log('Developer has created the SQLite3 database connection from her JavaScript codes language which has a generated successfully connection.');
+        console.log('Sarai Hannah Ajai has created the SQLite3 database connection from her written JavaScript coded language which \'contactUs_01\' has a generated successfully connection.');
     }
 });
 
@@ -249,9 +249,9 @@ db1.serialize( () => {
 	db1.run(sqlTable, (err) => {       
 	
 		if (err) {
-			console.log('Developer created database table is not programmatically coded with an: ' + error + '!');
+			console.log('Sarai Hannah Ajai has created the \'contactUs_01\' Sqlite3 database table which is  programmatically coded with an error message: ' + error + '!');
 		} else {
-			console.log('Developer has created a Sqlite3 database table which was programmatically coded successfully!');   
+			console.log('Sarai Hannah Ajai has created the \'contactUs_01\' Sqlite3 database table which is programmatically coded successfully!');   
 		}
 	});        
 });
