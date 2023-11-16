@@ -230,30 +230,30 @@ passport.use(
                 return done(null, { 
 					id: row.id,					
 
-					row:userDMVFirstName,       
-					row:userDMVMiddleName, 
-					row:userDMVLastName,        
-					row:userDMVSuffix,
-					row:userDMVDateOfBirth,
-					row:userDMVBirthSex,
-					row:userDMVGenderIdentity,
-					row:userDMVRace,
-					row:userDMVSSN,
-					row:userDMVEmail,
-					row:userDMVConfirmEmail,
-					row:userDMVPhoneNumber,
-					row:userDMVAddress,
-					row:userDMVUnitType,
-					row:userDMVUnitTypeNumber,
-					row:userDMVCountrySelection,
-					row:userDMVStateSelection,
-					row:userDMVCountySelection,
-					row:userDMVCitySelection,
-					row:userDMVZipSelection,
-					row:userDMVIdType,
-					row:userDMVIdTypeNumber,
-					row:userCommissionIvoteBallotIdIdentifierCode,
-					row:userCommissionIvoteBallotIdCodeBcryptic,
+						row:userDMVFirstName,       
+						row:userDMVMiddleName, 
+						row:userDMVLastName,        
+						row:userDMVSuffix,
+						row:userDMVDateOfBirth,
+						row:userDMVBirthSex,
+						row:userDMVGenderIdentity,
+						row:userDMVRace,
+						row:userDMVSSN,
+						row:userDMVEmail,
+						row:userDMVConfirmEmail,
+						row:userDMVPhoneNumber,
+						row:userDMVAddress,
+						row:userDMVUnitType,
+						row:userDMVUnitTypeNumber,
+						row:userDMVCountrySelection,
+						row:userDMVStateSelection,
+						row:userDMVCountySelection,
+						row:userDMVCitySelection,
+						row:userDMVZipSelection,
+						row:userDMVIdType,
+						row:userDMVIdTypeNumber,
+						row:userCommissionIvoteBallotIdIdentifierCode,
+						row:userCommissionIvoteBallotIdCodeBcryptic,
 							
 					isAuthenticated: true });
 
@@ -281,36 +281,35 @@ passport.deserializeUser(function(id, done) {
       return done(null, {
 		id: row.id, 
 
-		row:userDMVFirstName,       
-		row:userDMVMiddleName, 
-		row:userDMVLastName,        
-		row:userDMVSuffix,
-		row:userDMVDateOfBirth,
-		row:userDMVBirthSex,
-		row:userDMVGenderIdentity,
-		row:userDMVRace,
-		row:userDMVSSN,
-		row:userDMVEmail,
-		row:userDMVConfirmEmail,
-		row:userDMVPhoneNumber,
-		row:userDMVAddress,
-		row:userDMVUnitType,
-		row:userDMVUnitTypeNumber,
-		row:userDMVCountrySelection,
-		row:userDMVStateSelection,
-		row:userDMVCountySelection,
-		row:userDMVCitySelection,
-		row:userDMVZipSelection,
-		row:userDMVIdType,
-		row:userDMVIdTypeNumber,
-		row:userCommissionIvoteBallotIdIdentifierCode,
-		row:userCommissionIvoteBallotIdCodeBcryptic,
+			row:userDMVFirstName,       
+			row:userDMVMiddleName, 
+			row:userDMVLastName,        
+			row:userDMVSuffix,
+			row:userDMVDateOfBirth,
+			row:userDMVBirthSex,
+			row:userDMVGenderIdentity,
+			row:userDMVRace,
+			row:userDMVSSN,
+			row:userDMVEmail,
+			row:userDMVConfirmEmail,
+			row:userDMVPhoneNumber,
+			row:userDMVAddress,
+			row:userDMVUnitType,
+			row:userDMVUnitTypeNumber,
+			row:userDMVCountrySelection,
+			row:userDMVStateSelection,
+			row:userDMVCountySelection,
+			row:userDMVCitySelection,
+			row:userDMVZipSelection,
+			row:userDMVIdType,
+			row:userDMVIdTypeNumber,
+			row:userCommissionIvoteBallotIdIdentifierCode,
+			row:userCommissionIvoteBallotIdCodeBcryptic,
 				
 		isAuthenticated: true });	
 		
     });
-  });
-               
+});               
 
 iVoteBallotApp.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	// Check if user has Already been authenticated.
@@ -337,7 +336,6 @@ iVoteBallotApp.get('/alabamaDMV_Commission_01',  (req, res) => {
        
     }  
 });
-
 
 /*
 function createAlabamaPDF_Candidates_2024() {
@@ -451,10 +449,11 @@ iVoteBallotApp.get('/alabamaDMV_Commission_01', (req, res) => {
 iVoteBallotApp.post(
     '/alabama_DMV_Commission_01',
     passport.authenticate('login2', {
-        successRedirect: '/ivoteballot',
+        successRedirect: '/iVoteBallot',
         failureRedirect: '/alabamaDMV_Commission_01',
         failureFlash: true 
-}));
+	}
+));
 
 
 iVoteBallotApp.post('/alabamaDMV_Commission_01',
@@ -463,7 +462,8 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		const userCommissionIvoteBallotIdIdentifierCode = req.body.userCommissionIvoteBallotIdIdentifierCode;
 		const userCommissionIvoteBallotIdCodeBcryptic = req.body.userCommissionIvoteBallotIdCodeBcryptic;
 
-		const data = {          
+		const data = {    
+
             userDMVFirstName: req.body.userDMVFirstName,       
             userDMVMiddleName: req.body.userDMVMiddleName, 
             userDMVLastName: req.body.userDMVLastName,        
@@ -534,7 +534,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		return res.redirect('/alabamaDMV_Commission_01');        
 
 	} else {
-		console.log('The user passwordHashed and confirmPasswordHashed successfully match, and the user is successfully authenticated to the passport and session.');
+		console.log('The user\' iVoteBallot Id Identifier Code have successfully matched to his or her iVoteBallot Id Code entered into the input fields, and the user is successfully authenticated through the \'passport.use\' login2, LocalStrategy and session cookie.');
 	}   
 
 	const salt = await bcrypt.genSalt(15);
@@ -546,20 +546,22 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 
 	const sqlInsert = 'INSERT INTO alabamaDMV_Commission_01 (userDMVFirstName, userDMVMiddleName, userDMVLastName, userDMVSuffix, userDMVDateOfBirth, userDMVBirthSex, userDMVGenderIdentity, userDMVRace, userDMVSSN, userDMVEmail, userDMVConfirmEmail, userDMVPhoneNumber, userDMVAddress, userDMVUnitType, userDMVUnitTypeNumber, userDMVCountrySelection, userDMVStateSelection, userDMVCountySelection, userDMVCitySelection, userDMVZipSelection, userDMVIdType, userDMVIdTypeNumber, userCommissionIvoteBallotIdIdentifierCode, userCommissionIvoteBallotIdCodeBcryptic) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 	const params = [data.userDMVFirstName, data.userDMVMiddleName, data.userDMVLastName, data.userDMVSuffix, data.userDMVDateOfBirth, data.userDMVBirthSex, data.userDMVGenderIdentity, data.userDMVRace, data.userDMVSSN, data.userDMVEmail, data.userDMVConfirmEmail, data.userDMVPhoneNumber, data.userDMVAddress, data.userDMVUnitType, data.userDMVUnitTypeNumber, data.userDMVCountrySelection, data.userDMVStateSelection, data.userDMVCountySelection, data.userDMVCitySelection, data.userDMVZipSelection, data.userDMVIdType, data.userDMVIdTypeNumber, data.userCommissionIvoteBallotIdIdentifierCode, newUser.userCommissionIvoteBallotIdCodeBcryptic];
-	req.flash('Success', 'You are registered and can log in');
-	res.redirect('/alabamaDMV_Commission_01');
-
+	
 	await db1.run(sqlInsert, params, function (err, result) {
 		if (err) {
 			res.redirect('/500');
 			console.log('An syntax error has occurred during user\s contact us input fields from DOM submission with a 500 error message webpage display onto the user device screen.'); 
 						
 		} else {
-			console.log('The user data information typed into the input fields section has been successfully parsed into the AccouNetrics\s SQLite3 database. ' + Date());
-			res.redirect('/iVoteBallot');
-		}		
+			console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database. ' + Date());
+			//res.redirect('/iVoteBallot');
+			req.flash('Success', 'The user is successfully registered into the iVoteBallot database, and the user can now sign up to create his or her iVoteBallot account.');
+			res.redirect('/alabamaDMV_Commission_01');
+		}			
 		
-		
-	});			
+	});
+	
+	
+
 });
 
