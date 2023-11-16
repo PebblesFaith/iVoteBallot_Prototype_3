@@ -85,7 +85,6 @@ iVoteBallotApp.use(contactUs_01_Controller);
 /* Middleware to set req.isUnauthenticated for the first use of the
   '/alabamaDMV_Commission_01' URL bar
 */
-
 iVoteBallotApp.use('/alabamaDMV_Commission_01', (req, res, next) => {
     console.log('middleware called!');
     // Check if user is Already authenticated
@@ -96,25 +95,6 @@ iVoteBallotApp.use('/alabamaDMV_Commission_01', (req, res, next) => {
     }
     next();
 });
-
-// Middleware to set req.isUnauthenticated for the first use of the '/signup' URL bar
-
-/*
-const redirectAlabamaDMV_Commission_01 = (req, res, next) => {
-    if(req.session.userId) {
-        res.redirect('/ivoteballot');
-    } else {
-        next();
-    }
-}
-
-*/
-
-//iVoteBallotApp.use('/', require('./models/alabama_SignUp_01_Router'));
-//iVoteBallotApp.use(alabama_SignUp_01_Controller);
-
-//iVoteBallotApp.use('/', require('./models/alabamaDMV_Commission_01_Router'));
-//iVoteBallotApp.use(alabamaDMV_Commission_01_Controller);
 
 const db1 = new sqlite3.Database('alabamaDMV_Commission_01.db', err => {
     if (err) {
@@ -337,102 +317,6 @@ iVoteBallotApp.get('/alabamaDMV_Commission_01',  (req, res) => {
     }  
 });
 
-/*
-function createAlabamaPDF_Candidates_2024() {
-
-	const stream = fs.createWriteStream('./pdf_Files/alabama_PDF/user_AlabamaCandidates_Selections_2024.pdf');
-	const pdf = new pdfDocument();
-
-	pdf.image('./pdf_Files/alabama_Images/iVoteBallotCanva_Logo.png', 10, 25, {width: 150, height: 150});
-
-	const paragraph_01 = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Odio aenean sed adipiscing diam donec adipiscing tristique risus nec. Porta lorem mollis aliquam ut. Nam libero justo laoreet sit amet cursus sit amet dictum. Vitae sapien pellentesque habitant morbi tristique senectus et. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Phasellus faucibus scelerisque eleifend donec pretium. Consectetur lorem donec massa sapien. Vel fringilla est ullamcorper eget. Arcu ac tortor dignissim convallis aenean et. Ultricies mi eget mauris pharetra et ultrices neque ornare aenean. Amet venenatis urna cursus eget nunc scelerisque. Sed viverra tellus in hac habitasse platea. Facilisis gravida neque convallis a cras semper auctor neque vitae.';
-	const paragraph_02 = 'Tincidunt eget nullam non nisi. Vel facilisis volutpat est velit egestas dui id. Risus sed vulputate odio ut enim blandit volutpat. Sem fringilla ut morbi tincidunt augue interdum velit euismod in. Tempus imperdiet nulla malesuada pellentesque. Tempor orci eu lobortis elementum nibh. Facilisi nullam vehicula ipsum a arcu. Et netus et malesuada fames. Senectus et netus et malesuada fames ac turpis. Ac ut consequat semper viverra nam libero justo. Condimentum mattis pellentesque id nibh tortor. Semper risus in hendrerit gravida rutrum. Ultricies integer quis auctor elit sed vulputate. Non odio euismod lacinia at. Vulputate ut pharetra sit amet aliquam id diam. Scelerisque fermentum dui faucibus in ornare.';
-	const boldText = 'Times-Bold';
-	const normalText = 'Times-Roman';
-
-	pdf.text('Hello World, to the new World Order!', 10, 195);
-
-	pdf.font(boldText).text('I am Learning How to Use the PDFKit Library module.', 10, 210)
-
-	pdf.font(normalText).fillColor('#0d41ff').fontSize('15').text(paragraph_01, 25, 230);
-	pdf.font(normalText).fillColor('#0c91818').fontSize('15').text(paragraph_02, 25, 425);
-
-	pdf.addPage();
-
-	pdf.rect(5, 20, 560, 200).stroke('#0d41ff');
-	pdf.font(normalText).fillColor('#0c91818').fontSize('15').text(paragraph_01, 25, 25);
-	pdf.fillColor('#0d41ff').fontSize('15').text('iVoteBallot', {link: 'http://localhost:8080/alabama_Candidates_2024'});
-
-	pdf.fillColor('#0d41ff').fontSize('15').text('iVoteBallot', {link: 'downloadPDF()'});
-
-	pdf.pipe(stream);	
-
-	pdf.end();
-
-	console.log('The user\'s have successfully created an Alabama PDF candidates file final results');
-
-}
-
-createAlabamaPDF_Candidates_2024();
-
-function downloadPDF() {	
-	  
-	const stream = fs.createWriteStream('./pdf_Files/alabama_PDF/user_AlabamaCandidates_Selections_2024_02.pdf');
-	const pdf2 = new PDFDocument2();
-
-	pdf2.image('./pdf_Files/alabama_Images/iVoteBallotCanva_Logo.png', 10, 25, { width: 150, height: 150 });
-
-	const paragraph_01 = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Odio aenean sed adipiscing diam donec adipiscing tristique risus nec. Porta lorem mollis aliquam ut. Nam libero justo laoreet sit amet cursus sit amet dictum. Vitae sapien pellentesque habitant morbi tristique senectus et. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Phasellus faucibus scelerisque eleifend donec pretium. Consectetur lorem donec massa sapien. Vel fringilla est ullamcorper eget. Arcu ac tortor dignissim convallis aenean et. Ultricies mi eget mauris pharetra et ultrices neque ornare aenean. Amet venenatis urna cursus eget nunc scelerisque. Sed viverra tellus in hac habitasse platea. Facilisis gravida neque convallis a cras semper auctor neque vitae.';
-	const paragraph_02 = 'Tincidunt eget nullam non nisi. Vel facilisis volutpat est velit egestas dui id. Risus sed vulputate odio ut enim blandit volutpat. Sem fringilla ut morbi tincidunt augue interdum velit euismod in. Tempus imperdiet nulla malesuada pellentesque. Tempor orci eu lobortis elementum nibh. Facilisi nullam vehicula ipsum a arcu. Et netus et malesuada fames. Senectus et netus et malesuada fames ac turpis. Ac ut consequat semper viverra nam libero justo. Condimentum mattis pellentesque id nibh tortor. Semper risus in hendrerit gravida rutrum. Ultricies integer quis auctor elit sed vulputate. Non odio euismod lacinia at. Vulputate ut pharetra sit amet aliquam id diam. Scelerisque fermentum dui faucibus in ornare.';
-	const boldText = 'Times-Bold';
-	const normalText = 'Times-Roman';
-
-	pdf2.text('Hello World, to the new World Order x 222222 x 333333 x 5555555!', 10, 195);
-
-	pdf2.font(boldText).text('I am Learning How to Use the PDFKit Library module.', 10, 210);
-
-	pdf2.font(normalText).fillColor('#0d41ff').fontSize('15').text(paragraph_01, 25, 230);
-	pdf2.font(normalText).fillColor('#0c91818').fontSize('15').text(paragraph_02, 25, 425);
-
-	pdf2.addPage();
-
-	pdf2.rect(5, 20, 560, 200).stroke('#0d41ff');
-	pdf2.font(normalText).fillColor('#0c91818').fontSize('15').text(paragraph_01, 25, 25);
-	pdf2.fillColor('#0d41ff').fontSize('15').text('iVoteBallot', { link: 'http://localhost:8080/alabama_Candidates_2024' });
-
-	pdf2.fillColor('#0d41ff').fontSize('15').text('iVoteBallot', { link: 'downloadPDF()' });
-
-	pdf2.pipe(stream);
-	pdf2.end();
-
-	console.log("The user had successfully download the Alabama PDF candidates file  have been successfully created.");
-}
-
-downloadPDF();
-*/
-
-
-// This is your test secret API key.
-/*
-iVoteBallotApp.post('/create-checkout-session', async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-        price: 'price_1NyiWdHvyzFhhzdWjaN2p9Fm',
-        quantity: 1,
-      },
-    ],
-    mode: 'payment',
-    success_url: `${port}/success.html`,
-    cancel_url: `${port}/cancel.html`,
-  });
-
-  res.redirect(303, session.url);
-});
-
-*/
-
 iVoteBallotApp.get('/alabamaDMV_Commission_01', (req, res) => {
     if (req.isAuthenticated()) {
         console.log(req.user);
@@ -557,11 +441,204 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 			//res.redirect('/iVoteBallot');
 			req.flash('Success', 'The user is successfully registered into the iVoteBallot database, and the user can now sign up to create his or her iVoteBallot account.');
 			res.redirect('/alabamaDMV_Commission_01');
-		}			
+		}
 		
-	});
-	
-	
+		const transporter = nodemailer.createTransport ({
+			host: 'smtp.ionos.com',
+			port: 587,
+			secure: false,
+			auth: {
+				user: 'testdevelopmentenvcustomercare@ivoteballot.com',
+				pass: IONOS_SECRET_KEY,
+			}
+		}); 
+		
+		const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
+
+		const mailOptions_01 = {
+			from: req.body.userDMVEmail,
+			to: 'testdevelopmentenvcustomercare@ivoteballot.com', 
+			subject: `CEO/Election Assure Experts' Manager | An iVoteBallot's employee have manually entered, a new iVoteballot's user sucessfully into the iVoteballot database.`,  
+			html: ` 
+			
+				<p>The following user have been successfully entered into the iVoteBallot database by an iVoteBallot's Election Assure Experts' employee:</p>
+				<ul>
+					<li>
+						Name: ${req.body.userDMVFirstName} ${req.body.userDMVMiddleName} ${req.body.userDMVLastName}
+					</li>
+					<li>
+						Email: ${req.body.userDMVEmail}
+					</li>					
+				</ul>
+				
+				<img src="cid:iVoteBallot Canva - Logo Dated 05-05-23 copy" />
+				`,		
+				
+			attachments: [
+				{
+					filename: 'iVoteBallot Canva - Logo Dated 05-05-23 copy.png',
+					path: imagePath,					
+					cid: 'iVoteBallot Canva - Logo Dated 05-05-23 copy'
+				}
+			]
+		};
+
+		const mailOptions_02 = {
+			from: 'testdevelopmentenvcustomercare@ivoteballot.com',
+			to: req.body.userDMVEmail, 
+			subject: `Notification from iVoteBallot's Election Assure Experts`,			
+			html: 			
+				`			
+				<p>Dear ${req.body.userDMVFirstName} ${req.body.userDMVMiddleName} ${req.body.userDMVLastName},</p>	
+							
+				<p>
+					
+				</p>
+				
+				<p>
+					
+				</p>
+
+				Thank you for choosing iVoteBallot, and we hope you have a great day, 
+				${req.body.userDMVFirstName}.
+				</p>
+					
+				<p>Respectfully,</p>			
+				
+				<p>iVoteBallot's Election Assure Experts</p>
+
+				<img src="cid:iVoteBallot Canva - Logo Dated 05-05-23 copy" />
+				
+				`,   
+				
+			attachments: [
+				{
+					filename: 'iVoteBallot Canva - Logo Dated 05-05-23 copy.png',
+					path: imagePath,					
+					cid: 'iVoteBallot Canva - Logo Dated 05-05-23 copy'
+				}
+			]
+		};
+
+		transporter.sendMail(mailOptions_01, (error, info) => {
+			if (error) {				
+				console.log('The nodemailer have received an error message for the mailOptions_01:' + error + '.');
+				res.render('535');
+			} else {
+				console.log('Email Sent successfully: ' + info.response);			
+			}
+		});                
+
+		transporter.sendMail(mailOptions_02, (error, info) => {
+			if (error) {
+				console.log('The nodemailer have received an error message for the mailOptions_02:' + error + '.');
+				res.render('535');				
+			} else {
+				console.log('Email Sent successfully: ' + info.response);
+				
+			}
+		});
+		
+	});		
 
 });
+
+
+
+/*
+function createAlabamaPDF_Candidates_2024() {
+
+	const stream = fs.createWriteStream('./pdf_Files/alabama_PDF/user_AlabamaCandidates_Selections_2024.pdf');
+	const pdf = new pdfDocument();
+
+	pdf.image('./pdf_Files/alabama_Images/iVoteBallotCanva_Logo.png', 10, 25, {width: 150, height: 150});
+
+	const paragraph_01 = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Odio aenean sed adipiscing diam donec adipiscing tristique risus nec. Porta lorem mollis aliquam ut. Nam libero justo laoreet sit amet cursus sit amet dictum. Vitae sapien pellentesque habitant morbi tristique senectus et. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Phasellus faucibus scelerisque eleifend donec pretium. Consectetur lorem donec massa sapien. Vel fringilla est ullamcorper eget. Arcu ac tortor dignissim convallis aenean et. Ultricies mi eget mauris pharetra et ultrices neque ornare aenean. Amet venenatis urna cursus eget nunc scelerisque. Sed viverra tellus in hac habitasse platea. Facilisis gravida neque convallis a cras semper auctor neque vitae.';
+	const paragraph_02 = 'Tincidunt eget nullam non nisi. Vel facilisis volutpat est velit egestas dui id. Risus sed vulputate odio ut enim blandit volutpat. Sem fringilla ut morbi tincidunt augue interdum velit euismod in. Tempus imperdiet nulla malesuada pellentesque. Tempor orci eu lobortis elementum nibh. Facilisi nullam vehicula ipsum a arcu. Et netus et malesuada fames. Senectus et netus et malesuada fames ac turpis. Ac ut consequat semper viverra nam libero justo. Condimentum mattis pellentesque id nibh tortor. Semper risus in hendrerit gravida rutrum. Ultricies integer quis auctor elit sed vulputate. Non odio euismod lacinia at. Vulputate ut pharetra sit amet aliquam id diam. Scelerisque fermentum dui faucibus in ornare.';
+	const boldText = 'Times-Bold';
+	const normalText = 'Times-Roman';
+
+	pdf.text('Hello World, to the new World Order!', 10, 195);
+
+	pdf.font(boldText).text('I am Learning How to Use the PDFKit Library module.', 10, 210)
+
+	pdf.font(normalText).fillColor('#0d41ff').fontSize('15').text(paragraph_01, 25, 230);
+	pdf.font(normalText).fillColor('#0c91818').fontSize('15').text(paragraph_02, 25, 425);
+
+	pdf.addPage();
+
+	pdf.rect(5, 20, 560, 200).stroke('#0d41ff');
+	pdf.font(normalText).fillColor('#0c91818').fontSize('15').text(paragraph_01, 25, 25);
+	pdf.fillColor('#0d41ff').fontSize('15').text('iVoteBallot', {link: 'http://localhost:8080/alabama_Candidates_2024'});
+
+	pdf.fillColor('#0d41ff').fontSize('15').text('iVoteBallot', {link: 'downloadPDF()'});
+
+	pdf.pipe(stream);	
+
+	pdf.end();
+
+	console.log('The user\'s have successfully created an Alabama PDF candidates file final results');
+
+}
+
+createAlabamaPDF_Candidates_2024();
+
+function downloadPDF() {	
+	  
+	const stream = fs.createWriteStream('./pdf_Files/alabama_PDF/user_AlabamaCandidates_Selections_2024_02.pdf');
+	const pdf2 = new PDFDocument2();
+
+	pdf2.image('./pdf_Files/alabama_Images/iVoteBallotCanva_Logo.png', 10, 25, { width: 150, height: 150 });
+
+	const paragraph_01 = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Odio aenean sed adipiscing diam donec adipiscing tristique risus nec. Porta lorem mollis aliquam ut. Nam libero justo laoreet sit amet cursus sit amet dictum. Vitae sapien pellentesque habitant morbi tristique senectus et. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Phasellus faucibus scelerisque eleifend donec pretium. Consectetur lorem donec massa sapien. Vel fringilla est ullamcorper eget. Arcu ac tortor dignissim convallis aenean et. Ultricies mi eget mauris pharetra et ultrices neque ornare aenean. Amet venenatis urna cursus eget nunc scelerisque. Sed viverra tellus in hac habitasse platea. Facilisis gravida neque convallis a cras semper auctor neque vitae.';
+	const paragraph_02 = 'Tincidunt eget nullam non nisi. Vel facilisis volutpat est velit egestas dui id. Risus sed vulputate odio ut enim blandit volutpat. Sem fringilla ut morbi tincidunt augue interdum velit euismod in. Tempus imperdiet nulla malesuada pellentesque. Tempor orci eu lobortis elementum nibh. Facilisi nullam vehicula ipsum a arcu. Et netus et malesuada fames. Senectus et netus et malesuada fames ac turpis. Ac ut consequat semper viverra nam libero justo. Condimentum mattis pellentesque id nibh tortor. Semper risus in hendrerit gravida rutrum. Ultricies integer quis auctor elit sed vulputate. Non odio euismod lacinia at. Vulputate ut pharetra sit amet aliquam id diam. Scelerisque fermentum dui faucibus in ornare.';
+	const boldText = 'Times-Bold';
+	const normalText = 'Times-Roman';
+
+	pdf2.text('Hello World, to the new World Order x 222222 x 333333 x 5555555!', 10, 195);
+
+	pdf2.font(boldText).text('I am Learning How to Use the PDFKit Library module.', 10, 210);
+
+	pdf2.font(normalText).fillColor('#0d41ff').fontSize('15').text(paragraph_01, 25, 230);
+	pdf2.font(normalText).fillColor('#0c91818').fontSize('15').text(paragraph_02, 25, 425);
+
+	pdf2.addPage();
+
+	pdf2.rect(5, 20, 560, 200).stroke('#0d41ff');
+	pdf2.font(normalText).fillColor('#0c91818').fontSize('15').text(paragraph_01, 25, 25);
+	pdf2.fillColor('#0d41ff').fontSize('15').text('iVoteBallot', { link: 'http://localhost:8080/alabama_Candidates_2024' });
+
+	pdf2.fillColor('#0d41ff').fontSize('15').text('iVoteBallot', { link: 'downloadPDF()' });
+
+	pdf2.pipe(stream);
+	pdf2.end();
+
+	console.log("The user had successfully download the Alabama PDF candidates file  have been successfully created.");
+}
+
+downloadPDF();
+*/
+
+
+// This is your test secret API key.
+/*
+iVoteBallotApp.post('/create-checkout-session', async (req, res) => {
+  const session = await stripe.checkout.sessions.create({
+    line_items: [
+      {
+        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+        price: 'price_1NyiWdHvyzFhhzdWjaN2p9Fm',
+        quantity: 1,
+      },
+    ],
+    mode: 'payment',
+    success_url: `${port}/success.html`,
+    cancel_url: `${port}/cancel.html`,
+  });
+
+  res.redirect(303, session.url);
+});
+
+*/
+
 
