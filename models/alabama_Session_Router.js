@@ -7,6 +7,16 @@
 const express = require('express');
 
 /*
+	The code const flash = require('express-flash'); imports the express-flash module, which provides a 
+	middleware for storing and displaying flash messages in an Express.js application. Flash messages are 
+	short-lived messages that are stored in the session cookie id, and displayed to an user on his or her
+	next request. With express-flash, Sarai Hannah Ajai (Developer) can easily create and manage flash
+	messages within her iVoteBallot web application, which can be used to display success messages, 
+	error messages, or any other kind of notification to the front-end user.
+*/
+const flash = require('express-flash');
+
+/*
 	The contactUs_01_Router.js file is a router module that handles requests related to the
 	contact us form web page within an iVoteBallot web applications in Node.js. The
 	require('passport') statement is importing the Passport.js authentication middleware
@@ -14,6 +24,8 @@ const express = require('express');
 	user submissions and/or perform other authentication-related tasks.
 */
 const passport = require('passport');
+
+
 
 /*
 	The body-parser middleware is used to parse the body of incoming requests, which
@@ -29,6 +41,7 @@ const bodyParser = require('body-parser');
 	logic for the "Contact Us" form feature of the iVoteBallot web application.
 */
 const contactUs_01_Controller = require('../controllers/contactUs_01_Controller');
+const alabamaDMV_Commission_01_Controller = require('../controllers/alabamaDMV_Commission_01_Controller');
 
 /*
 	The statement const router = express.Router(); creates a new router object
@@ -66,6 +79,10 @@ const session = require('express-session');
 */
 const sqliteDB = require('better-sqlite3');
 
+const { route } = require('./views_Router');
+
+
+
 /*
 	This statement is importing and configuring a session store module called
 	"better-sqlite3-session-store" for the use with a Node.js application that
@@ -86,6 +103,8 @@ const AlabamaSqlite3SessionStore = require('better-sqlite3-session-store')(sessi
 	indicating that the database has been successfully created.
 */
 const db = new sqliteDB('Alabama_Id_Session.db', { verbose: console.log('The Alabama_Id_Session have been successfully created') });
+
+
 
 /*
 	This statement sets up a middleware function within iVoteBallot web application 
@@ -145,6 +164,32 @@ router.use([passport.initialize()]);
 */
 router.use(passport.session());
 
+router.use(flash());
+
+/* Middleware to set req.isUnauthenticated for the first use of the
+  '/alabamaDMV_Commission_01' URL bar
+*/
+router.use('/alabamaDMV_Commission_01', (req, res, next) => {
+    console.log('middleware called!');
+    // Check if user is Already authenticated
+    if (!req.session.isAuthenticated) {  
+      
+        // User of '/login' URL
+        req.isUnauthenticated = true;
+    }
+    next();
+});
+
+router.use('/alabamaDMV_Commission_01', (req, res, next) => {
+	// Check if user has Already been authenticated.
+	if(!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+})
+
+
+
 /*
 	These statements define the routing paths for the iVoteBallot web application using the
 	Express.js framework.
@@ -161,14 +206,27 @@ router.use(passport.session());
 	login1 functionality, and maps the request to a function called contactUs_01_PassportPost
 	within the same controller module.
 */
+
+router
+	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_RouteGet);
+
+router	
+	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_PassportGet);
+
+router
+	.post('/alabamaDMV_Commisson_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_AuthenticatePost);
+
+router
+	.post('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.createAlabamaDMV_Commission_01_Database);
+
 router
     .post('/contactUs_01', contactUs_01_Controller.createContactUs_01_Database);
 
 router
-    .get('/login1', contactUs_01_Controller.contactUs_01_PassportGet);
+    .get('/contactUs_01', contactUs_01_Controller.contactUs_01_PassportGet);
 
 router
-    .post('/login1', contactUs_01_Controller.contactUs_01_PassportPost);
+    .post('/contactUs_01', contactUs_01_Controller.contactUs_01_PassportPost);
  
 /*
 	In a Node.js application, the module.exports is used to expose a module, as a single object
