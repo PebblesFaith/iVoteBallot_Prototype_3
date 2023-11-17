@@ -16,8 +16,6 @@ const alabama_Session_Router = require('../models/alabama_Session_Router');
 */
 const passport = require('passport');
 
-
-
 /*
 	The JavaScript coded language const LocalStrategy = require('passport-local').Strategy
 	is used for setting up a local authentication strategy using the Passport.js library. 
@@ -252,7 +250,6 @@ passport.use(
 						row:userCommissionIvoteBallotIdCodeBcryptic,
 							
 					isAuthenticated: true });
-
             });                
         });       
     }
@@ -337,9 +334,18 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
-
 /*
-	 Get user route /alabamaDMV_Commission_01
+	The written JavaScript code language defines a route handler for the '/alabamaDMV_Commission_01'
+	route in the iVoteballot web application. This route is designed to handle HTTP GET requests. 
+	The code first checks, if the user is already authenticated by examining the 'isAuthenticated' 
+	property in the 'req.session' object. If the user is authenticated, an alert is triggered, 
+	notifying the user that he or she is already logged in. Subsequently, the code checks, if the
+	request is unauthenticated using 'req.isUnauthenticated'. If unauthenticated, the code logs any
+	flash messages and renders the 'alabamaDMV_Commission_01' view, providing a message to the user
+	regarding the documentation of iVoteBallot data onto the SQlite3's iVoteBallot database. If the 
+	user is authenticated, the code simply logs any flash messages for which is part of an authentication
+	flow and rendering logic for a specific route in an iVoteBallot web application, with a focus on
+	handling both authenticated and unauthenticated users requests.
 */
 const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01',  (req, res) => {    
     // Check if user already authenticated.
@@ -358,19 +364,46 @@ const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01',  (req, r
     }  
 });
 
+/*
+	The written JavaScript coded language, creates a route handler for the endpoint 
+	'/alabamaDMV_Commission_01'. This route is designed to handle HTTP requests and 
+	response logic. The function begins by checking, if the user's request is authenticated
+	using Passport, a popular authentication middleware for Node.js. If the user's request
+	is authenticated, the user's data information is logged to the console, including their
+	session cookie id details and the success of the user's login process. A message is then
+	logged, indicating that the user has been successfully authenticated through Passport 
+	from the iVoteBallot's employee direct user posting to the 'alabamaDMV_Commission_01' 
+	webpage. 
+	
+	Finally, the response renders the 'alabamaDMV_Commission_01' view. If the user's request 
+	is not authenticated, the code renders the '500' view and logs a message stating that the
+	user was not successfully authenticated within the session through Passport from the 
+	iVoteBallot's employee direct user posting to the 'alabamaDMV_Commission_01' webpage.
+*/
 const alabamaDMV_Commission_01_PassportGet = ('/alabamaDMV_Commission_01', (req, res) => {
     if (req.isAuthenticated()) {
         console.log(req.user);
         console.log('Request Session:' + req.session)
         console.log('' + req.logIn);
         console.log('The User had been successfully authenticated within the Session through the passport from the iVoteBallot\'s employee direct user posting to the \'alabamaDMV_Commission_01\' webpage!');
-        res.render('login1');
+        res.render('alabamaDMV_Commission_01');
     } else {
         res.render('500')       
         console.log('The user is not successfully authenticated within the session through the passport from the iVoteBallot\'s employee direct user posting to the \'alabamaDMV_Commission_01\' webpage!');
     }
 });
 
+/*
+	In the written JavaScript Coded language provides a route handler which is defined for
+	the endpoint '/alabama_DMV_Commission_01', specifically designed for handling user POST 
+	requests related to his or her Passport authentication. This route utilizes the Passport
+	middleware to authenticate the user using the 'login2' strategy. And, depending on the 
+	Passport authentication result, if successful, the user is redirected to the '/iVoteBallot' 
+	endpoint, and in case of failure, they are redirected back to the '/alabamaDMV_Commission_01'
+	endpoint with the option to display flash messages (set to true). This concise endpoint block 
+	of code encapsulates the Passport authentication process, and streamlining the redirection 
+	logic based on the outcome of the authentication attempt using Passport.
+*/
 const alabamaDMV_Commission_01_AuthenticatePost = (
     '/alabama_DMV_Commission_01',
     passport.authenticate('login2', {
@@ -380,6 +413,33 @@ const alabamaDMV_Commission_01_AuthenticatePost = (
 	}
 ));
 
+/*
+	In the written JavaScript coded language, a route handler is defined for the endpoint 
+	'/alabamaDMV_Commission_01', designed to handle asynchronous POST requests related to the
+	creation of user data in the SQLite3 'alabamaDMV_Commission_01' database. The function 
+	extracts various user input fields data from the request body, including personal details,
+	contact information, and iVoteBallot identifiers. And. this data information is then logged 
+	to the console for verification purposes.
+
+	The code further performs input fields' validation to ensure that essential fields are not empty,
+	but this validation section is currently commented out because Sarai Hannah Ajai (the Developer) 
+	had created a separate js file named, "alabamaDMV_Commission_01.ejs" to handle the all input
+	fields' validation checks within the DOM 'document.getElementById'. Following validation checks,
+	the user's iVoteBallot Id Identifier Code is compared to its bcrypt-hashed counterpart. If a 
+	mismatch is detected, an error flash message is generated, and the user is redirected to 
+	the '/alabamaDMV_Commission_01' endpoint. Conversely, if the codes match, a success message is
+	logged, and the user's iVoteBallot Id Code is hashed and salted using bcrypt API module for secure 
+	storage within the SQlite3 database.
+
+	The script then constructs an SQL query to insert the user's data information into the 
+	'alabamaDMV_Commission_01' SQLite3 database. If the insertion is successful, a success flash 
+	message is generated, and the user is redirected to the '/alabamaDMV_Commission_01' endpoint.
+	Concurrently, the script employs the Nodemailer library to send two email notifications: one to
+	the iVoteBallot support team informing them of the new user's registration and another to the
+	user, as a confirmation. And, an attachments within the emails, including the iVoteBallot logo to
+	which enhance the email contents. Additionally, error handling is implemented for the 
+	email-sending process, redirecting to a '535' error page if issues arise.
+*/
 const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 	async (req, res, next) => {   		
 		
@@ -583,21 +643,22 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 
 });
 
-
-
-
-
-
-
-
-
+/*
+	The given JavaScript coded language exports a module with multiple components, including
+	a router, Passport authentication functions for GET and POST requests, a database instance, 
+	and a function to create a database for handling the alabamaDMV_Commission_01 form submissions.
+	These components are intended for use in an iVoteBallot web application's alabamaDMV_Commission_01 
+	form feature by ways of providing the necessary functionality for handling user input and storing
+	his or her data information when exporting these components, as a module, they can be easily imported
+	and utilized in other parts of the iVoteBallot web application.
+*/
 module.exports = {
+
 	alabama_Session_Router,
 	alabamaDMV_Commission_01_RouteGet,
 	alabamaDMV_Commission_01_PassportGet,
 	alabamaDMV_Commission_01_AuthenticatePost,
-	createAlabamaDMV_Commission_01_Database
-		
+	createAlabamaDMV_Commission_01_Database	
 	
 }
   
