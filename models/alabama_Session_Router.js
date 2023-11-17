@@ -25,8 +25,6 @@ const flash = require('express-flash');
 */
 const passport = require('passport');
 
-
-
 /*
 	The body-parser middleware is used to parse the body of incoming requests, which
 	is necessary for accessing any user data information submitted through a form on 
@@ -36,9 +34,11 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 
 /*
-	The statement imports the contactUs_01_Controller module from the ../controllers directory
-	using the require function. This module contains codes that handles the algorithm
-	logic for the "Contact Us" form feature of the iVoteBallot web application.
+	The statement imports the contactUs_01_Controller module and the 
+	alabamaDMV_Commission_01_Controller from the ../controllers directory to the 
+	alabama_Session_Router using the require functions. Those module contains codes
+	that handles the algorithm logic for the "ContactUs_01" and alabamaDMV_Commission_01
+	form feature of the iVoteBallot web application.
 */
 const contactUs_01_Controller = require('../controllers/contactUs_01_Controller');
 const alabamaDMV_Commission_01_Controller = require('../controllers/alabamaDMV_Commission_01_Controller');
@@ -57,13 +57,13 @@ const router = express.Router();
 
 /*
 	The statement const session = require('express-session'); is used in JavaScript when
-	 working with the Node.js framework Express to create a session middleware. The
-	 express-session package provides the necessary tools for managing user sessions, 
-	 including creating and destroying sessions, storing session data, and setting session
-	 timeouts. Once the middleware is initialized, it can be used to maintain session data
-	 throughout the user's interaction with the iVoteBallot web application. The session
-	 variable is typically used, as a reference the middleware within the
-	 iVoteBallot application code.
+	working with the Node.js framework Express to create a session middleware. The
+	express-session package provides the necessary tools for managing user sessions, 
+	including creating and destroying sessions, storing session data, and setting session
+	timeouts. Once the middleware is initialized, it can be used to maintain session data
+	throughout the user's interaction with the iVoteBallot web application. The session
+	constant is typically used, as a reference the middleware within the
+	iVoteBallot application code.
 */
 const session = require('express-session');
 
@@ -73,7 +73,7 @@ const session = require('express-session');
 	library provides a faster and safer way to interact with SQLite3 databases in Node.js
 	compared to the built-in sqlite3 library.
 
-	Once the better-sqlite3 library is imported, the sqliteDB variable can be used to create
+	Once the better-sqlite3 library is imported, the sqliteDB constant can be used to create
 	a new instance of the better-sqlite3 database class and perform various database operations
 	like querying and modifying data.
 */
@@ -81,13 +81,11 @@ const sqliteDB = require('better-sqlite3');
 
 const { route } = require('./views_Router');
 
-
-
 /*
 	This statement is importing and configuring a session store module called
 	"better-sqlite3-session-store" for the use with a Node.js application that
 	is utilizing the "session" middleware. The "const" keyword declares a constant
-	variable named "Sqlite3ContactUsSessionStore" that is assigned the result of
+	variable named "AlabamaSqlite3SessionStore" that assigned the result of
 	calling the "require" function with the "better-sqlite3-session-store" library
 	as its argument. The resulting module is then initialized with the "session" 
 	middleware and the resulting store object is assigned to the constant variable.
@@ -96,15 +94,13 @@ const AlabamaSqlite3SessionStore = require('better-sqlite3-session-store')(sessi
 
 /*
 	This statement creates a new instance of an SQLites database object called "db" with
-	the name "contactUs_01_Session.db". The optional second argument specifies a 
+	the name "Alabama_Id_Session.db". The optional second argument specifies a 
 	configuration object for the SQlite3 database, which includes the "verbose" property
-	set to the value of the function call "console.log('The contactUs_01_Session have
+	set to the value of the function call "console.log('The The Alabama_Id_Session have
 	been successfully created')". This function call logs a message to the console
 	indicating that the database has been successfully created.
 */
 const db = new sqliteDB('Alabama_Id_Session.db', { verbose: console.log('The Alabama_Id_Session have been successfully created') });
-
-
 
 /*
 	This statement sets up a middleware function within iVoteBallot web application 
@@ -153,8 +149,8 @@ router.use([passport.initialize()]);
 	application from the Node.js API; in order to enable user's authentication using
 	the Passport library. Specifically, the router.use(passport.session()) is configuring 
 	the router to use the Passport's session-based authentication strategy, which allows
-	users to be authenticated across multiple requests by persisting user data in the
-	session store.
+	users to be authenticated across multiple requests by persisting user's data information
+	within the session store.
 
 	The router.use() method is used to register middleware functions for a specific route
 	or group of routes. In this case, passport.session() is a middleware function provided
@@ -186,25 +182,27 @@ router.use('/alabamaDMV_Commission_01', (req, res, next) => {
 		req.isUnauthenticated = true;
 	}
 	next();
-})
-
-
+});
 
 /*
 	These statements define the routing paths for the iVoteBallot web application using the
 	Express.js framework.
 
-	The first statement uses the HTTP POST method to create a new entry in the SQLite3 database, 
-	and maps the request to a function called createContactUs_01_Database within the 
-	contactUs_01_Controller module.
+	More than one statements uses the HTTP POST method to create a new entry in the SQLite3 database, 
+	and maps the request to a function called:
+		alabamaDMV_Commission_01_AuthenticatePost,
+		createAlabamaDMV_Commission_01_Database,
+		createContactUs_01_Database 
+		contactUs_01_PassportPost
+	within the contactUs_01_Controller and alabamaDMV_Commission controller modules.
 
-	The second statement uses the HTTP GET method to retrieve a page for user authentication, 
-	and maps the request to a function called contactUs_01_PassportGet within the 
-	same controller module.
+	And, more than one statements uses the HTTP GET method to retrieve a page for the users' 
+	authentications, and maps the request to a function called:
+		alabamaDMV_Commission_01_RouteGet,
+		alabamaDMV_Commission_01_PassportGet,
+		contactUs_01_PassportGet
+	within the contactUs_01_Controller and alabamaDMV_Commission controller modules.	
 
-	The third statement uses the HTTP POST method to authenticate a user and handle the 
-	login1 functionality, and maps the request to a function called contactUs_01_PassportPost
-	within the same controller module.
 */
 
 router
