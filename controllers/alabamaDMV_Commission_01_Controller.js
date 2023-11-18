@@ -664,7 +664,7 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 	These components are intended for use in an iVoteBallot web application's alabamaDMV_Commission_01 
 	form feature by ways of providing the necessary functionality for handling user input and storing
 	his or her data information when exporting these components, as a module, they can be easily imported
-	and utilized in other parts of the iVoteBallot web application.
+	and utilized in other parts of the iVoteBallot's web application.
 */
 module.exports = {
 
