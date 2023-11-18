@@ -335,6 +335,20 @@ passport.deserializeUser(function(id, done) {
 });
 
 /*
+    The constant redirectDashboard is a middleware function that checks, if the user is already
+    logged in by verifying the existence of a userId property in the user's session. If the user
+    is logged in, the function redirects them to the dashboard page; otherwise, it allows the
+    request to proceed to the next middleware function. This middleware is commonly used to restrict
+    access to certain routes for authenticated users.
+*/
+const redirectDashboard = (req, res, next) => {
+    if(req.session.userId) {
+        res.redirect('/alabamaDMV_Commission_01');
+    } else {
+        next();
+    }
+}
+/*
 	The written JavaScript code language defines a route handler for the '/alabamaDMV_Commission_01'
 	route in the iVoteballot web application. This route is designed to handle HTTP GET requests. 
 	The code first checks, if the user is already authenticated by examining the 'isAuthenticated' 
@@ -347,7 +361,7 @@ passport.deserializeUser(function(id, done) {
 	flow and rendering logic for a specific route in an iVoteBallot web application, with a focus on
 	handling both authenticated and unauthenticated users requests.
 */
-const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01',  (req, res) => {    
+const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {    
     // Check if user already authenticated.
     if (req.session.isAuthenticated) {
         return alert('You are already logged in!');
@@ -655,6 +669,7 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 module.exports = {
 
 	alabama_Session_Router,
+	redirectDashboard,
 	alabamaDMV_Commission_01_RouteGet,
 	alabamaDMV_Commission_01_PassportGet,
 	alabamaDMV_Commission_01_AuthenticatePost,
