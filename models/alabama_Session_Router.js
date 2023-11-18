@@ -160,10 +160,34 @@ router.use([passport.initialize()]);
 */
 router.use(passport.session());
 
+/*
+	The statement `router.use(flash())` is employed within the context of the custom 
+	JavaScript-coded language used in the development of the iVoteBallot web application. 
+	This particular configuration is pivotal for incorporating flash messaging functionality. 
+	And, flash messaging is a technique commonly used in web applications to provide user 
+	feedback, especially after form submissions. In this instance, the `router.use(flash())` 
+	statement signifies the integration of the Flash library into the application's routing 
+	system. The Flash library facilitates the creation and display of temporary messages to
+	users, enhancing the overall user experience by conveying information about the success
+	or failure of specific actions, such as form submissions or authentication processes. 
+	This implementation aligns with modern web development practices, contributing to a more 
+	interactive and user-friendly application.
+*/
 router.use(flash());
 
-/* Middleware to set req.isUnauthenticated for the first use of the
-  '/alabamaDMV_Commission_01' URL bar
+/* 
+	In the JavaScript code snippet `router.use('/alabamaDMV_Commission_01', (req, res, next) => { ... }`,
+	a pivotal middleware is integrated into the Node.js API. This middleware, when invoked onto
+	the specified route '/alabamaDMV_Commission_01', serves a crucial role in users' authentications. 
+	The middleware begins by logging a message to the console ('middleware called!'), and subsequently
+	checks, if the user is already authenticated by inspecting the session cookie id information within
+	the SQLite3 database. If the user is not authenticated, the middleware marks the request as 
+	unauthenticated, particularly relevant when the request is directed towards the '/login' URL. 
+	
+	The `next()` function ensures the seamless flow of the request through the middleware stack. 
+	This mechanism aids in controlling access to the specified route, exemplifying the versatility 
+	of the `router.use()` method for registering middleware functions tailored to specific routes 
+	or route groups in a Node.js application.
 */
 router.use('/alabamaDMV_Commission_01', (req, res, next) => {
     console.log('middleware called!');
@@ -176,6 +200,18 @@ router.use('/alabamaDMV_Commission_01', (req, res, next) => {
     next();
 });
 
+/*
+	In the JavaScript snippet `router.use('/alabamaDMV_Commission_01', (req, res, next) => { ... }`, 
+	a critical middleware operation is introduced within the context of a Node.js application. 
+	This middleware is specifically designed to scrutinize users' authentications onto the route
+	'/alabamaDMV_Commission_01'. The code initiates by assessing whether the user has already been
+	authenticated, and examining the session cookie id information from the SQLite3 database. If 
+	the user is not authenticated, the middleware sets the `req.isUnauthenticated` flag to true. 
+	The `next()` function ensures the smooth progression of the request through the middleware stack. 
+	This implementation effectively controls access to the specified route, showcasing the utility 
+	of the `router.use()` method for incorporating middleware functions tailored to particular routes
+	or route groups within a Node.js application.
+*/
 router.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	// Check if user has Already been authenticated.
 	if(!req.session.isAuthenticated) {
@@ -185,26 +221,29 @@ router.use('/alabamaDMV_Commission_01', (req, res, next) => {
 });
 
 /*
-	These statements define the routing paths for the iVoteBallot web application using the
-	Express.js framework.
+	The provided JavaScript code configures routing paths for the iVoteBallot web application within the Express.js
+	framework. These routes involve both HTTP POST and GET methods, each mapped to specific functions within the 
+	associated controller modules. Multiple statements employing the HTTP POST method are present to facilitate 
+	the creation of new entries in the SQLite3 database. These statements direct requests to functions named:
 
-	More than one statements uses the HTTP POST method to create a new entry in the SQLite3 database, 
-	and maps the request to a function called:
-		alabamaDMV_Commission_01_AuthenticatePost,
-		createAlabamaDMV_Commission_01_Database,
-		createContactUs_01_Database 
-		contactUs_01_PassportPost
-	within the contactUs_01_Controller and alabamaDMV_Commission controller modules.
+	`alabamaDMV_Commission_01_AuthenticatePost`, 
+	`createAlabamaDMV_Commission_01_Database`, 
+	`createContactUs_01_Database`, and 
+	`contactUs_01_PassportPost` 
 
-	And, more than one statements uses the HTTP GET method to retrieve a page for the users' 
-	authentications, and maps the request to a function called:
-		alabamaDMV_Commission_01_RouteGet,
-		alabamaDMV_Commission_01_PassportGet,
-		contactUs_01_PassportGet
-	within the contactUs_01_Controller and alabamaDMV_Commission controller modules.	
+	within the `alabamaDMV_Commission_01_Controller` and `contactUs_01_Controller` modules.
 
+	Conversely, HTTP GET requests are accommodated by several statements, directing users to pages related to 
+	authentications. These GET requests are mapped to functions named:
+
+	`alabamaDMV_Commission_01_RouteGet`, 
+	`alabamaDMV_Commission_01_PassportGet`, and 
+	`contactUs_01_PassportGet` 
+	
+	within the respective controller modules. This organized structure in routing and function mapping streamlines
+	the flow of requests and interactions within the iVoteBallot web application, enhancing clarity and 
+	maintainability within the codebase.	
 */
-
 router
 	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_RouteGet);
 
