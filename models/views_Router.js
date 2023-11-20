@@ -53,11 +53,11 @@ router
     .get('/alabama_ResetPassword_01', views_Controller.view_alabama_ResetPassword_01);
     
 router
-    .get('/alabama_SignUp_01', views_Controller.view_alabama_SignUp_01); 
+    .get('/alabamaVoters_SignUpLogin_01', views_Controller.view_alabamaVoters_SignUpLogin_01); 
     
 router
     .get('/alabama_SignUporLogIn_01', views_Controller.view_alabama_SignUporLogIn_01);
-    
+  
 router
     .get('/alabama_VerifyTemporaryPwd_01', views_Controller.view_alabama_VerifyTemporaryPwd_01);   
 
@@ -79,11 +79,13 @@ router
 router
     .get('/iVoteBallot', views_Controller.view_iVoteBallot);
 
-
 router
     .get('/test', views_Controller.view_Test);
 
 router
-    .get('/alabama_Create_Checkout_session', views_Controller.view_Alabama_Create_Checkout_Session);   
+    .get('/alabama_Create_Checkout_session', views_Controller.view_Alabama_Create_Checkout_Session); 
+    
+router
+    .get('/alabama_Checkout', views_Controller.view_alabama_Checkout);   
 
 module.exports = router;
