@@ -43,6 +43,7 @@ const bodyParser = require('body-parser');
 const contactUs_01_Controller = require('../controllers/contactUs_01_Controller');
 const alabamaDMV_Commission_01_Controller = require('../controllers/alabamaDMV_Commission_01_Controller');
 
+
 /*
 	The statement const router = express.Router(); creates a new router object
 	using the express framework in Node.js API.
@@ -194,7 +195,7 @@ router.use('/alabamaDMV_Commission_01', (req, res, next) => {
     // Check if user is Already authenticated
     if (!req.session.isAuthenticated) {  
       
-        // User of '/login' URL
+        // User of '/login#' URL
         req.isUnauthenticated = true;
     }
     next();
@@ -264,6 +265,10 @@ router
 
 router
     .post('/contactUs_01', contactUs_01_Controller.contactUs_01_PassportPost);
+
+	
+
+
  
 /*
 	In a Node.js application, the module.exports is used to expose a module, as a single object
