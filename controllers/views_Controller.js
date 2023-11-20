@@ -59,8 +59,8 @@ const view_alabama_ResetPassword_01 = (req, res) => {
 	res.render('alabama_ResetPassword_01');
 }
 
-const view_alabama_SignUp_01 = (req, res) => {
-	res.render('alabama_SignUp_01');
+const view_alabamaVoters_SignUpLogin_01 = (req, res) => {
+	res.render('alabamaVoters_SignUpLogin_01');
 }
 
 const view_alabama_SignUporLogIn_01 = (req, res) => {
@@ -99,16 +99,16 @@ const view_iVoteBallot = (req, res) => {
 	res.render('iVoteBallot');
 }
 
-const view_SignUporLogIn_01 = (req, res) => {
-	res.render('signUporLogIn_01');
-}
-
 const view_Test = (req, res) => {
 	res.render('test');
 }
 
 const view_Alabama_Create_Checkout_Session = (req, res) => {
 	res.render('alabama_Create_Checkout_session');
+}
+
+const view_alabama_Checkout = (req, res) => {
+	res.render('checkout');
 }
 
 module.exports = {	
@@ -123,7 +123,7 @@ module.exports = {
 	view_alabama_Candidates_2024_03,
 	view_alabama_ForgotPassword_01,	
 	view_alabama_ResetPassword_01,
-	view_alabama_SignUp_01,
+	view_alabamaVoters_SignUpLogin_01,
 	view_alabama_SignUporLogIn_01,
 	view_alabama_VerifyTemporaryPwd_01,
 	view_ContactUs_01,
@@ -133,5 +133,6 @@ module.exports = {
 	view_HelpCenter,
 	view_iVoteBallot,
 	view_Test,
-	view_Alabama_Create_Checkout_Session
+	view_Alabama_Create_Checkout_Session,
+	view_alabama_Checkout
 }
