@@ -94,7 +94,7 @@ passport.use(
             return done(null, false, { message: 'Your password and confirm password does not match.'})
             
         } else 
-         await db1.get(`SELECT * FROM users WHERE email = ?`, email,(err, row) => {
+         await db1.get(`SELECT * FROM ContactUs_01 WHERE email = ?`, email,(err, row) => {
             if (err) {
                 return done(err);
             }
@@ -151,7 +151,7 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function(id, done) {
     console.log('Deserializing user...')
     console.log(id);   
-    db1.get('SELECT * FROM users WHERE id = ?', id, (err, row) => {
+    db1.get('SELECT * FROM ContactUs_01 WHERE id = ?', id, (err, row) => {
       if (err) { 
         return done(err); 
     }
