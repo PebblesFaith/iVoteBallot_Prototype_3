@@ -273,7 +273,7 @@ db1.serialize( () => {
 */
 passport.serializeUser(function (user, done) {
     console.log('Serializing user...');
-    console.log('user:');
+    console.log('user');
     done(null, user.id);
 });
 
@@ -364,21 +364,19 @@ const redirectDashboard = (req, res, next) => {
 	handling both authenticated and unauthenticated users requests.
 */
 const alabamaDMV_Commission_01_RouteGet = ('/login2', redirectDashboard, (req, res) => {
-    console.log(req.session);	
+    console.log(req.session);
     console.log('isUnauthenticated: ', req.isUnauthenticated);
-    // Check if user already authenticated.	
-
+    // Check if user already authenticated.
     if (req.isUnauthenticated) {
         res.render('alabamaDMV_Commission_01');
-        console.log('The User is not logged into the \'iVoteBallot\'s !');
-	}
-    if     
+        console.log('User is not logged into the dashboard!');
+    } else if         
         (req.session.isAuthenticated) {
-        res.redirect('/ivoteballot'); //should be dashboard_01
+        res.redirect('/ivoteballot'); //dashboard_01
         console.log('User is logged into the dashboard!');
        
     } else {       
-        res.render('404');
+        res.render('535');
     }  
 });
 
@@ -412,6 +410,20 @@ const alabamaDMV_Commission_01_PassportGet = ('/alabamaDMV_Commission_01', (req,
 });
 
 /*
+  The constant redirectLogin is a middleware function that checks if the user is logged in by
+  verifying the existence of a userId property in the user's session. If the user is not logged
+  in, the function redirects them to the login page; otherwise, it allows the request to proceed 
+  to the next middleware function.
+*/
+const redirectLogin = (req, res, next) => {
+    if(!req.session.userId) {
+        res.redirect('/alabamaDMV_Commission_01');
+    } else {
+        next();
+    }
+}
+
+/*
 	In the written JavaScript Coded language provides a route handler which is defined for
 	the endpoint '/alabama_DMV_Commission_01', specifically designed for handling user POST 
 	requests related to his or her Passport authentication. This route utilizes the Passport
@@ -422,30 +434,18 @@ const alabamaDMV_Commission_01_PassportGet = ('/alabamaDMV_Commission_01', (req,
 	of code encapsulates the Passport authentication process, and streamlining the redirection 
 	logic based on the outcome of the authentication attempt using Passport.
 */
-/*
-const alabamaDMV_Commission_01_AuthenticatePost = (
-    '/alabama_DMV_Commission_01',
-    passport.authenticate('login2', {
-        successRedirect: '/iVoteBallot',
-        failureRedirect: '/alabamaDMV_Commission_01',
-        failureFlash: true 
-		
-	}
-));
-*/
-const alabamaDMV_Commission_01_AuthenticatePost = (
-    '/alabama_DMV_Commission_01', (req, res, next) => {
+
+const alabamaDMV_Commission_01_AuthenticatePost = 
+	('/alabama_DMV_Commission_01', (req, res, next) => {
     passport.authenticate('login2', {
         successRedirect: '/iVoteBallot',
         failureRedirect: '/alabamaDMV_Commission_01',
 
-        failureFlash: true 
-		
-	})
-	
-	(req, res, next);
-
-});
+		failureFlash: true
+	 })		
+		(req, res, next);
+    
+	});
 
 /*
 	In the written JavaScript coded language, a route handler is defined for the endpoint 
@@ -537,16 +537,8 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 	console.log('User iVoteBallot Id Identifier Code is: ' + data.userCommissionIvoteBallotIdIdentifierCode + '.');
 	console.log('User iVoteBallot Id Identifier Code Bcryption is: ' + data.userCommissionIvoteBallotIdCodeBcryptic + '');
 
-	console.log(req.session);
-
-	 // User input data information validation.
-	 /*
-	 if (!userDMVFirstName || !userDMVMiddleName || !userDMVLastName ||!userDMVSuffix ||!userDMVDateOfBirth ||!userDMVBirthSex ||!userDMVGenderIdentity ||!userDMVRace ||!userDMVSSN ||!userDMVEmail ||!userDMVConfirmEmail ||!userDMVPhoneNumber ||!userDMVAddress ||!userDMVUnitType ||!userDMVUnitTypeNumber ||!userDMVCountrySelection ||!userDMVStateSelection ||!userDMVCountySelection ||!userDMVCitySelection ||!userDMVZipSelection ||!userDMVIdType ||!userDMVIdTypeNumber ||!userCommissionIvoteBallotIdIdentifierCode ||!userCommissionIvoteBallotIdCodeBcryptic) {
-		req.flash('error', 'Please fill in all fields');
-		return res.redirect('/alabamaDMV_Commission_01'); 
-	} 
-	*/
-
+	console.log(req.session);	
+	
 	if (userCommissionIvoteBallotIdIdentifierCode !== userCommissionIvoteBallotIdCodeBcryptic) {
 		req.flash('error', 'The user\'s iVoteballot Id Identifier Code does not match to the user\'s iVoteballot Id Identifier Code Bcryptic you have entered into the input fields.');
 		return res.redirect('/alabamaDMV_Commission_01');        
@@ -578,10 +570,11 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 		};
 
 		req.login(user, function(err) {
-			if (err) { return next(err); }
+			if (err) { 
+				return next(err); 
+			}
 		
-		});
-	
+		});	
 
 		if (err) {
 			res.redirect('/500');
@@ -709,6 +702,7 @@ module.exports = {
 	redirectDashboard,
 	alabamaDMV_Commission_01_RouteGet,
 	alabamaDMV_Commission_01_PassportGet,
+	redirectLogin,
 	alabamaDMV_Commission_01_AuthenticatePost,
 	createAlabamaDMV_Commission_01_Database	
 	
