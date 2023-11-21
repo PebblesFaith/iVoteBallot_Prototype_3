@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  ivoteballot_prototype_3:
+    build: /    
+    container_name: ivoteballot_containter
+    ports:
+      - '8080:8080'
+    volumes:
+      - /ivoteballot_prototype_3:/ivoteballot
+      - /ivoteballot/node_modules
