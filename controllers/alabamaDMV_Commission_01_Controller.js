@@ -185,88 +185,75 @@ db1.serialize( () => {
 	parameters, if necessary. This code provides a simple but effective way to authenticate users
 	and ensurethe security of their iVoteballot data information.
 */
-passport.use(
-    'login2',
-    new LocalStrategy({
-    usernameField: 'userDMVEmail',
-    passwordField: 'userCommissionIvoteBallotIdIdentifierCode',
-    passReqToCallback: true // To allow request object to be passed to callback
-},   
-    async (req, userDMVEmail, userCommissionIvoteBallotIdIdentifierCode, done) => {
-        console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) email (\'userDMVEmail\') as: ' + userDMVEmail);
-        console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) password (\'userCommissionIvoteBallotIdIdentifierCode\') as: ' + userCommissionIvoteBallotIdIdentifierCode);
-        
-        if (!userCommissionIvoteBallotIdIdentifierCode) {
-            console.log('The iVoteBallot\'s employee have manually the user\'s password (\'userCommissionIvoteBallotIdIdentifierCode\') into the login field as:' + userCommissionIvoteBallotIdIdentifierCode);            
-            console.log('The iVoteBallot\'s employee have manually entered the user\'s passport.use LocalStrategy password (\'userCommissionIvoteBallotIdIdentifierCode\') request for which, does not match to the Session Cookie Id permission from the SQLite3 database.');
-			req.flashPassport('error', 'Your password and confirm password does not match.');
-            return done(null, false);
-            
-        } else {
-			try {
-				// Check for duplicate email
-				const existingUser = await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?`, userDMVEmail);
-		
-				if (existingUser) {
-				  return done(null, false, { message: 'This email address is already registered.' });
-			}		
-
-         	const row =  db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?`, userDMVEmail);            
-          
-            if (!row) {
-                return done(null, false, { message: 'You have entered the user email address incorrectly into the input field.'});
+	passport.use(
+		'login2',
+		new LocalStrategy({
+		usernameField: 'userDMVEmail',
+		passwordField: 'userCommissionIvoteBallotIdIdentifierCode',
+		passReqToCallback: true // To allow request object to be passed to callback
+	},   
+		async (req, userDMVEmail, userCommissionIvoteBallotIdIdentifierCode, done) => {
+			console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) email (\'userDMVEmail\') as: ' + userDMVEmail);
+			console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) password (\'userCommissionIvoteBallotIdIdentifierCode\') as: ' + userCommissionIvoteBallotIdIdentifierCode);
 			
-			}
-            
-            bcrypt.compare(userCommissionIvoteBallotIdIdentifierCode, row.userCommissionIvoteBallotIdIdentifierCode, (err, result) => {
-               
-                if (err) {
-                    return done(err);
-                }
-                if (!result) {
-                    return done(null, false, { message: 'You have entered the user password incorrectly into the input field.'})
-                }
-                //return done(null, row);
+			if (!userCommissionIvoteBallotIdIdentifierCode) {	
+				console.log('The iVoteBallot\'s employee have manually the user\'s password (\'userCommissionIvoteBallotIdIdentifierCode\') into the login field as:' + userCommissionIvoteBallotIdIdentifierCode);            
+				console.log('The iVoteBallot\'s employee have manually entered the user\'s passport.use LocalStrategy password (\'userCommissionIvoteBallotIdIdentifierCode\') request for which, does not match to the Session Cookie Id permission from the SQLite3 database.');
+				return done(null, false, { message: 'Your password and confirm password does not match.'});
 
-                return done(null, { 
-					id: row.id,					
+			} else 
+			 await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?`, userDMVEmail,(err, row) => {
+				if (err) {
+					return done(err);
+				}
+			  
+				if (!row) {
+					return done(null, false, { message: 'You have entered the incorrect email address.'});
+				}
+				
+				 bcrypt.compare(userCommissionIvoteBallotIdIdentifierCode, row.userCommissionIvoteBallotIdIdentifierCode, (err, result) => {
+				   
+					if (err) {
+						return done(err);
+					}
+					if (!result) {
+						return done(null, false, { message: 'You have entered the incorrect password.'});
+					}
+					//return done(null, row);
+	
+					return done(null, { id: row.id, 
+						
+							row:userDMVFirstName,       
+							row:userDMVMiddleName, 
+							row:userDMVLastName,        
+							row:userDMVSuffix,
+							row:userDMVDateOfBirth,
+							row:userDMVBirthSex,
+							row:userDMVGenderIdentity,
+							row:userDMVRace,
+							row:userDMVSSN,
+							row:userDMVEmail,
+							row:userDMVConfirmEmail,
+							row:userDMVPhoneNumber,
+							row:userDMVAddress,
+							row:userDMVUnitType,
+							row:userDMVUnitTypeNumber,
+							row:userDMVCountrySelection,
+							row:userDMVStateSelection,
+							row:userDMVCountySelection,
+							row:userDMVCitySelection,
+							row:userDMVZipSelection,
+							row:userDMVIdType,
+							row:userDMVIdTypeNumber,
+							row:userCommissionIvoteBallotIdIdentifierCode,
+							row:userCommissionIvoteBallotIdCodeBcryptic,
 
-						row:userDMVFirstName,       
-						row:userDMVMiddleName, 
-						row:userDMVLastName,        
-						row:userDMVSuffix,
-						row:userDMVDateOfBirth,
-						row:userDMVBirthSex,
-						row:userDMVGenderIdentity,
-						row:userDMVRace,
-						row:userDMVSSN,
-						row:userDMVEmail,
-						row:userDMVConfirmEmail,
-						row:userDMVPhoneNumber,
-						row:userDMVAddress,
-						row:userDMVUnitType,
-						row:userDMVUnitTypeNumber,
-						row:userDMVCountrySelection,
-						row:userDMVStateSelection,
-						row:userDMVCountySelection,
-						row:userDMVCitySelection,
-						row:userDMVZipSelection,
-						row:userDMVIdType,
-						row:userDMVIdTypeNumber,
-						row:userCommissionIvoteBallotIdIdentifierCode,
-						row:userCommissionIvoteBallotIdCodeBcryptic,
-							
-					isAuthenticated: true,
-				});
-            }); 
-			
-		} catch (err) {
-			return done(err);
+						isAuthenticated: true });
+	
+				});                
+			});       
 		}
-	}
-    })     
-    
-);
+	));
 
 /*
 	The code passport.serializeUser(function (user, done) { done(null, user.id); }) is a function
@@ -286,7 +273,7 @@ passport.use(
 */
 passport.serializeUser(function (user, done) {
     console.log('Serializing user...');
-    console.log('user');
+    console.log('user:');
     done(null, user.id);
 });
 
@@ -305,7 +292,7 @@ passport.serializeUser(function (user, done) {
 	and use it to authenticate requests.
 */
 passport.deserializeUser(function(id, done) {
-    console.log('Deserializing user...')
+    console.log('Deserializing users numbers...')
     console.log(id);   
     db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE id = ?', id, (err, row) => {
       if (err) { 
@@ -376,22 +363,22 @@ const redirectDashboard = (req, res, next) => {
 	flow and rendering logic for a specific route in an iVoteBallot web application, with a focus on
 	handling both authenticated and unauthenticated users requests.
 */
-const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {    
-    // Check if user already authenticated.
-    if (req.session.isAuthenticated) {
-		//req.flash('error', 'You are already logged in!');
-        return alert('You are already logged in!');
-		
-    }
-    console.log(req.session);
-    // Check if this is the first use of '/alabamaDMV_Commission_01' route URL bar
+const alabamaDMV_Commission_01_RouteGet = ('/login2', redirectDashboard, (req, res) => {
+    console.log(req.session);	
+    console.log('isUnauthenticated: ', req.isUnauthenticated);
+    // Check if user already authenticated.	
+
     if (req.isUnauthenticated) {
-        //req.flash('error', 'This is your first time use of your iVoteBallot account, and you have successfully logged into your iVoteBallot\'s account');
-        res.render('alabamaDMV_Commission_01', { messages: (req.flash('This is your first time use of your iVoteBallot account, and you have successfully logged into your iVoteBallot\'s account')) })        
-        
-    } else {
-        console.log(req.flash());        
+        res.render('alabamaDMV_Commission_01');
+        console.log('The User is not logged into the \'iVoteBallot\'s !');
+	}
+    if     
+        (req.session.isAuthenticated) {
+        res.redirect('/ivoteballot'); //should be dashboard_01
+        console.log('User is logged into the dashboard!');
        
+    } else {       
+        res.render('404');
     }  
 });
 
@@ -435,14 +422,30 @@ const alabamaDMV_Commission_01_PassportGet = ('/alabamaDMV_Commission_01', (req,
 	of code encapsulates the Passport authentication process, and streamlining the redirection 
 	logic based on the outcome of the authentication attempt using Passport.
 */
+/*
 const alabamaDMV_Commission_01_AuthenticatePost = (
     '/alabama_DMV_Commission_01',
     passport.authenticate('login2', {
         successRedirect: '/iVoteBallot',
         failureRedirect: '/alabamaDMV_Commission_01',
         failureFlash: true 
+		
 	}
 ));
+*/
+const alabamaDMV_Commission_01_AuthenticatePost = (
+    '/alabama_DMV_Commission_01', (req, res, next) => {
+    passport.authenticate('login2', {
+        successRedirect: '/iVoteBallot',
+        failureRedirect: '/alabamaDMV_Commission_01',
+
+        failureFlash: true 
+		
+	})
+	
+	(req, res, next);
+
+});
 
 /*
 	In the written JavaScript coded language, a route handler is defined for the endpoint 
@@ -558,12 +561,28 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 
 	const newUser = {
 		userCommissionIvoteBallotIdCodeBcryptic:iVoteBallotIdCodeHashed
-	};
+	};	
 
-	const sqlInsert = 'INSERT INTO alabamaDMV_Commission_01 (userDMVFirstName, userDMVMiddleName, userDMVLastName, userDMVSuffix, userDMVDateOfBirth, userDMVBirthSex, userDMVGenderIdentity, userDMVRace, userDMVSSN, userDMVEmail, userDMVConfirmEmail, userDMVPhoneNumber, userDMVAddress, userDMVUnitType, userDMVUnitTypeNumber, userDMVCountrySelection, userDMVStateSelection, userDMVCountySelection, userDMVCitySelection, userDMVZipSelection, userDMVIdType, userDMVIdTypeNumber, userCommissionIvoteBallotIdIdentifierCode, userCommissionIvoteBallotIdCodeBcryptic) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+	const sqlInsert = 'INSERT INTO alabamaDMV_Commission_01 (userDMVFirstName, userDMVMiddleName, userDMVLastName, userDMVSuffix, userDMVDateOfBirth, userDMVBirthSex, userDMVGenderIdentity, userDMVRace, userDMVSSN, userDMVEmail, userDMVConfirmEmail, userDMVPhoneNumber, userDMVAddress, userDMVUnitType, userDMVUnitTypeNumber, userDMVCountrySelection, userDMVStateSelection, userDMVCountySelection, userDMVCitySelection, userDMVZipSelection, userDMVIdType, userDMVIdTypeNumber, userCommissionIvoteBallotIdIdentifierCode, userCommissionIvoteBallotIdCodeBcryptic) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';	
+	
 	const params = [data.userDMVFirstName, data.userDMVMiddleName, data.userDMVLastName, data.userDMVSuffix, data.userDMVDateOfBirth, data.userDMVBirthSex, data.userDMVGenderIdentity, data.userDMVRace, data.userDMVSSN, data.userDMVEmail, data.userDMVConfirmEmail, data.userDMVPhoneNumber, data.userDMVAddress, data.userDMVUnitType, data.userDMVUnitTypeNumber, data.userDMVCountrySelection, data.userDMVStateSelection, data.userDMVCountySelection, data.userDMVCitySelection, data.userDMVZipSelection, data.userDMVIdType, data.userDMVIdTypeNumber, data.userCommissionIvoteBallotIdIdentifierCode, newUser.userCommissionIvoteBallotIdCodeBcryptic];
 	
-	await db1.run(sqlInsert, params, function (err, result) {
+	await db1.run(sqlInsert, params, function (err, result) {	
+		if (err) { 
+			return next(err); 
+		}
+		
+		var user = {
+			id: this.lastID,
+			userDMVEmail: req.body.userDMVEmail,
+		};
+
+		req.login(user, function(err) {
+			if (err) { return next(err); }
+		
+		});
+	
+
 		if (err) {
 			res.redirect('/500');
 			req.flash('error', 'An syntax error has occurred during user\s contact us input fields from DOM submission with a 500 error message webpage display onto the user device screen.');
@@ -572,7 +591,7 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 		} else {
 			console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database. ' + Date());			
 			req.flash('Success', 'The user is successfully registered into the iVoteBallot database, and the user can now sign up to create his or her iVoteBallot account.');
-			res.redirect('/alabamaDMV_Commission_01');
+			res.redirect('/ivoteballot');
 		}
 		
 		const transporter = nodemailer.createTransport ({
