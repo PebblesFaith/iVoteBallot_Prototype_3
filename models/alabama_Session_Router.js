@@ -16,6 +16,8 @@ const express = require('express');
 */
 const flash = require('express-flash');
 
+const flashPassport = require('connect-flash');
+
 /*
 	The contactUs_01_Router.js file is a router module that handles requests related to the
 	contact us form web page within an iVoteBallot web applications in Node.js. The
@@ -42,7 +44,6 @@ const bodyParser = require('body-parser');
 */
 const contactUs_01_Controller = require('../controllers/contactUs_01_Controller');
 const alabamaDMV_Commission_01_Controller = require('../controllers/alabamaDMV_Commission_01_Controller');
-
 
 /*
 	The statement const router = express.Router(); creates a new router object
@@ -161,6 +162,8 @@ router.use([passport.initialize()]);
 */
 router.use(passport.session());
 
+router.use(flashPassport());
+
 /*
 	The statement `router.use(flash())` is employed within the context of the custom 
 	JavaScript-coded language used in the development of the iVoteBallot web application. 
@@ -201,6 +204,34 @@ router.use('/alabamaDMV_Commission_01', (req, res, next) => {
     next();
 });
 
+/* 
+	In the JavaScript code snippet `router.use('/alabamaVoters_SignUpLogin_01', (req, res, next) 
+	=> { ... }`, a pivotal middleware is integrated into the Node.js API. This middleware, when 
+	invoked onto the specified route '/alabamaVoters_SignUpLogin_01', serves a crucial role in 
+	users' authentications. The middleware begins by logging a message to the console 
+	('middleware called!'), and subsequently checks, if the user is already authenticated by 
+	inspecting the session cookie id information within the SQLite3 database. If the user is not
+	authenticated, the middleware marks the request as unauthenticated, particularly relevant when
+	the request is directed towards the '/login' URL. 
+	
+	The `next()` function ensures the seamless flow of the request through the middleware stack. 
+	This mechanism aids in controlling access to the specified route, exemplifying the versatility 
+	of the `router.use()` method for registering middleware functions tailored to specific routes 
+	or route groups in a Node.js application.
+*/
+
+router.use('/alabamaVoters_SignUpLogin_01', (req, res, next) => {
+    console.log('middleware called!');
+    // Check if user is Already authenticated
+    if (!req.session.isAuthenticated) {  
+      
+        // User of '/login' URL
+        req.isUnauthenticated = true;
+    }
+    next();
+});
+
+
 /*
 	In the JavaScript snippet `router.use('/alabamaDMV_Commission_01', (req, res, next) => { ... }`, 
 	a critical middleware operation is introduced within the context of a Node.js application. 
@@ -220,6 +251,28 @@ router.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	}
 	next();
 });
+
+/*
+	In the JavaScript snippet `router.use('/alabamaVoters_SignUpLogin_01', (req, res, next) => 
+	{ ... }`, a critical middleware operation is introduced within the context of a Node.js 
+	application. This middleware is specifically designed to scrutinize users' authentications
+	onto the route '/alabamaVoters_SignUpLogin_01'. The code initiates by assessing whether the
+	user has already been authenticated, and examining the session cookie id information from 
+	the SQLite3 database. If the user is not authenticated, the middleware sets the 
+	`req.isUnauthenticated` flag to true. The `next()` function ensures the smooth progression of
+	the request through the middleware stack. This implementation effectively controls access to the
+	specified route, showcasing the utility of the `router.use()` method for incorporating middleware
+	functions tailored to particular routes or route groups within a Node.js application.
+*/
+/*
+router.use('/alabamaVoters_SignUpLogin_01', (req, res, next) => {
+	// Check if user has Already been authenticated.
+	if(!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+*/
 
 /*
 	The provided JavaScript code configures routing paths for the iVoteBallot web application within the Express.js
