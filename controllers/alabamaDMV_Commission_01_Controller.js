@@ -202,13 +202,14 @@ db1.serialize( () => {
 				return done(null, false, { message: 'Your password and confirm password does not match.'});
 
 			} else 
-			 await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?`, userDMVEmail,(err, row) => {
+			 await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?`, userDMVEmail, (err, row) => {
+				
 				if (err) {
 					return done(err);
 				}
-			  
+
 				if (!row) {
-					return done(null, false, { message: 'You have entered the incorrect email address.'});
+					return done (null, false, { message: 'You have entered the incorrect email address.'});
 				}
 				
 				 bcrypt.compare(userCommissionIvoteBallotIdIdentifierCode, row.userCommissionIvoteBallotIdIdentifierCode, (err, result) => {
