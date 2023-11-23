@@ -16,7 +16,7 @@ const express = require('express');
 */
 const flash = require('express-flash');
 
-const flashPassport = require('connect-flash');
+const flashSession = require('connect-flash');
 
 /*
 	The contactUs_01_Router.js file is a router module that handles requests related to the
@@ -123,7 +123,7 @@ router.use(
 				httpOnly: true,
 				sameSite: true,
 				resave: false,
-				saveUninitialized: false,
+				saveUninitialized: true,
 				maxAge: 'SESSION_MAX_AGE' // 30 minuites in milliseconds
 			}
 		}),
@@ -162,7 +162,7 @@ router.use([passport.initialize()]);
 */
 router.use(passport.session());
 
-router.use(flashPassport());
+router.use(flashSession());
 
 /*
 	The statement `router.use(flash())` is employed within the context of the custom 
@@ -233,6 +233,12 @@ router
 
 router	
 	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_PassportGet);
+
+router	
+	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_BlankEndPointGet);
+
+router	
+	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_EndPointGet);
 
 router
 	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.redirectLogin);
