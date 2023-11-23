@@ -27,11 +27,23 @@
 						<button class="dmv_CommissionButton_01" onclick="document.getElementById('popUpDMV_CommissionMenu').style.display='block'" style="width:auto;">DMV Commission - Voters' Details Information | Alabama</button>
 						
 						<div id="popUpDMV_CommissionMenu" class="dmvCommission_Form_01">
-							
-							<% if (messages.error) { %>
-								<%= messages.error %>
-					
-							<% } %>				
+
+							<% if (messages.success) { %>
+								<div class="alert alert-success">
+								  <% messages.success.forEach(function(message) { %>
+									<%= message %>
+								  <% }); %>
+								</div>
+							  <% } %>
+							  
+							  <% if (messages.error) { %>
+								<div class="alert alert-danger">
+								  <% messages.error.forEach(function(message) { %>
+									<%= message %>
+								  <% }); %>
+								</div>
+							  <% } %>
+								  
 						
 							<form 
 								class="form_AlabamaDMV_Commission animate"
