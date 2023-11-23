@@ -423,6 +423,18 @@ const alabamaDMV_Commission_01_PassportGet = ('/alabamaDMV_Commission_01', (req,
     }
 });
 
+const alabamaDMV_Commission_01_BlankEndPointGet = ('/', (req, res) => {
+	req.flashSession('message', 'You have successfully created the user profile onto iVoteBallot\'s database.');
+	res.redirect('/alabamaDMV_Commission_01');
+
+});
+
+const alabamaDMV_Commission_01_EndPointGet = ('/alabamaDMV_Commission_01', (req, res) => {
+	res.send(req.flashSession('message'));
+
+});
+
+
 /*
   The constant redirectLogin is a middleware function that checks if the user is logged in by
   verifying the existence of a userId property in the user's session. If the user is not logged
@@ -600,7 +612,7 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 			} else {
 				console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database. ' + Date());			
 				req.flash('Success', 'The user is successfully registered into the iVoteBallot database, and the user can now sign up to create his or her iVoteBallot account.');
-				res.redirect('/ivoteballot');
+				res.redirect('/alabamaDMV_Commission_01');
 			}		
 			
 			const transporter = nodemailer.createTransport ({
@@ -719,6 +731,8 @@ module.exports = {
 	redirectDashboard,
 	alabamaDMV_Commission_01_RouteGet,
 	alabamaDMV_Commission_01_PassportGet,
+	alabamaDMV_Commission_01_BlankEndPointGet,
+	alabamaDMV_Commission_01_EndPointGet,
 	redirectLogin,
 	alabamaDMV_Commission_01_AuthenticatePost,	
 	createAlabamaDMV_Commission_01_Database	
