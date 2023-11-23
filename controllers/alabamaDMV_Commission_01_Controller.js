@@ -490,9 +490,16 @@ const alabamaDMV_Commission_01_AuthenticatePost =
 */
 const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 	async (req, res, next) => { 
-		
+
 		const userCommissionIvoteBallotIdIdentifierCode = req.body.userCommissionIvoteBallotIdIdentifierCode;
-		const userCommissionIvoteBallotIdCodeBcryptic = req.body.userCommissionIvoteBallotIdCodeBcryptic;
+		const userCommissionIvoteBallotIdCodeBcryptic = req.body.userCommissionIvoteBallotIdCodeBcryptic;		
+				
+		const salt =  await bcrypt.genSalt(15);
+		const iVoteBallotIdCodeHashed =  await bcrypt.hash(req.body.userCommissionIvoteBallotIdCodeBcryptic, salt);
+
+		const newUser = {
+			userCommissionIvoteBallotIdCodeBcryptic:iVoteBallotIdCodeHashed
+		};	
 
 		const data = {    
 
@@ -560,14 +567,7 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 		} else {
 			req.flash('success', 'The user\' iVoteBallot Id Identifier Code have successfully matched to his or her iVoteBallot Id Code entered into the input fields, and the user is successfully authenticated through the \'passport.use\' login2, LocalStrategy and session cookie.');
 			//console.log('The user\' iVoteBallot Id Identifier Code have successfully matched to his or her iVoteBallot Id Code entered into the input fields, and the user is successfully authenticated through the \'passport.use\' login2, LocalStrategy and session cookie.');
-		}   
-
-		const salt = await bcrypt.genSalt(15);
-		const iVoteBallotIdCodeHashed = await bcrypt.hash(req.body.userCommissionIvoteBallotIdCodeBcryptic, salt);
-
-		const newUser = {
-			userCommissionIvoteBallotIdCodeBcryptic:iVoteBallotIdCodeHashed
-		};	
+		}   		
 
 		const sqlInsert = 'INSERT INTO alabamaDMV_Commission_01 (userDMVFirstName, userDMVMiddleName, userDMVLastName, userDMVSuffix, userDMVDateOfBirth, userDMVBirthSex, userDMVGenderIdentity, userDMVRace, userDMVSSN, userDMVEmail, userDMVConfirmEmail, userDMVPhoneNumber, userDMVAddress, userDMVUnitType, userDMVUnitTypeNumber, userDMVCountrySelection, userDMVStateSelection, userDMVCountySelection, userDMVCitySelection, userDMVZipSelection, userDMVIdType, userDMVIdTypeNumber, userCommissionIvoteBallotIdIdentifierCode, userCommissionIvoteBallotIdCodeBcryptic) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';	
 		
@@ -698,10 +698,11 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 					
 				}
 			});	
-			
-	});		
 
-});
+		});		
+
+	}
+);
 
 /*
 	The given JavaScript coded language exports a module with multiple components, including
