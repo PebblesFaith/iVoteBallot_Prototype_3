@@ -1215,8 +1215,14 @@ window.onload = function (e) {
             userZipSelection.options[userZipSelection.options.length] = new Option(zips[i], zips[i]);
         }
     
-    }                   
+    }  
+	
+	window.onload = function() {
+		document.getElementsByClassName('form_AlabamaDMV_Commission').value = '';
+	}
 
 }
+
+
 
 
