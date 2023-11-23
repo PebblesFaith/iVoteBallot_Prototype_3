@@ -388,11 +388,10 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	e.preventDefault();                                      
 	
 		form.addEventListner('submit', validateAlabamaDMV_CommissionForm);
-		return true; 
+		return true; 	
 		
 	}
-
-
+	
 /* 
 	Sarai Hannah Ajai have written her JavaScript coded languages in order to define a hierarchical
 	data structure that organizes information related to the United States, specifically, states,
@@ -1216,11 +1215,35 @@ window.onload = function (e) {
         }
     
     }  
-	
-	window.onload = function() {
-		document.getElementsByClassName('form_AlabamaDMV_Commission').value = '';
-	}
 
+	window.onload = function() {
+		document.getElementById('firstName').value = (''); 
+		document.getElementById('middleName').value =('');  
+		document.getElementById('lastName').value = (''); 
+		document.getElementById('suffix').value = ('');   
+		document.getElementById('dateOfBirth').value = ('');    
+		document.getElementById('birthSex').value = ('');   
+		document.getElementById('genderIdentity').value = ('');  
+		document.getElementById('race').value = (''); 
+		document.getElementById('ssn').value = (''); 
+		document.getElementById('email').value = ('');
+		document.getElementById('confirmEmail').value = ('');  
+		document.getElementById('phoneNumber').value = ('');	
+		document.getElementById('address').value = ('');	
+		document.getElementById('unitType').value = ('');
+		document.getElementById('unitTypeNumber').value = ('');
+		document.getElementById('countrySelect').value = ('');
+		document.getElementById('stateSelect').value = ('');
+		document.getElementById('countySelect').value = ('');
+		document.getElementById('citySelect').value = ('');
+		document.getElementById('zipSelect').value = ('');
+		document.getElementById('idType').value = ('');
+		document.getElementById('idTypeNumber').value = ('');
+		document.getElementById('iVoteBallotIdIdentifierCode').value = ('');
+		document.getElementById('iVoteBallotIdCodeHidden_Bcryptic').value = ('');
+	
+	}	
+	
 }
 
 
