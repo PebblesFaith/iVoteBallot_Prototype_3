@@ -121,10 +121,9 @@ router.use(
 			cookie: {
 				secure: true,
 				httpOnly: true,
-				sameSite: true,
-				resave: false,
+				sameSite: true,			
 				saveUninitialized: true,
-				maxAge: 'SESSION_MAX_AGE' // 30 minuites in milliseconds
+				maxAge: 'SESSION_MAX_AGE' // 30 minuites in milliseconds				
 			}
 		}),
 		secret: 'EXPRESS_SESSION_KEY',
