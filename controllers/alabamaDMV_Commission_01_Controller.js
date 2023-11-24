@@ -63,13 +63,12 @@ const nodemailer = require('nodemailer');
 */
 const path = require('path');
 
-	/*
+/*
 	The if (process.env.NODE_ !== 'production') block checks whether the application is running
 	in production mode, and if not, loads additional environment variables from another .env file.	
 	This is a common practice to ensure that sensitive information is not accidentally leaked in
 	development or testing environments.
-	*/
-
+*/
 if (process.env.NODE_ !== 'production') {
 	require('dotenv').config();
 }
@@ -423,17 +422,17 @@ const alabamaDMV_Commission_01_PassportGet = ('/alabamaDMV_Commission_01', (req,
     }
 });
 
-const alabamaDMV_Commission_01_BlankEndPointGet = ('/', (req, res) => {
+const alabamaDMV_Commission_01_BlankEndPointGet = ('/alabamaDMV_Commission_01', (req, res) => {
 	req.flashSession('message', 'You have successfully created the user profile onto iVoteBallot\'s database.');
 	res.redirect('/alabamaDMV_Commission_01');
 
 });
 
 const alabamaDMV_Commission_01_EndPointGet = ('/alabamaDMV_Commission_01', (req, res) => {
-	res.send(req.flashSession('message'));
+	res.send(req.flashSession('message'));	
+	res.redirect('/alabamaDMV_Commission_01');
 
 });
-
 
 /*
   The constant redirectLogin is a middleware function that checks if the user is logged in by
@@ -573,7 +572,7 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 		console.log(req.session);	
 	
 		if (userCommissionIvoteBallotIdIdentifierCode !== userCommissionIvoteBallotIdCodeBcryptic) {
-			req.flash('error', 'The user\'s iVoteballot Id Identifier Code does not match to the user\'s iVoteballot Id Identifier Code Bcryptic you have entered into the input fields.');
+			req.flash('error', 'The user\'s iVoteballot Id Identifier Code does not match to the user\'s iVoteballot Id Identifier Code Bcryptic you have entered into the input fields.');			
 			return res.redirect('/alabamaDMV_Commission_01');        
 
 		} else {
@@ -612,7 +611,9 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 			} else {
 				console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database. ' + Date());			
 				req.flash('Success', 'The user is successfully registered into the iVoteBallot database, and the user can now sign up to create his or her iVoteBallot account.');
+				
 				res.redirect('/alabamaDMV_Commission_01');
+			
 			}		
 			
 			const transporter = nodemailer.createTransport ({
@@ -624,7 +625,7 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 					pass: IONOS_SECRET_KEY,
 				}
 			}); 
-			
+						
 			const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
 
 			const mailOptions_01 = {
