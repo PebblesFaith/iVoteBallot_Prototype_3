@@ -352,6 +352,14 @@ const redirectDashboard = (req, res, next) => {
     }
 }
 
+const redirectDashboard_Login = (req, res, next) => {
+    if(req.session.userId) {
+        res.redirect('/alabamaVoters_SignUpLogin_01');
+    } else {
+        next();
+    }
+}
+
 /*
 	The written JavaScript code language defines a route handler for the '/alabamaDMV_Commission_01'
 	route in the iVoteballot web application. This route is designed to handle HTTP GET requests. 
@@ -375,7 +383,7 @@ const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01', redirect
         console.log('User is not logged into the dashboard!');
     } else if         
         (req.session.isAuthenticated) {
-        res.redirect('/ivoteballot'); //dashboard_01
+        res.redirect('/dashboard_01'); //dashboard_01
         console.log('User is logged into the dashboard!');
        
     } else {       
@@ -602,7 +610,7 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 				console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database. ' + Date());			
 				req.flash('Success', 'The user is successfully registered into the iVoteBallot database, and the user can now sign up to create his or her iVoteBallot account.');
 				
-				res.redirect('/alabamaDMV_Commission_01');
+				res.redirect('/alabamaVoters_SignUpLogin_01');
 			
 			}		
 			
@@ -720,7 +728,8 @@ module.exports = {
 
 	alabama_Session_Router,
 	redirectDashboard,
-	alabamaDMV_Commission_01_RouteGet,
+	//redirectDashboard_Login,
+	alabamaDMV_Commission_01_RouteGet,	
 	alabamaDMV_Commission_01_PassportGet,
 	alabamaDMV_Commission_01_BlankEndPointGet,
 	alabamaDMV_Commission_01_EndPointGet,
