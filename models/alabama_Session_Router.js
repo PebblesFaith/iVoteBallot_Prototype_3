@@ -200,6 +200,15 @@ router.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	next();
 });
 
+router.use('/alabamaVoters_SignUpLogin_01', (req, res, next) => {
+	console.log('middleware called!');
+	// Check if user has Already been authenticated.
+	if(!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
 /*
 	The provided JavaScript code configures routing paths for the iVoteBallot web application within the Express.js
 	framework. These routes involve both HTTP POST and GET methods, each mapped to specific functions within the 
@@ -248,6 +257,18 @@ router
 
 router
 	.post('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.createAlabamaDMV_Commission_01_Database);
+
+router
+	.get('/alabamaVoters_SignUpLogin_01', alabamaVoters_SignUpLogin_01_Controller.redirectDashboard);
+
+router
+	.get('/alabamaVoters_SignUpLogin_01', alabamaVoters_SignUpLogin_01_Controller.alabamaVoters_SignUpLogin_01_RouteGet);
+
+router
+	.get('/alabamaVoters_SignUpLogin_01', alabamaVoters_SignUpLogin_01_Controller.alabamaVoters_SignUpLogin_01_DashboardRouteGet);
+
+	router
+	.get('/alabamaVoters_SignUpLogin_01', alabamaVoters_SignUpLogin_01_Controller.alabamaVoters_SignUpLogin_01_DashboardRouteGet);
 
 router
     .post('/contactUs_01', contactUs_01_Controller.createContactUs_01_Database);
