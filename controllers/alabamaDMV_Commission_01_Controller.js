@@ -376,7 +376,8 @@ const redirectDashboard = (req, res, next) => {
 	flow and rendering logic for a specific route in an iVoteBallot web application, with a focus on
 	handling both authenticated and unauthenticated users requests.
 */
-const alabamaDMV_Commission_01_RouteGet = ('/login2', redirectDashboard, (req, res) => {
+
+const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {
     console.log(req.session);
     console.log('isUnauthenticated: ', req.isUnauthenticated);
     // Check if user already authenticated.
