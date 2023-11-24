@@ -44,6 +44,7 @@ const IONOS_SECRET_KEY = process.env.IONOS_SECRET_KEY;
 
 const views_Controller = require('./models/views_Router');
 const contactUs_01_Controller = require('./models/alabama_Session_Router');
+const alabamaVoters_SignUpLogin_01_Controller = require('./models/alabama_Session_Router');
 const alabamaDMV_Commission_01_Controller = require('./models/alabama_Session_Router');
 
 iVoteBallotApp.set('view engine', 'ejs');
@@ -62,6 +63,7 @@ iVoteBallotApp.use(views_Controller);
 
 iVoteBallotApp.use('/', require('./models/alabama_Session_Router'));
 iVoteBallotApp.use(contactUs_01_Controller);
+iVoteBallotApp.use(alabamaVoters_SignUpLogin_01_Controller);
 iVoteBallotApp.use(alabamaDMV_Commission_01_Controller);
 
 /*
