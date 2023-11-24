@@ -44,7 +44,6 @@ const bodyParser = require('body-parser');
 */
 const contactUs_01_Controller = require('../controllers/contactUs_01_Controller');
 const alabamaDMV_Commission_01_Controller = require('../controllers/alabamaDMV_Commission_01_Controller');
-const alabamaVoters_SignUpLogin_01_Controller = require('../controllers/alabamaVoters_SignUpLogin_01_Controller');
 
 /*
 	The statement const router = express.Router(); creates a new router object
@@ -259,18 +258,6 @@ router
 	.post('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.createAlabamaDMV_Commission_01_Database);
 
 router
-	.get('/alabamaVoters_SignUpLogin_01', alabamaVoters_SignUpLogin_01_Controller.redirectDashboard);
-
-router
-	.get('/alabamaVoters_SignUpLogin_01', alabamaVoters_SignUpLogin_01_Controller.alabamaVoters_SignUpLogin_01_RouteGet);
-
-router
-	.get('/alabamaVoters_SignUpLogin_01', alabamaVoters_SignUpLogin_01_Controller.alabamaVoters_SignUpLogin_01_DashboardRouteGet);
-
-	router
-	.get('/alabamaVoters_SignUpLogin_01', alabamaVoters_SignUpLogin_01_Controller.alabamaVoters_SignUpLogin_01_DashboardRouteGet);
-
-router
     .post('/contactUs_01', contactUs_01_Controller.createContactUs_01_Database);
 
 router
@@ -278,7 +265,6 @@ router
 
 router
     .post('/contactUs_01', contactUs_01_Controller.contactUs_01_PassportPost);
-
  
 /*
 	In a Node.js application, the module.exports is used to expose a module, as a single object
