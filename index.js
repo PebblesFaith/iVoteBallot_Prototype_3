@@ -1,6 +1,6 @@
 const express = require('express');
 
-const flash = require('express-flash');
+//const flash = require('express-flash');
 
 const iVoteBallotApp = express();
 
@@ -10,7 +10,7 @@ const ejs = require('ejs');
 
 const bodyParser = require('body-parser');
 
-const session = require('express-session');
+//const session = require('express-session');
 
 require('dotenv').config();
 
