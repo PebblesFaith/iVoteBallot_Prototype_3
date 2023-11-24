@@ -41,9 +41,7 @@
 
 	<body>
 		<header>
-			<%- include('../common/header') %>
-		</header>		  
-
+			
 		<div id="flex_Container">
 			<div id="flex_Container_Row">
 				<div id="flex_Container_Column">
@@ -51,7 +49,7 @@
 
 						<button class="signUpButton_01" onclick="document.getElementById('popUpSignUpMenu').style.display='block'" style="width:auto;">Sign Up | Alabama</button>
 						
-						<div id="popUpSignUpMenu" class="signUp_Form_01">
+						<div id="popUpSignUpMenu" class="signUp_Form_01">							
 						
 							<form class="form_SignUp_01 animate" name="signUpForm" onsubmit="return validateAlabamaVotersSignUpForm()" action="/alabamaVoters_SignUpLogin_01" method="POST">
 
