@@ -1,5 +1,5 @@
 
-const  validateAlabamaVotersSignUpForm = (e) => { 
+const  validateAlabamaVotersSignUpForm = (e) => { 	
 
 	console.log('Sarai Hannah Ajai is testing her written JavaScript programmatic codes; in order to validate her \'validateAlabamaVotersSignUpForm()\' form has opened up correctly within the HTML webpage.')
 	
