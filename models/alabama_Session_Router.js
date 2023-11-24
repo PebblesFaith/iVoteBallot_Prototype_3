@@ -44,6 +44,7 @@ const bodyParser = require('body-parser');
 */
 const contactUs_01_Controller = require('../controllers/contactUs_01_Controller');
 const alabamaDMV_Commission_01_Controller = require('../controllers/alabamaDMV_Commission_01_Controller');
+const alabamaVoters_SignUpLogin_01_Controller = require('../controllers/alabamaVoters_SignUpLogin_01_Controller');
 
 /*
 	The statement const router = express.Router(); creates a new router object
@@ -122,7 +123,7 @@ router.use(
 				secure: true,
 				httpOnly: true,
 				sameSite: true,			
-				saveUninitialized: true,
+				saveUninitialized: false,
 				maxAge: 'SESSION_MAX_AGE' // 30 minuites in milliseconds				
 			}
 		}),
