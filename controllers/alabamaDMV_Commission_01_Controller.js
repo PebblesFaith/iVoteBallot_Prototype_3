@@ -191,24 +191,13 @@ db1.serialize( () => {
 		passwordField: 'userCommissionIvoteBallotIdIdentifierCode',
 		passReqToCallback: true // To allow request object to be passed to callback
 	},   
-		async (req, userDMVEmail, userCommissionIvoteBallotIdIdentifierCode, done) => {
-
-			// Check if users' email addresses exists
-			await db1.get('SELECT * FROM WHERE userDMVEmail = ?' [userDMVEmail], (err, users) => {
-				if (err) {
-					throw err				
-				}
-				if (users.length > 1) {
-					return done (null, false, { message: 'Your email address already exists in our iVoteBallot\'s database.'});	
-				}
+		async (req, userDMVEmail, userCommissionIvoteBallotIdCodeBcryptic, done) => {
 			
-			});
-
 			console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) email (\'userDMVEmail\') as: ' + userDMVEmail);
-			console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) password (\'userCommissionIvoteBallotIdIdentifierCode\') as: ' + userCommissionIvoteBallotIdIdentifierCode);
+			console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) password (\'userCommissionIvoteBallotIdIdentifierCode\') as: ' + userCommissionIvoteBallotIdCodeBcryptic);
 			
-			if (!userCommissionIvoteBallotIdIdentifierCode) {	
-				console.log('The iVoteBallot\'s employee have manually the user\'s password (\'userCommissionIvoteBallotIdIdentifierCode\') into the login field as:' + userCommissionIvoteBallotIdIdentifierCode);            
+			if (!userCommissionIvoteBallotIdCodeBcryptic) {	
+				console.log('The iVoteBallot\'s employee have manually the user\'s password (\'userCommissionIvoteBallotIdIdentifierCode\') into the login field as:' + userCommissionIvoteBallotIdCodeBcryptic);            
 				console.log('The iVoteBallot\'s employee have manually entered the user\'s passport.use LocalStrategy password (\'userCommissionIvoteBallotIdIdentifierCode\') request for which, does not match to the Session Cookie Id permission from the SQLite3 database.');
 				return done(null, false, { message: 'Your password and confirm password does not match.'});
 
@@ -223,7 +212,7 @@ db1.serialize( () => {
 					return done (null, false, { message: 'You have entered the incorrect email address.'});
 				}
 				
-				 bcrypt.compare(userCommissionIvoteBallotIdIdentifierCode, row.userCommissionIvoteBallotIdIdentifierCode, (err, result) => {
+				 bcrypt.compare(userCommissionIvoteBallotIdCodeBcryptic, row.userCommissionIvoteBallotIdCodeBcryptic, (err, result) => {
 				   
 					if (err) {
 						return done(err);
