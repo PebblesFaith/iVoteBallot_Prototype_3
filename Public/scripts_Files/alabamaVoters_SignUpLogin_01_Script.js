@@ -41,6 +41,7 @@ const  validateAlabamaVotersSignUpForm = (e) => {
 
 }
 
+/*
 const validateLogInForm = (e) => { 
 
 	const userEmail_Login_01 = document.getElementById('emailLogIn_01').value.trim();
@@ -82,5 +83,5 @@ const validateLogInForm = (e) => {
 
 } 
 
-
+*/
 
