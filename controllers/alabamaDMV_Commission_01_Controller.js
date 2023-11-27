@@ -269,13 +269,8 @@ passport.use(
 		console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) email (\'userDMVEmail\') as: ' + userDMVEmail);
 		console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) password (\'userCommissionIvoteBallotIdIdentifierCode\') as: ' + userCommissionIvoteBallotIdCodeBcryptic);
 		
-		if (!userCommissionIvoteBallotIdCodeBcryptic) {	
-			console.log('The iVoteBallot\'s employee have manually the user\'s password (\'userCommissionIvoteBallotIdIdentifierCode\') into the login field as:' + userCommissionIvoteBallotIdCodeBcryptic);            
-			console.log('The iVoteBallot\'s employee have manually entered the user\'s passport.use LocalStrategy password (\'userCommissionIvoteBallotIdIdentifierCode\') request for which, does not match to the Session Cookie Id permission from the SQLite3 database.');
-			return done(null, false, { message: 'Your password and confirm password does not match.'});
-
-		} else 
-		 await db1.get(`SELECT * FROM alabamaVoters_SignUpLogin_01 WHERE userDMVEmail = ?`, userDMVEmail, (err, row) => {
+		
+		 await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?`, userDMVEmail, (err, row) => {
 			
 			if (err) {
 				return done(err);
@@ -291,38 +286,41 @@ passport.use(
 					return done(err);
 				}
 				if (!result) {
-					return done(null, false, { message: 'You have entered the incorrect password.'});
+					console.log('The user email and IvoteBallot Id Identifier Code are: ' + userDMVEmail + userCommissionIvoteBallotIdCodeBcryptic);
+					return done(null, false, { message: 'You have entered the IvoteBallot Id Identifier Code.'});
 				}
 				//return done(null, row);
 
-				return done(null, { id: row.id, 
+				return done(null, { id: 
 					
-						row:userDMVFirstName,       
-						row:userDMVMiddleName, 
-						row:userDMVLastName,        
-						row:userDMVSuffix,
-						row:userDMVDateOfBirth,
-						row:userDMVBirthSex,
-						row:userDMVGenderIdentity,
-						row:userDMVRace,
-						row:userDMVSSN,
-						row:userDMVEmail,
-						row:userDMVConfirmEmail,
-						row:userDMVPhoneNumber,
-						row:userDMVAddress,
-						row:userDMVUnitType,
-						row:userDMVUnitTypeNumber,
-						row:userDMVCountrySelection,
-						row:userDMVStateSelection,
-						row:userDMVCountySelection,
-						row:userDMVCitySelection,
-						row:userDMVZipSelection,
-						row:userDMVIdType,
-						row:userDMVIdTypeNumber,
-						row:userCommissionIvoteBallotIdIdentifierCode,
-						row:userCommissionIvoteBallotIdCodeBcryptic,
+					row.id, 					
+					row:userDMVFirstName,       
+					row:userDMVMiddleName, 
+					row:userDMVLastName,        
+					row:userDMVSuffix,
+					row:userDMVDateOfBirth,
+					row:userDMVBirthSex,
+					row:userDMVGenderIdentity,
+					row:userDMVRace,
+					row:userDMVSSN,
+					row:userDMVEmail,
+					row:userDMVConfirmEmail,
+					row:userDMVPhoneNumber,
+					row:userDMVAddress,
+					row:userDMVUnitType,
+					row:userDMVUnitTypeNumber,
+					row:userDMVCountrySelection,
+					row:userDMVStateSelection,
+					row:userDMVCountySelection,
+					row:userDMVCitySelection,
+					row:userDMVZipSelection,
+					row:userDMVIdType,
+					row:userDMVIdTypeNumber,
+					row:userCommissionIvoteBallotIdIdentifierCode,
+					row:userCommissionIvoteBallotIdCodeBcryptic,
 
 					isAuthenticated: true
+
 				});
 
 		});                
@@ -498,11 +496,11 @@ const alabamaVoters_SignUpLogin_01_AuthenticationGet = ('/alabamaVoters_SignUpLo
         console.log(req.user);
         console.log('Request Session:' + req.session);
         console.log('' + req.logIn);
-        console.log('The User had been successfully authenticated within the Session through the passport from the iVoteBallot\'s employee direct user posting to the \'alabamaVoters_SignUpLogin_01\' webpage!');
+        console.log('The User had been successfully authenticated within the Session through the passport from the user posting to the \'alabamaVoters_SignUpLogin_01\' webpage!');
         res.render('alabamaVoters_SignUpLogin_01');
     } else {
         res.render('500')       
-        console.log('The user is not successfully authenticated within the session through the passport from the iVoteBallot\'s employee direct user posting to the \'alabamaVoters_SignUpLogin_01\' webpage!');
+        console.log('The user is not successfully authenticated within the session through the passport from the user posting to the \'alabamaVoters_SignUpLogin_01\' webpage!');
     }
 });
 
@@ -818,7 +816,7 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 );
 
 const createAlabamaVoters_SignUpLogin_01_Database = ('/alabamaVoters_SignUpLogin_01',
-async (req, res, next) => {
+async (req, res) => {
 
 	const userDMVEmail = req.body.userDMVEmail;
 	const userCommissionIvoteBallotIdCodeBcryptic = req.body.userCommissionIvoteBallotIdCodeBcryptic;
@@ -827,8 +825,11 @@ async (req, res, next) => {
 	console.log('The user email is: ' + email + '.');
 	console.log('The user password: ' + userCommissionIvoteBallotIdCodeBcryptic + '.');
 
+	const salt = await bcrypt.genSalt(13)
+	const passwordHashed = await bcrypt.hash(userCommissionIvoteBallotIdCodeBcryptic, salt);
+
 	// Check, if the user's email exists onto the passport serialization through the session.
-	db1.get('SELECT * FROM alabamaVoters_SignUpLogin_01 WHERE userDMVEmail = ?', userDMVEmail, (err, row) => {
+	db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?', userDMVEmail, (err, row) => {
 
 		if (err) {
 
