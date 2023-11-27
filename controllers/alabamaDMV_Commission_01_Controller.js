@@ -257,6 +257,79 @@ db1.serialize( () => {
 	}
 ));
 
+passport.use(
+	'login3',
+	new LocalStrategy({
+	usernameField: 'userDMVEmail',
+	passwordField: 'userCommissionIvoteBallotIdIdentifierCode',
+	passReqToCallback: true // To allow request object to be passed to callback
+},   
+	async (req, userDMVEmail, userCommissionIvoteBallotIdCodeBcryptic, done) => {
+		
+		console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) email (\'userDMVEmail\') as: ' + userDMVEmail);
+		console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) password (\'userCommissionIvoteBallotIdIdentifierCode\') as: ' + userCommissionIvoteBallotIdCodeBcryptic);
+		
+		if (!userCommissionIvoteBallotIdCodeBcryptic) {	
+			console.log('The iVoteBallot\'s employee have manually the user\'s password (\'userCommissionIvoteBallotIdIdentifierCode\') into the login field as:' + userCommissionIvoteBallotIdCodeBcryptic);            
+			console.log('The iVoteBallot\'s employee have manually entered the user\'s passport.use LocalStrategy password (\'userCommissionIvoteBallotIdIdentifierCode\') request for which, does not match to the Session Cookie Id permission from the SQLite3 database.');
+			return done(null, false, { message: 'Your password and confirm password does not match.'});
+
+		} else 
+		 await db1.get(`SELECT * FROM alabamaVoters_SignUpLogin_01 WHERE userDMVEmail = ?`, userDMVEmail, (err, row) => {
+			
+			if (err) {
+				return done(err);
+			}
+
+			if (!row) {
+				return done (null, false, { message: 'You have entered the incorrect email address.'});
+			}
+			
+			bcrypt.compare(userCommissionIvoteBallotIdCodeBcryptic, row.userCommissionIvoteBallotIdCodeBcryptic, (err, result) => {
+			   
+				if (err) {
+					return done(err);
+				}
+				if (!result) {
+					return done(null, false, { message: 'You have entered the incorrect password.'});
+				}
+				//return done(null, row);
+
+				return done(null, { id: row.id, 
+					
+						row:userDMVFirstName,       
+						row:userDMVMiddleName, 
+						row:userDMVLastName,        
+						row:userDMVSuffix,
+						row:userDMVDateOfBirth,
+						row:userDMVBirthSex,
+						row:userDMVGenderIdentity,
+						row:userDMVRace,
+						row:userDMVSSN,
+						row:userDMVEmail,
+						row:userDMVConfirmEmail,
+						row:userDMVPhoneNumber,
+						row:userDMVAddress,
+						row:userDMVUnitType,
+						row:userDMVUnitTypeNumber,
+						row:userDMVCountrySelection,
+						row:userDMVStateSelection,
+						row:userDMVCountySelection,
+						row:userDMVCitySelection,
+						row:userDMVZipSelection,
+						row:userDMVIdType,
+						row:userDMVIdTypeNumber,
+						row:userCommissionIvoteBallotIdIdentifierCode,
+						row:userCommissionIvoteBallotIdCodeBcryptic,
+
+					isAuthenticated: true
+				});
+
+		});                
+	});       
+}
+));
+
 /*
 	The code passport.serializeUser(function (user, done) { done(null, user.id); }) is a function
 	that is used by Passport to serialize the user object for storage in a session.
@@ -420,6 +493,19 @@ const alabamaDMV_Commission_01_PassportGet = ('/alabamaDMV_Commission_01', (req,
     }
 });
 
+const alabamaVoters_SignUpLogin_01_AuthenticationGet = ('/alabamaVoters_SignUpLogin_01', (req, res) => {
+    if (req.isAuthenticated()) {
+        console.log(req.user);
+        console.log('Request Session:' + req.session);
+        console.log('' + req.logIn);
+        console.log('The User had been successfully authenticated within the Session through the passport from the iVoteBallot\'s employee direct user posting to the \'alabamaVoters_SignUpLogin_01\' webpage!');
+        res.render('alabamaVoters_SignUpLogin_01');
+    } else {
+        res.render('500')       
+        console.log('The user is not successfully authenticated within the session through the passport from the iVoteBallot\'s employee direct user posting to the \'alabamaVoters_SignUpLogin_01\' webpage!');
+    }
+});
+
 const alabamaDMV_Commission_01_BlankEndPointGet = ('/alabamaDMV_Commission_01', (req, res) => {
 	req.flashSession('message', 'You have successfully created the user profile onto iVoteBallot\'s database.');
 	res.redirect('/alabamaDMV_Commission_01');
@@ -431,6 +517,10 @@ const alabamaDMV_Commission_01_EndPointGet = ('/alabamaDMV_Commission_01', (req,
 	res.redirect('/alabamaDMV_Commission_01');
 
 });
+
+
+
+
 
 /*
   The constant redirectLogin is a middleware function that checks if the user is logged in by
@@ -463,6 +553,18 @@ const alabamaDMV_Commission_01_AuthenticatePost =
     passport.authenticate('login2', {
         successRedirect: '/iVoteBallot',
         failureRedirect: '/alabamaDMV_Commission_01',
+
+		failureFlash: true
+	 })		
+		(req, res, next);
+    
+});
+
+const alabamaVoters_SignUporLogin_01_AuthenticatePost = 
+	('/alabama_SignUporLogin_01', (req, res, next) => {
+    passport.authenticate('login3', {
+        successRedirect: '/signUp2',
+        failureRedirect: '/alabama_SignUporLogin_01',
 
 		failureFlash: true
 	 })		
@@ -715,6 +817,35 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 	}
 );
 
+const createAlabamaVoters_SignUpLogin_01_Database = ('/alabamaVoters_SignUpLogin_01',
+async (req, res, next) => {
+
+	const userDMVEmail = req.body.userDMVEmail;
+	const userCommissionIvoteBallotIdCodeBcryptic = req.body.userCommissionIvoteBallotIdCodeBcryptic;
+
+	console.log('These are the request body: ' + req.body);
+	console.log('The user email is: ' + email + '.');
+	console.log('The user password: ' + userCommissionIvoteBallotIdCodeBcryptic + '.');
+
+	// Check, if the user's email exists onto the passport serialization through the session.
+	db1.get('SELECT * FROM alabamaVoters_SignUpLogin_01 WHERE userDMVEmail = ?', userDMVEmail, (err, row) => {
+
+		if (err) {
+
+			console.error(err);
+			console.log('The user\'s passport and session was not successfully executed causing the 500 message due from Developer\'s programmatic coding language problems');
+			res.render('500');
+
+		} else if (!row) {
+			console.log('The user\'s email address is not successfully found within the passport serialization authenticated processes through the season');
+			res.render('alabamaVoters_SignUpLogin_01');
+		} 
+
+	});
+
+
+});
+
 /*
 	The given JavaScript coded language exports a module with multiple components, including
 	a router, Passport authentication functions for GET and POST requests, a database instance, 
@@ -731,11 +862,14 @@ module.exports = {
 	//redirectDashboard_Login,
 	alabamaDMV_Commission_01_RouteGet,	
 	alabamaDMV_Commission_01_PassportGet,
+	alabamaVoters_SignUpLogin_01_AuthenticationGet,
 	alabamaDMV_Commission_01_BlankEndPointGet,
 	alabamaDMV_Commission_01_EndPointGet,
 	redirectLogin,
-	alabamaDMV_Commission_01_AuthenticatePost,	
-	createAlabamaDMV_Commission_01_Database	
+	alabamaDMV_Commission_01_AuthenticatePost,
+	alabamaVoters_SignUporLogin_01_AuthenticatePost,
+	createAlabamaDMV_Commission_01_Database,
+	createAlabamaVoters_SignUpLogin_01_Database	
 	
 }
   
