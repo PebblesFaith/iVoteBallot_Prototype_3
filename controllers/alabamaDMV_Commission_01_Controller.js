@@ -822,7 +822,7 @@ async (req, res) => {
 	const userCommissionIvoteBallotIdCodeBcryptic = req.body.userCommissionIvoteBallotIdCodeBcryptic;
 
 	console.log('These are the request body: ' + req.body);
-	console.log('The user email is: ' + email + '.');
+	console.log('The user email is: ' + userDMVEmail + '.');
 	console.log('The user password: ' + userCommissionIvoteBallotIdCodeBcryptic + '.');
 
 	const salt = await bcrypt.genSalt(13)
@@ -830,21 +830,37 @@ async (req, res) => {
 
 	// Check, if the user's email exists onto the passport serialization through the session.
 	db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?', userDMVEmail, (err, row) => {
-
 		if (err) {
 
 			console.error(err);
-			console.log('The user\'s passport and session was not successfully executed causing the 500 message due from Developer\'s programmatic coding language problems');
-			res.render('500');
+			console.log('The user\'s passport.use and session cookie id were not successfully executed causing an 500 error message due from the Developer\'s programmatic coding language problems.');
+			res.renden(500);
 
 		} else if (!row) {
-			console.log('The user\'s email address is not successfully found within the passport serialization authenticated processes through the season');
-			res.render('alabamaVoters_SignUpLogin_01');
-		} 
+
+			console.log('The user\'s email address is not successfully found within the passport serialization authenticated process through the session cookie id that passes to the SQLite3 database.');
+
+		} else {	
+
+
+
+			db1.run('UPDATE alabamaDMV_Commission_01 SET userCommissionIvoteBallotIdCodeBcryptic = ? WHERE userDMVEmail = ?', passwordHashed, row.email, (err) => {
+
+				if (err) {
+
+					console.error(err);
+					console.log('SQLite3 database language did not not properly execute the UPDATE from the passport.use local3 LocalStrategy from the Session Cookie Id.');
+					res.render('500');
+
+				} else if (!row) {
+					console.log('The user\'s email address is not successfully found within the passport serialization authenticated processes through the season');
+					res.render('alabamaVoters_SignUpLogin_01');
+				} 
+
+			});
+		}
 
 	});
-
-
 });
 
 /*
