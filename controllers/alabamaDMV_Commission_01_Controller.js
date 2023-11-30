@@ -128,6 +128,7 @@ const db1 = new sqlite3.Database('alabamaDMV_Commission_01.db', err => {
 */
 db1.serialize( () => {
     const sqlTable =  (`CREATE TABLE IF NOT EXISTS alabamaDMV_Commission_01 (
+
         ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
         userDate DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
         userDMVFirstName VARCHAR (100) NOT NULL, 
@@ -153,14 +154,17 @@ db1.serialize( () => {
         userDMVIdType VARCHAR(100) NOT NULL,
         userDMVIdTypeNumber VARCHAR(25) NOT NULL,
         userCommissionIvoteBallotIdIdentifierCode VARCHAR(50) NOT NULL,
-        userCommissionIvoteBallotIdCodeBcryptic VARCHAR(50) NOT NULL
+        userCommissionIvoteBallotIdCodeBcryptic VARCHAR(50) NOT NULL,
+		userPassword VARCHAR(50) NOT NULL,
+		userConfirmPassword VARCHAR(50) NOT NULL,
+		userTemporary_Password VARCHAR(50) NOT NULL
         
     )`);  
 		
 	db1.run(sqlTable, (err) => {       
 	
 		if (err) {
-			console.log('Sarai Hannah Ajai have created the Sqlite3 \'alabamaDMV_Commission_01\' database table which is not JavaScript programmatically coded successfully for which have generated an error message: ' + error + '!');
+			console.log('Sarai Hannah Ajai have created the Sqlite3 \'alabamaDMV_Commission_01\' database table which is not JavaScript programmatically coded successfully for which have generated an error message: ' + err + '!');
 		} else {
 			console.log('Sarai Hannah Ajai have created the Sqlite3 \'alabamaDMV_Commission_01\' database table which is JavaScript programmatically coded successfully!');   
 		}
@@ -248,6 +252,9 @@ db1.serialize( () => {
 							row:userDMVIdTypeNumber,
 							row:userCommissionIvoteBallotIdIdentifierCode,
 							row:userCommissionIvoteBallotIdCodeBcryptic,
+							row:userPassword,
+							row:userConfirmPassword,
+							row:userTemporary_Password,
 
 						isAuthenticated: true
 					});
@@ -318,6 +325,9 @@ passport.use(
 					row:userDMVIdTypeNumber,
 					row:userCommissionIvoteBallotIdIdentifierCode,
 					row:userCommissionIvoteBallotIdCodeBcryptic,
+					row:userPassword,
+					row:userConfirmPassword,
+					row:userTemporary_Password,
 
 					isAuthenticated: true
 
@@ -401,6 +411,9 @@ passport.deserializeUser(function(id, done) {
 			row:userDMVIdTypeNumber,
 			row:userCommissionIvoteBallotIdIdentifierCode,
 			row:userCommissionIvoteBallotIdCodeBcryptic,
+			row:userPassword,
+			row:userConfirmPassword,
+			row:userTemporary_Password,
 				
 		isAuthenticated: true });	
 		
@@ -515,10 +528,6 @@ const alabamaDMV_Commission_01_EndPointGet = ('/alabamaDMV_Commission_01', (req,
 	res.redirect('/alabamaDMV_Commission_01');
 
 });
-
-
-
-
 
 /*
   The constant redirectLogin is a middleware function that checks if the user is logged in by
@@ -635,7 +644,10 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
             userDMVIdType: req.body.userDMVIdType,
             userDMVIdTypeNumber: req.body.userDMVIdTypeNumber,
             userCommissionIvoteBallotIdIdentifierCode: req.body.userCommissionIvoteBallotIdIdentifierCode,
-            userCommissionIvoteBallotIdCodeBcryptic: req.body.userCommissionIvoteBallotIdCodeBcryptic
+            userCommissionIvoteBallotIdCodeBcryptic: req.body.userCommissionIvoteBallotIdCodeBcryptic,
+			userPassword: req.body.userPassword,
+			userConfirmPassword: req.body.userConfirmPassword,
+			userTemporary_Password: req.body.userTemporary_Password
 
         }
 			
@@ -666,6 +678,9 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 		console.log('The user\'s Id type number is: ' + data.userDMVIdTypeNumber + '.');
 		console.log('The user\'s iVoteBallot Id Identifier Code is: ' + data.userCommissionIvoteBallotIdIdentifierCode + '.');
 		console.log('The user\'s iVoteBallot Id Identifier Code Bcryption is: ' + data.userCommissionIvoteBallotIdCodeBcryptic + '.');
+		console.log('The user\'s password is: ' + data.userPassword + '.');
+		console.log('The user\'s confirm password is: ' + data.userConfirmPassword + '.');
+		console.log('The user\'s temporary password is: ' + data.userTemporary_Password + '.');
 
 		console.log(req.session);	
 	
@@ -678,9 +693,9 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 			//console.log('The user\' iVoteBallot Id Identifier Code have successfully matched to his or her iVoteBallot Id Code entered into the input fields, and the user is successfully authenticated through the \'passport.use\' login2, LocalStrategy and session cookie.');
 		}   		
 
-		const sqlInsert = 'INSERT INTO alabamaDMV_Commission_01 (userDMVFirstName, userDMVMiddleName, userDMVLastName, userDMVSuffix, userDMVDateOfBirth, userDMVBirthSex, userDMVGenderIdentity, userDMVRace, userDMVSSN, userDMVEmail, userDMVConfirmEmail, userDMVPhoneNumber, userDMVAddress, userDMVUnitType, userDMVUnitTypeNumber, userDMVCountrySelection, userDMVStateSelection, userDMVCountySelection, userDMVCitySelection, userDMVZipSelection, userDMVIdType, userDMVIdTypeNumber, userCommissionIvoteBallotIdIdentifierCode, userCommissionIvoteBallotIdCodeBcryptic) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';	
+		const sqlInsert = 'INSERT INTO alabamaDMV_Commission_01 (userDMVFirstName, userDMVMiddleName, userDMVLastName, userDMVSuffix, userDMVDateOfBirth, userDMVBirthSex, userDMVGenderIdentity, userDMVRace, userDMVSSN, userDMVEmail, userDMVConfirmEmail, userDMVPhoneNumber, userDMVAddress, userDMVUnitType, userDMVUnitTypeNumber, userDMVCountrySelection, userDMVStateSelection, userDMVCountySelection, userDMVCitySelection, userDMVZipSelection, userDMVIdType, userDMVIdTypeNumber, userCommissionIvoteBallotIdIdentifierCode, userCommissionIvoteBallotIdCodeBcryptic, userPassword, userConfirmPassword, userTemporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';	
 		
-		const params = [data.userDMVFirstName, data.userDMVMiddleName, data.userDMVLastName, data.userDMVSuffix, data.userDMVDateOfBirth, data.userDMVBirthSex, data.userDMVGenderIdentity, data.userDMVRace, data.userDMVSSN, data.userDMVEmail, data.userDMVConfirmEmail, data.userDMVPhoneNumber, data.userDMVAddress, data.userDMVUnitType, data.userDMVUnitTypeNumber, data.userDMVCountrySelection, data.userDMVStateSelection, data.userDMVCountySelection, data.userDMVCitySelection, data.userDMVZipSelection, data.userDMVIdType, data.userDMVIdTypeNumber, data.userCommissionIvoteBallotIdIdentifierCode, newUser.userCommissionIvoteBallotIdCodeBcryptic];
+		const params = [data.userDMVFirstName, data.userDMVMiddleName, data.userDMVLastName, data.userDMVSuffix, data.userDMVDateOfBirth, data.userDMVBirthSex, data.userDMVGenderIdentity, data.userDMVRace, data.userDMVSSN, data.userDMVEmail, data.userDMVConfirmEmail, data.userDMVPhoneNumber, data.userDMVAddress, data.userDMVUnitType, data.userDMVUnitTypeNumber, data.userDMVCountrySelection, data.userDMVStateSelection, data.userDMVCountySelection, data.userDMVCitySelection, data.userDMVZipSelection, data.userDMVIdType, data.userDMVIdTypeNumber, data.userCommissionIvoteBallotIdIdentifierCode, newUser.userCommissionIvoteBallotIdCodeBcryptic, data.userPassword, data.userConfirmPassword, data.userTemporary_Password];
 		
 		db1.run(sqlInsert, params, function (err, result) {	
 			if (err) { 
