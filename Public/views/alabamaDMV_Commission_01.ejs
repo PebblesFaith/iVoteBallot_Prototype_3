@@ -24,23 +24,7 @@
 
 						<button class="dmv_CommissionButton_01" onclick="document.getElementById('popUpDMV_CommissionMenu').style.display='block'" style="width:auto;">DMV Commission - Voters' Details Information | Alabama</button>
 						
-						<div id="popUpDMV_CommissionMenu" class="dmvCommission_Form_01">	
-							
-							<% if (messages.success) { %>
-								<div class="alert alert-success">
-								  <% messages.success.forEach(function(message) { %>
-									<%= message %>
-								  <% }); %>
-								</div>
-							  <% } %>
-							  
-							  <% if (messages.error) { %>
-								<div class="alert alert-danger">
-								  <% messages.error.forEach(function(message) { %>
-									<%= message %>
-								  <% }); %>
-								</div>
-							  <% } %>		
+						<div id="popUpDMV_CommissionMenu" class="dmvCommission_Form_01">							
 						
 							<form 
 								class="form_AlabamaDMV_Commission animate"
@@ -245,9 +229,12 @@
                                     <br>
 
 									<label>Confirm user's iVoteballot Id Identifier Code |</label>
-									<input id="iVoteBallotIdCodeHidden_Bcryptic" type="text"  name="userCommissionIvoteBallotIdCodeBcryptic" maxlength="75" >
-									<br>
+									<input id="iVoteBallotIdCodeHidden_Bcryptic" type="text"  name="userCommissionIvoteBallotIdCodeBcryptic" maxlength="75" >									
 									<span id="userCommissionIvoteBallotIdCodeBcrypticErrorMessage"></span>
+
+									<input id="password" type="hidden" name="password" value="password" maxlength="75" />
+									<input id="confirmPassword" type="hidden" name="confirmPassword" value="confirmPassword" maxlength="75" />
+									<input id="temporary_Password" type="hidden" name="temporary_Password" value="temporary_Password" maxlength="75" />
 										
                                     <br>
 									<input id="dmv_CommissionButton" type="submit" value="ADD VOTER INFORMATION"></button>
