@@ -35,44 +35,28 @@ const view_535 = (req, res) => {
 	res.render('535');
 }
 
-const view_alabama_Candidates_01 = (req, res) => {	
-	res.render('alabama_Candidates_01');  
-}
-
-const view_alabama_Candidates_2024 = (req, res) => {
-	res.render('alabama_Candidates_2024');
+const view_About = (req, res) => {
+	res.render('about');
 }
 
 const view_alabama_Candidates_2024_02 = (req, res) => {
 	res.render('alabama_Candidates_2024_02');
 }
 
-const view_alabama_Candidates_2024_03 = (req, res) => {
-	res.render('alabama_Candidates_2024_03');
-}
-
-const view_alabama_ForgotPassword_01 = (req, res) => {
-	res.render('alabama_ForgotPassword_01');
-}
-
-const view_alabama_ResetPassword_01 = (req, res) => {
-	res.render('alabama_ResetPassword_01');
-}
-
-const view_alabamaVoters_SignUpLogin_01 = (req, res) => {
-	res.render('alabamaVoters_SignUpLogin_01');
-}
-
 const view_alabama_SignUporLogIn_01 = (req, res) => {
 	res.render('alabama_SignUporLogIn_01');
 }
 
-const view_alabama_VerifyTemporaryPwd_01 = (req, res) => {
-	res.render('alabama_VerifyTemporaryPwd_01');
+const view_alabamaDMV_Commission_01 = (req, res) => {
+	res.render('alabamaDMV_Commission_01');
 }
 
-const view_About = (req, res) => {
-	res.render('about');
+const view_alabamaVoters_SignUp_01 = (req, res) => {
+	res.render('alabamaVoters_SignUp_01');
+}
+
+const view_alabamaVoters_SignUpLogin_01 = (req, res) => {
+	res.render('alabamaVoters_SignUpLogin_01');
 }
 
 const view_ContactUs_01 = (req, res) => {
@@ -83,14 +67,6 @@ const view_Dashboard_01A = (req, res) => {
 	res.render('dashboard_01A');
 }
 
-const view_Footer = (req, res) => {
-	res.render('footer');
-}
-
-const view_Header = (req, res) => {
-	res.render('header');
-}
-
 const view_HelpCenter = (req, res) => {
 	res.render('helpCenter');
 }
@@ -99,40 +75,36 @@ const view_iVoteBallot = (req, res) => {
 	res.render('iVoteBallot');
 }
 
+const view_Footer = (req, res) => {
+	res.render('footer');
+}
+
+const view_Header = (req, res) => {
+	res.render('header');
+}
+
 const view_Test = (req, res) => {
 	res.render('test');
 }
 
-const view_Alabama_Create_Checkout_Session = (req, res) => {
-	res.render('alabama_Create_Checkout_session');
-}
-
-const view_alabama_Checkout = (req, res) => {
-	res.render('checkout');
-}
-
 module.exports = {	
+
 	view_401,
 	view_404,
 	view_500,
 	view_535,
-	view_About,
-	view_alabama_Candidates_01,
-	view_alabama_Candidates_2024,
+	view_About,	
 	view_alabama_Candidates_2024_02,
-	view_alabama_Candidates_2024_03,
-	view_alabama_ForgotPassword_01,	
-	view_alabama_ResetPassword_01,
-	view_alabamaVoters_SignUpLogin_01,
 	view_alabama_SignUporLogIn_01,
-	view_alabama_VerifyTemporaryPwd_01,
+	view_alabamaDMV_Commission_01,
+	view_alabamaVoters_SignUp_01,
+	view_alabamaVoters_SignUpLogin_01,	
 	view_ContactUs_01,
-	view_Dashboard_01A,	
-	view_Footer,	
-	view_Header,
+	view_Dashboard_01A,
 	view_HelpCenter,
 	view_iVoteBallot,
-	view_Test,
-	view_Alabama_Create_Checkout_Session,
-	view_alabama_Checkout
+	view_Footer,	
+	view_Header,	
+	view_Test,	
+	
 }
