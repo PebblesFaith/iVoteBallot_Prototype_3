@@ -28,6 +28,9 @@ const validateAlabamaDMV_CommissionForm = (e) => {
     const userDMVIdTypeNumber = document.getElementById('idTypeNumber').value.trim();
     const userCommissionIvoteBallotIdIdentifierCode = document.getElementById('iVoteBallotIdIdentifierCode').value.trim();
     const userCommissionIvoteBallotIdCodeBcryptic = document.getElementById('iVoteBallotIdCodeHidden_Bcryptic').value.trim();
+	const password = document.getElementById('password').value.trim();
+	const confirmPassword = document.getElementById('confirmPassword').value.trim();
+	const temporary_Password = document.getElementById('temporary_Password').value.trim();	
 	
 	const regExName = /^[A-Za-z\s]+$/;
 	const regExSSN =  /^\d{3}\-\d{2}\-\d{4}$/;  
@@ -40,6 +43,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	const regExUnitIdTypeDetails = /^(House)$/;
     const regExAlabamaId = /(^\d{7}$)|(^\d{8}$)/;
     const regIvoteballotIdIdentifierCode = /\d{2}[A-Z]{1}\d{1}\-\d{1}[A-Z]{1}\d{1}\-[A-Z]{2}\-\d{3}[A-Z]{2}\d{6}\-\d{2}/;
+	const regExPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,32}$/;
 	
 	if (userDMVFirstName === '' || userDMVFirstName == null || userDMVFirstName.length <= 2 || !userDMVFirstName.match(regExName)) {                                                               
 		document.getElementById('userDMVFirstNameErrorMessage').innerHTML = 'The user first name is a required input field or you must enter more than two characters into the userfirst name required input field.';
@@ -382,7 +386,56 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
         return false;					
                             
-    } 	                                                                  
+    } 	
+	
+	if (password === '' || password == null || password.length <= 7 || !password.match(regExPassword)) {
+		document.getElementById('passwordErrorMessage').textContent = 'Your password is a required input field.';
+	
+		setTimeout(function() {
+			document.getElementById('passwordErrorMessage').textContent = '';
+		},
+		9000)
+	
+	return false;
+	
+	}   	
+			
+	if (confirmPassword === '' || confirmPassword == null || confirmPassword.length <= 7 || !confirmPassword.match(regExPassword)) {
+		document.getElementById('confirmPasswordErrorMessage').textContent = 'Your confirm password is a required input field.';
+	
+		setTimeout(function() {
+			document.getElementById('confirmPasswordErrorMessage').textContent = '';
+		},
+		9000)
+	
+	return false;
+	
+	} 
+	
+	if (password != confirmPassword) {
+		document.getElementById('confirmPasswordErrorMessage').textContent = 'Your password does not match to your confirm password which are required input fields.';
+
+		setTimeout(function() {
+			document.getElementById('confirmPasswordErrorMessage').textContent = '';
+		},
+		9000)
+
+		return false;
+
+	}
+	
+	if (temporary_Password === '' || temporary_Password == null || temporary_Password.length <= 7 || !temporary_Password.match(regExPassword)) {
+		document.getElementById('temporary_PasswordErrorMessage').textContent = 'Your temporary password is a required input field.';
+
+		setTimeout(function() {
+			document.getElementById('temporary_PasswordErrorMessage').textContent = '';
+		},
+		9000)
+
+	return false;
+
+	}     
+
 	
 	e.preventDefault();                                      
 	
