@@ -35,37 +35,31 @@ router
     .get('/about', views_Controller.view_About);
 
 router
-    .get('/alabama_Candidates_01', views_Controller.view_alabama_Candidates_01); 
-
-router
-    .get('/alabama_Candidates_2024', views_Controller.view_alabama_Candidates_2024); 
-
-router
-    .get('/alabama_Candidates_2024_02', views_Controller.view_alabama_Candidates_2024_02); 
+    .get('/alabama_Candidates_2024_02', views_Controller.view_alabama_Candidates_2024_02);
     
 router
-    .get('/alabama_Candidates_2024_03', views_Controller.view_alabama_Candidates_2024_03); 
+    .get('/alabama_SignUporLogin_01', views_Controller.view_alabama_SignUporLogIn_01),
 
 router
-    .get('/alabama_ForgotPassword_01', views_Controller.view_alabama_ForgotPassword_01); 
+    .get('/alabamaDMV_Commission_01', views_Controller.view_alabamaDMV_Commission_01);
 
 router
-    .get('/alabama_ResetPassword_01', views_Controller.view_alabama_ResetPassword_01);
+    .get('/alabamaVoters_SignUp_01', views_Controller.view_alabamaVoters_SignUp_01);
     
 router
     .get('/alabamaVoters_SignUpLogin_01', views_Controller.view_alabamaVoters_SignUpLogin_01); 
     
 router
-    .get('/alabama_SignUporLogIn_01', views_Controller.view_alabama_SignUporLogIn_01);
-  
-router
-    .get('/alabama_VerifyTemporaryPwd_01', views_Controller.view_alabama_VerifyTemporaryPwd_01);   
-
-router
     .get('/contactUs_01', views_Controller.view_ContactUs_01);
 
 router
     .get('/dashboard_01', views_Controller.view_Dashboard_01A);
+
+    router
+    .get('/helpCenter', views_Controller.view_HelpCenter);
+
+router
+    .get('/iVoteBallot', views_Controller.view_iVoteBallot);
 
 router
     .get('/footer', views_Controller.view_Footer);
@@ -74,18 +68,7 @@ router
     .get('/header', views_Controller.view_Header);
 
 router
-    .get('/helpCenter', views_Controller.view_HelpCenter);
+    .get('/test', views_Controller.view_Test);  
 
-router
-    .get('/iVoteBallot', views_Controller.view_iVoteBallot);
-
-router
-    .get('/test', views_Controller.view_Test);
-
-router
-    .get('/alabama_Create_Checkout_session', views_Controller.view_Alabama_Create_Checkout_Session); 
-    
-router
-    .get('/alabama_Checkout', views_Controller.view_alabama_Checkout);   
 
 module.exports = router;
