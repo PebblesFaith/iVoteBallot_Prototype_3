@@ -28,9 +28,9 @@ const validateAlabamaDMV_CommissionForm = (e) => {
     const userDMVIdTypeNumber = document.getElementById('idTypeNumber').value.trim();
     const userCommissionIvoteBallotIdIdentifierCode = document.getElementById('iVoteBallotIdIdentifierCode').value.trim();
     const userCommissionIvoteBallotIdCodeBcryptic = document.getElementById('iVoteBallotIdCodeHidden_Bcryptic').value.trim();
-	const password = document.getElementById('password').value.trim();
-	const confirmPassword = document.getElementById('confirmPassword').value.trim();
-	const temporary_Password = document.getElementById('temporary_Password').value.trim();	
+	const userPassword = document.getElementById('password').value.trim();
+	const userConfirmPassword = document.getElementById('confirmPassword').value.trim();
+	const userTemporary_Password = document.getElementById('temporary_Password').value.trim();	
 	
 	const regExName = /^[A-Za-z\s]+$/;
 	const regExSSN =  /^\d{3}\-\d{2}\-\d{4}$/;  
@@ -388,11 +388,11 @@ const validateAlabamaDMV_CommissionForm = (e) => {
                             
     } 	
 	
-	if (password === '' || password == null || password.length <= 7 || !password.match(regExPassword)) {
-		document.getElementById('passwordErrorMessage').textContent = 'Your password is a required input field.';
+	if (userPassword === '' || userPassword == null || userPassword.length <= 7 || !userPassword.match(regExPassword)) {
+		document.getElementById('userPasswordErrorMessage').textContent = 'Your password is a required input field.';
 	
 		setTimeout(function() {
-			document.getElementById('passwordErrorMessage').textContent = '';
+			document.getElementById('userPasswordErrorMessage').textContent = '';
 		},
 		9000)
 	
@@ -400,11 +400,11 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	
 	}   	
 			
-	if (confirmPassword === '' || confirmPassword == null || confirmPassword.length <= 7 || !confirmPassword.match(regExPassword)) {
-		document.getElementById('confirmPasswordErrorMessage').textContent = 'Your confirm password is a required input field.';
+	if (userConfirmPassword === '' || userConfirmPassword == null || userConfirmPassword.length <= 7 || !userConfirmPassword.match(regExPassword)) {
+		document.getElementById('userConfirmPasswordErrorMessage').textContent = 'Your confirm password is a required input field.';
 	
 		setTimeout(function() {
-			document.getElementById('confirmPasswordErrorMessage').textContent = '';
+			document.getElementById('userConfirmPasswordErrorMessage').textContent = '';
 		},
 		9000)
 	
@@ -412,11 +412,11 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	
 	} 
 	
-	if (password != confirmPassword) {
-		document.getElementById('confirmPasswordErrorMessage').textContent = 'Your password does not match to your confirm password which are required input fields.';
+	if (userPassword != userConfirmPassword) {
+		document.getElementById('userConfirmPasswordErrorMessage').textContent = 'Your password does not match to your confirm password which are required input fields.';
 
 		setTimeout(function() {
-			document.getElementById('confirmPasswordErrorMessage').textContent = '';
+			document.getElementById('userConfirmPasswordErrorMessage').textContent = '';
 		},
 		9000)
 
@@ -424,11 +424,11 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 	
-	if (temporary_Password === '' || temporary_Password == null || temporary_Password.length <= 7 || !temporary_Password.match(regExPassword)) {
-		document.getElementById('temporary_PasswordErrorMessage').textContent = 'Your temporary password is a required input field.';
+	if (userTemporary_Password === '' || userTemporary_Password == null || userTemporary_Password.length <= 7 || !userTemporary_Password.match(regExPassword)) {
+		document.getElementById('userTemporary_PasswordErrorMessage').textContent = 'Your temporary password is a required input field.';
 
 		setTimeout(function() {
-			document.getElementById('temporary_PasswordErrorMessage').textContent = '';
+			document.getElementById('userTemporary_PasswordErrorMessage').textContent = '';
 		},
 		9000)
 
