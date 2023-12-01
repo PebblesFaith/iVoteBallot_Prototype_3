@@ -388,7 +388,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
                             
     } 	
 	
-	if (userPassword === '' || userPassword == null || userPassword.length <= 7 || !userPassword.match(regExPassword)) {
+	if (userPassword === '' || userPassword == null) {
 		document.getElementById('userPasswordErrorMessage').textContent = 'Your password is a required input field.';
 	
 		setTimeout(function() {
@@ -400,7 +400,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	
 	}   	
 			
-	if (userConfirmPassword === '' || userConfirmPassword == null || userConfirmPassword.length <= 7 || !userConfirmPassword.match(regExPassword)) {
+	if (userConfirmPassword === '' || userConfirmPassword == null) {
 		document.getElementById('userConfirmPasswordErrorMessage').textContent = 'Your confirm password is a required input field.';
 	
 		setTimeout(function() {
@@ -424,7 +424,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 	
-	if (userTemporary_Password === '' || userTemporary_Password == null || userTemporary_Password.length <= 7 || !userTemporary_Password.match(regExPassword)) {
+	if (userTemporary_Password === '' || userTemporary_Password == null) {
 		document.getElementById('userTemporary_PasswordErrorMessage').textContent = 'Your temporary password is a required input field.';
 
 		setTimeout(function() {
