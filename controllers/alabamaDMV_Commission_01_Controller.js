@@ -505,7 +505,7 @@ const alabamaDMV_Commission_01_PassportGet = ('/alabamaDMV_Commission_01', (req,
     }
 });
 
-const alabamaVoters_SignUpLogin_01_AuthenticationGet = ('/alabamaVoters_SignUpLogin_01', (req, res) => {
+const alabamaVoters_SignUpLogin_01_AuthenticationGet = ('/alabamaVoters_SignUp_01', (req, res) => {
     if (req.isAuthenticated()) {
         console.log(req.user);
         console.log('Request Session:' + req.session);
@@ -569,10 +569,10 @@ const alabamaDMV_Commission_01_AuthenticatePost =
 });
 
 const alabamaVoters_SignUporLogin_01_AuthenticatePost = 
-	('/alabama_SignUporLogin_01', (req, res, next) => {
+	('/alabamaVoters_SignUp_01', (req, res, next) => {
     passport.authenticate('login3', {
-        successRedirect: '/signUp2',
-        failureRedirect: '/alabama_SignUporLogin_01',
+        successRedirect: '/ivoteballot',
+        failureRedirect: '/alabamaVoters_SignUp_01',
 
 		failureFlash: true
 	 })		
@@ -831,7 +831,7 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 	}
 );
 
-const createAlabamaVoters_SignUpLogin_01_Database = ('/alabamaVoters_SignUpLogin_01',
+const createAlabamaVoters_SignUpLogin_01_Database = ('/alabamaVoters_SignUp_01',
 async (req, res) => {
 
 	const userDMVEmail = req.body.userDMVEmail;
@@ -903,7 +903,6 @@ module.exports = {
 	alabamaVoters_SignUporLogin_01_AuthenticatePost,
 	createAlabamaDMV_Commission_01_Database,
 	createAlabamaVoters_SignUpLogin_01_Database	
-	
 }
   
 
