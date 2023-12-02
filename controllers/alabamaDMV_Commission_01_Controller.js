@@ -334,9 +334,9 @@ passport.use(
 
 				});
 
-		});                
-	});       
-}
+			});                
+		});       
+	}
 ));
 
 /*
@@ -379,6 +379,7 @@ passport.deserializeUser(function(id, done) {
     console.log('Deserializing users numbers...')
     console.log(id);   
     db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE id = ?', id, (err, row) => {
+
       if (err) { 
         return done(err); 
     }
@@ -432,14 +433,6 @@ passport.deserializeUser(function(id, done) {
 const redirectDashboard = (req, res, next) => {
     if(req.session.userId) {
         res.redirect('/alabamaDMV_Commission_01');
-    } else {
-        next();
-    }
-}
-
-const redirectDashboard_Login = (req, res, next) => {
-    if(req.session.userId) {
-        res.redirect('/alabamaVoters_SignUpLogin_01');
     } else {
         next();
     }
@@ -505,19 +498,6 @@ const alabamaDMV_Commission_01_PassportGet = ('/alabamaDMV_Commission_01', (req,
     }
 });
 
-const alabamaVoters_SignUpLogin_01_AuthenticationGet = ('/alabamaVoters_SignUp_01', (req, res) => {
-    if (req.isAuthenticated()) {
-        console.log(req.user);
-        console.log('Request Session:' + req.session);
-        console.log('' + req.logIn);
-        console.log('The User had been successfully authenticated within the Session through the passport from the user posting to the \'alabamaVoters_SignUpLogin_01\' webpage!');
-        res.render('alabamaVoters_SignUpLogin_01');
-    } else {
-        res.render('500')       
-        console.log('The user is not successfully authenticated within the session through the passport from the user posting to the \'alabamaVoters_SignUpLogin_01\' webpage!');
-    }
-});
-
 const alabamaDMV_Commission_01_BlankEndPointGet = ('/alabamaDMV_Commission_01', (req, res) => {
 	req.flashSession('message', 'You have successfully created the user profile onto iVoteBallot\'s database.');
 	res.redirect('/alabamaDMV_Commission_01');
@@ -561,18 +541,6 @@ const alabamaDMV_Commission_01_AuthenticatePost =
     passport.authenticate('login2', {
         successRedirect: '/iVoteBallot',
         failureRedirect: '/alabamaDMV_Commission_01',
-
-		failureFlash: true
-	 })		
-		(req, res, next);
-    
-});
-
-const alabamaVoters_SignUporLogin_01_AuthenticatePost = 
-	('/alabamaVoters_SignUp_01', (req, res, next) => {
-    passport.authenticate('login3', {
-        successRedirect: '/ivoteballot',
-        failureRedirect: '/alabamaVoters_SignUp_01',
 
 		failureFlash: true
 	 })		
@@ -726,7 +694,7 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 				console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database. ' + Date());			
 				req.flash('Success', 'The user is successfully registered into the iVoteBallot database, and the user can now sign up to create his or her iVoteBallot account.');
 				
-				res.redirect('/alabamaVoters_SignUpLogin_01');
+				res.redirect('/alabamaVoters_SignUp_01');
 			
 			}		
 			
@@ -831,7 +799,7 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 	}
 );
 
-const createAlabamaVoters_SignUpLogin_01_Database = ('/alabamaVoters_SignUp_01',
+const createAlabamaVoters_SignUp_01_Database = ('/alabamaVoters_SignUp_01',
 async (req, res) => {
 
 	const userDMVEmail = req.body.userDMVEmail;
@@ -870,7 +838,7 @@ async (req, res) => {
 
 				} else if (!row) {
 					console.log('The user\'s email address is not successfully found within the passport serialization authenticated processes through the season');
-					res.render('alabamaVoters_SignUpLogin_01');
+					res.render('dashboard_01');
 				} 
 
 			});
@@ -891,18 +859,15 @@ async (req, res) => {
 module.exports = {
 
 	alabama_Session_Router,
-	redirectDashboard,
-	//redirectDashboard_Login,
+	redirectDashboard,	
 	alabamaDMV_Commission_01_RouteGet,	
-	alabamaDMV_Commission_01_PassportGet,
-	alabamaVoters_SignUpLogin_01_AuthenticationGet,
+	alabamaDMV_Commission_01_PassportGet,	
 	alabamaDMV_Commission_01_BlankEndPointGet,
 	alabamaDMV_Commission_01_EndPointGet,
-	redirectLogin,
-	alabamaDMV_Commission_01_AuthenticatePost,
-	alabamaVoters_SignUporLogin_01_AuthenticatePost,
+	redirectLogin,	
+	alabamaDMV_Commission_01_AuthenticatePost,	
 	createAlabamaDMV_Commission_01_Database,
-	createAlabamaVoters_SignUpLogin_01_Database	
+	createAlabamaVoters_SignUp_01_Database	
 }
   
 
