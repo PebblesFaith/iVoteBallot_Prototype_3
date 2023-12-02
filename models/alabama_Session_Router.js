@@ -199,6 +199,17 @@ router.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	next();
 });
 
+router.use('/alabamaVoters_SignUp_01', (req, res, next) => {
+	console.log('middleware called!');
+	// Check if user has Already been authenticated.
+	if(!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+
+
 /*
 	The provided JavaScript code configures routing paths for the iVoteBallot web application within the Express.js
 	framework. These routes involve both HTTP POST and GET methods, each mapped to specific functions within the 
