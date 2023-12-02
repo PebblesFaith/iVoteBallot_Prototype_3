@@ -470,6 +470,50 @@ const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01', redirect
 });
 
 /*
+   This is a route handler for a GET request to the path /login in the application. It first
+   invokes the middleware function redirectDashboard, and then proceeds to the main route
+   handler function. The main function logs the current user session and checks if the user is
+   authenticated or not. If the user is not authenticated, it renders a login page and logs a
+   message, and if the user is authenticated, it redirects them to the dashboard and logs another
+   message. If neither of these conditions are met, it renders the 404 page.
+*/
+const alabamaVoters_SignUp_01_RouteGet = ('/alabamaVoters_SignUp_01', redirectDashboard, (req, res) => {
+    console.log(req.session);
+    console.log('isUnauthenticated: ', req.isUnauthenticated);
+    // Check if user already authenticated.
+    if (req.isUnauthenticated) {
+        res.render('alabamaVoters_SignUp_01');
+        console.log('The user is not logged into the dashboard!');
+    } else if         
+        (req.session.isAuthenticated) {
+        res.redirect('/dashboard_01');
+        console.log('The user is logged into the dashboard!');
+       
+    } else {       
+        res.render('404');
+    }  
+});
+
+/*
+The app.get function handles an HTTP GET request to the /dashboard route, with redirectLogin as
+middleware. The function checks if the user is authenticated by calling req.isAuthenticated().
+If the user is authenticated, it renders the dashboard template with user information; otherwise, 
+it renders the login template and logs a message indicating that the user is not authenticated.
+*/
+const alabamaVoters_SignUp_01_Dashboard_01Get = ('/dashboard_01', (req, res) => {
+    if (req.isAuthenticated) {
+        console.log(req.user);
+        console.log(req.session);
+        console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
+        res.render('dashboard_01', { firstName: req.user.firstName, lastName: req.user.lastName, email: req.user.email});
+    } else if (req.isUnauthenticated) {
+        res.render('/alabamaVoters_SignUp_01')
+        console.log('User is not successfully authenticated within the session through the passport from dashboard!');
+    }
+});
+
+
+/*
 	The written JavaScript coded language, creates a route handler for the endpoint 
 	'/alabamaDMV_Commission_01'. This route is designed to handle HTTP requests and 
 	response logic. The function begins by checking, if the user's request is authenticated
@@ -547,6 +591,20 @@ const alabamaDMV_Commission_01_AuthenticatePost =
 		(req, res, next);
     
 });
+
+const alabamaVoters_SignUp_01_AuthenticatePost = 
+	('/alabamaVoters_SignUp_01', (req, res, next) => {
+    passport.authenticate('login3', {
+        successRedirect: '/dashboard_01',
+        failureRedirect: '/alabamaVoters_SignUp_01',
+
+		failureFlash: true
+	 })		
+		(req, res, next);
+    
+});
+
+
 
 /*
 	In the written JavaScript coded language, a route handler is defined for the endpoint 
@@ -867,6 +925,9 @@ module.exports = {
 	redirectLogin,	
 	alabamaDMV_Commission_01_AuthenticatePost,	
 	createAlabamaDMV_Commission_01_Database,
+	alabamaVoters_SignUp_01_RouteGet,
+	alabamaVoters_SignUp_01_Dashboard_01Get,
+	alabamaVoters_SignUp_01_AuthenticatePost,
 	createAlabamaVoters_SignUp_01_Database	
 }
   
