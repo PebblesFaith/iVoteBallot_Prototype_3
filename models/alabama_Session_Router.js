@@ -257,6 +257,15 @@ router
 	.post('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.createAlabamaDMV_Commission_01_Database);
 
 router
+	.post('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.alabamaVoters_SignUp_01_RouteGet);
+
+router
+	.post('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.alabamaVoters_SignUp_01_Dashboard_01Get);
+
+router
+	.post('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.alabamaVoters_SignUp_01_AuthenticatePost);
+
+router
 	.post('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.createAlabamaVoters_SignUp_01_Database);
 
 router
