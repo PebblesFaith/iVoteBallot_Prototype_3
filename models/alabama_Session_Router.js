@@ -190,6 +190,17 @@ router.use(flash());
 	of the `router.use()` method for incorporating middleware functions tailored to particular routes
 	or route groups within a Node.js application.
 */
+
+// Middleware to set req.isUnauthenticated for the first use of the '/ivoteballot' URL bar
+router.use('/ivoteballot', (req, res, next) => {
+	//Check if user is Already authenticated.
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+
+	next();
+});
+
 router.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	console.log('middleware called!');
 	// Check if user has Already been authenticated.
@@ -203,8 +214,19 @@ router.use('/alabamaVoters_SignUp_01', (req, res, next) => {
 	console.log('middleware called!');
 	// Check if user has Already been authenticated.
 	if(!req.session.isAuthenticated) {
+		// The user '/alabamaVoters_SignUp_01' URL
 		req.isUnauthenticated = true;
 	}
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/dashboard' URL bar
+router.use('/dashboard_01', (req, res, next) => {
+	//Check if user is Already authenticated.
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+
 	next();
 });
 
@@ -234,7 +256,12 @@ router.use('/alabamaVoters_SignUp_01', (req, res, next) => {
 	the flow of requests and interactions within the iVoteBallot web application, enhancing clarity and 
 	maintainability within the codebase.	
 */
+router
+	.get('/', alabamaDMV_Commission_01_Controller.blank_RouteGet);
 
+router
+	.get('/ivoteballot', alabamaDMV_Commission_01_Controller.ivoteballot_RouteGet),
+	
 router
 	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.redirectDashboard);
 
@@ -257,10 +284,13 @@ router
 	.post('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.createAlabamaDMV_Commission_01_Database);
 
 router
-	.post('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.alabamaVoters_SignUp_01_RouteGet);
+	.get('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.alabamaVoters_SignUp_01_RouteGet);
 
 router
-	.post('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.alabamaVoters_SignUp_01_Dashboard_01Get);
+	.get('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.alabamaVoters_SignUp_01_Dashboard_01Get);
+
+router
+	.get('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.dashboard_01Get)
 
 router
 	.post('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.alabamaVoters_SignUp_01_AuthenticatePost);
