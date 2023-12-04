@@ -44,6 +44,9 @@ router
     .get('/alabamaDMV_Commission_01', views_Controller.view_alabamaDMV_Commission_01);
 
 router
+    .get('/alabamaVoters_CreatePasswords_01', views_Controller.view_alabamaVoters_CreatePasswords_01);
+
+router
     .get('/alabamaVoters_SignUp_01', views_Controller.view_alabamaVoters_SignUp_01);
     
 router
