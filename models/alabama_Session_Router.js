@@ -202,6 +202,24 @@ router.use('/ivoteballot', (req, res, next) => {
 });
 
 router.use('/alabamaDMV_Commission_01', (req, res, next) => {
+	//Check if user is Already authenticated.
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+
+	next();
+});
+
+router.use('/alabamaVoters_SignUp_01', (req, res, next) => {
+	//Check if user is Already authenticated.
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+
+	next();
+});
+
+router.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	console.log('middleware called!');
 	// Check if user has Already been authenticated.
 	if(!req.session.isAuthenticated) {
@@ -229,7 +247,6 @@ router.use('/dashboard_01', (req, res, next) => {
 
 	next();
 });
-
 
 
 /*
