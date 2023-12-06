@@ -565,6 +565,21 @@ const dashboard_01Get = ('/dashboard_01', (req, res) => {
 
 });
 
+const alabamaVoters_CreatePasswords_01Get = ('/alabamaVoters_CreatePasswords_01', (req, res) => {
+	if (req.isAuthenticated) {
+		console.log(req.user);
+		console.log(req.session);
+		console.log('The user have been successfully authenticated within the Session through the passport.use login3 Local Strategy from the session cookie id.');
+
+		res.render('alabamaVoters_CreatePasswords_01', { userDMVFirstName: req.user.userDMVFirstName, userDMVMiddleName: req.user.userDMVMiddleName, userDMVLastName: req.user.userDMVLastName, userDMVEmail: req.user.userDMVEmail});
+
+	} else if (req.isUnauthenticated) {
+		console.log('The user have not been successfully authenticated within the passport.use local3 Local Strategy from the session cookie id.');
+		res.render('alabamaVoters_SignUp_01');
+	}
+
+});
+
 /*
 	The written JavaScript coded language, creates a route handler for the endpoint 
 	'/alabamaDMV_Commission_01'. This route is designed to handle HTTP requests and 
@@ -990,6 +1005,7 @@ module.exports = {
 	alabamaVoters_SignUp_01_Dashboard_01Get,
 	dashboard_01Get, 
 	alabamaVoters_SignUp_01_AuthenticatePost,
+	alabamaVoters_CreatePasswords_01Get,
 	createAlabamaVoters_SignUp_01_Database	
 }
   
