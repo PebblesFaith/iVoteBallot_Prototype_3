@@ -274,8 +274,8 @@ passport.use(
 },   
 	async (req, userDMVEmail, userCommissionIvoteBallotIdCodeBcryptic, done) => {
 		
-		console.log('The user have manually entered his or her email (\'userDMVEmail\') to which, passes through the passport.use(login3) to the session cookie id for authentication as: ' + userDMVEmail);
-		console.log('The user have manually entered his or her password (\'userCommissionIvoteBallotIdIdentifierCode\') to which, passes through the user\'s passport.use(login3) to the session cookie id for authentication as: ' + userCommissionIvoteBallotIdCodeBcryptic);
+		console.log('The user have manually entered his or her email (\'userDMVEmail\') successfully for which, passes through the passport.use(login3) to the session cookie id for authentication as: ' + userDMVEmail);
+		console.log('The user have manually entered his or her password (\'userCommissionIvoteBallotIdIdentifierCode\') successfully for which, passes through the user\'s passport.use(login3) to the session cookie id for authentication as: ' + userCommissionIvoteBallotIdCodeBcryptic);
 				
 		await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?`, userDMVEmail, (err, row) => {
 			
