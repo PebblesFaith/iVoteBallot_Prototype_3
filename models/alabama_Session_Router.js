@@ -327,6 +327,9 @@ router
 	.get('/alabamaVoters_CreatePasswords_01Get', alabamaDMV_Commission_01_Controller.alabamaVoters_CreatePasswords_01Get);
 
 router
+	.post('/alabamaVoters_CreatePasswords_01', alabamaDMV_Commission_01_Controller.alabamaVoters_CreatePasswords_01_CreatePassword);
+
+router
     .post('/contactUs_01', contactUs_01_Controller.createContactUs_01_Database);
 
 router
