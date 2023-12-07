@@ -525,7 +525,7 @@ const alabamaVoters_SignUp_01_RouteGet = ('/alabamaVoters_SignUp_01', redirect_S
 	} else if 
 		(req.session.isAuthenticated) {
 			console.log('The user is logged into the dashboard.');
-			res.redirect('/dashboard_01');
+			res.redirect('/alabamaVoters_CreatePassword_01');
 	} else {
 		res.render('404');
 	}
@@ -662,7 +662,7 @@ const alabamaDMV_Commission_01_AuthenticatePost =
 const alabamaVoters_SignUp_01_AuthenticatePost = 
 	('/alabamaVoters_SignUp_01', (req, res, next) => {
     passport.authenticate('login3', {
-        successRedirect: '/dashboard_01',
+        successRedirect: '/alabamaVoters_CreatePasswords_01',
         failureRedirect: '/alabamaVoters_SignUp_01',
 
 		failureFlash: true
@@ -670,6 +670,8 @@ const alabamaVoters_SignUp_01_AuthenticatePost =
 		(req, res, next);
     
 });
+
+
 
 /*
 	In the written JavaScript coded language, a route handler is defined for the endpoint 
@@ -922,6 +924,85 @@ const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
 	}
 );
 
+/*
+    The code defines a function called generateNewPassword() that generates a new random
+    password string. Here is the programmatic logic behind it:
+
+    1. Declare a constant length equal to 32, which represents the length of the new password.
+    2. Declare a constant charset which contains all the characters that can be used to
+       generate the password. This includes lowercase and uppercase letters, numbers, and special characters.
+    3. Declare a variable newPassword as an empty string to store the generated password.
+    4. Start a for loop that iterates length times. In each iteration, do the following:
+        a. Generate a random index between 0 and the length of charset using 
+           Math.floor(Math.random() * n), where n is the length of charset.
+        b. Use charAt() method to retrieve the character at the generated index from charset.
+        c. Append the retrieved character to the newPassword variable.
+    5. After the for loop completes, return the generated newPassword string.
+
+    In summary, the function generates a new random password by selecting random characters
+    from a predefined set of characters (i.e. charset) and concatenating them to form a password
+    of length 32.
+
+    Here is a caveat for you. If the new random password string does not contain one number when
+    sent to the user email address from nodemailer than then resetPassword.ejs file will alert
+    the user of a password error.
+*/
+function generateNewPassword() {
+    const length = 32;
+    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-={}[]:";?,./~';
+    let newPassword = '';
+    for (let i = 0, n = charset.length; i < length; i++) {
+      newPassword += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return newPassword;
+  }
+
+const alabamaVoters_CreatePasswords_01_CreatePassword = ('/alabamaVoters_CreatePasswords_01', 
+
+	async(req, res) => {
+
+		const userEmail = req.user.userDMVEmail;
+        const newPassword = req.body.userPassword;
+        const confirmNewPassword = req.body.userConfirmPassword; 
+
+        // Hash the password field using bcrypt.
+        const salt = await bcrypt.genSalt(13);  
+        const passwordHashed = await bcrypt.hash(newPassword, salt);       
+
+        // Hash the confirmPassword field using the same salt, as the password field.
+        const confirmPasswordHashed = await bcrypt.hash(confirmNewPassword, salt);  
+
+        if (passwordHashed !== confirmPasswordHashed) {
+        return res.render('alabamaVoters_CreatePasswords_01', { error: 'New password and confirm password did not match.'});    }
+    
+        // Update the user's password and confirm password in the database.    
+        db1.run('UPDATE alabamaDMV_Commission_01 SET userPassword = ?, userConfirmPassword = ? WHERE email = ?', [passwordHashed, confirmPasswordHashed, userDMVEmail], (err) => {       
+    
+            if (err) {
+                console.error(err.message);
+            return res.redirect('alabamaVoters_CreatePasswords_01', { error: 'An error occurred while updating your new password and confirm password. Please try again.'});
+            }     
+        
+            res.redirect('alabama_SignUporLogIn_01');
+            
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const createAlabamaVoters_SignUp_01_Database = ('/alabamaVoters_SignUp_01',
 async (req, res) => {
 
@@ -990,23 +1071,24 @@ async (req, res) => {
 module.exports = {
 
 	alabama_Session_Router,
+	dashboard_01Get, 
 	redirectDashboard,	
+	redirectLogin,	
 	redirect_SignUp_Dashboard,
+	blank_RouteGet,
+	ivoteballot_RouteGet, 
 	alabamaDMV_Commission_01_RouteGet,	
 	alabamaDMV_Commission_01_PassportGet,	
 	alabamaDMV_Commission_01_BlankEndPointGet,
-	alabamaDMV_Commission_01_EndPointGet,
-	redirectLogin,	
+	alabamaDMV_Commission_01_EndPointGet,	
 	alabamaDMV_Commission_01_AuthenticatePost,	
-	createAlabamaDMV_Commission_01_Database,
-	blank_RouteGet,
-	ivoteballot_RouteGet, 
+	createAlabamaDMV_Commission_01_Database,	
 	alabamaVoters_SignUp_01_RouteGet,
-	alabamaVoters_SignUp_01_Dashboard_01Get,
-	dashboard_01Get, 
-	alabamaVoters_SignUp_01_AuthenticatePost,
+	alabamaVoters_SignUp_01_Dashboard_01Get,	
+	alabamaVoters_SignUp_01_AuthenticatePost,	
+	createAlabamaVoters_SignUp_01_Database,
 	alabamaVoters_CreatePasswords_01Get,
-	createAlabamaVoters_SignUp_01_Database	
+	alabamaVoters_CreatePasswords_01_CreatePassword
 }
   
 
