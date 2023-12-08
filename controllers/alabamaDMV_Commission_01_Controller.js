@@ -294,7 +294,7 @@ passport.use(
 				}
 				if (!result) {
 					console.log('The user email and IvoteBallot Id Identifier Code are: ' + userDMVEmail + userCommissionIvoteBallotIdCodeBcryptic);
-					return done(null, false, { message: 'You have entered the IvoteBallot Id Identifier Code.'});
+					return done(null, false, { message: 'You have entered the incorrect IvoteBallot Id Identifier Code.'});
 				}
 				//return done(null, row);
 
@@ -489,67 +489,6 @@ const ivoteballot_RouteGet =  ('/ivoteballot', (req, res) => {
 
 });
 
-const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {
-    console.log(req.session);
-    console.log('isUnauthenticated: ', req.isUnauthenticated);
-    // Check if user already authenticated.
-    if (req.isUnauthenticated) {
-        res.render('alabamaDMV_Commission_01');
-        console.log('User is not logged into the dashboard!');
-    } else if         
-        (req.session.isAuthenticated) {
-        res.redirect('/dashboard_01'); //dashboard_01
-        console.log('User is logged into the dashboard!');
-       
-    } else {       
-        res.render('535');
-    }  
-});
-
-/*
-   This is a route handler for a GET request to the path /login in the application. It first
-   invokes the middleware function redirectDashboard, and then proceeds to the main route
-   handler function. The main function logs the current user session and checks if the user is
-   authenticated or not. If the user is not authenticated, it renders a login page and logs a
-   message, and if the user is authenticated, it redirects them to the dashboard and logs another
-   message. If neither of these conditions are met, it renders the 404 page.
-*/
-const alabamaVoters_SignUp_01_RouteGet = ('/alabamaVoters_SignUp_01', redirect_SignUp_Dashboard, (req, res) => {
-	console.log(req.session)
-	console.log('isUnuauthenticated: ', req.isUnauthenticated);	
-	// Check if user already authenticated
-	if (req.isUnauthenticated) {
-		console.log('The user is not logged into the dashboard.');
-		res.render('alabamaVoters_SignUp_01');
-		return alert('You are already logged in!');
-	} else if 
-		(req.session.isAuthenticated) {
-			console.log('The user is logged into the dashboard.');
-			res.redirect('/alabamaVoters_CreatePassword_01');
-	} else {
-		res.render('404');
-	}
-
-});
-
-/*
-The app.get function handles an HTTP GET request to the /dashboard route, with redirectLogin as
-middleware. The function checks if the user is authenticated by calling req.isAuthenticated().
-If the user is authenticated, it renders the dashboard template with user information; otherwise, 
-it renders the login template and logs a message indicating that the user is not authenticated.
-*/
-const alabamaVoters_SignUp_01_Dashboard_01Get = ('/dashboard_01', (req, res) => {
-    if (req.isAuthenticated) {
-        console.log(req.user);
-        console.log(req.session);
-        console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
-        res.render('dashboard_01', { firstName: req.user.firstName, lastName: req.user.lastName, email: req.user.email});
-    } else if (req.isUnauthenticated) {
-        res.render('/alabamaVoters_SignUp_01')
-        console.log('User is not successfully authenticated within the session through the passport from dashboard!');
-    }
-});
-
 const dashboard_01Get = ('/dashboard_01', (req, res) => {
 	if (req.isAuthenticated) {
 		console.log(req.user);
@@ -565,19 +504,23 @@ const dashboard_01Get = ('/dashboard_01', (req, res) => {
 
 });
 
-const alabamaVoters_CreatePasswords_01Get = ('/alabamaVoters_CreatePasswords_01', (req, res) => {
-	if (req.isAuthenticated) {
-		console.log(req.user);
-		console.log(req.session);
-		console.log('The user have been successfully authenticated within the Session through the passport.use login3 Local Strategy from the session cookie id.');
+/* -------------------------- This is the start of the alabamaDMV_Commission_01 Section --------------------------- */
 
-		res.render('alabamaVoters_CreatePasswords_01', { userDMVFirstName: req.user.userDMVFirstName, userDMVMiddleName: req.user.userDMVMiddleName, userDMVLastName: req.user.userDMVLastName, userDMVEmail: req.user.userDMVEmail});
-
-	} else if (req.isUnauthenticated) {
-		console.log('The user have not been successfully authenticated within the passport.use local3 Local Strategy from the session cookie id.');
-		res.render('alabamaVoters_SignUp_01');
-	}
-
+const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {
+    console.log(req.session);
+    console.log('isUnauthenticated: ', req.isUnauthenticated);
+    // Check if user already authenticated.
+    if (req.isUnauthenticated) {
+        res.render('alabamaDMV_Commission_01');
+        console.log('User is not logged into the dashboard!');
+    } else if         
+        (req.session.isAuthenticated) {
+        res.redirect('/dashboard_01'); //dashboard_01
+        console.log('User is logged into the dashboard!');
+       
+    } else {       
+        res.render('535');
+    }  
 });
 
 /*
@@ -659,17 +602,9 @@ const alabamaDMV_Commission_01_AuthenticatePost =
     
 });
 
-const alabamaVoters_SignUp_01_AuthenticatePost = 
-	('/alabamaVoters_SignUp_01', (req, res, next) => {
-    passport.authenticate('login2', {
-        successRedirect: '/alabamaVoters_CreatePasswords_01',
-        failureRedirect: '/alabamaVoters_SignUp_01',
+/* -------------------------- This is the end of the alabamaDMV_Commission_01 Section --------------------------- */
 
-		failureFlash: true
-	 })		
-		(req, res, next);
-    
-});
+/* -------------------------- This is the beginning of all Databases --------------------------- */
 
 /*
 	In the written JavaScript coded language, a route handler is defined for the endpoint 
@@ -698,7 +633,7 @@ const alabamaVoters_SignUp_01_AuthenticatePost =
 	which enhance the email contents. Additionally, error handling is implemented for the 
 	email-sending process, redirecting to a '535' error page if issues arise.
 */
-const createAlabamaDMV_Commission_01_Database = ('/alabamaDMV_Commission_01',
+const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 	async (req, res, next) => { 
 
 		const userCommissionIvoteBallotIdIdentifierCode = req.body.userCommissionIvoteBallotIdIdentifierCode;
@@ -985,77 +920,64 @@ const alabamaVoters_CreatePasswords_01_CreatePassword = ('/alabamaVoters_CreateP
             
         });
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
 const createAlabamaVoters_SignUp_01_Database = ('/alabamaVoters_SignUp_01',
-async (req, res) => {
-
-	const userDMVEmail = req.body.userDMVEmail;
-	const userCommissionIvoteBallotIdCodeBcryptic = req.body.userCommissionIvoteBallotIdCodeBcryptic;
-	const userPassword = req.body.userPassword;
-	const userConfirmPassword = req.body.userConfirmPassword;
-
-	console.log('These are the request body: ' + req.body);
-	console.log('The user email is: ' + userDMVEmail + '.');
-	console.log('The user password is: ' + userCommissionIvoteBallotIdCodeBcryptic + '.');
-	console.log('The user password is: ' + userPassword + '.');
-	console.log('The user confirm password is: ' + userConfirmPassword + '.');
-	console.log('The request session is: ' + req.session + '.');
-
-	// Hash the password field using bcrypt.
-	const salt = await bcrypt.genSalt(13)
-	const passwordHashed = await bcrypt.hash(userPassword, salt);
-
-	// Hash the confirm password field using the same salt, as the password field.
-	const confirmPasswordHashed = await bcrypt.hash(userConfirmPassword, salt);
-
-	// Check, if the user's email exists onto the passport serialization through the session.
-	db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?', userDMVEmail, (err, row) => {
-		
-		if (err) {
-
-			console.error(err);
-			console.log('The user\'s passport.use and session cookie id were not successfully executed causing an 500 error message due from the Developer\'s programmatic coding language problems.');
-			res.render(500);
-
-		} else if (!row) {
-
-			console.log('The user\'s email address is not successfully found within the passport.use serialization authenticated process through the session cookie id that passes to the SQLite3 database.');
-
-		} else {	
-
-			db1.run('UPDATE alabamaDMV_Commission_01 SET userPassword = ?, userConfirmPassword = ? WHERE userDMVEmail = ?', passwordHashed, confirmPasswordHashed, row.userDMVEmail, (err) => {
-
-				if (err) {
-
-					console.error(err);
-					console.log('SQLite3 database language did not not properly execute the UPDATE from the passport.use local3 LocalStrategy from the Session Cookie Id.');
-					res.render('500');
-
-				} else if (!row) {
-					console.log('The user\'s email address is not successfully found within the passport serialization authenticated processes through the season');
-					res.render('dashboard_01');
-				} 
-
-			});
-		}
-
+	async (req, res) => {
+	
+		const userDMVEmail = req.body.userDMVEmail;
+		const userCommissionIvoteBallotIdCodeBcryptic = req.body.userCommissionIvoteBallotIdCodeBcryptic;
+		const userPassword = req.body.userPassword;
+		const userConfirmPassword = req.body.userConfirmPassword;
+	
+		console.log('These are the request body: ' + req.body);
+		console.log('The user email is: ' + userDMVEmail + '.');
+		console.log('The user signup password is: ' + userCommissionIvoteBallotIdCodeBcryptic + '.');
+		console.log('The user password is: ' + userPassword + '.');
+		console.log('The user confirm password is: ' + userConfirmPassword + '.');
+		console.log('The request session is: ' + req.session + '.');
+	
+		// Hash the password field using bcrypt.
+		const salt = await bcrypt.genSalt(13)
+		const passwordHashed = await bcrypt.hash(userPassword, salt);
+	
+		// Hash the confirm password field using the same salt, as the password field.
+		const confirmPasswordHashed = await bcrypt.hash(userConfirmPassword, salt);
+	
+		// Check, if the user's email exists onto the passport serialization through the session.
+		db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?', userDMVEmail, (err, row) => {
+			
+			if (err) {
+	
+				console.error(err);
+				console.log('The user\'s passport.use and session cookie id were not successfully executed causing an 500 error message due from the Developer\'s programmatic coding language problems.');
+				res.render(500);
+	
+			} else if (!row) {
+				console.log('The user\'s email address is not successfully found within the passport.use serialization authenticated process through the session cookie id that passes to the SQLite3 database.');
+				res.render('alabamaVoters_SignUp_01');
+	
+			} else {	
+	
+				db1.run('UPDATE alabamaDMV_Commission_01 SET userPassword = ?, userConfirmPassword = ? WHERE userDMVEmail = ?', passwordHashed, confirmPasswordHashed, row.userDMVEmail, (err) => {
+	
+					if (err) {
+	
+						console.error(err);
+						console.log('SQLite3 database language did not not properly execute the UPDATE from the passport.use local3 LocalStrategy from the Session Cookie Id.');
+						res.render('500');
+	
+					} else if (!row) {
+						console.log('The user\'s email address is not successfully found within the passport serialization authenticated processes through the season');
+						res.render('dashboard_01');
+					} 
+	
+				});
+			}
+	
+		});
 	});
-});
+
+/* -------------------------- This is the end of all Databases --------------------------- */
 
 /*
 	The given JavaScript coded language exports a module with multiple components, including
@@ -1080,13 +1002,9 @@ module.exports = {
 	alabamaDMV_Commission_01_BlankEndPointGet,
 	alabamaDMV_Commission_01_EndPointGet,	
 	alabamaDMV_Commission_01_AuthenticatePost,	
-	createAlabamaDMV_Commission_01_Database,	
-	alabamaVoters_SignUp_01_RouteGet,
-	alabamaVoters_SignUp_01_Dashboard_01Get,	
-	alabamaVoters_SignUp_01_AuthenticatePost,	
-	createAlabamaVoters_SignUp_01_Database,
-	alabamaVoters_CreatePasswords_01Get,
-	alabamaVoters_CreatePasswords_01_CreatePassword
+	alabamaDMV_Commission_01_CreateDatabase,
+
+	
 }
   
 
