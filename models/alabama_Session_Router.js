@@ -238,7 +238,7 @@ router.use('/alabamaDMV_Commission_01', (req, res, next) => {
 });
 
 router.use('/alabamaVoters_SignUp_01', (req, res, next) => {
-	console.log('middleware called!');
+	console.log('The middleware called for the \'alabamaVoters_SignUp_01\' successfully.');
 	// Check if user has Already been authenticated.
 	if(!req.session.isAuthenticated) {
 		// The user '/alabamaVoters_SignUp_01' URL
@@ -306,28 +306,7 @@ router
 	.post('/alabamaDMV_Commisson_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_AuthenticatePost);
 
 router
-	.post('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.createAlabamaDMV_Commission_01_Database);
-
-router
-	.get('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.alabamaVoters_SignUp_01_RouteGet);
-
-router
-	.get('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.alabamaVoters_SignUp_01_Dashboard_01Get);
-
-router
-	.get('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.dashboard_01Get)
-
-router
-	.post('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.alabamaVoters_SignUp_01_AuthenticatePost);
-
-router
-	.post('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.createAlabamaVoters_SignUp_01_Database);
-
-router
-	.get('/alabamaVoters_CreatePasswords_01Get', alabamaDMV_Commission_01_Controller.alabamaVoters_CreatePasswords_01Get);
-
-router
-	.post('/alabamaVoters_CreatePasswords_01', alabamaDMV_Commission_01_Controller.alabamaVoters_CreatePasswords_01_CreatePassword);
+	.post('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_CreateDatabase);
 
 router
     .post('/contactUs_01', contactUs_01_Controller.createContactUs_01_Database);
