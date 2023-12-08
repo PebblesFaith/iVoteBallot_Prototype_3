@@ -201,6 +201,16 @@ router.use('/ivoteballot', (req, res, next) => {
 	next();
 });
 
+// Middleware to set req.isUnauthenticated for the first use of the '/dashboard' URL bar
+router.use('/dashboard_01', (req, res, next) => {
+	//Check if user is Already authenticated.
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+
+	next();
+});
+
 router.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	//Check if user is Already authenticated.
 	if (!req.session.isAuthenticated) {
@@ -228,6 +238,17 @@ router.use('/alabamaVoters_CreatePasswords_01', (req, res, next) => {
 	next();
 });
 
+router.use('/alabamaVoters_LogIn_01', (req, res, next) => {
+    console.log('The middleware called for the \'alabamaVoters_LogIn_01\' successfully.');
+    // Check if user is Already authenticated
+    if (!req.session.isAuthenticated) {  
+      
+        // User of '/login' URL
+        req.isUnauthenticated = true;
+    }
+    next();
+});
+
 router.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	console.log('middleware called!');
 	// Check if user has Already been authenticated.
@@ -244,16 +265,6 @@ router.use('/alabamaVoters_SignUp_01', (req, res, next) => {
 		// The user '/alabamaVoters_SignUp_01' URL
 		req.isUnauthenticated = true;
 	}
-	next();
-});
-
-// Middleware to set req.isUnauthenticated for the first use of the '/dashboard' URL bar
-router.use('/dashboard_01', (req, res, next) => {
-	//Check if user is Already authenticated.
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-
 	next();
 });
 
@@ -286,6 +297,12 @@ router
 
 router
 	.get('/ivoteballot', alabamaDMV_Commission_01_Controller.ivoteballot_RouteGet),
+
+router
+	.get('/alabamaVoters_LogIn_01', alabamaDMV_Commission_01_Controller.alabamaVoters_LogIn_01_Route_Get);
+
+router
+	.post('/alabamaVoters_LogIn_01', alabamaDMV_Commission_01_Controller.alabamaVoters_LogIn_01_AuthenticatePost);
 	
 router
 	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.redirectDashboard);
