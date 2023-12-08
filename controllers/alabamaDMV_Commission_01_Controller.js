@@ -198,10 +198,10 @@ db1.serialize( () => {
 		async (req, userDMVEmail, userCommissionIvoteBallotIdIdentifierCode, done) => {
 			
 			console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) email (\'userDMVEmail\') as: ' + userDMVEmail);
-			console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) password (\'userCommissionIvoteBallotIdIdentifierCode\') as: ' + userCommissionIvoteBallotIdCodeBcryptic);
+			console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) password (\'userCommissionIvoteBallotIdIdentifierCode\') as: ' + userCommissionIvoteBallotIdIdentifierCode);
 			
 			if (!userCommissionIvoteBallotIdIdentifierCode) {	
-				console.log('The iVoteBallot\'s employee have manually the user\'s password (\'userCommissionIvoteBallotIdIdentifierCode\') into the login field as:' + userCommissionIvoteBallotIdCodeBcryptic);            
+				console.log('The iVoteBallot\'s employee have manually the user\'s password (\'userCommissionIvoteBallotIdIdentifierCode\') into the login field as:' + userCommissionIvoteBallotIdIdentifierCode);            
 				console.log('The iVoteBallot\'s employee have manually entered the user\'s passport.use LocalStrategy password (\'userCommissionIvoteBallotIdIdentifierCode\') request for which, does not match to the Session Cookie Id permission from the SQLite3 database.');
 				return done(null, false, { message: 'Your password and confirm password does not match.'});
 
@@ -670,8 +670,6 @@ const alabamaVoters_SignUp_01_AuthenticatePost =
 		(req, res, next);
     
 });
-
-
 
 /*
 	In the written JavaScript coded language, a route handler is defined for the endpoint 
