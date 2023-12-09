@@ -188,7 +188,7 @@ db1.serialize( () => {
 	parameters, if necessary. This code provides a simple but effective way to authenticate users
 	and ensurethe security of their iVoteballot data information.
 */
-
+/*
 passport.use(
     'login1',
     new LocalStrategy({
@@ -267,20 +267,21 @@ passport.use(
         });       
     }
 ));
+*/
 
 passport.use(
 	'login2',
 	new LocalStrategy({
 	usernameField: 'userDMVEmail',
-	passwordField: 'userCommissionIvoteBallotIdIdentifierCode',
+	passwordField: 'userCommissionIvoteBallotIdCodeBcryptic',
 	passReqToCallback: true // To allow request object to be passed to callback
 },   
-	async (req, userDMVEmail, userCommissionIvoteBallotIdIdentifierCode, done) => {
+	async (req, userDMVEmail, userCommissionIvoteBallotIdCodeBcryptic, done) => {
 		
 		console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) email (\'userDMVEmail\') as: ' + userDMVEmail);
-		console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) password (\'userCommissionIvoteBallotIdIdentifierCode\') as: ' + userCommissionIvoteBallotIdIdentifierCode);
+		console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) password (\'userCommissionIvoteBallotIdIdentifierCode\') as: ' + userCommissionIvoteBallotIdCodeBcryptic);
 		
-		if (!userCommissionIvoteBallotIdIdentifierCode) {	
+		if (!userCommissionIvoteBallotIdCodeBcryptic) {	
 			console.log('The iVoteBallot\'s employee have manually the user\'s password (\'userCommissionIvoteBallotIdIdentifierCode\') into the login field as:' + userCommissionIvoteBallotIdIdentifierCode);            
 			console.log('The iVoteBallot\'s employee have manually entered the user\'s passport.use LocalStrategy password (\'userCommissionIvoteBallotIdIdentifierCode\') request for which, does not match to the Session Cookie Id permission from the SQLite3 database.');
 			return done(null, false, { message: 'Your password and confirm password does not match.'});
@@ -296,7 +297,7 @@ passport.use(
 				return done (null, false, { message: 'You have entered the incorrect email address.'});
 			}
 			
-				bcrypt.compare(userCommissionIvoteBallotIdIdentifierCode, row.userCommissionIvoteBallotIdIdentifierCode, (err, result) => {
+				bcrypt.compare(userCommissionIvoteBallotIdCodeBcryptic, row.userCommissionIvoteBallotIdCodeBcryptic, (err, result) => {
 				
 				if (err) {
 					return done(err);
@@ -344,7 +345,7 @@ passport.use(
 		});       
 	}
 ));
-
+/*
 passport.use(
 	'login3',
 	new LocalStrategy({
@@ -417,6 +418,7 @@ passport.use(
 		});       
 	}
 ));
+*/
 
 /*
 	The code passport.serializeUser(function (user, done) { done(null, user.id); }) is a function
@@ -619,9 +621,6 @@ const alabamaVoters_LogIn_01_AuthenticatePost = (
         failureFlash: true  
 }));
 
-
-
-
 /* -------------------------- This is the end of the alabamaVoters_LogIn_01 a Section --------------------------- */
 
 /* -------------------------- This is the start of the alabamaDMV_Commission_01 Section --------------------------- */
@@ -723,6 +722,43 @@ const alabamaDMV_Commission_01_AuthenticatePost =
 });
 
 /* -------------------------- This is the end of the alabamaDMV_Commission_01 Section --------------------------- */
+
+/* -------------------------- This is the beginning of the alabamaVoters_SignUp_01 a Section --------------------------- */
+const redirectSignUp = (req, res, next) => {
+    if(!req.session.userId) {
+        res.redirect('/alabamaVoters_SignUp_01');
+    } else {
+        next();
+    }
+}
+
+const alabamaVoters_SignUp_01_Passport_Get = ('/alabamaVoters_SignUp_01', redirectSignUp, (req, res) => {
+    if (req.isAuthenticated()) {
+        console.log(req.user);
+        console.log('Request Session:' + req.session)
+        console.log('The user request log in is: ' + req.logIn);
+        console.log('The User had been successfully authenticated within the Session Cookie Id through the passport from the iVoteBallot\'s employee direct user posting from the \'alabamaVoters_SignUp_01\' webpage!');
+        res.render('alabamaVoters_SignUp_01');
+    } else {
+        res.render('500')       
+        console.log('The user is not successfully authenticated within the Session Cookie Id through the passport from the iVoteBallot\'s employee direct user posting from the \'alabamaVoters_SignUp_01\' webpage!');
+    }
+});
+
+const alabamaVoters_SignUp_01_AuthenticatePost = 
+	('/alabamaVoters_SignUp_01', (req, res, next) => {
+    passport.authenticate('login2', {
+        successRedirect: '/alabamaVoters_CreatePassword_01',
+        failureRedirect: '/alabamaVoters_SignUp_01',
+
+		failureFlash: true
+	 })		
+		(req, res, next);
+    
+});
+
+
+/* -------------------------- This is the end of the alabamaVoters_SignUp_01 a Section --------------------------- */
 
 /* -------------------------- This is the beginning of all Databases --------------------------- */
 
@@ -1116,6 +1152,7 @@ module.exports = {
 	redirectLogin,
 	blank_RouteGet,
 	ivoteballot_RouteGet, 
+
 	alabamaDMV_Commission_01_RouteGet,	
 	alabamaDMV_Commission_01_PassportGet,	
 	alabamaDMV_Commission_01_BlankEndPointGet,
@@ -1123,9 +1160,11 @@ module.exports = {
 	alabamaDMV_Commission_01_AuthenticatePost,	
 	alabamaDMV_Commission_01_CreateDatabase,
 
-
 	alabamaVoters_LogIn_01_Route_Get,
-	alabamaVoters_LogIn_01_AuthenticatePost
+	alabamaVoters_LogIn_01_AuthenticatePost,
+
+	alabamaVoters_SignUp_01_Passport_Get,
+	alabamaVoters_SignUp_01_AuthenticatePost 
 
 
 	
