@@ -14,9 +14,9 @@ const express = require('express');
 	messages within her iVoteBallot web application, which can be used to display success messages, 
 	error messages, or any other kind of notification to the front-end user.
 */
-const flashExpress = require('express-flash');
-
 const flashSession = require('connect-flash');
+
+const flashExpress = require('express-flash');
 
 /*
 	The contactUs_01_Router.js file is a router module that handles requests related to the
@@ -161,9 +161,9 @@ router.use([passport.initialize()]);
 */
 router.use(passport.session());
 
-router.use(flashExpress());
-
 router.use(flashSession());
+
+router.use(flashExpress());
 
 /*
 	In the JavaScript snippet `router.use('/alabamaDMV_Commission_01', (req, res, next) => { ... }`, 
