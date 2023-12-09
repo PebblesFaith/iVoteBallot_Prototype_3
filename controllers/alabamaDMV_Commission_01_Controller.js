@@ -61,7 +61,7 @@ const nodemailer = require('nodemailer');
 	perform tasks such as resolving relative paths, joining multiple paths, and extracting 
 	file extensions.
 */
-const path = require('path');
+//const path = require('path');
 
 /*
 	The if (process.env.NODE_ !== 'production') block checks whether the application is running
@@ -188,7 +188,7 @@ db1.serialize( () => {
 	parameters, if necessary. This code provides a simple but effective way to authenticate users
 	and ensurethe security of their iVoteballot data information.
 */
-/*
+
 passport.use(
     'login1',
     new LocalStrategy({
@@ -208,7 +208,7 @@ passport.use(
             return done(null, false, { message: 'Your password does not match to our iVoteBallot database. Please try again.'})
             
         } else 
-         await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE email = ?`, userDMVEmail, (err, row) => {
+         await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?`, userDMVEmail, (err, row) => {
 
             if (err) {
                 return done(err);
@@ -261,13 +261,14 @@ passport.use(
 						userTemporary_Password: row.userTemporary_Password,	
 
 						isAuthenticated: true
-					});
+					}
+					
+				);
 
             });                
         });       
     }
 ));
-*/
 
 passport.use(
 	'login2',
@@ -279,15 +280,9 @@ passport.use(
 	async (req, userDMVEmail, userCommissionIvoteBallotIdCodeBcryptic, done) => {
 		
 		console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) email (\'userDMVEmail\') as: ' + userDMVEmail);
-		console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) password (\'userCommissionIvoteBallotIdIdentifierCode\') as: ' + userCommissionIvoteBallotIdCodeBcryptic);
+		console.log('The iVoteBallot\'s employee have manually the user\'s passport.use(login2) password (\'userCommissionIvoteBallotIdIdentifierCode\') as: ' + userCommissionIvoteBallotIdCodeBcryptic);	
 		
-		if (!userCommissionIvoteBallotIdCodeBcryptic) {	
-			console.log('The iVoteBallot\'s employee have manually the user\'s password (\'userCommissionIvoteBallotIdIdentifierCode\') into the login field as:' + userCommissionIvoteBallotIdIdentifierCode);            
-			console.log('The iVoteBallot\'s employee have manually entered the user\'s passport.use LocalStrategy password (\'userCommissionIvoteBallotIdIdentifierCode\') request for which, does not match to the Session Cookie Id permission from the SQLite3 database.');
-			return done(null, false, { message: 'Your password and confirm password does not match.'});
-
-		} else 
-			await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?`, userDMVEmail, (err, row) => {
+		await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?`, userDMVEmail, (err, row) => {
 			
 			if (err) {
 				return done(err);
@@ -297,15 +292,16 @@ passport.use(
 				return done (null, false, { message: 'You have entered the incorrect email address.'});
 			}
 			
-				bcrypt.compare(userCommissionIvoteBallotIdCodeBcryptic, row.userCommissionIvoteBallotIdCodeBcryptic, (err, result) => {
-				
-				if (err) {
-					return done(err);
-				}
-				if (!result) {
-					return done(null, false, { message: 'You have entered the incorrect password.'});
-				}
-				//return done(null, row);
+			bcrypt.compare(userCommissionIvoteBallotIdCodeBcryptic, row.userCommissionIvoteBallotIdCodeBcryptic, (err, result) => {
+			
+			if (err) {
+				return done(err);
+			}
+			if (!result) {
+				console.log('The user\'s iVoteBallot Id Code Bcryption for his/her password was entered incorrectly.' )
+				return done(null, false, { message: 'You have entered the incorrect password.'});
+			}
+			//return done(null, row);
 
 				return done(null, { 						
 					id: row.id, 
@@ -518,7 +514,6 @@ const redirectDashboard = (req, res, next) => {
         next();
     }
 }
-
 
 /*
 	The written JavaScript code language defines a route handler for the '/alabamaDMV_Commission_01'
