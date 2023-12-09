@@ -55,16 +55,16 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 
 /*
-	The code const flash = require('express-flash'); imports the express-flash module, which provides a 
-	middleware for storing and displaying flash messages in an Express.js application. Flash messages are 
-	short-lived messages that are stored in the session cookie id, and displayed to an user on his or her
-	next request. With express-flash, Sarai Hannah Ajai (Developer) can easily create and manage flash
-	messages within her iVoteBallot web application, which can be used to display success messages, 
-	error messages, or any other kind of notification to the front-end user.
+The code const flash = require('connect-flash'); imports the connect-flash module, which provides a 
+middleware for storing and displaying flash messages in an Express.js application. Flash messages are 
+short-lived messages that are stored in the session and displayed to the user on the next request. With
+connect-flash, you can easily create and manage flash messages in your application, which can be used to
+display success messages, error messages, or any other kind of notification to the user.
 */
-const flashExpress = require('express-flash');
 
 const flashSession = require('connect-flash');
+
+const flashExpress = require('express-flash');
 
 /*
 	1. The code const path = require('path') imports the built-in Node.js path module, which
@@ -593,21 +593,22 @@ const redirectDashboard = (req, res, next) => {
         next();
     }
 }
-
-const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {
-    console.log(req.session);
-    console.log('isUnauthenticated: ', req.isUnauthenticated);
+// User route signup
+const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {    
     // Check if user already authenticated.
+    if (req.session.isAuthenticated) {
+		console.log('User is not logged into the dashboard!');
+        return alert('You are already logged in!');
+    }
+    console.log(req.session);
+    // Check if this is the first use of '/alabamaDMV_Commission_01' route URL bar
     if (req.isUnauthenticated) {
-        res.render('alabamaDMV_Commission_01');
-        console.log('User is not logged into the dashboard!');
-    } else if         
-        (req.session.isAuthenticated) {
-        //res.redirect('/dashboard_01'); //dashboard_01
-        console.log('User is logged into the dashboard!');
+        console.log(req.flashExpress());
+        res.render('alabamaDMV_Commission_01', { messages: (req.flashExpress()) })        
+        
+    } else {
+        console.log(req.flashExpress());        
        
-    } else {       
-        res.render('535');
     }  
 });
 
@@ -1037,6 +1038,9 @@ const createAlabamaVoters_SignUp_01_Database = ('/alabamaVoters_SignUp_01',
 module.exports = {
 
 	alabama_Session_Router,
+	flashSession,
+	flashExpress,
+
 	dashboard_01Get, 
 	redirectDashboard,
 	blank_RouteGet,
