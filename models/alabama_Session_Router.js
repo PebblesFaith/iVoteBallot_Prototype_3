@@ -14,7 +14,7 @@ const express = require('express');
 	messages within her iVoteBallot web application, which can be used to display success messages, 
 	error messages, or any other kind of notification to the front-end user.
 */
-const flash = require('express-flash');
+const flashExpress = require('express-flash');
 
 const flashSession = require('connect-flash');
 
@@ -161,22 +161,9 @@ router.use([passport.initialize()]);
 */
 router.use(passport.session());
 
-router.use(flashSession());
+router.use(flashExpress());
 
-/*
-	The statement `router.use(flash())` is employed within the context of the custom 
-	JavaScript-coded language used in the development of the iVoteBallot web application. 
-	This particular configuration is pivotal for incorporating flash messaging functionality. 
-	And, flash messaging is a technique commonly used in web applications to provide user 
-	feedback, especially after form submissions. In this instance, the `router.use(flash())` 
-	statement signifies the integration of the Flash library into the application's routing 
-	system. The Flash library facilitates the creation and display of temporary messages to
-	users, enhancing the overall user experience by conveying information about the success
-	or failure of specific actions, such as form submissions or authentication processes. 
-	This implementation aligns with modern web development practices, contributing to a more 
-	interactive and user-friendly application.
-*/
-router.use(flash());
+router.use(flashSession());
 
 /*
 	In the JavaScript snippet `router.use('/alabamaDMV_Commission_01', (req, res, next) => { ... }`, 
