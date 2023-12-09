@@ -178,8 +178,38 @@ router.use(flashSession());
 	or route groups within a Node.js application.
 */
 
-// Middleware to set req.isUnauthenticated for the first use of the '/ivoteballot' URL bar
-router.use('/ivoteballot', (req, res, next) => {
+// Middleware to set req.isUnauthenticated for the first use of the '/401' URL bar
+router.use('/401', (req, res, next) => {
+	//Check if user is Already authenticated.
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/404' URL bar
+router.use('/404', (req, res, next) => {
+	//Check if user is Already authenticated.
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/500' URL bar
+router.use('/500', (req, res, next) => {
+	//Check if user is Already authenticated.
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/535' URL bar
+router.use('/535', (req, res, next) => {
 	//Check if user is Already authenticated.
 	if (!req.session.isAuthenticated) {
 		req.isUnauthenticated = true;
@@ -198,7 +228,8 @@ router.use('/dashboard_01', (req, res, next) => {
 	next();
 });
 
-router.use('/alabamaDMV_Commission_01', (req, res, next) => {
+// Middleware to set req.isUnauthenticated for the first use of the '/ivoteballot' URL bar
+router.use('/ivoteballot', (req, res, next) => {
 	//Check if user is Already authenticated.
 	if (!req.session.isAuthenticated) {
 		req.isUnauthenticated = true;
@@ -207,49 +238,11 @@ router.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	next();
 });
 
-router.use('/alabamaVoters_SignUp_01', (req, res, next) => {
-	//Check if user is Already authenticated.
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-
-	next();
-});
-
-router.use('/alabamaVoters_CreatePasswords_01', (req, res, next) => {
-	//Check if user is Already authenticated.
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-
-	next();
-});
-
-router.use('/alabamaVoters_LogIn_01', (req, res, next) => {
-    console.log('The middleware called for the \'alabamaVoters_LogIn_01\' successfully.');
-    // Check if user is Already authenticated
-    if (!req.session.isAuthenticated) {  
-      
-        // User of '/login' URL
-        req.isUnauthenticated = true;
-    }
-    next();
-});
 
 router.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	console.log('The middleware called for the \'alabamaDMV_Commission_01\' successfully.');
 	// Check if user has Already been authenticated.
 	if(!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-	next();
-});
-
-router.use('/alabamaVoters_SignUp_01', (req, res, next) => {
-	console.log('The middleware called for the \'alabamaVoters_SignUp_01\' successfully.');
-	// Check if user has Already been authenticated.
-	if(!req.session.isAuthenticated) {
-		// The user '/alabamaVoters_SignUp_01' URL
 		req.isUnauthenticated = true;
 	}
 	next();
@@ -284,30 +277,12 @@ router
 
 router
 	.get('/ivoteballot', alabamaDMV_Commission_01_Controller.ivoteballot_RouteGet),
-
-router
-	.get('/alabamaVoters_LogIn_01', alabamaDMV_Commission_01_Controller.alabamaVoters_LogIn_01_Route_Get);
-
-router
-	.post('/alabamaVoters_LogIn_01', alabamaDMV_Commission_01_Controller.alabamaVoters_LogIn_01_AuthenticatePost);
 	
 router
 	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.redirectDashboard);
 
 router
 	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_RouteGet);
-
-router	
-	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_PassportGet);
-
-router	
-	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_EndPointGet);
-
-router
-	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.redirectLogin);
-
-router
-	.post('/alabamaDMV_Commisson_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_AuthenticatePost);
 
 router
 	.post('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_CreateDatabase);
