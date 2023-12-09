@@ -55,6 +55,18 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 
 /*
+	The code const flash = require('express-flash'); imports the express-flash module, which provides a 
+	middleware for storing and displaying flash messages in an Express.js application. Flash messages are 
+	short-lived messages that are stored in the session cookie id, and displayed to an user on his or her
+	next request. With express-flash, Sarai Hannah Ajai (Developer) can easily create and manage flash
+	messages within her iVoteBallot web application, which can be used to display success messages, 
+	error messages, or any other kind of notification to the front-end user.
+*/
+const flashExpress = require('express-flash');
+
+const flashSession = require('connect-flash');
+
+/*
 	1. The code const path = require('path') imports the built-in Node.js path module, which
 	provides utilities for working with file and directory paths.
 	2. You can use the path module to manipulate file paths in a platform-independent way and
@@ -188,7 +200,7 @@ db1.serialize( () => {
 	parameters, if necessary. This code provides a simple but effective way to authenticate users
 	and ensurethe security of their iVoteballot data information.
 */
-
+/*
 passport.use(
     'login1',
     new LocalStrategy({
@@ -269,6 +281,7 @@ passport.use(
         });       
     }
 ));
+*/
 
 passport.use(
 	'login2',
@@ -499,21 +512,7 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
-/*
-    The constant redirectDashboard is a middleware function that checks, if the user is already
-    logged in by verifying the existence of a userId property in the user's session. If the user
-    is logged in, the function redirects them to the dashboard page; otherwise, it allows the
-    request to proceed to the next middleware function. This middleware is commonly used to restrict
-    access to certain routes for authenticated users.
-*/
 
-const redirectDashboard = (req, res, next) => {
-    if(req.session.userId) {
-        res.redirect('/alabamaDMV_Commission_01');
-    } else {
-        next();
-    }
-}
 
 /*
 	The written JavaScript code language defines a route handler for the '/alabamaDMV_Commission_01'
@@ -575,50 +574,25 @@ const dashboard_01Get = ('/dashboard_01', (req, res) => {
 });
 
 /* -------------------------- This is the beginning of the alabamaVoters_LogIn_01 a Section --------------------------- */
-const redirectLogin_01 = (req, res, next) => {
-    if(!req.session.userId) {
-        res.redirect('/alabamaVoters_LogIn_01');
+/* -------------------------- This is the end of the alabamaVoters_LogIn_01 a Section --------------------------- */
+
+/* --------- This is the start of the alabamaDMV_Commission_01 Section | Employees Manual Posting ---------- */
+
+/*
+    The constant redirectDashboard is a middleware function that checks, if the user is already
+    logged in by verifying the existence of a userId property in the user's session. If the user
+    is logged in, the function redirects them to the dashboard page; otherwise, it allows the
+    request to proceed to the next middleware function. This middleware is commonly used to restrict
+    access to certain routes for authenticated users.
+*/
+
+const redirectDashboard = (req, res, next) => {
+    if(req.session.userId) {
+        res.redirect('/alabamaDMV_Commission_01');
     } else {
         next();
     }
 }
-
-/*
-   This is a route handler for a GET request to the path /login in the application. It first
-   invokes the middleware function redirectDashboard, and then proceeds to the main route
-   handler function. The main function logs the current user session and checks if the user is
-   authenticated or not. If the user is not authenticated, it renders a login page and logs a
-   message, and if the user is authenticated, it redirects them to the dashboard and logs another
-   message. If neither of these conditions are met, it renders an error403 page.
-*/
-const alabamaVoters_LogIn_01_Route_Get = ('/alabamaVoters_LogIn_01', redirectLogin_01, (req, res) => {
-    console.log(req.session);
-    console.log('isUnauthenticated: ', req.isUnauthenticated);
-    // Check if user already authenticated.
-    if (req.isUnauthenticated) {
-        res.render('alabamaVoters_LogIn_01');
-        console.log('User is not logged into the dashboard!');
-    } else if         
-        (req.session.isAuthenticated) {
-        res.redirect('/dashboard_01');
-        console.log('User is logged into the dashboard!');
-       
-    } else {       
-        res.render('404');
-    }  
-});
-
-const alabamaVoters_LogIn_01_AuthenticatePost = (
-    '/alabamaVoters_LogIn_01',
-    passport.authenticate('login1', {
-        successRedirect: '/dashboard_01',
-        failureRedirect: '/alabamaVoters_LogIn_01',
-        failureFlash: true  
-}));
-
-/* -------------------------- This is the end of the alabamaVoters_LogIn_01 a Section --------------------------- */
-
-/* -------------------------- This is the start of the alabamaDMV_Commission_01 Section --------------------------- */
 
 const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {
     console.log(req.session);
@@ -635,85 +609,6 @@ const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01', redirect
     } else {       
         res.render('535');
     }  
-});
-
-/*
-	The written JavaScript coded language, creates a route handler for the endpoint 
-	'/alabamaDMV_Commission_01'. This route is designed to handle HTTP requests and 
-	response logic. The function begins by checking, if the user's request is authenticated
-	using Passport, a popular authentication middleware for Node.js. If the user's request
-	is authenticated, the user's data information is logged to the console, including their
-	session cookie id details and the success of the user's login process. A message is then
-	logged, indicating that the user has been successfully authenticated through Passport 
-	from the iVoteBallot's employee direct user posting to the 'alabamaDMV_Commission_01' 
-	webpage. 
-	
-	Finally, the response renders the 'alabamaDMV_Commission_01' view. If the user's request 
-	is not authenticated, the code renders the '500' view and logs a message stating that the
-	user was not successfully authenticated within the session through Passport from the 
-	iVoteBallot's employee direct user posting to the 'alabamaDMV_Commission_01' webpage.
-*/
-const alabamaDMV_Commission_01_PassportGet = ('/alabamaDMV_Commission_01', (req, res) => {
-    if (req.isAuthenticated()) {
-        console.log(req.user);
-        console.log('Request Session:' + req.session)
-        console.log('' + req.logIn);
-        console.log('The User had been successfully authenticated within the Session through the passport from the iVoteBallot\'s employee direct user posting to the \'alabamaDMV_Commission_01\' webpage!');
-        res.render('alabamaDMV_Commission_01');
-    } else {
-        res.render('500')       
-        console.log('The user is not successfully authenticated within the session through the passport from the iVoteBallot\'s employee direct user posting to the \'alabamaDMV_Commission_01\' webpage!');
-    }
-});
-
-const alabamaDMV_Commission_01_BlankEndPointGet = ('/alabamaDMV_Commission_01', (req, res) => {
-	req.flashSession('message', 'You have successfully created the user profile onto iVoteBallot\'s database.');
-	res.redirect('/alabamaDMV_Commission_01');
-
-});
-
-const alabamaDMV_Commission_01_EndPointGet = ('/alabamaDMV_Commission_01', (req, res) => {
-	res.send(req.flashSession('message'));	
-	res.redirect('/alabamaDMV_Commission_01');
-
-});
-
-/*
-  The constant redirectLogin is a middleware function that checks if the user is logged in by
-  verifying the existence of a userId property in the user's session. If the user is not logged
-  in, the function redirects them to the login page; otherwise, it allows the request to proceed 
-  to the next middleware function.
-*/
-const redirectLogin = (req, res, next) => {
-    if(!req.session.userId) {
-        res.redirect('/alabamaDMV_Commission_01');
-    } else {
-        next();
-    }
-}
-
-/*
-	In the written JavaScript Coded language provides a route handler which is defined for
-	the endpoint '/alabama_DMV_Commission_01', specifically designed for handling user POST 
-	requests related to his or her Passport authentication. This route utilizes the Passport
-	middleware to authenticate the user using the 'login2' strategy. And, depending on the 
-	Passport authentication result, if successful, the user is redirected to the '/iVoteBallot' 
-	endpoint, and in case of failure, they are redirected back to the '/alabamaDMV_Commission_01'
-	endpoint with the option to display flash messages (set to true). This concise endpoint block 
-	of code encapsulates the Passport authentication process, and streamlining the redirection 
-	logic based on the outcome of the authentication attempt using Passport.
-*/
-
-const alabamaDMV_Commission_01_AuthenticatePost = 
-	('/alabama_DMV_Commission_01', (req, res, next) => {
-    passport.authenticate('login2', {
-        successRedirect: '/iVoteBallot',
-        failureRedirect: '/alabamaDMV_Commission_01',
-
-		failureFlash: true
-	 })		
-		(req, res, next);
-    
 });
 
 /* -------------------------- This is the end of the alabamaDMV_Commission_01 Section --------------------------- */
@@ -1143,20 +1038,12 @@ module.exports = {
 
 	alabama_Session_Router,
 	dashboard_01Get, 
-	redirectDashboard,	
-	redirectLogin,
+	redirectDashboard,
 	blank_RouteGet,
 	ivoteballot_RouteGet, 
 
-	alabamaDMV_Commission_01_RouteGet,	
-	alabamaDMV_Commission_01_PassportGet,	
-	alabamaDMV_Commission_01_BlankEndPointGet,
-	alabamaDMV_Commission_01_EndPointGet,	
-	alabamaDMV_Commission_01_AuthenticatePost,	
+	alabamaDMV_Commission_01_RouteGet,			
 	alabamaDMV_Commission_01_CreateDatabase,
-
-	alabamaVoters_LogIn_01_Route_Get,
-	alabamaVoters_LogIn_01_AuthenticatePost,
 
 	alabamaVoters_SignUp_01_Passport_Get,
 	alabamaVoters_SignUp_01_AuthenticatePost 
