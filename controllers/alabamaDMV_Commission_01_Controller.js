@@ -165,8 +165,8 @@ db1.serialize( () => {
         userDMVZipSelection VARCHAR(25) NOT NULL,
         userDMVIdType VARCHAR(100) NOT NULL,
         userDMVIdTypeNumber VARCHAR(25) NOT NULL,
-        userCommissionIvoteBallotIdIdentifierCode VARCHAR(50) NOT NULL,
-        userCommissionIvoteBallotIdCodeBcryptic VARCHAR(50) NOT NULL,
+        userIvoteBallotIdIdentifierCode VARCHAR(50) NOT NULL,
+        userConfirmIvoteBallotIdIdentifierCode VARCHAR(50) NOT NULL,
 		userPassword VARCHAR(50) NOT NULL,
 		userConfirmPassword VARCHAR(50) NOT NULL,
 		userTemporary_Password VARCHAR(50) NOT NULL
@@ -202,71 +202,78 @@ db1.serialize( () => {
 */
 
 passport.use(
-	'login2',
+	'login1',
 	new LocalStrategy({
 	usernameField: 'userDMVEmail',
-	passwordField: 'userCommissionIvoteBallotIdCodeBcryptic ',
+	passwordField: 'userIvoteBallotIdIdentifierCode',
 	passReqToCallback: true // To allow request object to be passed to callback
 },   
-	async (req, userDMVEmail, userCommissionIvoteBallotIdCodeBcryptic , done) => {
+	async (req, userDMVEmail, userIvoteBallotIdIdentifierCode, done) => {
 		
-		console.log('The iVoteBallot\'s user\'s passport.use(login2) email (\'userDMVEmail\') as: ' + userDMVEmail);
-		console.log('The iVoteBallot\'s user\'s passport.use(login2) password (\'userCommissionIvoteBallotIdIdentifierCode\') as: ' + userCommissionIvoteBallotIdCodeBcryptic );	
+		console.log('The iVoteBallot\'s user\'s passport.use(login1) email (\'userDMVEmail\') as: ' + userDMVEmail);
+		console.log('The iVoteBallot\'s user\'s passport.use(login1) password (\'userIvoteBallotIdIdentifierCode\') as: ' + userIvoteBallotIdIdentifierCode );	
+
+		if (!userIvoteBallotIdIdentifierCode) {
+			console.log('The user\'s iVoteBallot Id Identifier Code entered into the input field is: ' + userIvoteBallotIdIdentifierCode + '.');
+			console.log('The user\'s iVoteBallot Id Identifier Code does not match to the Session cookie id\'s database.');
+			return done (null, false, { message: 'Your iVoteBallot Id Identifier Code does not match to our iVoteballot\'s database.' });
+
+		} else 
 		
-		await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?`, userDMVEmail, (err, row) => {
+			await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?`, userDMVEmail, (err, row) => {
 			
-			if (err) {
-				return done(err);
-			}
+				if (err) {
+					return done(err);
+				}
 
-			if (!row) {
-				return done (null, false, { message: 'You have entered the incorrect email address.'});
-			}
-			
-			bcrypt.compare(userCommissionIvoteBallotIdCodeBcryptic, row.userCommissionIvoteBallotIdCodeBcryptic, (err, result) => {
-			
-			if (err) {
-				return done(err);
-			}
-			if (!result) {
-				console.log('The user\'s iVoteBallot Id Code Bcryption for his/her password was entered incorrectly.' )
-				return done(null, false, { message: 'You have entered the incorrect password.'});
-			}
-			//return done(null, row);
-
-				return done(null, { 						
-					id: row.id, 
+				if (!row) {
+					return done (null, false, { message: 'You have entered the incorrect email address.'});
+				}
 				
-					userDMVFirstName: row.userDMVFirstName,       
-					userDMVMiddleName: row.userDMVMiddleName, 
-					userDMVLastName: row.userDMVLastName,        
-					userDMVSuffix: row.userDMVSuffix,
-					userDMVDateOfBirth: row.userDMVDateOfBirth,
-					userDMVBirthSex: row.userDMVBirthSex,
-					userDMVGenderIdentity: row.userDMVGenderIdentity,
-					userDMVRace: row.userDMVRace,
-					userDMVSSN: row.userDMVSSN,
-					userDMVEmail: row.userDMVEmail,
-					userDMVConfirmEmail: row.userDMVConfirmEmail,
-					userDMVPhoneNumber: row.userDMVPhoneNumber,
-					userDMVAddress: row.userDMVAddress,
-					userDMVUnitType: row.userDMVUnitType,
-					userDMVUnitTypeNumber: row.userDMVUnitType,
-					userDMVCountrySelection: row.userDMVCountrySelection,
-					userDMVStateSelection: row.userDMVStateSelection,
-					userDMVCountySelection: row.userDMVCountySelection,
-					userDMVCitySelection: row.userDMVCitySelection,
-					userDMVZipSelection: row.userDMVZipSelection,
-					userDMVIdType: row.userDMVIdType,
-					userDMVIdTypeNumber: row.userDMVIdTypeNumber,
-					userCommissionIvoteBallotIdIdentifierCode: row.userCommissionIvoteBallotIdIdentifierCode,
-					userCommissionIvoteBallotIdCodeBcryptic: row.userCommissionIvoteBallotIdCodeBcryptic,
-					userPassword: row.userPassword,
-					userConfirmPassword: row.userDMVConfirmEmail,
-					userTemporary_Password: row.userTemporary_Password,	
+				bcrypt.compare(userIvoteBallotIdIdentifierCode, row.userIvoteBallotIdIdentifierCode, (err, result) => {
+				
+				if (err) {
+					return done(err);
+				}
+				if (!result) {
+					console.log('The user\'s iVoteBallot Id Identifier Code was entered incorrectly.' )
+					return done(null, false, { message: 'You have entered the incorrect iVoteBallot Id Identifier Code.'});
+				}
+				//return done(null, row);
 
-					isAuthenticated: true
-				});
+					return done(null, { 						
+						id: row.id, 
+					
+						userDMVFirstName: row.userDMVFirstName,       
+						userDMVMiddleName: row.userDMVMiddleName, 
+						userDMVLastName: row.userDMVLastName,        
+						userDMVSuffix: row.userDMVSuffix,
+						userDMVDateOfBirth: row.userDMVDateOfBirth,
+						userDMVBirthSex: row.userDMVBirthSex,
+						userDMVGenderIdentity: row.userDMVGenderIdentity,
+						userDMVRace: row.userDMVRace,
+						userDMVSSN: row.userDMVSSN,
+						userDMVEmail: row.userDMVEmail,
+						userDMVConfirmEmail: row.userDMVConfirmEmail,
+						userDMVPhoneNumber: row.userDMVPhoneNumber,
+						userDMVAddress: row.userDMVAddress,
+						userDMVUnitType: row.userDMVUnitType,
+						userDMVUnitTypeNumber: row.userDMVUnitType,
+						userDMVCountrySelection: row.userDMVCountrySelection,
+						userDMVStateSelection: row.userDMVStateSelection,
+						userDMVCountySelection: row.userDMVCountySelection,
+						userDMVCitySelection: row.userDMVCitySelection,
+						userDMVZipSelection: row.userDMVZipSelection,
+						userDMVIdType: row.userDMVIdType,
+						userDMVIdTypeNumber: row.userDMVIdTypeNumber,
+						userIvoteBallotIdIdentifierCode: row.userIvoteBallotIdIdentifierCode,
+						userConfirmIvoteBallotIdIdentifierCode: row.userConfirmIvoteBallotIdIdentifierCode,
+						userPassword: row.userPassword,
+						userConfirmPassword: row.userDMVConfirmEmail,
+						userTemporary_Password: row.userTemporary_Password,	
+
+						isAuthenticated: true
+					});
 
 			});                
 		});       
@@ -344,8 +351,8 @@ passport.deserializeUser(function(id, done) {
 			userDMVZipSelection: row.userDMVZipSelection,
 			userDMVIdType: row.userDMVIdType,
 			userDMVIdTypeNumber: row.userDMVIdTypeNumber,
-			userCommissionIvoteBallotIdIdentifierCode: row.userCommissionIvoteBallotIdIdentifierCode,
-			userCommissionIvoteBallotIdCodeBcryptic: row.userCommissionIvoteBallotIdCodeBcryptic,
+			userIvoteBallotIdIdentifierCode: row.userIvoteBallotIdIdentifierCode,
+			userConfirmIvoteBallotIdIdentifierCode: row.userConfirmIvoteBallotIdIdentifierCode,
 			userPassword: row.userPassword,
 			userConfirmPassword: row.userDMVConfirmEmail,
 			userTemporary_Password: row.userTemporary_Password,
@@ -355,250 +362,11 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
-/*
-	The written JavaScript code language defines a route handler for the '/alabamaDMV_Commission_01'
-	route in the iVoteballot web application. This route is designed to handle HTTP GET requests. 
-	The code first checks, if the user is already authenticated by examining the 'isAuthenticated' 
-	property in the 'req.session' object. If the user is authenticated, an alert is triggered, 
-	notifying the user that he or she is already logged in. Subsequently, the code checks, if the
-	request is unauthenticated using 'req.isUnauthenticated'. If unauthenticated, the code logs any
-	flash messages and renders the 'alabamaDMV_Commission_01' view, providing a message to the user
-	regarding the documentation of iVoteBallot data onto the SQlite3's iVoteBallot database. If the 
-	user is authenticated, the code simply logs any flash messages for which is part of an authentication
-	flow and rendering logic for a specific route in an iVoteBallot web application, with a focus on
-	handling both authenticated and unauthenticated users requests.
-*/
-
-const RouteGet_401 =  ('/401', (req, res) => {
-	// Check if user already authenticated
-	if (req.session.isAuthenticated) {
-		return alert('You are already logged in.')
-	}
-	// Check, if this is the first user of the 401 webpage route URL bar.
-	if (req.isUnauthenticated) {
-		res.render('401');
-	} else {
-		// Render the user's 500 webpage for signup. 
-		res.render(500);
-	}
-
-});
-
-const RouteGet_404 =  ('/404', (req, res) => {
-	// Check if user already authenticated
-	if (req.session.isAuthenticated) {
-		return alert('You are already logged in.')
-	}
-	// Check, if this is the first user of the 404 webpage route URL bar.
-	if (req.isUnauthenticated) {
-		res.render('404');
-	} else {
-		// Render the user's 500 webpage for signup. 
-		res.render(500);
-	}
-
-});
-
-const RouteGet_500 =  ('/500', (req, res) => {
-	// Check if user already authenticated
-	if (req.session.isAuthenticated) {
-		return alert('You are already logged in.')
-	}
-	// Check, if this is the first user of the 500 webpage route URL bar.
-	if (req.isUnauthenticated) {
-		res.render('500');
-	} else {
-		// Render the user's 404 webpage for signup. 
-		res.render(404);
-	}
-
-});
-
-const RouteGet_535 =  ('/535', (req, res) => {
-	// Check if user already authenticated
-	if (req.session.isAuthenticated) {
-		return alert('You are already logged in.')
-	}
-	// Check, if this is the first user of the 500 webpage route URL bar.
-	if (req.isUnauthenticated) {
-		res.render('535');
-	} else {
-		// Render the user's 404 webpage for signup. 
-		res.render(500);
-	}
-
-});
-
-const blank_RouteGet =  ('/', (req, res) => {
-	// Check if user already authenticated
-	if (req.session.isAuthenticated) {
-		return alert('You are already logged in.')
-	}
-	// Check, if this is the first user of the '/ivoteballot' webpage route URL bar.
-	if (req.isUnauthenticated) {
-		res.render('ivoteballot');
-	} else {
-		// Render the user's alabamaVoters_SignUp_01 webpage for signup. 
-		res.render(404);
-	}
-
-});
-
-const ivoteballot_RouteGet =  ('/ivoteballot', (req, res) => {
-	// Check if user already authenticated
-	if (req.session.isAuthenticated) {
-		return alert('You are already logged in.')
-	}
-	// Check, if this is the first user of the '/ivoteballot' webpage route URL bar.
-	if (req.isUnauthenticated) {
-		res.render('ivoteballot');
-	} else {
-		// Render the user's alabamaVoters_SignUp_01 webpage for signup. 
-		res.render(404);
-	}
-
-});
-
-const dashboard_01Get = ('/dashboard_01', (req, res) => {
-	if (req.isAuthenticated) {
-		console.log(req.user);
-		console.log(req.session);
-		console.log('The user have been successfully authenticated within the Session through the passport.use login3 Local Strategy from the session cookie id.');
-
-		res.render('dashboard_01', { userDMVFirstName: req.user.userDMVFirstName, userDMVMiddleName: req.user.userDMVMiddleName, userDMVLastName: req.user.userDMVLastName, userDMVEmail: req.user.userDMVEmail});
-
-	} else if (req.isUnauthenticated) {
-		console.log('The user have not been successfully authenticated within the passport.use local3 Local Strategy from the session cookie id.');
-		res.render('alabamaVoters_SignUp_01');
-	}
-
-});
-
-/* -------------------------- This is the beginning of the alabamaVoters_LogIn_01 a Section --------------------------- */
-/* -------------------------- This is the end of the alabamaVoters_LogIn_01 a Section --------------------------- */
-
-/* --------- This is the start of the alabamaDMV_Commission_01 Section | Employees Manual Posting ---------- */
-
-/*
-    The constant redirectDashboard is a middleware function that checks, if the user is already
-    logged in by verifying the existence of a userId property in the user's session. If the user
-    is logged in, the function redirects them to the dashboard page; otherwise, it allows the
-    request to proceed to the next middleware function. This middleware is commonly used to restrict
-    access to certain routes for authenticated users.
-*/
-
-const redirectDashboard = (req, res, next) => {
-    if(req.session.userId) {
-        res.redirect('/alabamaDMV_Commission_01');
-    } else {
-        next();
-    }
-}
-// User route signup
-const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {    
-    // Check if user already authenticated.
-    if (req.session.isAuthenticated) {
-		console.log('User is not logged into the dashboard!');
-        return alert('You are already logged in!');
-    }
-    console.log(req.session);
-    // Check if this is the first use of '/alabamaDMV_Commission_01' route URL bar
-    if (req.isUnauthenticated) {
-        console.log(req.flashExpress());
-        res.render('alabamaDMV_Commission_01', { messages: (req.flashExpress()) })        
-        
-    } else {
-        console.log(req.flashExpress());        
-       
-    }  
-});
-
-/* -------------------------- This is the end of the alabamaDMV_Commission_01 Section --------------------------- */
-
-/* -------------------------- This is the beginning of the alabamaVoters_SignUp_01 a Section --------------------------- */
-
-/*
-const alabamaVoters_SignUp_01_RouteGet = ('/alabamaVoters_SignUp_01', (req, res) => {
-    if (req.isAuthenticated()) {
-
-        console.log(req.user);
-        console.log('Request Session:' + req.session)
-        console.log('The user request log in is: ' + req.logIn);
-        console.log('The User had been successfully authenticated within the Session Cookie Id through the passport from the iVoteBallot\'s employee direct user posting from the \'alabamaVoters_SignUp_01\' webpage!');
-        res.render('alabamaVoters_SignUp_01');
-
-    } else {
-
-		console.log('The user is not successfully authenticated within the Session Cookie Id through the passport from the iVoteBallot\'s employee direct user posting from the \'alabamaVoters_SignUp_01\' webpage!');
-        res.render('500')       
-        
-    }
-});
-*/
-
-const alabamaVoters_SignUp_01_RouteGet = ('/alabamaVoters_SignUp_01', redirectDashboard, (req, res) => {
-    console.log(req.session);
-    console.log('isUnauthenticated: ', req.isUnauthenticated);
-    // Check if user already authenticated.
-    if (req.isUnauthenticated) {
-        res.render('alabamaVoters_SignUp_01');
-        console.log('User is not logged into the dashboard!');
-    } else if         
-        (req.session.isAuthenticated) {
-        res.redirect('/alabamaVoters_CreatePasswords_01');
-        console.log('User is logged into the dashboard!');
-       
-    } else {       
-        res.render('404');
-    }  
-});
 
 
 
 
 
-
-const alabamaVoters_SignUp_01_AuthenticatePost = 
-	('/alabamaVoters_SignUp_01', 
-    passport.authenticate('login2', {
-        successRedirect: '/alabamaVoters_CreatePassword_01',
-        failureRedirect: '/alabamaVoters_SignUp_01',
-
-		failureFlash: true	 
-    
-}));
-
-/* -------------------------- This is the end of the alabamaVoters_SignUp_01 a Section --------------------------- */
-
-/* -------------------------- This is the beginning of all Databases --------------------------- */
-
-/*
-	In the written JavaScript coded language, a route handler is defined for the endpoint 
-	'/alabamaDMV_Commission_01', designed to handle asynchronous POST requests related to the
-	creation of user data in the SQLite3 'alabamaDMV_Commission_01' database. The function 
-	extracts various user input fields data from the request body, including personal details,
-	contact information, and iVoteBallot identifiers. And. this data information is then logged 
-	to the console for verification purposes.
-
-	The code further performs input fields' validation to ensure that essential fields are not empty,
-	but this validation section is currently commented out because Sarai Hannah Ajai (the Developer) 
-	had created a separate js file named, "alabamaDMV_Commission_01.ejs" to handle the all input
-	fields' validation checks within the DOM 'document.getElementById'. Following validation checks,
-	the user's iVoteBallot Id Identifier Code is compared to its bcrypt-hashed counterpart. If a 
-	mismatch is detected, an error flash message is generated, and the user is redirected to 
-	the '/alabamaDMV_Commission_01' endpoint. Conversely, if the codes match, a success message is
-	logged, and the user's iVoteBallot Id Code is hashed and salted using bcrypt API module for secure 
-	storage within the SQlite3 database.
-
-	The script then constructs an SQL query to insert the user's data information into the 
-	'alabamaDMV_Commission_01' SQLite3 database. If the insertion is successful, a success flash 
-	message is generated, and the user is redirected to the '/alabamaDMV_Commission_01' endpoint.
-	Concurrently, the script employs the Nodemailer library to send two email notifications: one to
-	the iVoteBallot support team informing them of the new user's registration and another to the
-	user, as a confirmation. And, an attachments within the emails, including the iVoteBallot logo to
-	which enhance the email contents. Additionally, error handling is implemented for the 
-	email-sending process, redirecting to a '535' error page if issues arise.
-*/
 const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 	async (req, res, next) => { 
 
@@ -823,82 +591,6 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 	}
 );
 
-const createAlabamaVoters_SignUp_01_Database = ('/alabamaVoters_SignUp_01',
-	async (req, res) => {
-	
-		const userDMVEmail = req.body.userDMVEmail;
-		const userCommissionIvoteBallotIdCodeBcryptic = req.body.userCommissionIvoteBallotIdCodeBcryptic;
-		const userPassword = req.body.userPassword;
-		const userConfirmPassword = req.body.userConfirmPassword;
-	
-		console.log('These are the request body: ' + req.body);
-		console.log('The user email is: ' + userDMVEmail + '.');
-		console.log('The user signup password is: ' + userCommissionIvoteBallotIdCodeBcryptic + '.');
-		console.log('The user password is: ' + userPassword + '.');
-		console.log('The user confirm password is: ' + userConfirmPassword + '.');
-		console.log('The request session is: ' + req.session + '.');
-	
-		// Hash the password field using bcrypt.
-		const salt = await bcrypt.genSalt(13)
-		const passwordHashed = await bcrypt.hash(userPassword, salt);
-	
-		// Hash the confirm password field using the same salt, as the password field.
-		const confirmPasswordHashed = await bcrypt.hash(userConfirmPassword, salt);
-	
-		// Check, if the user's email exists onto the passport serialization through the session.
-		db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?', userDMVEmail, (err, row) => {
-			
-			if (err) {
-	
-				console.error(err);
-				console.log('The user\'s passport.use and session cookie id were not successfully executed causing an 500 error message due from the Developer\'s programmatic coding language problems.');
-				res.render(500);
-	
-			} else if (!row) {
-				console.log('The user\'s email address is not successfully found within the passport.use serialization authenticated process through the session cookie id that passes to the SQLite3 database.');
-				res.render('alabamaVoters_SignUp_01');
-	
-			} else {	
-	
-				db1.run('UPDATE alabamaDMV_Commission_01 SET userPassword = ?, userConfirmPassword = ? WHERE userDMVEmail = ?', passwordHashed, confirmPasswordHashed, row.userDMVEmail, (err) => {
-	
-					if (err) {
-	
-						console.error(err);
-						console.log('SQLite3 database language did not not properly execute the UPDATE from the passport.use local3 LocalStrategy from the Session Cookie Id.');
-						res.render('500');
-	
-					} else if (!row) {
-
-						console.log('The user\'s email address is not successfully found within the passport serialization authenticated processes through the season');
-						res.render('alabamaVoter_SignUp_01');
-
-					} else {
-
-						db1.run('UPDATE alabamaDMV_Commission_01 SET userPassword = ?, userConfirmPassword = ? WHERE userDMVEmail = ?', passwordHashed, confirmPasswordHashed, row.userEMVEmail, (err) => {
-
-							if (err) {
-
-								console.log(err);
-
-							} else {
-
-								res.redirect('/alabamaVoters_SignUp_01');
-
-							}
-
-						});
-
-					} 
-	
-				});
-			}
-	
-		});
-	});
-
-/* -------------------------- This is the end of all Databases --------------------------- */
-
 /*
 	The given JavaScript coded language exports a module with multiple components, including
 	a router, Passport authentication functions for GET and POST requests, a database instance, 
@@ -911,24 +603,7 @@ const createAlabamaVoters_SignUp_01_Database = ('/alabamaVoters_SignUp_01',
 module.exports = {
 
 	alabama_Session_Router,
-	flashSession,
-	flashExpress,
-
-	RouteGet_401,
-	RouteGet_404,
-	RouteGet_500,
-	RouteGet_535,
-	dashboard_01Get, 
-	redirectDashboard,
-	blank_RouteGet,
-	ivoteballot_RouteGet, 
-
-	alabamaDMV_Commission_01_RouteGet,			
-	alabamaDMV_Commission_01_CreateDatabase,
-
-	alabamaVoters_SignUp_01_RouteGet,	
-	alabamaVoters_SignUp_01_AuthenticatePost,
-	createAlabamaVoters_SignUp_01_Database
+	
 
 
 	
