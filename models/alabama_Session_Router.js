@@ -165,7 +165,6 @@ router.use(flashSession());
 
 router.use(flashExpress());
 
-
 /* 
 	
 */
@@ -176,7 +175,6 @@ router.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	}
 	next();
 });
-
 
 /*
 	The provided JavaScript code configures routing paths for the iVoteBallot web application within the Express.js
@@ -206,7 +204,7 @@ router
 	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_RouteGet);
 
 router
-	.post('/alabamaDMV_Commission', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_CreateDatabase);
+	.post('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_CreateDatabase);
 
 router
     .post('/contactUs_01', contactUs_01_Controller.createContactUs_01_Database);
