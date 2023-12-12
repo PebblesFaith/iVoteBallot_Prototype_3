@@ -393,7 +393,7 @@ const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01', redirect
 
 /* -------------------------- The ending of the alabamaDMV_Commission_01 section ----------------------------- */
 
-
+/* -------------------------- The beginning of All SQLite3 databases section ----------------------------- */
 
 const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 	async (req, res) => { 		   
@@ -451,7 +451,7 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 		console.log('The user\'s zip code selection is: ' + userDMVZipSelection + '.');
 		console.log('The user\'s Id type is: ' + userDMVIdType + '.');
 		console.log('The user\'s Id type number is: ' + userDMVIdTypeNumber + '.');
-		console.log('The user\'s iVoteBallot Id Identifier Code is: ' + userCommissionIvoteBallotIdIdentifierCode + '.');
+		console.log('The user\'s iVoteBallot Id Identifier Code is: ' + userIvoteBallotIdIdentifierCode + '.');
 		console.log('The user\'s confirm iVoteBallot Id Identifier Code is: ' + userConfirmIvoteBallotIdIdentifierCode + '.');
 		console.log('The user\'s password is: ' + userPassword + '.');
 		console.log('The user\'s confirm password is: ' + userConfirmPassword + '.');
@@ -664,6 +664,8 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 
 	}
 );
+
+/* -------------------------- The ending of All SQLite3 databases section ----------------------------- */
 
 /*
 	The given JavaScript coded language exports a module with multiple components, including
