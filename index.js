@@ -37,11 +37,6 @@ if (process.env.NODE_ !== 'production') {
 	require('dotenv').config();
 }
 
-const ALABAMA_SESSION = process.env.ALABAMA_SESSION;
-const SESSION_MAX_AGE = process.env.SESSION_MAX_AGE;
-const EXPRESS_SESSION_KEY = process.env.EXPRESS_SESSION_KEY;
-const IONOS_SECRET_KEY = process.env.IONOS_SECRET_KEY;
-
 const views_Controller = require('./models/views_Router');
 const contactUs_01_Controller = require('./models/alabama_Session_Router');
 const alabamaDMV_Commission_01_Controller = require('./models/alabama_Session_Router');
