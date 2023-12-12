@@ -26,8 +26,8 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	const userDMVZipSelection = document.getElementById('zipSelect').value.trim();
     const userDMVIdType = document.getElementById('idType').value.trim();
     const userDMVIdTypeNumber = document.getElementById('idTypeNumber').value.trim();
-    const userCommissionIvoteBallotIdIdentifierCode = document.getElementById('iVoteBallotIdIdentifierCode').value.trim();
-    const userCommissionIvoteBallotIdCodeBcryptic = document.getElementById('iVoteBallotIdCodeHidden_Bcryptic').value.trim();
+    const userIvoteBallotIdIdentifierCode = document.getElementById('iVoteBallotIdIdentifierCode').value.trim();
+    const userConfirmIvoteBallotIdIdentifierCode = document.getElementById('confirmIvoteBallotIdIdentifierCode').value.trim();
 	const userPassword = document.getElementById('password').value.trim();
 	const userConfirmPassword = document.getElementById('confirmPassword').value.trim();
 	const userTemporary_Password = document.getElementById('temporary_Password').value.trim();	
@@ -364,11 +364,11 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
     } 
     
-    if (userCommissionIvoteBallotIdIdentifierCode  === '' || userCommissionIvoteBallotIdIdentifierCode  == null || !userCommissionIvoteBallotIdIdentifierCode.match(regIvoteballotIdIdentifierCode)) {                                                               
-        document.getElementById('userCommissioniVoteBallotIdIdentifierCodeErrorMessage').textContent = 'The user\'s iVoteBallot Id Identifier is a required input field and you must enter the user correct alphanumeric characters format into the required input field.';
+    if (userIvoteBallotIdIdentifierCode  === '' || userIvoteBallotIdIdentifierCode  == null || !userIvoteBallotIdIdentifierCode.match(regIvoteballotIdIdentifierCode)) {                                                               
+        document.getElementById('useriVoteBallotIdIdentifierCodeErrorMessage').textContent = 'The user\'s iVoteBallot Id Identifier Code is a required input field and you must enter the user correct alphanumeric characters format into the required input field.';
 
         setTimeout(function() {
-            document.getElementById('userCommissioniVoteBallotIdIdentifierCodeErrorMessage').textContent = '';
+            document.getElementById('useriVoteBallotIdIdentifierCodeErrorMessage').textContent = '';
         },
         9000)
 
@@ -376,20 +376,32 @@ const validateAlabamaDMV_CommissionForm = (e) => {
                             
     } 
 
-	if ( userCommissionIvoteBallotIdCodeBcryptic === '' || userCommissionIvoteBallotIdCodeBcryptic  == null || !userCommissionIvoteBallotIdCodeBcryptic.match(regIvoteballotIdIdentifierCode)) {                                                               
-        document.getElementById('userCommissionIvoteBallotIdCodeBcrypticErrorMessage').textContent = 'The user\'s iVoteBallot Id Identifier is a required input field and you must enter the user correct alphanumeric characters format into the required input field.';
+	if (userConfirmIvoteBallotIdIdentifierCode === '' || userConfirmIvoteBallotIdIdentifierCode  == null || !userConfirmIvoteBallotIdIdentifierCode.match(regIvoteballotIdIdentifierCode)) {                                                               
+        document.getElementById('userConfirmiVoteBallotIdIdentifierCodeErrorMessage').textContent = 'The user\'s iVoteBallot Id Identifier Code is a required input field and you must enter the user correct alphanumeric characters format into the required input field.';
 
         setTimeout(function() {
-            document.getElementById('userCommissionIvoteBallotIdCodeBcrypticErrorMessage').textContent = '';
+            document.getElementById('userConfirmiVoteBallotIdIdentifierCodeErrorMessage').textContent = '';
         },
         9000)
 
         return false;					
                             
     } 	
+
+	if (userIvoteBallotIdIdentifierCode  != userConfirmIvoteBallotIdIdentifierCode) {
+		document.getElementById('userConfirmiVoteBallotIdIdentifierCodeErrorMessage').textContent = 'The user\'s iVoteballot Id Identifier Code does not match to his/her confirm iVoteBallot Id Identifier Code which are required input fields.';
+
+		setTimeout(function() {
+			document.getElementById('userConfirmiVoteBallotIdIdentifierCodeErrorMessage').textContent = '';
+		},
+		9000)
+
+		return false;
+
+	}
 	
 	if (userPassword === '' || userPassword == null) {
-		document.getElementById('userPasswordErrorMessage').textContent = 'Your password is a required input field.';
+		document.getElementById('userPasswordErrorMessage').textContent = 'The user\'s password is a required input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userPasswordErrorMessage').textContent = '';
@@ -401,7 +413,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}   	
 			
 	if (userConfirmPassword === '' || userConfirmPassword == null) {
-		document.getElementById('userConfirmPasswordErrorMessage').textContent = 'Your confirm password is a required input field.';
+		document.getElementById('userConfirmPasswordErrorMessage').textContent = 'The user\'s confirm password is a required input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userConfirmPasswordErrorMessage').textContent = '';
@@ -413,7 +425,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	} 
 	
 	if (userPassword != userConfirmPassword) {
-		document.getElementById('userConfirmPasswordErrorMessage').textContent = 'Your password does not match to your confirm password which are required input fields.';
+		document.getElementById('userConfirmPasswordErrorMessage').textContent = 'The user\'s password does not match to his/her confirm password which are required input fields.';
 
 		setTimeout(function() {
 			document.getElementById('userConfirmPasswordErrorMessage').textContent = '';
@@ -425,7 +437,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 	
 	if (userTemporary_Password === '' || userTemporary_Password == null) {
-		document.getElementById('userTemporary_PasswordErrorMessage').textContent = 'Your temporary password is a required input field.';
+		document.getElementById('userTemporary_PasswordErrorMessage').textContent = 'The user\'s temporary password is a required input field.';
 
 		setTimeout(function() {
 			document.getElementById('userTemporary_PasswordErrorMessage').textContent = '';
