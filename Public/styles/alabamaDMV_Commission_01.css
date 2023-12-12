@@ -354,7 +354,7 @@ span.forgot_Password {
 #idType,
 #idTypeNumber,
 #iVoteBallotIdIdentifierCode,
-#iVoteBallotIdCodeHidden_Bcryptic,
+#confirmIvoteBallotIdIdentifierCode,
 #password,
 #confirmPassword,
 #temporary_Password
@@ -400,7 +400,7 @@ span.forgot_Password {
 #idType,
 #idTypeNumber,
 #iVoteBallotIdIdentifierCode,
-#iVoteBallotIdCodeHidden_Bcryptic,
+#confirmIvoteBallotIdIdentifierCode,
 #password,
 #confirmPassword,
 #temporary_Password
@@ -438,7 +438,7 @@ span.forgot_Password {
 #idType,
 #idTypeNumber,
 #iVoteBallotIdIdentifierCode,
-#iVoteBallotIdCodeHidden_Bcryptic,
+#confirmIvoteBallotIdIdentifierCode,
 #password,
 #confirmPassword,
 #temporary_Password
@@ -470,7 +470,7 @@ span.forgot_Password {
 #idType:focus,
 #idTypeNumber:focus,
 #iVoteBallotIdIdentifierCode:focus,
-#iVoteBallotIdCodeHidden_Bcryptic:focus,
+#confirmIvoteBallotIdIdentifierCode:focus,
 #password:focus,
 #confirmPassword:focus,
 #temporary_Password:focus
@@ -506,11 +506,11 @@ span.forgot_Password {
 #userDMVZipSelectionErrorMessage,
 #userDMVIdTypeErrorMessage,
 #userDMVIdTypeNumberErrorMessage,
-#userCommissioniVoteBallotIdIdentifierCodeErrorMessage,
-#userCommissionIvoteBallotIdCodeBcrypticErrorMessage,
-#passwordErrorMessage,
-#confirmPasswordErrorMessage,
-#temporary_PasswordErrorMessage
+#useriVoteBallotIdIdentifierCodeErrorMessage,
+#userConfirmiVoteBallotIdIdentifierCodeErrorMessage,
+#userPasswordErrorMessage,
+#userConfirmPasswordErrorMessage,
+#userTemporary_PasswordErrorMessage
 { 
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: clamp(9px, 2vw, 13px); 
