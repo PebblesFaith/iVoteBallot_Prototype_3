@@ -206,6 +206,9 @@ router
 	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_RouteGet);
 
 router
+	.post('/alabamaDMV_Commission', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_CreateDatabase);
+
+router
     .post('/contactUs_01', contactUs_01_Controller.createContactUs_01_Database);
 
 router
