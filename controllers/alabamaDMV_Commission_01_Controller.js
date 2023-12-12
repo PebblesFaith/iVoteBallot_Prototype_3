@@ -362,35 +362,51 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
+/* -------------------------- The beginning of the alabamaDMV_Commission_01 section ----------------------------- */
 
+const redirectSignUp = (req, res, next) => {
+    if(req.session.userId) {
+        res.redirect('/alabamaVoters_SingUp_01');
+    } else {
+        next();
+    }
+}
 
+const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01', redirectSignUp, (req, res) => {
+
+	// To check, if user is have already been authenticated.
+	if (req.session.isAuthenticated) {
+		return alert('You are already logged in to sign up for an iVoteballot account!');
+
+	}
+	console.log(req.session);
+	// To check, if the user have used the '/alabamaDMV_Commission_01' URL route bar first.
+	if (req.isUnauthenticated) {
+		console.log(req.flash());
+		res.render('alabamaDMV_Commission_01', { messages: (req.flash()) });
+
+	} else {
+		console.log(req.flash())
+	}
+
+});
+
+/* -------------------------- The ending of the alabamaDMV_Commission_01 section ----------------------------- */
 
 
 
 const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
-	async (req, res, next) => { 
+	async (req, res, next) => { 		   
 
-		const userCommissionIvoteBallotIdIdentifierCode = req.body.userCommissionIvoteBallotIdIdentifierCode;
-		const userCommissionIvoteBallotIdCodeBcryptic = req.body.userCommissionIvoteBallotIdCodeBcryptic;		
-				
-		const salt =  await bcrypt.genSalt(15);
-		const iVoteBallotIdCodeHashed =  await bcrypt.hash(req.body.userCommissionIvoteBallotIdCodeBcryptic, salt);
-
-		const newUser = {
-			userCommissionIvoteBallotIdCodeBcryptic:iVoteBallotIdCodeHashed
-		};	
-
-		const data = {    
-
-            userDMVFirstName: req.body.userDMVFirstName,       
-            userDMVMiddleName: req.body.userDMVMiddleName, 
-            userDMVLastName: req.body.userDMVLastName,        
-            userDMVSuffix: req.body.userDMVSuffix,
-            userDMVDateOfBirth: req.body.userDMVDateOfBirth,
-            userDMVBirthSex: req.body.userDMVBirthSex,
-            userDMVGenderIdentity: req.body.userDMVGenderIdentity,
-            userDMVRace: req.body.userDMVRace,
-            userDMVSSN: req.body.userDMVSSN,
+            userDMVFirstName = req.body.userDMVFirstName,       
+            userDMVMiddleName = req.body.userDMVMiddleName, 
+            userDMVLastName = req.body.userDMVLastName,        
+            userDMVSuffix = req.body.userDMVSuffix,
+            userDMVDateOfBirth = req.body.userDMVDateOfBirth,
+            userDMVBirthSex = req.body.userDMVBirthSex,
+            userDMVGenderIdentity = req.body.userDMVGenderIdentity,
+            userDMVRace = req.body.userDMVRace,
+            userDMVSSN = req.body.userDMVSSN,
             userDMVEmail: req.body.userDMVEmail,
             userDMVConfirmEmail: req.body.userDMVConfirmEmail,
             userDMVPhoneNumber: req.body.userDMVPhoneNumber,
@@ -603,6 +619,8 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 module.exports = {
 
 	alabama_Session_Router,
+
+	alabamaDMV_Commission_01_RouteGet
 	
 
 
