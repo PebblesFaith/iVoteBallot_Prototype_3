@@ -165,97 +165,18 @@ router.use(flashSession());
 
 router.use(flashExpress());
 
-/*
-	In the JavaScript snippet `router.use('/alabamaDMV_Commission_01', (req, res, next) => { ... }`, 
-	a critical middleware operation is introduced within the context of a Node.js application. 
-	This middleware is specifically designed to scrutinize users' authentications onto the route
-	'/alabamaDMV_Commission_01'. The code initiates by assessing whether the user has already been
-	authenticated, and examining the session cookie id information from the SQLite3 database. If 
-	the user is not authenticated, the middleware sets the `req.isUnauthenticated` flag to true. 
-	The `next()` function ensures the smooth progression of the request through the middleware stack. 
-	This implementation effectively controls access to the specified route, showcasing the utility 
-	of the `router.use()` method for incorporating middleware functions tailored to particular routes
-	or route groups within a Node.js application.
+
+/* 
+	
 */
-
-// Middleware to set req.isUnauthenticated for the first use of the '/401' URL bar
-router.use('/401', (req, res, next) => {
-	//Check if user is Already authenticated.
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-
-	next();
-});
-
-// Middleware to set req.isUnauthenticated for the first use of the '/404' URL bar
-router.use('/404', (req, res, next) => {
-	//Check if user is Already authenticated.
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-
-	next();
-});
-
-// Middleware to set req.isUnauthenticated for the first use of the '/500' URL bar
-router.use('/500', (req, res, next) => {
-	//Check if user is Already authenticated.
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-
-	next();
-});
-
-// Middleware to set req.isUnauthenticated for the first use of the '/535' URL bar
-router.use('/535', (req, res, next) => {
-	//Check if user is Already authenticated.
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-
-	next();
-});
-
-// Middleware to set req.isUnauthenticated for the first use of the '/dashboard' URL bar
-router.use('/dashboard_01', (req, res, next) => {
-	//Check if user is Already authenticated.
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-
-	next();
-});
-
-// Middleware to set req.isUnauthenticated for the first use of the '/ivoteballot' URL bar
-router.use('/ivoteballot', (req, res, next) => {
-	//Check if user is Already authenticated.
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-
-	next();
-});
-
 router.use('/alabamaDMV_Commission_01', (req, res, next) => {
-	console.log('The middleware called for the \'alabamaDMV_Commission_01\' successfully.');
-	// Check if user has Already been authenticated.
-	if(!req.session.isAuthenticated) {
+	console.log('The middleware call the \'alabamaDMV_Commission_01\' successfully.')
+	if (!req.session.isAuthenicated) {
 		req.isUnauthenticated = true;
 	}
 	next();
 });
 
-router.use('/alabamaVoters_SignUp_01', (req, res, next) => {
-	console.log('The middleware called for the \'alabamaVoters_SignUp_01\' successfully.');
-	// Check if user has Already been authenticated.
-	if(!req.session.isAuthenticated) {
-		// User is direct back to the 'alabamaVoters_SignUp_01' URL
-		req.isUnauthenticated = true;
-	}
-	next();
-});
 
 /*
 	The provided JavaScript code configures routing paths for the iVoteBallot web application within the Express.js
@@ -282,37 +203,7 @@ router.use('/alabamaVoters_SignUp_01', (req, res, next) => {
 	maintainability within the codebase.	
 */
 router
-	.get('/401', alabamaDMV_Commission_01_Controller.RouteGet_401);
-
-router
-	.get('/404', alabamaDMV_Commission_01_Controller.RouteGet_404);
-
-router
-	.get('/500', alabamaDMV_Commission_01_Controller.RouteGet_500);
-
-router
-	.get('/', alabamaDMV_Commission_01_Controller.blank_RouteGet);
-
-router
-	.get('/ivoteballot', alabamaDMV_Commission_01_Controller.ivoteballot_RouteGet),
-	
-router
-	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.redirectDashboard);
-
-router
 	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_RouteGet);
-
-router
-	.post('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_CreateDatabase);
-
-router
-	.get('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.alabamaVoters_SignUp_01_RouteGet);
-
-router
-	.post('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.alabamaVoters_SignUp_01_AuthenticatePost);
-
-router
-	.post('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.createAlabamaVoters_SignUp_01_Database);
 
 router
     .post('/contactUs_01', contactUs_01_Controller.createContactUs_01_Database);
