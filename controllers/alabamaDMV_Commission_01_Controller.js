@@ -62,9 +62,7 @@ connect-flash, you can easily create and manage flash messages in your applicati
 display success messages, error messages, or any other kind of notification to the user.
 */
 
-const flashSession = require('connect-flash');
 
-const flashExpress = require('express-flash');
 
 /*
 	1. The code const path = require('path') imports the built-in Node.js path module, which
@@ -475,7 +473,7 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 			!userDMVPhoneNumber ||
 			!userDMVAddress ||
 			!userDMVUnitType ||
-			!userDMVUnitTypeNumber ||
+			userDMVUnitTypeNumber ||
 			!userDMVCountrySelection ||
 			!userDMVStateSelection ||
 			!userDMVCountySelection ||
@@ -487,7 +485,7 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 			!userConfirmIvoteBallotIdIdentifierCode ||
 			!userPassword ||
 			!userConfirmPassword ||
-			!userTemporary_Password
+			!userTemporary_Password			
 			
 		) {
 			req.flash('error', 'Please fill in all required fields.')
