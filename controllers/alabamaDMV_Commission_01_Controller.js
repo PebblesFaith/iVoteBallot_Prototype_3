@@ -389,7 +389,54 @@ const alabamaDMV_Commission_01_RouteGet = ('/alabamaDMV_Commission_01', redirect
 
 });
 
+const alabamaDMV_Commission_01_AuthenticatedGet = ('/alabamaDMV_Commission_01', (req, res) => {
+    if (req.isAuthenticated()) {
+        console.log(req.user);
+        console.log('Request Session:' + req.session)
+        console.log('' + req.logIn);
+        console.log('The User have been successfully authenticated within the passport.user login1 LocalStrategy through the Session Cookie Id from the SQLite3 database for which is known as, serialization.');
+        res.render('alabamaDMV_Commission_01');
+    } else {
+        res.render('500')
+       
+        console.log('The User have not been successfully authenticated within the passport.user login1 LocalStrategy through the Session Cookie Id from the SQLite3 database for which is known as, serialization.');
+    }
+});
+
 /* -------------------------- The ending of the alabamaDMV_Commission_01 section ----------------------------- */
+
+/* -------------------------- The beginning of the alabamaVoters_SignUp_01 section ----------------------------- */
+
+const alabamaVoters_SignUp_01_RouteGet = ('/alabamaVoters_SignUp_01', redirectSignUp, (req, res) => {
+
+	console.log(req.session);
+	console.log('isUnauthenticated: ', req.isUnauthenticated);
+	// To check, if user is already been authenticated.
+	if (req.isUnauthenticated) {
+		res.render('alabamaVoters_SignUp_01');
+		console.log('The user have not successfully logged into the alabamaVoters_SignUp_01 webpage in order to create password and confirm password.');
+
+	} else if 
+		(req.session.isAuthenticated) {
+			res.redirect('alabamaVoters_SignUp_01');
+			console.log('The user have successfully logged into the alabamaVoters_SignUp_01 webpage in order to create password and confirm password.');
+
+	} else {
+		res.render('404');
+	}
+
+});
+
+const alabamaVoters_SignUp_01_RoutePost = (
+	'/alabamaVoters_SignUp_01',
+	passport.authenticate('login1', {
+		successRedirect: 'alabamaVoters_LogIn_01',
+		failureRedirect: '/alabamaVoters_SignUp_01',
+		failureFlash: true
+	})
+);
+
+/* -------------------------- The ending of the alabamaVoters_SignUp_01 section ----------------------------- */
 
 /* -------------------------- The beginning of All SQLite3 databases section ----------------------------- */
 
@@ -473,7 +520,7 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 			!userDMVPhoneNumber ||
 			!userDMVAddress ||
 			!userDMVUnitType ||
-			userDMVUnitTypeNumber ||
+			
 			!userDMVCountrySelection ||
 			!userDMVStateSelection ||
 			!userDMVCountySelection ||
@@ -679,7 +726,11 @@ module.exports = {
 	alabama_Session_Router,
 
 	alabamaDMV_Commission_01_RouteGet,
-	alabamaDMV_Commission_01_CreateDatabase
+	alabamaDMV_Commission_01_AuthenticatedGet,
+	alabamaDMV_Commission_01_CreateDatabase,
+
+	alabamaVoters_SignUp_01_RouteGet,
+	alabamaVoters_SignUp_01_RoutePost
 
 
 	
