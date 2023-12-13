@@ -58,6 +58,18 @@ const alabamaDMV_Commission_01_Controller = require('../controllers/alabamaDMV_C
 const router = express.Router();
 
 /*
+	The statement const sqliteDB = require('better-sqlite3'); is a piece of code that is
+	used to import the better-sqlite3 library in a Node.js application. The better-sqlite3
+	library provides a faster and safer way to interact with SQLite3 databases in Node.js
+	compared to the built-in sqlite3 library.
+
+	Once the better-sqlite3 library is imported, the sqliteDB constant can be used to create
+	a new instance of the better-sqlite3 database class and perform various database operations
+	like querying and modifying data.
+*/
+const sqliteDB = require('better-sqlite3');
+
+/*
 	The statement const session = require('express-session'); is used in JavaScript when
 	working with the Node.js framework Express to create a session middleware. The
 	express-session package provides the necessary tools for managing user sessions, 
@@ -69,17 +81,7 @@ const router = express.Router();
 */
 const session = require('express-session');
 
-/*
-	The statement const sqliteDB = require('better-sqlite3'); is a piece of code that is
-	used to import the better-sqlite3 library in a Node.js application. The better-sqlite3
-	library provides a faster and safer way to interact with SQLite3 databases in Node.js
-	compared to the built-in sqlite3 library.
 
-	Once the better-sqlite3 library is imported, the sqliteDB constant can be used to create
-	a new instance of the better-sqlite3 database class and perform various database operations
-	like querying and modifying data.
-*/
-const sqliteDB = require('better-sqlite3');
 
 const { route } = require('./views_Router');
 
@@ -121,13 +123,13 @@ router.use(
 			cookie: {
 				secure: true,
 				httpOnly: true,
-				sameSite: true,			
+				sameSite: true,	
+				resave: false,		
 				saveUninitialized: false,
 				maxAge: 'SESSION_MAX_AGE' // 30 minuites in milliseconds				
 			}
 		}),
-		secret: 'EXPRESS_SESSION_KEY',
-		resave: false
+		secret: 'EXPRESS_SESSION_KEY',		
 	})
 )
 
