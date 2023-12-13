@@ -145,7 +145,7 @@ const db1 = new sqlite3.Database('alabamaDMV_Commission_01.db', err => {
 db1.serialize( () => {
     const sqlTable =  (`CREATE TABLE IF NOT EXISTS alabamaDMV_Commission_01 (
 
-        ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
         userDate DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
         userDMVFirstName VARCHAR (100) NOT NULL, 
         userDMVMiddleName VARCHAR (100) NOT NULL, 
@@ -251,6 +251,7 @@ passport.use(
 		});       
 	}
 ));
+
 /*
 	The code passport.serializeUser(function (user, done) { done(null, user.id); }) is a function
 	that is used by Passport to serialize the user object for storage in a session.
@@ -272,7 +273,6 @@ passport.serializeUser(function (user, done) {
     console.log('user');
     done(null, user.id);
 });
-
 
 /*
 	The code passport.deserializeUser is used by Passport to deserialize the user object from a 
@@ -542,10 +542,13 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 		} else {
 			req.flash('success', 'The user\' iVoteBallot Id Identifier Code have successfully matched to his or her iVoteBallot Id Code entered into the input fields, and the user is successfully authenticated through the \'passport.use\' login1, LocalStrategy through the session cookie id.');
 			console.log('The user\' iVoteBallot Id Identifier Code have successfully matched to his or her confirm iVoteBallot Id Code entered into the input fields, and the user is successfully authenticated through the \'passport.use\' login1, LocalStrategy through the session cookie id.');
-		}   	
+		}  
 		
-		// To hash the user's userIvoteBallotIdIdentifierCode input field using bcryption.
+		// To hash the user's userDMVSSN input field using bcryption.
 		const salt = await bcrypt.genSalt(13);
+		const userDMVSSNHashed = await bcrypt.hash(req.body.userDMVSSN, salt);
+		
+		// To hash the user's userIvoteBallotIdIdentifierCode input field using bcryption.		
 		const userIvoteBallotIdIdentifierCodeHashed = await bcrypt.hash(req.body.userIvoteBallotIdIdentifierCode, salt);
 
 		// To hash the user's userIvoteBallotIdIdentifierCode input field using bcryption.	
@@ -561,7 +564,7 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 			userDMVBirthSex,
 			userDMVGenderIdentity,
 			userDMVRace, 
-			userDMVSSN, 
+			userDMVSSN: userDMVSSNHashed, 
 			userDMVEmail,
 			userDMVConfirmEmail,
 			userDMVPhoneNumber,
