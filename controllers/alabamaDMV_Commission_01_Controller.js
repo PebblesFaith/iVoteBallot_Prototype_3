@@ -1,3 +1,7 @@
+const express = require('express');
+
+const iVoteBallotApp = express();
+
 /*
 	The purpose of this JavaScript coded language is to require the "alabama_Session_Router" 
 	module from the "../models/alabama_Session_Router" file. This indicates that the module
@@ -7,6 +11,8 @@
 	that handles user contact us form submissions.
 */
 const alabama_Session_Router = require('../models/alabama_Session_Router');
+
+const session = require('express-session');
 
 /*
 	This line of JavaScript coded language imports the Passport library by assigning
@@ -239,39 +245,7 @@ passport.use(
 				}
 				//return done(null, row);
 
-					return done(null, { 						
-						id: row.id, 
-					
-						userDMVFirstName: row.userDMVFirstName,       
-						userDMVMiddleName: row.userDMVMiddleName, 
-						userDMVLastName: row.userDMVLastName,        
-						userDMVSuffix: row.userDMVSuffix,
-						userDMVDateOfBirth: row.userDMVDateOfBirth,
-						userDMVBirthSex: row.userDMVBirthSex,
-						userDMVGenderIdentity: row.userDMVGenderIdentity,
-						userDMVRace: row.userDMVRace,
-						userDMVSSN: row.userDMVSSN,
-						userDMVEmail: row.userDMVEmail,
-						userDMVConfirmEmail: row.userDMVConfirmEmail,
-						userDMVPhoneNumber: row.userDMVPhoneNumber,
-						userDMVAddress: row.userDMVAddress,
-						userDMVUnitType: row.userDMVUnitType,
-						userDMVUnitTypeNumber: row.userDMVUnitType,
-						userDMVCountrySelection: row.userDMVCountrySelection,
-						userDMVStateSelection: row.userDMVStateSelection,
-						userDMVCountySelection: row.userDMVCountySelection,
-						userDMVCitySelection: row.userDMVCitySelection,
-						userDMVZipSelection: row.userDMVZipSelection,
-						userDMVIdType: row.userDMVIdType,
-						userDMVIdTypeNumber: row.userDMVIdTypeNumber,
-						userIvoteBallotIdIdentifierCode: row.userIvoteBallotIdIdentifierCode,
-						userConfirmIvoteBallotIdIdentifierCode: row.userConfirmIvoteBallotIdIdentifierCode,
-						userPassword: row.userPassword,
-						userConfirmPassword: row.userDMVConfirmEmail,
-						userTemporary_Password: row.userTemporary_Password,	
-
-						isAuthenticated: true
-					});
+					return done(null, {	id: row.id, userDMVFirstName: row.userDMVFirstName, userDMVMiddleName: row.userDMVMiddleName, userDMVLastName: row.userDMVLastName, userDMVSuffix: row.userDMVSuffix, userDMVDateOfBirth: row.userDMVDateOfBirth, userDMVBirthSex: row.userDMVBirthSex, userDMVGenderIdentity: row.userDMVGenderIdentity, userDMVRace: row.userDMVRace, userDMVSSN: row.userDMVSSN, userDMVEmail: row.userDMVEmail, userDMVConfirmEmail: row.userDMVConfirmEmail, userDMVPhoneNumber: row.userDMVPhoneNumber, userDMVAddress: row.userDMVAddress, userDMVUnitType: row.userDMVUnitType, userDMVUnitTypeNumber: row.userDMVUnitType, userDMVCountrySelection: row.userDMVCountrySelection, userDMVStateSelection: row.userDMVStateSelection, userDMVCountySelection: row.userDMVCountySelection, userDMVCitySelection: row.userDMVCitySelection, userDMVZipSelection: row.userDMVZipSelection, userDMVIdType: row.userDMVIdType, userDMVIdTypeNumber: row.userDMVIdTypeNumber, userIvoteBallotIdIdentifierCode: row.userIvoteBallotIdIdentifierCode, userConfirmIvoteBallotIdIdentifierCode: row.userConfirmIvoteBallotIdIdentifierCode, userPassword: row.userPassword, userConfirmPassword: row.userDMVConfirmEmail, userTemporary_Password: row.userTemporary_Password, isAuthenticated: true });
 
 			});                
 		});       
@@ -298,6 +272,7 @@ passport.serializeUser(function (user, done) {
     console.log('user');
     done(null, user.id);
 });
+
 
 /*
 	The code passport.deserializeUser is used by Passport to deserialize the user object from a 
@@ -364,7 +339,7 @@ passport.deserializeUser(function(id, done) {
 
 const redirectSignUp = (req, res, next) => {
     if(req.session.userId) {
-        res.redirect('/alabamaVoters_SingUp_01');
+        res.redirect('/alabamaVoters_SignUp_01');
     } else {
         next();
     }
@@ -407,7 +382,27 @@ const alabamaDMV_Commission_01_AuthenticatedGet = ('/alabamaDMV_Commission_01', 
 
 /* -------------------------- The beginning of the alabamaVoters_SignUp_01 section ----------------------------- */
 
-const alabamaVoters_SignUp_01_RouteGet = ('/alabamaVoters_SignUp_01', redirectSignUp, (req, res) => {
+const redirectLogin = (req, res, next) => {
+    if(req.session.userId) {
+        res.redirect('/alabamaVoters_LogIn_01');
+    } else {
+        next();
+    }
+}
+
+const alabamaVoters_SignUp_01_RouteGet = ('/alabamaVoters_SignUp_01', (req, res) => {
+    if (req.isAuthenticated) {
+        console.log(req.user);
+        console.log(req.session);
+        console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
+        res.render('alabamaVoters_LogIn_01', { firstName: req.user.firstName, lastName: req.user.lastName, email: req.user.email});
+    } else if (req.isUnauthenticated) {
+        res.render('/alabamaVoters_SignUp_01')
+        console.log('User is not successfully authenticated within the session through the passport from dashboard!');
+    }
+});
+/*
+const alabamaVoters_SignUp_01_RouteGet = ('/alabamaVoters_SignUp_01', redirectLogin, (req, res) => {
 
 	console.log(req.session);
 	console.log('isUnauthenticated: ', req.isUnauthenticated);
@@ -418,7 +413,7 @@ const alabamaVoters_SignUp_01_RouteGet = ('/alabamaVoters_SignUp_01', redirectSi
 
 	} else if 
 		(req.session.isAuthenticated) {
-			res.redirect('alabamaVoters_SignUp_01');
+			res.redirect('alabamaVoters_LogIn_01');
 			console.log('The user have successfully logged into the alabamaVoters_SignUp_01 webpage in order to create password and confirm password.');
 
 	} else {
@@ -426,6 +421,7 @@ const alabamaVoters_SignUp_01_RouteGet = ('/alabamaVoters_SignUp_01', redirectSi
 	}
 
 });
+*/
 
 const alabamaVoters_SignUp_01_RoutePost = (
 	'/alabamaVoters_SignUp_01',
