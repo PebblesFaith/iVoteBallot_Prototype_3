@@ -10,7 +10,7 @@ const ejs = require('ejs');
 
 const bodyParser = require('body-parser');
 
-//const session = require('express-session');
+const session = require('express-session');
 
 require('dotenv').config();
 
