@@ -224,7 +224,7 @@
 }
 
 #email,
-#iVoteBallotIdCodeHidden_Bcryptic
+#iVoteBallotIdIdentifierCode
 {
 	outline: none; 
 	border-top-style: hidden;
@@ -245,7 +245,7 @@
 }  
   
 #email,
-#iVoteBallotIdCodeHidden_Bcryptic
+#iVoteBallotIdIdentifierCode
 {
 	display: flex;
 	flex-wrap: row wrap;
@@ -258,14 +258,14 @@
 }
   
 #email,
-#iVoteBallotIdCodeHidden_Bcryptic
+#iVoteBallotIdIdentifierCode
 {
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
 }
   
 #email:focus,
-#iVoteBallotIdCodeHidden_Bcryptic:focus
+#iVoteBallotIdIdentifierCode:focus
 {
 	border:3px solid rgb(205, 214, 249);
 	border-top-style: hidden;
@@ -277,7 +277,7 @@
 }
 
 #userDMVEmailErrorMessage,
-#userCommissionIvoteBallotIdCodeBcrypticErrorMessage
+#useriVoteBallotIdIdentifierCodeErrorMessage
 { 
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: clamp(9px, 2vw, 13px); 
