@@ -189,7 +189,8 @@ router.use('/alabamaVoters_SignUp_01', (req, res, next) => {
 		req.isUnauthenticated = true;
 	}
 	next();
-});
+});	
+
 
 /*
 	The provided JavaScript code configures routing paths for the iVoteBallot web application within the Express.js
