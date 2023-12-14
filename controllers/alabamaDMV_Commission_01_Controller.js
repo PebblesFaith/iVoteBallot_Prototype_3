@@ -245,12 +245,48 @@ passport.use(
 				}
 				//return done(null, row);
 
-					return done(null, {	id: row.id, userDMVFirstName: row.userDMVFirstName, userDMVMiddleName: row.userDMVMiddleName, userDMVLastName: row.userDMVLastName, userDMVSuffix: row.userDMVSuffix, userDMVDateOfBirth: row.userDMVDateOfBirth, userDMVBirthSex: row.userDMVBirthSex, userDMVGenderIdentity: row.userDMVGenderIdentity, userDMVRace: row.userDMVRace, userDMVSSN: row.userDMVSSN, userDMVEmail: row.userDMVEmail, userDMVConfirmEmail: row.userDMVConfirmEmail, userDMVPhoneNumber: row.userDMVPhoneNumber, userDMVAddress: row.userDMVAddress, userDMVUnitType: row.userDMVUnitType, userDMVUnitTypeNumber: row.userDMVUnitType, userDMVCountrySelection: row.userDMVCountrySelection, userDMVStateSelection: row.userDMVStateSelection, userDMVCountySelection: row.userDMVCountySelection, userDMVCitySelection: row.userDMVCitySelection, userDMVZipSelection: row.userDMVZipSelection, userDMVIdType: row.userDMVIdType, userDMVIdTypeNumber: row.userDMVIdTypeNumber, userIvoteBallotIdIdentifierCode: row.userIvoteBallotIdIdentifierCode, userConfirmIvoteBallotIdIdentifierCode: row.userConfirmIvoteBallotIdIdentifierCode, userPassword: row.userPassword, userConfirmPassword: row.userDMVConfirmEmail, userTemporary_Password: row.userTemporary_Password, isAuthenticated: true });
-
-			});                
-		});       
-	}
-));
+					return done(null, 
+						{	
+							id: row.id, 
+							
+							userDMVFirstName: row.userDMVFirstName, 
+							userDMVMiddleName: row.userDMVMiddleName, 
+							userDMVLastName: row.userDMVLastName, 
+							userDMVSuffix: row.userDMVSuffix, 
+							userDMVDateOfBirth: row.userDMVDateOfBirth, 
+							userDMVBirthSex: row.userDMVBirthSex, 
+							userDMVGenderIdentity: row.userDMVGenderIdentity, 
+							userDMVRace: row.userDMVRace, 
+							userDMVSSN: row.userDMVSSN, 
+							userDMVEmail: row.userDMVEmail, 
+							userDMVConfirmEmail: row.userDMVConfirmEmail, 
+							userDMVPhoneNumber: row.userDMVPhoneNumber, 
+							userDMVAddress: row.userDMVAddress, 
+							userDMVUnitType: row.userDMVUnitType, 
+							userDMVUnitTypeNumber: row.userDMVUnitType, 
+							userDMVCountrySelection: row.userDMVCountrySelection, 
+							userDMVStateSelection: row.userDMVStateSelection, 
+							userDMVCountySelection: row.userDMVCountySelection, 
+							userDMVCitySelection: row.userDMVCitySelection, 
+							userDMVZipSelection: row.userDMVZipSelection, 
+							userDMVIdType: row.userDMVIdType, 
+							userDMVIdTypeNumber: row.userDMVIdTypeNumber, 
+							userIvoteBallotIdIdentifierCode: row.userIvoteBallotIdIdentifierCode, 
+							userConfirmIvoteBallotIdIdentifierCode: row.userConfirmIvoteBallotIdIdentifierCode, 
+							userPassword: row.userPassword, 
+							userConfirmPassword: row.userDMVConfirmEmail, 
+							userTemporary_Password: row.userTemporary_Password, 
+							
+							isAuthenticated: true
+							 
+						}
+					
+					);
+				});                
+			});       
+		}
+	)
+);
 
 /*
 	The code passport.serializeUser(function (user, done) { done(null, user.id); }) is a function
@@ -299,7 +335,9 @@ passport.deserializeUser(function(id, done) {
       if (!row) { 
         return done(null, false); 
     }
-      return done(null, {
+      return done(null, 
+
+		{
 			id: row.id, 
 
 			userDMVFirstName: row.userDMVFirstName,       
@@ -330,9 +368,12 @@ passport.deserializeUser(function(id, done) {
 			userConfirmPassword: row.userDMVConfirmEmail,
 			userTemporary_Password: row.userTemporary_Password,
 				
-		isAuthenticated: true });	
+			isAuthenticated: true 
+
+		});	
 		
     });
+
 });
 
 /* -------------------------- The beginning of the alabamaDMV_Commission_01 section ----------------------------- */
@@ -395,7 +436,7 @@ const alabamaVoters_SignUp_01_RouteGet = ('/alabamaVoters_SignUp_01', (req, res)
         console.log(req.user);
         console.log(req.session);
         console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
-        res.render('alabamaVoters_LogIn_01', { firstName: req.user.firstName, lastName: req.user.lastName, email: req.user.email});
+        res.render('alabamaVoters_CreatePasswords_01', { firstName: req.user.firstName, lastName: req.user.lastName, email: req.user.email});
     } else if (req.isUnauthenticated) {
         res.render('/alabamaVoters_SignUp_01')
         console.log('User is not successfully authenticated within the session through the passport from dashboard!');
@@ -426,13 +467,19 @@ const alabamaVoters_SignUp_01_RouteGet = ('/alabamaVoters_SignUp_01', redirectLo
 const alabamaVoters_SignUp_01_RoutePost = (
 	'/alabamaVoters_SignUp_01',
 	passport.authenticate('login1', {
-		successRedirect: 'alabamaVoters_LogIn_01',
+		successRedirect: '/alabamaVoters_CreatePasswords_01',
 		failureRedirect: '/alabamaVoters_SignUp_01',
 		failureFlash: true
 	})
 );
 
 /* -------------------------- The ending of the alabamaVoters_SignUp_01 section ----------------------------- */
+
+/* -------------------------- The beginning of the alabamaVoters_CreatePassword_01 section ----------------------------- */
+
+
+
+/* -------------------------- The ending of the alabamaVoters_CreatePassword_01 section ----------------------------- */
 
 /* -------------------------- The beginning of All SQLite3 databases section ----------------------------- */
 
@@ -501,6 +548,7 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 		console.log(req.session);	
 
 		// The user's input dat information validation
+		/*
 		if (
 			!userDMVFirstName || 
 			!userDMVMiddleName || 
@@ -515,7 +563,7 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 			!userDMVConfirmEmail ||
 			!userDMVPhoneNumber ||
 			!userDMVAddress ||
-			!userDMVUnitType ||
+		
 			
 			!userDMVCountrySelection ||
 			!userDMVStateSelection ||
@@ -533,7 +581,8 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 		) {
 			req.flash('error', 'Please fill in all required fields.')
 			return res.redirect('/alabamaDMV_Commission_01');
-		}			
+		}	
+		*/		
 		
 		if (userIvoteBallotIdIdentifierCode !== userConfirmIvoteBallotIdIdentifierCode) {
 			req.flash('error', 'The user\'s iVoteballot Id Identifier Code does not match to the user\'s confirm iVoteballot Id Identifier Code for which, you have entered into the input fields.');			
@@ -709,6 +758,7 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 	}
 );
 
+
 /* -------------------------- The ending of All SQLite3 databases section ----------------------------- */
 
 /*
@@ -729,9 +779,7 @@ module.exports = {
 	alabamaDMV_Commission_01_CreateDatabase,
 
 	alabamaVoters_SignUp_01_RouteGet,
-	alabamaVoters_SignUp_01_RoutePost
-
-
+	alabamaVoters_SignUp_01_RoutePost,
 	
 }
   
