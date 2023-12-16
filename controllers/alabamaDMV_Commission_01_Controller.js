@@ -67,8 +67,9 @@ short-lived messages that are stored in the session and displayed to the user on
 connect-flash, you can easily create and manage flash messages in your application, which can be used to
 display success messages, error messages, or any other kind of notification to the user.
 */
+const flash2 = require('connect-flash');
 
-
+const flash = require('express-flash');
 
 /*
 	1. The code const path = require('path') imports the built-in Node.js path module, which
@@ -289,6 +290,88 @@ passport.use(
 );
 
 /*
+passport.use(
+	'login2',
+	new LocalStrategy({
+	usernameField: 'userDMVEmail',
+	passwordField: 'userIvoteBallotIdIdentifierCode',
+	passReqToCallback: true // To allow request object to be passed to callback
+},   
+	async (req, userDMVEmail, userIvoteBallotIdIdentifierCode, done) => {
+		
+		console.log('The iVoteBallot\'s user\'s passport.use(login2) email (\'userDMVEmail\') as: ' + userDMVEmail);
+		console.log('The iVoteBallot\'s user\'s passport.use(login2) password (\'userIvoteBallotIdIdentifierCode\') as: ' + userIvoteBallotIdIdentifierCode );	
+
+				
+		await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?`, userDMVEmail, (err, row) => {
+		
+			if (err) {
+				return done(err);
+			}
+
+			if (!row) {
+				return done (null, false, { message: 'You have entered the incorrect email address '+  userDMVEmail + '.'});
+			}
+			
+			bcrypt.compare(userIvoteBallotIdIdentifierCode, row.userIvoteBallotIdIdentifierCode, (err, result) => {
+			
+			if (err) {
+				return done(err);
+			}
+			if (!result) {
+				console.log('The user\'s iVoteBallot Id Identifier Code was entered incorrectly ' + userPassword + '.');
+				return done(null, false, { message: 'You have entered the incorrect iVoteBallot Id Identifier Code' + userPassword + '.'});
+			}
+			//return done(null, row);
+
+				return done(null, 
+					{	
+						id: row.id, 
+						
+						userDMVFirstName: row.userDMVFirstName, 
+						userDMVMiddleName: row.userDMVMiddleName, 
+						userDMVLastName: row.userDMVLastName, 
+						userDMVSuffix: row.userDMVSuffix, 
+						userDMVDateOfBirth: row.userDMVDateOfBirth, 
+						userDMVBirthSex: row.userDMVBirthSex, 
+						userDMVGenderIdentity: row.userDMVGenderIdentity, 
+						userDMVRace: row.userDMVRace, 
+						userDMVSSN: row.userDMVSSN, 
+						userDMVEmail: row.userDMVEmail, 
+						userDMVConfirmEmail: row.userDMVConfirmEmail, 
+						userDMVPhoneNumber: row.userDMVPhoneNumber, 
+						userDMVAddress: row.userDMVAddress, 
+						userDMVUnitType: row.userDMVUnitType, 
+						userDMVUnitTypeNumber: row.userDMVUnitType, 
+						userDMVCountrySelection: row.userDMVCountrySelection, 
+						userDMVStateSelection: row.userDMVStateSelection, 
+						userDMVCountySelection: row.userDMVCountySelection, 
+						userDMVCitySelection: row.userDMVCitySelection, 
+						userDMVZipSelection: row.userDMVZipSelection, 
+						userDMVIdType: row.userDMVIdType, 
+						userDMVIdTypeNumber: row.userDMVIdTypeNumber, 
+						userIvoteBallotIdIdentifierCode: row.userIvoteBallotIdIdentifierCode, 
+						userConfirmIvoteBallotIdIdentifierCode: row.userConfirmIvoteBallotIdIdentifierCode, 
+						userPassword: row.userPassword, 
+						userConfirmPassword: row.userDMVConfirmEmail, 
+						userTemporary_Password: row.userTemporary_Password, 
+						
+						isAuthenticated: true
+							
+					}
+				
+				);
+
+			});
+				               
+		});
+
+	}
+
+));
+*/
+
+/*
 	The code passport.serializeUser(function (user, done) { done(null, user.id); }) is a function
 	that is used by Passport to serialize the user object for storage in a session.
 
@@ -306,8 +389,8 @@ passport.use(
 */
 passport.serializeUser(function (user, done) {
     console.log('Serializing user...');
-    console.log('user');
-    done(null, user.id);
+    console.log(user);
+    done(null, { id: user.id, userDMVEmail: user.userDMVEmail });
 });
 
 /*
@@ -423,23 +506,16 @@ const alabamaDMV_Commission_01_AuthenticatedGet = ('/alabamaDMV_Commission_01', 
 
 /* -------------------------- The beginning of the alabamaVoters_SignUp_01 section ----------------------------- */
 
-const redirectLogin = (req, res, next) => {
-    if(req.session.userId) {
-        res.redirect('/alabamaVoters_LogIn_01');
-    } else {
-        next();
-    }
-}
-
 const alabamaVoters_SignUp_01_RouteGet = ('/alabamaVoters_SignUp_01', (req, res) => {
     if (req.isAuthenticated) {
         console.log(req.user);
-        console.log(req.session);
-        console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
-        res.render('alabamaVoters_CreatePasswords_01', { firstName: req.user.firstName, lastName: req.user.lastName, email: req.user.email});
+        console.log('Request Session: ' + req.session);
+		conslog.log('' + req.logIn);
+        console.log('The User had been successfully authenticated within the Session through the passport from dashboard!');
+        res.render('alabamaVoters_CreatePasswords_01');
     } else if (req.isUnauthenticated) {
         res.render('/alabamaVoters_SignUp_01')
-        console.log('User is not successfully authenticated within the session through the passport from dashboard!');
+        console.log('The User is not successfully authenticated within the session through the passport from dashboard!');
     }
 });
 /*
@@ -477,14 +553,58 @@ const alabamaVoters_SignUp_01_RoutePost = (
 
 /* -------------------------- The beginning of the alabamaVoters_CreatePassword_01 section ----------------------------- */
 
+const alabamaVoters_CreatePasswords_01_RouteGet = ('/alabamaVoters_CreatePasswords_01', (req, res) => {
+    if (req.isAuthenticated) {
+        console.log(req.user);
+        console.log(req.session);
+        console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
+        res.render('alabamaVoters_LogIn_01', { userDMVFirstName: req.user.userDMVFirstName, userDMVLastName: req.user.userDMVLastName, userDMVEmail: req.user.userDMVEmail });
+    } else if (req.isUnauthenticated) {
+        res.render('/alabamaVoters_CreatePasswords_01')
+        console.log('User is not successfully authenticated within the session through the passport from dashboard!');
+    }
+});
+
+/*
+ alabamaVoters_CreatePasswords_01_RoutePost = (
+	'/alabamaVoters_CreatePasswords_01',
+	passport.authenticate('login3', {
+		successRedirect: '/alabamaVoters_LogIn_01',
+		failureRedirect: '/alabamaVoters_CreatePasswords_01',
+		failureFlash: true
+	})
+);
+*/
 
 
 /* -------------------------- The ending of the alabamaVoters_CreatePassword_01 section ----------------------------- */
 
+/* -------------------------- The beginning of the alabamaVoters_LogIn_01 section ----------------------------- */
+
+const alabamaVoters_LogIn_01_RouteGet = ('/alabamaVoters_LogIn_01', (req, res) => {
+    if (req.isAuthenticated) {
+        console.log(req.user);
+        console.log(req.session);
+        console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
+        res.render('ivoteballot', { userDMVFirstName: req.user.userDMVFirstName, userDMVLastName: req.user.userDMVLastName, userDMVEmail: req.user.userDMVEmail });
+    } else if (req.isUnauthenticated) {
+        res.render('/alabamaVoters_LogIn_01')
+        console.log('User is not successfully authenticated within the session through the passport from dashboard!');
+    }
+});
+
+/* -------------------------- The ending of the alabamaVoters_LogIn_01 section ----------------------------- */
+
+
+
+
+
 /* -------------------------- The beginning of All SQLite3 databases section ----------------------------- */
 
 const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
-	async (req, res) => { 		   
+	async (req, res) => { 	
+		
+		console.log(req.user);
 
 		const userDMVFirstName = req.body.userDMVFirstName;       
 		const userDMVMiddleName = req.body.userDMVMiddleName; 
@@ -666,7 +786,7 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 					pass: IONOS_SECRET_KEY,
 				}
 			}); 
-						
+			
 			const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
 
 			const mailOptions_01 = {
@@ -758,6 +878,142 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 	}
 );
 
+const alabamaVoters_SignUp_01_CreateDatabase = ('/alabamaVoters_SignUp_01',
+
+	async (req, res) => {
+		const userDMVEmail = req.body.userDMVEmail;
+		const userIvoteBallotIdIdentifierCode = req.body.userIvoteBallotIdIdentifierCode;
+		const userPassword = req.body.userPassword;
+		const userConfirmPassword = req.body.userConfirmPassword;
+
+		console.log('These are the request body' + req.body);
+
+		console.log('The user email address is: ' + userDMVEmail + '.');
+		console.log('The user iVoteBallot Id Identifier Code is: ' + userIvoteBallotIdIdentifierCode + '.');
+		console.log('The user password is: ' + userPassword + '.');
+		console.log('The user confirm password is: ' + userConfirmPassword + '.');
+
+		console.log('The request session: ' + req.session + '.');
+
+		// To hash the newPassword input field using bcrypt library.
+		const salt = await bcrypt.genSalt(14);
+		const passwordHashed = await bcrypt.hash(userPassword, salt);
+
+		// To hash the confirmNewPassword input field using bcrypt library.
+		const confirmPasswordHashed = await bcrypt.hash(userConfirmPassword, salt);
+		
+		// To check, if the user's email address exists onto the passport serialization through the session cookie id.
+		db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?', userDMVEmail, (err, row) => {
+
+			if (err) {
+
+				console.error(err);
+				console.log('The user\'s input fields for passport.use login2 Local Strategy and Session Cookie Id did not successfully executed from the internet causing an 500 error message most likely from the Developer\'s JavaScript coded written algorithm problems.');
+				res.render('/500');
+
+			} else if (!row) {
+
+				console.log('The user\'s email address is not found successfully through the process of the passport.use login2 Local Strategy and Session Cookie Id to the SQLite3 database for serializtion.');
+				res.render('alabamaVoters_SignUp_01');
+
+			} else {
+
+				db1.run('UPDATE alabamaDMV_Commission_01 SET userPassword = ?, userConfirmPassword = ? WHERE userDMVEmail = ?', passwordHashed, confirmPasswordHashed, row.userDMVEmail, (err) => {
+
+					if (err) {
+						console.error(err);
+						console.log('The user\s passport and session was not successfully executed causing an 500 error message due from Developer\s programmatic coding language problems.');
+						res.render('500');   
+
+					} else {
+
+						console.log('The user\s email address is successfully found within the passport serialization authenticated processes through the session.');
+						res.redirect('/ivoteballot');
+					}  
+
+				});
+
+			}
+
+		});
+
+	}
+	
+);
+
+const alabamaVoters_CreatePasswords_01_CreateDatabase = (
+	
+	async (req, res) => {
+
+		console.log('req.user:', req.userDMVEmail);
+
+		const userDMVEmail = req.user && req.user.userDMVEmail;
+		const userPassword = req.body.userPassword;
+		const userConfirmPassword = req.body.userConfirmPassword;
+
+		console.log(req.body);
+
+		if (!userDMVEmail) {
+
+			console.log('The user is not found within the req.body.');
+		}
+
+		// To hash the newPassword input field using bcrypt library.
+		const salt = await bcrypt.genSalt(14);
+		const passwordHashed = await bcrypt.hash(userPassword, salt);
+
+		// To hash the confirmNewPassword input field using bcrypt library.
+		const confirmPasswordHashed = await bcrypt.hash(userConfirmPassword, salt);
+
+		console.log('The user\'s email is: ' + userDMVEmail + '.');
+
+		if (passwordHashed !== confirmPasswordHashed) {
+			return res.render('alabamaVoters_CreatePasswords_01', { error: 'Your new password does not match to confirm password.' });
+
+		} else {
+
+			db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?', userDMVEmail, (err, row) => {
+
+				if (err) {
+
+					console.error(err);
+
+					// Handle the error...
+
+				} else if (!row) {
+
+					console.log('The user is not found in the SQLite3 database');
+
+					// Handle the case where the user is not found.
+					console.log('To retrieved user from the SQLite3 database.');
+				}
+			});
+
+
+			db1.run('UPDATE alabamaDMV_Commission_01 SET userPassword = ?, userConfirmPassword = ? WHERE userDMVEmail = ?', 
+				[
+					passwordHashed,
+					confirmPasswordHashed,
+					userDMVEmail
+				],
+				(err) => {
+					
+					if (err) {
+						console.log(err.message);
+						return res.redirect('alabamaVoters_CreatePasswords_01', { error: 'An error occurred while user was updating his/her new password and confirm password from the \'alabamaVoters_CreatePasswords_01\' webpage.' });
+
+					} else {
+
+						res.redirect('/alabamaVoters_LogIn_01');
+					}
+
+				}
+			)
+		}
+	}
+);
+
+
 
 /* -------------------------- The ending of All SQLite3 databases section ----------------------------- */
 
@@ -780,6 +1036,16 @@ module.exports = {
 
 	alabamaVoters_SignUp_01_RouteGet,
 	alabamaVoters_SignUp_01_RoutePost,
+	alabamaVoters_SignUp_01_CreateDatabase,
+
+	alabamaVoters_CreatePasswords_01_RouteGet,
+	//alabamaVoters_CreatePasswords_01_RoutePost,	
+	alabamaVoters_CreatePasswords_01_CreateDatabase,
+
+	alabamaVoters_LogIn_01_RouteGet
+
+
+
 	
 }
   
