@@ -117,6 +117,7 @@ const db = new sqliteDB('Alabama_Id_Session.db', { verbose: console.log('The Ala
 router.use(
 	session({
 		store: new AlabamaSqlite3SessionStore ({
+			
 			client: db,
 			dir:'Alabama_Id_Session.db',
 			name:'ALABAMA_SESSION',
@@ -129,7 +130,9 @@ router.use(
 				maxAge: 'SESSION_MAX_AGE' // 30 minuites in milliseconds				
 			}
 		}),
-		secret: 'EXPRESS_SESSION_KEY',		
+		
+		secret: 'EXPRESS_SESSION_KEY',	
+			
 	})
 )
 
@@ -194,7 +197,18 @@ router.use('/alabamaVoters_SignUp_01', (req, res, next) => {
 /* 
 	
 */
+router.use('/alabamaVoters_EmailVerification_01', (req, res, next) => {
+	console.log('The middleware have called, the \'alabamaVoters_EmailVerification_01\' successfully.')
+	if (!req.session.isAuthenicated) {
+		// To check if user have already been authenticated.
+		req.isUnauthenticated = true;
+	}
+	next();
+});	
 
+/* 
+	
+*/
 router.use('/alabamaVoters_CreatePasswords_01', (req, res, next) => {
 	console.log('The middleware have called, the \'alabamaVoters_CreatePasswords_01\' successfully.')
 	if (!req.session.isAuthenicated) {
@@ -229,6 +243,7 @@ router.use('/alabamaVoters_CreatePasswords_01', (req, res, next) => {
 	the flow of requests and interactions within the iVoteBallot web application, enhancing clarity and 
 	maintainability within the codebase.	
 */
+
 router
 	.get('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_RouteGet);
 	
@@ -237,10 +252,10 @@ router
 
 router
 	.post('/alabamaDMV_Commission_01', alabamaDMV_Commission_01_Controller.alabamaDMV_Commission_01_CreateDatabase);
-
+/*
 router
 	.get('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.alabamaVoters_SignUp_01_RouteGet);
-
+*/
 router
 	.post('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.alabamaVoters_SignUp_01_RoutePost);
 
@@ -248,11 +263,17 @@ router
 	.post('/alabamaVoters_SignUp_01', alabamaDMV_Commission_01_Controller.alabamaVoters_SignUp_01_CreateDatabase);
 
 router
-	.get('/alabamaVoters_CreatePasswords_01', alabamaDMV_Commission_01_Controller.alabamaVoters_CreatePasswords_01_RouteGet);
-/*
+	.get('/alabamaVoters_EmailVerification_01', alabamaDMV_Commission_01_Controller.alabamaVoters_EmailVerification_01_AuthenticatedGet);
+
 router
-	.get('/alabamaVoters_CreatePasswords_01', alabamaDMV_Commission_01_Controller.alabamaVoters_CreatePasswords_01_RoutePost);
-*/
+	.post('/alabamaVoters_EmailVerification_01', alabamaDMV_Commission_01_Controller.alabamaVoters_EmailVerification_01_CreateDatabase);
+
+router
+	.get('/alabamaVoters_CreatePasswords_01', alabamaDMV_Commission_01_Controller.alabamaVoters_CreatePasswords_01_RouteGet);
+
+//router
+	//.get('/alabamaVoters_CreatePasswords_01', alabamaDMV_Commission_01_Controller.alabamaVoters_CreatePasswords_01_RoutePost);
+
 router
 	.post('/alabamaVoters_CreatePasswords_01', alabamaDMV_Commission_01_Controller.alabamaVoters_CreatePasswords_01_CreateDatabase);
 
