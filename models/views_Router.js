@@ -47,6 +47,9 @@ router
     .get('/alabamaVoters_CreatePasswords_01', views_Controller.view_alabamaVoters_CreatePasswords_01);
 
 router
+    .get('/alabamaVoters_EmailVerification_01', views_Controller.view_alabamaVoters_EmailVerification_01);
+
+router
     .get('/alabamaVoters_SignUp_01', views_Controller.view_alabamaVoters_SignUp_01);
     
 router
