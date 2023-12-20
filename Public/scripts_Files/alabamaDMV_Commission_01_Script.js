@@ -4,33 +4,33 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	console.log('Sarai Hannah Ajai is testing her written JavaScript programmatic codes; in order to validate her contact us form has opened up correctly within the HTML webpage.')
 	
-	const userDMVFirstName = document.getElementById('firstName').value.trim(); 
-	const userDMVMiddleName = document.getElementById('middleName').value.trim();  
-	const userDMVLastName = document.getElementById('lastName').value.trim(); 
-	const userDMVSuffix = document.getElementById('suffix').value.trim();   
-	const userDMVDateOfBirth = document.getElementById('dateOfBirth').value.trim();    
-	const userDMVBirthSex = document.getElementById('birthSex').value.trim();   
-	const userDMVGenderIdentity = document.getElementById('genderIdentity').value.trim();  
-	const userDMVRace = document.getElementById('race').value.trim();  
-	const userDMVSSN = document.getElementById('ssn').value.trim(); 
-	const userDMVEmail = document.getElementById('email').value.trim();
-	const userDMVConfirmEmail = document.getElementById('confirmEmail').value.trim();  
-	const userDMVPhoneNumber = document.getElementById('phoneNumber').value.trim();	
-	const userDMVAddress = document.getElementById('address').value.trim();	
-	const userDMVUnitType = document.getElementById('unitType').value.trim();
-	const userDMVUnitTypeNumber = document.getElementById('unitTypeNumber').value.trim();
-	const userDMVCountrySelection = document.getElementById('countrySelect').value.trim();
-    const userDMVStateSelection = document.getElementById('stateSelect').value.trim();
-    const userDMVCountySelection = document.getElementById('countySelect').value.trim();
-	const userDMVCitySelection = document.getElementById('citySelect').value.trim();
-	const userDMVZipSelection = document.getElementById('zipSelect').value.trim();
-    const userDMVIdType = document.getElementById('idType').value.trim();
-    const userDMVIdTypeNumber = document.getElementById('idTypeNumber').value.trim();
-    const userIvoteBallotIdIdentifierCode = document.getElementById('iVoteBallotIdIdentifierCode').value.trim();
-    const userConfirmIvoteBallotIdIdentifierCode = document.getElementById('confirmIvoteBallotIdIdentifierCode').value.trim();
-	const userPassword = document.getElementById('password').value.trim();
-	const userConfirmPassword = document.getElementById('confirmPassword').value.trim();
-	const userTemporary_Password = document.getElementById('temporary_Password').value.trim();	
+	const DMVFirstName = document.getElementById('firstName').value.trim(); 
+	const DMVMiddleName = document.getElementById('middleName').value.trim();  
+	const DMVLastName = document.getElementById('lastName').value.trim(); 
+	const DMVSuffix = document.getElementById('suffix').value.trim();   
+	const DMVDateOfBirth = document.getElementById('dateOfBirth').value.trim();    
+	const DMVBirthSex = document.getElementById('birthSex').value.trim();   
+	const DMVGenderIdentity = document.getElementById('genderIdentity').value.trim();  
+	const DMVRace = document.getElementById('race').value.trim();  
+	const DMVSSN = document.getElementById('ssn').value.trim(); 
+	const DMVEmail = document.getElementById('email').value.trim();
+	const DMVConfirmEmail = document.getElementById('confirmEmail').value.trim();  
+	const DMVPhoneNumber = document.getElementById('phoneNumber').value.trim();	
+	const DMVAddress = document.getElementById('address').value.trim();	
+	const DMVUnitType = document.getElementById('unitType').value.trim();
+	const DMVUnitTypeNumber = document.getElementById('unitTypeNumber').value.trim();
+	const DMVCountrySelection = document.getElementById('countrySelect').value.trim();
+    const DMVStateSelection = document.getElementById('stateSelect').value.trim();
+    const DMVCountySelection = document.getElementById('countySelect').value.trim();
+	const DMVCitySelection = document.getElementById('citySelect').value.trim();
+	const DMVZipSelection = document.getElementById('zipSelect').value.trim();
+    const DMVIdType = document.getElementById('idType').value.trim();
+    const DMVIdTypeNumber = document.getElementById('idTypeNumber').value.trim();
+    const IvoteBallotIdIdentifierCode = document.getElementById('iVoteBallotIdIdentifierCode').value.trim();
+    const ConfirmIvoteBallotIdIdentifierCode = document.getElementById('confirmIvoteBallotIdIdentifierCode').value.trim();
+	const Password = document.getElementById('password').value.trim();
+	const ConfirmPassword = document.getElementById('confirmPassword').value.trim();
+	const Temporary_Password = document.getElementById('temporary_Password').value.trim();	
 	
 	const regExName = /^[A-Za-z\s]+$/;
 	const regExSSN =  /^\d{3}\-\d{2}\-\d{4}$/;  
@@ -45,7 +45,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
     const regIvoteballotIdIdentifierCode = /\d{2}[A-Z]{1}\d{1}\-\d{1}[A-Z]{1}\d{1}\-[A-Z]{2}\-\d{3}[A-Z]{2}\d{6}\-\d{2}/;
 	const regExPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,32}$/;
 	
-	if (userDMVFirstName === '' || userDMVFirstName == null || userDMVFirstName.length <= 2 || !userDMVFirstName.match(regExName)) {                                                               
+	if (DMVFirstName === '' || DMVFirstName == null || DMVFirstName.length <= 2 || !DMVFirstName.match(regExName)) {                                                               
 		document.getElementById('userDMVFirstNameErrorMessage').innerHTML = 'The user first name is a required input field or you must enter more than two characters into the userfirst name required input field.';
 	
 		setTimeout(function() {
@@ -57,7 +57,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 
-	if (userDMVMiddleName === '' || userDMVMiddleName == null) {
+	if (DMVMiddleName === '' || DMVMiddleName == null) {
 		document.getElementById('userDMVMiddleNameErrorMessage').innerHTML = 'Do the user have a middle name? If so, please type in the user middle name into the input field or skip the user middle name input field entirety.';
 	
 		setTimeout(function() {
@@ -65,7 +65,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		},
 		9000)                                           
 							
-		} else if (userDMVMiddleName.length <= 2 || !userDMVMiddleName.match(regExName)) {
+		} else if (DMVMiddleName.length <= 2 || !DMVMiddleName.match(regExName)) {
 		document.getElementById('userDMVMiddleNameErrorMessage').innerHTML = 'The user middle name is an optional input field; however, you must enter more than two characters into the user middle name required input field.';
 	
 		setTimeout(function() {
@@ -77,7 +77,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	
 	} 
 	
-	if (userDMVLastName === '' || userDMVLastName == null || userDMVLastName.length <= 2 || !userDMVLastName.match(regExName)) {
+	if (DMVLastName === '' || DMVLastName == null || DMVLastName.length <= 2 || !DMVLastName.match(regExName)) {
 		document.getElementById('userDMVLastNameErrorMessage').innerHTML = 'The user last name is a required input field or you must enter more than two characters into the user last name required input field.';
 	
 		setTimeout(function() {
@@ -89,7 +89,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	
 	}
 
-	if (userDMVSuffix === '' || userDMVSuffix == null) {
+	if (DMVSuffix === '' || DMVSuffix == null) {
 		document.getElementById('userDMVSuffixErrorMessage').textContent = 'Do the user have a suffix name? If so, please type in the user suffix name into the input field or skip the user suffix name input field entirety.';
 
 		setTimeout(function() {
@@ -97,7 +97,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		},
 		9000)                                           
 							
-		} else if (userDMVSuffix.length <= 0 || !userDMVSuffix.match(regExName)) {
+		} else if (DMVSuffix.length <= 0 || !DMVSuffix.match(regExName)) {
 		document.getElementById('userDMVSuffixErrorMessage').textContent = 'The user suffix name is an optional input field; however, you must enter more than one characters into the user suffix name required input field.';
 
 		setTimeout(function() {
@@ -109,7 +109,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 
-	if (userDMVDateOfBirth === '' || userDMVDateOfBirth == null) {                                                               
+	if (DMVDateOfBirth === '' || DMVDateOfBirth == null) {                                                               
 		document.getElementById('userDMVDateOfBirthErrorMessage').innerHTML = 'The user date of birth is a required input field.';
 	
 		setTimeout(function() {
@@ -121,7 +121,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 
-	if (userDMVBirthSex === '' || userDMVBirthSex == null) {                                                               
+	if (DMVBirthSex === '' || DMVBirthSex == null) {                                                               
 		document.getElementById('userDMVBirthSexErrorMessage').innerHTML = 'The user birth sex is a required input field.';
 	
 		setTimeout(function() {
@@ -133,7 +133,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 
-	if (userDMVGenderIdentity === '' || userDMVGenderIdentity == null) {                                                               
+	if (DMVGenderIdentity === '' || DMVGenderIdentity == null) {                                                               
 		document.getElementById('userDMVGenderIdentityErrorMessage').innerHTML = 'The user gender identity is a required input field.';
 	
 		setTimeout(function() {
@@ -145,7 +145,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 
-	if (userDMVRace === '' || userDMVRace == null) {                                                               
+	if (DMVRace === '' || DMVRace == null) {                                                               
 		document.getElementById('userDMVRaceErrorMessage').innerHTML = 'The user race is a required input field.';
 	
 		setTimeout(function() {
@@ -157,7 +157,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 
-	if (userDMVSSN === '' || userDMVSSN == null || !userDMVSSN.match(regExSSN)) {                                                               
+	if (DMVSSN === '' || DMVSSN == null || !DMVSSN.match(regExSSN)) {                                                               
 		document.getElementById('userDMVSSNErrorMessage').innerHTML = 'The user SSN is a required input field or you must enter the user correct SSN into the require input field.';
 	
 		setTimeout(function() {
@@ -169,7 +169,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 
-	if (userDMVEmail === '' || userDMVEmail == null || userDMVEmail.length <= 6 || !userDMVEmail.match(regExEmail)) {
+	if (DMVEmail === '' || DMVEmail == null || DMVEmail.length <= 6 || !DMVEmail.match(regExEmail)) {
 		document.getElementById('userDMVEmailErrorMessage').textContent = 'The user\'s email address is a required input field and you must enter the correct user\s email address format into the require input field.';
 
 		setTimeout(function() {
@@ -181,7 +181,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 
-	if (userDMVConfirmEmail === '' || userDMVConfirmEmail == null || userDMVConfirmEmail.length <= 6 || !userDMVConfirmEmail.match(regExEmail)) {
+	if (DMVConfirmEmail === '' || DMVConfirmEmail == null || DMVConfirmEmail.length <= 6 || !DMVConfirmEmail.match(regExEmail)) {
 		document.getElementById('userDMVConfirmEmailErrorMessage').textContent = 'The user\'s confirm email address is a required input field and you must enter the correct user confirm email address format into the require input field.';
 
 		setTimeout(function() {
@@ -193,7 +193,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 	
-	if (userDMVEmail != userDMVConfirmEmail) {
+	if (DMVEmail != DMVConfirmEmail) {
 		document.getElementById('userDMVConfirmEmailErrorMessage').textContent = 'The user\'s email address does not match to his/her confirm email address which are required input fields.';
 
 		setTimeout(function() {
@@ -205,7 +205,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 
-	if (userDMVPhoneNumber === '' || userDMVPhoneNumber == null || userDMVPhoneNumber.length <= 10 || !userDMVPhoneNumber.match(regExPhoneNumber))  {                                                               
+	if (DMVPhoneNumber === '' || DMVPhoneNumber == null || DMVPhoneNumber.length <= 10 || !DMVPhoneNumber.match(regExPhoneNumber))  {                                                               
 		document.getElementById('userDMVPhoneNumberErrorMessage').textContent = 'The user\'s phone number is a required input field or you must enter exactly the user twelve number digits into the phone number required input field.';
 
 		setTimeout(function() {
@@ -217,7 +217,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}	
 
-	if (userDMVAddress === '' || userDMVAddress == null || userDMVAddress.length <= 6 || !userDMVAddress.match(regExAddress))  {                                                               
+	if (DMVAddress === '' || DMVAddress == null || DMVAddress.length <= 6 || !DMVAddress.match(regExAddress))  {                                                               
 		document.getElementById('userDMVAddressErrorMessage').textContent = 'The user\'s street address is a required field and you must enter the user correct street address format into the require input field.';
 
 		setTimeout(function() {
@@ -229,7 +229,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 	
-	if (userDMVUnitType === '' || userDMVUnitType == null) {
+	if (DMVUnitType === '' || DMVUnitType == null) {
 		document.getElementById('userDMVUnitTypeErrorMessage').textContent = 'Select the user residential unit type to which he or she lives in, and the user residential unit type is a require field.';
 
 		setTimeout(function() {
@@ -241,7 +241,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 
-	if (userDMVUnitTypeNumber === '' || userDMVUnitTypeNumber == null || userDMVUnitTypeNumber.match(regExUnitTypeNumber))  {                                                               
+	if (DMVUnitTypeNumber === '' || DMVUnitTypeNumber == null || DMVUnitTypeNumber.match(regExUnitTypeNumber))  {                                                               
 		document.getElementById('userDMVUnitTypeNumberErrorMessage').textContent =  'The user\'s unit type number is a required field unless the user own his or her home or other residential property which does not have an address unit type number.';
 
 		setTimeout(function() {
@@ -249,7 +249,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		},
 		9000)               
 
-	} else if (!userDMVUnitTypeNumber.match(regExUnitIdTypeDetails)) {
+	} else if (!DMVUnitTypeNumber.match(regExUnitIdTypeDetails)) {
 		document.getElementById('userDMVUnitTypeNumberErrorMessage').textContent = 'The user\'s address unit type number is a required field unless the user own his or her home or other residential property which does not have an address unit type number. Please leave blank, if the user does not have an apartment number or unit number of an alphanumeric characters';
 
 		setTimeout(function() {
@@ -257,7 +257,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		},
 		9000)
 
-	} else if (!userDMVUnitTypeNumber.match(regExUnitIdTypeDetails)) {
+	} else if (!DMVUnitTypeNumber.match(regExUnitIdTypeDetails)) {
 		//document.getElementById('userReviewUnitTypeNumber').textContent = '11. Your Residential Unit Type Number is: ' +  userUnitTypeNumber + '.';
 		document.getElementById('userDMVUnitTypeNumberErrorMessage').textContent = 'Error Message: The user\'s address unit type number is a required field unless the user own his or her  home or other residential property which does not have an address unit type number. Please leave blank, if the user does not have an apartment number or unit number of an alphanumeric characters.';
 
@@ -269,7 +269,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		return false;
 	} 
 
-	if (userDMVCountrySelection === '' || userDMVCountrySelection == null) {		
+	if (DMVCountrySelection === '' || DMVCountrySelection == null) {		
 		document.getElementById('userDMVCountrySelectionErrorMessage').textContent = 'Error Message: The user\'s country is a required select option field and you must select the user correct country from the option require field.';
 		setTimeout(function() {
 			document.getElementById('userDMVCountrySelectionErrorMessage').textContent = '';
@@ -280,7 +280,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	
 	}
 
-    if (userDMVStateSelection === '' || userDMVStateSelection == null) {       
+    if (DMVStateSelection === '' || DMVStateSelection == null) {       
         document.getElementById('userDMVStateSelectionErrorMessage').textContent = 'Error Message: The user\'s state is a required select option field and you must select the user correct state from the option require field.';
 
         setTimeout(function() {
@@ -292,7 +292,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
     } 
 
-    if (userDMVCountySelection === '' || userDMVCountySelection == null) {
+    if (DMVCountySelection === '' || DMVCountySelection == null) {
 		document.getElementById('userDMVCountySelectionErrorMessage').textContent = 'Error Message: The user\'s county is a required select option field and you must select the user correct county from the option require field.';
 
 		setTimeout(function() {
@@ -304,7 +304,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 
-	if (userDMVCitySelection === '' || userDMVCitySelection == null) {
+	if (DMVCitySelection === '' || DMVCitySelection == null) {
 		document.getElementById('userDMVCitySelectionErrorMessage').textContent = 'Error Message: The user\'s city is a required select option field and you must select the user correct city from the option require field.';
 
 		setTimeout(function() {
@@ -316,7 +316,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 
-	if (userDMVZipSelection === '' || userDMVZipSelection == null) {
+	if (DMVZipSelection === '' || DMVZipSelection == null) {
 		document.getElementById('userDMVZipSelectionErrorMessage').textContent = 'Error Message: The user\'s zip code area is a required select option field and you must select the user correct zip code area from the option require field.';
 
 		setTimeout(function() {
@@ -328,7 +328,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	} 
 
-    if (userDMVIdType === '' || userDMVIdType == null) {
+    if (DMVIdType === '' || DMVIdType == null) {
         document.getElementById('userDMVIdTypeErrorMessage').textContent = 'The user\'s Alabama identification card type is a required option field and you must select the user correct Alabama\'s identification card type from the option require field.';
 
         setTimeout(function() {
@@ -340,7 +340,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
     }
 
-    if (userDMVIdTypeNumber === '' || userDMVIdTypeNumber == null || !userDMVIdTypeNumber.match(regExAlabamaId))  {                                                               
+    if (DMVIdTypeNumber === '' || DMVIdTypeNumber == null || !DMVIdTypeNumber.match(regExAlabamaId))  {                                                               
         document.getElementById('userDMVIdTypeNumberErrorMessage').textContent =  'The user\'s Alabama numeric identification card characters are a required field or you must enter the user correct Alabama numeric identification card characters from his or her Alabama\'s identification card into the required field.';
 
         setTimeout(function() {
@@ -352,7 +352,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
     }  
     
-    if (userDMVIdTypeNumber === '' || userDMVIdTypeNumber == null || !userDMVIdTypeNumber.match(regExAlabamaId))  {                                                               
+    if (DMVIdTypeNumber === '' || DMVIdTypeNumber == null || !DMVIdTypeNumber.match(regExAlabamaId))  {                                                               
         document.getElementById('userDMVIdTypeNumberErrorMessage').textContent =  'The user\'s Alabama numeric identification card characters are a required field or you must enter the user correct Alabama numeric identification card characters from his or her Alabama\'s identification card into the required field.';
 
         setTimeout(function() {
@@ -364,7 +364,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
     } 
     
-    if (userIvoteBallotIdIdentifierCode  === '' || userIvoteBallotIdIdentifierCode  == null || !userIvoteBallotIdIdentifierCode.match(regIvoteballotIdIdentifierCode)) {                                                               
+    if (IvoteBallotIdIdentifierCode  === '' || IvoteBallotIdIdentifierCode  == null || !IvoteBallotIdIdentifierCode.match(regIvoteballotIdIdentifierCode)) {                                                               
         document.getElementById('useriVoteBallotIdIdentifierCodeErrorMessage').textContent = 'The user\'s iVoteBallot Id Identifier Code is a required input field and you must enter the user correct alphanumeric characters format into the required input field.';
 
         setTimeout(function() {
@@ -376,7 +376,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
                             
     } 
 
-	if (userConfirmIvoteBallotIdIdentifierCode === '' || userConfirmIvoteBallotIdIdentifierCode  == null || !userConfirmIvoteBallotIdIdentifierCode.match(regIvoteballotIdIdentifierCode)) {                                                               
+	if (ConfirmIvoteBallotIdIdentifierCode === '' || ConfirmIvoteBallotIdIdentifierCode  == null || !ConfirmIvoteBallotIdIdentifierCode.match(regIvoteballotIdIdentifierCode)) {                                                               
         document.getElementById('userConfirmiVoteBallotIdIdentifierCodeErrorMessage').textContent = 'The user\'s iVoteBallot Id Identifier Code is a required input field and you must enter the user correct alphanumeric characters format into the required input field.';
 
         setTimeout(function() {
@@ -388,7 +388,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
                             
     } 	
 
-	if (userIvoteBallotIdIdentifierCode  != userConfirmIvoteBallotIdIdentifierCode) {
+	if (IvoteBallotIdIdentifierCode  != ConfirmIvoteBallotIdIdentifierCode) {
 		document.getElementById('userConfirmiVoteBallotIdIdentifierCodeErrorMessage').textContent = 'The user\'s iVoteballot Id Identifier Code does not match to his/her confirm iVoteBallot Id Identifier Code which are required input fields.';
 
 		setTimeout(function() {
@@ -400,7 +400,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 	
-	if (userPassword === '' || userPassword == null) {
+	if (Password === '' || Password == null) {
 		document.getElementById('userPasswordErrorMessage').textContent = 'The user\'s password is a required input field.';
 	
 		setTimeout(function() {
@@ -412,7 +412,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	
 	}   	
 			
-	if (userConfirmPassword === '' || userConfirmPassword == null) {
+	if (ConfirmPassword === '' || ConfirmPassword == null) {
 		document.getElementById('userConfirmPasswordErrorMessage').textContent = 'The user\'s confirm password is a required input field.';
 	
 		setTimeout(function() {
@@ -424,7 +424,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	
 	} 
 	
-	if (userPassword != userConfirmPassword) {
+	if (Password != ConfirmPassword) {
 		document.getElementById('userConfirmPasswordErrorMessage').textContent = 'The user\'s password does not match to his/her confirm password which are required input fields.';
 
 		setTimeout(function() {
@@ -436,7 +436,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 	
-	if (userTemporary_Password === '' || userTemporary_Password == null) {
+	if (Temporary_Password === '' || Temporary_Password == null) {
 		document.getElementById('userTemporary_PasswordErrorMessage').textContent = 'The user\'s temporary password is a required input field.';
 
 		setTimeout(function() {
