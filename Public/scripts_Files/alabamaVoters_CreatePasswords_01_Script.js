@@ -28,12 +28,12 @@ function toggle_InputConfirmPasswordCheckBox() {
 
 const validateCreatePasswordsForm = (e) => {
 
-	const userPassword = document.getElementById('password').value.trim();
-	const userConfirmPassword = document.getElementById('confirmPassword').value.trim();
+	const Password = document.getElementById('password').value.trim();
+	const ConfirmPassword = document.getElementById('confirmPassword').value.trim();
 
 	const regExPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,32}$/;	
 	
-	if (userPassword === '' || userPassword == null || userPassword.length <= 7 || !userPassword.match(regExPassword)) {
+	if (Password === '' || Password == null || Password.length <= 7 || !Password.match(regExPassword)) {
 		document.getElementById('userPasswordErrorMessage').textContent = 'Your password is a required input field.';	
 
 		setTimeout(function() {
@@ -45,7 +45,7 @@ const validateCreatePasswordsForm = (e) => {
 	
 	} 			
 			
-	if (userConfirmPassword === '' || userConfirmPassword == null || userConfirmPassword.length <= 7 || !userConfirmPassword.match(regExPassword)) {
+	if (ConfirmPassword === '' || ConfirmPassword == null || ConfirmPassword.length <= 7 || !ConfirmPassword.match(regExPassword)) {
 		document.getElementById('userConfirmPasswordErrorMessage').textContent = 'Your confirm password is a required input field.';
 	
 		setTimeout(function() {
@@ -57,7 +57,7 @@ const validateCreatePasswordsForm = (e) => {
 	
 	} 
 	
-	if (userPassword != userConfirmPassword) {
+	if (Password != ConfirmPassword) {
 		document.getElementById('userConfirmPasswordErrorMessage').textContent = 'Your password does not match to your confirm password which are required input fields.';
 
 		setTimeout(function() {
