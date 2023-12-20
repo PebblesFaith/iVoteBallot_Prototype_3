@@ -147,34 +147,34 @@ db1.serialize( () => {
     const sqlTable =  (`CREATE TABLE IF NOT EXISTS alabamaDMV_Commission_01 (
 
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
-        userDate DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
-        userDMVFirstName VARCHAR (100) NOT NULL, 
-        userDMVMiddleName VARCHAR (100) NOT NULL, 
-        userDMVLastName VARCHAR(100) NOT NULL,
-        userDMVSuffix VARCHAR(25) NOT NULL,
-        userDMVDateOfBirth VARCHAR(50) NOT NULL,
-        userDMVBirthSex VARCHAR(25) NOT NULL,
-        userDMVGenderIdentity VARCHAR(25) NOT NULL,
-        userDMVRace VARCHAR(250) NOT NULL,
-        userDMVSSN VARCHAR(25) NOT NULL,
-        userDMVEmail VARCHAR(150) NOT NULL,
-        userDMVConfirmEmail VARCHAR(150) NOT NULL,
-        userDMVPhoneNumber VARCHAR(50) NOT NULL,
-        userDMVAddress VARCHAR(200) NOT NULL,
-        userDMVUnitType VARCHAR(100) NOT NULL,
-        userDMVUnitTypeNumber VARCHAR(15) NOT NULL,
-        userDMVCountrySelection VARCHAR(100) NOT NULL,
-        userDMVStateSelection VARCHAR(100) NOT NULL,
-        userDMVCountySelection VARCHAR(100) NOT NULL,
-        userDMVCitySelection VARCHAR(100) NOT NULL,
-        userDMVZipSelection VARCHAR(25) NOT NULL,
-        userDMVIdType VARCHAR(100) NOT NULL,
-        userDMVIdTypeNumber VARCHAR(25) NOT NULL,
-        userIvoteBallotIdIdentifierCode VARCHAR(50) NOT NULL,
-        userConfirmIvoteBallotIdIdentifierCode VARCHAR(50) NOT NULL,
-		userPassword VARCHAR(50) NOT NULL,
-		userConfirmPassword VARCHAR(50) NOT NULL,
-		userTemporary_Password VARCHAR(50) NOT NULL
+        Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
+        DMVFirstName VARCHAR (100) NOT NULL, 
+        DMVMiddleName VARCHAR (100) NOT NULL, 
+        DMVLastName VARCHAR(100) NOT NULL,
+        DMVSuffix VARCHAR(25) NOT NULL,
+        DMVDateOfBirth VARCHAR(50) NOT NULL,
+        DMVBirthSex VARCHAR(25) NOT NULL,
+        DMVGenderIdentity VARCHAR(25) NOT NULL,
+        DMVRace VARCHAR(250) NOT NULL,
+        DMVSSN VARCHAR(25) NOT NULL,
+        DMVEmail VARCHAR(150) NOT NULL,
+        DMVConfirmEmail VARCHAR(150) NOT NULL,
+        DMVPhoneNumber VARCHAR(50) NOT NULL,
+        DMVAddress VARCHAR(200) NOT NULL,
+        DMVUnitType VARCHAR(100) NOT NULL,
+        DMVUnitTypeNumber VARCHAR(15) NOT NULL,
+        DMVCountrySelection VARCHAR(100) NOT NULL,
+        DMVStateSelection VARCHAR(100) NOT NULL,
+        DMVCountySelection VARCHAR(100) NOT NULL,
+        DMVCitySelection VARCHAR(100) NOT NULL,
+        DMVZipSelection VARCHAR(25) NOT NULL,
+        DMVIdType VARCHAR(100) NOT NULL,
+        DMVIdTypeNumber VARCHAR(25) NOT NULL,
+        IvoteBallotIdIdentifierCode VARCHAR(50) NOT NULL,
+        ConfirmIvoteBallotIdIdentifierCode VARCHAR(50) NOT NULL,
+		Password VARCHAR(50) NOT NULL,
+		ConfirmPassword VARCHAR(50) NOT NULL,
+		Temporary_Password VARCHAR(50) NOT NULL
         
     )`);  
 		
@@ -301,23 +301,23 @@ iVoteBallotApp.use(passport.session());
 passport.use(
 	'local1',
 	new LocalStrategy({
-	usernameField: 'userDMVEmail',
-	passwordField: 'userIvoteBallotIdIdentifierCode',
+	usernameField: 'DMVEmail',
+	passwordField: 'IvoteBallotIdIdentifierCode',
 	passReqToCallback: true // To allow request object to be passed to callback
 },   
-	async (req, userDMVEmail, userIvoteBallotIdIdentifierCode, done) => {
+	async (req, DMVEmail, IvoteBallotIdIdentifierCode, done) => {
 		
-		console.log('The iVoteBallot\'s user\'s passport.use(local1) email (\'userDMVEmail\') as: ' + userDMVEmail);
-		console.log('The iVoteBallot\'s user\'s passport.use(local1) password (\'userIvoteBallotIdIdentifierCode\') as: ' + userIvoteBallotIdIdentifierCode );	
+		console.log('The iVoteBallot\'s user\'s passport.use(local1) email (\'DMVEmail\') as: ' + DMVEmail);
+		console.log('The iVoteBallot\'s user\'s passport.use(local1) password (\'IvoteBallotIdIdentifierCode\') as: ' + IvoteBallotIdIdentifierCode );	
 
-		if (!userIvoteBallotIdIdentifierCode) {
-			console.log('The user\'s iVoteBallot Id Identifier Code entered into the input field is: ' + userIvoteBallotIdIdentifierCode + '.');
+		if (!IvoteBallotIdIdentifierCode) {
+			console.log('The user\'s iVoteBallot Id Identifier Code entered into the input field is: ' + IvoteBallotIdIdentifierCode + '.');
 			console.log('The user\'s iVoteBallot Id Identifier Code does not match to the Session cookie id\'s database.');
 			return done (null, false, { message: 'Your iVoteBallot Id Identifier Code does not match to our iVoteballot\'s database.' });
 
 		} else 
 		
-			await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?`, userDMVEmail, (err, row) => {
+			await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE DMVEmail = ?`, DMVEmail, (err, row) => {
 			
 				if (err) {
 					return done(err);
@@ -327,7 +327,7 @@ passport.use(
 					return done (null, false, { message: 'You have entered the incorrect email address.'});
 				}
 				
-				bcrypt.compare(userIvoteBallotIdIdentifierCode, row.userIvoteBallotIdIdentifierCode, (err, result) => {
+				bcrypt.compare(IvoteBallotIdIdentifierCode, row.IvoteBallotIdIdentifierCode, (err, result) => {
 				
 				if (err) {
 					return done(err);
@@ -339,38 +339,39 @@ passport.use(
 				
 				//return done(null, user);
 
-					return done(null, {	
-							id: row.id, 
-					
-							userDMVFirstName: row.userDMVFirstName, 
-							userDMVMiddleName: row.userDMVMiddleName, 
-							userDMVLastName: row.userDMVLastName, 
-							userDMVSuffix: row.userDMVSuffix, 
-							userDMVDateOfBirth: row.userDMVDateOfBirth, 
-							userDMVBirthSex: row.userDMVBirthSex, 
-							userDMVGenderIdentity: row.userDMVGenderIdentity, 
-							userDMVRace: row.userDMVRace, 
-							userDMVSSN: row.userDMVSSN, 
-							userDMVEmail: row.userDMVEmail, 
-							userDMVConfirmEmail: row.userDMVConfirmEmail, 
-							userDMVPhoneNumber: row.userDMVPhoneNumber, 
-							userDMVAddress: row.userDMVAddress, 
-							userDMVUnitType: row.userDMVUnitType, 
-							userDMVUnitTypeNumber: row.userDMVUnitType, 
-							userDMVCountrySelection: row.userDMVCountrySelection, 
-							userDMVStateSelection: row.userDMVStateSelection, 
-							userDMVCountySelection: row.userDMVCountySelection, 
-							userDMVCitySelection: row.userDMVCitySelection, 
-							userDMVZipSelection: row.userDMVZipSelection, 
-							userDMVIdType: row.userDMVIdType, 
-							userDMVIdTypeNumber: row.userDMVIdTypeNumber, 
-							userIvoteBallotIdIdentifierCode: row.userIvoteBallotIdIdentifierCode, 
-							userConfirmIvoteBallotIdIdentifierCode: row.userConfirmIvoteBallotIdIdentifierCode, 
-							userPassword: row.userPassword, 
-							userConfirmPassword: row.userDMVConfirmEmail, 
-							userTemporary_Password: row.userTemporary_Password, 
-							
-							isAuthenticated: true
+					return done(null, {
+
+						id: row.id, 
+				
+						DMVFirstName: row.DMVFirstName, 
+						DMVMiddleName: row.DMVMiddleName, 
+						DMVLastName: row.DMVLastName, 
+						DMVSuffix: row.DMVSuffix, 
+						DMVDateOfBirth: row.DMVDateOfBirth, 
+						DMVBirthSex: row.DMVBirthSex, 
+						DMVGenderIdentity: row.DMVGenderIdentity, 
+						DMVRace: row.DMVRace, 
+						DMVSSN: row.DMVSSN, 
+						DMVEmail: row.DMVEmail, 
+						DMVConfirmEmail: row.DMVConfirmEmail, 
+						DMVPhoneNumber: row.DMVPhoneNumber, 
+						DMVAddress: row.DMVAddress, 
+						DMVUnitType: row.DMVUnitType, 
+						DMVUnitTypeNumber: row.DMVUnitType, 
+						DMVCountrySelection: row.DMVCountrySelection, 
+						DMVStateSelection: row.DMVStateSelection, 
+						DMVCountySelection: row.DMVCountySelection, 
+						DMVCitySelection: row.DMVCitySelection, 
+						DMVZipSelection: row.DMVZipSelection, 
+						DMVIdType: row.DMVIdType, 
+						DMVIdTypeNumber: row.DMVIdTypeNumber, 
+						IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
+						ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, 
+						Password: row.Password, 
+						ConfirmPassword: row.DMVConfirmEmail, 
+						Temporary_Password: row.Temporary_Password, 
+						
+						isAuthenticated: true
 							 
 						}
 					
@@ -517,33 +518,33 @@ passport.deserializeUser(function(id, done) {
 		{
 			id: row.id, 
 			
-			userDMVFirstName: row.userDMVFirstName, 
-			userDMVMiddleName: row.userDMVMiddleName, 
-			userDMVLastName: row.userDMVLastName, 
-			userDMVSuffix: row.userDMVSuffix, 
-			userDMVDateOfBirth: row.userDMVDateOfBirth, 
-			userDMVBirthSex: row.userDMVBirthSex, 
-			userDMVGenderIdentity: row.userDMVGenderIdentity, 
-			userDMVRace: row.userDMVRace, 
-			userDMVSSN: row.userDMVSSN, 
-			userDMVEmail: row.userDMVEmail, 
-			userDMVConfirmEmail: row.userDMVConfirmEmail, 
-			userDMVPhoneNumber: row.userDMVPhoneNumber, 
-			userDMVAddress: row.userDMVAddress, 
-			userDMVUnitType: row.userDMVUnitType, 
-			userDMVUnitTypeNumber: row.userDMVUnitType, 
-			userDMVCountrySelection: row.userDMVCountrySelection, 
-			userDMVStateSelection: row.userDMVStateSelection, 
-			userDMVCountySelection: row.userDMVCountySelection, 
-			userDMVCitySelection: row.userDMVCitySelection, 
-			userDMVZipSelection: row.userDMVZipSelection, 
-			userDMVIdType: row.userDMVIdType, 
-			userDMVIdTypeNumber: row.userDMVIdTypeNumber, 
-			userIvoteBallotIdIdentifierCode: row.userIvoteBallotIdIdentifierCode, 
-			userConfirmIvoteBallotIdIdentifierCode: row.userConfirmIvoteBallotIdIdentifierCode, 
-			userPassword: row.userPassword, 
-			userConfirmPassword: row.userDMVConfirmEmail, 
-			userTemporary_Password: row.userTemporary_Password,
+			DMVFirstName: row.DMVFirstName, 
+			DMVMiddleName: row.DMVMiddleName, 
+			DMVLastName: row.DMVLastName, 
+			DMVSuffix: row.DMVSuffix, 
+			DMVDateOfBirth: row.DMVDateOfBirth, 
+			DMVBirthSex: row.DMVBirthSex, 
+			DMVGenderIdentity: row.DMVGenderIdentity, 
+			DMVRace: row.DMVRace, 
+			DMVSSN: row.DMVSSN, 
+			DMVEmail: row.DMVEmail, 
+			DMVConfirmEmail: row.DMVConfirmEmail, 
+			DMVPhoneNumber: row.DMVPhoneNumber, 
+			DMVAddress: row.DMVAddress, 
+			DMVUnitType: row.DMVUnitType, 
+			DMVUnitTypeNumber: row.DMVUnitType, 
+			DMVCountrySelection: row.DMVCountrySelection, 
+			DMVStateSelection: row.DMVStateSelection, 
+			DMVCountySelection: row.DMVCountySelection, 
+			DMVCitySelection: row.DMVCitySelection, 
+			DMVZipSelection: row.DMVZipSelection, 
+			DMVIdType: row.DMVIdType, 
+			DMVIdTypeNumber: row.DMVIdTypeNumber, 
+			IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
+			ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, 
+			Password: row.Password, 
+			ConfirmPassword: row.DMVConfirmEmail, 
+			Temporary_Password: row.Temporary_Password, 
 			
 			isAuthenticated: true 
 
@@ -640,7 +641,7 @@ const alabamaVoters_CreatePasswords_01_RouteGet = ('/alabamaVoters_CreatePasswor
         console.log(req.user);
         console.log(req.session);
         console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
-        res.render('alabamaVoters_CreatePasswords_01', { userDMVFirstName: req.user.userDMVFirstName, userDMVLastName: req.user.userDMVLastName, userDMVEmail: req.user.userDMVEmail });
+        res.render('alabamaVoters_CreatePasswords_01', { DMVFirstName: req.user.DMVFirstName, DMVLastName: req.user.DMVLastName, DMVEmail: req.user.DMVEmail });
     } else if (req.isUnauthenticated) {
         res.render('/alabamaVoters_SignUp_01')
         console.log('User is not successfully authenticated within the session through the passport from dashboard!');
@@ -656,7 +657,7 @@ const alabamaVoters_LogIn_01_RouteGet = ('/alabamaVoters_LogIn_01', (req, res) =
         console.log(req.user);
         console.log(req.session);
         console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
-        res.render('ivoteballot', { userDMVFirstName: req.user.userDMVFirstName, userDMVLastName: req.user.userDMVLastName, userDMVEmail: req.user.userDMVEmail });
+        res.render('ivoteballot', { DMVFirstName: req.user.DMVFirstName, DMVLastName: req.user.DMVLastName, DMVEmail: req.user.DMVEmail });
     } else if (req.isUnauthenticated) {
         res.render('/alabamaVoters_LogIn_01')
         console.log('User is not successfully authenticated within the session through the passport from dashboard!');
@@ -670,66 +671,66 @@ const alabamaVoters_LogIn_01_RouteGet = ('/alabamaVoters_LogIn_01', (req, res) =
 const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 	async (req, res) => { 	
 		
-		console.log(req.user);
+		console.log(req.req);
 
-		const userDMVFirstName = req.body.userDMVFirstName;       
-		const userDMVMiddleName = req.body.userDMVMiddleName; 
-		const userDMVLastName = req.body.userDMVLastName;        
-		const userDMVSuffix = req.body.userDMVSuffix;
-		const userDMVDateOfBirth = req.body.userDMVDateOfBirth;
-		const userDMVBirthSex = req.body.userDMVBirthSex;
-		const userDMVGenderIdentity = req.body.userDMVGenderIdentity;
-		const userDMVRace = req.body.userDMVRace;
-		const userDMVSSN = req.body.userDMVSSN;
-		const userDMVEmail = req.body.userDMVEmail;
-		const userDMVConfirmEmail = req.body.userDMVConfirmEmail;
-		const userDMVPhoneNumber = req.body.userDMVPhoneNumber;
-		const userDMVAddress = req.body.userDMVAddress;
-		const userDMVUnitType = req.body.userDMVUnitType;
-		const userDMVUnitTypeNumber = req.body.userDMVUnitTypeNumber;
-		const userDMVCountrySelection = req.body.userDMVCountrySelection;
-		const userDMVStateSelection = req.body.userDMVStateSelection;
-		const userDMVCountySelection = req.body.userDMVCountySelection;
-		const userDMVCitySelection = req.body.userDMVCitySelection;
-		const userDMVZipSelection = req.body.userDMVZipSelection;
-		const userDMVIdType = req.body.userDMVIdType;
-		const userDMVIdTypeNumber = req.body.userDMVIdTypeNumber;
-		const userIvoteBallotIdIdentifierCode = req.body.userIvoteBallotIdIdentifierCode;
-		const userConfirmIvoteBallotIdIdentifierCode = req.body.userConfirmIvoteBallotIdIdentifierCode;
-		const userPassword = req.body.userPassword;
-		const userConfirmPassword = req.body.userConfirmPassword;
-		const userTemporary_Password = req.body.userTemporary_Password;
+		const DMVFirstName = req.body.DMVFirstName;       
+		const DMVMiddleName = req.body.DMVMiddleName; 
+		const DMVLastName = req.body.DMVLastName;        
+		const DMVSuffix = req.body.DMVSuffix;
+		const DMVDateOfBirth = req.body.DMVDateOfBirth;
+		const DMVBirthSex = req.body.DMVBirthSex;
+		const DMVGenderIdentity = req.body.DMVGenderIdentity;
+		const DMVRace = req.body.DMVRace;
+		const DMVSSN = req.body.DMVSSN;
+		const DMVEmail = req.body.DMVEmail;
+		const DMVConfirmEmail = req.body.DMVConfirmEmail;
+		const DMVPhoneNumber = req.body.DMVPhoneNumber;
+		const DMVAddress = req.body.DMVAddress;
+		const DMVUnitType = req.body.DMVUnitType;
+		const DMVUnitTypeNumber = req.body.DMVUnitTypeNumber;
+		const DMVCountrySelection = req.body.DMVCountrySelection;
+		const DMVStateSelection = req.body.DMVStateSelection;
+		const DMVCountySelection = req.body.DMVCountySelection;
+		const DMVCitySelection = req.body.DMVCitySelection;
+		const DMVZipSelection = req.body.DMVZipSelection;
+		const DMVIdType = req.body.DMVIdType;
+		const DMVIdTypeNumber = req.body.DMVIdTypeNumber;
+		const IvoteBallotIdIdentifierCode = req.body.IvoteBallotIdIdentifierCode;
+		const ConfirmIvoteBallotIdIdentifierCode = req.body.ConfirmIvoteBallotIdIdentifierCode;
+		const Password = req.body.Password;
+		const ConfirmPassword = req.body.ConfirmPassword;
+		const Temporary_Password = req.body.Temporary_Password;
 
 		console.log(req.body);
 
-		console.log('The user\'s first name: ' + userDMVFirstName + '.');
-		console.log('The user\'s middle name is: ' + userDMVMiddleName + '.');
-		console.log('The user\'s last name is: ' + userDMVLastName + '.');
-		console.log('The user\'s suffix is: ' + userDMVSuffix + '.');
-		console.log('The user\'s date of birth is: ' + userDMVDateOfBirth + '.');
-		console.log('The user\'s birth sex is: ' + userDMVBirthSex + '.');
-		console.log('The user\'s gender identity is: ' + userDMVGenderIdentity + '.');
-		console.log('The user\'s race is: ' + userDMVRace + '.');
-		console.log('The user\'s SSN is: ' + userDMVSSN + '.');
-		console.log('The user\'s email is: ' + userDMVEmail + '.');
-		console.log('The user\'s confirm email is: ' + userDMVConfirmEmail + '.');
-		console.log('The user\'s phone number is: ' + userDMVPhoneNumber + '.');
-		console.log('The user\'s address is: ' + userDMVAddress + '.');
-		console.log('The user\'s unit type is: ' + userDMVUnitType + '.');
-		console.log('The user\'s unit type number is: ' + userDMVUnitTypeNumber + '.');
-		console.log('The user\'s country selection is: ' + userDMVCountrySelection + '.');
-		console.log('The user\'s state selection is: ' + userDMVStateSelection + '.');
-		console.log('The user\'s county selection is: ' + userDMVCountySelection + '.');
-		console.log('The user\'s city selection is: ' + userDMVCitySelection + '.');
-		console.log('The user\'s state selection is: ' + userDMVStateSelection + '.');
-		console.log('The user\'s zip code selection is: ' + userDMVZipSelection + '.');
-		console.log('The user\'s Id type is: ' + userDMVIdType + '.');
-		console.log('The user\'s Id type number is: ' + userDMVIdTypeNumber + '.');
-		console.log('The user\'s iVoteBallot Id Identifier Code is: ' + userIvoteBallotIdIdentifierCode + '.');
-		console.log('The user\'s confirm iVoteBallot Id Identifier Code is: ' + userConfirmIvoteBallotIdIdentifierCode + '.');
-		console.log('The user\'s password is: ' + userPassword + '.');
-		console.log('The user\'s confirm password is: ' + userConfirmPassword + '.');
-		console.log('The user\'s temporary password is: ' + userTemporary_Password + '.');
+		console.log('The user\'s first name: ' + DMVFirstName + '.');
+		console.log('The user\'s middle name is: ' + DMVMiddleName + '.');
+		console.log('The user\'s last name is: ' + DMVLastName + '.');
+		console.log('The user\'s suffix is: ' + DMVSuffix + '.');
+		console.log('The user\'s date of birth is: ' + DMVDateOfBirth + '.');
+		console.log('The user\'s birth sex is: ' + DMVBirthSex + '.');
+		console.log('The user\'s gender identity is: ' + DMVGenderIdentity + '.');
+		console.log('The user\'s race is: ' + DMVRace + '.');
+		console.log('The user\'s SSN is: ' + DMVSSN + '.');
+		console.log('The user\'s email is: ' + DMVEmail + '.');
+		console.log('The user\'s confirm email is: ' + DMVConfirmEmail + '.');
+		console.log('The user\'s phone number is: ' + DMVPhoneNumber + '.');
+		console.log('The user\'s address is: ' + DMVAddress + '.');
+		console.log('The user\'s unit type is: ' + DMVUnitType + '.');
+		console.log('The user\'s unit type number is: ' + DMVUnitTypeNumber + '.');
+		console.log('The user\'s country selection is: ' + DMVCountrySelection + '.');
+		console.log('The user\'s state selection is: ' + DMVStateSelection + '.');
+		console.log('The user\'s county selection is: ' + DMVCountySelection + '.');
+		console.log('The user\'s city selection is: ' + DMVCitySelection + '.');
+		console.log('The user\'s state selection is: ' + DMVStateSelection + '.');
+		console.log('The user\'s zip code selection is: ' + DMVZipSelection + '.');
+		console.log('The user\'s Id type is: ' + DMVIdType + '.');
+		console.log('The user\'s Id type number is: ' + DMVIdTypeNumber + '.');
+		console.log('The user\'s iVoteBallot Id Identifier Code is: ' + IvoteBallotIdIdentifierCode + '.');
+		console.log('The user\'s confirm iVoteBallot Id Identifier Code is: ' + ConfirmIvoteBallotIdIdentifierCode + '.');
+		console.log('The user\'s password is: ' + Password + '.');
+		console.log('The user\'s confirm password is: ' + ConfirmPassword + '.');
+		console.log('The user\'s temporary password is: ' + Temporary_Password + '.');
 
 		console.log(req.session);	
 
@@ -770,7 +771,7 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 		}	
 		*/		
 		
-		if (userIvoteBallotIdIdentifierCode !== userConfirmIvoteBallotIdIdentifierCode) {
+		if (IvoteBallotIdIdentifierCode !== ConfirmIvoteBallotIdIdentifierCode) {
 			req.flash('error', 'The user\'s iVoteballot Id Identifier Code does not match to the user\'s confirm iVoteballot Id Identifier Code for which, you have entered into the input fields.');			
 			return res.redirect('/alabamaDMV_Commission_01');        
 
@@ -779,69 +780,67 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 			console.log('The user\' iVoteBallot Id Identifier Code have successfully matched to his or her confirm iVoteBallot Id Code entered into the input fields, and the user is successfully authenticated through the \'passport.use\' login1, LocalStrategy through the session cookie id.');
 		}  
 		
-		// To hash the user's userDMVSSN input field using bcryption.
-		const salt = await bcrypt.genSalt(13);
-		const userDMVSSNHashed = await bcrypt.hash(req.body.userDMVSSN, salt);
+		// To hash the user's DMVSSN input field using bcryption.
+		const salt = await bcrypt.genSalt(12);
+		const DMVSSNHashed = await bcrypt.hash(req.body.DMVSSN, salt);
 		
-		// To hash the user's userIvoteBallotIdIdentifierCode input field using bcryption.		
-		const userIvoteBallotIdIdentifierCodeHashed = await bcrypt.hash(req.body.userIvoteBallotIdIdentifierCode, salt);
+		// To hash the user's IvoteBallotIdIdentifierCode input field using bcryption.		
+		const IvoteBallotIdIdentifierCodeHashed = await bcrypt.hash(req.body.IvoteBallotIdIdentifierCode, salt);
 
-		// To hash the user's userIvoteBallotIdIdentifierCode input field using bcryption.	
-		const userConfirmIvoteBallotIdIdentifierCodeHashed = await bcrypt.hash(req.body.userConfirmIvoteBallotIdIdentifierCode, salt);
+		// To hash the user's IvoteBallotIdIdentifierCode input field using bcryption.	
+		const ConfirmIvoteBallotIdIdentifierCodeHashed = await bcrypt.hash(req.body.ConfirmIvoteBallotIdIdentifierCode, salt);
 
 		const newUser = {
 
-			userDMVFirstName,
-			userDMVMiddleName, 
-			userDMVLastName,
-			userDMVSuffix,
-			userDMVDateOfBirth, 
-			userDMVBirthSex,
-			userDMVGenderIdentity,
-			userDMVRace, 
-			userDMVSSN: userDMVSSNHashed, 
-			userDMVEmail,
-			userDMVConfirmEmail,
-			userDMVPhoneNumber,
-			userDMVAddress,
-			userDMVUnitType,
-			userDMVUnitTypeNumber,
-			userDMVCountrySelection,
-			userDMVStateSelection,
-			userDMVCountySelection,
-			userDMVCitySelection,
-			userDMVZipSelection,
-			userDMVIdType,
-			userDMVIdTypeNumber,
-			userIvoteBallotIdIdentifierCode: userIvoteBallotIdIdentifierCodeHashed,
-			userConfirmIvoteBallotIdIdentifierCode: userConfirmIvoteBallotIdIdentifierCodeHashed,
-			userPassword,
-			userConfirmPassword,
-			userTemporary_Password
+			DMVFirstName,
+			DMVMiddleName, 
+			DMVLastName,
+			DMVSuffix,
+			DMVDateOfBirth, 
+			DMVBirthSex,
+			DMVGenderIdentity,
+			DMVRace, 
+			DMVSSN: DMVSSNHashed, 
+			DMVEmail,
+			DMVConfirmEmail,
+			DMVPhoneNumber,
+			DMVAddress,
+			DMVUnitType,
+			DMVUnitTypeNumber,
+			DMVCountrySelection,
+			DMVStateSelection,
+			DMVCountySelection,
+			DMVCitySelection,
+			DMVZipSelection,
+			DMVIdType,
+			DMVIdTypeNumber,
+			IvoteBallotIdIdentifierCode: IvoteBallotIdIdentifierCodeHashed,
+			ConfirmIvoteBallotIdIdentifierCode: ConfirmIvoteBallotIdIdentifierCodeHashed,
+			Password,
+			ConfirmPassword,
+			Temporary_Password
 
 		}
 
-		const sqlInsert = 'INSERT INTO alabamaDMV_Commission_01 (userDMVFirstName, userDMVMiddleName, userDMVLastName, userDMVSuffix, userDMVDateOfBirth, userDMVBirthSex, userDMVGenderIdentity, userDMVRace, userDMVSSN, userDMVEmail, userDMVConfirmEmail, userDMVPhoneNumber, userDMVAddress, userDMVUnitType, userDMVUnitTypeNumber, userDMVCountrySelection, userDMVStateSelection, userDMVCountySelection, userDMVCitySelection, userDMVZipSelection, userDMVIdType, userDMVIdTypeNumber, userIvoteBallotIdIdentifierCode, userConfirmIvoteBallotIdIdentifierCode, userPassword, userConfirmPassword, userTemporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';	
+		const sqlInsert = 'INSERT INTO alabamaDMV_Commission_01 (DMVFirstName, DMVMiddleName, DMVLastName, DMVSuffix, DMVDateOfBirth, DMVBirthSex, DMVGenderIdentity, DMVRace, DMVSSN, DMVEmail, DMVConfirmEmail, DMVPhoneNumber, DMVAddress, DMVUnitType, DMVUnitTypeNumber, DMVCountrySelection, DMVStateSelection, DMVCountySelection, DMVCitySelection, DMVZipSelection, DMVIdType, DMVIdTypeNumber, IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode, Password, ConfirmPassword, Temporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';	
 		
-		const params = [newUser.userDMVFirstName, newUser.userDMVMiddleName, newUser.userDMVLastName, newUser.userDMVSuffix, newUser.userDMVDateOfBirth, newUser.userDMVBirthSex, newUser.userDMVGenderIdentity, newUser.userDMVRace, newUser.userDMVSSN, newUser.userDMVEmail, newUser.userDMVConfirmEmail, newUser.userDMVPhoneNumber, newUser.userDMVAddress, newUser.userDMVUnitType, newUser.userDMVUnitTypeNumber, newUser.userDMVCountrySelection, newUser.userDMVStateSelection, newUser.userDMVCountySelection, newUser.userDMVCitySelection, newUser.userDMVZipSelection, newUser.userDMVIdType, newUser.userDMVIdTypeNumber, newUser.userIvoteBallotIdIdentifierCode, newUser.userConfirmIvoteBallotIdIdentifierCode, newUser.userPassword, newUser.userConfirmPassword, newUser.userTemporary_Password];
+		const params = [newUser.DMVFirstName, newUser.DMVMiddleName, newUser.DMVLastName, newUser.DMVSuffix, newUser.DMVDateOfBirth, newUser.DMVBirthSex, newUser.DMVGenderIdentity, newUser.DMVRace, newUser.DMVSSN, newUser.DMVEmail, newUser.DMVConfirmEmail, newUser.DMVPhoneNumber, newUser.DMVAddress, newUser.DMVUnitType, newUser.DMVUnitTypeNumber, newUser.DMVCountrySelection, newUser.DMVStateSelection, newUser.DMVCountySelection, newUser.DMVCitySelection, newUser.DMVZipSelection, newUser.DMVIdType, newUser.DMVIdTypeNumber, newUser.IvoteBallotIdIdentifierCode, newUser.ConfirmIvoteBallotIdIdentifierCode, newUser.Password, newUser.ConfirmPassword, newUser.Temporary_Password];
 		
-		db1.run(sqlInsert, params, function (err, result) {	
-			if (err) { 
-				return next(err); 
-			}				
+		db1.run(sqlInsert, params, function (err) {	
 			
 			if (err) {
-				res.redirect('/500');
+				console.error(err);
 				req.flash('error', 'An syntax error has occurred during user\s contact us input fields from DOM submission with a 500 error message webpage display onto the user device screen.');
 				console.log('An syntax error has occurred during user\s contact us input fields from DOM submission with a 500 error message webpage display onto the user device screen.'); 
-							
+				res.render('500');			
+			
 			} else {
 				console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database. ' + Date());			
 				req.flash('Success', 'The user is successfully registered into the iVoteBallot database, and the user can now sign up to create his or her iVoteBallot account.');
 				
-				res.redirect('/alabamaVoters_SignUp_01');
-			
-			} 		
+				res.redirect('/alabamaVoters_SignUp_01');	
+
+			}
 			
 			const transporter = nodemailer.createTransport ({
 				host: 'smtp.ionos.com',
@@ -856,18 +855,18 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 			const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
 
 			const mailOptions_01 = {
-				from: req.body.userDMVEmail,
+				from: req.body.DMVEmail,
 				to: 'testdevelopmentenvcustomercare@ivoteballot.com', 
 				subject: `CEO/Election Assure Experts' Manager | An iVoteBallot's employee have manually entered, a new iVoteballot's user sucessfully into the iVoteballot database.`,  
 				html: ` 
-				
+								
 					<p>The following user have been successfully entered into the iVoteBallot database by an iVoteBallot's Election Assure Experts' employee:</p>
 					<ul>
 						<li>
-							Name: ${req.body.userDMVFirstName} ${req.body.userDMVMiddleName} ${req.body.userDMVLastName}
+							Name: ${req.body.DMVFirstName} ${req.body.DMVMiddleName} ${req.body.DMVLastName}
 						</li>
 						<li>
-							Email: ${req.body.userDMVEmail}
+							Email: ${req.body.DMVEmail}
 						</li>					
 					</ul>
 					
@@ -885,11 +884,11 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 
 			const mailOptions_02 = {
 				from: 'testdevelopmentenvcustomercare@ivoteballot.com',
-				to: req.body.userDMVEmail, 
+				to: req.body.DMVEmail, 
 				subject: `Notification from iVoteBallot's Election Assure Experts`,			
 				html: 			
 					`			
-					<p>Dear ${req.body.userDMVFirstName} ${req.body.userDMVMiddleName} ${req.body.userDMVLastName},</p>	
+					<p>Dear ${req.body.DMVFirstName} ${req.body.DMVMiddleName} ${req.body.DMVLastName},</p>	
 								
 					<p>
 						
@@ -900,7 +899,7 @@ const alabamaDMV_Commission_01_CreateDatabase = ('/alabamaDMV_Commission_01',
 					</p>
 
 					Thank you for choosing iVoteBallot, and we hope you have a great day, 
-					${req.body.userDMVFirstName}.
+					${req.body.DMVFirstName}.
 					</p>
 						
 					<p>Respectfully,</p>			
@@ -948,29 +947,29 @@ const alabamaVoters_SignUp_01_CreateDatabase = ('/alabamaVoters_SignUp_01',
 
 	async (req, res) => {
 
-		const userDMVEmail = req.body.userDMVEmail;
+		const DMVEmail = req.body.DMVEmail;
 		//const userIvoteBallotIdIdentifierCode = req.body.userIvoteBallotIdIdentifierCode;
-		const userPassword = req.body.userPassword;
-		const userConfirmPassword = req.body.userConfirmPassword;
+		const Password = req.body.Password;
+		const ConfirmPassword = req.body.ConfirmPassword;
 
 		console.log('These are the request body' + req.body);
 
 		//console.log('The user email address is: ' + userDMVEmail + '.');
 		//console.log('The user iVoteBallot Id Identifier Code is: ' + userIvoteBallotIdIdentifierCode + '.');
-		console.log('The user password is: ' + userPassword + '.');
-		console.log('The user confirm password is: ' + userConfirmPassword + '.');
+		console.log('The user password is: ' + Password + '.');
+		console.log('The user confirm password is: ' + ConfirmPassword + '.');
 
 		console.log('The request session: ' + req.session + '.');
 
 		// To hash the newPassword input field using bcrypt library.
 		const salt = await bcrypt.genSalt(14);
-		const passwordHashed = await bcrypt.hash(userPassword, salt);
+		const passwordHashed = await bcrypt.hash(Password, salt);
 
 		// To hash the confirmNewPassword input field using bcrypt library.
-		const confirmPasswordHashed = await bcrypt.hash(userConfirmPassword, salt);
+		const confirmPasswordHashed = await bcrypt.hash(ConfirmPassword, salt);
 		
 		// To check, if the user's email address exists onto the passport serialization through the session cookie id.
-		db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?', userDMVEmail, (err, user) => {
+		db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE DMVEmail = ?', DMVEmail, (err, user) => {
 
 			if (err) {
 
@@ -985,7 +984,7 @@ const alabamaVoters_SignUp_01_CreateDatabase = ('/alabamaVoters_SignUp_01',
 
 			} else {
 		
-				db1.run('UPDATE alabamaDMV_Commission_01 SET userPassword = ?, userConfirmPassword = ? WHERE userDMVEmail = ?', passwordHashed, confirmPasswordHashed, req.userDMVEmail, (err) => {
+				db1.run('UPDATE alabamaDMV_Commission_01 SET Password = ?, ConfirmPassword = ? WHERE DMVEmail = ?', passwordHashed, confirmPasswordHashed, req.DMVEmail, (err) => {
 
 					if (err) {
 						console.error(err);
