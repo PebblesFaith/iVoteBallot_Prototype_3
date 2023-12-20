@@ -1018,10 +1018,10 @@ function generateNewPassword() {
 }  
 
 const alabamaVoters_EmailVerification_01_CreateDatabase = ('/alabamaVoters_EmailVerification_01', (req, res) => {
-	const email = req.body.userDMVEmail;
+	const email = req.body.DMVEmail;
 	
 		// Check if the email exists in the database
-		db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?', email, (err, row) => {
+		db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE DMVEmail = ?', email, (err, row) => {
 			if (err) {
 			console.error(err);
 			console.log('SQLite3 language did not successfully execute user/s email address search properly; therefore this error means a JavaScript codes language error.');
@@ -1036,7 +1036,7 @@ const alabamaVoters_EmailVerification_01_CreateDatabase = ('/alabamaVoters_Email
 			const newPassword = generateNewPassword();
 			const hash = bcrypt.hashSync(newPassword, 13);
 		   
-			db1.run('UPDATE alabamaDMV_Commission_01 SET userTemporary_Password = ? WHERE userDMVEmail = ?', hash, email, (err) => {
+			db1.run('UPDATE alabamaDMV_Commission_01 SET Temporary_Password = ? WHERE DMVEmail = ?', hash, email, (err) => {
 				if (err) {
 				console.error(err);
 				console.log('SQlite3 language had not properly execute the UPDATE correctly.')
@@ -1068,22 +1068,22 @@ const alabamaVoters_EmailVerification_01_CreateDatabase = ('/alabamaVoters_Email
 					using the default SMTP transporter nodemailer API library.
 					*/
 					const mailOptions_01 = {
-						from: req.body.userDMVEmail,
+						from: req.body.DMVEmail,
 						to: 'testdevelopmentenvcustomercare@ivoteballot.com', 
 						subject: `iVoteBallot has a New Online Voter Registration Not Yet Verified`,  
 						text: `iVoteBallot new online voter registration name is:
-						${req.user.userDMVFirstName} ${req.user.userDMVLastName}
-						and ${req.user.userDMVFirstName} ${req.user.userDMVLastName} has been sent an iVoteBallot's verification link registration in order to verify his/her
-						email account, ${req.user.userDMVEmail}.`,     
+						${req.user.DMVFirstName} ${req.user.DMVLastName}
+						and ${req.user.DMVFirstName} ${req.user.DMVLastName} has been sent an iVoteBallot's verification link registration in order to verify his/her
+						email account, ${req.user.DMVEmail}.`,     
 					};
 	
 					const mailOptions_02 = {
 						from: 'testdevelopmentenvcustomercare@ivoteballot.com',
-						to: req.body.userDMVEmail, 
+						to: req.body.DMVEmail, 
 						subject: `Authenticate your iVoteBallot's Email Address Link`,
 						html: `
 						
-						<p>Dear ${req.user.userDMVFirstName} ${req.user.userDMVLastName},</p>
+						<p>Dear ${req.user.DMVFirstName} ${req.user.DMVLastName},</p>
 	
 						<p>Please click onto the following link in order to authenticate your email address:<p>
 	
@@ -1138,32 +1138,26 @@ const alabamaVoters_EmailVerification_01_CreateDatabase = ('/alabamaVoters_Email
 	});
 	
 
-
-
-
-
-
-
 const alabamaVoters_CreatePasswords_01_CreateDatabase = ('/alabamaVoters_CreatePasswords_01',
 	
 	async(req, res) => {
 
-		console.log('req.user:', req.userDMVEmail);
+		console.log('req.user:', req.DMVEmail);
 
-		const userDMVEmail = req.user.userDMVEmail;
-		const userPassword = req.body.userPassword;
-		const userConfirmPassword = req.body.userConfirmPassword;
+		const userDMVEmail = req.user.DMVEmail;
+		const userPassword = req.body.Password;
+		const userConfirmPassword = req.body.ConfirmPassword;
 
 		console.log(req.body);
 
-		if (!userDMVEmail) {
+		if (!DMVEmail) {
 
 			console.log('The user is not found within the req.body.');
 		}
 
 		// To hash the newPassword input field using bcrypt library.
 		const salt = await bcrypt.genSalt(14);
-		const passwordHashed = await bcrypt.hash(userPassword, salt);
+		const passwordHashed = await bcrypt.hash(Password, salt);
 
 		// To hash the confirmNewPassword input field using bcrypt library.
 		const confirmPasswordHashed = await bcrypt.hash(userConfirmPassword, salt);
@@ -1175,7 +1169,7 @@ const alabamaVoters_CreatePasswords_01_CreateDatabase = ('/alabamaVoters_CreateP
 
 		} else {
 
-			db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE userDMVEmail = ?', userDMVEmail, (err, row) => {
+			db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE DMVEmail = ?', DMVEmail, (err, row) => {
 
 				if (err) {
 
@@ -1193,11 +1187,11 @@ const alabamaVoters_CreatePasswords_01_CreateDatabase = ('/alabamaVoters_CreateP
 			});
 
 
-			db1.run('UPDATE alabamaDMV_Commission_01 SET userPassword = ?, userConfirmPassword = ? WHERE userDMVEmail = ?', 
+			db1.run('UPDATE alabamaDMV_Commission_01 SET Password = ?, ConfirmPassword = ? WHERE DMVEmail = ?', 
 				[
 					passwordHashed,
 					confirmPasswordHashed,
-					userDMVEmail
+					DMVEmail
 				],
 				(err) => {
 					
