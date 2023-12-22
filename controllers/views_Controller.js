@@ -67,6 +67,10 @@ const view_alabamaVoters_SignUpLogin_01 = (req, res) => {
 	res.render('alabamaVoters_SignUpLogin_01');
 }
 
+const view_alabamaVoters_VerifyEmailPassword_01 = (req, res) => {
+	res.render('alabamaVoters_VerifyEmailPassword_01');
+}
+
 const view_ContactUs_01 = (req, res) => {
 	res.render('contactUs_01');
 }
@@ -108,7 +112,8 @@ module.exports = {
 	view_alabamaVoters_CreatePasswords_01,
 	view_alabamaVoters_EmailVerification_01,
 	view_alabamaVoters_SignUp_01,
-	view_alabamaVoters_SignUpLogin_01,	
+	view_alabamaVoters_SignUpLogin_01,
+	view_alabamaVoters_VerifyEmailPassword_01,	
 	view_ContactUs_01,
 	view_Dashboard_01A,
 	view_HelpCenter,
