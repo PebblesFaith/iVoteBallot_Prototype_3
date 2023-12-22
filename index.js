@@ -622,6 +622,21 @@ iVoteBallotApp.use('/alabamaVoters_VerifyEmailPassword_01', (req, res, next) => 
     next();
 });
 
+iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
+    if (req.isAuthenticated()) {
+        console.log(req.user);
+        console.log('Request Session:' + req.session)
+        console.log('' + req.logIn);
+        console.log('The User had been successfully authenticated within the Session through the passport from reset password webpage!');
+        res.render('alabamaVoters_CreatePasswords');
+    } else {
+        res.render('500')
+       
+        console.log('The user is not successfully authenticated within the session through the passport from reset password webpage!');
+
+    }
+});
+
 iVoteBallotApp.post(
     '/alabamaVoters_VerifyEmailPassword_01',
     passport.authenticate('local2', {
