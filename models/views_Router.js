@@ -50,6 +50,9 @@ router
     .get('/alabamaVoters_EmailVerification_01', views_Controller.view_alabamaVoters_EmailVerification_01);
 
 router
+    .get('/alabamaVoters_LogIn_01', views_Controller.view_alabamaVoters_LogIn_01);
+
+router
     .get('/alabamaVoters_SignUp_01', views_Controller.view_alabamaVoters_SignUp_01);
     
 router
