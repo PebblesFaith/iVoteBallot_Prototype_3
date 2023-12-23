@@ -286,7 +286,8 @@ iVoteBallotApp.use(
 			}
 		}),
 				
-		secret: 'EXPRESS_SESSION_KEY',	
+		secret: 'EXPRESS_SESSION_KEY',
+		resave: false,	
 			
 	})
 )
