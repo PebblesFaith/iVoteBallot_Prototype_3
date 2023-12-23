@@ -588,10 +588,9 @@ iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) =>
 
 /* -------------------------- The beginning of the alabamaVoters_SignUp_01 section ----------------------------- */
 
-
 // Middleware to set req.isUnauthenticated for the first use of the '/login2' URL bar
 iVoteBallotApp.use('/alabamaVoters_SignUp_01', (req, res, next) => {
-    console.log('middleware called!');
+    console.log('The middleware have been call for the user\'s \'alabamaVoters_SignUp_01\'.');
     // Check if user is Already authenticated
     if (!req.session.isAuthenticated) {  
       
@@ -656,7 +655,7 @@ iVoteBallotApp.get('/alabamaVoters_EmailVerification_01', (req, res) => {
 
 // Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_VerifyEmailPassword_01' URL bar
 iVoteBallotApp.use('/alabamaVoters_VerifyEmailPassword_01', (req, res, next) => {
-    console.log('middleware have been call for the \'alabamaVoters_VerifyEmailPassword_01!');
+    console.log('The middleware have been call for the user\'s \'alabamaVoters_VerifyEmailPassword_01!');
     // Check if user is Already authenticated
     if (!req.session.isAuthenticated) {  
       
@@ -697,7 +696,7 @@ iVoteBallotApp.post(
 
 // Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_LogIn_01' URL bar
 iVoteBallotApp.use('/alabamaVoters_LogIn_01', (req, res, next) => {
-    console.log('middleware have been call for the \'alabamaVoters_LogIn_01!');
+    console.log('The middleware have been call for the user\'s \'alabamaVoters_LogIn_01!');
     // Check if user is Already authenticated
     if (!req.session.isAuthenticated) {  
       
