@@ -322,9 +322,6 @@ iVoteBallotApp.use([passport.initialize()]);
 */
 iVoteBallotApp.use(passport.session());
 
-iVoteBallotApp.use(flash());
-
-iVoteBallotApp.use(flash2());
 
 /*
 	The JavaScript codes language sets up a local1, LocalStrategy for Passport, which is a popular
@@ -439,6 +436,50 @@ passport.use(
 
 ));
 
+passport.use(
+	'local3',
+	new LocalStrategy({
+	usernameField: 'DMVEmail',
+	passwordField: 'Password',
+	passReqToCallback: true // To allow request object to be passed to callback
+},   
+	async (req, DMVEmail, Password, done) => {
+		
+		console.log('The iVoteBallot\'s user\'s passport.use(local3) email (\'DMVEmail\') as: ' + DMVEmail);
+		console.log('The iVoteBallot\'s user\'s passport.use(local3) password (\'Password\') as: ' + Password );	
+
+				
+		await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE DMVEmail = ?`, DMVEmail, (err, row) => {
+		
+			if (err) {
+				return done(err);
+			}
+
+			if (!row) {
+				return done (null, false, { message: 'You have entered the incorrect email address '+  DMVEmail + '.'});
+			}
+			
+			bcrypt.compare(Password, row.Password, (err, result) => {
+			
+			if (err) {
+				return done(err);
+			}
+			if (!result) {
+				console.log('The user\'s temporary password was entered incorrectly: ' + Password + '.');
+				return done(null, false, { message: 'You have entered the incorrect password: ' + Password + '.'});
+			}
+			//return done(null, row);
+
+			return done(null, {	id: row.id, DMVFirstName: row.DMVFirstName, DMVMiddleName: row.DMVMiddleName, DMVLastName: row.DMVLastName, DMVSuffix: row.DMVSuffix, DMVDateOfBirth: row.DMVDateOfBirth, DMVBirthSex: row.DMVBirthSex, DMVGenderIdentity: row.DMVGenderIdentity, DMVRace: row.DMVRace, DMVSSN: row.DMVSSN, DMVEmail: row.DMVEmail, DMVConfirmEmail: row.DMVConfirmEmail, DMVPhoneNumber: row.DMVPhoneNumber, DMVAddress: row.DMVAddress, DMVUnitType: row.DMVUnitType, DMVUnitTypeNumber: row.DMVUnitType, DMVCountrySelection: row.DMVCountrySelection, DMVStateSelection: row.DMVStateSelection, DMVCountySelection: row.DMVCountySelection, DMVCitySelection: row.DMVCitySelection, DMVZipSelection: row.DMVZipSelection, DMVIdType: row.DMVIdType, DMVIdTypeNumber: row.DMVIdTypeNumber, IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, Password: row.Password, ConfirmPassword: row.DMVConfirmEmail, Temporary_Password: row.Temporary_Password, isAuthenticated: true	});
+
+			});
+				               
+		});
+
+	}
+
+));
+
 
 /*
 	The code passport.serializeUser(function (user, done) { done(null, user.id); }) is a function
@@ -495,6 +536,11 @@ passport.deserializeUser(function(id, done) {
     });
 
 });
+
+iVoteBallotApp.use(flash());
+
+iVoteBallotApp.use(flash2());
+
 
 /* -------------------------- The beginning of the alabamaDMV_Commission_01 section ----------------------------- */
 
@@ -627,7 +673,7 @@ iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
         console.log(req.user);
         console.log(req.session);
         console.log('User had been successfully authenticated within the Session through the passport from local2!');
-        res.render('alabamaVoters_EmailVerification_01', { DMVFirstName: req.user.DMVFirstName, DMVLastName: req.user.DMVLastName, DMVEmail: req.user.DMVEmail});
+        res.render('alabamaVoters_EmailVerification_01', { firstName: req.user.DMVFirstName, lastName: req.user.DMVLastName, email: req.user.DMVEmail});
     } else if (req.isUnauthenticated) {
         res.redirect('/alabamaVoters_VerifyEmailPassword_01')
         console.log('User is not successfully authenticated within the session through the passport from local2!');
@@ -643,8 +689,6 @@ iVoteBallotApp.post(
 }));
 
 
-
-
 /* -------------------------- The ending of the alabamaVoters_VerifyEmailPassword_01 section ----------------------------- */
 
 /* -------------------------- The beginning of the alabamaVoters_CreatePassword_01 section ----------------------------- */
@@ -653,7 +697,61 @@ iVoteBallotApp.post(
 
 /* -------------------------- The beginning of the alabamaVoters_LogIn_01 section ----------------------------- */
 
+// Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_LogIn_01' URL bar
+iVoteBallotApp.use('/alabamaVoters_LogIn_01', (req, res, next) => {
+    console.log('middleware have been call for the \'alabamaVoters_LogIn_01!');
+    // Check if user is Already authenticated
+    if (!req.session.isAuthenticated) {  
+      
+        // User of '/login' URL
+        req.isUnauthenticated = true;
+    }
+    next();
+});
+
+iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
+    console.log(req.session);
+    console.log('isUnauthenticated: ', req.isUnauthenticated);
+    // Check if user already authenticated.
+    if (req.isUnauthenticated) {
+        res.render('alabamaVoters_LogIn_01');
+        console.log('User is not logged into the dashboard!');
+    } else if         
+        (req.session.isAuthenticated) {
+        res.redirect('/dashboard_01');
+        console.log('User is logged into the dashboard!');
+       
+    } else {       
+        res.render('404');
+    }  
+});
+
+iVoteBallotApp.post(
+    '/alabamaVoters_LogIn_01',
+    passport.authenticate('local3', {
+        successRedirect: '/dashboard_01',
+        failureRedirect: '/alabamaVoters_LogIn_01',
+        failureFlash: true  
+}));
+
+
 /* -------------------------- The ending of the alabamaVoters_LogIn_01 section ----------------------------- */
+
+/* -------------------------- The beginning of the dashboard_01 section ----------------------------- */
+
+iVoteBallotApp.get('/dashboard_01', (req, res) => {
+    if (req.isAuthenticated) {
+        console.log(req.user);
+        console.log(req.session);
+        console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
+        res.render('dashboard_01', { DMVFirstName: req.user.DMVFirstName, DMVLastName: req.user.DMVLastName, DMVEmail: req.user.DMVEmail});
+    } else if (req.isUnauthenticated) {
+        res.render('/alabamaVoters_LogIn_01')
+        console.log('User is not successfully authenticated within the session through the passport from dashboard!');
+    }
+});
+
+/* -------------------------- The ending of the dashboard_01 section ----------------------------- */
 
 /* -------------------------- The beginning of All SQLite3 databases section ----------------------------- */
 
@@ -1124,9 +1222,6 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 	});
 });
 
-
-
-
 iVoteBallotApp.post('/alabamaVoters_VerifyEmailPassword_01', 
     async (req, res) => {
 
@@ -1176,11 +1271,6 @@ iVoteBallotApp.post('/alabamaVoters_VerifyEmailPassword_01',
             }
         });
 });
-
-
-
-
-	
 
 iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 	
