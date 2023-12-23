@@ -423,6 +423,18 @@ a:hover {
 	border: none;  
 }
 
+.password_Container {
+	position: relative;
+}
+
+#showHide_01 {
+	position: absolute;
+	right: 5px;
+	top: 50%;
+	transform: translateY(-50%);
+	cursor: pointer;
+}
+
 
 
 
