@@ -9,6 +9,36 @@
 	font-weight: normal;  
 }
 
+#hr_Blue_line_02 {
+    border-color: rgb(13, 65, 255); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
+}
+
+#hr_Red_line_02 {
+    border-color: rgb(201, 24, 24); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    width: auto;
+}  
+
+#hr_Grey_line_02 {
+    color: rgb(195, 195, 195);
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
+}
+
 /*
 	  The CSS styles in this code block are used to create a flexible container with a red
 	  background color, center-aligned content, and a row direction. The "flex-wrap: wrap"
