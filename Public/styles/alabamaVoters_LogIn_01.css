@@ -40,6 +40,31 @@
 }
 
 /*
+    This CSS styling for the .header_Image_01 element on the homepage sets it to display as
+    a flex container with column direction, centers the content, and applies a blue color with
+    transparent background. The width is set to a minimum of 125 pixels and maximum of 250
+    pixels, with a fluid scaling between 3 viewport units.
+*/
+.header_Image_01 {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(13, 65, 255);	
+    text-align: center;
+    line-height: none;
+    margin-top: 15px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+    justify-content: center; 
+	align-items: baseline;
+    background-color: transparent;    
+    width: clamp(75px, 2vw, 200px);  
+    border-right-style: solid; 
+    border-color: rgb(201, 24, 24);
+    border: 0, 2px, 0, 0;
+}
+
+/*
 	  The CSS styles in this code block are used to create a flexible container with a red
 	  background color, center-aligned content, and a row direction. The "flex-wrap: wrap"
 	  property allows the container to wrap its items onto multiple lines if necessary. The
