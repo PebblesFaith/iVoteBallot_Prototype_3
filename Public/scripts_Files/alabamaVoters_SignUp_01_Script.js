@@ -1,3 +1,15 @@
+function toggle_InputPasswordCheckBox() {
+	var passwordInput = document.getElementById("iVoteBallotIdIdentifierCode");
+	var toggleButton = document.getElementById("showHide_01");
+
+	if (passwordInput.type === "password") {
+	  passwordInput.type = "text";
+	  toggleButton.textContent = "Hide";
+	} else {
+	  passwordInput.type = "password";
+	  toggleButton.textContent = "Show";
+	}
+}
 
 const  validateAlabamaVotersSignUpForm = (e) => { 	
 
