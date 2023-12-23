@@ -1,3 +1,16 @@
+function toggle_InputPasswordCheckBox() {
+	var passwordInput = document.getElementById("password");
+	var toggleButton = document.getElementById("showHide_01");
+
+	if (passwordInput.type === "password") {
+	  passwordInput.type = "text";
+	  toggleButton.textContent = "Hide";
+	} else {
+	  passwordInput.type = "password";
+	  toggleButton.textContent = "Show";
+	}
+}
+
 const validateAlabamaVotersLogInForm = (e) => { 	
 
 	console.log('Sarai Hannah Ajai is testing her written JavaScript programmatic codes; in order to validate her \'validateAlabamaVotersSignUpForm()\' form has opened up correctly within the HTML webpage.')
