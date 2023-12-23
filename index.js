@@ -280,7 +280,7 @@ iVoteBallotApp.use(
 				httpOnly: true,
 				sameSite: true,	
 				resave: false,		
-				saveUninitialized: true,
+				saveUninitialized: false,
 				//proxy: true,
 				maxAge: 'SESSION_MAX_AGE' // 30 minuites in milliseconds				
 			}
@@ -322,6 +322,9 @@ iVoteBallotApp.use([passport.initialize()]);
 */
 iVoteBallotApp.use(passport.session());
 
+iVoteBallotApp.use(flash());
+
+iVoteBallotApp.use(flash2());
 
 /*
 	The JavaScript codes language sets up a local1, LocalStrategy for Passport, which is a popular
@@ -480,7 +483,6 @@ passport.use(
 
 ));
 
-
 /*
 	The code passport.serializeUser(function (user, done) { done(null, user.id); }) is a function
 	that is used by Passport to serialize the user object for storage in a session.
@@ -536,11 +538,6 @@ passport.deserializeUser(function(id, done) {
     });
 
 });
-
-iVoteBallotApp.use(flash());
-
-iVoteBallotApp.use(flash2());
-
 
 /* -------------------------- The beginning of the alabamaDMV_Commission_01 section ----------------------------- */
 
