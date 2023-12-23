@@ -399,13 +399,13 @@ passport.use(
 	'local2',
 	new LocalStrategy({
 	usernameField: 'DMVEmail',
-	passwordField: 'temporary_Password',
+	passwordField: 'Temporary_Password',
 	passReqToCallback: true // To allow request object to be passed to callback
 },   
-	async (req, DMVEmail, temporary_Password, done) => {
+	async (req, DMVEmail, Temporary_Password, done) => {
 		
 		console.log('The iVoteBallot\'s user\'s passport.use(local2) email (\'DMVEmail\') as: ' + DMVEmail);
-		console.log('The iVoteBallot\'s user\'s passport.use(local2) password (\'userIvoteBallotIdIdentifierCode\') as: ' + userIvoteBallotIdIdentifierCode );	
+		console.log('The iVoteBallot\'s user\'s passport.use(local2) password (\'Temporary_Password\') as: ' + Temporary_Password );	
 
 				
 		await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE DMVEmail = ?`, DMVEmail, (err, row) => {
@@ -418,14 +418,14 @@ passport.use(
 				return done (null, false, { message: 'You have entered the incorrect email address '+  DMVEmail + '.'});
 			}
 			
-			bcrypt.compare(temporary_Password, row.temporary_Password, (err, result) => {
+			bcrypt.compare(Temporary_Password, row.Temporary_Password, (err, result) => {
 			
 			if (err) {
 				return done(err);
 			}
 			if (!result) {
-				console.log('The user\'s temporary password was entered incorrectly: ' + temporary_Password + '.');
-				return done(null, false, { message: 'You have entered the incorrect temporary password: ' + temporary_Password + '.'});
+				console.log('The user\'s temporary password was entered incorrectly: ' + Temporary_Password + '.');
+				return done(null, false, { message: 'You have entered the incorrect temporary password: ' + Temporary_Password + '.'});
 			}
 			//return done(null, row);
 
@@ -623,27 +623,27 @@ iVoteBallotApp.use('/alabamaVoters_VerifyEmailPassword_01', (req, res, next) => 
 });
 
 iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated) {
         console.log(req.user);
-        console.log('Request Session:' + req.session)
-        console.log('' + req.logIn);
-        console.log('The User had been successfully authenticated within the Session through the passport from reset password webpage!');
-        res.render('alabamaVoters_CreatePasswords');
-    } else {
-        res.render('500')
-       
-        console.log('The user is not successfully authenticated within the session through the passport from reset password webpage!');
-
+        console.log(req.session);
+        console.log('User had been successfully authenticated within the Session through the passport from local2!');
+        res.render('alabamaVoters_EmailVerification_01', { DMVFirstName: req.user.DMVFirstName, DMVLastName: req.user.DMVLastName, DMVEmail: req.user.DMVEmail});
+    } else if (req.isUnauthenticated) {
+        res.redirect('/alabamaVoters_VerifyEmailPassword_01')
+        console.log('User is not successfully authenticated within the session through the passport from local2!');
     }
 });
 
 iVoteBallotApp.post(
     '/alabamaVoters_VerifyEmailPassword_01',
     passport.authenticate('local2', {
-        successRedirect: '/alabamaVoters_CreatePasswords_01',
+        successRedirect: 'alabamaVoters_CreatePasswords_01',
         failureRedirect: '/alabamaVoters_VerifyEmailPassword_01',
         failureFlash: true 
 }));
+
+
+
 
 /* -------------------------- The ending of the alabamaVoters_VerifyEmailPassword_01 section ----------------------------- */
 
@@ -1124,6 +1124,9 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 	});
 });
 
+
+
+
 iVoteBallotApp.post('/alabamaVoters_VerifyEmailPassword_01', 
     async (req, res) => {
 
@@ -1178,7 +1181,7 @@ iVoteBallotApp.post('/alabamaVoters_VerifyEmailPassword_01',
 
 
 	
-/*
+
 iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 	
 	async(req, res) => {
@@ -1228,7 +1231,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 	}
 );
 
-*/
+
 
 
 
