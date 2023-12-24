@@ -955,9 +955,9 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 					</ul>
 					
 					<p>Kindly find the attached image for the iVoteBallot logo.</p>
-					<img src="cid:iVoteBallotLogo" />
+					<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 
-					`,
+					`,					
 
 					attachments: [
 						{
@@ -972,38 +972,35 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 				const mailOptions_02 = {
 					from: 'testdevelopmentenvcustomercare@ivoteballot.com',
 					to: req.body.DMVEmail,
-					subject: `Notification from iVoteBallot's Election Assure Experts`,
+					subject: `Notification from the iVoteBallot's Election Assure Experts`,
 					html:
 						`			
-					<p>Dear ${req.body.DMVFirstName} ${req.body.DMVMiddleName} ${req.body.DMVLastName},</p>	
-								
-					<p>
-						
-					</p>
 					
-					<p>
-						
-					</p>
+						<p>Dear ${req.body.DMVFirstName} ${req.body.DMVMiddleName} ${req.body.DMVLastName},</p>
+						<p>Congratulations! Your iVoteballot account has been successfully set up by our dedicated Election Assure Experts.</p>
 
-					Thank you for choosing iVoteBallot, and we hope you have a great day, 
-					${req.body.DMVFirstName}.
-					</p>
-						
-					<p>Respectfully,</p>			
-					
-					<p>iVoteBallot's Election Assure Experts</p>
+						<p>
+							At iVoteBallot, we are committed to providing you with a seamless voting experience. And, your account is now ready for you to sign up, and we encourage you to explore our platform.
+						</p>
 
-					<img src="cid:iVoteBallot Canva - Logo Dated 05-05-23 copy" />
-					
-					`,
+						<p>
+							Thank you for choosing iVoteBallot. We wish you a fantastic voting journey and hope you have a great day, ${req.body.DMVFirstName}.
+						</p>
 
-					attachments: [
-						{
-							filename: 'iVoteBallot Canva - Logo Dated 05-05-23 copy.png',
-							path: imagePath,
-							cid: 'iVoteBallot Canva - Logo Dated 05-05-23 copy'
-						}
-					]
+						<p>Best Regards,</p>
+						<p>iVoteBallot's Election Assure Experts</p>
+
+						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+
+						`,
+						attachments: [
+							{
+								filename: 'iVoteBallotLogo.png',
+								path: imagePath,
+								cid: 'iVoteBallotLogo'
+							}
+						]
+
 				};
 
 				transporter.sendMail(mailOptions_01, (error, info) => {
