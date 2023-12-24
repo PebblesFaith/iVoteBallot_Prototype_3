@@ -1179,14 +1179,14 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 
 							<br>
 
-							<p>in order for iVoteBallot to verify your email address identity.</p>
-													
+							<p>in order for iVoteBallot to verify your email address identity.</p>						
+							
 							<p>This temporary password is valid for the next 10 minutes. After, successful authentication, you can set your permanent password and confirm password.</p>
 							
 							<p>Should you have any questions or concerns, feel free to reach out to our iVoteBallot's Customer Care Team.</p>
 							
-							<p>Respectfully, </p>							
-						
+							<p>Respectfully, </p>	
+		
 							<p>iVoteBallot's Customer Care Team </p>
 							
 							`,
