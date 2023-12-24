@@ -993,6 +993,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 
 						`,
+
 						attachments: [
 							{
 								filename: 'iVoteBallotLogo.png',
@@ -1154,36 +1155,42 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 						const mailOptions_01 = {
 							from: req.body.DMVEmail,
 							to: 'testdevelopmentenvcustomercare@ivoteballot.com',
-							subject: `iVoteBallot has a New Online Voter Registration Not Yet Verified`,
-							text: `iVoteBallot new online voter registration name is:
-						${req.user.DMVFirstName} ${req.user.DMVLastName}
-						and ${req.user.DMVFirstName} ${req.user.DMVLastName} has been sent an iVoteBallot's verification link registration in order to verify his/her
-						email account, ${req.user.DMVEmail}.`,
+							subject: `New User Registration - iVoteBallot Online Voter Registration Not Yet Verified`,
+							text: `	iVoteBallot has received a new online registration:
+
+								${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName}
+						        and ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName} has been sent a temporary password for an iVoteBallot account verification. The email associated with the iVoteBallot's account is: ${req.user.DMVEmail}.
+																
+								`,								
+
 						};
 
 						const mailOptions_02 = {
 							from: 'testdevelopmentenvcustomercare@ivoteballot.com',
 							to: req.body.DMVEmail,
-							subject: `Authenticate your iVoteBallot's Email Address Link`,
+							subject: `Authenticate Your iVoteBallot's Account`,
 							html: `
 						
-						<p>Dear ${req.user.DMVFirstName} ${req.user.DMVLastName},</p>
-	
-						<p>Please click onto the following link in order to authenticate your email address:<p>
-	
-						<p>Your new temporary password is: ${newPassword}</p;
-					
-						<br>
+							<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
+		
+							<p>Thank you for choosing iVoteBallot to complete your sign-up process, please use the following temporary password:<p>
+		
+							<p><strong>${newPassword}</strong></p;
+
+							<br>
+
+							<p>in order for iVoteBallot to verify your email address identity.</p>
+													
+							<p>This temporary password is valid for the next 10 minutes. After, successful authentication, you can set your permanent password and confirm password.</p>
+							
+							<p>Should you have any questions or concerns, feel free to reach out to our iVoteBallot's Customer Care Team.</p>
+							
+							<p>Respectfully, </p>							
 						
-						<p>and, your email address verification code will expire in 10 minutes. </p>
-						<br>        
-						<p>Respectfully, </p>
-						
-						<br>
-	
-						<p>iVoteBallot's Customer Care Team </p>
-						
-						`,
+							<p>iVoteBallot's Customer Care Team </p>
+							
+							`,
+
 						};
 
 						/*
