@@ -1132,97 +1132,122 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 
 					res.redirect('/alabamaVoters_VerifyEmailPassword_01');
 					console.log('SQlite3 language had properly execute the UPDATE successfully for the user\'s Temporary Password.')
+				}
+				/*
+				Sarai Hannah Ajai has generated a test SMTP service account; in order to receive AccouNetrics' customercare@ionos.com emails from the 
+				'transporter' constant object from the AccouNetrics' users which pass through the 'nodemailer' API library.
+				*/
+				const transporter = nodemailer.createTransport({
+					host: 'smtp.ionos.com',
+					port: 587,
+					secure: false,
+					auth: {
+						user: 'testdevelopmentenvcustomercare@ivoteballot.com',
+						pass: IONOS_SECRET_KEY,
+					}
+				});
+
+				const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
+
+				if (req.isAuthenticated()) {
+					/*
+					Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
+					using the default SMTP transporter nodemailer API library.
+					*/
+					const mailOptions_01 = {
+						from: req.body.DMVEmail,
+						to: 'testdevelopmentenvcustomercare@ivoteballot.com',
+						subject: `New User Registration - iVoteBallot Online Voter Registration Not Yet Verified`,
+						html: `	
+				
+							<p>iVoteBallot has received a new online registration:</p>
+
+							<p>New User Registration ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName}, has been sent a temporary password for an iVoteBallot account verification.</p> 
+							<p>The email associated with the iVoteBallot's account is: ${req.user.DMVEmail}.</p>
+															
+							<p>Kindly find the attached image for the iVoteBallot logo.</p>
+							<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+
+						`,					
+		
+							attachments: [
+								{
+									filename: 'iVoteBallotLogo.png',
+									path: imagePath,
+									cid: 'iVoteBallotLogo'
+		
+								}
+							]						
+
+					};
+
+					const mailOptions_02 = {
+						from: 'testdevelopmentenvcustomercare@ivoteballot.com',
+						to: req.body.DMVEmail,
+						subject: `Authenticate Your iVoteBallot's Account`,
+						html: `
+					
+						<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
+	
+						<p>Thank you for choosing iVoteBallot to complete your sign-up process, please use the following temporary password:<p>
+	
+						<p><strong>${newPassword}</strong></p;
+
+						<br>
+
+						<p>in order for iVoteBallot to verify your email address identity.</p>						
+						
+						<p>This temporary password is valid for the next 10 minutes. After, successful authentication, you can set your permanent password and confirm password.</p>
+						
+						<p>Should you have any questions or concerns, feel free to reach out to our iVoteBallot's Customer Care Team.</p>
+						
+						<p>Respectfully, </p>	
+	
+						<p>iVoteBallot's Customer Care Team </p>
+
+						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+						
+						`,					
+		
+							attachments: [
+								{
+									filename: 'iVoteBallotLogo.png',
+									path: imagePath,
+									cid: 'iVoteBallotLogo'
+		
+								}
+							]		
+
+					};
 
 					/*
-					Sarai Hannah Ajai has generated a test SMTP service account; in order to receive AccouNetrics' customercare@ionos.com emails from the 
-					'transporter' constant object from the AccouNetrics' users which pass through the 'nodemailer' API library.
+					Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
+					email account with nodemailer defined transporter object.
 					*/
-					const transporter = nodemailer.createTransport({
-						host: 'smtp.ionos.com',
-						port: 587,
-						secure: false,
-						auth: {
-							user: 'testdevelopmentenvcustomercare@ivoteballot.com',
-							pass: IONOS_SECRET_KEY,
+
+					transporter.sendMail(mailOptions_01, (error, info) => {
+						if (error) {
+							console.log(error);
+						} else {
+							console.log('Email Sent: ' + info.response);
 						}
 					});
 
-					if (req.isAuthenticated()) {
-						/*
-						Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
-						using the default SMTP transporter nodemailer API library.
-						*/
-						const mailOptions_01 = {
-							from: req.body.DMVEmail,
-							to: 'testdevelopmentenvcustomercare@ivoteballot.com',
-							subject: `New User Registration - iVoteBallot Online Voter Registration Not Yet Verified`,
-							text: `	iVoteBallot has received a new online registration:
+					transporter.sendMail(mailOptions_02, (error, info) => {
+						if (error) {
+							console.log(error);
+							res.send('error');
+						} else {
+							console.log('Email Sent: ' + info.response);
+							res.send('success!');
+						}
+					});
 
-								${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName}
-						        and ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName} has been sent a temporary password for an iVoteBallot account verification. The email associated with the iVoteBallot's account is: ${req.user.DMVEmail}.
-																
-								`,								
+				} else {
+					res.render('error404');
+					console.log('The nodemailer user could not be authenticated.');
 
-						};
-
-						const mailOptions_02 = {
-							from: 'testdevelopmentenvcustomercare@ivoteballot.com',
-							to: req.body.DMVEmail,
-							subject: `Authenticate Your iVoteBallot's Account`,
-							html: `
-						
-							<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
-		
-							<p>Thank you for choosing iVoteBallot to complete your sign-up process, please use the following temporary password:<p>
-		
-							<p><strong>${newPassword}</strong></p;
-
-							<br>
-
-							<p>in order for iVoteBallot to verify your email address identity.</p>						
-							
-							<p>This temporary password is valid for the next 10 minutes. After, successful authentication, you can set your permanent password and confirm password.</p>
-							
-							<p>Should you have any questions or concerns, feel free to reach out to our iVoteBallot's Customer Care Team.</p>
-							
-							<p>Respectfully, </p>	
-		
-							<p>iVoteBallot's Customer Care Team </p>
-							
-							`,
-
-						};
-
-						/*
-						Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
-						email account with nodemailer defined transporter object.
-						*/
-
-						transporter.sendMail(mailOptions_01, (error, info) => {
-							if (error) {
-								console.log(error);
-							} else {
-								console.log('Email Sent: ' + info.response);
-							}
-						});
-
-						transporter.sendMail(mailOptions_02, (error, info) => {
-							if (error) {
-								console.log(error);
-								res.send('error');
-							} else {
-								console.log('Email Sent: ' + info.response);
-								res.send('success!');
-							}
-						});
-
-					} else {
-						res.render('error404');
-						console.log('The nodemailer user could not be authenticated.');
-
-					}
-
-				}
+				}				
 			});
 		}
 	});
@@ -1320,6 +1345,12 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
 						res.redirect('/alabamaVoters_LogIn_01');
 					}
+
+					
+					
+
+
+
 
 				}
 			)
