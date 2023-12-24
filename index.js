@@ -1134,7 +1134,7 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 					console.log('SQlite3 language had properly execute the UPDATE successfully for the user\'s Temporary Password.')
 				}
 				/*
-				Sarai Hannah Ajai has generated a test SMTP service account; in order to receive AccouNetrics' customercare@ionos.com emails from the 
+				Sarai Hannah Ajai has generated a test SMTP service account; in order to receive iVoteBallot's customercare@ionos.com emails from the 
 				'transporter' constant object from the AccouNetrics' users which pass through the 'nodemailer' API library.
 				*/
 				const transporter = nodemailer.createTransport({
@@ -1343,16 +1343,91 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
 					} else {
 
+						const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
+
+						const transporter = nodemailer.createTransport({
+							host: 'smtp.ionos.com',
+							port: 587,
+							secure: false,
+							auth: {
+								user: 'testdevelopmentenvcustomercare@ivoteballot.com',
+								pass: IONOS_SECRET_KEY,
+							}
+						});
+
+						// Send notification email to admin
+						const mailOptions_01 = {
+							from: req.body.DMVEmail,
+							to: 'testdevelopmentenvcustomercare@ivoteballot.com',
+							subject: `New User Signup Notification Successfully Completed`,
+							html: `	
+					
+							<p>New user ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName} has successfully registered for iVoteBallot.</p>
+							<p>Email: ${DMVEmail}</p>
+																
+								<p>Kindly find the attached image for the iVoteBallot logo.</p>
+								<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+	
+							`,					
+			
+								attachments: [
+									{
+										filename: 'iVoteBallotLogo.png',
+										path: imagePath,
+										cid: 'iVoteBallotLogo'
+			
+									}
+								]						
+	
+						};
+			  
+						transporter.sendMail(mailOptions_01, (err, info) => {
+							if (err) {
+								console.log(err);
+							} else {
+								console.log('Email Sent: ' + info.response);
+							}
+						});
+
+						// Send welcome email to the user
+						const mailOptions_02 = {
+							from: 'testdevelopmentenvcustomercare@ivoteballot.com',
+							to: DMVEmail,
+							subject: 'Successful Registration for iVoteBallot',
+							html: `
+							  <p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
+							  <p>You have successfully registered for iVoteBallot.</p>
+							  <p>Thank you for choosing iVoteBallot!</p>
+							  <p>Best regards,</p>
+							  <p>iVoteBallot's Customer Care Team </p>
+							  <img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+							`,
+
+							attachments: [
+								{
+									filename: 'iVoteBallotLogo.png',
+									path: imagePath,
+									cid: 'iVoteBallotLogo'
+		
+								}
+							]	
+
+						};
+			  
+						transporter.sendMail(mailOptions_02, (err, info) => {
+						if (err) {
+							console.log(err);
+						} else {
+							console.log('Email Sent: ' + info.response);
+						}
+						}); 						
+						
 						res.redirect('/alabamaVoters_LogIn_01');
+
 					}
 
-					
-					
-
-
-
-
 				}
+
 			)
 		}
 	}
