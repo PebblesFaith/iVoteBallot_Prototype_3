@@ -53,6 +53,9 @@ router
     .get('/alabamaVoters_LogIn_01', views_Controller.view_alabamaVoters_LogIn_01);
 
 router
+    .get('/alabamaVoters_LogOut_01', views_Controller.view_alabamaVoters_LogOut_01);
+
+router
     .get('/alabamaVoters_SignUp_01', views_Controller.view_alabamaVoters_SignUp_01);
     
 router
