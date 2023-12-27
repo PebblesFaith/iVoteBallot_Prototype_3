@@ -167,14 +167,14 @@ iVoteBallotApp.set('view engine', 'ejs');
 iVoteBallotApp.set('views', './Public/views');
 iVoteBallotApp.set('common', './Public/common');
 
-iVoteBallotApp.use(express.urlencoded({ extended: false }));
-
-iVoteBallotApp.use(express.json());
-
 iVoteBallotApp.use(express.static(path.join(__dirname, 'public')));
 
 iVoteBallotApp.use('/', require('./models/views_Router'));
 iVoteBallotApp.use(views_Controller);
+
+iVoteBallotApp.use(express.urlencoded({ extended: false }));
+
+iVoteBallotApp.use(express.json());
 
 /*
 	The code creates a new instance of the SQLite3 Database using the sqlite3 module in JavaScript. 
@@ -395,7 +395,6 @@ passport.use(
 	)
 );
 
-
 passport.use(
 	'local2',
 	new LocalStrategy({
@@ -551,7 +550,7 @@ passport.deserializeUser(function (id, done) {
 */
 const redirectDashboard = (req, res, next) => {
 	if (req.session.userId) {
-		res.redirect('/alabamaDMV_Commission_01');
+		res.redirect('/dashboard_01');
 	} else {
 		next();
 	}
@@ -732,9 +731,23 @@ iVoteBallotApp.post(
 	}));
 
 
+
+
 /* -------------------------- The ending of the alabamaVoters_LogIn_01 section ----------------------------- */
 
 /* -------------------------- The beginning of the dashboard_01 section ----------------------------- */
+
+// Middleware to set req.isUnauthenticated for the first use of the '/dashboard_01' URL bar
+iVoteBallotApp.use('/dashboard_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'dashboard_01!');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
 
 iVoteBallotApp.get('/dashboard_01', (req, res) => {
 	if (req.isAuthenticated) {
