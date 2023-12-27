@@ -763,6 +763,18 @@ iVoteBallotApp.use('/dashboard_01', (req, res, next) => {
 	next();
 });
 
+// Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_LogOut_01' URL bar
+iVoteBallotApp.use('/alabamaVoters_LogOut_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'alabamaVoters_LogOut_01!');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
 const views_Controller = require('./models/views_Router');
 const contactUs_01_Controller = require('./models/alabama_Session_Router');
 const { view_iVoteBallot } = require('./controllers/views_Controller');
@@ -798,8 +810,7 @@ const redirectDashboard = (req, res, next) => {
 
 /* -------------------------- The ending of the redirectDashboard section ----------------------------- */
 
-
-
+/* -------------------------- The beginning of the GET ROUTE section ----------------------------- */
 
 // User route 401
 iVoteBallotApp.get('/401', (req, res) => {
@@ -809,9 +820,8 @@ iVoteBallotApp.get('/401', (req, res) => {
 	}
 	console.log(req.session);
 	// Check if this is the first use of '/401' route URL bar
-	if (req.isUnauthenticated) {
-		console.log(req.flash());
-		res.render('401', { messages: (req.flash()) })
+	if (req.isUnauthenticated) {		
+		res.render('401');
 
 	} else {
 		console.log(req.flash());
@@ -819,12 +829,6 @@ iVoteBallotApp.get('/401', (req, res) => {
 
 	}
 });
-
-
-
-/* -------------------------- The beginning of the 404 section ----------------------------- */
-
-
 
 // User route 404
 iVoteBallotApp.get('/404', (req, res) => {
@@ -834,9 +838,8 @@ iVoteBallotApp.get('/404', (req, res) => {
 	}
 	console.log(req.session);
 	// Check if this is the first use of '/404' route URL bar
-	if (req.isUnauthenticated) {
-		console.log(req.flash());
-		res.render('404', { messages: (req.flash()) })
+	if (req.isUnauthenticated) {	
+		res.render('404');
 
 	} else {
 		console.log(req.flash());
@@ -844,11 +847,6 @@ iVoteBallotApp.get('/404', (req, res) => {
 
 	}
 });
-
-/* -------------------------- The ending of the 404 section ----------------------------- */
-
-/* -------------------------- The beginning of the 500 section ----------------------------- */
-
 
 // User route 500
 iVoteBallotApp.get('/500', (req, res) => {
@@ -858,9 +856,8 @@ iVoteBallotApp.get('/500', (req, res) => {
 	}
 	console.log(req.session);
 	// Check if this is the first use of '/500' route URL bar
-	if (req.isUnauthenticated) {
-		console.log(req.flash());
-		res.render('500', { messages: (req.flash()) })
+	if (req.isUnauthenticated) {	
+		res.render('500')
 
 	} else {
 		console.log(req.flash());
@@ -868,12 +865,6 @@ iVoteBallotApp.get('/500', (req, res) => {
 
 	}
 });
-
-/* -------------------------- The ending of the 500 section ----------------------------- */
-
-/* -------------------------- The beginning of the 535 section ----------------------------- */
-
-
 
 // User route 535
 iVoteBallotApp.get('/535', (req, res) => {
@@ -883,9 +874,8 @@ iVoteBallotApp.get('/535', (req, res) => {
 	}
 	console.log(req.session);
 	// Check if this is the first use of '/535' route URL bar
-	if (req.isUnauthenticated) {
-		console.log(req.flash());
-		res.render('535', { messages: (req.flash()) })
+	if (req.isUnauthenticated) {	
+		res.render('535');
 
 	} else {
 		console.log(req.flash());
@@ -893,14 +883,6 @@ iVoteBallotApp.get('/535', (req, res) => {
 
 	}
 });
-
-/* -------------------------- The ending of the 535 section ----------------------------- */
-
-/* -------------------------- The beginning of the alabamaDMV_Commission_01 section ----------------------------- */
-
-
-
-
 
 // User route signup
 iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {
@@ -920,12 +902,6 @@ iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) =>
 	}
 });
 
-/* -------------------------- The ending of the alabamaDMV_Commission_01 section ----------------------------- */
-
-/* -------------------------- The beginning of the alabamaVoters_SignUp_01 section ----------------------------- */
-
-
-
 iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 	if (req.isAuthenticated()) {
 		console.log(req.user);
@@ -941,20 +917,6 @@ iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 	}
 });
 
-iVoteBallotApp.post(
-	'/alabamaVoters_SignUp_01',
-	passport.authenticate('local1', {
-		successRedirect: '/alabamaVoters_EmailVerification_01',
-		failureRedirect: '/alabamaVoters_SignUp_01',
-		failureFlash: true
-	}));
-
-/* -------------------------- The ending of the alabamaVoters_SignUp_01 section ----------------------------- */
-
-/* -------------------------- The beginning of the alabamaVoters_EmailVerification section ----------------------------- */
-
-
-
 // User route forgotPassword
 iVoteBallotApp.get('/alabamaVoters_EmailVerification_01', (req, res) => {
 	// Check if user already authenticated.
@@ -968,12 +930,6 @@ iVoteBallotApp.get('/alabamaVoters_EmailVerification_01', (req, res) => {
 	}
 });
 
-/* -------------------------- The ending of the alabamaVoters_EmailVerification_01 section ----------------------------- */
-
-/* -------------------------- The beginning of the alabamaVoters_VerifyEmailPassword_01 section ----------------------------- */
-
-
-
 iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
 	if (req.isAuthenticated) {
 		console.log(req.user);
@@ -985,25 +941,6 @@ iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
 		console.log('User is not successfully authenticated within the session through the passport from local2!');
 	}
 });
-
-iVoteBallotApp.post(
-	'/alabamaVoters_VerifyEmailPassword_01',
-	passport.authenticate('local2', {
-		successRedirect: 'alabamaVoters_CreatePasswords_01',
-		failureRedirect: '/alabamaVoters_VerifyEmailPassword_01',
-		failureFlash: true
-	}));
-
-
-/* -------------------------- The ending of the alabamaVoters_VerifyEmailPassword_01 section ----------------------------- */
-
-/* -------------------------- The beginning of the alabamaVoters_CreatePassword_01 section ----------------------------- */
-
-/* -------------------------- The ending of the alabamaVoters_CreatePassword_01 section ----------------------------- */
-
-/* -------------------------- The beginning of the alabamaVoters_LogIn_01 section ----------------------------- */
-
-
 
 iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 	console.log(req.session);
@@ -1022,23 +959,6 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 	}
 });
 
-iVoteBallotApp.post(
-	'/alabamaVoters_LogIn_01',
-	passport.authenticate('local3', {
-		successRedirect: '/dashboard_01',
-		failureRedirect: '/alabamaVoters_LogIn_01',
-		failureFlash: true
-	}));
-
-
-
-
-/* -------------------------- The ending of the alabamaVoters_LogIn_01 section ----------------------------- */
-
-/* -------------------------- The beginning of the dashboard_01 section ----------------------------- */
-
-
-
 iVoteBallotApp.get('/dashboard_01', (req, res) => {
 	if (req.isAuthenticated) {
 		console.log(req.user);
@@ -1051,7 +971,87 @@ iVoteBallotApp.get('/dashboard_01', (req, res) => {
 	}
 });
 
-/* -------------------------- The ending of the dashboard_01 section ----------------------------- */
+// User route for alabamaVoters_LogOut_01
+iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => { 
+    if (req.isAuthenticated()) {
+        console.log('The User have successfully logged out of the dashboard!');
+        res.render('alabamaVoters_LogOut_01');
+    } else {      
+        res.render('404');
+    }  
+});
+
+/* -------------------------- The ending of the GET ROUTE section ----------------------------- */
+
+/* -------------------------- The beginning of the DELETE ROUTE section ----------------------------- */
+
+// Delete a route for the alabamaVoters_LogOut_01 page
+iVoteBallotApp.delete('/alabamaVoters_LogOut_01', (req, res) => {  
+    if (req.isAuthenticated()) {
+    
+        req.logOut(); 
+        res.render('alabamaVoters_LogIn_01');
+        }
+        /* The logout logic will clear the users from the session object and save. 
+        Also, will enure that the re-using of the old session id does not have
+        a logged in user again.
+        */
+        req.session.user = null    
+        req.session.save(function (err) {
+            if (err) 
+                next(err)       
+            
+                /* The regenerate of the session, which is good practice to help safe
+                guard against users' forms of session fixation.
+                */ 
+                req.session.regenerate(function (err) {
+                    if (err) next(err)
+                res.render('dashboard_01');
+            });        
+        }
+    );    
+});
+
+/* -------------------------- The ending of the DELETE ROUTE section ----------------------------- */
+
+/* -------------------------- The beginning of the POST LOCAL STRATEGY section ----------------------------- */
+
+iVoteBallotApp.post(
+	'/alabamaVoters_SignUp_01',
+	passport.authenticate('local1', {
+		successRedirect: '/alabamaVoters_EmailVerification_01',
+		failureRedirect: '/alabamaVoters_SignUp_01',
+		failureFlash: true
+	}
+));
+
+iVoteBallotApp.post(
+	'/alabamaVoters_VerifyEmailPassword_01',
+	passport.authenticate('local2', {
+		successRedirect: 'alabamaVoters_CreatePasswords_01',
+		failureRedirect: '/alabamaVoters_VerifyEmailPassword_01',
+		failureFlash: true
+	}	
+));
+
+iVoteBallotApp.post(
+	'/alabamaVoters_LogIn_01',
+	passport.authenticate('local3', {
+		successRedirect: '/dashboard_01',
+		failureRedirect: '/alabamaVoters_LogIn_01',
+		failureFlash: true
+	}
+));
+
+iVoteBallotApp.post(
+    '/alabamaVoters_LogOut_01',
+    passport.authenticate('local3', {
+        successRedirect: '/alabamaVoters_LogIn_01',
+        failureRedirect: '/alabamaVoters_LogOut_01',
+        failureFlash: true  
+}));
+
+/* -------------------------- The ending of the POST LOCAL STRATEGY section ----------------------------- */
 
 /* -------------------------- The beginning of All SQLite3 databases section ----------------------------- */
 
