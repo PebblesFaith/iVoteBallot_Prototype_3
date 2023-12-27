@@ -100,9 +100,11 @@ short-lived messages that are stored in the session and displayed to the user on
 connect-flash, you can easily create and manage flash messages in your application, which can be used to
 display success messages, error messages, or any other kind of notification to the user.
 */
+const flash2 = require('connect-flash');
+
 const flash = require('express-flash');
 
-const flash2 = require('connect-flash');
+const methodOverride = require('method-override');
 
 /*
 	The given Javascript coded language imports the 'nodemailer' library which is used for
@@ -121,9 +123,9 @@ const nodemailer = require('nodemailer');
 	been successfully created')". This function call logs a message to the console
 	indicating that the database has been successfully created.
 */
-const db = new sqliteDB('Alabama_Id_Session.db', { verbose: console.log('The Alabama_Id_Session have been successfully created.') });
+const db = new sqliteDB('Alabama_Id_Session.db', { verbose: console.log('The Alabama_Id_Session database have been successfully created.') });
 
-const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
+//const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
 const port = 8080;
 
@@ -157,20 +159,6 @@ const ALABAMA_SESSION = process.env.ALABAMA_SESSION;
 const SESSION_MAX_AGE = process.env.SESSION_MAX_AGE;
 const EXPRESS_SESSION_KEY = process.env.EXPRESS_SESSION_KEY;
 const IONOS_SECRET_KEY = process.env.IONOS_SECRET_KEY;
-
-const views_Controller = require('./models/views_Router');
-const contactUs_01_Controller = require('./models/alabama_Session_Router');
-const { view_iVoteBallot } = require('./controllers/views_Controller');
-
-iVoteBallotApp.set('view engine', 'ejs');
-
-iVoteBallotApp.set('views', './Public/views');
-iVoteBallotApp.set('common', './Public/common');
-
-iVoteBallotApp.use(express.static(path.join(__dirname, 'public')));
-
-iVoteBallotApp.use('/', require('./models/views_Router'));
-iVoteBallotApp.use(views_Controller);
 
 iVoteBallotApp.use(express.urlencoded({ extended: false }));
 
@@ -618,7 +606,7 @@ passport.serializeUser(function (user, done) {
 	allows the index.js (server) to retrieve user data information from the sessions cookie id
 	and use it to authenticate requests.
 */
-passport.deserializeUser(function (id, done) {
+passport.deserializeUser(function(id, done) {
 	console.log('Deserializing users...')
 	console.log(id);
 	db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE id = ?', id, (err, row) => {
@@ -628,51 +616,50 @@ passport.deserializeUser(function (id, done) {
 		}
 		if (!row) {
 			return done(null, false);
-		} else {
-
-			return done(null, 
-				{ 
-					
-					id: row.id, 
-					DMVFirstName: row.DMVFirstName, 
-					DMVMiddleName: row.DMVMiddleName, 
-					DMVLastName: row.DMVLastName, 
-					DMVSuffix: row.DMVSuffix, 
-					DMVDateOfBirth: row.DMVDateOfBirth, 
-					DMVBirthSex: row.DMVBirthSex, 
-					DMVGenderIdentity: row.DMVGenderIdentity, 
-					DMVRace: row.DMVRace, 
-					DMVSSN: row.DMVSSN, 
-					DMVEmail: row.DMVEmail, 
-					DMVConfirmEmail: row.DMVConfirmEmail, 
-					DMVPhoneNumber: row.DMVPhoneNumber, 
-					DMVAddress: row.DMVAddress, 
-					DMVUnitType: row.DMVUnitType, 
-					DMVUnitTypeNumber: row.DMVUnitType, 
-					DMVCountrySelection: row.DMVCountrySelection, 
-					DMVStateSelection: row.DMVStateSelection, 
-					DMVCountySelection: row.DMVCountySelection, 
-					DMVCitySelection: row.DMVCitySelection, 
-					DMVZipSelection: row.DMVZipSelection, 
-					DMVIdType: row.DMVIdType, 
-					DMVIdTypeNumber: row.DMVIdTypeNumber, 
-					IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
-					ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode,
-					Password: row.Password, 
-					ConfirmPassword: row.DMVConfirmEmail, 
-					Temporary_Password: row.Temporary_Password, 
-					isAuthenticated: true 
-				}
-				
-			);
-
 		}
+
+		return done(null, 
+
+			{ 					
+				id: row.id, 
+				DMVFirstName: row.DMVFirstName, 
+				DMVMiddleName: row.DMVMiddleName, 
+				DMVLastName: row.DMVLastName, 
+				DMVSuffix: row.DMVSuffix, 
+				DMVDateOfBirth: row.DMVDateOfBirth, 
+				DMVBirthSex: row.DMVBirthSex, 
+				DMVGenderIdentity: row.DMVGenderIdentity, 
+				DMVRace: row.DMVRace, 
+				DMVSSN: row.DMVSSN, 
+				DMVEmail: row.DMVEmail, 
+				DMVConfirmEmail: row.DMVConfirmEmail, 
+				DMVPhoneNumber: row.DMVPhoneNumber, 
+				DMVAddress: row.DMVAddress, 
+				DMVUnitType: row.DMVUnitType, 
+				DMVUnitTypeNumber: row.DMVUnitType, 
+				DMVCountrySelection: row.DMVCountrySelection, 
+				DMVStateSelection: row.DMVStateSelection, 
+				DMVCountySelection: row.DMVCountySelection, 
+				DMVCitySelection: row.DMVCitySelection, 
+				DMVZipSelection: row.DMVZipSelection, 
+				DMVIdType: row.DMVIdType, 
+				DMVIdTypeNumber: row.DMVIdTypeNumber, 
+				IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
+				ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode,
+				Password: row.Password, 
+				ConfirmPassword: row.DMVConfirmEmail, 
+				Temporary_Password: row.Temporary_Password, 
+				isAuthenticated: true 
+
+			}
+			
+		);		
 
 	});
 
 });
 
-/* -------------------------- The beginning of the 401 section ----------------------------- */
+/* -------------------------- The beginning of the use section ----------------------------- */
 
 // Middleware to set req.isUnauthenticated for the first use of the '/401' URL bar.
 iVoteBallotApp.use('/401', (req, res, next) => {
@@ -682,6 +669,137 @@ iVoteBallotApp.use('/401', (req, res, next) => {
 	}
 	next();
 });
+
+// Middleware to set req.isUnauthenticated for the first use of the '/404' URL bar.
+iVoteBallotApp.use('/404', (req, res, next) => {
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/500' URL bar.
+iVoteBallotApp.use('/500', (req, res, next) => {
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/535' URL bar.
+iVoteBallotApp.use('/535', (req, res, next) => {
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/alabamaDMV_Commisstion_01' URL bar.
+iVoteBallotApp.use('/alabamaDMV_Commission_01', (req, res, next) => {
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/login2' URL bar
+iVoteBallotApp.use('/alabamaVoters_SignUp_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'alabamaVoters_SignUp_01\'.');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/forgotPassword' URL bar
+iVoteBallotApp.use('/alabamaVoters_EmailVerification_01', (req, res, next) => {
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_VerifyEmailPassword_01' URL bar
+iVoteBallotApp.use('/alabamaVoters_VerifyEmailPassword_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'alabamaVoters_VerifyEmailPassword_01!');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_LogIn_01' URL bar
+iVoteBallotApp.use('/alabamaVoters_LogIn_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'alabamaVoters_LogIn_01!');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/dashboard_01' URL bar
+iVoteBallotApp.use('/dashboard_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'dashboard_01!');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+const views_Controller = require('./models/views_Router');
+const contactUs_01_Controller = require('./models/alabama_Session_Router');
+const { view_iVoteBallot } = require('./controllers/views_Controller');
+
+iVoteBallotApp.set('view engine', 'ejs');
+
+iVoteBallotApp.set('views', './Public/views');
+iVoteBallotApp.set('common', './Public/common');
+
+iVoteBallotApp.use(express.static(path.join(__dirname, 'public')));
+
+iVoteBallotApp.use('/', require('./models/views_Router'));
+iVoteBallotApp.use(views_Controller);
+
+/* -------------------------- The ending of the use section ----------------------------- */
+
+/* -------------------------- The beginning of the redirectDashboard section ----------------------------- */
+
+/*
+	The constant redirectDashboard is a middleware function that checks if the user is already
+	logged in by verifying the existence of a userId property in the user's session. If the user
+	is logged in, the function redirects them to the dashboard page; otherwise, it allows the
+	request to proceed to the next middleware function. This middleware is commonly used to restrict
+	access to certain routes for authenticated users.
+*/
+const redirectDashboard = (req, res, next) => {
+	if (req.session.userId) {
+		res.redirect('/dashboard_01');
+	} else {
+		next();
+	}
+}
+
+/* -------------------------- The ending of the redirectDashboard section ----------------------------- */
+
+
+
 
 // User route 401
 iVoteBallotApp.get('/401', (req, res) => {
@@ -702,18 +820,11 @@ iVoteBallotApp.get('/401', (req, res) => {
 	}
 });
 
-/* -------------------------- The ending of the 401 section ----------------------------- */
+
 
 /* -------------------------- The beginning of the 404 section ----------------------------- */
 
-// Middleware to set req.isUnauthenticated for the first use of the '/404' URL bar.
-iVoteBallotApp.use('/404', (req, res, next) => {
-	// Check if user is Already authenticated
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-	next();
-});
+
 
 // User route 404
 iVoteBallotApp.get('/404', (req, res) => {
@@ -738,14 +849,6 @@ iVoteBallotApp.get('/404', (req, res) => {
 
 /* -------------------------- The beginning of the 500 section ----------------------------- */
 
-// Middleware to set req.isUnauthenticated for the first use of the '/500' URL bar.
-iVoteBallotApp.use('/500', (req, res, next) => {
-	// Check if user is Already authenticated
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-	next();
-});
 
 // User route 500
 iVoteBallotApp.get('/500', (req, res) => {
@@ -770,14 +873,7 @@ iVoteBallotApp.get('/500', (req, res) => {
 
 /* -------------------------- The beginning of the 535 section ----------------------------- */
 
-// Middleware to set req.isUnauthenticated for the first use of the '/535' URL bar.
-iVoteBallotApp.use('/535', (req, res, next) => {
-	// Check if user is Already authenticated
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-	next();
-});
+
 
 // User route 535
 iVoteBallotApp.get('/535', (req, res) => {
@@ -802,29 +898,9 @@ iVoteBallotApp.get('/535', (req, res) => {
 
 /* -------------------------- The beginning of the alabamaDMV_Commission_01 section ----------------------------- */
 
-/*
-	The constant redirectDashboard is a middleware function that checks if the user is already
-	logged in by verifying the existence of a userId property in the user's session. If the user
-	is logged in, the function redirects them to the dashboard page; otherwise, it allows the
-	request to proceed to the next middleware function. This middleware is commonly used to restrict
-	access to certain routes for authenticated users.
-*/
-const redirectDashboard = (req, res, next) => {
-	if (req.session.userId) {
-		res.redirect('/dashboard_01');
-	} else {
-		next();
-	}
-}
 
-// Middleware to set req.isUnauthenticated for the first use of the '/alabamaDMV_Commisstion_01' URL bar.
-iVoteBallotApp.use('/alabamaDMV_Commission_01', (req, res, next) => {
-	// Check if user is Already authenticated
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-	next();
-});
+
+
 
 // User route signup
 iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {
@@ -848,17 +924,7 @@ iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) =>
 
 /* -------------------------- The beginning of the alabamaVoters_SignUp_01 section ----------------------------- */
 
-// Middleware to set req.isUnauthenticated for the first use of the '/login2' URL bar
-iVoteBallotApp.use('/alabamaVoters_SignUp_01', (req, res, next) => {
-	console.log('The middleware have been call for the user\'s \'alabamaVoters_SignUp_01\'.');
-	// Check if user is Already authenticated
-	if (!req.session.isAuthenticated) {
 
-		// User of '/login' URL
-		req.isUnauthenticated = true;
-	}
-	next();
-});
 
 iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 	if (req.isAuthenticated()) {
@@ -887,14 +953,7 @@ iVoteBallotApp.post(
 
 /* -------------------------- The beginning of the alabamaVoters_EmailVerification section ----------------------------- */
 
-// Middleware to set req.isUnauthenticated for the first use of the '/forgotPassword' URL bar
-iVoteBallotApp.use('/alabamaVoters_EmailVerification_01', (req, res, next) => {
-	// Check if user is Already authenticated
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-	next();
-});
+
 
 // User route forgotPassword
 iVoteBallotApp.get('/alabamaVoters_EmailVerification_01', (req, res) => {
@@ -913,17 +972,7 @@ iVoteBallotApp.get('/alabamaVoters_EmailVerification_01', (req, res) => {
 
 /* -------------------------- The beginning of the alabamaVoters_VerifyEmailPassword_01 section ----------------------------- */
 
-// Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_VerifyEmailPassword_01' URL bar
-iVoteBallotApp.use('/alabamaVoters_VerifyEmailPassword_01', (req, res, next) => {
-	console.log('The middleware have been call for the user\'s \'alabamaVoters_VerifyEmailPassword_01!');
-	// Check if user is Already authenticated
-	if (!req.session.isAuthenticated) {
 
-		// User of '/login' URL
-		req.isUnauthenticated = true;
-	}
-	next();
-});
 
 iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
 	if (req.isAuthenticated) {
@@ -954,17 +1003,7 @@ iVoteBallotApp.post(
 
 /* -------------------------- The beginning of the alabamaVoters_LogIn_01 section ----------------------------- */
 
-// Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_LogIn_01' URL bar
-iVoteBallotApp.use('/alabamaVoters_LogIn_01', (req, res, next) => {
-	console.log('The middleware have been call for the user\'s \'alabamaVoters_LogIn_01!');
-	// Check if user is Already authenticated
-	if (!req.session.isAuthenticated) {
 
-		// User of '/login' URL
-		req.isUnauthenticated = true;
-	}
-	next();
-});
 
 iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 	console.log(req.session);
@@ -998,17 +1037,7 @@ iVoteBallotApp.post(
 
 /* -------------------------- The beginning of the dashboard_01 section ----------------------------- */
 
-// Middleware to set req.isUnauthenticated for the first use of the '/dashboard_01' URL bar
-iVoteBallotApp.use('/dashboard_01', (req, res, next) => {
-	console.log('The middleware have been call for the user\'s \'dashboard_01!');
-	// Check if user is Already authenticated
-	if (!req.session.isAuthenticated) {
 
-		// User of '/login' URL
-		req.isUnauthenticated = true;
-	}
-	next();
-});
 
 iVoteBallotApp.get('/dashboard_01', (req, res) => {
 	if (req.isAuthenticated) {
@@ -1656,8 +1685,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 									}
 								]						
 	
-						};
-	
+						};	
 
 						// Send welcome email to the user
 						const mailOptions_02 = {
