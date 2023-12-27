@@ -1135,7 +1135,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 			req.flash('success', 'The user\' iVoteBallot Id Identifier Code have successfully matched to his or her iVoteBallot Id Code entered into the input fields, and the user is successfully authenticated through the \'passport.use\' login1, LocalStrategy through the session cookie id.');
 			console.log('The user\' iVoteBallot Id Identifier Code have successfully matched to his or her confirm iVoteBallot Id Code entered into the input fields, and the user is successfully authenticated through the \'passport.use\' login1, LocalStrategy through the session cookie id.');
 		}
-
+		
 		// To hash the user's DMVSSN input field using bcryption.
 		const salt = await bcrypt.genSalt(12);
 		const DMVSSNHashed = await bcrypt.hash(req.body.DMVSSN, salt);
@@ -1630,14 +1630,17 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 						});
 
 						// Send notification email to admin
+						
 						const mailOptions_01 = {
 							from: req.body.DMVEmail,
 							to: 'testdevelopmentenvcustomercare@ivoteballot.com',
 							subject: `New User Signup Notification Successfully Completed`,
 							html: `	
 					
-							<p>New user ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName} has successfully registered for iVoteBallot.</p>
-							<p>Email: ${DMVEmail}</p>
+								<p>iVoteBallot has received a new online registration completion:</p>
+	
+								<p>New User ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName} has successfully registered for iVoteBallot.</p> 
+								<p>: ${req.user.DMVEmail}.</p>
 																
 								<p>Kindly find the attached image for the iVoteBallot logo.</p>
 								<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
@@ -1654,14 +1657,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 								]						
 	
 						};
-			  
-						transporter.sendMail(mailOptions_01, (err, info) => {
-							if (err) {
-								console.log(err);
-							} else {
-								console.log('Email Sent: ' + info.response);
-							}
-						});
+	
 
 						// Send welcome email to the user
 						const mailOptions_02 = {
@@ -1687,6 +1683,14 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 							]	
 
 						};
+
+						transporter.sendMail(mailOptions_01, (err, info) => {
+							if (err) {
+								console.log(err);
+							} else {
+								console.log('Email Sent: ' + info.response);
+							}
+						});
 			  
 						transporter.sendMail(mailOptions_02, (err, info) => {
 						if (err) {
