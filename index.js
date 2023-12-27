@@ -571,6 +571,41 @@ iVoteBallotApp.get('/401', (req, res) => {
 
 /* -------------------------- The ending of the 401 section ----------------------------- */
 
+/* -------------------------- The beginning of the 404 section ----------------------------- */
+
+// Middleware to set req.isUnauthenticated for the first use of the '/404' URL bar.
+iVoteBallotApp.use('/404', (req, res, next) => {
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// User route 404
+iVoteBallotApp.get('/404', (req, res) => {
+	// Check if user already authenticated.
+	if (req.session.isAuthenticated) {
+		return alert('You are already logged in!');
+	}
+	console.log(req.session);
+	// Check if this is the first use of '/404' route URL bar
+	if (req.isUnauthenticated) {
+		console.log(req.flash());
+		res.render('404', { messages: (req.flash()) })
+
+	} else {
+		console.log(req.flash());
+		res.render('500');
+
+	}
+});
+
+/* -------------------------- The ending of the 404 section ----------------------------- */
+
+
+
+
 
 
 /* -------------------------- The beginning of the alabamaDMV_Commission_01 section ----------------------------- */
