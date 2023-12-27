@@ -386,7 +386,40 @@ passport.use(
 
 							//return done(null, user);
 
-							return done(null, { id: row.id, DMVFirstName: row.DMVFirstName, DMVMiddleName: row.DMVMiddleName, DMVLastName: row.DMVLastName, DMVSuffix: row.DMVSuffix, DMVDateOfBirth: row.DMVDateOfBirth, DMVBirthSex: row.DMVBirthSex, DMVGenderIdentity: row.DMVGenderIdentity, DMVRace: row.DMVRace, DMVSSN: row.DMVSSN, DMVEmail: row.DMVEmail, DMVConfirmEmail: row.DMVConfirmEmail, DMVPhoneNumber: row.DMVPhoneNumber, DMVAddress: row.DMVAddress, DMVUnitType: row.DMVUnitType, DMVUnitTypeNumber: row.DMVUnitType, DMVCountrySelection: row.DMVCountrySelection, DMVStateSelection: row.DMVStateSelection, DMVCountySelection: row.DMVCountySelection, DMVCitySelection: row.DMVCitySelection, DMVZipSelection: row.DMVZipSelection, DMVIdType: row.DMVIdType, DMVIdTypeNumber: row.DMVIdTypeNumber, IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, Password: row.Password, ConfirmPassword: row.DMVConfirmEmail, Temporary_Password: row.Temporary_Password, isAuthenticated: true });
+							return done(null, 
+								{ 
+									id: row.id, 
+									DMVFirstName: row.DMVFirstName, 
+									DMVMiddleName: row.DMVMiddleName, 
+									DMVLastName: row.DMVLastName, 
+									DMVSuffix: row.DMVSuffix, 
+									DMVDateOfBirth: row.DMVDateOfBirth, 
+									DMVBirthSex: row.DMVBirthSex, 
+									DMVGenderIdentity: row.DMVGenderIdentity, 
+									DMVRace: row.DMVRace, 
+									DMVSSN: row.DMVSSN, 
+									DMVEmail: row.DMVEmail, 
+									DMVConfirmEmail: row.DMVConfirmEmail, 
+									DMVPhoneNumber: row.DMVPhoneNumber, 
+									DMVAddress: row.DMVAddress, 
+									DMVUnitType: row.DMVUnitType, 
+									DMVUnitTypeNumber: row.DMVUnitType, 
+									DMVCountrySelection: row.DMVCountrySelection, 
+									DMVStateSelection: row.DMVStateSelection, 
+									DMVCountySelection: row.DMVCountySelection, 
+									DMVCitySelection: row.DMVCitySelection, 
+									DMVZipSelection: row.DMVZipSelection, 
+									DMVIdType: row.DMVIdType, 
+									DMVIdTypeNumber: row.DMVIdTypeNumber, 
+									IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
+									ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, 
+									Password: row.Password, 
+									ConfirmPassword: row.DMVConfirmEmail, 
+									Temporary_Password: row.Temporary_Password, 
+									isAuthenticated: true 
+								}
+								
+							);
 
 						}
 					});
@@ -429,7 +462,40 @@ passport.use(
 					}
 					//return done(null, row);
 
-					return done(null, { id: row.id, DMVFirstName: row.DMVFirstName, DMVMiddleName: row.DMVMiddleName, DMVLastName: row.DMVLastName, DMVSuffix: row.DMVSuffix, DMVDateOfBirth: row.DMVDateOfBirth, DMVBirthSex: row.DMVBirthSex, DMVGenderIdentity: row.DMVGenderIdentity, DMVRace: row.DMVRace, DMVSSN: row.DMVSSN, DMVEmail: row.DMVEmail, DMVConfirmEmail: row.DMVConfirmEmail, DMVPhoneNumber: row.DMVPhoneNumber, DMVAddress: row.DMVAddress, DMVUnitType: row.DMVUnitType, DMVUnitTypeNumber: row.DMVUnitType, DMVCountrySelection: row.DMVCountrySelection, DMVStateSelection: row.DMVStateSelection, DMVCountySelection: row.DMVCountySelection, DMVCitySelection: row.DMVCitySelection, DMVZipSelection: row.DMVZipSelection, DMVIdType: row.DMVIdType, DMVIdTypeNumber: row.DMVIdTypeNumber, IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, Password: row.Password, ConfirmPassword: row.DMVConfirmEmail, Temporary_Password: row.Temporary_Password, isAuthenticated: true });
+					return done(null, 
+						{ 
+							id: row.id, 
+							DMVFirstName: row.DMVFirstName, 
+							DMVMiddleName: row.DMVMiddleName, 
+							DMVLastName: row.DMVLastName, 
+							DMVSuffix: row.DMVSuffix, 
+							DMVDateOfBirth: row.DMVDateOfBirth, 
+							DMVBirthSex: row.DMVBirthSex, 
+							DMVGenderIdentity: row.DMVGenderIdentity, 
+							DMVRace: row.DMVRace, 
+							DMVSSN: row.DMVSSN, 
+							DMVEmail: row.DMVEmail, 
+							DMVConfirmEmail: row.DMVConfirmEmail, 
+							DMVPhoneNumber: row.DMVPhoneNumber, 
+							DMVAddress: row.DMVAddress, 
+							DMVUnitType: row.DMVUnitType, 
+							DMVUnitTypeNumber: row.DMVUnitType, 
+							DMVCountrySelection: row.DMVCountrySelection, 
+							DMVStateSelection: row.DMVStateSelection, 
+							DMVCountySelection: row.DMVCountySelection, 
+							DMVCitySelection: row.DMVCitySelection, 
+							DMVZipSelection: row.DMVZipSelection, 
+							DMVIdType: row.DMVIdType, 
+							DMVIdTypeNumber: row.DMVIdTypeNumber, 
+							IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
+							ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode,
+							Password: row.Password, 
+							ConfirmPassword: row.DMVConfirmEmail, 
+							Temporary_Password: row.Temporary_Password,
+							isAuthenticated: true 
+						}
+						
+					);
 
 				});
 
@@ -475,8 +541,7 @@ passport.use(
 
 					return done(null, 
 						{ 
-							id: 
-							row.id,
+							id: row.id,
 							DMVFirstName: row.DMVFirstName, 
 							DMVMiddleName: row.DMVMiddleName, 
 							DMVLastName: row.DMVLastName, 
@@ -504,7 +569,7 @@ passport.use(
 							Password: row.Password, 
 							ConfirmPassword: row.DMVConfirmEmail, 
 							Temporary_Password: row.Temporary_Password, 
-							isAuthenticated: true, 
+							isAuthenticated: true 
 						}
 
 					);	
@@ -565,7 +630,41 @@ passport.deserializeUser(function (id, done) {
 			return done(null, false);
 		} else {
 
-			return done(null, { id: row.id, DMVFirstName: row.DMVFirstName, DMVMiddleName: row.DMVMiddleName, DMVLastName: row.DMVLastName, DMVSuffix: row.DMVSuffix, DMVDateOfBirth: row.DMVDateOfBirth, DMVBirthSex: row.DMVBirthSex, DMVGenderIdentity: row.DMVGenderIdentity, DMVRace: row.DMVRace, DMVSSN: row.DMVSSN, DMVEmail: row.DMVEmail, DMVConfirmEmail: row.DMVConfirmEmail, DMVPhoneNumber: row.DMVPhoneNumber, DMVAddress: row.DMVAddress, DMVUnitType: row.DMVUnitType, DMVUnitTypeNumber: row.DMVUnitType, DMVCountrySelection: row.DMVCountrySelection, DMVStateSelection: row.DMVStateSelection, DMVCountySelection: row.DMVCountySelection, DMVCitySelection: row.DMVCitySelection, DMVZipSelection: row.DMVZipSelection, DMVIdType: row.DMVIdType, DMVIdTypeNumber: row.DMVIdTypeNumber, IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, Password: row.Password, ConfirmPassword: row.DMVConfirmEmail, Temporary_Password: row.Temporary_Password, isAuthenticated: true });
+			return done(null, 
+				{ 
+					
+					id: row.id, 
+					DMVFirstName: row.DMVFirstName, 
+					DMVMiddleName: row.DMVMiddleName, 
+					DMVLastName: row.DMVLastName, 
+					DMVSuffix: row.DMVSuffix, 
+					DMVDateOfBirth: row.DMVDateOfBirth, 
+					DMVBirthSex: row.DMVBirthSex, 
+					DMVGenderIdentity: row.DMVGenderIdentity, 
+					DMVRace: row.DMVRace, 
+					DMVSSN: row.DMVSSN, 
+					DMVEmail: row.DMVEmail, 
+					DMVConfirmEmail: row.DMVConfirmEmail, 
+					DMVPhoneNumber: row.DMVPhoneNumber, 
+					DMVAddress: row.DMVAddress, 
+					DMVUnitType: row.DMVUnitType, 
+					DMVUnitTypeNumber: row.DMVUnitType, 
+					DMVCountrySelection: row.DMVCountrySelection, 
+					DMVStateSelection: row.DMVStateSelection, 
+					DMVCountySelection: row.DMVCountySelection, 
+					DMVCitySelection: row.DMVCitySelection, 
+					DMVZipSelection: row.DMVZipSelection, 
+					DMVIdType: row.DMVIdType, 
+					DMVIdTypeNumber: row.DMVIdTypeNumber, 
+					IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
+					ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode,
+					Password: row.Password, 
+					ConfirmPassword: row.DMVConfirmEmail, 
+					Temporary_Password: row.Temporary_Password, 
+					isAuthenticated: true 
+				}
+				
+			);
 
 		}
 
