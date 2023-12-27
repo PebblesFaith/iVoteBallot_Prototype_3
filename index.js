@@ -539,6 +539,40 @@ passport.deserializeUser(function (id, done) {
 
 });
 
+/* -------------------------- The beginning of the 401 section ----------------------------- */
+
+// Middleware to set req.isUnauthenticated for the first use of the '/401' URL bar.
+iVoteBallotApp.use('/401', (req, res, next) => {
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// User route 401
+iVoteBallotApp.get('/401', (req, res) => {
+	// Check if user already authenticated.
+	if (req.session.isAuthenticated) {
+		return alert('You are already logged in!');
+	}
+	console.log(req.session);
+	// Check if this is the first use of '/401' route URL bar
+	if (req.isUnauthenticated) {
+		console.log(req.flash());
+		res.render('401', { messages: (req.flash()) })
+
+	} else {
+		console.log(req.flash());
+		res.render('500');
+
+	}
+});
+
+/* -------------------------- The ending of the 401 section ----------------------------- */
+
+
+
 /* -------------------------- The beginning of the alabamaDMV_Commission_01 section ----------------------------- */
 
 /*
@@ -556,7 +590,7 @@ const redirectDashboard = (req, res, next) => {
 	}
 }
 
-// Middleware to set req.isUnauthenticated for the first use of the '/signup' URL bar.
+// Middleware to set req.isUnauthenticated for the first use of the '/alabamaDMV_Commisstion_01' URL bar.
 iVoteBallotApp.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	// Check if user is Already authenticated
 	if (!req.session.isAuthenticated) {
