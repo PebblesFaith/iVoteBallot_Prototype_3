@@ -603,10 +603,69 @@ iVoteBallotApp.get('/404', (req, res) => {
 
 /* -------------------------- The ending of the 404 section ----------------------------- */
 
+/* -------------------------- The beginning of the 500 section ----------------------------- */
 
+// Middleware to set req.isUnauthenticated for the first use of the '/500' URL bar.
+iVoteBallotApp.use('/500', (req, res, next) => {
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
 
+// User route 500
+iVoteBallotApp.get('/500', (req, res) => {
+	// Check if user already authenticated.
+	if (req.session.isAuthenticated) {
+		return alert('You are already logged in!');
+	}
+	console.log(req.session);
+	// Check if this is the first use of '/500' route URL bar
+	if (req.isUnauthenticated) {
+		console.log(req.flash());
+		res.render('500', { messages: (req.flash()) })
 
+	} else {
+		console.log(req.flash());
+		res.render('535');
 
+	}
+});
+
+/* -------------------------- The ending of the 500 section ----------------------------- */
+
+/* -------------------------- The beginning of the 535 section ----------------------------- */
+
+// Middleware to set req.isUnauthenticated for the first use of the '/535' URL bar.
+iVoteBallotApp.use('/535', (req, res, next) => {
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// User route 535
+iVoteBallotApp.get('/535', (req, res) => {
+	// Check if user already authenticated.
+	if (req.session.isAuthenticated) {
+		return alert('You are already logged in!');
+	}
+	console.log(req.session);
+	// Check if this is the first use of '/535' route URL bar
+	if (req.isUnauthenticated) {
+		console.log(req.flash());
+		res.render('535', { messages: (req.flash()) })
+
+	} else {
+		console.log(req.flash());
+		res.render('500');
+
+	}
+});
+
+/* -------------------------- The ending of the 535 section ----------------------------- */
 
 /* -------------------------- The beginning of the alabamaDMV_Commission_01 section ----------------------------- */
 
