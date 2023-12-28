@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>iVoteBallot | Log Out</title>
+
+	<link rel="stylesheet" type="text/css" href="../styles/alabamaVoters_LogOut_01.css" />
+
+	<script defer src="../scripts_Files/alabamaVoters_SignUp_01_Script.js"></script>	
+</head>
+	<body>
+
+		<header>
+			<%- include('../common/header') %>
+		</header>
+		
+		<div id="flex_Container">
+			<div id="flex_Container_Row">
+				<div id="flex_Container_Column">
+					<div id="first_Column">					
+	
+						<form 
+							class="form_LogOut_01 animate" 
+							name="logOutForm" 
+							onsubmit="return validateAlabamaVotersLogOutForm()" 
+							action="/alabamaVoters_LogOut_01?_method=DELETE" 
+							method="POST"
+						>
+							<div class="imageContainer">
+							
+								<p id="titleLogOut_01"> Log Out | Alabama</p>
+								<!--<span class="close" onclick="document.getElementById('popUpSignUpMenu').style.display='none'" title="Close Sign Up Form">&times;</span>-->
+							
+							</div>
+	
+							<div class="logOut_Container_01">  	
+								
+								<p>You have been successfully logged out. Thank you for using iVoteBallot.</p>
+									
+								<hr id="hr_Red_line_02">
+	
+								<a class="forgotPassword_SignUp_01" href="http://localhost:8080/alabamaVoters_EmailVerification_01">Forgot Password?</a>
+	
+								<hr id="hr_Blue_line_02">
+								<p id="memberQuestion_01">
+									Are you already an iVoteBallot's member?
+									<a class="signUp_LogIn_01" href="http://localhost:8080/alabamaVoters_LogIn_01">Access your account.</a>
+								</p>		
+								
+								<br>									
+							
+								<button id="logOutSubmitButton" type="submit">SIGN UP</button>
+								
+							</div>						
+	
+						</form>
+	
+					</div>			
+				</div>
+			</div>
+		</div>
+
+		<footer>
+			<%- include('../common/footer') %>
+		</footer>
+
+	</body>
+</html>
