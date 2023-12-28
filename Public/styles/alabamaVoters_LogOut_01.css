@@ -1,0 +1,360 @@
+/*
+    This CSS style language codes defines a custom font family called "Megrim-Regular"
+    and specifies the path for the font file in the "src" property. The "font-weight"
+    property sets the font weight to "normal."
+*/
+@font-face {
+	font-family: "Megrim-Regular";
+	src: url(../fonts/Source_Code_Pro/SourceCodePro-SemiBold.ttf) format('truetype');
+	font-weight: normal;  
+}
+
+#hr_Blue_line_02 {
+    border-color: rgb(13, 65, 255); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
+}
+
+#hr_Red_line_02 {
+    border-color: rgb(201, 24, 24); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    width: auto;
+}  
+
+#hr_Grey_line_02 {
+    color: rgb(195, 195, 195);
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
+}
+
+/*
+    This CSS styling for the .header_Image_01 element on the homepage sets it to display as
+    a flex container with column direction, centers the content, and applies a blue color with
+    transparent background. The width is set to a minimum of 125 pixels and maximum of 250
+    pixels, with a fluid scaling between 3 viewport units.
+*/
+.header_Image_01 {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(13, 65, 255);	
+    text-align: center;
+    line-height: none;
+    margin-top: 15px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+    justify-content: center; 
+	align-items: baseline;
+    background-color: transparent;    
+    width: clamp(75px, 2vw, 200px);  
+    border-right-style: solid; 
+    border-color: rgb(201, 24, 24);
+    border: 0, 2px, 0, 0;
+}
+
+/*
+	  The CSS styles in this code block are used to create a flexible container with a red
+	  background color, center-aligned content, and a row direction. The "flex-wrap: wrap"
+	  property allows the container to wrap its items onto multiple lines if necessary. The
+	  "align-items: center" and "justify-content: center" properties ensure that the items are
+	  both vertically and horizontally centered within the container.
+*/
+#flex_Container {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	background-color: rgb(201, 24, 24);
+	align-items: center;
+	justify-content: center;
+}
+  
+/*
+	This CSS style defines a flexible container with a horizontal layout that wraps its content
+	if necessary. It also sets the container to stretch its items to fit the full width of the
+	container. Overall, this style is designed to create a responsive and adaptive layout for
+	web page elements.
+*/
+#flex_Container_Row {
+	display: flex;
+	flex-direction: row;    
+	flex-wrap: wrap;
+	align-items: stretch;
+	width: 100%;
+}
+  
+/*
+	The CSS code style aims to apply the flexbox layout to all direct child div elements of a
+	container with an ID of "flex_Container_Row". The "flex: 1" property assigns equal flex grow
+	value to each child element, allowing them to fill the available horizontal space evenly.
+*/
+#flex_Container_Row > div {
+	display: flex;
+	flex: 1;  
+}
+  
+/*
+	The CSS style defines how to create a flex container with a column layout. The "display:
+	flex" property specifies that the container should use flexbox layout, while "flex-direction:
+	column" arranges the flex items vertically. Finally, "flex-basis: 100%" sets the initial size
+	of the flex items to 100% of the container's width.
+*/
+#flex_Container_Column {
+	display: flex;
+	flex-direction: column;
+	flex-basis: 100%;  
+}
+  
+/*
+	This CSS style is used to create a flexible layout with a container element and multiple
+	child elements displayed as columns. The "flex" property is used to distribute the available
+	space among the child elements evenly, and the "display" property is set to "flex" to enable
+	flexbox layout.
+*/
+#flex_Container_Column > div {
+	display: flex;
+	flex: 1;
+}
+
+/*
+	The CSS style code sets the properties of an HTML element with the ID "first_Column" to create
+	a flexible container that wraps its contents in a column layout. The style also defines the
+	background color, height, width, text alignment, margin, padding, font family, size, and color
+	of the element, as well as its content justification and absence of a border.
+*/
+#first_Column {
+	display: flex;
+	flex-wrap: row wrap;
+	flex-direction: column;
+	background-color: rgb(255, 255, 255); 
+	text-align: left;
+	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	font-size: clamp(12px, 2vw, 16px);
+	color: rgb(13, 65, 255);  
+	justify-content: left;  
+	border: none;
+}
+
+/*
+	The CSS code style below uses a media query to target devices with a maximum screen width
+	of 992 pixels. It then applies a style to the element with the ID "flex_Container", setting
+	its width to 100% of the viewport. This is done to ensure that the element expands to fill
+	the width of the screen on smaller devices, improving the user experience for mobile and
+	tablet devices.
+*/
+@media all and (max-width: 992px) {
+	#flex_Container {
+	  width: 100%;
+	}
+}
+  
+/*
+	The CSS code style below uses a media query to target devices with a maximum screen width
+	of 600 pixels. It then applies a style to the element with the ID "flex_Container", setting
+	its width to 100% of the viewport. This is done to ensure that the element expands to fill
+	the width of the screen on smaller devices, improving the user experience for mobile and
+	tablet devices.
+*/
+@media all and (max-width: 600px) {
+	#flex_Container {
+	  width: 100%;
+	}
+}
+  
+/*
+	The CSS style defined within the "@media print" rule is designed to control how a web page
+	will appear when printed. In this specific example, it sets the background color to white 
+	and the text color to black for the body element when printing the iVoteBallot webpage.
+*/
+@media print {
+	body {        
+	 background-color: rgb(255, 255, 255);
+	 color: rgb(0, 0, 0);
+	}	    
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {	
+	.cancelButtonLogIn_01 {
+		width: 100%;
+	}
+}
+
+/* Sign up pop up menu--------------------------------------------------------------------------- */
+  
+.signUpButton_01 {
+	display: block;
+	height: 40px;
+	width: 100%;
+	background-color: rgb(201, 24, 24);
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	color: rgb(255, 255, 255);
+	font-size: clamp(12px, 2vw, 16px);
+	text-align: center;
+	border: none;  
+}
+    
+/* The Login form (background) */
+.signUp_Form_01 {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(255, 255, 255); /* Fallback color */
+	background-color: rgb(255, 255, 255); /* Black w/ opacity */
+	padding-top: 45px;
+}
+  
+/* Form Login Content/Box */
+.form_LogOut_01 {
+	background-color: #fefefe;
+	margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+	border: 2px solid rgb(13, 65, 255);
+	width: 60%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+	position: absolute;
+	right: 25px;
+	top: 0;
+	/*color: rgb(201, 24, 24);*/
+	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	font-size: clamp(12px, 2vw, 30px);   
+	font-weight: bold;
+}
+  
+.close:hover,
+.close:focus {
+	/*color: rgb(13, 65, 255);*/
+	cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+	-webkit-animation: animatezoom 0.6s;
+	animation: animatezoom 0.6s
+}
+  
+@-webkit-keyframes animatezoom {
+	from {-webkit-transform: scale(0)} 
+	to {-webkit-transform: scale(1)}
+}
+	
+@keyframes animatezoom {
+	from {transform: scale(0)} 
+	to {transform: scale(1)}
+}
+
+#titleLogOut_01 {
+	display: flex;
+	flex-wrap: row wrap;
+	flex-direction: column;
+	background-color: rgb(255, 255, 255); 
+	text-align: center;
+	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	font-size: clamp(16px, 2vw, 25px);
+	color: rgb(201, 24, 24);  
+	justify-content: center;  
+	border: none;  
+}
+
+.logOut_Container_01 {
+	padding: 16px;  
+}
+
+#descriptive_Paragraph_01 {
+	display: flex;
+	flex-wrap: row wrap;
+	flex-direction: column;		
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	color: rgb(201, 24, 24);
+	font-size: clamp(10px, 2vw, 14px);	
+	text-decoration: none;
+}
+
+.forgotPassword_SignUp_01 {
+	display: flex;
+	flex-wrap: row wrap;
+	flex-direction: column;	
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	color: rgb(201, 24, 24);
+	font-size: clamp(10px, 2vw, 14px);	
+	text-decoration: none;
+}
+
+#forgotPassword_SignUp_01 a:hover {
+    color: rgb(13, 65, 255);
+}
+
+#memberQuestion_01 {
+	display: flex;
+	flex-wrap: row wrap;
+	flex-direction: column;	
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	color: rgb(201, 24, 24);
+	font-size: clamp(10px, 2vw, 14px);	
+	text-decoration: none;
+	text-align: center;
+}
+
+.signUp_LogIn_01 {
+	display: flex;
+	flex-wrap: row wrap;
+	flex-direction: column;	
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	color: rgb(201, 24, 24);
+	font-size: clamp(10px, 2vw, 14px);	
+	text-decoration: none;
+	text-align: center;
+}
+
+a:hover {
+	color: rgb(13, 65, 255);
+}
+
+#logOutSubmitButton {
+	display: block;
+	height: 40px;
+	width: 100%;
+	background-color: rgb(201, 24, 24);
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	color: rgb(255, 255, 255);
+	font-size: clamp(12px, 2vw, 16px);
+	text-align: center;
+	border: none;  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
