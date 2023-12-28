@@ -3,7 +3,8 @@
 const validateAlabamaDMV_CommissionForm = (e) => {    
 
 	console.log('Sarai Hannah Ajai is testing her written JavaScript programmatic codes; in order to validate her contact us form has opened up correctly within the HTML webpage.')
-	
+
+	const DMVPhoto = document.getElementById('photo').value.trim(); 
 	const DMVFirstName = document.getElementById('firstName').value.trim(); 
 	const DMVMiddleName = document.getElementById('middleName').value.trim();  
 	const DMVLastName = document.getElementById('lastName').value.trim(); 
@@ -44,9 +45,20 @@ const validateAlabamaDMV_CommissionForm = (e) => {
     const regExAlabamaId = /(^\d{7}$)|(^\d{8}$)/;
     const regIvoteballotIdIdentifierCode = /\d{2}[A-Z]{1}\d{1}\-\d{1}[A-Z]{1}\d{1}\-[A-Z]{2}\-\d{3}[A-Z]{2}\d{6}\-\d{2}/;
 	const regExPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,32}$/;
+
+	if (DMVPhoto === '' || DMVPhoto == null) {		
+		document.getElementById('userDMVPhotoErrorMessage').textContent = 'Error Message: The user\'s photograph is a required select field and you must upload the user correct photograph from the photo selection require field.';
+		setTimeout(function() {
+			document.getElementById('userDMVPhotoErrorMessage').textContent = '';
+		},
+		9000)    	
+
+		return false;  
+	
+	}
 	
 	if (DMVFirstName === '' || DMVFirstName == null || DMVFirstName.length <= 2 || !DMVFirstName.match(regExName)) {                                                               
-		document.getElementById('userDMVFirstNameErrorMessage').innerHTML = 'The user first name is a required input field or you must enter more than two characters into the userfirst name required input field.';
+		document.getElementById('userDMVFirstNameErrorMessage').innerHTML = 'Error Message: The user first name is a required input field or you must enter more than two characters into the userfirst name required input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userDMVFirstNameErrorMessage').innerHTML = '';
@@ -58,7 +70,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVMiddleName === '' || DMVMiddleName == null) {
-		document.getElementById('userDMVMiddleNameErrorMessage').innerHTML = 'Do the user have a middle name? If so, please type in the user middle name into the input field or skip the user middle name input field entirety.';
+		document.getElementById('userDMVMiddleNameErrorMessage').innerHTML = 'Error Message: Do the user have a middle name? If so, please type in the user middle name into the input field or skip the user middle name input field entirety.';
 	
 		setTimeout(function() {
 			document.getElementById('userDMVMiddleNameErrorMessage').innerHTML = '';
@@ -66,7 +78,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		9000)                                           
 							
 		} else if (DMVMiddleName.length <= 2 || !DMVMiddleName.match(regExName)) {
-		document.getElementById('userDMVMiddleNameErrorMessage').innerHTML = 'The user middle name is an optional input field; however, you must enter more than two characters into the user middle name required input field.';
+		document.getElementById('userDMVMiddleNameErrorMessage').innerHTML = 'Error Message: The user middle name is an optional input field; however, you must enter more than two characters into the user middle name required input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userDMVMiddleNameErrorMessage').innerHTML = '';
@@ -78,7 +90,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	} 
 	
 	if (DMVLastName === '' || DMVLastName == null || DMVLastName.length <= 2 || !DMVLastName.match(regExName)) {
-		document.getElementById('userDMVLastNameErrorMessage').innerHTML = 'The user last name is a required input field or you must enter more than two characters into the user last name required input field.';
+		document.getElementById('userDMVLastNameErrorMessage').innerHTML = 'Error Message: The user last name is a required input field or you must enter more than two characters into the user last name required input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userDMVLastNameErrorMessage').innerHTML = '';
@@ -90,7 +102,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVSuffix === '' || DMVSuffix == null) {
-		document.getElementById('userDMVSuffixErrorMessage').textContent = 'Do the user have a suffix name? If so, please type in the user suffix name into the input field or skip the user suffix name input field entirety.';
+		document.getElementById('userDMVSuffixErrorMessage').textContent = 'Error Message: Do the user have a suffix name? If so, please type in the user suffix name into the input field or skip the user suffix name input field entirety.';
 
 		setTimeout(function() {
 			document.getElementById('userDMVSuffixErrorMessage').textContent = '';
@@ -98,7 +110,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		9000)                                           
 							
 		} else if (DMVSuffix.length <= 0 || !DMVSuffix.match(regExName)) {
-		document.getElementById('userDMVSuffixErrorMessage').textContent = 'The user suffix name is an optional input field; however, you must enter more than one characters into the user suffix name required input field.';
+		document.getElementById('userDMVSuffixErrorMessage').textContent = 'Error Message: The user suffix name is an optional input field; however, you must enter more than one characters into the user suffix name required input field.';
 
 		setTimeout(function() {
 			document.getElementById('userDMVSuffixErrorMessage').textContent = '';
@@ -110,7 +122,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVDateOfBirth === '' || DMVDateOfBirth == null) {                                                               
-		document.getElementById('userDMVDateOfBirthErrorMessage').innerHTML = 'The user date of birth is a required input field.';
+		document.getElementById('userDMVDateOfBirthErrorMessage').innerHTML = 'Error Message: The user date of birth is a required input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userDMVDateOfBirthErrorMessage').innerHTML = '';
@@ -122,7 +134,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVBirthSex === '' || DMVBirthSex == null) {                                                               
-		document.getElementById('userDMVBirthSexErrorMessage').innerHTML = 'The user birth sex is a required input field.';
+		document.getElementById('userDMVBirthSexErrorMessage').innerHTML = 'Error Message: The user birth sex is a required input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userDMVBirthSexErrorMessage').innerHTML = '';
@@ -134,7 +146,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVGenderIdentity === '' || DMVGenderIdentity == null) {                                                               
-		document.getElementById('userDMVGenderIdentityErrorMessage').innerHTML = 'The user gender identity is a required input field.';
+		document.getElementById('userDMVGenderIdentityErrorMessage').innerHTML = 'Error Message: The user gender identity is a required input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userDMVGenderIdentityErrorMessage').innerHTML = '';
@@ -146,7 +158,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVRace === '' || DMVRace == null) {                                                               
-		document.getElementById('userDMVRaceErrorMessage').innerHTML = 'The user race is a required input field.';
+		document.getElementById('userDMVRaceErrorMessage').innerHTML = 'Error Message: The user race is a required input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userDMVRaceErrorMessage').innerHTML = '';
@@ -158,7 +170,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVSSN === '' || DMVSSN == null || !DMVSSN.match(regExSSN)) {                                                               
-		document.getElementById('userDMVSSNErrorMessage').innerHTML = 'The user SSN is a required input field or you must enter the user correct SSN into the require input field.';
+		document.getElementById('userDMVSSNErrorMessage').innerHTML = 'Error Message: The user SSN is a required input field or you must enter the user correct SSN into the require input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userDMVSSNErrorMessage').innerHTML = '';
@@ -170,7 +182,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVEmail === '' || DMVEmail == null || DMVEmail.length <= 6 || !DMVEmail.match(regExEmail)) {
-		document.getElementById('userDMVEmailErrorMessage').textContent = 'The user\'s email address is a required input field and you must enter the correct user\s email address format into the require input field.';
+		document.getElementById('userDMVEmailErrorMessage').textContent = 'Error Message: The user\'s email address is a required input field and you must enter the correct user\s email address format into the require input field.';
 
 		setTimeout(function() {
 			document.getElementById('userDMVEmailErrorMessage').textContent = '';
@@ -182,7 +194,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVConfirmEmail === '' || DMVConfirmEmail == null || DMVConfirmEmail.length <= 6 || !DMVConfirmEmail.match(regExEmail)) {
-		document.getElementById('userDMVConfirmEmailErrorMessage').textContent = 'The user\'s confirm email address is a required input field and you must enter the correct user confirm email address format into the require input field.';
+		document.getElementById('userDMVConfirmEmailErrorMessage').textContent = 'Error Message: The user\'s confirm email address is a required input field and you must enter the correct user confirm email address format into the require input field.';
 
 		setTimeout(function() {
 			document.getElementById('userDMVConfirmEmailErrorMessage').textContent = '';
@@ -194,7 +206,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 	
 	if (DMVEmail != DMVConfirmEmail) {
-		document.getElementById('userDMVConfirmEmailErrorMessage').textContent = 'The user\'s email address does not match to his/her confirm email address which are required input fields.';
+		document.getElementById('userDMVConfirmEmailErrorMessage').textContent = 'Error Message: The user\'s email address does not match to his/her confirm email address which are required input fields.';
 
 		setTimeout(function() {
 			document.getElementById('userDMVConfirmEmailErrorMessage').textContent = '';
@@ -206,7 +218,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVPhoneNumber === '' || DMVPhoneNumber == null || DMVPhoneNumber.length <= 10 || !DMVPhoneNumber.match(regExPhoneNumber))  {                                                               
-		document.getElementById('userDMVPhoneNumberErrorMessage').textContent = 'The user\'s phone number is a required input field or you must enter exactly the user twelve number digits into the phone number required input field.';
+		document.getElementById('userDMVPhoneNumberErrorMessage').textContent = 'Error Message: The user\'s phone number is a required input field or you must enter exactly the user twelve number digits into the phone number required input field.';
 
 		setTimeout(function() {
 			document.getElementById('userDMVPhoneNumberErrorMessage').textContent = '';
@@ -218,7 +230,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}	
 
 	if (DMVAddress === '' || DMVAddress == null || DMVAddress.length <= 6 || !DMVAddress.match(regExAddress))  {                                                               
-		document.getElementById('userDMVAddressErrorMessage').textContent = 'The user\'s street address is a required field and you must enter the user correct street address format into the require input field.';
+		document.getElementById('userDMVAddressErrorMessage').textContent = 'Error Message: The user\'s street address is a required field and you must enter the user correct street address format into the require input field.';
 
 		setTimeout(function() {
 			document.getElementById('userDMVAddressErrorMessage').textContent = '';
@@ -230,7 +242,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 	
 	if (DMVUnitType === '' || DMVUnitType == null) {
-		document.getElementById('userDMVUnitTypeErrorMessage').textContent = 'Select the user residential unit type to which he or she lives in, and the user residential unit type is a require field.';
+		document.getElementById('userDMVUnitTypeErrorMessage').textContent = 'Error Message: Select the user residential unit type to which he or she lives in, and the user residential unit type is a require field.';
 
 		setTimeout(function() {
 			document.getElementById('userDMVUnitTypeErrorMessage').textContent = '';
@@ -242,7 +254,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVUnitTypeNumber === '' || DMVUnitTypeNumber == null || DMVUnitTypeNumber.match(regExUnitTypeNumber))  {                                                               
-		document.getElementById('userDMVUnitTypeNumberErrorMessage').textContent =  'The user\'s unit type number is a required field unless the user own his or her home or other residential property which does not have an address unit type number.';
+		document.getElementById('userDMVUnitTypeNumberErrorMessage').textContent =  'Error Message: The user\'s unit type number is a required field unless the user own his or her home or other residential property which does not have an address unit type number.';
 
 		setTimeout(function() {
 			document.getElementById('userDMVUnitTypeNumberErrorMessage').textContent = '';
@@ -250,7 +262,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		9000)               
 
 	} else if (!DMVUnitTypeNumber.match(regExUnitIdTypeDetails)) {
-		document.getElementById('userDMVUnitTypeNumberErrorMessage').textContent = 'The user\'s address unit type number is a required field unless the user own his or her home or other residential property which does not have an address unit type number. Please leave blank, if the user does not have an apartment number or unit number of an alphanumeric characters';
+		document.getElementById('userDMVUnitTypeNumberErrorMessage').textContent = 'Error Message: The user\'s address unit type number is a required field unless the user own his or her home or other residential property which does not have an address unit type number. Please leave blank, if the user does not have an apartment number or unit number of an alphanumeric characters';
 
 		setTimeout(function() {
 			document.getElementById('userDMVUnitTypeNumberErrorMessage').textContent = '';
@@ -329,7 +341,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	} 
 
     if (DMVIdType === '' || DMVIdType == null) {
-        document.getElementById('userDMVIdTypeErrorMessage').textContent = 'The user\'s Alabama identification card type is a required option field and you must select the user correct Alabama\'s identification card type from the option require field.';
+        document.getElementById('userDMVIdTypeErrorMessage').textContent = 'Error Message: The user\'s Alabama identification card type is a required option field and you must select the user correct Alabama\'s identification card type from the option require field.';
 
         setTimeout(function() {
             document.getElementById('userDMVIdTypeErrorMessage').textContent = '';
@@ -341,7 +353,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
     }
 
     if (DMVIdTypeNumber === '' || DMVIdTypeNumber == null || !DMVIdTypeNumber.match(regExAlabamaId))  {                                                               
-        document.getElementById('userDMVIdTypeNumberErrorMessage').textContent =  'The user\'s Alabama numeric identification card characters are a required field or you must enter the user correct Alabama numeric identification card characters from his or her Alabama\'s identification card into the required field.';
+        document.getElementById('userDMVIdTypeNumberErrorMessage').textContent =  'Error Message: The user\'s Alabama numeric identification card characters are a required field or you must enter the user correct Alabama numeric identification card characters from his or her Alabama\'s identification card into the required field.';
 
         setTimeout(function() {
             document.getElementById('userDMVIdTypeNumberErrorMessage').textContent = '';
@@ -353,7 +365,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
     }  
     
     if (DMVIdTypeNumber === '' || DMVIdTypeNumber == null || !DMVIdTypeNumber.match(regExAlabamaId))  {                                                               
-        document.getElementById('userDMVIdTypeNumberErrorMessage').textContent =  'The user\'s Alabama numeric identification card characters are a required field or you must enter the user correct Alabama numeric identification card characters from his or her Alabama\'s identification card into the required field.';
+        document.getElementById('userDMVIdTypeNumberErrorMessage').textContent =  'Error Message: The user\'s Alabama numeric identification card characters are a required field or you must enter the user correct Alabama numeric identification card characters from his or her Alabama\'s identification card into the required field.';
 
         setTimeout(function() {
             document.getElementById('userDMVIdTypeNumberErrorMessage').textContent = '';
@@ -365,7 +377,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
     } 
     
     if (IvoteBallotIdIdentifierCode  === '' || IvoteBallotIdIdentifierCode  == null || !IvoteBallotIdIdentifierCode.match(regIvoteballotIdIdentifierCode)) {                                                               
-        document.getElementById('useriVoteBallotIdIdentifierCodeErrorMessage').textContent = 'The user\'s iVoteBallot Id Identifier Code is a required input field and you must enter the user correct alphanumeric characters format into the required input field.';
+        document.getElementById('useriVoteBallotIdIdentifierCodeErrorMessage').textContent = 'Error Message: The user\'s iVoteBallot Id Identifier Code is a required input field and you must enter the user correct alphanumeric characters format into the required input field.';
 
         setTimeout(function() {
             document.getElementById('useriVoteBallotIdIdentifierCodeErrorMessage').textContent = '';
@@ -377,7 +389,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
     } 
 
 	if (ConfirmIvoteBallotIdIdentifierCode === '' || ConfirmIvoteBallotIdIdentifierCode  == null || !ConfirmIvoteBallotIdIdentifierCode.match(regIvoteballotIdIdentifierCode)) {                                                               
-        document.getElementById('userConfirmiVoteBallotIdIdentifierCodeErrorMessage').textContent = 'The user\'s iVoteBallot Id Identifier Code is a required input field and you must enter the user correct alphanumeric characters format into the required input field.';
+        document.getElementById('userConfirmiVoteBallotIdIdentifierCodeErrorMessage').textContent = 'Error Message: The user\'s iVoteBallot Id Identifier Code is a required input field and you must enter the user correct alphanumeric characters format into the required input field.';
 
         setTimeout(function() {
             document.getElementById('userConfirmiVoteBallotIdIdentifierCodeErrorMessage').textContent = '';
@@ -389,7 +401,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
     } 	
 
 	if (IvoteBallotIdIdentifierCode  != ConfirmIvoteBallotIdIdentifierCode) {
-		document.getElementById('userConfirmiVoteBallotIdIdentifierCodeErrorMessage').textContent = 'The user\'s iVoteballot Id Identifier Code does not match to his/her confirm iVoteBallot Id Identifier Code which are required input fields.';
+		document.getElementById('userConfirmiVoteBallotIdIdentifierCodeErrorMessage').textContent = 'Error Message: The user\'s iVoteballot Id Identifier Code does not match to his/her confirm iVoteBallot Id Identifier Code which are required input fields.';
 
 		setTimeout(function() {
 			document.getElementById('userConfirmiVoteBallotIdIdentifierCodeErrorMessage').textContent = '';
@@ -401,7 +413,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 	
 	if (Password === '' || Password == null) {
-		document.getElementById('userPasswordErrorMessage').textContent = 'The user\'s password is a required input field.';
+		document.getElementById('userPasswordErrorMessage').textContent = 'Error Message: The user\'s password is a required input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userPasswordErrorMessage').textContent = '';
@@ -413,7 +425,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}   	
 			
 	if (ConfirmPassword === '' || ConfirmPassword == null) {
-		document.getElementById('userConfirmPasswordErrorMessage').textContent = 'The user\'s confirm password is a required input field.';
+		document.getElementById('userConfirmPasswordErrorMessage').textContent = 'Error Message: The user\'s confirm password is a required input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userConfirmPasswordErrorMessage').textContent = '';
@@ -425,7 +437,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	} 
 	
 	if (Password != ConfirmPassword) {
-		document.getElementById('userConfirmPasswordErrorMessage').textContent = 'The user\'s password does not match to his/her confirm password which are required input fields.';
+		document.getElementById('userConfirmPasswordErrorMessage').textContent = 'Error Message: The user\'s password does not match to his/her confirm password which are required input fields.';
 
 		setTimeout(function() {
 			document.getElementById('userConfirmPasswordErrorMessage').textContent = '';
@@ -437,7 +449,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 	
 	if (Temporary_Password === '' || Temporary_Password == null) {
-		document.getElementById('userTemporary_PasswordErrorMessage').textContent = 'The user\'s temporary password is a required input field.';
+		document.getElementById('userTemporary_PasswordErrorMessage').textContent = 'Error Message: The user\'s temporary password is a required input field.';
 
 		setTimeout(function() {
 			document.getElementById('userTemporary_PasswordErrorMessage').textContent = '';
