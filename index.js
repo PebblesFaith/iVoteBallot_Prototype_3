@@ -209,6 +209,7 @@ db1.serialize(() => {
 
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
         Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
+		DMVPhoto BLOB (250) NOT NULL,
         DMVFirstName VARCHAR (100) NOT NULL, 
         DMVMiddleName VARCHAR (100) NOT NULL, 
         DMVLastName VARCHAR(100) NOT NULL,
@@ -376,7 +377,8 @@ passport.use(
 
 							return done(null, 
 								{ 
-									id: row.id, 
+									id: row.id,
+									DMVPhoto: row.DMVPhoto, 
 									DMVFirstName: row.DMVFirstName, 
 									DMVMiddleName: row.DMVMiddleName, 
 									DMVLastName: row.DMVLastName, 
@@ -453,6 +455,7 @@ passport.use(
 					return done(null, 
 						{ 
 							id: row.id, 
+							DMVPhoto: row.DMVPhoto, 
 							DMVFirstName: row.DMVFirstName, 
 							DMVMiddleName: row.DMVMiddleName, 
 							DMVLastName: row.DMVLastName, 
@@ -530,6 +533,7 @@ passport.use(
 					return done(null, 
 						{ 
 							id: row.id,
+							DMVPhoto: row.DMVPhoto, 
 							DMVFirstName: row.DMVFirstName, 
 							DMVMiddleName: row.DMVMiddleName, 
 							DMVLastName: row.DMVLastName, 
@@ -622,6 +626,7 @@ passport.deserializeUser(function(id, done) {
 
 			{ 					
 				id: row.id, 
+				DMVPhoto: row.DMVPhoto, 
 				DMVFirstName: row.DMVFirstName, 
 				DMVMiddleName: row.DMVMiddleName, 
 				DMVLastName: row.DMVLastName, 
@@ -1064,6 +1069,7 @@ iVoteBallotApp.post(
 iVoteBallotApp.post('/alabamaDMV_Commission_01',
 	async (req, res) => {
 
+		const DMVPhoto = req.body.DMVPhoto;
 		const DMVFirstName = req.body.DMVFirstName;
 		const DMVMiddleName = req.body.DMVMiddleName;
 		const DMVLastName = req.body.DMVLastName;
@@ -1094,6 +1100,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 
 		console.log(req.body);
 
+		console.log('The user\'s photograph image is: ' + DMVPhoto + '.');
 		console.log('The user\'s first name: ' + DMVFirstName + '.');
 		console.log('The user\'s middle name is: ' + DMVMiddleName + '.');
 		console.log('The user\'s last name is: ' + DMVLastName + '.');
@@ -1184,6 +1191,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 
 		const newUser = {
 
+			DMVPhoto,
 			DMVFirstName,
 			DMVMiddleName,
 			DMVLastName,
@@ -1214,9 +1222,9 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 
 		};
 
-		await db1.run('INSERT INTO alabamaDMV_Commission_01 (DMVFirstName, DMVMiddleName, DMVLastName, DMVSuffix, DMVDateOfBirth, DMVBirthSex, DMVGenderIdentity, DMVRace, DMVSSN, DMVEmail, DMVConfirmEmail, DMVPhoneNumber, DMVAddress, DMVUnitType, DMVUnitTypeNumber, DMVCountrySelection, DMVStateSelection, DMVCountySelection, DMVCitySelection, DMVZipSelection, DMVIdType, DMVIdTypeNumber, IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode, Password, ConfirmPassword, Temporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+		await db1.run('INSERT INTO alabamaDMV_Commission_01 (DMVPhoto, DMVFirstName, DMVMiddleName, DMVLastName, DMVSuffix, DMVDateOfBirth, DMVBirthSex, DMVGenderIdentity, DMVRace, DMVSSN, DMVEmail, DMVConfirmEmail, DMVPhoneNumber, DMVAddress, DMVUnitType, DMVUnitTypeNumber, DMVCountrySelection, DMVStateSelection, DMVCountySelection, DMVCitySelection, DMVZipSelection, DMVIdType, DMVIdTypeNumber, IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode, Password, ConfirmPassword, Temporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
 
-			[newUser.DMVFirstName, newUser.DMVMiddleName, newUser.DMVLastName, newUser.DMVSuffix, newUser.DMVDateOfBirth, newUser.DMVBirthSex, newUser.DMVGenderIdentity, newUser.DMVRace, newUser.DMVSSN, newUser.DMVEmail, newUser.DMVConfirmEmail, newUser.DMVPhoneNumber, newUser.DMVAddress, newUser.DMVUnitType, newUser.DMVUnitTypeNumber, newUser.DMVCountrySelection, newUser.DMVStateSelection, newUser.DMVCountySelection, newUser.DMVCitySelection, newUser.DMVZipSelection, newUser.DMVIdType, newUser.DMVIdTypeNumber, newUser.IvoteBallotIdIdentifierCode, newUser.ConfirmIvoteBallotIdIdentifierCode, newUser.Password, newUser.ConfirmPassword, newUser.Temporary_Password], (err) => {
+			[newUser.DMVPhoto, newUser.DMVFirstName, newUser.DMVMiddleName, newUser.DMVLastName, newUser.DMVSuffix, newUser.DMVDateOfBirth, newUser.DMVBirthSex, newUser.DMVGenderIdentity, newUser.DMVRace, newUser.DMVSSN, newUser.DMVEmail, newUser.DMVConfirmEmail, newUser.DMVPhoneNumber, newUser.DMVAddress, newUser.DMVUnitType, newUser.DMVUnitTypeNumber, newUser.DMVCountrySelection, newUser.DMVStateSelection, newUser.DMVCountySelection, newUser.DMVCitySelection, newUser.DMVZipSelection, newUser.DMVIdType, newUser.DMVIdTypeNumber, newUser.IvoteBallotIdIdentifierCode, newUser.ConfirmIvoteBallotIdIdentifierCode, newUser.Password, newUser.ConfirmPassword, newUser.Temporary_Password], (err) => {
 
 
 				if (err) {
@@ -1276,7 +1284,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 
 						}
 					]
-				};
+				};				
 
 				const mailOptions_02 = {
 					from: 'testdevelopmentenvcustomercare@ivoteballot.com',
