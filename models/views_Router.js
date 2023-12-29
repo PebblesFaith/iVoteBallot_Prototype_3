@@ -68,7 +68,7 @@ router
     .get('/contactUs_01', views_Controller.view_ContactUs_01);
 
 router
-    .get('/dashboard_01', views_Controller.view_Dashboard_01A);
+    .get('/dashboard_01', views_Controller.view_Dashboard_01);
 
     router
     .get('/helpCenter', views_Controller.view_HelpCenter);
