@@ -83,8 +83,8 @@ const view_ContactUs_01 = (req, res) => {
 	res.render('contactUs_01');
 }
 
-const view_Dashboard_01A = (req, res) => {
-	res.render('dashboard_01A');
+const view_Dashboard_01 = (req, res) => {
+	res.render('dashboard_01');
 }
 
 const view_HelpCenter = (req, res) => {
@@ -125,7 +125,7 @@ module.exports = {
 	view_alabamaVoters_SignUpLogin_01,
 	view_alabamaVoters_VerifyEmailPassword_01,	
 	view_ContactUs_01,
-	view_Dashboard_01A,
+	view_Dashboard_01,
 	view_HelpCenter,
 	view_iVoteBallot,
 	view_Footer,	
