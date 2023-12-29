@@ -102,9 +102,7 @@ short-lived messages that are stored in the session and displayed to the user on
 connect-flash, you can easily create and manage flash messages in your application, which can be used to
 display success messages, error messages, or any other kind of notification to the user.
 */
-const flash2 = require('connect-flash');
-
-const flash = require('express-flash');
+const flash = require('connect-flash');
 
 const methodOverride = require('method-override');
 
@@ -270,15 +268,15 @@ iVoteBallotApp.use(
 				secure: true,
 				httpOnly: true,
 				sameSite: true,
-				resave: false,
-				saveUninitialized: false,
+				resave: true,
+				saveUninitialized: true,
 				//proxy: true,
 				maxAge: 'SESSION_MAX_AGE' // 30 minuites in milliseconds				
 			}
 		}),
 
 		secret: 'EXPRESS_SESSION_KEY',
-		resave: false,
+		resave: true,
 
 	})
 )
@@ -316,8 +314,6 @@ iVoteBallotApp.use(passport.session());
 
 iVoteBallotApp.use(flash());
 
-iVoteBallotApp.use(flash2());
-
 /*
 	The JavaScript codes language sets up a local1, LocalStrategy for Passport, which is a popular
 	authentication middleware for Node.js. It defines a function that will be called when an
@@ -353,7 +349,7 @@ passport.use(
 				console.log('The user\'s iVoteBallot Id Identifier Code does not match to the Session cookie id\'s database.');
 				return done(null, false, { message: 'Your iVoteBallot Id Identifier Code does not match to our iVoteballot\'s database.' });
 
-			} else
+			} else			
 
 				await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE DMVEmail = ?`, DMVEmail, (err, row) => {
 
@@ -668,6 +664,20 @@ passport.deserializeUser(function(id, done) {
 
 /* -------------------------- The beginning of the use section ----------------------------- */
 
+const views_Controller = require('./models/views_Router');
+const contactUs_01_Controller = require('./models/alabama_Session_Router');
+const { view_iVoteBallot } = require('./controllers/views_Controller');
+
+iVoteBallotApp.set('view engine', 'ejs');
+
+iVoteBallotApp.set('views', './Public/views');
+iVoteBallotApp.set('common', './Public/common');
+
+iVoteBallotApp.use(express.static(path.join(__dirname, 'public')));
+
+iVoteBallotApp.use('/', require('./models/views_Router'));
+iVoteBallotApp.use(views_Controller);
+
 // Middleware to set req.isUnauthenticated for the first use of the '/401' URL bar.
 iVoteBallotApp.use('/401', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'401\'.');
@@ -787,20 +797,6 @@ iVoteBallotApp.use('/alabamaVoters_LogOut_01', (req, res, next) => {
 	}
 	next();
 });
-
-const views_Controller = require('./models/views_Router');
-const contactUs_01_Controller = require('./models/alabama_Session_Router');
-const { view_iVoteBallot } = require('./controllers/views_Controller');
-
-iVoteBallotApp.set('view engine', 'ejs');
-
-iVoteBallotApp.set('views', './Public/views');
-iVoteBallotApp.set('common', './Public/common');
-
-iVoteBallotApp.use(express.static(path.join(__dirname, 'public')));
-
-iVoteBallotApp.use('/', require('./models/views_Router'));
-iVoteBallotApp.use(views_Controller);
 
 /* -------------------------- The ending of the use section ----------------------------- */
 
@@ -1236,12 +1232,12 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 					console.error(err);
 					req.flash('error', 'An syntax error has occurred during user\s contact us input fields from DOM submission with a 500 error message webpage display onto the user device screen.');
 					console.log('An syntax error has occurred during user\s contact us input fields from DOM submission with a 500 error message webpage display onto the user device screen.');
-					res.render('500');
+					res.render('/500');
 
 				} else {
-					console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database. ' + Date());
+					//console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database. ' + Date());
 					req.flash('Success', 'The user is successfully registered into the iVoteBallot database, and the user can now sign up to create his or her iVoteBallot account.');
-
+					req.flash('Success', 'You are registered and can log in');
 					res.redirect('/alabamaVoters_SignUp_01');
 
 				}
@@ -1385,7 +1381,7 @@ iVoteBallotApp.post('/alabamaVoters_SignUp_01',
 				res.render('500');
 
 			} else if (!user) {
-
+				req.flash('error', 'The user have entered the incorrect email address and/or password that were not successfully process through the passport.use local1 Local Strategy and Session Cookie Id to the SQlite3 database authentication from serialization.');
 				console.log('The user\'s email address is not found successfully through the process of the passport.use local1 Local Strategy and Session Cookie Id to the SQLite3 database for serializtion.');
 				res.render('alabamaVoters_SignUp_01');
 
