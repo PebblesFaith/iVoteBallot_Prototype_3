@@ -360,7 +360,7 @@ passport.use(
 					}
 
 					if (!row) {
-						console.log('The user\'s have entered the incorrect email address: ' + DMVEmail );
+						console.log('The user\'s have entered the incorrect email address for local1: ' + DMVEmail );
 						return done(null, false, { message: 'You have entered the incorrect email address: ' + DMVEmail });
 					}
 
@@ -370,7 +370,7 @@ passport.use(
 							return done(err);
 						}
 						if (!result) {
-							console.log('The user\'s iVoteBallot Id Identifier Code was entered incorrectly: ' + IvoteBallotIdIdentifierCode ); 
+							console.log('The user\'s iVoteBallot Id Identifier Code was entered incorrectly for local1: ' + IvoteBallotIdIdentifierCode ); 
 							return done(null, false, { message: 'You have entered the incorrect iVoteBallot Id Identifier Code: ' + IvoteBallotIdIdentifierCode });
 						} else {
 
@@ -405,7 +405,8 @@ passport.use(
 				}
 
 				if (!row) {
-					return done(null, false, { message: 'You have entered the incorrect email address ' + DMVEmail + '.' });
+					console.log('The user\'s have entered the incorrect email address from local2: ' + DMVEmail );
+					return done(null, false, { message: 'You have entered the incorrect email address: ' + DMVEmail });
 				}
 
 				bcrypt.compare(Temporary_Password, row.Temporary_Password, (err, result) => {
@@ -414,8 +415,8 @@ passport.use(
 						return done(err);
 					}
 					if (!result) {
-						console.log('The user\'s temporary password was entered incorrectly: ' + Temporary_Password + '.');
-						return done(null, false, { message: 'You have entered the incorrect temporary password: ' + Temporary_Password + '.' });
+						console.log('The user\'s temporary password was entered incorrectly from local2: ' + Temporary_Password );
+						return done(null, false, { message: 'You have entered the incorrect temporary password: ' + Temporary_Password });
 					}
 					//return done(null, row);
 
@@ -449,7 +450,7 @@ passport.use(
 				}
 
 				if (!row) {
-					return done(null, false, { message: 'You have entered the incorrect email address: ' + DMVEmail + '.' });
+					return done(null, false, { message: 'You have entered the incorrect email address for local3: ' + DMVEmail + '.' });
 				}
 
 				bcrypt.compare(Password, row.Password, (err, result) => {
@@ -458,7 +459,7 @@ passport.use(
 						return done(err);
 					}
 					if (!result) {
-						console.log('The user\'s password was entered incorrectly: ' + Password + '.');
+						console.log('The user\'s password was entered incorrectly for local3: ' + Password + '.');
 						return done(null, false, { message: 'You have entered the incorrect password: ' + Password + '.' });
 					}
 					//return done(null, row);
