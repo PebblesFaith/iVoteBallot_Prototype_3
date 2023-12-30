@@ -441,7 +441,8 @@ a:hover {
 	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: clamp(10px, 2vw, 14px);
 	text-align: center;
-
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 
