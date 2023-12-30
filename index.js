@@ -160,7 +160,7 @@ const SESSION_MAX_AGE = process.env.SESSION_MAX_AGE;
 const EXPRESS_SESSION_KEY = process.env.EXPRESS_SESSION_KEY;
 const IONOS_SECRET_KEY = process.env.IONOS_SECRET_KEY;
 
-iVoteBallotApp.use(express.urlencoded({ extended: false }));
+iVoteBallotApp.use(express.urlencoded({ extended: true }));
 
 iVoteBallotApp.use(express.json());
 
@@ -247,7 +247,6 @@ db1.serialize(() => {
 			}
 		};
 });
-
 
 /*
 	This statement sets up a middleware function within iVoteBallot web application 
@@ -973,7 +972,8 @@ iVoteBallotApp.get('/dashboard_01', (req, res) => {
 		console.log(req.user);
 		console.log(req.session);
 		console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
-		res.render('dashboard_01', { DMVFirstName: req.user.DMVFirstName, DMVLastName: req.user.DMVLastName, DMVEmail: req.user.DMVEmail });
+		const DMVFirstName = req.flash('user');
+		res.render('dashboard_01', { DMVFirstName });
 	} else if (req.isUnauthenticated) {
 		res.render('/alabamaVoters_LogIn_01')
 		console.log('User is not successfully authenticated within the session through the passport from dashboard!');
@@ -1660,6 +1660,11 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 						return res.redirect('alabamaVoters_CreatePasswords_01', { error: 'An error occurred while user was updating his/her new password and confirm password from the \'alabamaVoters_CreatePasswords_01\' webpage.' });
 
 					} else {
+
+						req.flash('user', req.body.DMVFirstName);
+						res.redirect('/dashboard_01');
+
+				
 
 						const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
 
