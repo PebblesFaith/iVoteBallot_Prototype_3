@@ -360,7 +360,8 @@ passport.use(
 					}
 
 					if (!row) {
-						return done(null, false, { message: 'You have entered the incorrect email address.' });
+						console.log('The user\'s have entered the incorrect email address: ' + DMVEmail );
+						return done(null, false, { message: 'You have entered the incorrect email address: ' + DMVEmail });
 					}
 
 					bcrypt.compare(IvoteBallotIdIdentifierCode, row.IvoteBallotIdIdentifierCode, (err, result) => {
@@ -369,8 +370,8 @@ passport.use(
 							return done(err);
 						}
 						if (!result) {
-							console.log('The user\'s iVoteBallot Id Identifier Code was entered incorrectly.')
-							return done(null, false, { message: 'You have entered the incorrect iVoteBallot Id Identifier Code.' });
+							console.log('The user\'s iVoteBallot Id Identifier Code was entered incorrectly: ' + IvoteBallotIdIdentifierCode ); 
+							return done(null, false, { message: 'You have entered the incorrect iVoteBallot Id Identifier Code: ' + IvoteBallotIdIdentifierCode });
 						} else {
 
 							//return done(null, user);
