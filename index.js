@@ -450,7 +450,8 @@ passport.use(
 				}
 
 				if (!row) {
-					return done(null, false, { message: 'You have entered the incorrect email address for local3: ' + DMVEmail + '.' });
+					console.log('The user\'s have entered the incorrect email address from local3: ' + DMVEmail );
+					return done(null, false, { message: 'You have entered the incorrect email address: ' + DMVEmail + '.' });
 				}
 
 				bcrypt.compare(Password, row.Password, (err, result) => {
