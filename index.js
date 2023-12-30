@@ -102,9 +102,9 @@ short-lived messages that are stored in the session and displayed to the user on
 connect-flash, you can easily create and manage flash messages in your application, which can be used to
 display success messages, error messages, or any other kind of notification to the user.
 */
-const flash = require('connect-flash');
+const flash2 = require('connect-flash');
 
-const flash2 = require('express-flash');
+const flash = require('express-flash');
 
 const methodOverride = require('method-override');
 
@@ -162,7 +162,7 @@ const SESSION_MAX_AGE = process.env.SESSION_MAX_AGE;
 const EXPRESS_SESSION_KEY = process.env.EXPRESS_SESSION_KEY;
 const IONOS_SECRET_KEY = process.env.IONOS_SECRET_KEY;
 
-iVoteBallotApp.use(express.urlencoded({ extended: true }));
+iVoteBallotApp.use(express.urlencoded({ extended: false }));
 
 iVoteBallotApp.use(express.json());
 
@@ -269,18 +269,21 @@ iVoteBallotApp.use(
 				secure: true,
 				httpOnly: true,
 				sameSite: true,
-				resave: true,
-				saveUninitialized: true,
+				resave: false,
+				saveUninitialized: false,
 				//proxy: true,
 				maxAge: 'SESSION_MAX_AGE' // 30 minuites in milliseconds				
 			}
 		}),
 
-		secret: 'EXPRESS_SESSION_KEY',
-		resave: true,
-
+		secret: 'EXPRESS_SESSION_KEY'
+		
 	})
 )
+
+
+iVoteBallotApp.use(flash());
+iVoteBallotApp.use(flash2());
 
 /*
 	The statement router.use([passport.initialize()]); is used to initialize Passport.js
@@ -312,16 +315,6 @@ iVoteBallotApp.use([passport.initialize()]);
 	used after Passport's authentication middleware has been invoked.
 */
 iVoteBallotApp.use(passport.session());
-
-iVoteBallotApp.use(flash());
-iVoteBallotApp.use(function(req, res, next){
-    res.locals.message = req.flash();
-    next();
-});
-
-iVoteBallotApp.use(flash2());
-
-
 
 /*
 	The JavaScript codes language sets up a local1, LocalStrategy for Passport, which is a popular
@@ -455,7 +448,7 @@ passport.use(
 				}
 
 				if (!row) {
-					return done(null, false, { message: 'You have entered the incorrect email address ' + DMVEmail + '.' });
+					return done(null, false, { message: 'You have entered the incorrect email address: ' + DMVEmail + '.' });
 				}
 
 				bcrypt.compare(Password, row.Password, (err, result) => {
@@ -464,7 +457,7 @@ passport.use(
 						return done(err);
 					}
 					if (!result) {
-						console.log('The user\'s temporary password was entered incorrectly: ' + Password + '.');
+						console.log('The user\'s password was entered incorrectly: ' + Password + '.');
 						return done(null, false, { message: 'You have entered the incorrect password: ' + Password + '.' });
 					}
 					//return done(null, row);
@@ -653,7 +646,7 @@ iVoteBallotApp.use('/dashboard_01', (req, res, next) => {
 
 		// User of '/login' URL
 		req.isUnauthenticated = true;
-	}
+	}	
 	next();
 });
 
@@ -843,11 +836,10 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 iVoteBallotApp.get('/dashboard_01', (req, res) => {
 	if (req.isAuthenticated) {
 		console.log(req.user);
-		console.log(req.session);
-		res.render('/dashboard_01');
+		console.log(req.session);		
 		console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
+		res.render('dashboard_01', { firstName: req.user.DMVFirstName, lastName: req.user.DMVLastName, email: req.user.DMVEmail});
 		
-		res.render('dashboard_01');
 	} else if (req.isUnauthenticated) {
 		res.render('/alabamaVoters_LogIn_01')
 		console.log('User is not successfully authenticated within the session through the passport from dashboard!');
