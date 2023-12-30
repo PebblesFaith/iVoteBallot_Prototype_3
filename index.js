@@ -313,6 +313,8 @@ iVoteBallotApp.use(passport.session());
 
 iVoteBallotApp.use(flash());
 
+
+
 /*
 	The JavaScript codes language sets up a local1, LocalStrategy for Passport, which is a popular
 	authentication middleware for Node.js. It defines a function that will be called when an
@@ -973,7 +975,7 @@ iVoteBallotApp.get('/dashboard_01', (req, res) => {
 		console.log(req.session);
 		console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
 		const DMVFirstName = req.flash('user');
-		res.render('dashboard_01', { DMVFirstName });
+		res.render('dashboard_01', { message: req.flash('user') });
 	} else if (req.isUnauthenticated) {
 		res.render('/alabamaVoters_LogIn_01')
 		console.log('User is not successfully authenticated within the session through the passport from dashboard!');
@@ -1662,9 +1664,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 					} else {
 
 						req.flash('user', req.body.DMVFirstName);
-						res.redirect('/dashboard_01');
-
-				
+						res.redirect('/dashboard_01');				
 
 						const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
 
