@@ -319,6 +319,8 @@ iVoteBallotApp.use(function(req, res, next){
     next();
 });
 
+iVoteBallotApp.use(flash2());
+
 
 
 /*
@@ -380,41 +382,7 @@ passport.use(
 
 							//return done(null, user);
 
-							return done(null, 
-								{ 
-									id: row.id,
-									DMVPhoto: row.DMVPhoto, 
-									DMVFirstName: row.DMVFirstName, 
-									DMVMiddleName: row.DMVMiddleName, 
-									DMVLastName: row.DMVLastName, 
-									DMVSuffix: row.DMVSuffix, 
-									DMVDateOfBirth: row.DMVDateOfBirth, 
-									DMVBirthSex: row.DMVBirthSex, 
-									DMVGenderIdentity: row.DMVGenderIdentity, 
-									DMVRace: row.DMVRace, 
-									DMVSSN: row.DMVSSN, 
-									DMVEmail: row.DMVEmail, 
-									DMVConfirmEmail: row.DMVConfirmEmail, 
-									DMVPhoneNumber: row.DMVPhoneNumber, 
-									DMVAddress: row.DMVAddress, 
-									DMVUnitType: row.DMVUnitType, 
-									DMVUnitTypeNumber: row.DMVUnitType, 
-									DMVCountrySelection: row.DMVCountrySelection, 
-									DMVStateSelection: row.DMVStateSelection, 
-									DMVCountySelection: row.DMVCountySelection, 
-									DMVCitySelection: row.DMVCitySelection, 
-									DMVZipSelection: row.DMVZipSelection, 
-									DMVIdType: row.DMVIdType, 
-									DMVIdTypeNumber: row.DMVIdTypeNumber, 
-									IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
-									ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, 
-									Password: row.Password, 
-									ConfirmPassword: row.DMVConfirmEmail, 
-									Temporary_Password: row.Temporary_Password, 
-									isAuthenticated: true 
-								}
-								
-							);
+							return done(null, { id: row.id, DMVPhoto: row.DMVPhoto, DMVFirstName: row.DMVFirstName, DMVMiddleName: row.DMVMiddleName, DMVLastName: row.DMVLastName, DMVSuffix: row.DMVSuffix, DMVDateOfBirth: row.DMVDateOfBirth, DMVBirthSex: row.DMVBirthSex, DMVGenderIdentity: row.DMVGenderIdentity, DMVRace: row.DMVRace, DMVSSN: row.DMVSSN, DMVEmail: row.DMVEmail, DMVConfirmEmail: row.DMVConfirmEmail, DMVPhoneNumber: row.DMVPhoneNumber, DMVAddress: row.DMVAddress, DMVUnitType: row.DMVUnitType, DMVUnitTypeNumber: row.DMVUnitType, DMVCountrySelection: row.DMVCountrySelection, DMVStateSelection: row.DMVStateSelection, DMVCountySelection: row.DMVCountySelection, DMVCitySelection: row.DMVCitySelection, DMVZipSelection: row.DMVZipSelection, DMVIdType: row.DMVIdType, DMVIdTypeNumber: row.DMVIdTypeNumber, IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, Password: row.Password, ConfirmPassword: row.DMVConfirmEmail, Temporary_Password: row.Temporary_Password, isAuthenticated: true });
 
 						}
 					});
@@ -457,41 +425,7 @@ passport.use(
 					}
 					//return done(null, row);
 
-					return done(null, 
-						{ 
-							id: row.id, 
-							DMVPhoto: row.DMVPhoto, 
-							DMVFirstName: row.DMVFirstName, 
-							DMVMiddleName: row.DMVMiddleName, 
-							DMVLastName: row.DMVLastName, 
-							DMVSuffix: row.DMVSuffix, 
-							DMVDateOfBirth: row.DMVDateOfBirth, 
-							DMVBirthSex: row.DMVBirthSex, 
-							DMVGenderIdentity: row.DMVGenderIdentity, 
-							DMVRace: row.DMVRace, 
-							DMVSSN: row.DMVSSN, 
-							DMVEmail: row.DMVEmail, 
-							DMVConfirmEmail: row.DMVConfirmEmail, 
-							DMVPhoneNumber: row.DMVPhoneNumber, 
-							DMVAddress: row.DMVAddress, 
-							DMVUnitType: row.DMVUnitType, 
-							DMVUnitTypeNumber: row.DMVUnitType, 
-							DMVCountrySelection: row.DMVCountrySelection, 
-							DMVStateSelection: row.DMVStateSelection, 
-							DMVCountySelection: row.DMVCountySelection, 
-							DMVCitySelection: row.DMVCitySelection, 
-							DMVZipSelection: row.DMVZipSelection, 
-							DMVIdType: row.DMVIdType, 
-							DMVIdTypeNumber: row.DMVIdTypeNumber, 
-							IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
-							ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode,
-							Password: row.Password, 
-							ConfirmPassword: row.DMVConfirmEmail, 
-							Temporary_Password: row.Temporary_Password,
-							isAuthenticated: true 
-						}
-						
-					);
+					return done(null, { id: row.id, DMVPhoto: row.DMVPhoto, DMVFirstName: row.DMVFirstName, DMVMiddleName: row.DMVMiddleName, DMVLastName: row.DMVLastName, DMVSuffix: row.DMVSuffix, DMVDateOfBirth: row.DMVDateOfBirth, DMVBirthSex: row.DMVBirthSex, DMVGenderIdentity: row.DMVGenderIdentity, DMVRace: row.DMVRace, DMVSSN: row.DMVSSN, DMVEmail: row.DMVEmail, DMVConfirmEmail: row.DMVConfirmEmail, DMVPhoneNumber: row.DMVPhoneNumber, DMVAddress: row.DMVAddress, DMVUnitType: row.DMVUnitType, DMVUnitTypeNumber: row.DMVUnitType, DMVCountrySelection: row.DMVCountrySelection, DMVStateSelection: row.DMVStateSelection, DMVCountySelection: row.DMVCountySelection, DMVCitySelection: row.DMVCitySelection, DMVZipSelection: row.DMVZipSelection, DMVIdType: row.DMVIdType, DMVIdTypeNumber: row.DMVIdTypeNumber, IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, Password: row.Password, ConfirmPassword: row.DMVConfirmEmail, Temporary_Password: row.Temporary_Password, isAuthenticated: true });
 
 				});
 
@@ -535,41 +469,7 @@ passport.use(
 					}
 					//return done(null, row);
 
-					return done(null, 
-						{ 
-							id: row.id,
-							DMVPhoto: row.DMVPhoto, 
-							DMVFirstName: row.DMVFirstName, 
-							DMVMiddleName: row.DMVMiddleName, 
-							DMVLastName: row.DMVLastName, 
-							DMVSuffix: row.DMVSuffix, 
-							DMVDateOfBirth: row.DMVDateOfBirth, 
-							DMVBirthSex: row.DMVBirthSex, 
-							DMVGenderIdentity: row.DMVGenderIdentity, 
-							DMVRace: row.DMVRace, 
-							DMVSSN: row.DMVSSN, 
-							DMVEmail: row.DMVEmail, 
-							DMVConfirmEmail: row.DMVConfirmEmail, 
-							DMVPhoneNumber: row.DMVPhoneNumber, 
-							DMVAddress: row.DMVAddress, 
-							DMVUnitType: row.DMVUnitType, 
-							DMVUnitTypeNumber: row.DMVUnitType, 
-							DMVCountrySelection: row.DMVCountrySelection, 
-							DMVStateSelection: row.DMVStateSelection, 
-							DMVCountySelection: row.DMVCountySelection, 
-							DMVCitySelection: row.DMVCitySelection, 
-							DMVZipSelection: row.DMVZipSelection, 
-							DMVIdType: row.DMVIdType, 
-							DMVIdTypeNumber: row.DMVIdTypeNumber, 
-							IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
-							ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, 
-							Password: row.Password, 
-							ConfirmPassword: row.DMVConfirmEmail, 
-							Temporary_Password: row.Temporary_Password, 
-							isAuthenticated: true 
-						}
-
-					);	
+					return done(null, {  id: row.id, DMVPhoto: row.DMVPhoto, DMVFirstName: row.DMVFirstName, DMVMiddleName: row.DMVMiddleName, DMVLastName: row.DMVLastName, DMVSuffix: row.DMVSuffix, DMVDateOfBirth: row.DMVDateOfBirth, DMVBirthSex: row.DMVBirthSex, DMVGenderIdentity: row.DMVGenderIdentity, DMVRace: row.DMVRace, DMVSSN: row.DMVSSN, DMVEmail: row.DMVEmail, DMVConfirmEmail: row.DMVConfirmEmail, DMVPhoneNumber: row.DMVPhoneNumber, DMVAddress: row.DMVAddress, DMVUnitType: row.DMVUnitType, DMVUnitTypeNumber: row.DMVUnitType, DMVCountrySelection: row.DMVCountrySelection, DMVStateSelection: row.DMVStateSelection, DMVCountySelection: row.DMVCountySelection, DMVCitySelection: row.DMVCitySelection, DMVZipSelection: row.DMVZipSelection, DMVIdType: row.DMVIdType, DMVIdTypeNumber: row.DMVIdTypeNumber, IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, Password: row.Password, ConfirmPassword: row.DMVConfirmEmail, Temporary_Password: row.Temporary_Password, isAuthenticated: true });	
 
 				});
 
@@ -627,43 +527,7 @@ passport.deserializeUser(function(id, done) {
 			return done(null, false);
 		}
 
-		return done(null, 
-
-			{ 					
-				id: row.id, 
-				DMVPhoto: row.DMVPhoto, 
-				DMVFirstName: row.DMVFirstName, 
-				DMVMiddleName: row.DMVMiddleName, 
-				DMVLastName: row.DMVLastName, 
-				DMVSuffix: row.DMVSuffix, 
-				DMVDateOfBirth: row.DMVDateOfBirth, 
-				DMVBirthSex: row.DMVBirthSex, 
-				DMVGenderIdentity: row.DMVGenderIdentity, 
-				DMVRace: row.DMVRace, 
-				DMVSSN: row.DMVSSN, 
-				DMVEmail: row.DMVEmail, 
-				DMVConfirmEmail: row.DMVConfirmEmail, 
-				DMVPhoneNumber: row.DMVPhoneNumber, 
-				DMVAddress: row.DMVAddress, 
-				DMVUnitType: row.DMVUnitType, 
-				DMVUnitTypeNumber: row.DMVUnitType, 
-				DMVCountrySelection: row.DMVCountrySelection, 
-				DMVStateSelection: row.DMVStateSelection, 
-				DMVCountySelection: row.DMVCountySelection, 
-				DMVCitySelection: row.DMVCitySelection, 
-				DMVZipSelection: row.DMVZipSelection, 
-				DMVIdType: row.DMVIdType, 
-				DMVIdTypeNumber: row.DMVIdTypeNumber, 
-				IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
-				ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode,
-				Password: row.Password, 
-				ConfirmPassword: row.DMVConfirmEmail, 
-				Temporary_Password: row.Temporary_Password, 
-				isAuthenticated: true 
-
-			}
-			
-		);		
+		return done(null, { id: row.id, DMVPhoto: row.DMVPhoto, DMVFirstName: row.DMVFirstName, DMVMiddleName: row.DMVMiddleName, DMVLastName: row.DMVLastName, DMVSuffix: row.DMVSuffix, DMVDateOfBirth: row.DMVDateOfBirth, DMVBirthSex: row.DMVBirthSex, DMVGenderIdentity: row.DMVGenderIdentity, DMVRace: row.DMVRace, DMVSSN: row.DMVSSN, DMVEmail: row.DMVEmail, DMVConfirmEmail: row.DMVConfirmEmail, DMVPhoneNumber: row.DMVPhoneNumber, DMVAddress: row.DMVAddress, DMVUnitType: row.DMVUnitType, DMVUnitTypeNumber: row.DMVUnitType, DMVCountrySelection: row.DMVCountrySelection, DMVStateSelection: row.DMVStateSelection, DMVCountySelection: row.DMVCountySelection, DMVCitySelection: row.DMVCitySelection, DMVZipSelection: row.DMVZipSelection, DMVIdType: row.DMVIdType, DMVIdTypeNumber: row.DMVIdTypeNumber, IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, Password: row.Password, ConfirmPassword: row.DMVConfirmEmail, Temporary_Password: row.Temporary_Password, isAuthenticated: true });		
 
 	});
 
@@ -1669,10 +1533,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 						console.log(err.message);
 						return res.redirect('alabamaVoters_CreatePasswords_01', { error: 'An error occurred while user was updating his/her new password and confirm password from the \'alabamaVoters_CreatePasswords_01\' webpage.' });
 
-					} else {
-
-						req.flash('user', req.body.DMVFirstName);
-						res.redirect('/dashboard_01');				
+					} else {								
 
 						const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
 
