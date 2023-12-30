@@ -31,6 +31,14 @@
 								<!--<span class="close" onclick="document.getElementById('popUpSignUpMenu').style.display='none'" title="Close Sign Up Form">&times;</span>-->
 							
 							</div>
+							<div class="flash_Message_01">	
+										
+								<% if (messages.error) { %>
+									<%= messages.error %>
+
+								<% } %>
+
+							</div>
 	
 							<div class="signUp_Container_01">  									   
 								<label>Email Address | </label> 									
