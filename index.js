@@ -836,12 +836,12 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 	}
 });
 
-iVoteBallotApp.get('/dashboard_01', (req, res) => {
+iVoteBallotApp.get('/dashboard_01', checkAuthenticated, (req, res) => {
 	if (req.isAuthenticated) {
 		console.log(req.user);
 		console.log(req.session);		
 		console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
-		res.render('dashboard_01', { firstName: req.user.DMVFirstName, lastName: req.user.DMVLastName, email: req.user.DMVEmail});
+		res.render('dashboard_01', { DMVFirstName: req.user.DMVFirstName});
 		
 	} else if (req.isUnauthenticated) {
 		res.render('/alabamaVoters_LogIn_01')
@@ -930,6 +930,33 @@ iVoteBallotApp.post(
 }));
 
 /* -------------------------- The ending of the POST LOCAL STRATEGY section ----------------------------- */
+
+function checkAuthenticated(req, res, next) {
+
+	if (req.isAuthenticated()) {
+
+		return next();
+	}
+
+	res.redirect('/alabamaVoters_LogIn_01');
+
+
+};
+
+function checkNotAuthenticated(req, res, next) {
+
+	if (req.isAuthenticated()) {
+
+		return res.redirect('/iVoteallot');
+
+	}
+	
+		return next();
+
+};
+
+
+
 
 /* -------------------------- The beginning of All SQLite3 databases section ----------------------------- */
 
