@@ -104,6 +104,8 @@ display success messages, error messages, or any other kind of notification to t
 */
 const flash = require('connect-flash');
 
+const flash2 = require('express-flash');
+
 const methodOverride = require('method-override');
 
 /*
@@ -312,6 +314,10 @@ iVoteBallotApp.use([passport.initialize()]);
 iVoteBallotApp.use(passport.session());
 
 iVoteBallotApp.use(flash());
+iVoteBallotApp.use(function(req, res, next){
+    res.locals.message = req.flash();
+    next();
+});
 
 
 
@@ -591,7 +597,7 @@ passport.use(
 */
 passport.serializeUser(function (user, done) {
 	console.log('Serializing user...');
-	console.log(user);
+	console.log('user');
 	done(null, user.id);
 });
 
@@ -961,8 +967,9 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 		console.log('User is not logged into the dashboard!');
 	} else if
 		(req.session.isAuthenticated) {
-		res.redirect('/dashboard_01');
-		console.log('User is logged into the dashboard!');
+			
+			res.redirect('/dashboard_01');
+			console.log('User is logged into the dashboard!');
 
 	} else {
 		res.render('404');
@@ -973,9 +980,10 @@ iVoteBallotApp.get('/dashboard_01', (req, res) => {
 	if (req.isAuthenticated) {
 		console.log(req.user);
 		console.log(req.session);
+		res.render('/dashboard_01');
 		console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
-		const DMVFirstName = req.flash('user');
-		res.render('dashboard_01', { message: req.flash('user') });
+		
+		res.render('dashboard_01');
 	} else if (req.isUnauthenticated) {
 		res.render('/alabamaVoters_LogIn_01')
 		console.log('User is not successfully authenticated within the session through the passport from dashboard!');
