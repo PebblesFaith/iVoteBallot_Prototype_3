@@ -272,7 +272,7 @@ iVoteBallotApp.use(
 				resave: false,
 				saveUninitialized: false,
 				//proxy: true,
-				maxAge: 'SESSION_MAX_AGE' // 30 minuites in milliseconds				
+				maxAge: 'SESSION_MAX_AGE' // 1 hour				
 			}
 		}),
 
