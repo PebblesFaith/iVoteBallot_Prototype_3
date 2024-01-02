@@ -270,7 +270,7 @@ iVoteBallotApp.use(
 				httpOnly: true,
 				sameSite: true,
 				resave: false,
-				saveUninitialized: false,
+				saveUninitialized: true,
 				//proxy: true,
 				maxAge: 'SESSION_MAX_AGE' // 1 hour				
 			}
@@ -280,7 +280,6 @@ iVoteBallotApp.use(
 		
 	})
 )
-
 
 iVoteBallotApp.use(flash());
 iVoteBallotApp.use(flash2());
