@@ -1156,7 +1156,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 					bcc: 'cio_developmenttest@ivoteballot.com',				
 					subject: `New User Signup Notification | iVoteBallot Employee Entry`,
 					html: ` 
-								
+													
 				<p>Dear CEO/Election Assure Experts' Manager,</p>
 				<p>An iVoteBallot employee has manually entered a new user into the iVoteBallot database. Here are the details:</p>
 		
@@ -1182,7 +1182,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 
 						}
 					]
-				};				
+				};								
 
 				const mailOptions_02 = {
 					from: 'electionassureexpert@ivoteballot.com',
@@ -1417,7 +1417,7 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 						
 						<p>This temporary password is valid for the next 10 minutes. After, successful authentication, you can set your permanent password and confirm password.</p>
 						
-						<p>Should you have any questions or concerns, feel free to reach out to our iVoteBallot's Customer Care Team.</p>
+						<p>Should you have any questions or concerns, feel free to reach out to our iVoteBallot's Election Assure Expert Team Team.</p>
 						
 						<p>Respectfully, </p>	
 	
@@ -1605,7 +1605,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
 						// Send welcome email to the user
 						const mailOptions_02 = {
-							from: 'ceo_developmenttest@ivoteballot.com',
+							from: 'electionassureexpert@ivoteballot.com',
 							to: DMVEmail,
 							bcc: 'cio_developmenttest@ivoteballot.com',
 							subject: 'Successful Registration for iVoteBallot',
@@ -1614,7 +1614,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 							  <p>You have successfully registered for iVoteBallot.</p>
 							  <p>Thank you for choosing iVoteBallot!</p>
 							  <p>Best regards,</p>
-							  <p>iVoteBallot's Customer Care Team </p>
+							  <p>iVoteBallot's Election Assure Expert Team </p>
 							  <img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 							`,
 
