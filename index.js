@@ -1157,7 +1157,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 					subject: `New User Signup Notification | iVoteBallot Employee Entry`,
 					html: ` 
 													
-				<p>Dear CEO/Election Assure Experts' Manager,</p>
+				<p>Dear CEO/CIO/Manager,</p>
 				<p>An iVoteBallot employee has manually entered a new user into the iVoteBallot database. Here are the details:</p>
 		
 					<ul>
@@ -1167,9 +1167,8 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 						<li>
 							Email: ${req.body.DMVEmail}
 						</li>					
-					</ul>
+					</ul>					
 					
-					<p>Kindly find the attached image for the iVoteBallot logo.</p>
 					<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 
 					`,					
@@ -1204,7 +1203,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 						</p>
 
 						<p>Best Regards,</p>
-						<p>iVoteBallot's Election Assure Experts</p>
+						<p>iVoteBallot's Election Assure Expert Team</p>
 
 						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 
@@ -1379,10 +1378,9 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 				
 							<p>iVoteBallot has received a new online registration:</p>
 
-							<p>New User Registration ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName}, has been sent a temporary password for an iVoteBallot account verification.</p> 
-							<p>The email associated with the iVoteBallot's account is: ${req.user.DMVEmail}.</p>
-															
-							<p>Kindly find the attached image for the iVoteBallot logo.</p>
+							<p>New User Registration: ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName}, has been sent a temporary password for an iVoteBallot account verification.</p> 
+							<p>The email associated with the iVoteBallot's account is: ${req.user.DMVEmail}.</p>															
+						
 							<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 
 						`,					
@@ -1585,9 +1583,8 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 								<p>iVoteBallot has received a new online registration completion:</p>
 	
 								<p>New User ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName} has successfully registered for iVoteBallot.</p> 
-								<p>: ${req.user.DMVEmail}.</p>
-																
-								<p>Kindly find the attached image for the iVoteBallot logo.</p>
+								<p>: ${req.user.DMVEmail}.</p>																
+								
 								<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 	
 							`,					
