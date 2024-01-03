@@ -1627,7 +1627,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 								}
 							]	
 
-						};
+						};						
 
 						transporter.sendMail(mailOptions_01, (err, info) => {
 							if (err) {
