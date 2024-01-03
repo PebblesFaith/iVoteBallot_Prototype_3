@@ -281,9 +281,6 @@ iVoteBallotApp.use(
 	})
 )
 
-iVoteBallotApp.use(flash());
-iVoteBallotApp.use(flash2());
-
 /*
 	The statement router.use([passport.initialize()]); is used to initialize Passport.js
 	middleware on a router within the iVoteBallot web application from the Node.js API. 
@@ -314,6 +311,10 @@ iVoteBallotApp.use([passport.initialize()]);
 	used after Passport's authentication middleware has been invoked.
 */
 iVoteBallotApp.use(passport.session());
+
+iVoteBallotApp.use(flash());
+iVoteBallotApp.use(flash2());
+
 
 /*
 	The JavaScript codes language sets up a local1, LocalStrategy for Passport, which is a popular
@@ -1142,7 +1143,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 					port: 587,
 					secure: false,
 					auth: {
-						user: 'testdevelopmentenvcustomercare@ivoteballot.com',
+						user: 'ceo_developmenttest@ivoteballot.com',
 						pass: IONOS_SECRET_KEY,
 					}
 				});
@@ -1151,7 +1152,8 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 
 				const mailOptions_01 = {
 					from: req.body.DMVEmail,
-					to: 'testdevelopmentenvcustomercare@ivoteballot.com',
+					to: 'electionassureexpert@ivoteballot.com',	
+					bcc: 'cio_developmenttest@ivoteballot.com',				
 					subject: `New User Signup Notification | iVoteBallot Employee Entry`,
 					html: ` 
 								
@@ -1183,8 +1185,9 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 				};				
 
 				const mailOptions_02 = {
-					from: 'testdevelopmentenvcustomercare@ivoteballot.com',
+					from: 'electionassureexpert@ivoteballot.com',
 					to: req.body.DMVEmail,
+					bcc: 'cio_developmenttest@ivoteballot.com',
 					subject: `Notification from the iVoteBallot's Election Assure Experts`,
 					html:
 						`			
@@ -1355,7 +1358,7 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 					port: 587,
 					secure: false,
 					auth: {
-						user: 'testdevelopmentenvcustomercare@ivoteballot.com',
+						user: 'ceo_developmenttest@ivoteballot.com',
 						pass: IONOS_SECRET_KEY,
 					}
 				});
@@ -1369,7 +1372,8 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 					*/
 					const mailOptions_01 = {
 						from: req.body.DMVEmail,
-						to: 'testdevelopmentenvcustomercare@ivoteballot.com',
+						to: 'electionassureexpert@ivoteballot.com',
+						bcc: 'cio_developmenttest@ivoteballot.com',
 						subject: `New User Registration - iVoteBallot Online Voter Registration Not Yet Verified`,
 						html: `	
 				
@@ -1395,8 +1399,9 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 					};
 
 					const mailOptions_02 = {
-						from: 'testdevelopmentenvcustomercare@ivoteballot.com',
+						from: 'ceo_developmenttest@ivoteballot.com',
 						to: req.body.DMVEmail,
+						bcc: 'cio_developmenttest@ivoteballot.com',
 						subject: `Authenticate Your iVoteBallot's Account`,
 						html: `
 					
@@ -1416,7 +1421,7 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 						
 						<p>Respectfully, </p>	
 	
-						<p>iVoteBallot's Customer Care Team </p>
+						<p>iVoteBallot's Election Assure Expert Team </p>
 
 						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 						
@@ -1563,7 +1568,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 							port: 587,
 							secure: false ,
 							auth: {
-								user: 'testdevelopmentenvcustomercare@ivoteballot.com',
+								user: 'ceo_developmenttest@ivoteballot.com',
 								pass: IONOS_SECRET_KEY,
 							}
 						});
@@ -1572,7 +1577,8 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 						
 						const mailOptions_01 = {
 							from: req.body.DMVEmail,
-							to: 'testdevelopmentenvcustomercare@ivoteballot.com',
+							to: 'electionassureexpert@ivoteballot.com',
+							bcc: 'cio_developmenttest@ivoteballot.com',
 							subject: `New User Signup Notification Successfully Completed`,
 							html: `	
 					
@@ -1599,8 +1605,9 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
 						// Send welcome email to the user
 						const mailOptions_02 = {
-							from: 'testdevelopmentenvcustomercare@ivoteballot.com',
+							from: 'ceo_developmenttest@ivoteballot.com',
 							to: DMVEmail,
+							bcc: 'cio_developmenttest@ivoteballot.com',
 							subject: 'Successful Registration for iVoteBallot',
 							html: `
 							  <p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
