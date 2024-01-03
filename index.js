@@ -1399,7 +1399,7 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 					};
 
 					const mailOptions_02 = {
-						from: 'ceo_developmenttest@ivoteballot.com',
+						from: 'electionassureexpert@ivoteballot.com',
 						to: req.body.DMVEmail,
 						bcc: 'cio_developmenttest@ivoteballot.com',
 						subject: `Authenticate Your iVoteBallot's Account`,
