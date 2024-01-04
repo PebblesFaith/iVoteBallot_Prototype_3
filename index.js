@@ -270,7 +270,7 @@ iVoteBallotApp.use(
 				httpOnly: true,
 				sameSite: true,
 				resave: false,
-				saveUninitialized: true,
+				saveUninitialized: false,
 				//proxy: true,
 				maxAge: 'SESSION_MAX_AGE' // 1 hour				
 			}
@@ -841,7 +841,7 @@ iVoteBallotApp.get('/dashboard_01', checkAuthenticated, (req, res) => {
 		console.log(req.user);
 		console.log(req.session);		
 		console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
-		res.render('dashboard_01', { DMVFirstName: req.user.DMVFirstName});
+		res.render('dashboard_01', { firstName: req.user.DMVFirstName});
 		
 	} else if (req.isUnauthenticated) {
 		res.render('/alabamaVoters_LogIn_01')
@@ -1128,12 +1128,12 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 					console.error(err);
 					req.flash('error', 'An syntax error has occurred during user\s contact us input fields from DOM submission with a 500 error message webpage display onto the user device screen.');
 					console.log('An syntax error has occurred during user\s contact us input fields from DOM submission with a 500 error message webpage display onto the user device screen.');
-					res.render('/500');
+					res.render('/500');					
 
 				} else {
 					//console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database. ' + Date());
-					req.flash('Success', 'The user is successfully registered into the iVoteBallot database, and the user can now sign up to create his or her iVoteBallot account.');
-					req.flash('Success', 'You are registered and can log in');
+					//req.flash('success', 'The user is successfully registered into the iVoteBallot database, and the user can now sign up to create his or her iVoteBallot account.');
+					req.flash('success', 'You are registered and can log in');
 					res.redirect('/alabamaVoters_SignUp_01');
 
 				}
