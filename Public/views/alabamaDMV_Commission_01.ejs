@@ -15,7 +15,23 @@
 	<body>
 		<header>
 			<%- include('../common/iVoteBallot_EmployeesHeader') %>
-		</header>			
+		</header>		
+		
+		<% if (messages.success) { %>
+			<div class="alert alert-success">
+			  <% messages.success.forEach(function(message) { %>
+				<%= message %>
+			  <% }); %>
+			</div>
+		  <% } %>
+		  
+		  <% if (messages.error) { %>
+			<div class="alert alert-danger">
+			  <% messages.error.forEach(function(message) { %>
+				<%= message %>
+			  <% }); %>
+			</div>
+		  <% } %>
 
 		<div id="flex_Container">
 			<div id="flex_Container_Row">
