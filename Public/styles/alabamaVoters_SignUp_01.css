@@ -439,11 +439,23 @@ a:hover {
 	background-color: rgb(201, 24, 24);
 	color: rgb(255, 255, 255);
 	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-	font-size: clamp(10px, 2vw, 14px);
+	font-size: clamp(9px, 2vw, 12px);
 	text-align: center;	
 	padding-left: 15px;
 	padding-right: 15px;
 }
+
+.flash_Message_02 {
+	background-color: rgb(209, 241, 220);
+	color: rgb(135, 135, 131);
+	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	font-size: clamp(9px, 2vw, 12px);
+	text-align: center;	
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+
 
 
 
