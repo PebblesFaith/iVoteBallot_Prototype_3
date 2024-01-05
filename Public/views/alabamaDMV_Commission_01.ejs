@@ -15,7 +15,16 @@
 	<body>
 		<header>
 			<%- include('../common/iVoteBallot_EmployeesHeader') %>
-		</header>		
+		</header>	
+		
+		<div class="flash_Message_01">	
+										
+			<% if (messages.error) { %>
+				<%= messages.error %>
+
+			<% } %>
+
+		</div>
 		
 		<% if (messages.success) { %>
 			<div class="alert alert-success">
