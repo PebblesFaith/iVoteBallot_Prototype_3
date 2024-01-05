@@ -11,7 +11,7 @@
 	<script defer src="../scripts_Files/alabamaVoters_EmailVerification_01_Script.js"></script>
 
 </head>
-	<body>
+	<body>		
 
 		<div id="flex_Container">
 			<div id="flex_Container_Row">
@@ -24,12 +24,30 @@
 							action="/alabamaVoters_EmailVerification_01" 
 							method="POST"
 						>
-	
+								
 							<div class="imageContainer">
 								<a href="http://localhost:8080/iVoteBallot"><img class="header_Image_01" src="../images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png" /></a>
 								<p id="titleEmailVerification_01"> Email Address Verification | Alabama</p>
 								<!--<span class="close" onclick="document.getElementById('popUpSignUpMenu').style.display='none'" title="Close Sign Up Form">&times;</span>-->
 							
+								<div class="flash_Message_01">	
+										
+									<% if (messages.error) { %>
+										<%= messages.error %>
+						
+									<% } %>
+						
+								</div>
+						
+								<div class="flash_Message_02">	
+						
+									<% if (messages.success) { %>
+										<%= messages.success %>
+						
+									<% } %>
+						
+								</div>			
+								
 							</div>
 	
 							<div class="emailVerification_Container_01">  	
