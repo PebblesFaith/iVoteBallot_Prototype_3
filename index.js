@@ -681,6 +681,7 @@ const redirectDashboard = (req, res, next) => {
 		res.redirect('/dashboard_01');
 	} else {
 		next();
+		res.redirect('/alabamaVoters_LogIn_01');
 	}
 }
 
@@ -954,9 +955,6 @@ function checkNotAuthenticated(req, res, next) {
 		return next();
 
 };
-
-
-
 
 /* -------------------------- The beginning of All SQLite3 databases section ----------------------------- */
 
