@@ -38,6 +38,22 @@
 
 								<% } %>
 
+								<% if (messages.success) { %>
+									<div class="alert alert-success">
+									  <% messages.success.forEach(function(message) { %>
+										<%= message %>
+									  <% }); %>
+									</div>
+								  <% } %>
+								  
+								  <% if (messages.error) { %>
+									<div class="alert alert-danger">
+									  <% messages.error.forEach(function(message) { %>
+										<%= message %>
+									  <% }); %>
+									</div>
+								  <% } %>
+
 							</div>
 	
 							<div class="signUp_Container_01">  									   
