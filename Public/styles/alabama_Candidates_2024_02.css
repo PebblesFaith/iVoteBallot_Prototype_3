@@ -585,10 +585,12 @@ p {
 
 }
 
-.shoppingCart_Image_02 {   
+.shoppingCart_Image_02 {  
+    margin-top: 5px;   
     display: flex;
     width: clamp(30px, 2vw, 100px); 
-    justify-content: right;
+    justify-content: center;
+    align-items: center;
 
 }
 
@@ -5765,4 +5767,77 @@ hr.hr_White_line_03 {
     cursor:pointer;
     text-decoration: none;
 
+}
+
+.header_Image_01 {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(13, 65, 255);	
+    text-align: center;
+    line-height: none;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-bottom: 10px;  
+    justify-content: center; 
+	align-items: baseline;
+    background-color: transparent;    
+    width: clamp(75px, 2vw, 200px);  
+    border-right-style: solid; 
+    border-color: rgb(201, 24, 24);
+    border: 0, 2px, 0, 0;
+}
+
+/*
+    The header.ejs homepage CSS styles for the #slogan_01 element displays the flex in a column direction
+    with center alignment and red color. It also sets a custom font-family, font-size using a
+    responsive unit, and adjusts margins to create spacing. The background-color is transparent to
+    allow for a flexible design.
+*/
+#slogan_01 {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(201, 24, 24);    
+    text-align: center;
+    line-height: none;
+    margin-top: 0px;
+    margin-bottom: 10px;      
+    margin-left: 5px;
+    margin-right: 5px;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 15px);   
+    justify-content: center;  
+    background-color: transparent;  
+}
+
+#hr_Blue_line_02 {
+    border-color: rgb(13, 65, 255); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
+}
+
+#hr_Red_line_02 {
+    border-color: rgb(201, 24, 24); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    width: auto;
+}  
+
+#hr_Grey_line_02 {
+    color: rgb(195, 195, 195);
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
 }
