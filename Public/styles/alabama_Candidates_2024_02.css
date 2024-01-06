@@ -628,8 +628,6 @@ p {
     color: rgb(13, 65, 255);    
 }
 
-
-
 /*
     The CSS statement sets the display property of the label element to inline-block, 
     which allows it to be displayed inline with other elements while still retaining its
@@ -1124,13 +1122,6 @@ p {
     background-color: rgb(255, 255, 255);
 }
 
-
-
-
-
-
-
-
 /* United States Presidential Candidates */
 #candidateButton_FC001_24,
 #candidateButton_FC002_24,
@@ -1556,7 +1547,6 @@ p {
     text-align: center;
 }
 
-
 #usPresidential_ScoreSheet_Subtitle_02_FC011_24_Gray
 {  
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -1627,7 +1617,6 @@ p {
 
 }
 
-
 #usPresidential_ScoreSheet_CampaignWebsite_FC011_24_Gray:hover
 {
     font-family: Georgia, Times, 'Times New Roman', serif;
@@ -1636,8 +1625,6 @@ p {
     cursor: pointer;
 
 }
-
-
 
 #usPresidential_ScoreSheet_CampaignWebsite_FC012_24_Blue:hover,
 #usPresidential_ScoreSheet_CampaignWebsite_FC013_24_Blue:hover,
@@ -1706,11 +1693,6 @@ p {
     text-align: left;
  
 }
-
-
-
-
-
 
 /* United States Senator Candidates */
 #candidateButton_FC015_24,
@@ -1914,7 +1896,6 @@ p {
 }
 */
 
-
 .modal_ScoreSheet_Footer_FC042_24_Blue,
 .modal_ScoreSheet_Footer_FC043_24_Blue,
 .modal_ScoreSheet_Footer_FC044_24_Blue
@@ -1953,7 +1934,6 @@ p {
 }
 
 */
-
 
 #usSenator_Footer_Title_FC042_24_Blue,
 #usSenator_Footer_Title_FC043_24_Blue,
@@ -2066,7 +2046,6 @@ p {
     text-align: center;
 }
 
-
 #usSenator_ScoreSheet_Subtitle_01_FC015_24_Red,
 #usSenator_ScoreSheet_Subtitle_01_FC016_24_Red,
 #usSenator_ScoreSheet_Subtitle_01_FC038_24_Red,
@@ -2125,7 +2104,6 @@ p {
 }
 */
 
-
 #usSenator_ScoreSheet_CampaignWebsite_FC042_24_Blue,
 #usSenator_ScoreSheet_CampaignWebsite_FC043_24_Blue,
 #usSenator_ScoreSheet_CampaignWebsite_FC044_24_Blue
@@ -2161,7 +2139,6 @@ p {
 }
 
 */
-
 
 #usSenator_ScoreSheet_CampaignWebsite_FC042_24_Blue:hover,
 #usSenator_ScoreSheet_CampaignWebsite_FC043_24_Blue:hover,
@@ -2225,25 +2202,6 @@ p {
     text-align: left;
  
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .scoreSheet_Flex_Container {
     display: flex;
@@ -2786,44 +2744,6 @@ p {
  
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* lieutenant Governor */
 #candidateButton_AL016_24
 {
@@ -3023,7 +2943,6 @@ p {
     text-align: left;
  
 }
-
 
 /* Attorney General */
 #candidateButton_AL017_24,
@@ -3539,12 +3458,6 @@ p {
  
 }
 
-
-
-
-
-
-
 /* State Treasurer */
 #candidateButton_AL025_24
 {
@@ -3745,7 +3658,6 @@ p {
     text-align: left;
  
 }
-
 
 /* State Auditor */
 #candidateButton_AL026_24,
@@ -3986,10 +3898,6 @@ p {
  
 }
 
-
-
-
-
 /* Agriculture */
 #candidateButton_AL029_24
 {
@@ -4192,11 +4100,6 @@ p {
 
 
 /* Senator */
-
-
-
-
-
 hr.hr_Blue_line_03 {
     color: rgb(13, 65, 255);
     border-style: solid;
@@ -4236,7 +4139,6 @@ hr.hr_White_line_03 {
     margin-bottom: 5px;
     width: auto;
 }
-
 
 /* United States Congressional Districts */
 #candidateButton_FC017_24,
@@ -5585,14 +5487,6 @@ hr.hr_White_line_03 {
  
 }
 
-
-
-
-
-
-
-
-
 /* Supreme Court */                                            
 #candidateButton_AL044_24,
 #candidateButton_AL045_24,
@@ -5745,7 +5639,6 @@ hr.hr_White_line_03 {
     height: auto;
 }
 
-
 #supremeCourt_Place5_Footer_Title_AL044_24,
 #supremeCourt_Place5_Footer_Title_AL045_24,
 #supremeCourt_Place5_Footer_Title_AL046_24,
@@ -5851,18 +5744,6 @@ hr.hr_White_line_03 {
  
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 #checkoutButton {
     display: block;
     align-content: center;
@@ -5876,4 +5757,12 @@ hr.hr_White_line_03 {
     border: none;  
 }
 
+#style_Open_Text {
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 14px); 
+    margin-left: 10px;
+    color: rgb(201, 24, 24); 
+    cursor:pointer;
+    text-decoration: none;
 
+}
