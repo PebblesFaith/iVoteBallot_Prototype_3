@@ -70,55 +70,82 @@
 
 -->
 	<body>
-		
+
 		<div class="flex_Container">
+			<div class="flex_Container_Row">
+				<div class="flex_Container_Column">
+					<div class="left_Column">	
+						
+						<a class="header_Image_01" href="http://localhost:8080/iVoteBallot"><img  src="../images/free_Canva_Created_Images/iVoteBallotLogo.png" /></a>					
+					
+					</div>			
+				</div>
 
-			<hr class="hr_Red_line">	
+				<div class="flex_Container_Column">
 
-		<br>
+					<div class="middle_Column">	
+						
+						<p id="slogan_01">
+							Your ballot, your decision, your power
+						</p>
+					
+					</div>			
+				</div>
 
-		<span class="style_Open_Text" style="cursor:pointer" onclick="open_Navigational_Bar()">	
+				<div class="flex_Container_Column">
 
-			<a id="style_Open_Text" style="cursor:pointer" href="http://localhost:8080/dashboard_01">&#9776; Menu</a>
+					<div class="right_Column">
+
+						<div class="flex_Container">
+
+							<hr class="hr_Red_line">	
+				
+							<span class="style_Open_Text" style="cursor:pointer" onclick="open_Navigational_Bar()">					
+							
+								<div class="wrap_TotalSelectedCandidates">
+									<a href="#">
+										<img class="shoppingCart_Image_02" src="../images/free_Icon_Finder/2205215_bag_paper_shopping_store_icon.png">
+										
+									</a>	
+									
+									<p><span id="totalSelectedCandidates_Icon">0</span></p>
+								</div>
+								
+							</span>	
+							
+						</div>
+							
+					</div>					
+
+				</div>
+			</div>			
+		</div>	
 		
-			<div class="wrap_TotalSelectedCandidates">
-				<a href="#">
-					<img class="shoppingCart_Image_02" src="../images/free_Icon_Finder/2205215_bag_paper_shopping_store_icon.png">
+			<!--
+				<div id="userCandidatesShoppingCart_2024" class="popupModal">
+					<div class="popupModal_Content">
+						<span class="close">&times;</span>
+
+						<div id="wrapImage"> 
+							<img class="header_Image_02" src="../images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png" width="100" height="100" />	
+						</div>	
+						
+						<div id="imageHeader">
+							<p id="imageTitle">2024 Selected Candidates</p>
+						</div>		
 					
-				</a>	
-				
-				<p><span id="totalSelectedCandidates_Icon">0</span></p>
-			</div>
-			
-		</span>	
-	
-		<!--
-			<div id="userCandidatesShoppingCart_2024" class="popupModal">
-				<div class="popupModal_Content">
-					<span class="close">&times;</span>
-
-					<div id="wrapImage"> 
-						<img class="header_Image_02" src="../images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png" width="100" height="100" />	
-					</div>	
+						<button id="printPDF" type="button" onclick="printShoppingCartContent()";>
+							SUBMIT
+						</button>
 					
-					<div id="imageHeader">
-						<p id="imageTitle">2024 Selected Candidates</p>
-					</div>		
-				
-					<button id="printPDF" type="button" onclick="printShoppingCartContent()";>
-						SUBMIT
-					</button>
-				
-				</div>				
+					</div>				
 
-			</div>	
-		-->
+				</div>	
+			-->
 
-		</div>				
-	
-		<br>
-		<hr id="hr_Blue_line_02">
-		<br>
+		</div>		
+		
+		
 
 			<div class="flex_Container_Row">
 				<div class="flex_Container_Column">					
@@ -315,7 +342,14 @@
 
 							</div>
 								
-						</div>						
+						</div>	
+						
+						<hr id="hr_Grey_line_02">			
+
+						<a id="style_Open_Text" style="cursor:pointer" href="http://localhost:8080/dashboard_01">&#9776; Menu</a>
+					
+						<hr class="hr_Red_line">
+
 
 						<hr class="hr_Red_line">
 
