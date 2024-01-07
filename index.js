@@ -634,6 +634,14 @@ iVoteBallotApp.use('/dashboard_01', (req, res, next) => {
 
 		// User of '/login' URL
 		req.isUnauthenticated = true;
+	} else {
+		if (req.isAuthenticated()) {
+			// If authenticated, add the key-value pair to the req object
+			req.userInfo = {
+				userName: 'Fred Daniel Flintstone', // Replace with your dynamic value
+				// Add more key-value pairs if needed
+			};
+		}
 	}	
 	next();
 });
@@ -650,8 +658,10 @@ iVoteBallotApp.use('/alabamaVoters_LogOut_01', (req, res, next) => {
 	next();
 });
 
-iVoteBallotApp.set('views', './Public/views');
+//iVoteBallotApp.set('views', './Public/views');
 iVoteBallotApp.set('common', './Public/common');
+
+iVoteBallotApp.set('views', './public/views');
 iVoteBallotApp.set('view engine', 'ejs');
 iVoteBallotApp.use(express.static(path.join(__dirname, 'public')));
 
@@ -776,6 +786,7 @@ iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) =>
 	}
 });
 
+/*
 iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 	if (req.isAuthenticated()) {
 		console.log(req.user);
@@ -789,6 +800,26 @@ iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 		console.log('The user is not successfully authenticated within the session through the passport from reset password webpage!');
 
 	}
+});
+
+*/
+
+// User route signup
+iVoteBallotApp.get('/alabamaVoters_SignUp_01', redirectDashboard, (req, res) => {    
+    // Check if user already authenticated.
+    if (req.session.isAuthenticated) {
+        return alert('You are already logged in!');
+    }
+    console.log(req.session);
+    // Check if this is the first use of '/signup' route URL bar
+    if (req.isUnauthenticated) {
+        console.log(req.flash());
+        res.render('alabamaVoters_SignUp_01', { messages: (req.flash()) });     
+        
+    } else {
+        console.log(req.flash());        
+       
+    }  
 });
 
 // User route forgotPassword
@@ -834,12 +865,12 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 	}
 });
 
-iVoteBallotApp.get('/dashboard_01', checkAuthenticated, (req, res) => {
+iVoteBallotApp.get('/dashboard_01', (req, res) => {
 	if (req.isAuthenticated) {
 		console.log(req.user);
 		console.log(req.session);		
 		console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
-		res.render('dashboard_01', { message: req.user.DMVFirstName});
+		res.render('/dashboard_01', { DMVFirstName: req.user.DMVFirstName, DMVLastName: req.user.DMVLastName, DMVEmail: req.user.DMVEmail});
 		
 	} else if (req.isUnauthenticated) {
 		res.render('/alabamaVoters_LogIn_01')
@@ -854,8 +885,7 @@ iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
         res.render('alabamaVoters_LogOut_01');
     } else {      
         res.render('404');
-    }  
-});
+    }  });
 
 /* -------------------------- The ending of the GET ROUTE section ----------------------------- */
 
@@ -929,29 +959,6 @@ iVoteBallotApp.post(
 
 /* -------------------------- The ending of the POST LOCAL STRATEGY section ----------------------------- */
 
-function checkAuthenticated(req, res, next) {
-
-	if (req.isAuthenticated()) {
-
-		return next();
-	}
-
-	res.redirect('/alabamaVoters_LogIn_01');
-
-
-};
-
-function checkNotAuthenticated(req, res, next) {
-
-	if (req.isAuthenticated()) {
-
-		return res.redirect('/iVoteallot');
-
-	}
-	
-		return next();
-
-};
 
 /* -------------------------- The beginning of All SQLite3 databases section ----------------------------- */
 
@@ -1126,7 +1133,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 
 				} else {
 					console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
-					req.flash('success', 'You have successfully registered for the iVoteBallot database, and you can now sign up to create your iVoteBallot account.');
+					req.flash('success', 'The Election Assure Expert have successfully registered your data information onto the iVoteBallot database, and you can now sign up to create your iVoteBallot account.');
 					
 					res.redirect('/alabamaVoters_SignUp_01');
 
@@ -1648,18 +1655,6 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 		}
 	}
 );
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
