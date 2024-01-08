@@ -614,22 +614,6 @@ iVoteBallotApp.use('/alabamaVoters_VerifyEmailPassword_01', (req, res, next) => 
 	next();
 });
 
-iVoteBallotApp.get('/alabamaVoters_LogIn_01', (req, res) => {
-    if (req.isAuthenticated()) {
-        console.log(req.user);
-        console.log('Request Session:' + req.session)
-        console.log('' + req.logIn);
-        console.log('The User had been successfully authenticated within the Session through the passport from reset password webpage!');
-        res.render('alabamaVoters_LogIn_01');
-    } else {
-        res.render('500')
-       
-        console.log('The user is not successfully authenticated within the session through the passport from reset password webpage!');
-
-    }
-});
-
-
 // Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_LogIn_01' URL bar
 iVoteBallotApp.use('/alabamaVoters_LogIn_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'alabamaVoters_LogIn_01!');
