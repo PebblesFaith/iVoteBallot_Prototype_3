@@ -270,7 +270,7 @@ iVoteBallotApp.use(
 				httpOnly: true,
 				sameSite: true,
 				resave: false,
-				saveUninitialized: false,
+				saveUninitialized: true,
 				//proxy: true,
 				maxAge: 'SESSION_MAX_AGE' // 1 hour				
 			}
@@ -376,11 +376,45 @@ passport.use(
 
 							//return done(null, user);
 
-							return done(null, { id: row.id, DMVFirstName: row.DMVFirstName, DMVEmail: row.DMVEmail, isAuthenticated: true });
+							return done(null, 
+								{ 
+									id: row.id, 
+									DMVPhoto: row.DMVPhoto, 
+									DMVFirstName: row.DMVFirstName, 
+									DMVMiddleName: row.DMVMiddleName, 
+									DMVLastName: row.DMVLastName, 
+									DMVSuffix: row.DMVSuffix, 
+									DMVDateOfBirth: row.DMVDateOfBirth, 
+									DMVBirthSex: row.DMVBirthSex, 
+									DMVGenderIdentity: row.DMVGenderIdentity, 
+									DMVRace: row.DMVRace, 
+									DMVSSN: row.DMVSSN, 
+									DMVEmail: row.DMVEmail, 
+									DMVConfirmEmail: row.DMVConfirmEmail, 
+									DMVPhoneNumber: row.DMVPhoneNumber, 
+									DMVAddress: row.DMVAddress, 
+									DMVUnitType: row.DMVUnitType, 
+									DMVUnitTypeNumber: row.DMVUnitType, 
+									DMVCountrySelection: row.DMVCountrySelection, 
+									DMVStateSelection: row.DMVStateSelection, 
+									DMVCountySelection: row.DMVCountySelection, 
+									DMVCitySelection: row.DMVCitySelection, 
+									DMVZipSelection: row.DMVZipSelection, 
+									DMVIdType: row.DMVIdType, 
+									DMVIdTypeNumber: row.DMVIdTypeNumber, 
+									IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
+									ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, 
+									Password: row.Password, 
+									ConfirmPassword: row.DMVConfirmEmail, 
+									Temporary_Password: row.Temporary_Password, 
 
+									isAuthenticated: true 
+								}
+							);
 						}
 					});
-				});
+				}
+			);
 		}
 	)
 );
@@ -420,15 +454,46 @@ passport.use(
 					}
 					//return done(null, row);
 
-					return done(null, { id: row.id, DMVFirstName: row.DMVFirstName, DMVEmail: row.DMVEmail, isAuthenticated: true });
+					return done(null, 						
+						{ 
+							id: row.id, 
+							DMVPhoto: row.DMVPhoto, 
+							DMVFirstName: row.DMVFirstName, 
+							DMVMiddleName: row.DMVMiddleName, 
+							DMVLastName: row.DMVLastName, 
+							DMVSuffix: row.DMVSuffix, 
+							DMVDateOfBirth: row.DMVDateOfBirth, 
+							DMVBirthSex: row.DMVBirthSex, 
+							DMVGenderIdentity: row.DMVGenderIdentity, 
+							DMVRace: row.DMVRace, 
+							DMVSSN: row.DMVSSN, 
+							DMVEmail: row.DMVEmail, 
+							DMVConfirmEmail: row.DMVConfirmEmail, 
+							DMVPhoneNumber: row.DMVPhoneNumber, 
+							DMVAddress: row.DMVAddress, 
+							DMVUnitType: row.DMVUnitType, 
+							DMVUnitTypeNumber: row.DMVUnitType, 
+							DMVCountrySelection: row.DMVCountrySelection, 
+							DMVStateSelection: row.DMVStateSelection, 
+							DMVCountySelection: row.DMVCountySelection, 
+							DMVCitySelection: row.DMVCitySelection, 
+							DMVZipSelection: row.DMVZipSelection, 
+							DMVIdType: row.DMVIdType, 
+							DMVIdTypeNumber: row.DMVIdTypeNumber, 
+							IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
+							ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, 
+							Password: row.Password, 
+							ConfirmPassword: row.DMVConfirmEmail, 
+							Temporary_Password: row.Temporary_Password, 
 
+							isAuthenticated: true 
+						}
+					);
 				});
-
 			});
-
 		}
-
-	));
+	)	
+);
 
 passport.use(
 	'local3',
@@ -461,10 +526,45 @@ passport.use(
 					if (!result) {
 						console.log('The user\'s password was entered incorrectly for local3: ' + Password + '.');
 						return done(null, false, { message: 'You have entered the incorrect password: ' + Password + '.' });
-					}
-					//return done(null, row);
+						}
+						//return done(null, row);
 
-					return done(null, { id: row.id, DMVFirstName: row.DMVFirstName, DMVEmail: row.DMVEmail, isAuthenticated: true });
+						return done(null, 
+						{ 
+							id: row.id, 
+							DMVPhoto: row.DMVPhoto, 
+							DMVFirstName: row.DMVFirstName, 
+							DMVMiddleName: row.DMVMiddleName, 
+							DMVLastName: row.DMVLastName, 
+							DMVSuffix: row.DMVSuffix, 
+							DMVDateOfBirth: row.DMVDateOfBirth, 
+							DMVBirthSex: row.DMVBirthSex, 
+							DMVGenderIdentity: row.DMVGenderIdentity, 
+							DMVRace: row.DMVRace, 
+							DMVSSN: row.DMVSSN, 
+							DMVEmail: row.DMVEmail, 
+							DMVConfirmEmail: row.DMVConfirmEmail, 
+							DMVPhoneNumber: row.DMVPhoneNumber, 
+							DMVAddress: row.DMVAddress, 
+							DMVUnitType: row.DMVUnitType, 
+							DMVUnitTypeNumber: row.DMVUnitType, 
+							DMVCountrySelection: row.DMVCountrySelection, 
+							DMVStateSelection: row.DMVStateSelection, 
+							DMVCountySelection: row.DMVCountySelection, 
+							DMVCitySelection: row.DMVCitySelection, 
+							DMVZipSelection: row.DMVZipSelection, 
+							DMVIdType: row.DMVIdType, 
+							DMVIdTypeNumber: row.DMVIdTypeNumber, 
+							IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
+							ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, 
+							Password: row.Password, 
+							ConfirmPassword: row.DMVConfirmEmail, 
+							Temporary_Password: row.Temporary_Password, 
+
+							isAuthenticated: true 
+						}
+					);
+
 
 				});
 
@@ -472,7 +572,8 @@ passport.use(
 
 		}
 
-	));
+	)
+);
 
 /*
 	The code passport.serializeUser(function (user, done) { done(null, user.id); }) is a function
@@ -522,7 +623,41 @@ passport.deserializeUser(function(id, done) {
 			return done(null, false);
 		}
 
-		return done(null, { id: row.id, DMVFirstName: row.DMVFirstName, DMVEmail: row.DMVEmail, isAuthenticated: true });
+		return done(null, 
+			{ 
+				id: row.id, 
+				DMVPhoto: row.DMVPhoto, 
+				DMVFirstName: row.DMVFirstName, 
+				DMVMiddleName: row.DMVMiddleName, 
+				DMVLastName: row.DMVLastName, 
+				DMVSuffix: row.DMVSuffix, 
+				DMVDateOfBirth: row.DMVDateOfBirth, 
+				DMVBirthSex: row.DMVBirthSex, 
+				DMVGenderIdentity: row.DMVGenderIdentity, 
+				DMVRace: row.DMVRace, 
+				DMVSSN: row.DMVSSN, 
+				DMVEmail: row.DMVEmail, 
+				DMVConfirmEmail: row.DMVConfirmEmail, 
+				DMVPhoneNumber: row.DMVPhoneNumber, 
+				DMVAddress: row.DMVAddress, 
+				DMVUnitType: row.DMVUnitType, 
+				DMVUnitTypeNumber: row.DMVUnitType, 
+				DMVCountrySelection: row.DMVCountrySelection, 
+				DMVStateSelection: row.DMVStateSelection, 
+				DMVCountySelection: row.DMVCountySelection, 
+				DMVCitySelection: row.DMVCitySelection, 
+				DMVZipSelection: row.DMVZipSelection, 
+				DMVIdType: row.DMVIdType, 
+				DMVIdTypeNumber: row.DMVIdTypeNumber, 
+				IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
+				ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, 
+				Password: row.Password, 
+				ConfirmPassword: row.DMVConfirmEmail, 
+				Temporary_Password: row.Temporary_Password, 
+
+				isAuthenticated: true 
+			}
+		);
 
 	});
 
@@ -658,10 +793,9 @@ iVoteBallotApp.use('/alabamaVoters_LogOut_01', (req, res, next) => {
 	next();
 });
 
-//iVoteBallotApp.set('views', './Public/views');
+iVoteBallotApp.set('views', './Public/views');
 iVoteBallotApp.set('common', './Public/common');
 
-iVoteBallotApp.set('views', './public/views');
 iVoteBallotApp.set('view engine', 'ejs');
 iVoteBallotApp.use(express.static(path.join(__dirname, 'public')));
 
@@ -764,7 +898,6 @@ iVoteBallotApp.get('/535', (req, res) => {
 	} else {
 		console.log(req.flash());
 		res.render('500');
-
 	}
 });
 
@@ -772,13 +905,14 @@ iVoteBallotApp.get('/535', (req, res) => {
 iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {
 	// Check if user already authenticated.
 	if (req.session.isAuthenticated) {
-		return alert('You are already logged in!');
+		//return alert('You are already logged in!');
+		res.render('/alabamaVoters_SignUp_01');
 	}
 	console.log(req.session);
 	// Check if this is the first use of '/signup' route URL bar
 	if (req.isUnauthenticated) {
 		console.log(req.flash());
-		res.render('alabamaDMV_Commission_01', { messages: (req.flash()) })
+		res.render('alabamaDMV_Commission_01', { messages: (req.flash('You have not manually updated user\'s data inforamtion')) })
 
 	} else {
 		console.log(req.flash());
@@ -786,7 +920,7 @@ iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) =>
 	}
 });
 
-/*
+
 iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 	if (req.isAuthenticated()) {
 		console.log(req.user);
@@ -802,9 +936,9 @@ iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 	}
 });
 
-*/
 
 // User route signup
+/*
 iVoteBallotApp.get('/alabamaVoters_SignUp_01', redirectDashboard, (req, res) => {    
     // Check if user already authenticated.
     if (req.session.isAuthenticated) {
@@ -821,6 +955,7 @@ iVoteBallotApp.get('/alabamaVoters_SignUp_01', redirectDashboard, (req, res) => 
        
     }  
 });
+*/
 
 // User route forgotPassword
 iVoteBallotApp.get('/alabamaVoters_EmailVerification_01', (req, res) => {
