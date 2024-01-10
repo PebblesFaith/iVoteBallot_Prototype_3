@@ -277,7 +277,7 @@ iVoteBallotApp.use(
 		}),
 
 		secret: 'EXPRESS_SESSION_KEY'
-		
+
 	})
 )
 
@@ -350,7 +350,7 @@ passport.use(
 				console.log('The user\'s iVoteBallot Id Identifier Code does not match to the Session cookie id\'s database.');
 				return done(null, false, { message: 'Your iVoteBallot Id Identifier Code does not match to our iVoteballot\'s database.' });
 
-			} else			
+			} else
 
 				await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE DMVEmail = ?`, DMVEmail, (err, row) => {
 
@@ -359,7 +359,7 @@ passport.use(
 					}
 
 					if (!row) {
-						console.log('The user\'s have entered the incorrect email address for local1: ' + DMVEmail );
+						console.log('The user\'s have entered the incorrect email address for local1: ' + DMVEmail);
 						return done(null, false, { message: 'You have entered the incorrect email address: ' + DMVEmail });
 					}
 
@@ -369,51 +369,51 @@ passport.use(
 							return done(err);
 						}
 						if (!result) {
-							console.log('The user\'s iVoteBallot Id Identifier Code was entered incorrectly for local1: ' + IvoteBallotIdIdentifierCode ); 
+							console.log('The user\'s iVoteBallot Id Identifier Code was entered incorrectly for local1: ' + IvoteBallotIdIdentifierCode);
 							return done(null, false, { message: 'You have entered the incorrect iVoteBallot Id Identifier Code: ' + IvoteBallotIdIdentifierCode });
 						} else {
 
 							//return done(null, user);
 
-							return done(null, 
-								{ 
-									id: row.id, 
-									DMVPhoto: row.DMVPhoto, 
-									DMVFirstName: row.DMVFirstName, 
-									DMVMiddleName: row.DMVMiddleName, 
-									DMVLastName: row.DMVLastName, 
-									DMVSuffix: row.DMVSuffix, 
-									DMVDateOfBirth: row.DMVDateOfBirth, 
-									DMVBirthSex: row.DMVBirthSex, 
-									DMVGenderIdentity: row.DMVGenderIdentity, 
-									DMVRace: row.DMVRace, 
-									DMVSSN: row.DMVSSN, 
-									DMVEmail: row.DMVEmail, 
-									DMVConfirmEmail: row.DMVConfirmEmail, 
-									DMVPhoneNumber: row.DMVPhoneNumber, 
-									DMVAddress: row.DMVAddress, 
-									DMVUnitType: row.DMVUnitType, 
-									DMVUnitTypeNumber: row.DMVUnitType, 
-									DMVCountrySelection: row.DMVCountrySelection, 
-									DMVStateSelection: row.DMVStateSelection, 
-									DMVCountySelection: row.DMVCountySelection, 
-									DMVCitySelection: row.DMVCitySelection, 
-									DMVZipSelection: row.DMVZipSelection, 
-									DMVIdType: row.DMVIdType, 
-									DMVIdTypeNumber: row.DMVIdTypeNumber, 
-									IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
-									ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, 
-									Password: row.Password, 
-									ConfirmPassword: row.DMVConfirmEmail, 
-									Temporary_Password: row.Temporary_Password, 
+							return done(null,
+								{
+									id: row.id,
+									DMVPhoto: row.DMVPhoto,
+									DMVFirstName: row.DMVFirstName,
+									DMVMiddleName: row.DMVMiddleName,
+									DMVLastName: row.DMVLastName,
+									DMVSuffix: row.DMVSuffix,
+									DMVDateOfBirth: row.DMVDateOfBirth,
+									DMVBirthSex: row.DMVBirthSex,
+									DMVGenderIdentity: row.DMVGenderIdentity,
+									DMVRace: row.DMVRace,
+									DMVSSN: row.DMVSSN,
+									DMVEmail: row.DMVEmail,
+									DMVConfirmEmail: row.DMVConfirmEmail,
+									DMVPhoneNumber: row.DMVPhoneNumber,
+									DMVAddress: row.DMVAddress,
+									DMVUnitType: row.DMVUnitType,
+									DMVUnitTypeNumber: row.DMVUnitType,
+									DMVCountrySelection: row.DMVCountrySelection,
+									DMVStateSelection: row.DMVStateSelection,
+									DMVCountySelection: row.DMVCountySelection,
+									DMVCitySelection: row.DMVCitySelection,
+									DMVZipSelection: row.DMVZipSelection,
+									DMVIdType: row.DMVIdType,
+									DMVIdTypeNumber: row.DMVIdTypeNumber,
+									IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode,
+									ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode,
+									Password: row.Password,
+									ConfirmPassword: row.DMVConfirmEmail,
+									Temporary_Password: row.Temporary_Password,
 
-									isAuthenticated: true 
+									isAuthenticated: true
 								}
 							);
 						}
 					});
 				}
-			);
+				);
 		}
 	)
 );
@@ -438,7 +438,7 @@ passport.use(
 				}
 
 				if (!row) {
-					console.log('The user\'s have entered the incorrect email address from local2: ' + DMVEmail );
+					console.log('The user\'s have entered the incorrect email address from local2: ' + DMVEmail);
 					return done(null, false, { message: 'You have entered the incorrect email address: ' + DMVEmail });
 				}
 
@@ -448,50 +448,50 @@ passport.use(
 						return done(err);
 					}
 					if (!result) {
-						console.log('The user\'s temporary password was entered incorrectly from local2: ' + Temporary_Password );
+						console.log('The user\'s temporary password was entered incorrectly from local2: ' + Temporary_Password);
 						return done(null, false, { message: 'You have entered the incorrect temporary password: ' + Temporary_Password });
 					}
 					//return done(null, row);
 
-					return done(null, 						
-						{ 
-							id: row.id, 
-							DMVPhoto: row.DMVPhoto, 
-							DMVFirstName: row.DMVFirstName, 
-							DMVMiddleName: row.DMVMiddleName, 
-							DMVLastName: row.DMVLastName, 
-							DMVSuffix: row.DMVSuffix, 
-							DMVDateOfBirth: row.DMVDateOfBirth, 
-							DMVBirthSex: row.DMVBirthSex, 
-							DMVGenderIdentity: row.DMVGenderIdentity, 
-							DMVRace: row.DMVRace, 
-							DMVSSN: row.DMVSSN, 
-							DMVEmail: row.DMVEmail, 
-							DMVConfirmEmail: row.DMVConfirmEmail, 
-							DMVPhoneNumber: row.DMVPhoneNumber, 
-							DMVAddress: row.DMVAddress, 
-							DMVUnitType: row.DMVUnitType, 
-							DMVUnitTypeNumber: row.DMVUnitType, 
-							DMVCountrySelection: row.DMVCountrySelection, 
-							DMVStateSelection: row.DMVStateSelection, 
-							DMVCountySelection: row.DMVCountySelection, 
-							DMVCitySelection: row.DMVCitySelection, 
-							DMVZipSelection: row.DMVZipSelection, 
-							DMVIdType: row.DMVIdType, 
-							DMVIdTypeNumber: row.DMVIdTypeNumber, 
-							IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
-							ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, 
-							Password: row.Password, 
-							ConfirmPassword: row.DMVConfirmEmail, 
-							Temporary_Password: row.Temporary_Password, 
+					return done(null,
+						{
+							id: row.id,
+							DMVPhoto: row.DMVPhoto,
+							DMVFirstName: row.DMVFirstName,
+							DMVMiddleName: row.DMVMiddleName,
+							DMVLastName: row.DMVLastName,
+							DMVSuffix: row.DMVSuffix,
+							DMVDateOfBirth: row.DMVDateOfBirth,
+							DMVBirthSex: row.DMVBirthSex,
+							DMVGenderIdentity: row.DMVGenderIdentity,
+							DMVRace: row.DMVRace,
+							DMVSSN: row.DMVSSN,
+							DMVEmail: row.DMVEmail,
+							DMVConfirmEmail: row.DMVConfirmEmail,
+							DMVPhoneNumber: row.DMVPhoneNumber,
+							DMVAddress: row.DMVAddress,
+							DMVUnitType: row.DMVUnitType,
+							DMVUnitTypeNumber: row.DMVUnitType,
+							DMVCountrySelection: row.DMVCountrySelection,
+							DMVStateSelection: row.DMVStateSelection,
+							DMVCountySelection: row.DMVCountySelection,
+							DMVCitySelection: row.DMVCitySelection,
+							DMVZipSelection: row.DMVZipSelection,
+							DMVIdType: row.DMVIdType,
+							DMVIdTypeNumber: row.DMVIdTypeNumber,
+							IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode,
+							ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode,
+							Password: row.Password,
+							ConfirmPassword: row.DMVConfirmEmail,
+							Temporary_Password: row.Temporary_Password,
 
-							isAuthenticated: true 
+							isAuthenticated: true
 						}
 					);
 				});
 			});
 		}
-	)	
+	)
 );
 
 passport.use(
@@ -513,7 +513,7 @@ passport.use(
 				}
 
 				if (!row) {
-					console.log('The user\'s have entered the incorrect email address from local3: ' + DMVEmail );
+					console.log('The user\'s have entered the incorrect email address from local3: ' + DMVEmail);
 					return done(null, false, { message: 'You have entered the incorrect email address: ' + DMVEmail + '.' });
 				}
 
@@ -525,42 +525,42 @@ passport.use(
 					if (!result) {
 						console.log('The user\'s password was entered incorrectly for local3: ' + Password + '.');
 						return done(null, false, { message: 'You have entered the incorrect password: ' + Password + '.' });
-						}
-						//return done(null, row);
+					}
+					//return done(null, row);
 
-						return done(null, 
-						{ 
-							id: row.id, 
-							DMVPhoto: row.DMVPhoto, 
-							DMVFirstName: row.DMVFirstName, 
-							DMVMiddleName: row.DMVMiddleName, 
-							DMVLastName: row.DMVLastName, 
-							DMVSuffix: row.DMVSuffix, 
-							DMVDateOfBirth: row.DMVDateOfBirth, 
-							DMVBirthSex: row.DMVBirthSex, 
-							DMVGenderIdentity: row.DMVGenderIdentity, 
-							DMVRace: row.DMVRace, 
-							DMVSSN: row.DMVSSN, 
-							DMVEmail: row.DMVEmail, 
-							DMVConfirmEmail: row.DMVConfirmEmail, 
-							DMVPhoneNumber: row.DMVPhoneNumber, 
-							DMVAddress: row.DMVAddress, 
-							DMVUnitType: row.DMVUnitType, 
-							DMVUnitTypeNumber: row.DMVUnitType, 
-							DMVCountrySelection: row.DMVCountrySelection, 
-							DMVStateSelection: row.DMVStateSelection, 
-							DMVCountySelection: row.DMVCountySelection, 
-							DMVCitySelection: row.DMVCitySelection, 
-							DMVZipSelection: row.DMVZipSelection, 
-							DMVIdType: row.DMVIdType, 
-							DMVIdTypeNumber: row.DMVIdTypeNumber, 
-							IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
-							ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, 
-							Password: row.Password, 
-							ConfirmPassword: row.DMVConfirmEmail, 
-							Temporary_Password: row.Temporary_Password, 
+					return done(null,
+						{
+							id: row.id,
+							DMVPhoto: row.DMVPhoto,
+							DMVFirstName: row.DMVFirstName,
+							DMVMiddleName: row.DMVMiddleName,
+							DMVLastName: row.DMVLastName,
+							DMVSuffix: row.DMVSuffix,
+							DMVDateOfBirth: row.DMVDateOfBirth,
+							DMVBirthSex: row.DMVBirthSex,
+							DMVGenderIdentity: row.DMVGenderIdentity,
+							DMVRace: row.DMVRace,
+							DMVSSN: row.DMVSSN,
+							DMVEmail: row.DMVEmail,
+							DMVConfirmEmail: row.DMVConfirmEmail,
+							DMVPhoneNumber: row.DMVPhoneNumber,
+							DMVAddress: row.DMVAddress,
+							DMVUnitType: row.DMVUnitType,
+							DMVUnitTypeNumber: row.DMVUnitType,
+							DMVCountrySelection: row.DMVCountrySelection,
+							DMVStateSelection: row.DMVStateSelection,
+							DMVCountySelection: row.DMVCountySelection,
+							DMVCitySelection: row.DMVCitySelection,
+							DMVZipSelection: row.DMVZipSelection,
+							DMVIdType: row.DMVIdType,
+							DMVIdTypeNumber: row.DMVIdTypeNumber,
+							IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode,
+							ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode,
+							Password: row.Password,
+							ConfirmPassword: row.DMVConfirmEmail,
+							Temporary_Password: row.Temporary_Password,
 
-							isAuthenticated: true 
+							isAuthenticated: true
 						}
 					);
 
@@ -610,7 +610,7 @@ passport.serializeUser(function (user, done) {
 	allows the index.js (server) to retrieve user data information from the sessions cookie id
 	and use it to authenticate requests.
 */
-passport.deserializeUser(function(id, done) {
+passport.deserializeUser(function (id, done) {
 	console.log('Deserializing users...')
 	console.log(id);
 	db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE id = ?', id, (err, row) => {
@@ -622,39 +622,39 @@ passport.deserializeUser(function(id, done) {
 			return done(null, false);
 		}
 
-		return done(null, 
-			{ 
-				id: row.id, 
-				DMVPhoto: row.DMVPhoto, 
-				DMVFirstName: row.DMVFirstName, 
-				DMVMiddleName: row.DMVMiddleName, 
-				DMVLastName: row.DMVLastName, 
-				DMVSuffix: row.DMVSuffix, 
-				DMVDateOfBirth: row.DMVDateOfBirth, 
-				DMVBirthSex: row.DMVBirthSex, 
-				DMVGenderIdentity: row.DMVGenderIdentity, 
-				DMVRace: row.DMVRace, 
-				DMVSSN: row.DMVSSN, 
-				DMVEmail: row.DMVEmail, 
-				DMVConfirmEmail: row.DMVConfirmEmail, 
-				DMVPhoneNumber: row.DMVPhoneNumber, 
-				DMVAddress: row.DMVAddress, 
-				DMVUnitType: row.DMVUnitType, 
-				DMVUnitTypeNumber: row.DMVUnitType, 
-				DMVCountrySelection: row.DMVCountrySelection, 
-				DMVStateSelection: row.DMVStateSelection, 
-				DMVCountySelection: row.DMVCountySelection, 
-				DMVCitySelection: row.DMVCitySelection, 
-				DMVZipSelection: row.DMVZipSelection, 
-				DMVIdType: row.DMVIdType, 
-				DMVIdTypeNumber: row.DMVIdTypeNumber, 
-				IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode, 
-				ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode, 
-				Password: row.Password, 
-				ConfirmPassword: row.DMVConfirmEmail, 
-				Temporary_Password: row.Temporary_Password, 
+		return done(null,
+			{
+				id: row.id,
+				DMVPhoto: row.DMVPhoto,
+				DMVFirstName: row.DMVFirstName,
+				DMVMiddleName: row.DMVMiddleName,
+				DMVLastName: row.DMVLastName,
+				DMVSuffix: row.DMVSuffix,
+				DMVDateOfBirth: row.DMVDateOfBirth,
+				DMVBirthSex: row.DMVBirthSex,
+				DMVGenderIdentity: row.DMVGenderIdentity,
+				DMVRace: row.DMVRace,
+				DMVSSN: row.DMVSSN,
+				DMVEmail: row.DMVEmail,
+				DMVConfirmEmail: row.DMVConfirmEmail,
+				DMVPhoneNumber: row.DMVPhoneNumber,
+				DMVAddress: row.DMVAddress,
+				DMVUnitType: row.DMVUnitType,
+				DMVUnitTypeNumber: row.DMVUnitType,
+				DMVCountrySelection: row.DMVCountrySelection,
+				DMVStateSelection: row.DMVStateSelection,
+				DMVCountySelection: row.DMVCountySelection,
+				DMVCitySelection: row.DMVCitySelection,
+				DMVZipSelection: row.DMVZipSelection,
+				DMVIdType: row.DMVIdType,
+				DMVIdTypeNumber: row.DMVIdTypeNumber,
+				IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode,
+				ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode,
+				Password: row.Password,
+				ConfirmPassword: row.DMVConfirmEmail,
+				Temporary_Password: row.Temporary_Password,
 
-				isAuthenticated: true 
+				isAuthenticated: true
 			}
 		);
 
@@ -776,7 +776,7 @@ iVoteBallotApp.use('/dashboard_01', (req, res, next) => {
 				// Add more key-value pairs if needed
 			};
 		}
-	}	
+	}
 	next();
 });
 
@@ -837,7 +837,7 @@ iVoteBallotApp.get('/401', (req, res) => {
 	}
 	console.log(req.session);
 	// Check if this is the first use of '/401' route URL bar
-	if (req.isUnauthenticated) {		
+	if (req.isUnauthenticated) {
 		res.render('401');
 
 	} else {
@@ -855,7 +855,7 @@ iVoteBallotApp.get('/404', (req, res) => {
 	}
 	console.log(req.session);
 	// Check if this is the first use of '/404' route URL bar
-	if (req.isUnauthenticated) {	
+	if (req.isUnauthenticated) {
 		res.render('404');
 
 	} else {
@@ -873,7 +873,7 @@ iVoteBallotApp.get('/500', (req, res) => {
 	}
 	console.log(req.session);
 	// Check if this is the first use of '/500' route URL bar
-	if (req.isUnauthenticated) {	
+	if (req.isUnauthenticated) {
 		res.render('500')
 
 	} else {
@@ -891,7 +891,7 @@ iVoteBallotApp.get('/535', (req, res) => {
 	}
 	console.log(req.session);
 	// Check if this is the first use of '/535' route URL bar
-	if (req.isUnauthenticated) {	
+	if (req.isUnauthenticated) {
 		res.render('535');
 
 	} else {
@@ -970,9 +970,9 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 		console.log('User is not logged into the dashboard!');
 	} else if
 		(req.session.isAuthenticated) {
-			
-			res.redirect('/dashboard_01');
-			console.log('User is logged into the dashboard!');
+
+		res.redirect('/dashboard_01');
+		console.log('User is logged into the dashboard!');
 
 	} else {
 		res.render('404');
@@ -982,10 +982,10 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 iVoteBallotApp.get('/dashboard_01', (req, res) => {
 	if (req.isAuthenticated) {
 		console.log(req.user);
-		console.log(req.session);		
+		console.log(req.session);
 		console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
 		res.render('/dashboard_01', { DMVFirstName: req.user.DMVFirstName });
-		
+
 	} else if (req.isUnauthenticated) {
 		res.render('/alabamaVoters_LogIn_01')
 		console.log('User is not successfully authenticated within the session through the passport from dashboard!');
@@ -993,13 +993,13 @@ iVoteBallotApp.get('/dashboard_01', (req, res) => {
 });
 
 // User route for alabamaVoters_LogOut_01
-iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => { 
-    if (req.isAuthenticated()) {
-        console.log('The User have successfully logged out of the dashboard!');
-        res.render('alabamaVoters_LogOut_01');
-    } else {      
-        res.render('404');
-    }  
+iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
+	if (req.isAuthenticated()) {
+		console.log('The User have successfully logged out of the dashboard!');
+		res.render('alabamaVoters_LogOut_01');
+	} else {
+		res.render('404');
+	}
 });
 
 /* -------------------------- The ending of the GET ROUTE section ----------------------------- */
@@ -1007,30 +1007,30 @@ iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
 /* -------------------------- The beginning of the DELETE ROUTE section ----------------------------- */
 
 // Delete a route for the alabamaVoters_LogOut_01 page
-iVoteBallotApp.delete('/alabamaVoters_LogOut_01', (req, res) => {  
-    if (req.isAuthenticated()) {
-    
-        req.logOut(); 
-        res.render('alabamaVoters_LogIn_01');
-        }
-        /* The logout logic will clear the users from the session object and save. 
-        Also, will enure that the re-using of the old session id does not have
-        a logged in user again.
-        */
-        req.session.user = null    
-        req.session.save(function (err) {
-            if (err) 
-                next(err)       
-            
-                /* The regenerate of the session, which is good practice to help safe
-                guard against users' forms of session fixation.
-                */ 
-                req.session.regenerate(function (err) {
-                    if (err) next(err)
-                res.render('dashboard_01');
-            });        
-        }
-    );    
+iVoteBallotApp.delete('/alabamaVoters_LogOut_01', (req, res) => {
+	if (req.isAuthenticated()) {
+
+		req.logOut();
+		res.render('alabamaVoters_LogIn_01');
+	}
+	/* The logout logic will clear the users from the session object and save. 
+	Also, will enure that the re-using of the old session id does not have
+	a logged in user again.
+	*/
+	req.session.user = null
+	req.session.save(function (err) {
+		if (err)
+			next(err)
+
+		/* The regenerate of the session, which is good practice to help safe
+		guard against users' forms of session fixation.
+		*/
+		req.session.regenerate(function (err) {
+			if (err) next(err)
+			res.render('dashboard_01');
+		});
+	}
+	);
 });
 
 /* -------------------------- The ending of the DELETE ROUTE section ----------------------------- */
@@ -1044,7 +1044,7 @@ iVoteBallotApp.post(
 		failureRedirect: '/alabamaVoters_SignUp_01',
 		failureFlash: true
 	}
-));
+	));
 
 iVoteBallotApp.post(
 	'/alabamaVoters_VerifyEmailPassword_01',
@@ -1052,8 +1052,8 @@ iVoteBallotApp.post(
 		successRedirect: 'alabamaVoters_CreatePasswords_01',
 		failureRedirect: '/alabamaVoters_VerifyEmailPassword_01',
 		failureFlash: true
-	}	
-));
+	}
+	));
 
 iVoteBallotApp.post(
 	'/alabamaVoters_LogIn_01',
@@ -1062,15 +1062,15 @@ iVoteBallotApp.post(
 		failureRedirect: '/alabamaVoters_LogIn_01',
 		failureFlash: true
 	}
-));
+	));
 
 iVoteBallotApp.post(
-    '/alabamaVoters_LogOut_01',
-    passport.authenticate('local3', {
-        successRedirect: '/alabamaVoters_LogIn_01',
-        failureRedirect: '/alabamaVoters_LogOut_01',
-        failureFlash: true  
-}));
+	'/alabamaVoters_LogOut_01',
+	passport.authenticate('local3', {
+		successRedirect: '/alabamaVoters_LogIn_01',
+		failureRedirect: '/alabamaVoters_LogOut_01',
+		failureFlash: true
+	}));
 
 /* -------------------------- The ending of the POST LOCAL STRATEGY section ----------------------------- */
 
@@ -1183,10 +1183,10 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 			console.log('The user\' iVoteBallot Id Identifier Code have not successfully matched to the confirm iVoteBallot Id Code entered into the input fields by our Election Assure Expert.');
 			return res.redirect('/alabamaDMV_Commission_01');
 
-		} else {			
+		} else {
 			console.log('The user\' iVoteBallot Id Identifier Code have successfully matched to his or her confirm iVoteBallot Id Code entered into the input fields, and the user is successfully authenticated through the \'passport.use\' login1, LocalStrategy through the session cookie id.');
 		}
-		
+
 		// To hash the user's DMVSSN input field using bcryption.
 		const salt = await bcrypt.genSalt(12);
 		const DMVSSNHashed = await bcrypt.hash(req.body.DMVSSN, salt);
@@ -1198,10 +1198,19 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		// To hash the user's IvoteBallotIdIdentifierCode input field using bcryption.	
 		const ConfirmIvoteBallotIdIdentifierCodeHashed = await bcrypt.hash(req.body.ConfirmIvoteBallotIdIdentifierCode, salt);
 
+		// To hash the user's Password input field using bcryption.	
+		const PasswordHashed = await bcrypt.hash(req.body.Password, salt);
+
+		// To hash the user's Confirm Password input field using bcryption.	
+		const ConfirmPasswordHashed = await bcrypt.hash(req.body.ConfirmPassword, salt);
+
+		// To hash the user's Confirm Password input field using bcryption.	
+		const Temporary_PasswordHashed = await bcrypt.hash(req.body.Temporary_Password, salt);
+
 		// Read the photo file as binary data
 		const photoFilePath = `/Users/saraihannahajai/Documents/iVoteBallot_Prototype_3/Public/images/Alabama DMV Voters Photos/${DMVPhoto}`;
 		const photoFileData = fs.readFileSync(photoFilePath);
-		
+
 		const newUser = {
 
 			DMVPhoto,
@@ -1229,16 +1238,18 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 			DMVIdTypeNumber: DMVIdTypeNumberHashed,
 			IvoteBallotIdIdentifierCode: IvoteBallotIdIdentifierCodeHashed,
 			ConfirmIvoteBallotIdIdentifierCode: ConfirmIvoteBallotIdIdentifierCodeHashed,
-			Password,
-			ConfirmPassword,
-			Temporary_Password
-			
+			Password: PasswordHashed,
+			ConfirmPassword: ConfirmPasswordHashed,
+			Temporary_Password: Temporary_PasswordHashed
+
 		};
 
-		await db1.run('INSERT INTO alabamaDMV_Commission_01 (DMVPhoto, DMVFirstName, DMVMiddleName, DMVLastName, DMVSuffix, DMVDateOfBirth, DMVBirthSex, DMVGenderIdentity, DMVRace, DMVSSN, DMVEmail, DMVConfirmEmail, DMVPhoneNumber, DMVAddress, DMVUnitType, DMVUnitTypeNumber, DMVCountrySelection, DMVStateSelection, DMVCountySelection, DMVCitySelection, DMVZipSelection, DMVIdType, DMVIdTypeNumber, IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode, Password, ConfirmPassword, Temporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+		await db1.run(
+			`INSERT INTO alabamaDMV_Commission_01 (DMVPhoto, DMVFirstName, DMVMiddleName, DMVLastName, DMVSuffix, DMVDateOfBirth, DMVBirthSex, DMVGenderIdentity, DMVRace, DMVSSN, DMVEmail, DMVConfirmEmail, DMVPhoneNumber, DMVAddress, DMVUnitType, DMVUnitTypeNumber, DMVCountrySelection, DMVStateSelection, DMVCountySelection, DMVCitySelection, DMVZipSelection, DMVIdType, DMVIdTypeNumber, IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode, Password, ConfirmPassword, Temporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
 
 			[Buffer.from(photoFileData), newUser.DMVFirstName, newUser.DMVMiddleName, newUser.DMVLastName, newUser.DMVSuffix, newUser.DMVDateOfBirth, newUser.DMVBirthSex, newUser.DMVGenderIdentity, newUser.DMVRace, newUser.DMVSSN, newUser.DMVEmail, newUser.DMVConfirmEmail, newUser.DMVPhoneNumber, newUser.DMVAddress, newUser.DMVUnitType, newUser.DMVUnitTypeNumber, newUser.DMVCountrySelection, newUser.DMVStateSelection, newUser.DMVCountySelection, newUser.DMVCitySelection, newUser.DMVZipSelection, newUser.DMVIdType, newUser.DMVIdTypeNumber, newUser.IvoteBallotIdIdentifierCode, newUser.ConfirmIvoteBallotIdIdentifierCode, newUser.Password, newUser.ConfirmPassword, newUser.Temporary_Password], (err) => {
-				
+			
+	
 				if (err) {
 					console.error(err);
 					req.flash('error', 'An syntax error has occurred when you have entered your data information into the input field that is link to our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
@@ -1351,12 +1362,9 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 						console.log('Email Sent successfully: ' + info.response);
 
 					}
-				});
-
-			}
-			
+				});	
+			}			
 		);
-
 	}
 );
 
@@ -1417,11 +1425,8 @@ iVoteBallotApp.post('/alabamaVoters_SignUp_01',
 				});
 
 			}
-
 		});
-
 	}
-
 );
 
 function generateNewPassword() {
@@ -1445,8 +1450,8 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 			req.flash('error', 'This email address input field have generated an error message 500, please contact iVoteballot customer care team.');
 			res.render('500');
 
-		} else if (!row) {			
-			req.flash('error','Your email address was not found in our iVoteBallot database.' );			
+		} else if (!row) {
+			req.flash('error', 'Your email address was not found in our iVoteBallot database.');
 			console.log('User/s email was not successfully found onto the SQlite3 database.')
 			res.render('alabamaVoters_EmailVerification_01');
 		} else {
@@ -1494,24 +1499,24 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 						bcc: 'cio_developmenttest@ivoteballot.com',
 						subject: `New User Registration - iVoteBallot Online Voter Registration Not Yet Verified`,
 						html: `	
+		
+					<p>iVoteBallot has received a new online registration:</p>
+
+					<p>New User Registration: ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName}, has been sent a temporary password for an iVoteBallot account verification.</p> 
+					<p>The email associated with the iVoteBallot's account is: ${req.user.DMVEmail}.</p>															
 				
-							<p>iVoteBallot has received a new online registration:</p>
+					<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 
-							<p>New User Registration: ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName}, has been sent a temporary password for an iVoteBallot account verification.</p> 
-							<p>The email associated with the iVoteBallot's account is: ${req.user.DMVEmail}.</p>															
-						
-							<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+				`,
 
-						`,					
-		
-							attachments: [
-								{
-									filename: 'iVoteBallotLogo.png',
-									path: imagePath,
-									cid: 'iVoteBallotLogo'
-		
-								}
-							]						
+						attachments: [
+							{
+								filename: 'iVoteBallotLogo.png',
+								path: imagePath,
+								cid: 'iVoteBallotLogo'
+
+							}
+						]
 
 					};
 
@@ -1521,37 +1526,37 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 						bcc: 'cio_developmenttest@ivoteballot.com',
 						subject: `Authenticate Your iVoteBallot's Account`,
 						html: `
-					
-						<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
-	
-						<p>Thank you for choosing iVoteBallot to complete your sign-up process, please use the following temporary password:<p>
-	
-						<p><strong>${newPassword}</strong></p;
+			
+				<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
 
-						<br>
+				<p>Thank you for choosing iVoteBallot to complete your sign-up process, please use the following temporary password:<p>
 
-						<p>in order for iVoteBallot to verify your email address identity.</p>						
-						
-						<p>This temporary password is valid for the next 10 minutes. After, successful authentication, you can set your permanent password and confirm password.</p>
-						
-						<p>Should you have any questions or concerns, feel free to reach out to our iVoteBallot's Election Assure Expert Team Team.</p>
-						
-						<p>Respectfully, </p>	
-	
-						<p>iVoteBallot's Election Assure Expert Team </p>
+				<p><strong>${newPassword}</strong></p;
 
-						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
-						
-						`,					
-		
-							attachments: [
-								{
-									filename: 'iVoteBallotLogo.png',
-									path: imagePath,
-									cid: 'iVoteBallotLogo'
-		
-								}
-							]		
+				<br>
+
+				<p>in order for iVoteBallot to verify your email address identity.</p>						
+				
+				<p>This temporary password is valid for the next 10 minutes. After, successful authentication, you can set your permanent password and confirm password.</p>
+				
+				<p>Should you have any questions or concerns, feel free to reach out to our iVoteBallot's Election Assure Expert Team Team.</p>
+				
+				<p>Respectfully, </p>	
+
+				<p>iVoteBallot's Election Assure Expert Team </p>
+
+				<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+				
+				`,
+
+						attachments: [
+							{
+								filename: 'iVoteBallotLogo.png',
+								path: imagePath,
+								cid: 'iVoteBallotLogo'
+
+							}
+						]
 
 					};
 
@@ -1582,7 +1587,7 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 					res.render('error404');
 					console.log('The nodemailer user could not be authenticated.');
 
-				}				
+				}
 			});
 		}
 	});
@@ -1632,7 +1637,7 @@ iVoteBallotApp.post('/alabamaVoters_VerifyEmailPassword_01',
 						console.log('The user\s email address is successfully found within the passport serialization authenticated processes through the session.');
 						res.redirect('/ivoteballot');
 					}
-
+					
 				});
 			}
 		});
@@ -1676,14 +1681,14 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 						console.log(err.message);
 						return res.redirect('alabamaVoters_CreatePasswords_01', { error: 'An error occurred while user was updating his/her new password and confirm password from the \'alabamaVoters_CreatePasswords_01\' webpage.' });
 
-					} else {								
+					} else {
 
 						const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
 
 						const transporter = nodemailer.createTransport({
 							host: 'smtp.ionos.com',
 							port: 587,
-							secure: false ,
+							secure: false,
 							auth: {
 								user: 'ceo_developmenttest@ivoteballot.com',
 								pass: IONOS_SECRET_KEY,
@@ -1691,33 +1696,33 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 						});
 
 						// Send notification email to admin
-						
+
 						const mailOptions_01 = {
 							from: req.body.DMVEmail,
 							to: 'electionassureexpert@ivoteballot.com',
 							bcc: 'cio_developmenttest@ivoteballot.com',
 							subject: `New User Signup Notification Successfully Completed`,
 							html: `	
-					
-								<p>iVoteBallot has received a new online registration completion:</p>
-	
-								<p>New User ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName} has successfully registered for iVoteBallot.</p> 
-								<p>: ${req.user.DMVEmail}.</p>																
-								
-								<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
-	
-							`,					
 			
-								attachments: [
-									{
-										filename: 'iVoteBallotLogo.png',
-										path: imagePath,
-										cid: 'iVoteBallotLogo'
-			
-									}
-								]						
-	
-						};	
+						<p>iVoteBallot has received a new online registration completion:</p>
+
+						<p>New User ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName} has successfully registered for iVoteBallot.</p> 
+						<p>: ${req.user.DMVEmail}.</p>																
+						
+						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+
+					`,
+
+							attachments: [
+								{
+									filename: 'iVoteBallotLogo.png',
+									path: imagePath,
+									cid: 'iVoteBallotLogo'
+
+								}
+							]
+
+						};
 
 						// Send welcome email to the user
 						const mailOptions_02 = {
@@ -1726,24 +1731,24 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 							bcc: 'cio_developmenttest@ivoteballot.com',
 							subject: 'Successful Registration for iVoteBallot',
 							html: `
-							  <p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
-							  <p>You have successfully registered for iVoteBallot.</p>
-							  <p>Thank you for choosing iVoteBallot!</p>
-							  <p>Best regards,</p>
-							  <p>iVoteBallot's Election Assure Expert Team </p>
-							  <img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
-							`,
+						<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
+						<p>You have successfully registered for iVoteBallot.</p>
+						<p>Thank you for choosing iVoteBallot!</p>
+						<p>Best regards,</p>
+						<p>iVoteBallot's Election Assure Expert Team </p>
+						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+					`,
 
 							attachments: [
 								{
 									filename: 'iVoteBallotLogo.png',
 									path: imagePath,
 									cid: 'iVoteBallotLogo'
-		
-								}
-							]	
 
-						};						
+								}
+							]
+
+						};
 
 						transporter.sendMail(mailOptions_01, (err, info) => {
 							if (err) {
@@ -1752,21 +1757,20 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 								console.log('Email Sent: ' + info.response);
 							}
 						});
-			  
+
 						transporter.sendMail(mailOptions_02, (err, info) => {
-						if (err) {
-							console.log(err);
-						} else {
-							console.log('Email Sent: ' + info.response);
-						}
-						}); 						
-						
+							if (err) {
+								console.log(err);
+							} else {
+								console.log('Email Sent: ' + info.response);
+							}
+						});
+
 						res.redirect('/alabamaVoters_LogIn_01');
 
 					}
 
 				}
-
 			)
 		}
 	}
