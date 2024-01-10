@@ -1548,8 +1548,8 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 				<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 				
 				`,
-
-						attachments: [
+				
+					attachments: [
 							{
 								filename: 'iVoteBallotLogo.png',
 								path: imagePath,
