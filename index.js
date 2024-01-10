@@ -315,7 +315,6 @@ iVoteBallotApp.use(passport.session());
 iVoteBallotApp.use(flash());
 iVoteBallotApp.use(flash2());
 
-
 /*
 	The JavaScript codes language sets up a local1, LocalStrategy for Passport, which is a popular
 	authentication middleware for Node.js. It defines a function that will be called when an
@@ -905,21 +904,22 @@ iVoteBallotApp.get('/535', (req, res) => {
 iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {
 	// Check if user already authenticated.
 	if (req.session.isAuthenticated) {
-		//return alert('You are already logged in!');
+		console.log('Another Election Assure Expert have already created the user iVoteBallot\'s account.');
+		req.flash('success', 'Another Election Assure Expert have already created the user iVoteBallot\'s account.');
 		res.render('/alabamaVoters_SignUp_01');
 	}
 	console.log(req.session);
-	// Check if this is the first use of '/signup' route URL bar
+	// Check if this is the first use of '/alabamaDMV_Commission_01' route URL bar
 	if (req.isUnauthenticated) {
 		console.log(req.flash());
-		res.render('alabamaDMV_Commission_01', { messages: (req.flash('You have not manually updated user\'s data inforamtion')) })
+		req.flash('error', 'You have not manually updated user\'s data information.');
+		res.render('/alabamaDMV_Commission_01');
 
 	} else {
-		console.log(req.flash());
+		res.render('535');
 
 	}
 });
-
 
 iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 	if (req.isAuthenticated()) {
@@ -935,27 +935,6 @@ iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 
 	}
 });
-
-
-// User route signup
-/*
-iVoteBallotApp.get('/alabamaVoters_SignUp_01', redirectDashboard, (req, res) => {    
-    // Check if user already authenticated.
-    if (req.session.isAuthenticated) {
-        return alert('You are already logged in!');
-    }
-    console.log(req.session);
-    // Check if this is the first use of '/signup' route URL bar
-    if (req.isUnauthenticated) {
-        console.log(req.flash());
-        res.render('alabamaVoters_SignUp_01', { messages: (req.flash()) });     
-        
-    } else {
-        console.log(req.flash());        
-       
-    }  
-});
-*/
 
 // User route forgotPassword
 iVoteBallotApp.get('/alabamaVoters_EmailVerification_01', (req, res) => {
@@ -1013,11 +992,6 @@ iVoteBallotApp.get('/dashboard_01', (req, res) => {
 	}
 });
 
-
-
-
-
-
 // User route for alabamaVoters_LogOut_01
 iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => { 
     if (req.isAuthenticated()) {
@@ -1025,9 +999,8 @@ iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
         res.render('alabamaVoters_LogOut_01');
     } else {      
         res.render('404');
-    }  });
-
-
+    }  
+});
 
 /* -------------------------- The ending of the GET ROUTE section ----------------------------- */
 
@@ -1100,7 +1073,6 @@ iVoteBallotApp.post(
 }));
 
 /* -------------------------- The ending of the POST LOCAL STRATEGY section ----------------------------- */
-
 
 /* -------------------------- The beginning of All SQLite3 databases section ----------------------------- */
 
@@ -1279,7 +1251,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 					
 					res.redirect('/alabamaVoters_SignUp_01');
 
-				}
+				}			
 
 				const transporter = nodemailer.createTransport({
 					host: 'smtp.ionos.com',
@@ -1300,18 +1272,18 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 					subject: `New User Signup Notification | iVoteBallot Employee Entry`,
 					html: ` 
 													
-				<p>Dear CEO/CIO/Manager,</p>
-				<p>An iVoteBallot employee has manually entered a new user into the iVoteBallot database. Here are the details:</p>
-		
-					<ul>
-						<li>
-							Name: ${req.body.DMVFirstName} ${req.body.DMVMiddleName} ${req.body.DMVLastName}
-						</li>
-						<li>
-							Email: ${req.body.DMVEmail}
-						</li>					
-					</ul>					
-					
+					<p>Dear CEO/CIO/Manager,</p>
+					<p>An iVoteBallot employee has manually entered a new user into the iVoteBallot database. Here are the details:</p>
+			
+						<ul>
+							<li>
+								Name: ${req.body.DMVFirstName} ${req.body.DMVMiddleName} ${req.body.DMVLastName}
+							</li>
+							<li>
+								Email: ${req.body.DMVEmail}
+							</li>					
+						</ul>					
+						
 					<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 
 					`,					
@@ -1332,7 +1304,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 					bcc: 'cio_developmenttest@ivoteballot.com',
 					subject: `Notification from the iVoteBallot's Election Assure Experts`,
 					html:
-						`			
+						`	
 					
 						<p>Dear ${req.body.DMVFirstName} ${req.body.DMVMiddleName} ${req.body.DMVLastName},</p>
 						<p>Congratulations! Your iVoteballot account has been successfully set up by our dedicated Election Assure Experts.</p>
@@ -1381,7 +1353,9 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 					}
 				});
 
-			});
+			}
+			
+		);
 
 	}
 );
