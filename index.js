@@ -685,8 +685,9 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 
 		console.groupEnd();
 
+		const bufferData = Buffer.from(req.user.DMVPhoto, 'base64');	
 
-		res.render('dashboard_01', { DMVFirstName: req.user.DMVFirstName, DMVMiddleName: req.user.DMVMiddleName, DMVLastName: req.user.DMVLastName });
+		res.render('dashboard_01', { DMVFirstName: req.user.DMVFirstName, DMVMiddleName: req.user.DMVMiddleName, DMVLastName: req.user.DMVLastName, DMVPhoto: bufferData.toString('base64') });
 		console.log('DMVFirstName:', req.user.DMVFirstName);
 		console.log('DMVMiddleName:', req.user.DMVMiddleName);
 		console.log('DMVLastName:', req.user.DMVLastName);
