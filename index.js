@@ -666,181 +666,6 @@ passport.deserializeUser(function (id, done) {
 
 });
 
-/* -------------------------- The beginning of the GET ROUTE section ----------------------------- */
-
-// User route 401
-iVoteBallotApp.get('/401', (req, res) => {
-	// Check if user already authenticated.
-	if (req.session.isAuthenticated) {
-		return alert('You are already logged in!');
-	}
-	console.log(req.session);
-	// Check if this is the first use of '/401' route URL bar
-	if (req.isUnauthenticated) {
-		res.render('401');
-
-	} else {
-		console.log(req.flash());
-		res.render('500');
-
-	}
-});
-
-// User route 404
-iVoteBallotApp.get('/404', (req, res) => {
-	// Check if user already authenticated.
-	if (req.session.isAuthenticated) {
-		return alert('You are already logged in!');
-	}
-	console.log(req.session);
-	// Check if this is the first use of '/404' route URL bar
-	if (req.isUnauthenticated) {
-		res.render('404');
-
-	} else {
-		console.log(req.flash());
-		res.render('500');
-
-	}
-});
-
-// User route 500
-iVoteBallotApp.get('/500', (req, res) => {
-	// Check if user already authenticated.
-	if (req.session.isAuthenticated) {
-		return alert('You are already logged in!');
-	}
-	console.log(req.session);
-	// Check if this is the first use of '/500' route URL bar
-	if (req.isUnauthenticated) {
-		res.render('500')
-
-	} else {
-		console.log(req.flash());
-		res.render('535');
-
-	}
-});
-
-// User route 535
-iVoteBallotApp.get('/535', (req, res) => {
-	// Check if user already authenticated.
-	if (req.session.isAuthenticated) {
-		return alert('You are already logged in!');
-	}
-	console.log(req.session);
-	// Check if this is the first use of '/535' route URL bar
-	if (req.isUnauthenticated) {
-		res.render('535');
-
-	} else {
-		console.log(req.flash());
-		res.render('500');
-	}
-});
-
-/* -------------------------- The beginning of the redirectDashboard section ----------------------------- */
-
-/*
-	The constant redirectDashboard is a middleware function that checks if the user is already
-	logged in by verifying the existence of a userId property in the user's session. If the user
-	is logged in, the function redirects them to the dashboard page; otherwise, it allows the
-	request to proceed to the next middleware function. This middleware is commonly used to restrict
-	access to certain routes for authenticated users.
-*/
-const redirectDashboard = (req, res, next) => {
-	if (req.session.userId) {
-		res.redirect('/dashboard_01');
-	} else {
-		next();
-		res.redirect('/alabamaVoters_LogIn_01');
-	}
-}
-
-/* -------------------------- The ending of the redirectDashboard section ----------------------------- */
-
-// The User route for alabamaDMV_Commission_01 
-iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {
-	// Check if user already authenticated.
-	if (req.session.isAuthenticated) {
-		console.log('Another Election Assure Expert have already created the user iVoteBallot\'s account.');
-		req.flash('success', 'Another Election Assure Expert have already created the user iVoteBallot\'s account.');
-		res.render('/alabamaVoters_SignUp_01');
-	}
-	console.log(req.session);
-	// Check if this is the first use of '/alabamaDMV_Commission_01' route URL bar
-	if (req.isUnauthenticated) {
-		console.log(req.flash());
-		req.flash('error', 'You have not manually updated user\'s data information.');
-		res.render('/alabamaDMV_Commission_01');
-
-	} else {
-		res.render('535');
-
-	}
-});
-
-iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
-
-	if (req.isAuthenticated()) {
-		console.log(req.user);
-		console.log('Request Session:' + req.session)
-		console.log('' + req.logIn);
-		console.log('The User had been successfully authenticated within the Session through the passport from reset password webpage!');
-		res.render('alabamaVoters_EmailVerification_01');
-
-	} else {
-
-		res.render('500')
-
-		console.log('The user is not successfully authenticated within the session through the passport from reset password webpage!');
-
-	}
-});
-
-// User route forgotPassword
-iVoteBallotApp.get('/alabamaVoters_EmailVerification_01', (req, res) => {
-	// Check if user already authenticated.
-	if (req.isUnauthenticated) {
-		console.log('User had been successfully authenticated within the Session through the passport from forgotPassword webpage!');
-		res.render('alabamaVoters_VerifyEmailPassword_01');
-	} else {
-		// Render signup page for new users
-		console.log('User had not been successfully authenticated within the Session through the passport from forgotPassword webpage!');
-		res.render('404')
-	}
-});
-
-iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
-	if (req.isAuthenticated) {
-		console.log(req.user);
-		console.log(req.session);
-		console.log('User had been successfully authenticated within the Session through the passport from local2!');
-		res.render('alabamaVoters_EmailVerification_01', { firstName: req.user.DMVFirstName, lastName: req.user.DMVLastName, email: req.user.DMVEmail });
-	} else if (req.isUnauthenticated) {
-		res.redirect('/alabamaVoters_VerifyEmailPassword_01')
-		console.log('User is not successfully authenticated within the session through the passport from local2!');
-	}
-});
-
-iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
-	console.log(req.session);
-	console.log('isUnauthenticated: ', req.isUnauthenticated);
-	// Check if user already authenticated.
-	if (req.isUnauthenticated) {
-		res.render('alabamaVoters_LogIn_01');
-		console.log('User is not logged into the dashboard!');
-	} else if
-		(req.session.isAuthenticated) {
-
-		res.redirect('/dashboard_01');
-		console.log('User is logged into the dashboard!');
-
-	} else {
-		res.render('404');
-	}
-});
-
 iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 	
 	if (req.isAuthenticated) {
@@ -862,24 +687,15 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 
 
 		res.render('dashboard_01', { DMVFirstName: req.user.DMVFirstName, DMVMiddleName: req.user.DMVMiddleName, DMVLastName: req.user.DMVLastName });
+		console.log('DMVFirstName:', req.user.DMVFirstName);
+		console.log('DMVMiddleName:', req.user.DMVMiddleName);
+		console.log('DMVLastName:', req.user.DMVLastName);
 
 	} else if (req.isUnauthenticated) {
 		res.render('/alabamaVoters_LogIn_01')
 		console.log('User is not successfully authenticated within the session through the passport from dashboard!');
 	}
 });
-
-// User route for alabamaVoters_LogOut_01
-iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
-	if (req.isAuthenticated()) {
-		console.log('The User have successfully logged out of the dashboard!');
-		res.render('alabamaVoters_LogOut_01');
-	} else {
-		res.render('404');
-	}
-});
-
-/* -------------------------- The ending of the GET ROUTE section ----------------------------- */
 
 /* -------------------------- The beginning of the use section ----------------------------- */
 
@@ -1026,6 +842,7 @@ iVoteBallotApp.use(views_Controller);
 
 /* -------------------------- The ending of the use section ----------------------------- */
 
+
 /* -------------------------- The beginning of the GET ROUTE section ----------------------------- */
 
 // User route 401
@@ -1099,6 +916,26 @@ iVoteBallotApp.get('/535', (req, res) => {
 	}
 });
 
+/* -------------------------- The beginning of the redirectDashboard section ----------------------------- */
+
+/*
+	The constant redirectDashboard is a middleware function that checks if the user is already
+	logged in by verifying the existence of a userId property in the user's session. If the user
+	is logged in, the function redirects them to the dashboard page; otherwise, it allows the
+	request to proceed to the next middleware function. This middleware is commonly used to restrict
+	access to certain routes for authenticated users.
+*/
+const redirectDashboard = (req, res, next) => {
+	if (req.session.userId) {
+		res.redirect('/dashboard_01');
+	} else {
+		next();
+		res.redirect('/alabamaVoters_LogIn_01');
+	}
+}
+
+/* -------------------------- The ending of the redirectDashboard section ----------------------------- */
+
 // The User route for alabamaDMV_Commission_01 
 iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {
 	// Check if user already authenticated.
@@ -1121,13 +958,16 @@ iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) =>
 });
 
 iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
+
 	if (req.isAuthenticated()) {
 		console.log(req.user);
 		console.log('Request Session:' + req.session)
 		console.log('' + req.logIn);
 		console.log('The User had been successfully authenticated within the Session through the passport from reset password webpage!');
 		res.render('alabamaVoters_EmailVerification_01');
+
 	} else {
+
 		res.render('500')
 
 		console.log('The user is not successfully authenticated within the session through the passport from reset password webpage!');
