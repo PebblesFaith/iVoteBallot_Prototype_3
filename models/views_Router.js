@@ -70,7 +70,7 @@ router
 router
     .get('/dashboard_01', views_Controller.view_Dashboard_01);
 
-    router
+router
     .get('/helpCenter', views_Controller.view_HelpCenter);
 
 router
