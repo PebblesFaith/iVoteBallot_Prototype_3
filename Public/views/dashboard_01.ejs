@@ -95,34 +95,29 @@
 						
 						<div id="user_Profile_Picture">
 
-							<div class="avatarContainer">
+							<div class="avatarContainer">								
 								
-								<div class="avatar-upload">
-									<div class="avatar-edit">
-										<input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-										<label for="imageUpload"></label>
-										
-										</div>
-										<div class="avatar-preview">
-											<div id="clock" style="background-image: url(../images/free_Icon_Finder/2931147_user_face_avatar_account_head_icon.png);">
-											</div>
-										</div>				
+								<div class="avatar-preview">
 
-										<div id="dropDown">
-
-											<button id="dropButton">Profile Details</button>
-
-											<div id="dropDown_Content">
-												<a href="#">Account</a>
-												<a href="#">Purchases</a>
-												<a href="#">Private Messages</a>
-												<a href="#">Notifications</a>	
-												<a href="http://localhost:8080/alabamaVoters_LogOut_01?_method">Log Out</a>
-											</div>
-
-										</div>
-
+									<div id="clock" >
+										<img src="data:image/jpeg;base64, <%= DMVPhoto %>" alt="DMV Photo">
+									</div>				
+							
 								</div>
+
+								<div id="dropDown">
+
+									<button id="dropButton">Profile Details</button>
+
+									<div id="dropDown_Content">
+										<a href="#">Account</a>
+										<a href="#">Purchases</a>
+										<a href="#">Private Messages</a>
+										<a href="#">Notifications</a>	
+										<a href="http://localhost:8080/alabamaVoters_LogOut_01?_method">Log Out</a>
+									</div>
+
+								</div>								
 
 							</div>
 
@@ -188,7 +183,8 @@
 		<hr id="hr_Blue_line_02">
 		<br>	
 
-		<h3>Welcome, <%= DMVFirstName %> <%= DMVMiddleName %> <%= DMVLastName %></h3>	
+		<h3>Welcome, <%= DMVFirstName %> <%= DMVMiddleName %> <%= DMVLastName %> 
+		</h3>	
 						
 		<br>
 		<hr id="hr_Blue_line_02">
