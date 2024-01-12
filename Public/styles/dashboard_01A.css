@@ -442,7 +442,7 @@
   }
   
 .sideBar_Navigation a:hover {
-    color: rgb(255, 255, 255);
+    color: rgb(13, 65, 255);
   }
   
 .sideBar_Navigation .closeButton {
@@ -450,7 +450,7 @@
     top: 0;
     right: 25px;
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: clamp(12px, 2vw, 20px); 
+    font-size: clamp(12px, 3vw, 45px); 
     margin-left: 25px;
     color: rgb(201, 24, 24);
   }
@@ -504,9 +504,8 @@
     padding: 8px 12px;
     text-decoration: none;
     display: block;
-  }
-  
-  
+}
+    
 #dropDown_Content a:hover {
     background-color: rgb(255, 255, 255);
 }
@@ -649,6 +648,7 @@
     when the #left_Row_01 a:hover element is in the hover state.
 */
 #left_Row_01 a:hover {
+    background-color: rgba(245, 240, 240, 0.906);
     color: rgb(13, 65, 255);
 }
 
@@ -690,6 +690,7 @@
     when the #left_Row_02 a:hover element is in the hover state.
 */
 #left_Row_02 a:hover {
+    background-color: rgba(245, 240, 240, 0.906);    
     color: rgb(201, 24, 24);
 }
 
@@ -702,8 +703,7 @@
     .flex_Container_StarsAndStrips {
       width: 100%;
     }
-  }
-
+}
 
 #textStyle_01 {
     display: flex;
