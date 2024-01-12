@@ -95,15 +95,6 @@ const session = require('express-session');
 */
 const AlabamaSqlite3SessionStore = require('better-sqlite3-session-store')(session);
 
-/*
-The code const flash = require('connect-flash'); imports the connect-flash module, which provides a 
-middleware for storing and displaying flash messages in an Express.js application. Flash messages are 
-short-lived messages that are stored in the session and displayed to the user on the next request. With
-connect-flash, you can easily create and manage flash messages in your application, which can be used to
-display success messages, error messages, or any other kind of notification to the user.
-*/
-const flash2 = require('connect-flash');
-
 const flash = require('express-flash');
 
 const methodOverride = require('method-override');
@@ -313,7 +304,6 @@ iVoteBallotApp.use([passport.initialize()]);
 iVoteBallotApp.use(passport.session());
 
 iVoteBallotApp.use(flash());
-iVoteBallotApp.use(flash2());
 
 /*
 	The JavaScript codes language sets up a local1, LocalStrategy for Passport, which is a popular
