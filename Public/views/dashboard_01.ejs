@@ -148,7 +148,7 @@
 				<br>
 				<div class="flex_Container_Row">
 					<div id="left_Row_02">
-						<img id="alignText_01" src="../images/free_Icon_Finder/6971195_vote_choice_icon-5.png" >
+						<img id="alignText_01" src="../images/free_Icon_Finder/2088715_ballot_ballot box_choice_vote_icon.png" >
 						<a href="http://localhost:8080/alabama_Candidates_2024_02">Vote Here</a>
 					</div>
 				</div>
@@ -169,10 +169,32 @@
 				<br>
 				<div class="flex_Container_Row">
 					<div id="left_Row_01">
+						<img id="alignText_01" src="../images/free_Icon_Finder/3178363_bell_notification_ring_alarm_icon.png" >
+						<a href="#">Notifications</a>
+					</div>
+				</div>
+				<br>
+				<div class="flex_Container_Row">
+					<div id="left_Row_02">
+						<img id="alignText_01" src="../images/free_Icon_Finder/2931147_user_face_avatar_account_head_icon.png" >
+						<a href="#">Account</a>
+					</div>
+				</div>
+				<br>
+				<div class="flex_Container_Row">
+					<div id="left_Row_01">
+						<img id="alignText_01" src="../images/free_Icon_Finder/2464378_cogwheel_gear_settings_icon.png" >
+						<a href="http://localhost:8080/alabamaVoters_LogOut_01?_method">Settings</a>
+					</div>
+				</div>
+				<br>
+				<div class="flex_Container_Row">
+					<div id="left_Row_02">
 						<img id="alignText_01" src="../images/free_Icon_Finder/4115235_exit_logout_sign out_icon.png" >
 						<a href="http://localhost:8080/alabamaVoters_LogOut_01?_method">Log Out</a>
 					</div>
 				</div>
+				<br>
 
 			</div>			  
 			  
@@ -208,6 +230,8 @@
 		<br>
 		<hr id="hr_Blue_line_02">
 		<br>
+		<br>
+		<br>
 
 		<div class="footer_flex_container">       
 			<ul class="iVoteBallot_Footer_Insignia_01">
@@ -215,23 +239,10 @@
 			</ul>
 		<div>	
 
-		<script>
+		<script>			
 			
-			document.getElementById('imageUpload').addEventListener('change', readURL, true);
-			function readURL(){
-				const file = document.getElementById("imageUpload").files[0];
-				const reader = new FileReader();
-				reader.onloadend = function(){
-					document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";        
-				}
-				if(file){
-					reader.readAsDataURL(file);
-				}else{
-				}
-			}
-
 			function open_Navigational_Bar() {
-				document.getElementById("side_Navigational").style.width = "100%";
+				document.getElementById("side_Navigational").style.width = "50%";
 			}
 
 			function close_Navigational_Bar() {
