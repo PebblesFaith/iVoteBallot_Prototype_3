@@ -260,7 +260,7 @@ iVoteBallotApp.use(
 				secure: true,
 				httpOnly: true,
 				sameSite: true,
-				resave: false,
+				resave: true,
 				saveUninitialized: true,
 				//proxy: true,
 				maxAge: 'SESSION_MAX_AGE' // 1 hour				
@@ -678,11 +678,37 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 
 		const bufferData = Buffer.from(req.user.DMVPhoto, 'base64');
 
-		res.render('dashboard_01', { DMVFirstName: req.user.DMVFirstName, DMVMiddleName: req.user.DMVMiddleName, DMVLastName: req.user.DMVLastName, DMVPhoto: bufferData.toString('base64'), DMVEmail: req.user.DMVEmail, DMVAddress: req.user.DMVAddress, DMVUnitType: req.user.DMVUnitType, DMVUnitTypeNumber: req.user.DMVUnitTypeNumber, DMVCountrySelection: req.user.DMVCountrySelection, DMVStateSelection: req.user.DMVStateSelection, DMVCountySelection: req.user.DMVCountySelection, DMVCitySelection: req.user.DMVCitySelection, DMVZipSelection: req.user.DMVZipSelection, DMVPhoneNumber: req.user.DMVPhoneNumber, });
+		res.render('dashboard_01', { 
+			DMVFirstName: req.user.DMVFirstName, 
+			DMVMiddleName: req.user.DMVMiddleName, 
+			DMVLastName: req.user.DMVLastName, 
+			DMVPhoto: bufferData.toString('base64'), 
+			DMVEmail: req.user.DMVEmail, 
+			DMVAddress: req.user.DMVAddress, 
+			DMVUnitType: req.user.DMVUnitType, 
+			DMVUnitTypeNumber: req.user.DMVUnitTypeNumber, 
+			DMVCountrySelection: req.user.DMVCountrySelection, 
+			DMVStateSelection: req.user.DMVStateSelection, 
+			DMVCountySelection: req.user.DMVCountySelection, 
+			DMVCitySelection: req.user.DMVCitySelection, 
+			DMVZipSelection: req.user.DMVZipSelection, 
+			DMVPhoneNumber: req.user.DMVPhoneNumber, 
+		});
 
 		console.log('DMVFirstName:', req.user.DMVFirstName);
 		console.log('DMVMiddleName:', req.user.DMVMiddleName);
 		console.log('DMVLastName:', req.user.DMVLastName);
+		console.log('DMVPhoto:', req.user.DMVPhoto);
+		console.log('DMVEmail:', req.user.DMVEmail);
+		console.log('DMVAddress:', req.user.DMVAddress);
+		console.log('DMVUnitType:', req.user.DMVUnitType);
+		console.log('DMVUnitTypeNumber:', req.user.DMVUnitTypeNumber);
+		console.log('DMVCountrySelection:', req.user.DMVCountrySelection);
+		console.log('DMVStateSelection:', req.user.DMVStateSelection);
+		console.log('DMVCountySelection:', req.user.DMVCountySelection);
+		console.log('DMVCitySelection:', req.user.DMVCitySelection);
+		console.log('DMVZipSelection:', req.user.DMVZipSelection);
+		console.log('DMVPhoneNumber:', req.user.DMVPhoneNumber);
 
 	} else if (req.isUnauthenticated) {
 		res.render('/alabamaVoters_LogIn_01')
@@ -1177,8 +1203,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 			!userDMVEmail || 
 			!userDMVConfirmEmail ||
 			!userDMVPhoneNumber ||
-			!userDMVAddress ||
-		
+			!userDMVAddress ||		
 			
 			!userDMVCountrySelection ||
 			!userDMVStateSelection ||
@@ -1797,24 +1822,12 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 );
 
 
-
-
-
-
-
-
-
 //const boxicons = require('boxicons');
 /*
 const pdfDocument = require('pdfkit');
 const PDFDocument2 = require('pdfkit');
 const fs = require('fs');
 */
-
-
-
-
-
 
 /*
 function createAlabamaPDF_Candidates_2024() {
