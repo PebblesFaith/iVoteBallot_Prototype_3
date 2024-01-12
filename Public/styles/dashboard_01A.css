@@ -396,7 +396,7 @@
     transparent background. The width is set to a minimum of 125 pixels and maximum of 250
     pixels, with a fluid scaling between 3 viewport units.
 */
-#clock {
+#clock_Image {
     display: flex;
     flex-wrap: row wrap;
     flex-direction: column;   
@@ -418,11 +418,11 @@
 }
 
 .sideBar_Navigation {
-    height: 100%;
+    height: 48%;
     width: 0;
     position: fixed;
     z-index: 1;
-    top: 0px;
+    top: 180px;
     left: 0px;      
     background-color: rgb(255, 255, 255);
     overflow-x: hidden;
@@ -520,7 +520,6 @@
     color:rgb(255, 255, 255)
 }
 
-
 /*
     The CSS style language codes sets a blue solid border for an HTML element identified
     by "hr_Blue_line_02", while removing the left and right borders. Additionally, it adds
@@ -605,11 +604,11 @@
     width: clamp(10px, 2vw, 20px);    
 }
 
-
 #alignText_01 {
     vertical-align: middle;
+    margin-left: 25px;
     padding-right: 15px;
-   
+    width: clamp(20px, 3vw, 100px);     
 }
 
 /*
