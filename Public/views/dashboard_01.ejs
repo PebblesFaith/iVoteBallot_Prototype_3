@@ -112,7 +112,7 @@
 
 									<div id="dropDown_Content">
 
-										<a href="#">Account</a>										
+										<a href="#">Account</a>	
 										<a href="http://localhost:8080/alabamaVoters_LogOut_01?_method">Log Out</a>
 
 									</div>
@@ -130,7 +130,7 @@
 			</div>
 		</div>		
 
-		<hr class="hr_Red_line">	
+		<hr id="hr_Red_line_02">	
 
 		<br>
 		<div class="flex_Container_Row">
@@ -178,49 +178,79 @@
 						<img id="alignText_01" src="../images/free_Icon_Finder/2931147_user_face_avatar_account_head_icon.png" >
 						<a href="#" id="accountButton">Account</a>
 
-						<!-- The Modal -->
+						
 						<div id="accountModal" class="account">
 
 							<!-- Modal content -->
 							<div class="accountModal_Content">
-							<div class="accountModal_header">
-								<span class="accountClose">&times;</span>
-								<p class="userAccountProfile_01">
-									Your Alabama DMV Profile Information
-								</p>
-							</div>
-							<div class="accountModal_Body">
-								<h3 id="userDataProfile_01">										
-									<%= DMVFirstName %> <%= DMVMiddleName %> <%= DMVLastName %> 
-								</h3>								
+								<div class="accountModal_Header">
+									<span class="accountClose">&times;</span>
+									<p class="userAccountProfile_01">
+										Your Alabama DMV Profile Information
+									</p>
+									<hr id="hr_Grey_line_02">
+								</div>
 								
-								<h5 id="userDataProfile_02">
+								<div id="userNameProfile_02">										
+									<%= DMVFirstName %> <%= DMVMiddleName %> <%= DMVLastName %> 
+								</div>
 
-									<div id="clock_Image_02" >
-										<img src="data:image/jpeg;base64, <%= DMVPhoto %>" alt="DMV Photo">
+								<hr id="hr_Grey_line_02">
+								
+								<div class="flex_Container">
+									<div class="flex_Container_Row">								
+
+										<div class="flex_Container_Column">
+											<br>
+										
+											<div id="clock_Image_02" >
+												<img src="data:image/jpeg;base64, <%= DMVPhoto %>" alt="DMV Photo"> 
+											</div>
+											
+										</div>
+
+										<div class="flex_Container_Column">
+											
+											<div id="userDetailProfile_03">	
+												<br>											
+
+												Identification Card Type | <%= DMVIdType %>
+												<br>																		
+												Date of Birth | <%= DMVDateOfBirth %>   
+												<br>
+												Birth Sex | <%= DMVBirthSex %>
+												<br>
+												Email Address | <%= DMVEmail %>
+												<br> 
+												<br>
+												Country | <%= DMVCountrySelection %>
+												<br>
+												Address | <%= DMVAddress %>
+												<br>
+												<%= DMVUnitType %> | <%= DMVUnitTypeNumber %>
+												<br>
+												City | <%= DMVCitySelection %> 
+												<br>
+												County | <%= DMVCountySelection %>
+												<br> 
+												State | <%= DMVStateSelection %> 
+												<br>
+												Zip Code | <%= DMVZipSelection %>
+												<br>
+												<br>
+												Phone Number | <%= DMVPhoneNumber %>
+												<br>
+												<br>								
+											
+											</div>
+
+										</div>
 									</div>
-									<br>									
-									Date of Birth: <%= DMVDateOfBirth %>   Birth Sex: <%= DMVBirthSex %>
-									<br>
-									Email Address: <%= DMVEmail %>
-									<br> 
-									<br>
-									Country: <%= DMVCountrySelection %>
-									<br>
-									Address: <%= DMVAddress %>
-									<br>
-									<%= DMVUnitType %>: <%= DMVUnitTypeNumber %>
-									<br>
-									City: <%= DMVCitySelection %> County: <%= DMVCountySelection %> State: <%= DMVStateSelection %> Zip Code: <%= DMVZipSelection %>
-									<br>
-									<br>
-									Phone Number: <%= DMVPhoneNumber %>		
-						
-								</h5>
-							</div>
-							<div class="accountModal_footer">
+								</div>
+								
+									
+								
 							
-							</div>
 							</div>
 						
 						</div>
