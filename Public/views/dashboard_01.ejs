@@ -105,11 +105,11 @@
 									</div>				
 							
 								</div>
-
+								<!--
 								<div id="dropDown">
 
 									<button id="dropButton">Profile</button>
-
+									
 									<div id="dropDown_Content">
 
 										<a href="#">Account</a>	
@@ -118,7 +118,7 @@
 									</div>
 
 								</div>								
-
+								-->			
 							</div>
 
 						</div>
@@ -207,12 +207,13 @@
 												<img src="data:image/jpeg;base64, <%= DMVPhoto %>" alt="DMV Photo"> 
 											</div>
 											
-										</div>
+										</div>										
 
 										<div class="flex_Container_Column">
+
+											<br>
 											
-											<div id="userDetailProfile_03">	
-												<br>											
+											<div id="userDetailProfile_03">																								
 
 												Identification Card Type | <%= DMVIdType %>
 												<br>																		
@@ -242,14 +243,30 @@
 												<br>
 												<br>								
 											
-											</div>
+											</div>										
 
 										</div>
 									</div>
 								</div>
+
+								<br>
 								
-									
+								<hr id="hr_Grey_line_02">
 								
+								<div id=userDetailProfile_04>
+									Please be aware that iVoteBallot assumes no legal responsibility for 
+									the data on your Alabama State identification card. And, any changes 
+									to your Alabama State identification card data information must be 
+									handled directly through the Alabama Department of Motor Vehicle 
+									location. Our role at iVoteBallot is solely to manage your Alabama 
+									State identification data card information for voting purposes. 
+									Additionally, certain identifiers in your Alabama State identification 
+									data information have been incorporated with cryptographic algorithm 
+									enhancements to safeguard your personal identifiable information ("PII")
+									and ensure your privacy and safety.
+								</div>
+
+								<hr id="hr_Grey_line_02">
 							
 							</div>
 						
@@ -261,7 +278,62 @@
 				<div class="flex_Container_Row">
 					<div id="left_Row_01">
 						<img id="alignText_01" src="../images/free_Icon_Finder/2464378_cogwheel_gear_settings_icon.png" >
-						<a href="http://localhost:8080/alabamaVoters_LogOut_01?_method">Settings</a>
+					
+						<a href="#" id="settingsButton">Settings</a>
+						
+						<div id="settingsModal" class="settings">
+
+							<!-- Modal content -->
+							<div class="settingsModal_Content">
+								<div class="settingsModal_Header">
+									<span class="settingsClose">&times;</span>
+									<p class="userSettingsProfile_01">
+										Account Settings
+									</p>
+									<hr id="hr_Grey_line_02">
+								</div>								
+								
+								<div class="flex_Container">
+									<div class="flex_Container_Row">								
+
+										<div class="flex_Container_Column">
+											<br>
+										
+											<div id="userDetailProfile_05">	
+
+												<a href="http://localhost:8080/alabamaVoters_EmailVerification_01">Change Password</a>
+												
+											</div>
+											
+										</div>										
+
+										<div class="flex_Container_Column">
+
+											<br>
+											
+											<div id="userDetailProfile_06">		
+																
+											
+											</div>										
+
+										</div>
+									</div>
+								</div>
+
+								<br>
+								
+								<hr id="hr_Grey_line_02">
+								
+								<div id=userDetailProfile_04>
+									
+								</div>
+
+								<hr id="hr_Grey_line_02">
+							
+							</div>
+						
+						</div>
+						
 					</div>
 				</div>
 				<br>
@@ -284,7 +356,7 @@
 		<br>	
 
 		<h3 id="userDataProfile_01">
-			Welcome, <%= DMVFirstName %> <%= DMVMiddleName %> <%= DMVLastName %> 
+			Hi, <%= DMVFirstName %> <%= DMVMiddleName %> <%= DMVLastName %>, we are glad, you are with us. 
 		</h3>		
 						
 		<br>
@@ -334,6 +406,40 @@
 				accountModal.style.display = "none";
 			}
 		}
+
+
+
+		// Get the modal
+		var settingsModal = document.getElementById("settingsModal");
+
+		// Get the button that opens the modal
+		var settingsButton = document.getElementById("settingsButton");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("settingsClose")[0];
+
+		// When the user clicks the button, open the modal 
+		settingsButton.onclick = function() {
+		settingsModal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+		settingsModal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+		if (event.target == modal) {
+			settingsModal.style.display = "none";
+		}
+		}
+
+
+
+
+
+
 
 		</script>
 
