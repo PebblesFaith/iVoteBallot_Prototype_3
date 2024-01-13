@@ -144,14 +144,19 @@
     display: flex;
     flex-wrap: row wrap;
     flex-direction: column;   
-    color: rgb(13, 65, 255);    
+    color: rgb(13, 65, 255);	
     text-align: center;
     line-height: none;
-    margin-top: 20px;
-    margin-bottom: auto;              
-    justify-content: center;  
+    margin-top: 15px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+    justify-content: center; 
+	align-items: baseline;
     background-color: transparent;    
-    width: clamp(125px, 3vw, 250px);    
+    width: clamp(75px, 2vw, 200px);  
+    border-right-style: solid; 
+    border-color: rgb(201, 24, 24);
+    border: 0, 2px, 0, 0;
 }
 
 /*
@@ -427,7 +432,8 @@
     background-color: rgb(255, 255, 255);
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 25px;  
+    padding-top: 25px; 
+    border-color: rgb(105, 105, 105);  
     
   }
   
@@ -525,6 +531,7 @@
     a top and bottom margin of 5 pixels to the element. This styling is used to
     create a visual separation between sections on the webpage.
 */
+
 #hr_Blue_line_02 {
     border-color: rgb(13, 65, 255); 
     border-style: solid;
@@ -532,6 +539,27 @@
     border-right: none;
     margin-top: 5px;
     margin-bottom: 5px;
+    width: auto;
+}
+
+#hr_Red_line_02 {
+    border-color: rgb(201, 24, 24); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    width: auto;
+}  
+
+#hr_Grey_line_02 {
+    color: rgb(195, 195, 195);
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
 }
 
 /*
@@ -750,14 +778,13 @@
     color: rgb(201, 24, 24);
 }
 
-#userDataProfile_02 {
+.userNameProfile_02 {
     display: flex;
     flex-flow: row wrap;
-    align-items: center;
-    margin-left: 30px;  
+    align-items: center;   
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(10px, 2vw, 16px); 
-    color: rgb(13, 65, 255);
+    color: rgb(201, 24, 24);
 }
 
 /* The Account Modal (background) */
@@ -771,18 +798,22 @@
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(13, 65, 255); /* Fallback color */
+    background-color: rgb(255, 255, 255); /* Fallback color */   
    
 }
   
 /* Modal Content */
 .accountModal_Content {
-    position: relative;
-    background-color: #fefefe;
+    position: relative; /* close x */
+    background-color: rgb(255, 255, 255);
     margin: auto;
     padding: 0;
-    border: 1px solid #888;
+    border: 1px solid rgba(219, 214, 214, 0.798);
     width: 80%;
+    min-height: 300px;
+    height: 300px;
+    overflow-x:hidden;
+    overflow-y:auto;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
@@ -822,11 +853,8 @@
 .accountModal_Header {
     padding: 2px 16px;
     background-color: #ffffff;
-    color: white;
-}
-  
-.accountModal_Body {
-    padding: 2px 16px;
+    color: rgb(13, 65, 255);
+    text-align: center;
 }
   
 .accountModal_footer {
@@ -835,39 +863,50 @@
     color: white;
 }
 
-.userAccountProfile_01 {
+#userAccountProfile_01 {
     display: flex;
     flex-flow: row wrap;
-    text-align: center;
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */ 
     margin-left: 30px;  
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(12px, 2vw, 18px); 
     color: rgb(13, 65, 255);
 }
 
-/*
-    This CSS styling for the .header_Image_01 element on the homepage sets it to display as
-    a flex container with column direction, centers the content, and applies a blue color with
-    transparent background. The width is set to a minimum of 125 pixels and maximum of 250
-    pixels, with a fluid scaling between 3 viewport units.
-*/
+#userNameProfile_02 {
+    display: flex;
+    flex-flow: row wrap;
+    text-align: center; 
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */ 
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(201, 24, 24);
+}
+
+#userDetailProfile_03 {
+    display: flex;
+    flex-flow: row wrap;
+    text-align: center; 
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */ 
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(10px, 2vw, 16px); 
+    color: rgb(13, 65, 255);
+}
+
 #clock_Image_02 {
     display: flex;
-    flex-wrap: row wrap;
-    flex-direction: column;   
-    color: rgb(201, 24, 24);    
-    justify-content: center;
-    line-height: none;
-    margin-top: 10px;
-    margin-bottom: auto; 
-    padding-right: 40px;           
-    
-    background-color: transparent;    
-    width: clamp(75px, 2vw, 150px);
-   
-	right: 5px;
-	
-	
-	cursor: pointer;
-    
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */
+    text-align: center;  
+    background-color: transparent;   
+    border-right: 1px solid rgba(219, 214, 214, 0.798);
+}
+
+#clock_Image_02 img {
+    max-width: 100%; /* Ensure the image doesn't exceed its container's width */
+    max-height: 100%; /* Ensure the image doesn't exceed its container's height */
+    width: clamp(75px, 2vw, 150px); /* Customize the width within the specified range */
 }
