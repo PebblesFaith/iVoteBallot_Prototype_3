@@ -682,7 +682,9 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 			DMVFirstName: req.user.DMVFirstName, 
 			DMVMiddleName: req.user.DMVMiddleName, 
 			DMVLastName: req.user.DMVLastName, 
-			DMVPhoto: bufferData.toString('base64'), 
+			DMVPhoto: bufferData.toString('base64'),
+			DMVDateOfBirth: req.user.DMVDateOfBirth,
+			DMVBirthSex: req.user.DMVBirthSex,
 			DMVEmail: req.user.DMVEmail, 
 			DMVAddress: req.user.DMVAddress, 
 			DMVUnitType: req.user.DMVUnitType, 
@@ -699,6 +701,8 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 		console.log('DMVMiddleName:', req.user.DMVMiddleName);
 		console.log('DMVLastName:', req.user.DMVLastName);
 		console.log('DMVPhoto:', req.user.DMVPhoto);
+		console.log('DMVDateOfBirth:', req.user.DMVDateOfBirth);
+		console.log('DMVBirthSex:', req.user.DMVBirthSex);
 		console.log('DMVEmail:', req.user.DMVEmail);
 		console.log('DMVAddress:', req.user.DMVAddress);
 		console.log('DMVUnitType:', req.user.DMVUnitType);
@@ -1629,7 +1633,7 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 					});
 
 				} else {
-					res.render('error404');
+					res.render('404');
 					console.log('The nodemailer user could not be authenticated.');
 
 				}
@@ -1738,7 +1742,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 								user: 'ceo_developmenttest@ivoteballot.com',
 								pass: IONOS_SECRET_KEY,
 							}
-						});
+						});						
 
 						// Send notification email to admin
 
