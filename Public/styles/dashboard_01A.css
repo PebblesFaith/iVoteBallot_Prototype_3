@@ -475,14 +475,14 @@
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(12px, 2vw, 14px); 
     border: none;
-    margin-right: 25px;    
+    margin-right: 10px;    
   }
   
 #dropDown {
     position: relative;
     display: inline-block;
     position: absolute;
-	right: 5px;
+	right: 43px;
 	top: 16%;
 	transform: translateY(-16%);
 	cursor: pointer;
@@ -494,7 +494,7 @@
     background-color: rgb(255, 255, 255);
     min-width: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;    
+       
   }
   
 #dropDown_Content a {    
@@ -507,7 +507,7 @@
 }
     
 #dropDown_Content a:hover {
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(245, 240, 240, 0.906);
 }
   
 #dropDown:hover #dropDown_Content {
@@ -753,9 +753,121 @@
 #userDataProfile_02 {
     display: flex;
     flex-flow: row wrap;
-    align-items: left;
+    align-items: center;
     margin-left: 30px;  
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(10px, 2vw, 16px); 
     color: rgb(13, 65, 255);
+}
+
+/* The Account Modal (background) */
+.account {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 200px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(13, 65, 255); /* Fallback color */
+   
+}
+  
+/* Modal Content */
+.accountModal_Content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+  
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+  
+  @keyframes animatetop {
+    from {top:-200px; opacity:0}
+    to {top:0; opacity:1}
+  }
+  
+/* The Close Button */
+.accountClose {
+    color: rgb(13, 65, 255);   
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 3vw, 45px); 
+
+}
+  
+.accountClose:hover,
+.accountClose:focus {
+    color: rgb(201, 24, 24);
+    text-decoration: none;
+    cursor: pointer;
+}
+  
+.accountModal_Header {
+    padding: 2px 16px;
+    background-color: #ffffff;
+    color: white;
+}
+  
+.accountModal_Body {
+    padding: 2px 16px;
+}
+  
+.accountModal_footer {
+    padding: 2px 16px;
+    background-color: #ffffff;
+    color: white;
+}
+
+.userAccountProfile_01 {
+    display: flex;
+    flex-flow: row wrap;
+    text-align: center;
+    margin-left: 30px;  
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(13, 65, 255);
+}
+
+/*
+    This CSS styling for the .header_Image_01 element on the homepage sets it to display as
+    a flex container with column direction, centers the content, and applies a blue color with
+    transparent background. The width is set to a minimum of 125 pixels and maximum of 250
+    pixels, with a fluid scaling between 3 viewport units.
+*/
+#clock_Image_02 {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    color: rgb(201, 24, 24);    
+    justify-content: center;
+    line-height: none;
+    margin-top: 10px;
+    margin-bottom: auto; 
+    padding-right: 40px;           
+    
+    background-color: transparent;    
+    width: clamp(75px, 2vw, 150px);
+   
+	right: 5px;
+	
+	
+	cursor: pointer;
+    
 }
