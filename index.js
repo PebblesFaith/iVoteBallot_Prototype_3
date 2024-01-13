@@ -683,6 +683,7 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 			DMVMiddleName: req.user.DMVMiddleName, 
 			DMVLastName: req.user.DMVLastName, 
 			DMVPhoto: bufferData.toString('base64'),
+			DMVIdType: req.user.DMVIdType,		
 			DMVDateOfBirth: req.user.DMVDateOfBirth,
 			DMVBirthSex: req.user.DMVBirthSex,
 			DMVEmail: req.user.DMVEmail, 
@@ -701,12 +702,13 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 		console.log('DMVMiddleName:', req.user.DMVMiddleName);
 		console.log('DMVLastName:', req.user.DMVLastName);
 		console.log('DMVPhoto:', req.user.DMVPhoto);
+		console.log('DMVIdType:', req.user.DMVIdType);
 		console.log('DMVDateOfBirth:', req.user.DMVDateOfBirth);
 		console.log('DMVBirthSex:', req.user.DMVBirthSex);
 		console.log('DMVEmail:', req.user.DMVEmail);
 		console.log('DMVAddress:', req.user.DMVAddress);
 		console.log('DMVUnitType:', req.user.DMVUnitType);
-		console.log('DMVUnitTypeNumber:', req.user.DMVUnitTypeNumber);
+		console.log('DVMIdTypeNumber:', req.user.DMVIdTypeNumber);		
 		console.log('DMVCountrySelection:', req.user.DMVCountrySelection);
 		console.log('DMVStateSelection:', req.user.DMVStateSelection);
 		console.log('DMVCountySelection:', req.user.DMVCountySelection);
