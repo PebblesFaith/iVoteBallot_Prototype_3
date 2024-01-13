@@ -857,12 +857,6 @@
     text-align: center;
 }
   
-.accountModal_footer {
-    padding: 2px 16px;
-    background-color: #ffffff;
-    color: white;
-}
-
 #userAccountProfile_01 {
     display: flex;
     flex-flow: row wrap;
@@ -896,6 +890,19 @@
     color: rgb(13, 65, 255);
 }
 
+#userDetailProfile_04 {
+    display: flex;
+    flex-flow: row wrap;
+    text-align: left; 
+    align-items: left; 
+    justify-content: left; 
+    margin-left: 20px;
+    margin-left: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(201, 24, 24);
+}
+
 #clock_Image_02 {
     display: flex;
     align-items: center; /* Vertical centering */
@@ -909,4 +916,89 @@
     max-width: 100%; /* Ensure the image doesn't exceed its container's width */
     max-height: 100%; /* Ensure the image doesn't exceed its container's height */
     width: clamp(75px, 2vw, 150px); /* Customize the width within the specified range */
+}
+
+
+
+/* The Settings Modal (background) */
+.settings {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 200px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(255, 255, 255); /* Fallback color */   
+   
+}
+  
+/* Modal Content */
+.settingsModal_Content {
+    position: relative; /* close x */
+    background-color: rgb(255, 255, 255);
+    margin: auto;
+    padding: 0;
+    border: 1px solid rgba(219, 214, 214, 0.798);
+    width: 80%;
+    min-height: 300px;
+    height: 300px;
+    overflow-x:hidden;
+    overflow-y:auto;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+  
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+  
+  @keyframes animatetop {
+    from {top:-200px; opacity:0}
+    to {top:0; opacity:1}
+  }
+  
+/* The Close Button */
+.settingsClose {
+    color: rgb(13, 65, 255);   
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 3vw, 45px); 
+
+}
+  
+.settingsClose:hover,
+.settingsClose:focus {
+    color: rgb(201, 24, 24);
+    text-decoration: none;
+    cursor: pointer;
+}
+  
+.settingsModal_Header {
+    padding: 2px 16px;
+    background-color: #ffffff;
+    color: rgb(13, 65, 255);
+    text-align: center;
+}
+
+#userDetailProfile_05 {
+    display: flex;
+    flex-flow: row wrap;
+    text-align: left; 
+    align-items: left; 
+    justify-content: left; 
+    margin-left: 20px;
+    margin-left: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 12px); 
+    color: rgb(201, 24, 24);
 }
