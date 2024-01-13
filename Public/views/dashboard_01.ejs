@@ -108,14 +108,13 @@
 
 								<div id="dropDown">
 
-									<button id="dropButton">Profile Details</button>
+									<button id="dropButton">Profile</button>
 
 									<div id="dropDown_Content">
-										<a href="#">Account</a>
-										<a href="#">Purchases</a>
-										<a href="#">Private Messages</a>
-										<a href="#">Notifications</a>	
+
+										<a href="#">Account</a>										
 										<a href="http://localhost:8080/alabamaVoters_LogOut_01?_method">Log Out</a>
+
 									</div>
 
 								</div>								
@@ -177,7 +176,55 @@
 				<div class="flex_Container_Row">
 					<div id="left_Row_02">
 						<img id="alignText_01" src="../images/free_Icon_Finder/2931147_user_face_avatar_account_head_icon.png" >
-						<a href="#">Account</a>
+						<a href="#" id="accountButton">Account</a>
+
+						<!-- The Modal -->
+						<div id="accountModal" class="account">
+
+							<!-- Modal content -->
+							<div class="accountModal_Content">
+							<div class="accountModal_header">
+								<span class="accountClose">&times;</span>
+								<p class="userAccountProfile_01">
+									Your Alabama DMV Profile Information
+								</p>
+							</div>
+							<div class="accountModal_Body">
+								<h3 id="userDataProfile_01">										
+									<%= DMVFirstName %> <%= DMVMiddleName %> <%= DMVLastName %> 
+								</h3>								
+								
+								<h5 id="userDataProfile_02">
+
+									<div id="clock_Image_02" >
+										<img src="data:image/jpeg;base64, <%= DMVPhoto %>" alt="DMV Photo">
+									</div>
+									<br>									
+									Date of Birth: <%= DMVDateOfBirth %>   Birth Sex: <%= DMVBirthSex %>
+									<br>
+									Email Address: <%= DMVEmail %>
+									<br> 
+									<br>
+									Country: <%= DMVCountrySelection %>
+									<br>
+									Address: <%= DMVAddress %>
+									<br>
+									<%= DMVUnitType %>: <%= DMVUnitTypeNumber %>
+									<br>
+									City: <%= DMVCitySelection %> County: <%= DMVCountySelection %> State: <%= DMVStateSelection %> Zip Code: <%= DMVZipSelection %>
+									<br>
+									<br>
+									Phone Number: <%= DMVPhoneNumber %>		
+						
+								</h5>
+							</div>
+							<div class="accountModal_footer">
+							
+							</div>
+							</div>
+						
+						</div>
+						
 					</div>
 				</div>
 				<br>
@@ -208,24 +255,7 @@
 
 		<h3 id="userDataProfile_01">
 			Welcome, <%= DMVFirstName %> <%= DMVMiddleName %> <%= DMVLastName %> 
-		</h3>
-		
-		<h5 id="userDataProfile_02">
-			Email Address: <%= DMVEmail %>
-			<br> 
-			<br>
-			Country: <%= DMVCountrySelection %>
-			<br>
-			Address: <%= DMVAddress %>
-			<br>
-			<%= DMVUnitType %>: <%= DMVUnitTypeNumber %>
-			<br>
-			City: <%= DMVCitySelection %> County: <%= DMVCountySelection %> State: <%= DMVStateSelection %> Zip Code: <%= DMVZipSelection %>
-			<br>
-			<br>
-			Phone Number: <%= DMVPhoneNumber %>		
-
-		</h5>
+		</h3>		
 						
 		<br>
 		<hr id="hr_Blue_line_02">
@@ -242,12 +272,38 @@
 		<script>			
 			
 			function open_Navigational_Bar() {
-				document.getElementById("side_Navigational").style.width = "50%";
+				document.getElementById("side_Navigational").style.width = "100%";
 			}
 
 			function close_Navigational_Bar() {
 				document.getElementById("side_Navigational").style.width = "0";
 			}
+					
+			// Get the modal
+			var accountModal = document.getElementById("accountModal");
+
+			// Get the button that opens the modal
+			var accountButton = document.getElementById("accountButton");
+
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("accountClose")[0];
+
+			// When the user clicks the button, open the modal 
+			accountButton.onclick = function() {
+			accountModal.style.display = "block";
+			}
+
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+			accountModal.style.display = "none";
+			}
+
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+			if (event.target == modal) {
+				accountModal.style.display = "none";
+			}
+		}
 
 		</script>
 
