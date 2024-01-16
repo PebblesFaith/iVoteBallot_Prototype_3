@@ -423,12 +423,12 @@
 }
 
 .sideBar_Navigation {
-    height: 48%;
+    height: 65%;
     width: 0;
     position: fixed;
     z-index: 1;
     top: 180px;
-    left: 0px;      
+    left: 0px;        
     background-color: rgb(255, 255, 255);
     overflow-x: hidden;
     transition: 0.5s;
@@ -810,8 +810,8 @@
     padding: 0;
     border: 1px solid rgba(219, 214, 214, 0.798);
     width: 80%;
-    min-height: 300px;
-    height: 300px;
+    min-height: 600px;
+    height: 600px;
     overflow-x:hidden;
     overflow-y:auto;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
@@ -1001,4 +1001,30 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(8px, 2vw, 12px); 
     color: rgb(201, 24, 24);
+}
+
+/*
+    This CSS styling for the .header_Image_01 element on the homepage sets it to display as
+    a flex container with column direction, centers the content, and applies a blue color with
+    transparent background. The width is set to a minimum of 125 pixels and maximum of 250
+    pixels, with a fluid scaling between 3 viewport units.
+*/
+.header_Image_02 {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */ 
+   
+    line-height: none;
+    margin-top: 15px;
+    margin-bottom: auto; 
+    padding-right: 5px;            
+   
+	align-items: baseline;
+    background-color: transparent;    
+    width: clamp(75px, 2vw, 200px);  
+    border-right-style: solid; 
+    border-color: rgb(201, 24, 24);
+    border: 0, 2px, 0, 0;
 }
