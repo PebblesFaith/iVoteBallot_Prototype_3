@@ -1063,6 +1063,7 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', (req, res) => {
 	if (req.isAuthenticated()) {
 
 		req.logOut();
+		
 		res.render('alabamaVoters_LogIn_01');
 	}
 	/* The logout logic will clear the users from the session object and save. 
@@ -1826,7 +1827,6 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 		}
 	}
 );
-
 
 //const boxicons = require('boxicons');
 /*
