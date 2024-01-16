@@ -696,6 +696,8 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 			DMVCitySelection: req.user.DMVCitySelection, 
 			DMVZipSelection: req.user.DMVZipSelection, 
 			DMVPhoneNumber: req.user.DMVPhoneNumber, 
+
+			alabama_Candidates_2024_02: '/alabama_Candidates_2024_02', 
 		});
 
 		console.log('DMVFirstName:', req.user.DMVFirstName);
@@ -718,9 +720,66 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 
 	} else if (req.isUnauthenticated) {
 		res.render('/alabamaVoters_LogIn_01')
-		console.log('User is not successfully authenticated within the session through the passport from dashboard!');
+		console.log('The user is not successfully authenticated within the session through the passport from dashboard!');
 	}
 });
+
+iVoteBallotApp.get('/alabama_Candidates_2024_02', async (req, res) => {
+    if (req.isAuthenticated()) {
+
+		console.log('The User had been successfully authenticated within the Session through the passport from alabama_Candidates_2024_02!');
+		const bufferData = Buffer.from(req.user.DMVPhoto, 'base64');
+
+        // If user is authenticated, render the Alabama DMV page
+        res.render('alabama_Candidates_2024_02', {			
+
+            // Pass any necessary data to the template
+            // For example: DMVFirstName, DMVLastName, etc.
+			DMVFirstName: req.user.DMVFirstName, 
+			DMVMiddleName: req.user.DMVMiddleName, 
+			DMVLastName: req.user.DMVLastName, 
+			DMVPhoto: bufferData.toString('base64'),
+			DMVIdType: req.user.DMVIdType,		
+			DMVDateOfBirth: req.user.DMVDateOfBirth,
+			DMVBirthSex: req.user.DMVBirthSex,
+			DMVEmail: req.user.DMVEmail, 
+			DMVAddress: req.user.DMVAddress, 
+			DMVUnitType: req.user.DMVUnitType, 
+			DMVUnitTypeNumber: req.user.DMVUnitTypeNumber, 
+			DMVCountrySelection: req.user.DMVCountrySelection, 
+			DMVStateSelection: req.user.DMVStateSelection, 
+			DMVCountySelection: req.user.DMVCountySelection, 
+			DMVCitySelection: req.user.DMVCitySelection, 
+			DMVZipSelection: req.user.DMVZipSelection, 
+			DMVPhoneNumber: req.user.DMVPhoneNumber, 
+		});
+
+		console.log('DMVFirstName:', req.user.DMVFirstName);
+		console.log('DMVMiddleName:', req.user.DMVMiddleName);
+		console.log('DMVLastName:', req.user.DMVLastName);
+		console.log('DMVPhoto:', req.user.DMVPhoto);
+		console.log('DMVIdType:', req.user.DMVIdType);
+		console.log('DMVDateOfBirth:', req.user.DMVDateOfBirth);
+		console.log('DMVBirthSex:', req.user.DMVBirthSex);
+		console.log('DMVEmail:', req.user.DMVEmail);
+		console.log('DMVAddress:', req.user.DMVAddress);
+		console.log('DMVUnitType:', req.user.DMVUnitType);
+		console.log('DVMIdTypeNumber:', req.user.DMVIdTypeNumber);		
+		console.log('DMVCountrySelection:', req.user.DMVCountrySelection);
+		console.log('DMVStateSelection:', req.user.DMVStateSelection);
+		console.log('DMVCountySelection:', req.user.DMVCountySelection);
+		console.log('DMVCitySelection:', req.user.DMVCitySelection);
+		console.log('DMVZipSelection:', req.user.DMVZipSelection);
+		console.log('DMVPhoneNumber:', req.user.DMVPhoneNumber);
+
+       
+    } else {
+        // If user is not authenticated, redirect to the login page
+        res.redirect('/alabamaVoters_LogIn_01');
+        console.log('The user is not successfully authenticated within the session through the passport from alabamaDMV_Commission_01.');
+    }
+});
+
 
 /* -------------------------- The beginning of the use section ----------------------------- */
 
