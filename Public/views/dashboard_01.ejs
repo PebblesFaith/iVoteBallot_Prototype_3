@@ -102,30 +102,32 @@
 
 									<div id="clock_Image" >
 										<img src="data:image/jpeg;base64, <%= DMVPhoto %>" alt="DMV Photo">
-									</div>				
+									</div>		
 							
 								</div>
-								<!--
-								<div id="dropDown">
-
-									<button id="dropButton">Profile</button>
-									
-									<div id="dropDown_Content">
-
-										<a href="#">Account</a>	
-										<a href="http://localhost:8080/alabamaVoters_LogOut_01?_method">Log Out</a>
-
-									</div>
-
-								</div>								
-								-->			
+								
 							</div>
 
 						</div>
 					
 					</div>
 					
-				</div>				
+				</div>	
+
+				<div class="flex_Container_Column">
+
+					<div class="right_Column">
+
+						<div id="logOut_01">
+							<img id="alignLogOutImage_01" src="../images/free_Icon_Finder/4115235_exit_logout_sign out_icon.png" >	
+							
+						</div>						
+
+						<a id="logOutButton_01" href="http://localhost:8080/alabamaVoters_LogOut_01?_method">Log Out</a>
+
+					</div>
+
+				</div>
 							
 			</div>
 		</div>		
@@ -414,8 +416,6 @@
 				accountModal.style.display = "none";
 			}
 		}
-
-
 
 		// Get the modal
 		var settingsModal = document.getElementById("settingsModal");
