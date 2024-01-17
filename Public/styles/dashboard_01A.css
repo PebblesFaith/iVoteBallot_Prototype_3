@@ -395,31 +395,19 @@
     padding: 20px;
 }
 
-/*
-    This CSS styling for the .header_Image_01 element on the homepage sets it to display as
-    a flex container with column direction, centers the content, and applies a blue color with
-    transparent background. The width is set to a minimum of 125 pixels and maximum of 250
-    pixels, with a fluid scaling between 3 viewport units.
-*/
 #clock_Image {
     display: flex;
-    flex-wrap: row wrap;
-    flex-direction: column;   
-    color: rgb(13, 65, 255);    
-    text-align: right;
-    line-height: none;
-    margin-top: 10px;
-    margin-bottom: auto; 
-    padding-right: 40px;           
-    
-    background-color: transparent;    
-    width: clamp(75px, 2vw, 150px);
-    position: absolute;
-	right: 5px;
-	top: 1%;
-	transform: translateY(-1%);
-	cursor: pointer;
-    
+    align-items: right; /* Vertical centering */
+    justify-content: right; /* Horizontal centering */
+    text-align: right;  
+    background-color: transparent;       
+    padding-top: 25px;
+}
+
+#clock_Image img {
+    min-width: 20%; /* Ensure the image doesn't exceed its container's width */
+    min-height: 20%; /* Ensure the image doesn't exceed its container's height */
+    width: clamp(80px, 2vw, 250px); /* Customize the width within the specified range */
 }
 
 .sideBar_Navigation {
@@ -909,13 +897,12 @@
     justify-content: center; /* Horizontal centering */
     text-align: center;  
     background-color: transparent;   
-    border-right: 1px solid rgba(219, 214, 214, 0.798);
 }
 
 #clock_Image_02 img {
     max-width: 100%; /* Ensure the image doesn't exceed its container's width */
     max-height: 100%; /* Ensure the image doesn't exceed its container's height */
-    width: clamp(75px, 2vw, 150px); /* Customize the width within the specified range */
+    width: clamp(100px, 2vw, 150px); /* Customize the width within the specified range */
 }
 
 
@@ -1014,17 +1001,131 @@
     flex-wrap: row wrap;
     flex-direction: column;   
     align-items: center; /* Vertical centering */
-    justify-content: center; /* Horizontal centering */ 
-   
+    justify-content: center; /* Horizontal centering */    
     line-height: none;
     margin-top: 15px;
     margin-bottom: auto; 
-    padding-right: 5px;            
-   
+    padding-right: 5px;   
 	align-items: baseline;
     background-color: transparent;    
     width: clamp(75px, 2vw, 200px);  
     border-right-style: solid; 
     border-color: rgb(201, 24, 24);
     border: 0, 2px, 0, 0;
+}
+
+/*
+    The CSS statement targets all anchor tags (a) within the logOut_01 element and removes
+    the underline decoration (text-decoration: none), sets the display property to block 
+    (display: block). So, the anchor takes the full width of its container, adds 5px 
+    padding around the anchor (padding: 5px), and sets the font color to blue (color: 
+    rgb(13, 65, 255)).
+*/
+.header_Image_02 a {
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+    color: rgb(13, 65, 255);
+} 
+
+.header_Image_02 a:hover {
+    background-color: rgba(245, 240, 240, 0.906);    
+    color: rgb(201, 24, 24);
+    
+}
+
+
+/*
+    The CSS style code sets the properties of an HTML element with the ID "logOut_01" to create
+    a flexible container that wraps its contents in a column layout. The style also defines the
+    background color, height, width, text alignment, margin, padding, font family, size, and color
+    of the element, as well as its content justification and absence of a border.
+*/
+#logOut_01 {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-around;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(13, 65, 255);
+}
+
+/*
+    The CSS statement targets all anchor tags (a) within the logOut_01 element and removes
+    the underline decoration (text-decoration: none), sets the display property to block 
+    (display: block). So, the anchor takes the full width of its container, adds 5px 
+    padding around the anchor (padding: 5px), and sets the font color to blue (color: 
+    rgb(13, 65, 255)).
+*/
+#logOut_01 a {
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+    color: rgb(13, 65, 255);
+} 
+
+/*
+    This CSS statement changes the color of a hyperlink when the user hovers his/her cursor 
+    over the #logOut_01 a:hover element of contact us webpage. Specifically, the 
+    #logOut_01 a:hover element sets the color to a shade of blue defined by the RGB 
+    values (201, 24, 24). And, the ":hover" pseudo-class is used to target the hyperlink
+    when the #logOut_01 a:hover element is in the hover state.
+*/
+#logOut_01 a:hover {
+    background-color: rgba(245, 240, 240, 0.906);    
+    color: rgb(201, 24, 24);
+}
+
+#alignLogOutImage_01 {
+    display: flex;
+    align-items: left; /* Vertical centering */
+    justify-content: left; /* Horizontal centering */
+    text-align: left;  
+    padding-top: 30px;;
+    background-color: transparent;      
+    width: clamp(50px, 3vw, 100px);     
+}
+
+/*
+    The CSS style code sets the properties of an HTML element with the ID "left_Row_02" to create
+    a flexible container that wraps its contents in a column layout. The style also defines the
+    background color, height, width, text alignment, margin, padding, font family, size, and color
+    of the element, as well as its content justification and absence of a border.
+*/
+#logOutButton_01 {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-around;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 18px); 
+    color: rgb(13, 65, 255);
+    padding-top: 10px;
+}
+
+/*
+    The CSS statement targets all anchor tags (a) within the left_Row_02 element and removes
+    the underline decoration (text-decoration: none), sets the display property to block 
+    (display: block). So, the anchor takes the full width of its container, adds 5px 
+    padding around the anchor (padding: 5px), and sets the font color to blue (color: 
+    rgb(13, 65, 255)).
+*/
+#logOutButton_01 a {
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+    color: rgb(13, 65, 255);
+} 
+
+/*
+    This CSS statement changes the color of a hyperlink when the user hovers his/her cursor 
+    over the #left_Row_02 a:hover element of contact us webpage. Specifically, the 
+    #left_Row_02 a:hover element sets the color to a shade of blue defined by the RGB 
+    values (201, 24, 24). And, the ":hover" pseudo-class is used to target the hyperlink
+    when the #left_Row_02 a:hover element is in the hover state.
+*/
+#logOutButton_01 a:hover {
+    background-color: rgb(201, 24, 24);    
+    color: rgb(255, 255, 255);
 }
