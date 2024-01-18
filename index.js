@@ -99,6 +99,13 @@ const flash = require('express-flash');
 
 const methodOverride = require('method-override');
 
+const { v4: uuidv4 } = require('uuid');
+
+// Generate a random token using uuid
+const randomToken = uuidv4();
+
+
+
 /*
 	The given Javascript coded language imports the 'nodemailer' library which is used for
 	sending email within the iVoteBallot web application. The 'require' function is a
@@ -260,7 +267,7 @@ iVoteBallotApp.use(
 				secure: true,
 				httpOnly: true,
 				sameSite: true,
-				resave: true,
+				resave: false,
 				saveUninitialized: true,
 				//proxy: true,
 				maxAge: 'SESSION_MAX_AGE' // 1 hour				
@@ -660,6 +667,12 @@ passport.deserializeUser(function (id, done) {
 iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 	
 	if (req.isAuthenticated) {
+
+		const user_agent = req.headers['user-agent'];
+		req.session.user_agent = user_agent;
+
+		const ip_address = req.ip; 
+		req.session.ip_address = ip_address;
 		
 		console.log(req.user);
 		console.log(req.session);
@@ -671,6 +684,8 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 			console.log('req.params:', req.params);
 			console.log('req.headers:', req.headers);
 			console.log('req.isAuthenticated:', req.isAuthenticated);
+			console.log('user_agent:', req.session.user_agent);
+			console.log('ip_address:', req.session.ip_address);
 
 			console.log('req.user', req.user);
 
@@ -779,7 +794,6 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', async (req, res) => {
         console.log('The user is not successfully authenticated within the session through the passport from alabamaDMV_Commission_01.');
     }
 });
-
 
 /* -------------------------- The beginning of the use section ----------------------------- */
 
@@ -916,6 +930,9 @@ iVoteBallotApp.set('common', './Public/common');
 
 iVoteBallotApp.set('view engine', 'ejs');
 iVoteBallotApp.use(express.static(path.join(__dirname, 'public')));
+
+// Use method-override middleware
+iVoteBallotApp.use(methodOverride('_method'));
 
 const views_Controller = require('./models/views_Router');
 const contactUs_01_Controller = require('./models/alabama_Session_Router');
@@ -1117,33 +1134,42 @@ iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
 
 /* -------------------------- The beginning of the DELETE ROUTE section ----------------------------- */
 
-// Delete a route for the alabamaVoters_LogOut_01 page
+
+
 iVoteBallotApp.delete('/alabamaVoters_LogOut_01', (req, res) => {
-	if (req.isAuthenticated()) {
+    if (req.isAuthenticated()) {
+        // Generate a random token using uuid
+        const randomToken = uuidv4();
 
-		req.logOut();
-		
-		res.render('alabamaVoters_LogIn_01');
-	}
-	/* The logout logic will clear the users from the session object and save. 
-	Also, will enure that the re-using of the old session id does not have
-	a logged in user again.
-	*/
-	req.session.user = null
-	req.session.save(function (err) {
-		if (err)
-			next(err)
+        // Save the token in the session
+        req.session.logoutToken = randomToken;
 
-		/* The regenerate of the session, which is good practice to help safe
-		guard against users' forms of session fixation.
-		*/
-		req.session.regenerate(function (err) {
-			if (err) next(err)
-			res.render('dashboard_01');
-		});
-	}
-	);
+        // Perform logout logic
+        req.logOut();
+        req.session.user = null;
+
+        req.session.regenerate(function (err) {
+            if (err) return next(err);
+
+            // Set cache control headers to prevent caching
+            res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+            res.setHeader('Expires', '-1');
+            res.setHeader('Pragma', 'no-cache');
+
+            // Set response status to indicate permanent redirect
+            res.status(301);
+
+            // Redirect with the token in the URL
+            res.redirect(`/alabamaVoters_LogIn_01?token=${randomToken}`);
+        });
+    } else {
+        res.redirect('/alabamaVoters_LogIn_01'); // Redirect to login page if not authenticated
+    }
 });
+
+
+
+
 
 /* -------------------------- The ending of the DELETE ROUTE section ----------------------------- */
 
