@@ -405,7 +405,7 @@ passport.use(
 									IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode,
 									ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode,
 									Password: row.Password,
-									ConfirmPassword: row.DMVConfirmEmail,
+									ConfirmPassword: row.ConfirmPassword,
 									Temporary_Password: row.Temporary_Password,
 
 									isAuthenticated: true
@@ -483,7 +483,7 @@ passport.use(
 							IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode,
 							ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode,
 							Password: row.Password,
-							ConfirmPassword: row.DMVConfirmEmail,
+							ConfirmPassword: row.ConfirmPassword,
 							Temporary_Password: row.Temporary_Password,
 
 							isAuthenticated: true
@@ -558,7 +558,7 @@ passport.use(
 							IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode,
 							ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode,
 							Password: row.Password,
-							ConfirmPassword: row.DMVConfirmEmail,
+							ConfirmPassword: row.ConfirmPassword,
 							Temporary_Password: row.Temporary_Password,
 
 							isAuthenticated: true
@@ -652,7 +652,7 @@ passport.deserializeUser(function (id, done) {
 				IvoteBallotIdIdentifierCode: user.IvoteBallotIdIdentifierCode,
 				ConfirmIvoteBallotIdIdentifierCode: user.ConfirmIvoteBallotIdIdentifierCode,
 				Password: user.Password,
-				ConfirmPassword: user.DMVConfirmEmail,
+				ConfirmPassword: user.ConfirmPassword,
 				Temporary_Password: user.Temporary_Password,
 
 				isAuthenticated: true
@@ -1010,6 +1010,40 @@ iVoteBallotApp.get('/535', (req, res) => {
 	// Check if this is the first use of '/535' route URL bar
 	if (req.isUnauthenticated) {
 		res.render('535');
+
+	} else {
+		console.log(req.flash());
+		res.render('500');
+	}
+});
+
+// User route /
+iVoteBallotApp.get('/', (req, res) => {
+	// Check if user already authenticated.
+	if (req.session.isAuthenticated) {
+		return alert('You are already logged in!');
+	}
+	console.log(req.session);
+	// Check if this is the first use of '/535' route URL bar
+	if (req.isUnauthenticated) {
+		res.render('ivoteballot');
+
+	} else {
+		console.log(req.flash());
+		res.render('500');
+	}
+});
+
+// User route ivoteballot
+iVoteBallotApp.get('/ivoteballot', (req, res) => {
+	// Check if user already authenticated.
+	if (req.session.isAuthenticated) {
+		return alert('You are already logged in!');
+	}
+	console.log(req.session);
+	// Check if this is the first use of '/535' route URL bar
+	if (req.isUnauthenticated) {
+		res.render('ivoteballot');
 
 	} else {
 		console.log(req.flash());
