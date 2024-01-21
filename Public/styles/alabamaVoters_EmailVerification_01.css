@@ -328,7 +328,8 @@
 { 
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: clamp(9px, 2vw, 13px); 
-	color: rgb(201, 24, 24);    
+	background-color: rgb(201, 24, 24);
+	color: rgb(255, 255, 255);    
 	text-align: left;
 	white-space: normal; 
 }
