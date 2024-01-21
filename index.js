@@ -1169,8 +1169,6 @@ iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
 
 /* -------------------------- The beginning of the DELETE ROUTE section ----------------------------- */
 
-
-
 iVoteBallotApp.delete('/alabamaVoters_LogOut_01', (req, res) => {
     if (req.isAuthenticated()) {
         // Generate a random token using uuid
@@ -1201,10 +1199,6 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', (req, res) => {
         res.redirect('/alabamaVoters_LogIn_01'); // Redirect to login page if not authenticated
     }
 });
-
-
-
-
 
 /* -------------------------- The ending of the DELETE ROUTE section ----------------------------- */
 
