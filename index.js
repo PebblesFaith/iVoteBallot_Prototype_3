@@ -102,7 +102,7 @@ const methodOverride = require('method-override');
 const { v4: uuidv4 } = require('uuid');
 
 // Generate a random token using uuid
-const randomToken = uuidv4();
+const userId = uuidv4();
 
 
 
@@ -207,7 +207,7 @@ const db1 = new sqlite3.Database('alabamaDMV_Commission_01.db', err => {
 db1.serialize(() => {
 	db1.run(`CREATE TABLE IF NOT EXISTS alabamaDMV_Commission_01 (
 
-        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+        id TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6)))), 
         Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
 		DMVPhoto BLOB (250) NOT NULL,
         DMVFirstName VARCHAR (100) NOT NULL, 
@@ -684,13 +684,14 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 			console.log('req.params:', req.params);
 			console.log('req.headers:', req.headers);
 			console.log('req.isAuthenticated:', req.isAuthenticated);
-			console.log('user_agent:', req.session.user_agent);
+			console.log('_____________________________________ \.n');
+			console.log('req.sesssion.user_agent:', req.session.user_agent);			
 			console.log('ip_address:', req.session.ip_address);
-
+			console.log('_____________________________________ \.n');
 			console.log('req.user', req.user);
 
 		console.groupEnd();
-
+		
 		const bufferData = Buffer.from(req.user.DMVPhoto, 'base64');
 
 		res.render('dashboard_01', { 
@@ -1250,7 +1251,7 @@ iVoteBallotApp.post(
 
 iVoteBallotApp.post('/alabamaDMV_Commission_01',
 	async (req, res) => {
-
+		
 		const DMVPhoto = req.body.DMVPhoto;
 		const DMVFirstName = req.body.DMVFirstName;
 		const DMVMiddleName = req.body.DMVMiddleName;
@@ -1281,7 +1282,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		const Temporary_Password = req.body.Temporary_Password;
 
 		console.log(req.body);
-
+		
 		console.log('The user\'s photograph image is: ' + DMVPhoto + '.');
 		console.log('The user\'s first name: ' + DMVFirstName + '.');
 		console.log('The user\'s middle name is: ' + DMVMiddleName + '.');
@@ -1383,7 +1384,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		const photoFileData = fs.readFileSync(photoFilePath);
 
 		const newUser = {
-
+			
 			DMVPhoto,
 			DMVFirstName,
 			DMVMiddleName,
@@ -1425,7 +1426,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 					console.error(err);
 					req.flash('error', 'An syntax error has occurred when you have entered your data information into the input field that is link to our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
 					console.log('An syntax error has occurred when the user have entered his/her data information into the input field that is link our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
-					res.render('/500');					
+					res.render('500');					
 
 				} else {
 					console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
@@ -1920,7 +1921,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 							]
 
 						};
-
+						
 						transporter.sendMail(mailOptions_01, (err, info) => {
 							if (err) {
 								console.log(err);
