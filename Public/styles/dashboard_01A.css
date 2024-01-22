@@ -407,7 +407,7 @@
 #clock_Image img {
     min-width: 20%; /* Ensure the image doesn't exceed its container's width */
     min-height: 20%; /* Ensure the image doesn't exceed its container's height */
-    width: clamp(80px, 2vw, 250px); /* Customize the width within the specified range */
+    width: clamp(150px, 2vw, 250px); /* Customize the width within the specified range */
 }
 
 .sideBar_Navigation {
@@ -902,7 +902,7 @@
 #clock_Image_02 img {
     max-width: 100%; /* Ensure the image doesn't exceed its container's width */
     max-height: 100%; /* Ensure the image doesn't exceed its container's height */
-    width: clamp(100px, 2vw, 150px); /* Customize the width within the specified range */
+    width: clamp(250px, 2vw, 250px); /* Customize the width within the specified range */
 }
 
 
