@@ -727,7 +727,7 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 
 			alabama_Candidates_2024_02: '/alabama_Candidates_2024_02', 
 		});
-
+		
 		console.log('DMVFirstName:', req.user.DMVFirstName);
 		console.log('DMVMiddleName:', req.user.DMVMiddleName);
 		console.log('DMVLastName:', req.user.DMVLastName);
