@@ -735,8 +735,8 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 		console.log('DMVIdType:', req.user.DMVIdType);
 		console.log('DMVDateOfBirth:', req.user.DMVDateOfBirth);
 		console.log('DMVBirthSex:', req.user.DMVBirthSex);
-		console.log('The user\'s grade school name: ' + DMVGradeSchool + '.');
-		console.log('Did the user graduate from grade school: ' + DMVGradeSchoolSelection + '.');
+		console.log('The user\'s grade school name: ' + req.user.DMVGradeSchool + '.');
+		console.log('Did the user graduate from grade school: ' + req.user.DMVGradeSchoolSelection + '.');
 		console.log('DMVEmail:', req.user.DMVEmail);
 		console.log('DMVAddress:', req.user.DMVAddress);
 		console.log('DMVUnitType:', req.user.DMVUnitType);
