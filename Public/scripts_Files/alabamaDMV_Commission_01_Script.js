@@ -13,6 +13,8 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	const DMVBirthSex = document.getElementById('birthSex').value.trim();   
 	const DMVGenderIdentity = document.getElementById('genderIdentity').value.trim();  
 	const DMVRace = document.getElementById('race').value.trim();  
+	const DMVGradeSchool = document.getElementById('gradeSchool').value.trim();  
+	const DMVGradeSchoolSelection = document.getElementById('gradeSchoolSelect').value.trim();
 	const DMVSSN = document.getElementById('ssn').value.trim(); 
 	const DMVEmail = document.getElementById('email').value.trim();
 	const DMVConfirmEmail = document.getElementById('confirmEmail').value.trim();  
@@ -168,6 +170,29 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	
 		return false;		
 
+	}
+
+	if (DMVGradeSchool === '' || DMVGradeSchool == null || DMVGradeSchool.length <= 2 || !DMVGradeSchool.match(regExName)) {                                                               
+		document.getElementById('userDMVGradeSchoolErrorMessage').innerHTML = 'Error Message: The user grade school is a required input field or you must enter more than two characters into the user Grade School name required input field.';
+	
+		setTimeout(function() {
+			document.getElementById('userDMVGradeSchoolErrorMessage').innerHTML = '';
+		},
+		9000)
+	
+		return false;		
+
+	}
+
+	if (DMVGradeSchoolSelection=== '' || DMVGradeSchoolSelection == null) {		
+		document.getElementById('userDMVGradeSchoolSelectionErrorMessage').textContent = 'Error Message: The user\'s grade school is a required select option field and you must select if the user is a grade school graduate from the option require field.';
+		setTimeout(function() {
+			document.getElementById('userDMVGradeSchoolSelectionErrorMessage').textContent = '';
+		},
+		9000)    	
+
+		return false;  
+	
 	}
 
 	if (DMVSSN === '' || DMVSSN == null || !DMVSSN.match(regExSSN)) {                                                               
