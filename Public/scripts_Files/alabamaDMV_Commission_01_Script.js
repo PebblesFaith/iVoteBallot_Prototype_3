@@ -61,10 +61,10 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 	
 	if (DMVFirstName === '' || DMVFirstName == null || DMVFirstName.length <= 2 || !DMVFirstName.match(regExName)) {                                                               
-		document.getElementById('userDMVFirstNameErrorMessage').innerHTML = 'Error Message: The user first name is a required input field or you must enter more than two characters into the userfirst name required input field.';
+		document.getElementById('userDMVFirstNameErrorMessage').textContent  = 'Error Message: The user first name is a required input field or you must enter more than two characters into the userfirst name required input field.';
 	
 		setTimeout(function() {
-			document.getElementById('userDMVFirstNameErrorMessage').innerHTML = '';
+			document.getElementById('userDMVFirstNameErrorMessage').textContent  = '';
 		},
 		9000)
 	
@@ -73,18 +73,18 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVMiddleName === '' || DMVMiddleName == null) {
-		document.getElementById('userDMVMiddleNameErrorMessage').innerHTML = 'Error Message: Do the user have a middle name? If so, please type in the user middle name into the input field or skip the user middle name input field entirety.';
+		document.getElementById('userDMVMiddleNameErrorMessage').textContent = 'Error Message: Do the user have a middle name? If so, please type in the user middle name into the input field or skip the user middle name input field entirety.';
 	
 		setTimeout(function() {
-			document.getElementById('userDMVMiddleNameErrorMessage').innerHTML = '';
+			document.getElementById('userDMVMiddleNameErrorMessage').textContent = '';
 		},
 		9000)                                           
 							
 		} else if (DMVMiddleName.length <= 2 || !DMVMiddleName.match(regExName)) {
-		document.getElementById('userDMVMiddleNameErrorMessage').innerHTML = 'Error Message: The user middle name is an optional input field; however, you must enter more than two characters into the user middle name required input field.';
+		document.getElementById('userDMVMiddleNameErrorMessage').textContent = 'Error Message: The user middle name is an optional input field; however, you must enter more than two characters into the user middle name required input field.';
 	
 		setTimeout(function() {
-			document.getElementById('userDMVMiddleNameErrorMessage').innerHTML = '';
+			document.getElementById('userDMVMiddleNameErrorMessage').textContent  = '';
 		},
 		9000)
 	
@@ -93,10 +93,10 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	} 
 	
 	if (DMVLastName === '' || DMVLastName == null || DMVLastName.length <= 2 || !DMVLastName.match(regExName)) {
-		document.getElementById('userDMVLastNameErrorMessage').innerHTML = 'Error Message: The user last name is a required input field or you must enter more than two characters into the user last name required input field.';
+		document.getElementById('userDMVLastNameErrorMessage').textContent  = 'Error Message: The user last name is a required input field or you must enter more than two characters into the user last name required input field.';
 	
 		setTimeout(function() {
-			document.getElementById('userDMVLastNameErrorMessage').innerHTML = '';
+			document.getElementById('userDMVLastNameErrorMessage').textContent  = '';
 		},
 		9000)
 	
@@ -125,10 +125,10 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVDateOfBirth === '' || DMVDateOfBirth == null) {                                                               
-		document.getElementById('userDMVDateOfBirthErrorMessage').innerHTML = 'Error Message: The user date of birth is a required input field.';
+		document.getElementById('userDMVDateOfBirthErrorMessage').textContent  = 'Error Message: The user date of birth is a required input field.';
 	
 		setTimeout(function() {
-			document.getElementById('userDMVDateOfBirthErrorMessage').innerHTML = '';
+			document.getElementById('userDMVDateOfBirthErrorMessage').textContent  = '';
 		},
 		9000)
 	
@@ -137,10 +137,10 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVBirthSex === '' || DMVBirthSex == null) {                                                               
-		document.getElementById('userDMVBirthSexErrorMessage').innerHTML = 'Error Message: The user birth sex is a required input field.';
+		document.getElementById('userDMVBirthSexErrorMessage').textContent = 'Error Message: The user birth sex is a required input field.';
 	
 		setTimeout(function() {
-			document.getElementById('userDMVBirthSexErrorMessage').innerHTML = '';
+			document.getElementById('userDMVBirthSexErrorMessage').textContent = '';
 		},
 		9000)
 	
@@ -149,10 +149,10 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVGenderIdentity === '' || DMVGenderIdentity == null) {                                                               
-		document.getElementById('userDMVGenderIdentityErrorMessage').innerHTML = 'Error Message: The user gender identity is a required input field.';
+		document.getElementById('userDMVGenderIdentityErrorMessage').textContent  = 'Error Message: The user gender identity is a required input field.';
 	
 		setTimeout(function() {
-			document.getElementById('userDMVGenderIdentityErrorMessage').innerHTML = '';
+			document.getElementById('userDMVGenderIdentityErrorMessage').textContent = '';
 		},
 		9000)
 	
@@ -161,10 +161,10 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVRace === '' || DMVRace == null) {                                                               
-		document.getElementById('userDMVRaceErrorMessage').innerHTML = 'Error Message: The user race is a required input field.';
+		document.getElementById('userDMVRaceErrorMessage').textContent  = 'Error Message: The user race is a required input field.';
 	
 		setTimeout(function() {
-			document.getElementById('userDMVRaceErrorMessage').innerHTML = '';
+			document.getElementById('userDMVRaceErrorMessage').textContent = '';
 		},
 		9000)
 	
@@ -173,10 +173,10 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVGradeSchool === '' || DMVGradeSchool == null || DMVGradeSchool.length <= 2 || !DMVGradeSchool.match(regExName)) {                                                               
-		document.getElementById('userDMVGradeSchoolErrorMessage').innerHTML = 'Error Message: The user grade school is a required input field or you must enter more than two characters into the user Grade School name required input field.';
+		document.getElementById('userDMVGradeSchoolErrorMessage').textContent  = 'Error Message: The user grade school is a required input field or you must enter more than two characters into the user Grade School name required input field.';
 	
 		setTimeout(function() {
-			document.getElementById('userDMVGradeSchoolErrorMessage').innerHTML = '';
+			document.getElementById('userDMVGradeSchoolErrorMessage').textContent = '';
 		},
 		9000)
 	
@@ -196,10 +196,10 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVSSN === '' || DMVSSN == null || !DMVSSN.match(regExSSN)) {                                                               
-		document.getElementById('userDMVSSNErrorMessage').innerHTML = 'Error Message: The user SSN is a required input field or you must enter the user correct SSN into the require input field.';
+		document.getElementById('userDMVSSNErrorMessage').textContent  = 'Error Message: The user SSN is a required input field or you must enter the user correct SSN into the require input field.';
 	
 		setTimeout(function() {
-			document.getElementById('userDMVSSNErrorMessage').innerHTML = '';
+			document.getElementById('userDMVSSNErrorMessage').textContent = '';
 		},
 		9000)
 	
