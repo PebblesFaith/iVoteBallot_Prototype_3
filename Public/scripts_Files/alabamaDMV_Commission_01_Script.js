@@ -15,6 +15,8 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	const DMVRace = document.getElementById('race').value.trim();  
 	const DMVGradeSchool = document.getElementById('gradeSchool').value.trim();  
 	const DMVGradeSchoolSelection = document.getElementById('gradeSchoolSelect').value.trim();
+	const DMVGradeSchoolYearSelection = document.getElementById('gradeSchoolYearSelect').value.trim();
+	
 	const DMVSSN = document.getElementById('ssn').value.trim(); 
 	const DMVEmail = document.getElementById('email').value.trim();
 	const DMVConfirmEmail = document.getElementById('confirmEmail').value.trim();  
@@ -194,6 +196,18 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		return false;  
 	
 	}
+
+	if (DMVGradeSchoolYearSelection=== '' || DMVGradeSchoolYearSelection == null) {		
+		document.getElementById('userDMVGradeSchoolYearSelectionErrorMessage').textContent = 'Error Message: The user\'s grade school year is a required select option field and you must select the user\'s grade school graduate year from the option require field.';
+		setTimeout(function() {
+			document.getElementById('userDMVGradeSchoolYearSelectionErrorMessage').textContent = '';
+		},
+		9000)    	
+
+		return false;  
+	
+	}
+
 
 	if (DMVSSN === '' || DMVSSN == null || !DMVSSN.match(regExSSN)) {                                                               
 		document.getElementById('userDMVSSNErrorMessage').textContent  = 'Error Message: The user SSN is a required input field or you must enter the user correct SSN into the require input field.';
