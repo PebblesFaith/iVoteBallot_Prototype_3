@@ -360,7 +360,8 @@ span.forgot_Password {
 #confirmPassword,
 #temporary_Password,
 #gradeSchool,
-#gradeSchoolSelect
+#gradeSchoolSelect,
+#gradeSchoolYearSelect
 {
 	outline: none; 
 	border-top-style: hidden;
@@ -409,7 +410,8 @@ span.forgot_Password {
 #confirmPassword,
 #temporary_Password,
 #gradeSchool,
-#gradeSchoolSelect
+#gradeSchoolSelect,
+#gradeSchoolYearSelect
 {
 	display: flex;
 	flex-wrap: row wrap;
@@ -450,7 +452,8 @@ span.forgot_Password {
 #confirmPassword,
 #temporary_Password,
 #gradeSchool,
-#gradeSchoolSelect
+#gradeSchoolSelect,
+#gradeSchoolYearSelect
 {
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
@@ -485,7 +488,8 @@ span.forgot_Password {
 #confirmPassword:focus,
 #temporary_Password:focus,
 #gradeSchool:focus,
-#gradeSchoolSelect:focus
+#gradeSchoolSelect:focus,
+#gradeSchoolYearSelect:focus
 {
 	border:3px solid rgb(205, 214, 249);
 	border-top-style: hidden;
@@ -523,9 +527,10 @@ span.forgot_Password {
 #userConfirmiVoteBallotIdIdentifierCodeErrorMessage,
 #userPasswordErrorMessage,
 #userConfirmPasswordErrorMessage,
-#userTemporary_PasswordErrorMessage
+#userTemporary_PasswordErrorMessage,
 #userDMVGradeSchoolErrorMessage,
-#userDMVGradeSchoolSelectionErrorMessage
+#userDMVGradeSchoolSelectionErrorMessage,
+#userDMVGradeSchoolYearSelectionErrorMessage
 { 
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: clamp(9px, 2vw, 13px); 
