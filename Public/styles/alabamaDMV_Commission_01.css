@@ -361,7 +361,10 @@ span.forgot_Password {
 #temporary_Password,
 #gradeSchool,
 #gradeSchoolSelect,
-#gradeSchoolYearSelect
+#gradeSchoolYearSelect,
+#highSchool,
+#highSchoolSelect,
+#highSchoolYearSelect
 {
 	outline: none; 
 	border-top-style: hidden;
@@ -411,7 +414,10 @@ span.forgot_Password {
 #temporary_Password,
 #gradeSchool,
 #gradeSchoolSelect,
-#gradeSchoolYearSelect
+#gradeSchoolYearSelect,
+#highSchool,
+#highSchoolSelect,
+#highSchoolYearSelect
 {
 	display: flex;
 	flex-wrap: row wrap;
@@ -453,7 +459,10 @@ span.forgot_Password {
 #temporary_Password,
 #gradeSchool,
 #gradeSchoolSelect,
-#gradeSchoolYearSelect
+#gradeSchoolYearSelect,
+#highSchool,
+#highSchoolSelect,
+#highSchoolYearSelect
 {
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
@@ -489,7 +498,10 @@ span.forgot_Password {
 #temporary_Password:focus,
 #gradeSchool:focus,
 #gradeSchoolSelect:focus,
-#gradeSchoolYearSelect:focus
+#gradeSchoolYearSelect:focus,
+#highSchool:focus,
+#highSchoolSelect:focus,
+#highSchoolYearSelect:focus
 {
 	border:3px solid rgb(205, 214, 249);
 	border-top-style: hidden;
@@ -530,7 +542,10 @@ span.forgot_Password {
 #userTemporary_PasswordErrorMessage,
 #userDMVGradeSchoolErrorMessage,
 #userDMVGradeSchoolSelectionErrorMessage,
-#userDMVGradeSchoolYearSelectionErrorMessage
+#userDMVGradeSchoolYearSelectionErrorMessage,
+#userDMVHighSchoolErrorMessage,
+#userDMVHighSchoolSelectionErrorMessage,
+#userDMVHighSchoolYearSelectionErrorMessage
 { 
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: clamp(9px, 2vw, 13px); 
