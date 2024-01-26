@@ -157,6 +157,26 @@
 									<span id = "userDMVGradeSchoolYearSelectionErrorMessage"></span>
 									<br>	
 
+									<label>Last High School Name Attended |</label>                            
+									<input id="highSchool" type="text" name="DMVHighSchool" maxlength="75">                           
+									<span id="userDMVHighSchoolErrorMessage"></span>
+									<br>
+
+									<select id="highSchoolSelect" name="DMVGradeSchoolSelection">
+										<option id="selectBackground" value="" disable selected hidden>High School Diploma?</option>
+											<option value = Yes>Yes</option>
+											<option value = No>No</option>											
+									</select>
+									<span id = "userDMVHighSchoolSelectionErrorMessage"></span>
+									<br>	
+
+									<select id="highSchoolYearSelect" name="DMVHighSchoolYearSelection">
+										<option id="selectBackground" value="" disable selected hidden>Year Graduate from High School:</option>
+										<option value = No_Graduate>No Graduate</option>
+									</select>
+									<span id = "userDMVHighSchoolYearSelectionErrorMessage"></span>
+									<br>
+
 									<label>Social Security Number | Enter user's ssn in the format of xxx-xx-xxxx.</label>                                           
 									<input id="ssn" type="text" name="DMVSSN" maxlength="75"> 								                          
 									<span id="userDMVSSNErrorMessage"></span>
@@ -317,6 +337,20 @@
 				dateDropdown.add(dateOption);      
 				currentYear -= 1;  
 			}
+
+			const dateDropdown_02 = document.getElementById('highSchoolYearSelect'); 
+       
+			let currentYear_02 = new Date().getFullYear();    
+			let  earliestYear_02 = 1900;     
+
+			while (currentYear_02 >= earliestYear_02) {      
+				let dateOption = document.createElement('option');          
+				dateOption.text = currentYear_02;      
+				dateOption.value = currentYear_02;        
+				dateDropdown_02.add(dateOption);      
+				currentYear_02 -= 1;  
+			}
+
 
 		</script>
 			
