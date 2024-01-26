@@ -143,11 +143,18 @@
 									<br>
 
 									<select id="gradeSchoolSelect" name="DMVGradeSchoolSelection">
-										<option id="selectBackground" value="" disable selected hidden>Grade School Diploma</option>
+										<option id="selectBackground" value="" disable selected hidden>Grade School Diploma?</option>
 											<option value = Yes>Yes</option>
 											<option value = No>No</option>											
 									</select>
 									<span id = "userDMVGradeSchoolSelectionErrorMessage"></span>
+									<br>	
+
+									<select id="gradeSchoolYearSelect" name="DMVGradeSchoolYearSelection">
+										<option id="selectBackground" value="" disable selected hidden>Year Graduate from Grade School:</option>
+										<option value = No_Graduate>No Graduate</option>
+									</select>
+									<span id = "userDMVGradeSchoolYearSelectionErrorMessage"></span>
 									<br>	
 
 									<label>Social Security Number | Enter user's ssn in the format of xxx-xx-xxxx.</label>                                           
@@ -296,6 +303,22 @@
 		<footer>
 			<%- include('../common/footer') %>
 		</footer>	
+
+		<script>
+			const dateDropdown = document.getElementById('gradeSchoolYearSelect'); 
+       
+			let currentYear = new Date().getFullYear();    
+			let  earliestYear = 1900;     
+
+			while (currentYear >= earliestYear) {      
+				let dateOption = document.createElement('option');          
+				dateOption.text = currentYear;      
+				dateOption.value = currentYear;        
+				dateDropdown.add(dateOption);      
+				currentYear -= 1;  
+			}
+
+		</script>
 			
 	</body>
 </html>
