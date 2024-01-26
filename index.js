@@ -662,7 +662,7 @@ passport.deserializeUser(function (id, done) {
 				DMVGradeSchool: user.DMVGradeSchool,
 				DMVGradeSchoolSelection: user.DMVGradeSchoolSelection,
 				DMVGradeSchoolYearSelection: user.DMVGradeSchoolYearSelection,
-				DMVHighSchool: row.DMVHighSchool,
+				DMVHighSchool: user.DMVHighSchool,
 				DMVHighSchoolSelection: row.DMVHighSchoolSelection,
 				DMVHighSchoolYearSelection: row.DMVHighSchoolYearSelection,
 				DMVSSN: user.DMVSSN,
