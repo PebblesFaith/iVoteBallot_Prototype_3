@@ -663,8 +663,8 @@ passport.deserializeUser(function (id, done) {
 				DMVGradeSchoolSelection: user.DMVGradeSchoolSelection,
 				DMVGradeSchoolYearSelection: user.DMVGradeSchoolYearSelection,
 				DMVHighSchool: user.DMVHighSchool,
-				DMVHighSchoolSelection: row.DMVHighSchoolSelection,
-				DMVHighSchoolYearSelection: row.DMVHighSchoolYearSelection,
+				DMVHighSchoolSelection: user.DMVHighSchoolSelection,
+				DMVHighSchoolYearSelection: user.DMVHighSchoolYearSelection,
 				DMVSSN: user.DMVSSN,
 				DMVEmail: user.DMVEmail,
 				DMVConfirmEmail: user.DMVConfirmEmail,
@@ -686,6 +686,7 @@ passport.deserializeUser(function (id, done) {
 				Temporary_Password: user.Temporary_Password,
 
 				isAuthenticated: true
+				
 			}
 			
 		);
