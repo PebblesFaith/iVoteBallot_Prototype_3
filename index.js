@@ -219,7 +219,8 @@ db1.serialize(() => {
         DMVGenderIdentity VARCHAR(25) NOT NULL,
         DMVRace VARCHAR(250) NOT NULL,
 		DMVGradeSchool VARCHAR(300) NOT NULL,
-		DMVGradeSchoolSelection VARCHARE(300) NOT NULL,
+		DMVGradeSchoolSelection VARCHAR(10) NOT NULL,
+		DMVGradeSchoolYearSelection VARCHAR(25) NOT NULL,
         DMVSSN VARCHAR(25) NOT NULL,
         DMVEmail VARCHAR(150) NOT NULL,
         DMVConfirmEmail VARCHAR(150) NOT NULL,
@@ -392,6 +393,7 @@ passport.use(
 									DMVRace: row.DMVRace,
 									DMVGradeSchool: row.DMVGradeSchool,
 									DMVGradeSchoolSelection: row.DMVGradeSchoolSelection,
+									DMVGradeSchoolYearSelection: row.DMVGradeSchoolYearSelection,
 									DMVSSN: row.DMVSSN,
 									DMVEmail: row.DMVEmail,
 									DMVConfirmEmail: row.DMVConfirmEmail,
@@ -472,6 +474,7 @@ passport.use(
 							DMVRace: row.DMVRace,
 							DMVGradeSchool: row.DMVGradeSchool,
 							DMVGradeSchoolSelection: row.DMVGradeSchoolSelection,
+							DMVGradeSchoolYearSelection: row.DMVGradeSchoolYearSelection,
 							DMVSSN: row.DMVSSN,
 							DMVEmail: row.DMVEmail,
 							DMVConfirmEmail: row.DMVConfirmEmail,
@@ -549,6 +552,7 @@ passport.use(
 							DMVRace: row.DMVRace,
 							DMVGradeSchool: row.DMVGradeSchool,
 							DMVGradeSchoolSelection: row.DMVGradeSchoolSelection,
+							DMVGradeSchoolYearSelection: row.DMVGradeSchoolYearSelection,
 							DMVSSN: row.DMVSSN,
 							DMVEmail: row.DMVEmail,
 							DMVConfirmEmail: row.DMVConfirmEmail,
@@ -645,6 +649,7 @@ passport.deserializeUser(function (id, done) {
 				DMVRace: user.DMVRace,
 				DMVGradeSchool: user.DMVGradeSchool,
 				DMVGradeSchoolSelection: user.DMVGradeSchoolSelection,
+				DMVGradeSchoolYearSelection: row.DMVGradeSchoolYearSelection,
 				DMVSSN: user.DMVSSN,
 				DMVEmail: user.DMVEmail,
 				DMVConfirmEmail: user.DMVConfirmEmail,
@@ -714,6 +719,7 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 			DMVBirthSex: req.user.DMVBirthSex,
 			DMVGradeSchool: req.user.DMVGradeSchool,
 			DMVGradeSchoolSelection: req.user.DMVGradeSchoolSelection,
+			DMVGradeSchoolYearSelection: req.user.DMVGradeSchoolYearSelection,		
 			DMVEmail: req.user.DMVEmail, 
 			DMVAddress: req.user.DMVAddress, 
 			DMVUnitType: req.user.DMVUnitType, 
@@ -735,8 +741,9 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 		console.log('DMVIdType:', req.user.DMVIdType);
 		console.log('DMVDateOfBirth:', req.user.DMVDateOfBirth);
 		console.log('DMVBirthSex:', req.user.DMVBirthSex);
-		console.log('The user\'s grade school name: ' + req.user.DMVGradeSchool + '.');
-		console.log('Did the user graduate from grade school: ' + req.user.DMVGradeSchoolSelection + '.');
+		console.log('DMVGradeSchool:', req.user.DMVGradeSchool);
+		console.log('DMVGradeSchoolSelection:', req.user.DMVGradeSchoolSelection);
+		console.log('DMVGradeSchoolYearSelection:', req.user.DMVGradeSchoolYearSelection);
 		console.log('DMVEmail:', req.user.DMVEmail);
 		console.log('DMVAddress:', req.user.DMVAddress);
 		console.log('DMVUnitType:', req.user.DMVUnitType);
@@ -774,6 +781,7 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', async (req, res) => {
 			DMVBirthSex: req.user.DMVBirthSex,
 			DMVGradeSchool: req.user.DMVGradeSchool,
 			DMVGradeSchoolSelection: req.user.DMVGradeSchoolSelection,
+			DMVGradeSchoolYearSelection: req.user.DMVGradeSchoolYearSelection,	
 			DMVEmail: req.user.DMVEmail, 
 			DMVAddress: req.user.DMVAddress, 
 			DMVUnitType: req.user.DMVUnitType, 
@@ -793,8 +801,9 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', async (req, res) => {
 		console.log('DMVIdType:', req.user.DMVIdType);
 		console.log('DMVDateOfBirth:', req.user.DMVDateOfBirth);
 		console.log('DMVBirthSex:', req.user.DMVBirthSex);
-		console.log('The user\'s grade school name: ' + DMVGradeSchool + '.');
-		console.log('Did the user graduate from grade school: ' + DMVGradeSchoolSelection + '.');
+		console.log('DMVGradeSchool:', req.user.DMVGradeSchool);
+		console.log('DMVGradeSchoolSelection:', req.user.DMVGradeSchoolSelection);
+		console.log('DMVGradeSchoolYearSelection:', req.user.DMVGradeSchoolYearSelection);
 		console.log('DMVEmail:', req.user.DMVEmail);
 		console.log('DMVAddress:', req.user.DMVAddress);
 		console.log('DMVUnitType:', req.user.DMVUnitType);
@@ -1275,6 +1284,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		const DMVRace = req.body.DMVRace;
 		const DMVGradeSchool = req.body.DMVGradeSchool;
 		const DMVGradeSchoolSelection = req.body.DMVGradeSchoolSelection;
+		const DMVGradeSchoolYearSelection = req.body.DMVGradeSchoolYearSelection;
 		const DMVSSN = req.body.DMVSSN;
 		const DMVEmail = req.body.DMVEmail;
 		const DMVConfirmEmail = req.body.DMVConfirmEmail;
@@ -1307,6 +1317,8 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		console.log('The user\'s gender identity is: ' + DMVGenderIdentity + '.');
 		console.log('The user\'s race is: ' + DMVRace + '.');
 		console.log('The user\'s grade school name: ' + DMVGradeSchool + '.');
+		console.log('Did the user graduate from grade school: ' + DMVGradeSchoolSelection + '.');
+		console.log('What year did the user graudated from grade school name: ' + DMVGradeSchoolYearSelection + '.');
 		console.log('Did the user graduate from grade school: ' + DMVGradeSchoolSelection + '.');
 		console.log('The user\'s SSN is: ' + DMVSSN + '.');
 		console.log('The user\'s email is: ' + DMVEmail + '.');
@@ -1412,6 +1424,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 			DMVRace,
 			DMVGradeSchool,
 			DMVGradeSchoolSelection,
+			DMVGradeSchoolYearSelection,
 			DMVSSN: DMVSSNHashed,
 			DMVEmail,
 			DMVConfirmEmail,
@@ -1435,9 +1448,9 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		};
 
 		await db1.run(
-			`INSERT INTO alabamaDMV_Commission_01 (DMVPhoto, DMVFirstName, DMVMiddleName, DMVLastName, DMVSuffix, DMVDateOfBirth, DMVBirthSex, DMVGenderIdentity, DMVRace, DMVGradeSchool, DMVGradeSchoolSelection, DMVSSN, DMVEmail, DMVConfirmEmail, DMVPhoneNumber, DMVAddress, DMVUnitType, DMVUnitTypeNumber, DMVCountrySelection, DMVStateSelection, DMVCountySelection, DMVCitySelection, DMVZipSelection, DMVIdType, DMVIdTypeNumber, IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode, Password, ConfirmPassword, Temporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+			`INSERT INTO alabamaDMV_Commission_01 (DMVPhoto, DMVFirstName, DMVMiddleName, DMVLastName, DMVSuffix, DMVDateOfBirth, DMVBirthSex, DMVGenderIdentity, DMVRace, DMVGradeSchool, DMVGradeSchoolSelection, DMVGradeSchoolYearSelection, DMVSSN, DMVEmail, DMVConfirmEmail, DMVPhoneNumber, DMVAddress, DMVUnitType, DMVUnitTypeNumber, DMVCountrySelection, DMVStateSelection, DMVCountySelection, DMVCitySelection, DMVZipSelection, DMVIdType, DMVIdTypeNumber, IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode, Password, ConfirmPassword, Temporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
 
-			[Buffer.from(photoFileData), newUser.DMVFirstName, newUser.DMVMiddleName, newUser.DMVLastName, newUser.DMVSuffix, newUser.DMVDateOfBirth, newUser.DMVBirthSex, newUser.DMVGenderIdentity, newUser.DMVRace, newUser.DMVGradeSchool, newUser.DMVGradeSchoolSelection, newUser.DMVSSN, newUser.DMVEmail, newUser.DMVConfirmEmail, newUser.DMVPhoneNumber, newUser.DMVAddress, newUser.DMVUnitType, newUser.DMVUnitTypeNumber, newUser.DMVCountrySelection, newUser.DMVStateSelection, newUser.DMVCountySelection, newUser.DMVCitySelection, newUser.DMVZipSelection, newUser.DMVIdType, newUser.DMVIdTypeNumber, newUser.IvoteBallotIdIdentifierCode, newUser.ConfirmIvoteBallotIdIdentifierCode, newUser.Password, newUser.ConfirmPassword, newUser.Temporary_Password], (err) => {
+			[Buffer.from(photoFileData), newUser.DMVFirstName, newUser.DMVMiddleName, newUser.DMVLastName, newUser.DMVSuffix, newUser.DMVDateOfBirth, newUser.DMVBirthSex, newUser.DMVGenderIdentity, newUser.DMVRace, newUser.DMVGradeSchool, newUser.DMVGradeSchoolSelection, newUser.DMVGradeSchoolYearSelection, newUser.DMVSSN, newUser.DMVEmail, newUser.DMVConfirmEmail, newUser.DMVPhoneNumber, newUser.DMVAddress, newUser.DMVUnitType, newUser.DMVUnitTypeNumber, newUser.DMVCountrySelection, newUser.DMVStateSelection, newUser.DMVCountySelection, newUser.DMVCitySelection, newUser.DMVZipSelection, newUser.DMVIdType, newUser.DMVIdTypeNumber, newUser.IvoteBallotIdIdentifierCode, newUser.ConfirmIvoteBallotIdIdentifierCode, newUser.Password, newUser.ConfirmPassword, newUser.Temporary_Password], (err) => {
 			
 	
 				if (err) {
