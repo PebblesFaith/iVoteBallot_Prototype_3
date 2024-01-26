@@ -16,6 +16,10 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	const DMVGradeSchool = document.getElementById('gradeSchool').value.trim();  
 	const DMVGradeSchoolSelection = document.getElementById('gradeSchoolSelect').value.trim();
 	const DMVGradeSchoolYearSelection = document.getElementById('gradeSchoolYearSelect').value.trim();
+
+	const DMVHighSchool = document.getElementById('highSchool').value.trim();  
+	const DMVHighSchoolSelection = document.getElementById('highSchoolSelect').value.trim();
+	const DMVHighSchoolYearSelection = document.getElementById('highSchoolYearSelect').value.trim();
 	
 	const DMVSSN = document.getElementById('ssn').value.trim(); 
 	const DMVEmail = document.getElementById('email').value.trim();
@@ -175,7 +179,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVGradeSchool === '' || DMVGradeSchool == null || DMVGradeSchool.length <= 2 || !DMVGradeSchool.match(regExName)) {                                                               
-		document.getElementById('userDMVGradeSchoolErrorMessage').textContent  = 'Error Message: The user grade school is a required input field or you must enter more than two characters into the user Grade School name required input field.';
+		document.getElementById('userDMVGradeSchoolErrorMessage').textContent  = 'Error Message: The user grade school is a required input field or you must enter more than two characters into the user\'s Grade School name required input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userDMVGradeSchoolErrorMessage').textContent = '';
@@ -208,6 +212,39 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	
 	}
 
+	if (DMVHighSchool === '' || DMVHighSchool == null || DMVHighSchool.length <= 2 || !DMVHighSchool.match(regExName)) {                                                               
+		document.getElementById('userDMVHighSchoolErrorMessage').textContent  = 'Error Message: The user high school is a required input field or you must enter more than two characters into the user\'s High School name required input field.';
+	
+		setTimeout(function() {
+			document.getElementById('userDMVHighSchoolErrorMessage').textContent = '';
+		},
+		9000)
+	
+		return false;		
+
+	}
+
+	if (DMVHighSchoolSelection=== '' || DMVHighSchoolSelection == null) {		
+		document.getElementById('userDMVHighSchoolSelectionErrorMessage').textContent = 'Error Message: The user\'s high school is a required select option field and you must select if the user is a high school graduate from the option require field.';
+		setTimeout(function() {
+			document.getElementById('userDMVHighSchoolSelectionErrorMessage').textContent = '';
+		},
+		9000)    	
+
+		return false;  
+	
+	}
+
+	if (DMVHighSchoolYearSelection=== '' || DMVHighSchoolYearSelection == null) {		
+		document.getElementById('userDMVHighSchoolYearSelectionErrorMessage').textContent = 'Error Message: The user\'s high school year is a required select option field and you must select the user\'s high school graduate year from the option require field.';
+		setTimeout(function() {
+			document.getElementById('userDMVHighSchoolYearSelectionErrorMessage').textContent = '';
+		},
+		9000)    	
+
+		return false;  
+	
+	}
 
 	if (DMVSSN === '' || DMVSSN == null || !DMVSSN.match(regExSSN)) {                                                               
 		document.getElementById('userDMVSSNErrorMessage').textContent  = 'Error Message: The user SSN is a required input field or you must enter the user correct SSN into the require input field.';
