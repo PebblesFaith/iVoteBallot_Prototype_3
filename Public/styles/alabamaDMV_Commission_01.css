@@ -364,7 +364,11 @@ span.forgot_Password {
 #gradeSchoolYearSelect,
 #highSchool,
 #highSchoolSelect,
-#highSchoolYearSelect
+#highSchoolYearSelect,
+#degreeSelect,
+#categorySelect,
+#subjectSelect,
+#college
 {
 	outline: none; 
 	border-top-style: hidden;
@@ -417,7 +421,11 @@ span.forgot_Password {
 #gradeSchoolYearSelect,
 #highSchool,
 #highSchoolSelect,
-#highSchoolYearSelect
+#highSchoolYearSelect,
+#degreeSelect,
+#categorySelect,
+#subjectSelect,
+#college
 {
 	display: flex;
 	flex-wrap: row wrap;
@@ -462,7 +470,11 @@ span.forgot_Password {
 #gradeSchoolYearSelect,
 #highSchool,
 #highSchoolSelect,
-#highSchoolYearSelect
+#highSchoolYearSelect,
+#degreeSelect,
+#categorySelect,
+#subjectSelect,
+#college
 {
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
@@ -501,7 +513,11 @@ span.forgot_Password {
 #gradeSchoolYearSelect:focus,
 #highSchool:focus,
 #highSchoolSelect:focus,
-#highSchoolYearSelect:focus
+#highSchoolYearSelect:focus,
+#degreeSelect:focus,
+#categorySelect:focus,
+#subjectSelect:focus,
+#college:focus
 {
 	border:3px solid rgb(205, 214, 249);
 	border-top-style: hidden;
@@ -545,7 +561,11 @@ span.forgot_Password {
 #userDMVGradeSchoolYearSelectionErrorMessage,
 #userDMVHighSchoolErrorMessage,
 #userDMVHighSchoolSelectionErrorMessage,
-#userDMVHighSchoolYearSelectionErrorMessage
+#userDMVHighSchoolYearSelectionErrorMessage,
+#userDMVDegreeSelectionErrorMessage,
+#userDMVCategorySelectionErrorMessage,
+#userDMVSubjectSelectionErrorMessage,
+#userDMVCollegeErrorMessage
 { 
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: clamp(9px, 2vw, 13px); 
