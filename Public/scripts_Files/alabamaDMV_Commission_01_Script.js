@@ -16,16 +16,13 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	const DMVGradeSchool = document.getElementById('gradeSchool').value.trim();  
 	const DMVGradeSchoolSelection = document.getElementById('gradeSchoolSelect').value.trim();
 	const DMVGradeSchoolYearSelection = document.getElementById('gradeSchoolYearSelect').value.trim();
-
 	const DMVHighSchool = document.getElementById('highSchool').value.trim();  
 	const DMVHighSchoolSelection = document.getElementById('highSchoolSelect').value.trim();
 	const DMVHighSchoolYearSelection = document.getElementById('highSchoolYearSelect').value.trim();
-
+	const DMVCollege = document.getElementById('college').value.trim();
 	const DMVDegreeSelection = document.getElementById('degreeSelect').value.trim();
 	const DMVCategorySelection = document.getElementById('categorySelect').value.trim();
 	const DMVSubjectSelection = document.getElementById('subjectSelect').value.trim();
-
-
 	const DMVSSN = document.getElementById('ssn').value.trim(); 
 	const DMVEmail = document.getElementById('email').value.trim();
 	const DMVConfirmEmail = document.getElementById('confirmEmail').value.trim();  
@@ -218,7 +215,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}
 
 	if (DMVHighSchool === '' || DMVHighSchool == null || DMVHighSchool.length <= 2 || !DMVHighSchool.match(regExName)) {                                                               
-		document.getElementById('userDMVHighSchoolErrorMessage').textContent  = 'Error Message: The user high school is a required input field or you must enter more than two characters into the user\'s High School name required input field.';
+		document.getElementById('userDMVHighSchoolErrorMessage').textContent  = 'Error Message: The user\'s high school is a required input field or you must enter more than two characters into the user\'s High School name required input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userDMVHighSchoolErrorMessage').textContent = '';
@@ -250,6 +247,21 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		return false;  
 	
 	}
+
+	if (DMVCollege === '' || DMVCollege == null || DMVCollege.length <= 2 || !DMVCollege.match(regExName)) {                                                               
+		document.getElementById('userDMVHighSchoolErrorMessage').textContent  = 'Error Message: The user\'s college or university is a required input field or you must enter more than two characters into the user\'s college or university name required input field.';
+	
+		setTimeout(function() {
+			document.getElementById('userDMVHighSchoolErrorMessage').textContent = '';
+		},
+		9000)
+	
+		return false;		
+
+	}
+
+
+
 
 	if (DMVDegreeSelection === '' || DMVDegreeSelection == null) {		
 		document.getElementById('userDMVDegreeSelectionErrorMessage').textContent = 'Error Message: The user\'s college or university degree is a required select option field and you must select the user correct college or university degree from the option require field.';
@@ -283,15 +295,6 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		return false;  
 	
 	}
-
-
-
-
-
-
-
-
-
 
 	if (DMVSSN === '' || DMVSSN == null || !DMVSSN.match(regExSSN)) {                                                               
 		document.getElementById('userDMVSSNErrorMessage').textContent  = 'Error Message: The user SSN is a required input field or you must enter the user correct SSN into the require input field.';
@@ -585,12 +588,16 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	}     
 
 	
-	e.preventDefault();                                      
+	// Your e event handling code here
+	e.preventDefault(); // Prevent default action for e event
+	                              
 	
-		form.addEventListner('submit', validateAlabamaDMV_CommissionForm);
-		return true; 	
+	form.addEventListner('submit', validateAlabamaDMV_CommissionForm);
+	return true; 	
 		
-	}
+}
+
+
 	
 /* 
 	Sarai Hannah Ajai have written her JavaScript coded languages in order to define a hierarchical
@@ -1326,9 +1333,88 @@ const countryStateCountyCityZipData = {
 			},
 		},                          
 	}
-};				
+};	
+
+const highEducationData = {
+		
+	'Associate': {
+		'Art & Design': ['Art & History', 'Graphic Design', 'Multimedia Design', 'Photography'],
+		'Business & Management': ['Accounting', 'Business Administration', 'Business Intelligence', 'Contract Management', 'Entrepreneurship', 'Finance', 'Hospitality Management', 'Hotel & Restaurant Management', 'Human Resource', 'Management', 'Management Information System', 'Marketing', 'Non-Profit Management', 'Retail & Sales Management', 'Small Business', 'Sports Management', 'Supply Chain & Logistics', 'Taxation'],
+		'Computer & Technology': ['36022', '36051'],
+		'Criminal Justice & Legal': ['36066', '36067', '36022'],
+		'Education & Teaching': ['36066', '36067'],
+		'Liberal Arst & Humanities': ['36066', '36067'],
+		'Nursing & Healthcare': ['36066', '36067'],
+		'Psychology & Counseling': ['36066', '36067'],
+		'Science & Engineering': ['36066', '36067'],
+		'Trades & Career': ['36066', '36067']
+	},
+	'Bachelor': {
+		'Bay Minette': ['36507'],
+		'Bon Secour': ['36511', '36535'],
+		'Daphne': ['36527', '36526'],
+		'Elberta': ['36530'],
+		'Fairhope': ['36532', '36559'],
+		'Foley': ['36535', '36580'],
+		'Gulf Shores': ['36542', '36547'],
+		'Lillian': ['36549'],
+		'Loxley': ['36551', '36527', '36578'],
+		'Magnolia Springs': ['36535', '36555'],
+		'Orange Beach': ['36561', '36530'],
+		'Perdido': ['36562'],
+		'Perdido Beach': ['36530'],
+		'Point Clear': ['36564', '36532'],
+		'Robertsdale': ['36567'],
+		'Silverhill': ['36576'],
+		'Spanish Fort': ['36507', '36527'],
+		'Stapleton': ['36527', '36578'],
+		'Stockton': ['36507', '36579'],
+		'Summerdale': ['36535', '36580']
+	},
+	'Master': {
+		'Bakerhill': ['36027'],
+		'Blue Springs': ['36374', '36017'],
+		'Clayton': ['36016'],
+		'Clio': ['36017'],
+		'Eufaula': ['36027'],
+		'Louisville': ['36048']
+	},
+	'Doctorate': {
+		'Brent': ['35042', '35034'],
+		'Centreville': ['35042'],
+		'West Blocton': ['35184'],
+		'Woodstock': ['35188', '35111']
+	},
+	'Certificate/Diploma': {
+		'Allgood': ['35013', '35121'],
+		'Blountsville': ['35031'],
+		'Cleveland': ['35049','35121'],
+		'County Line': ['35172'],
+		'Hayden': ['35180', '35079'],
+		'Highland Lake': ['35121'],
+		'Locust Fork': ['35133', '35097'],
+		'Nectar': ['35079', '35049'],
+		'Oneonta': ['35121'],
+		'Remlap': ['35133'],
+		'Rosa': ['35031', '35121'],
+		'Smoke Rise': ['35180'],
+		'Snead': ['35952'],
+		'Susan Moore': ['35952', '35031', '35121']
+	},
+	'Graduate Certification': {
+		'Midway': ['36053'],
+		'Union Springs': ['36089']
+	},
+	'Bootcamps': {
+		'Georgiana': ['36033'],
+		'Greenville': ['36037'],
+		'McKenzie': ['36456']
+	},
+	
+};	
 		
 window.onload = function (e) {
+	
 		
 	//Get user html DOM elements.
 	var userCountrySelection = document.getElementById("countrySelect");
@@ -1442,99 +1528,13 @@ window.onload = function (e) {
 		document.getElementById('iVoteBallotIdIdentifierCode').value = ('');
 		document.getElementById('iVoteBallotIdCodeHidden_Bcryptic').value = ('');
 	
-	}	
-	
-}
+	}
 
-
-
-
-
-const highEducationData = {
-		
-			'Associate': {
-				'Art & Design': ['Art & History', 'Graphic Design', 'Multimedia Design', 'Photography'],
-				'Business & Management': ['Accounting', 'Business Administration', 'Business Intelligence', 'Contract Management', 'Entrepreneurship', 'Finance', 'Hospitality Management', 'Hotel & Restaurant Management', 'Human Resource', 'Management', 'Management Information System', 'Marketing', 'Non-Profit Management', 'Retail & Sales Management', 'Small Business', 'Sports Management', 'Supply Chain & Logistics', 'Taxation'],
-				'Computer & Technology': ['36022', '36051'],
-				'Criminal Justice & Legal': ['36066', '36067', '36022'],
-				'Education & Teaching': ['36066', '36067'],
-				'Liberal Arst & Humanities': ['36066', '36067'],
-				'Nursing & Healthcare': ['36066', '36067'],
-				'Psychology & Counseling': ['36066', '36067'],
-				'Science & Engineering': ['36066', '36067'],
-				'Trades & Career': ['36066', '36067']
-			},
-			'Bachelor': {
-				'Bay Minette': ['36507'],
-				'Bon Secour': ['36511', '36535'],
-				'Daphne': ['36527', '36526'],
-				'Elberta': ['36530'],
-				'Fairhope': ['36532', '36559'],
-				'Foley': ['36535', '36580'],
-				'Gulf Shores': ['36542', '36547'],
-				'Lillian': ['36549'],
-				'Loxley': ['36551', '36527', '36578'],
-				'Magnolia Springs': ['36535', '36555'],
-				'Orange Beach': ['36561', '36530'],
-				'Perdido': ['36562'],
-				'Perdido Beach': ['36530'],
-				'Point Clear': ['36564', '36532'],
-				'Robertsdale': ['36567'],
-				'Silverhill': ['36576'],
-				'Spanish Fort': ['36507', '36527'],
-				'Stapleton': ['36527', '36578'],
-				'Stockton': ['36507', '36579'],
-				'Summerdale': ['36535', '36580']
-			},
-			'Master': {
-				'Bakerhill': ['36027'],
-				'Blue Springs': ['36374', '36017'],
-				'Clayton': ['36016'],
-				'Clio': ['36017'],
-				'Eufaula': ['36027'],
-				'Louisville': ['36048']
-			},
-			'Doctorate': {
-				'Brent': ['35042', '35034'],
-				'Centreville': ['35042'],
-				'West Blocton': ['35184'],
-				'Woodstock': ['35188', '35111']
-			},
-			'Certificate/Diploma': {
-				'Allgood': ['35013', '35121'],
-				'Blountsville': ['35031'],
-				'Cleveland': ['35049','35121'],
-				'County Line': ['35172'],
-				'Hayden': ['35180', '35079'],
-				'Highland Lake': ['35121'],
-				'Locust Fork': ['35133', '35097'],
-				'Nectar': ['35079', '35049'],
-				'Oneonta': ['35121'],
-				'Remlap': ['35133'],
-				'Rosa': ['35031', '35121'],
-				'Smoke Rise': ['35180'],
-				'Snead': ['35952'],
-				'Susan Moore': ['35952', '35031', '35121']
-			},
-			'Graduate Certification': {
-				'Midway': ['36053'],
-				'Union Springs': ['36089']
-			},
-			'Bootcamps': {
-				'Georgiana': ['36033'],
-				'Greenville': ['36037'],
-				'McKenzie': ['36456']
-			},
-			
-};				
-		
-window.onload = function (e) {
-		
 	//Get user html DOM elements.
 	var userDegreeSelection = document.getElementById("degreeSelect");
 	var userCategorySelection = document.getElementById("categorySelect");    
 	var userSubjectSelection = document.getElementById("subjectSelect");  
-        
+		
 	
 	//Load user country.
 	
@@ -1542,72 +1542,42 @@ window.onload = function (e) {
 		userDegreeSelection.options[userDegreeSelection.options.length] = new Option(degreeType, degreeType);
 		
 	}   
-		
-    /* 
-        Create function to allow user to change his/her state. 
-    */
-        
-    userDegreeSelection.onchange = function () {
-        
-        userCategorySelection.length = 1; // remove all options bar first
-        userSubjectSelection.length = 1; // remove all options bar first
-        
-        
-        if (this.selectedIndex < 1)
-                return true; // done
-            
-            for (var categoryType in highEducationData[this.value]) {
-                userCategorySelection.options[userCategorySelection.options.length] = new Option(categoryType, categoryType);
-            }
-                                
-        }       
-     
-    /* 
-        Create function to allow users to change his/her city and zip code area. 
-    */	
-    userCategorySelection.onchange = function () {
-        userSubjectSelection.length = 1; // remove all options bar first
-        
-        if (this.selectedIndex < 1)
-            return; // done
-        
-        var subjectType = highEducationData[userDegreeSelection.value][this.value];
-        for (var i = 0; i < subjectType.length; i++) {
-            userSubjectSelection.options[userSubjectSelection.options.length] = new Option(subjectType[i], subjectType[i]);
-        }
-    
-    }  
-
-	window.onload = function() {
-		document.getElementById('firstName').value = (''); 
-		document.getElementById('middleName').value =('');  
-		document.getElementById('lastName').value = (''); 
-		document.getElementById('suffix').value = ('');   
-		document.getElementById('dateOfBirth').value = ('');    
-		document.getElementById('birthSex').value = ('');   
-		document.getElementById('genderIdentity').value = ('');  
-		document.getElementById('race').value = (''); 
-		document.getElementById('ssn').value = (''); 
-		document.getElementById('email').value = ('');
-		document.getElementById('confirmEmail').value = ('');  
-		document.getElementById('phoneNumber').value = ('');	
-		document.getElementById('address').value = ('');	
-		document.getElementById('unitType').value = ('');
-		document.getElementById('unitTypeNumber').value = ('');
-		document.getElementById('countrySelect').value = ('');
-		document.getElementById('stateSelect').value = ('');
-		document.getElementById('countySelect').value = ('');
-		document.getElementById('citySelect').value = ('');
-		document.getElementById('zipSelect').value = ('');
-		document.getElementById('idType').value = ('');
-		document.getElementById('idTypeNumber').value = ('');
-		document.getElementById('iVoteBallotIdIdentifierCode').value = ('');
-		document.getElementById('iVoteBallotIdCodeHidden_Bcryptic').value = ('');
 	
-	}	
+		
+	userDegreeSelection.onchange = function () {
+		
+		userCategorySelection.length = 1; // remove all options bar first
+		userSubjectSelection.length = 1; // remove all options bar first
+		
+		
+		if (this.selectedIndex < 1)
+				return true; // done
+			
+			for (var categoryType in highEducationData[this.value]) {
+				userCategorySelection.options[userCategorySelection.options.length] = new Option(categoryType, categoryType);
+			}
+								
+		}       
+	
+	userCategorySelection.onchange = function () {
+		userSubjectSelection.length = 1; // remove all options bar first
+		
+		if (this.selectedIndex < 1)
+			return; // done
+		
+		var subjectType = highEducationData[userDegreeSelection.value][this.value];
+		for (var i = 0; i < subjectType.length; i++) {
+			userSubjectSelection.options[userSubjectSelection.options.length] = new Option(subjectType[i], subjectType[i]);
+		}
+	
+	}  	
 	
 }
 
+
+
+
+	
 
 
 
