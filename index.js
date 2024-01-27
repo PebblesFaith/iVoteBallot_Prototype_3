@@ -1395,7 +1395,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		console.log('The user\'s college or university name is:' + DMVCollege + '.');
 		console.log('What is the user\'s degree:' + DMVDegreeSelection + '.');
 		console.log('What is the user\'s degree category:' + DMVCategorySelection + '.');
-		console.log('What is the user\'s degree subject:' + DMVSubjectSelection + '.');T
+		console.log('What is the user\'s degree subject:' + DMVSubjectSelection + '.');
 		console.log('The user\'s SSN is: ' + DMVSSN + '.');
 		console.log('The user\'s email is: ' + DMVEmail + '.');
 		console.log('The user\'s confirm email is: ' + DMVConfirmEmail + '.');
