@@ -713,9 +713,19 @@ passport.deserializeUser(function (id, done) {
 
 });
 
-iVoteBallotApp.get('/dashboard_01', async (req, res) => {
+function checkAuthenticatedMiddleware() {
+	return (req, res, next) => {
+		if (req.isAuthenticated())
+			return next();
+
+			res.redirect('/dashboard_01');
+	} 	
+
+}
+
+iVoteBallotApp.get('/dashboard_01', checkAuthenticatedMiddleware(), async (req, res) => {
 	
-	if (req.isAuthenticated) {
+	if (req.isAuthenticated()) {
 
 		const user_agent = req.headers['user-agent'];
 		req.session.user_agent = user_agent;
@@ -803,17 +813,48 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 		console.log('DMVZipSelection:', req.user.DMVZipSelection);
 		console.log('DMVPhoneNumber:', req.user.DMVPhoneNumber);
 
-	} else if (req.isUnauthenticated) {
-		res.render('/alabamaVoters_LogIn_01')
-		console.log('The user is not successfully authenticated within the session through the passport from dashboard!');
-	}
+	} else {		
+		// The User is not authenticated, redirect to the login page or display a message.
+		console.log(req.user);
+		console.log(req.session);
+		console.log('The User had not been successfully authenticated within the Session through the passport from dashboard_01!');
+	
+		console.group('\n GET /user - request details:')
+		console.log('_____________________________________ \.n');
+		console.log('req.body:', req.body);
+		console.log('req.params:', req.params);
+		console.log('req.headers:', req.headers);
+		console.log('req.isAuthenticated:', req.isAuthenticated);
+		console.log('_____________________________________ \.n');
+		console.log('req.sesssion.user_agent:', req.session.user_agent);
+		console.log('ip_address:', req.session.ip_address);
+		console.log('_____________________________________ \.n');
+		console.log('req.user', req.user);
+	
+		console.groupEnd();
+	
+		// Redirect the user to the logout route
+		res.redirect('/alabamaVoters_LogOut_01');
+		console.log('The user is not successfully authenticated within the session through the passport from dashboard!');				
+	
+	}	
+		
 });
 
-iVoteBallotApp.get('/alabama_Candidates_2024_02', async (req, res) => {
+
+iVoteBallotApp.post('/alabamaVoters_LogOut_01', function(req, res, next){
+	req.logout(function(err) {
+	  if (err) { return next(err); }
+	  res.redirect('/');
+	});
+  });
+
+
+iVoteBallotApp.get('/alabama_Candidates_2024_02', checkAuthenticatedMiddleware(), async (req, res) => {
     if (req.isAuthenticated()) {
 
 		console.log('The User had been successfully authenticated within the Session through the passport from alabama_Candidates_2024_02!');
-		const bufferData = Buffer.from(req.user.DMVPhoto, 'base64');
+		//const bufferData = Buffer.from(req.user.DMVPhoto, 'base64');
 
         // If user is authenticated, render the Alabama DMV page
         res.render('alabama_Candidates_2024_02', {			
@@ -823,7 +864,7 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', async (req, res) => {
 			DMVFirstName: req.user.DMVFirstName, 
 			DMVMiddleName: req.user.DMVMiddleName, 
 			DMVLastName: req.user.DMVLastName, 
-			DMVPhoto: bufferData.toString('base64'),
+			//DMVPhoto: bufferData.toString('base64'),
 			DMVIdType: req.user.DMVIdType,		
 			DMVDateOfBirth: req.user.DMVDateOfBirth,
 			DMVBirthSex: req.user.DMVBirthSex,
@@ -852,7 +893,7 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', async (req, res) => {
 		console.log('DMVFirstName:', req.user.DMVFirstName);
 		console.log('DMVMiddleName:', req.user.DMVMiddleName);
 		console.log('DMVLastName:', req.user.DMVLastName);
-		console.log('DMVPhoto:', req.user.DMVPhoto);
+		//console.log('DMVPhoto:', req.user.DMVPhoto);
 		console.log('DMVIdType:', req.user.DMVIdType);
 		console.log('DMVDateOfBirth:', req.user.DMVDateOfBirth);
 		console.log('DMVBirthSex:', req.user.DMVBirthSex);
@@ -876,7 +917,6 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', async (req, res) => {
 		console.log('DMVCitySelection:', req.user.DMVCitySelection);
 		console.log('DMVZipSelection:', req.user.DMVZipSelection);
 		console.log('DMVPhoneNumber:', req.user.DMVPhoneNumber);
-
        
     } else {
         // If user is not authenticated, redirect to the login page
@@ -884,6 +924,7 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', async (req, res) => {
         console.log('The user is not successfully authenticated within the session through the passport from alabamaDMV_Commission_01.');
     }
 });
+
 
 /* -------------------------- The beginning of the use section ----------------------------- */
 
@@ -1245,19 +1286,31 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 
 
 // User route for alabamaVoters_LogOut_01
+/*
 iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
-	if (req.isAuthenticated()) {
+	if (req.isUnauthenticated()) {
 		console.log('The User have successfully logged out of the dashboard!');
 		res.render('alabamaVoters_LogOut_01');
 	} else {
 		res.render('404');
 	}
 });
+*/ 
+
+iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res, next) => {
+	req.logout(function(err) {
+		console.log('The User have successfully logged out of the dashboard!');
+	  if (err) { 
+		return next(err);
+	}
+	  res.redirect('/alabamaVoters_LogOut_01');
+	});
+  });
 
 /* -------------------------- The ending of the GET ROUTE section ----------------------------- */
 
 /* -------------------------- The beginning of the DELETE ROUTE section ----------------------------- */
-
+/*
 iVoteBallotApp.delete('/alabamaVoters_LogOut_01', (req, res) => {
     if (req.isAuthenticated()) {
         // Generate a random token using uuid
@@ -1289,6 +1342,8 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', (req, res) => {
     }
 });
 
+*/
+
 /* -------------------------- The ending of the DELETE ROUTE section ----------------------------- */
 
 /* -------------------------- The beginning of the POST LOCAL STRATEGY section ----------------------------- */
@@ -1318,15 +1373,40 @@ iVoteBallotApp.post(
 		failureRedirect: '/alabamaVoters_LogIn_01',
 		failureFlash: true
 	}
-	));
+));
 
-iVoteBallotApp.post(
-	'/alabamaVoters_LogOut_01',
-	passport.authenticate('local3', {
-		successRedirect: '/alabamaVoters_LogIn_01',
-		failureRedirect: '/alabamaVoters_LogOut_01',
-		failureFlash: true
-	}));
+
+/*
+iVoteBallotApp.post('/alabamaVoters_LogOut_01', function(req, res, next) {
+	req.logout(function(err) {
+		const user_agent = req.headers['user-agent'];
+		req.session.user_agent = user_agent;
+
+		const ip_address = req.ip; 
+		req.session.ip_address = ip_address;
+		
+		console.log(req.user);
+		console.log(req.session);
+		console.log('User had not been successfully authenticated within the Session through the passport from dashboard!');
+
+		console.group('\n GET /user - request details:')
+			console.log('_____________________________________ \.n');
+			console.log('req.body:', req.body);
+			console.log('req.params:', req.params);
+			console.log('req.headers:', req.headers);
+			console.log('req.isAuthenticated:', req.isAuthenticated);
+			console.log('_____________________________________ \.n');
+			console.log('req.sesssion.user_agent:', req.session.user_agent);			
+			console.log('ip_address:', req.session.ip_address);
+			console.log('_____________________________________ \.n');
+			console.log('req.user', req.user);
+
+		console.groupEnd();
+	  if (err) { return next(err); }
+	  res.redirect('/alabamaVoters_LogOut_01');
+	});
+  });
+*/
 
 /* -------------------------- The ending of the POST LOCAL STRATEGY section ----------------------------- */
 
@@ -1374,7 +1454,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		const ConfirmPassword = req.body.ConfirmPassword;
 		const Temporary_Password = req.body.Temporary_Password;
 
-		console.log(req.body);
+		console.log(req.body);		
 		
 		console.log('The user\'s photograph image is: ' + DMVPhoto + '.');
 		console.log('The user\'s first name: ' + DMVFirstName + '.');
