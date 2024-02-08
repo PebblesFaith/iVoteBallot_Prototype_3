@@ -62,9 +62,9 @@ const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
 
 /*
-	1. The code statement "const bcrypt = require('bcrypt')" is a module that allows Sarai Hannah Ajai (the Developer) to hash and compare passwords
+	1. The code statement "const bcrypt = require('bcrypt')" is a library that allows Sarai Hannah Ajai (the Developer) to hash and compare passwords
 	   into the Node.js iVoteBallot web application through the passport.js library and session id management library.
-	2. The bcrypt module uses a one-way hashing algorithm to securely store users' passwords into the SQLite3 database, making it difficult for 
+	2. The bcrypt library uses a one-way hashing algorithm to securely store users' passwords into the SQLite3 database, making it difficult for 
 	   attackers to retrieve the original password.
 	3. Ms. Ajai (the Developer) can use the bcrypt module to generate a salted hash of the users' passwords, and later compare the hash with 
 	   the users' input fields such as, email address in orderto verify their identityt hrough the passport.js library and session id management
@@ -72,11 +72,12 @@ const bodyParser = require('body-parser');
 */
 const bcrypt = require('bcrypt');
 
-/*
-	This line of JavaScript coded language imports the Passport library by assigning
-	it to a constant variable called "passport". The Passport library is typically used
-	for authentication in iVoteBallot web application which allows users to log in and
-	access his/her protected log in credentials.
+/*	
+	1. The code statement "const passport = require('passport')" is a middleware library that provides authentication support onto the Node.js 
+	   iVoteBallot web application.
+	2. The passport library provides a flexible and modular authentication framework that can be easily integrated into the iVoteBallot web application.
+	3. Sarai Hannah Ajai (the Developer) can use the passport library to implement various authentication strategies, such as local authentication, 
+	   social authentication, and token-based authentication, to secure iVoteballot web application's resources.
 */
 const passport = require('passport');
 
