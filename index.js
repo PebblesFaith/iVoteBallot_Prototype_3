@@ -62,13 +62,13 @@ const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
 
 /*
-	1. The code const bcrypt = require('bcrypt') is a module that allows Sarai Hannah Ajai 
-	(the Developer) to hash and compare passwords in a Node.js application.
-	2. The bcrypt module uses a one-way hashing algorithm to securely store user's passwords 
-	in SQLite3 database, making it difficult for attackers to retrieve the original password.
-	3. Ms. Ajai (the Developer) can use the bcrypt module to generate a salted hash of the user's
-	password, and later compare the hash with the user's input field such as, email address
-	to verify their identity.
+	1. The code statement "const bcrypt = require('bcrypt')" is a module that allows Sarai Hannah Ajai (the Developer) to hash and compare passwords
+	   into the Node.js iVoteBallot web application through the passport.js library and session id management library.
+	2. The bcrypt module uses a one-way hashing algorithm to securely store users' passwords into the SQLite3 database, making it difficult for 
+	   attackers to retrieve the original password.
+	3. Ms. Ajai (the Developer) can use the bcrypt module to generate a salted hash of the users' passwords, and later compare the hash with 
+	   the users' input fields such as, email address in orderto verify their identityt hrough the passport.js library and session id management
+	   library.
 */
 const bcrypt = require('bcrypt');
 
