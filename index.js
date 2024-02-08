@@ -813,42 +813,15 @@ iVoteBallotApp.get('/dashboard_01', checkAuthenticatedMiddleware(), async (req, 
 		console.log('DMVZipSelection:', req.user.DMVZipSelection);
 		console.log('DMVPhoneNumber:', req.user.DMVPhoneNumber);
 
-	} else {		
-		// The User is not authenticated, redirect to the login page or display a message.
-		console.log(req.user);
-		console.log(req.session);
-		console.log('The User had not been successfully authenticated within the Session through the passport from dashboard_01!');
-	
-		console.group('\n GET /user - request details:')
-		console.log('_____________________________________ \.n');
-		console.log('req.body:', req.body);
-		console.log('req.params:', req.params);
-		console.log('req.headers:', req.headers);
-		console.log('req.isAuthenticated:', req.isAuthenticated);
-		console.log('_____________________________________ \.n');
-		console.log('req.sesssion.user_agent:', req.session.user_agent);
-		console.log('ip_address:', req.session.ip_address);
-		console.log('_____________________________________ \.n');
-		console.log('req.user', req.user);
-	
-		console.groupEnd();
-	
-		// Redirect the user to the logout route
-		res.redirect('/alabamaVoters_LogOut_01');
-		console.log('The user is not successfully authenticated within the session through the passport from dashboard!');				
-	
+		} else {		
+			
+			res.redirect('/alabamaVoters_LogIn_01');			
+
+			console.log('The user is not successfully authenticated within the session through the passport from dashboard!');	
+			
 	}	
 		
 });
-
-
-iVoteBallotApp.post('/alabamaVoters_LogOut_01', function(req, res, next){
-	req.logout(function(err) {
-	  if (err) { return next(err); }
-	  res.redirect('/');
-	});
-  });
-
 
 iVoteBallotApp.get('/alabama_Candidates_2024_02', checkAuthenticatedMiddleware(), async (req, res) => {
     if (req.isAuthenticated()) {
@@ -1068,6 +1041,7 @@ iVoteBallotApp.use(methodOverride('_method'));
 const views_Controller = require('./models/views_Router');
 const contactUs_01_Controller = require('./models/alabama_Session_Router');
 const { view_iVoteBallot } = require('./controllers/views_Controller');
+const { ErrorCreate } = require('session/lib/session/storage/base');
 
 iVoteBallotApp.use('/', require('./models/views_Router'));
 iVoteBallotApp.use(views_Controller);
@@ -1286,7 +1260,6 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 
 
 // User route for alabamaVoters_LogOut_01
-/*
 iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
 	if (req.isUnauthenticated()) {
 		console.log('The User have successfully logged out of the dashboard!');
@@ -1295,54 +1268,39 @@ iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
 		res.render('404');
 	}
 });
-*/ 
-
-iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res, next) => {
-	req.logout(function(err) {
-		console.log('The User have successfully logged out of the dashboard!');
-	  if (err) { 
-		return next(err);
-	}
-	  res.redirect('/alabamaVoters_LogOut_01');
-	});
-  });
 
 /* -------------------------- The ending of the GET ROUTE section ----------------------------- */
 
 /* -------------------------- The beginning of the DELETE ROUTE section ----------------------------- */
-/*
+
 iVoteBallotApp.delete('/alabamaVoters_LogOut_01', (req, res) => {
-    if (req.isAuthenticated()) {
-        // Generate a random token using uuid
-        const randomToken = uuidv4();
+	
+		if (req.isAuthenticated()) {
+			req.session.destroy();		
+		
+			res.redirect('/alabamaVoters_LogIn_01'); // Redirect to login page if not authenticated
+		} else {
 
-        // Save the token in the session
-        req.session.logoutToken = randomToken;
+		res.redirect('/500');
 
-        // Perform logout logic
-        req.logOut();
-        req.session.user = null;
+	}		
 
-        req.session.regenerate(function (err) {
-            if (err) return next(err);
+	console.log('reg.user', req.user);	
+	console.log('User had been successfully logout through authenticated within the Session passport from dashboard!');
 
-            // Set cache control headers to prevent caching
-            res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-            res.setHeader('Expires', '-1');
-            res.setHeader('Pragma', 'no-cache');
+	console.group('\n GET /user - request details:')
+		console.log('_____________________________________ \.n');
+		console.log('req.body:', req.body);
+		console.log('req.params:', req.params);
+		console.log('req.headers:', req.headers);
+		console.log('req.isUnAuthenticated:', req.isUnauthenticated);
+		console.log('_____________________________________ \.n');			
+		
+		console.log('_____________________________________ \.n');		
 
-            // Set response status to indicate permanent redirect
-            res.status(301);
-
-            // Redirect with the token in the URL
-            res.redirect(`/alabamaVoters_LogIn_01?token=${randomToken}`);
-        });
-    } else {
-        res.redirect('/alabamaVoters_LogIn_01'); // Redirect to login page if not authenticated
-    }
+	console.groupEnd();
+ 
 });
-
-*/
 
 /* -------------------------- The ending of the DELETE ROUTE section ----------------------------- */
 
@@ -2140,7 +2098,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 			)
 		}
 	}
-);
+);	
 
 //const boxicons = require('boxicons');
 /*
