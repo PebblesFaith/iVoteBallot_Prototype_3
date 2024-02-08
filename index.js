@@ -783,6 +783,7 @@ iVoteBallotApp.get('/dashboard_01', checkAuthenticatedMiddleware(), async (req, 
 			DMVPhoneNumber: req.user.DMVPhoneNumber, 
 
 			alabama_Candidates_2024_02: '/alabama_Candidates_2024_02', 
+			alabamaVoters_LogOut_01: '/alabamaVoters_LogOut_01',
 		});
 		
 		console.log('DMVFirstName:', req.user.DMVFirstName);
@@ -899,7 +900,7 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', checkAuthenticatedMiddleware()
 });
 
 
-/* -------------------------- The beginning of the use section ----------------------------- */
+/* -------------------------- The beginning of the USE section ----------------------------- */
 
 // Middleware to set req.isUnauthenticated for the first use of the '/401' URL bar.
 iVoteBallotApp.use('/401', (req, res, next) => {
@@ -1046,7 +1047,7 @@ const { ErrorCreate } = require('session/lib/session/storage/base');
 iVoteBallotApp.use('/', require('./models/views_Router'));
 iVoteBallotApp.use(views_Controller);
 
-/* -------------------------- The ending of the use section ----------------------------- */
+/* -------------------------- The ending of the USE section ----------------------------- */
 
 /* -------------------------- The beginning of the redirectDashboard section ----------------------------- */
 
@@ -1335,17 +1336,18 @@ iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
 iVoteBallotApp.delete('/alabamaVoters_LogOut_01', (req, res) => {
 	
 	if (req.isAuthenticated()) {
+		
 		req.session.destroy();		
 	
 		res.redirect('/alabamaVoters_LogIn_01'); // Redirect to login page if not authenticated
 	} else {
 
-	res.redirect('/500');
+	res.redirect('/535');
 
 }		
 
 console.log('reg.user', req.user);	
-console.log('User had been successfully logout through authenticated within the Session passport from dashboard!');
+console.log('User had been successfully logout through "passport.use passport.use local3, new LocalStrategy" authenticated within the Session Id passport from dashboard!');
 
 console.group('\n GET /user - request details:')
 	console.log('_____________________________________ \.n');
@@ -1934,7 +1936,7 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 					});
 
 				} else {
-					res.render('404');
+					res.render('/535');
 					console.log('The nodemailer user could not be authenticated.');
 
 				}
