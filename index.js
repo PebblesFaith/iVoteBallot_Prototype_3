@@ -1,5 +1,5 @@
 /*
-	The "const express = require('express')" means that the server-side JavaScript code is using the Express.js framework to handle
+	The code statement  "const express = require('express')" means that the server-side JavaScript code is using the Express.js framework to handle
 	the HTTP requests and responses, routing, middleware, and other web application functionalities are as follows:	
 
 	1. const express: This line declares a constant variable named "express". In JavaScript, "const" is used to declare variables 
@@ -14,13 +14,13 @@
 const express = require('express');
 
 /*
-	The code const iVoteBallotApp = express(); creates a new instance of the Express.js framework and assigns it to the
+	The code statement "const iVoteBallotApp = express()" creates a new instance of the Express.js framework and assigns it to the
 	constant iVoteBallotApp, allowing the iVoteBallot web application to define routes and middleware management.
 */
 const iVoteBallotApp = express();
 
 /*
-	1. The code const path = require('path') imports the built-in Node.js path module, which provides utilities for working 
+	1. The code statement "const path = require('path')" imports the built-in Node.js path module, which provides utilities for working 
 	   with file and directory paths.
 	2. You can use the path module to manipulate file paths in a platform-independent way and perform tasks such as resolving
 	   relative paths, joining multiple paths, and extracting file extensions.
@@ -92,14 +92,12 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 /*
-	The statement const sqliteDB = require('better-sqlite3'); is a piece of code that is
-	used to import the better-sqlite3 library in a Node.js application. The better-sqlite3
-	library provides a faster and safer way to interact with SQLite3 databases in Node.js
-	compared to the built-in sqlite3 library.
-
-	Once the better-sqlite3 library is imported, the sqliteDB constant can be used to create
-	a new instance of the better-sqlite3 database class and perform various database operations
-	like querying and modifying data.
+	1. The code statement "const sqliteDB = require('better-sqlite3')" is a library that provides a more efficient and convenient way to work with
+	   SQLite databases within the Node.js iVoteBallot web application.
+	2. The better-sqlite3 library is built on top of the standard sqlite3 library to which, provides a simpler and more	intuitive API for 
+	   performing common database operations.
+	3. Sarai Hannah Ajai (the Developer) can use the better-sqlite3 library to create, read, update, and delete data with the SQLite database,
+	   and leverage features such as, prepared statements and transactions for better performance and security.
 */
 const sqliteDB = require('better-sqlite3');
 
