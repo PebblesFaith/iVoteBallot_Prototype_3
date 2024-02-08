@@ -1176,8 +1176,40 @@ const redirectDashboard = (req, res, next) => {
 
 /* -------------------------- The ending of the redirectDashboard section ----------------------------- */
 
-// The User route for alabamaDMV_Commission_01 
-iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {
+/* -------------------------- The beginning of the GET Route section ----------------------------- */
+
+/*
+   This section defines various GET routes for handling user authentication and session management
+   in the iVoteBallot web application. Here is a breakdown of each route's functionality:
+
+   - '/alabamaDMV_Commission_01': Renders the alabamaVoters_SignUp_01 page if the user is not 
+     authenticated. If the user is authenticated, it renders the '/alabamaVoters_EmailVerification_01'
+     page. It checks for user authentication status and displays appropriate messages accordingly.
+
+   - '/alabamaVoters_SignUp_01': Renders the alabamaVoters_EmailVerification_01 page if the user is
+     authenticated. Otherwise, renders the '500' error page and logs an authentication failure message.
+
+   - '/alabamaVoters_EmailVerification_01': Renders the alabamaVoters_VerifyEmailPassword_01 page
+     if the user is not authenticated. Otherwise, renders the '404' error page.
+
+   - '/alabamaVoters_VerifyEmailPassword_01': Renders the alabamaVoters_EmailVerification_01 page
+     if the user is authenticated. Otherwise, redirects to '/alabamaVoters_VerifyEmailPassword_01'
+     and logs an authentication failure message.
+
+   - '/alabamaVoters_LogIn_01': Renders the alabamaVoters_LogIn_01 page if the user is not logged in.
+     If the user is authenticated, redirects to '/dashboard_01'. Renders the '404' error page for 
+     unrecognized conditions.
+
+   - '/alabamaVoters_LogOut_01': Renders the alabamaVoters_LogOut_01 page if the user is not
+     authenticated. Otherwise, renders the '404' error page.
+
+   This ensure that the Passport.js middleware and session management are properly configured to enable
+   the users' authentication and session handling. 
+*/
+
+// The User route for alabamaDMV_Commission_01.
+iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => { 
+
 	// Check if user already authenticated.
 	if (req.session.isAuthenticated) {
 		console.log('Another Election Assure Expert have already created the user iVoteBallot\'s account.');
@@ -1197,6 +1229,7 @@ iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) =>
 	}
 });
 
+// The User route for alabamaVoters_SignUp_01. 
 iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 
 	if (req.isAuthenticated()) {
@@ -1215,7 +1248,7 @@ iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 	}
 });
 
-// User route forgotPassword
+// The User route for alabamaVoters_EmailVerification_01.
 iVoteBallotApp.get('/alabamaVoters_EmailVerification_01', (req, res) => {
 	// Check if user already authenticated.
 	if (req.isUnauthenticated) {
@@ -1228,6 +1261,7 @@ iVoteBallotApp.get('/alabamaVoters_EmailVerification_01', (req, res) => {
 	}
 });
 
+// The user route for alabamaVoters_VerifyEmailPassword_01.
 iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
 	if (req.isAuthenticated) {
 		console.log(req.user);
@@ -1240,6 +1274,7 @@ iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
 	}
 });
 
+// The user route for alabamaVoters_LogIn_01.
 iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 	console.log(req.session);
 	console.log('isUnauthenticated: ', req.isUnauthenticated);
@@ -1257,7 +1292,6 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 		res.render('404');
 	}
 });
-
 
 // User route for alabamaVoters_LogOut_01
 iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
