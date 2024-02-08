@@ -28,7 +28,7 @@ const iVoteBallotApp = express();
 const path = require('path');
 
 /*
-	1. The code const ejs = require('ejs') imports the EJS (Embedded JavaScript) template engine into Sarai Hannah Ajai's 
+	1. The code statement "const ejs = require('ejs')" imports the EJS (Embedded JavaScript) template engine into Sarai Hannah Ajai's 
 	   (the Developer) Node.js iVoteBallot web application.
 	2. Sarai Hanna Ajai (the Developer) can use the ejs module to render dynamic HTML pages by embedding JavaScript code 
 	   into iVoteballot HTML templates, allowing her to easily generate dynamic content based on data from iVoteBallot
@@ -36,21 +36,28 @@ const path = require('path');
 */
 const ejs = require('ejs');
 
+/*
+
+	The code statement "const fs = require('fs')" imports the File System module into Sarai Hannah Ajai's (the Developer) Node.js iVoteBallot
+	web application, enabling her to work with the file system in order to perform operations such as, reading from and writing to files, and 
+	enhancing the functionality of the iVoteBallot web application.
+*/
 const fs = require('fs');
 
 /*
-	This JavaScript coded language imports the "sqlite3" library, and sets it to a constant
-	variable "sqlite3". And, the ".verbose()" method allows for verbose mode, which provides
-	additional information during execution for debugging purposes. This .verbose() method is
-	typically used for interacting with SQLite3 databases within the iVoteBallot web application.
+	1. The code statement "const sqlite3 = require('sqlite3').verbose()" imports the SQLite3 module into the Node.js iVoteBallot web application.
+	2. The .verbose() method provides additional debugging information when working with the SQLite3 database.
+	3. Sarai Hannah Ajai (the Developer) can use the sqlite3 module to create, read, update, and delete data in an SQLite3 database,
+	   which is a popular embedded database engine.
 */
 const sqlite3 = require('sqlite3').verbose();
 
 /*
-	The body-parser middleware is used to parse the body of incoming requests, which
-	is necessary for accessing any user data information submitted through a form on 
-	the "Contact Us" web page. This data can then be used to send emails, store text messages,
-	and/or perform other actions based on the iVoteBallot application's requirements.
+	1. The code statment "const bodyParser = require('body-parser')" is a middleware module that parses incoming request bodies into the Node.js
+	   iVoteballot web application.
+	2. The body-parser module can parse different types of request bodies, including JSON, URL-encoded, and	multipart forms.
+	3. Once the request body is parsed, the middleware adds the parsed data to the request objects, which Sarai Hannah Ajai (the Developer) can 
+	   then access into the iVoteBallot web application route handlers.
 */
 const bodyParser = require('body-parser');
 
