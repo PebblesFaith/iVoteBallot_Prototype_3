@@ -82,12 +82,12 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 
 /*
-	The JavaScript coded language const LocalStrategy = require('passport-local').Strategy
-	is used for setting up a local authentication strategy using the Passport.js library. 
-	And, the 'passport-local' library is being required to access the LocalStrategy constructor 
-	function that defines the authentication strategy. The LocalStrategy is used to authenticate
-	users based on username and password credentials stored in a session cookie, as opposed to
-	using an external authentication services.
+	1. The code statement "const LocalStrategy = require('passport-local').Strategy" is a library that provides a local authentication strategy for
+	   the passport middleware.
+	2. The passport-local library allows Sarai Hannah Ajai (the Developer) to authenticate users using a username and password combination that are
+	   stored locally into the iVoteBallot web application.
+	3. Ms. Ajai (the Developer) can use the LocalStrategy object to define how the authentication process works and provide custom validation and 
+	   error handlings logic for the authentication flow.
 */
 const LocalStrategy = require('passport-local').Strategy;
 
