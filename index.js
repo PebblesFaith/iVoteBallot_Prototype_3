@@ -1048,114 +1048,6 @@ iVoteBallotApp.use(views_Controller);
 
 /* -------------------------- The ending of the use section ----------------------------- */
 
-
-/* -------------------------- The beginning of the GET ROUTE section ----------------------------- */
-
-// User route 401
-iVoteBallotApp.get('/401', (req, res) => {
-	// Check if user already authenticated.
-	if (req.session.isAuthenticated) {
-		return alert('You are already logged in!');
-	}
-	console.log(req.session);
-	// Check if this is the first use of '/401' route URL bar
-	if (req.isUnauthenticated) {
-		res.render('401');
-
-	} else {
-		console.log(req.flash());
-		res.render('500');
-
-	}
-});
-
-// User route 404
-iVoteBallotApp.get('/404', (req, res) => {
-	// Check if user already authenticated.
-	if (req.session.isAuthenticated) {
-		return alert('You are already logged in!');
-	}
-	console.log(req.session);
-	// Check if this is the first use of '/404' route URL bar
-	if (req.isUnauthenticated) {
-		res.render('404');
-
-	} else {
-		console.log(req.flash());
-		res.render('500');
-
-	}
-});
-
-// User route 500
-iVoteBallotApp.get('/500', (req, res) => {
-	// Check if user already authenticated.
-	if (req.session.isAuthenticated) {
-		return alert('You are already logged in!');
-	}
-	console.log(req.session);
-	// Check if this is the first use of '/500' route URL bar
-	if (req.isUnauthenticated) {
-		res.render('500')
-
-	} else {
-		console.log(req.flash());
-		res.render('535');
-
-	}
-});
-
-// User route 535
-iVoteBallotApp.get('/535', (req, res) => {
-	// Check if user already authenticated.
-	if (req.session.isAuthenticated) {
-		return alert('You are already logged in!');
-	}
-	console.log(req.session);
-	// Check if this is the first use of '/535' route URL bar
-	if (req.isUnauthenticated) {
-		res.render('535');
-
-	} else {
-		console.log(req.flash());
-		res.render('500');
-	}
-});
-
-// User route /
-iVoteBallotApp.get('/', (req, res) => {
-	// Check if user already authenticated.
-	if (req.session.isAuthenticated) {
-		return alert('You are already logged in!');
-	}
-	console.log(req.session);
-	// Check if this is the first use of '/535' route URL bar
-	if (req.isUnauthenticated) {
-		res.render('ivoteballot');
-
-	} else {
-		console.log(req.flash());
-		res.render('500');
-	}
-});
-
-// User route ivoteballot
-iVoteBallotApp.get('/ivoteballot', (req, res) => {
-	// Check if user already authenticated.
-	if (req.session.isAuthenticated) {
-		return alert('You are already logged in!');
-	}
-	console.log(req.session);
-	// Check if this is the first use of '/535' route URL bar
-	if (req.isUnauthenticated) {
-		res.render('ivoteballot');
-
-	} else {
-		console.log(req.flash());
-		res.render('500');
-	}
-});
-
 /* -------------------------- The beginning of the redirectDashboard section ----------------------------- */
 
 /*
@@ -1176,23 +1068,23 @@ const redirectDashboard = (req, res, next) => {
 
 /* -------------------------- The ending of the redirectDashboard section ----------------------------- */
 
-/* -------------------------- The beginning of the GET Route section ----------------------------- */
+/* -------------------------- The beginning of the GET ROUTE section ----------------------------- */
 
 /*
    This section defines various GET routes for handling user authentication and session management
-   in the iVoteBallot web application. Here is a breakdown of each route's functionality:
+   in the iVoteBallot web application. Here's a breakdown of each route's functionality:
 
-   - '/alabamaDMV_Commission_01': Renders the alabamaVoters_SignUp_01 page if the user is not 
+   - '/alabamaDMV_Commission_01': Renders the alabamaVoters_SignUp_01 page, if the user is not 
      authenticated. If the user is authenticated, it renders the '/alabamaVoters_EmailVerification_01'
-     page. It checks for user authentication status and displays appropriate messages accordingly.
+     page. And the passport.js checks for user's authentication status and displays appropriate messages accordingly.
 
-   - '/alabamaVoters_SignUp_01': Renders the alabamaVoters_EmailVerification_01 page if the user is
+   - '/alabamaVoters_SignUp_01': Renders the alabamaVoters_EmailVerification_01 page, if the user is
      authenticated. Otherwise, renders the '500' error page and logs an authentication failure message.
 
-   - '/alabamaVoters_EmailVerification_01': Renders the alabamaVoters_VerifyEmailPassword_01 page
+   - '/alabamaVoters_EmailVerification_01': Renders the alabamaVoters_VerifyEmailPassword_01 page,
      if the user is not authenticated. Otherwise, renders the '404' error page.
 
-   - '/alabamaVoters_VerifyEmailPassword_01': Renders the alabamaVoters_EmailVerification_01 page
+   - '/alabamaVoters_VerifyEmailPassword_01': Renders the alabamaVoters_EmailVerification_01 page,
      if the user is authenticated. Otherwise, redirects to '/alabamaVoters_VerifyEmailPassword_01'
      and logs an authentication failure message.
 
@@ -1200,12 +1092,123 @@ const redirectDashboard = (req, res, next) => {
      If the user is authenticated, redirects to '/dashboard_01'. Renders the '404' error page for 
      unrecognized conditions.
 
-   - '/alabamaVoters_LogOut_01': Renders the alabamaVoters_LogOut_01 page if the user is not
+   - '/alabamaVoters_LogOut_01': Renders the alabamaVoters_LogOut_01 page, if the user is not
      authenticated. Otherwise, renders the '404' error page.
 
-   This ensure that the Passport.js middleware and session management are properly configured to enable
-   the users' authentication and session handling. 
+   - '/401', '/404', '/500', '/535', '/', '/ivoteballot': These routes handle various HTTP status
+     code scenarios and render appropriate pages based on user authentication status. If the user
+     is authenticated, an alert message is shown indicating that the user is already logged in.
+     Otherwise, it renders the respective error or landing page based on the route.
+
+   Ensure that the Passport.js middleware and session management are properly configured to enable
+   user authentication and session handling. Check the order of routes and middleware to ensure
+   proper authentication before accessing protected routes.
 */
+
+// User route 401
+iVoteBallotApp.get('/401', (req, res) => {
+	// Check if user already authenticated.
+	if (req.session.isAuthenticated) {
+		req.flash('success', 'You are already logged in!');
+	}
+	console.log(req.session);
+	// Check if this is the first use of '/401' route URL bar
+	if (req.isUnauthenticated) {
+		res.render('401');
+
+	} else {
+		console.log(req.flash());
+		res.render('500');
+
+	}
+});
+
+// User route 404
+iVoteBallotApp.get('/404', (req, res) => {
+	// Check if user already authenticated.
+	if (req.session.isAuthenticated) {
+		req.flash('success', 'You are already logged in!');
+	}
+	console.log(req.session);
+	// Check if this is the first use of '/404' route URL bar
+	if (req.isUnauthenticated) {
+		res.render('404');
+
+	} else {
+		console.log(req.flash());
+		res.render('500');
+
+	}
+});
+
+// User route 500
+iVoteBallotApp.get('/500', (req, res) => {
+	// Check if user already authenticated.
+	if (req.session.isAuthenticated) {
+		req.flash('success', 'You are already logged in!');
+	}
+	console.log(req.session);
+	// Check if this is the first use of '/500' route URL bar
+	if (req.isUnauthenticated) {
+		res.render('500')
+
+	} else {
+		console.log(req.flash());
+		res.render('535');
+
+	}
+});
+
+// User route 535
+iVoteBallotApp.get('/535', (req, res) => {
+	// Check if user already authenticated.
+	if (req.session.isAuthenticated) {
+		req.flash('success', 'You are already logged in!');
+	}
+	console.log(req.session);
+	// Check if this is the first use of '/535' route URL bar
+	if (req.isUnauthenticated) {
+		res.render('535');
+
+	} else {
+		console.log(req.flash());
+		res.render('500');
+	}
+});
+
+// User route /
+iVoteBallotApp.get('/', (req, res) => {
+	// Check if user already authenticated.
+	if (req.session.isAuthenticated) {
+		req.flash('success', 'You are not logged in!');
+	}
+	console.log(req.session);
+	// Check if this is the first use of '/535' route URL bar
+	if (req.isUnauthenticated) {
+		res.render('ivoteballot');
+
+	} else {
+		console.log(req.flash());
+		res.render('500');
+	}
+});
+
+// User route ivoteballot
+iVoteBallotApp.get('/ivoteballot', (req, res) => {
+	// Check if user already authenticated.
+	if (req.session.isAuthenticated) {
+		req.flash('success', 'You are not logged in!');
+	}
+	console.log(req.session);
+	// Check if this is the first use of '/535' route URL bar
+	if (req.isUnauthenticated) {
+		res.render('ivoteballot');
+
+	} else {
+		console.log(req.flash());
+		res.render('500');
+	}
+});
 
 // The User route for alabamaDMV_Commission_01.
 iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => { 
