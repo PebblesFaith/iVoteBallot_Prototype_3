@@ -1272,34 +1272,56 @@ iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
 /* -------------------------- The ending of the GET ROUTE section ----------------------------- */
 
 /* -------------------------- The beginning of the DELETE ROUTE section ----------------------------- */
+/*
+   This route handler is responsible for processing logout requests from authenticated users
+   accessing the '/alabamaVoters_LogOut_01' endpoint of the iVoteBallot web applicatin. Here is a breakdown
+   of the functionality:
 
+   1. The route handler checks, if the incoming request is authenticated using req.isAuthenticated().
+   2. If the request is authenticated, it destroys the session associated with the request using
+      req.session.destroy(), effectively removing the session ID connectivity from the server.
+   3. After destroying the session, the user is redirected to the '/alabamaVoters_LogIn_01' page,
+      indicating successful logout.
+   4. If the request is not authenticated, the user is redirected to the '/500' page, presumably
+      indicating a server error.
+   5. Information about the user and the logout process is logged to the console for debugging
+      and monitoring purposes.
+   6. Request details such as req.body, req.params, req.headers, and req.isUnauthenticated are logged
+      within a console group to provide additional context.
+   7. The console group is closed using console.groupEnd().
+
+   In order to ensure that Passport.js authentication middleware and express-session middleware are properly
+   configured and initialized to enable session handling and user authentication. Additionally,
+   verify that routes and middlewares are set up in the correct order to enforce authentication
+   before accessing protected routes like the logout endpoint.
+*/
 iVoteBallotApp.delete('/alabamaVoters_LogOut_01', (req, res) => {
 	
-		if (req.isAuthenticated()) {
-			req.session.destroy();		
-		
-			res.redirect('/alabamaVoters_LogIn_01'); // Redirect to login page if not authenticated
-		} else {
+	if (req.isAuthenticated()) {
+		req.session.destroy();		
+	
+		res.redirect('/alabamaVoters_LogIn_01'); // Redirect to login page if not authenticated
+	} else {
 
-		res.redirect('/500');
+	res.redirect('/500');
 
-	}		
+}		
 
-	console.log('reg.user', req.user);	
-	console.log('User had been successfully logout through authenticated within the Session passport from dashboard!');
+console.log('reg.user', req.user);	
+console.log('User had been successfully logout through authenticated within the Session passport from dashboard!');
 
-	console.group('\n GET /user - request details:')
-		console.log('_____________________________________ \.n');
-		console.log('req.body:', req.body);
-		console.log('req.params:', req.params);
-		console.log('req.headers:', req.headers);
-		console.log('req.isUnAuthenticated:', req.isUnauthenticated);
-		console.log('_____________________________________ \.n');			
-		
-		console.log('_____________________________________ \.n');		
+console.group('\n GET /user - request details:')
+	console.log('_____________________________________ \.n');
+	console.log('req.body:', req.body);
+	console.log('req.params:', req.params);
+	console.log('req.headers:', req.headers);
+	console.log('req.isUnAuthenticated:', req.isUnauthenticated);
+	console.log('_____________________________________ \.n');			
+	
+	console.log('_____________________________________ \.n');		
 
-	console.groupEnd();
- 
+console.groupEnd();
+
 });
 
 /* -------------------------- The ending of the DELETE ROUTE section ----------------------------- */
