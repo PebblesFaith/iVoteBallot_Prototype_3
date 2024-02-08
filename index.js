@@ -1392,39 +1392,6 @@ iVoteBallotApp.post(
 	}
 ));
 
-
-/*
-iVoteBallotApp.post('/alabamaVoters_LogOut_01', function(req, res, next) {
-	req.logout(function(err) {
-		const user_agent = req.headers['user-agent'];
-		req.session.user_agent = user_agent;
-
-		const ip_address = req.ip; 
-		req.session.ip_address = ip_address;
-		
-		console.log(req.user);
-		console.log(req.session);
-		console.log('User had not been successfully authenticated within the Session through the passport from dashboard!');
-
-		console.group('\n GET /user - request details:')
-			console.log('_____________________________________ \.n');
-			console.log('req.body:', req.body);
-			console.log('req.params:', req.params);
-			console.log('req.headers:', req.headers);
-			console.log('req.isAuthenticated:', req.isAuthenticated);
-			console.log('_____________________________________ \.n');
-			console.log('req.sesssion.user_agent:', req.session.user_agent);			
-			console.log('ip_address:', req.session.ip_address);
-			console.log('_____________________________________ \.n');
-			console.log('req.user', req.user);
-
-		console.groupEnd();
-	  if (err) { return next(err); }
-	  res.redirect('/alabamaVoters_LogOut_01');
-	});
-  });
-*/
-
 /* -------------------------- The ending of the POST LOCAL STRATEGY section ----------------------------- */
 
 /* -------------------------- The beginning of All SQLite3 databases section ----------------------------- */
