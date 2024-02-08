@@ -1,16 +1,39 @@
+/*
+	The "const express = require('express')" means that the server-side JavaScript code is using the Express.js framework to handle
+	the HTTP requests and responses, routing, middleware, and other web application functionalities are as follows:	
+
+	1. const express: This line declares a constant variable named "express". In JavaScript, "const" is used to declare variables 
+	   that cannot be re-assigned once they are initialized.
+	2. require('express'): This part is a CommonJS module system function used in Node.js to import modules. In this case, the
+	   Node.js modules imports the 'express' module, which is a popular Node.js web application framework used for building web 
+	   servers and APIs.
+
+	So, when you see "const express = require('express')"", this means that the server-side JavaScript code is using the Express.js
+	    framework to handle HTTP requests and responses, routing, middleware, and other web application functionalities.
+*/
 const express = require('express');
 
+/*
+	The code const iVoteBallotApp = express(); creates a new instance of the Express.js framework and assigns it to the
+	constant iVoteBallotApp, allowing the iVoteBallot web application to define routes and middleware management.
+*/
 const iVoteBallotApp = express();
 
 /*
-	1. The code const path = require('path') imports the built-in Node.js path module, which
-	provides utilities for working with file and directory paths.
-	2. You can use the path module to manipulate file paths in a platform-independent way and
-	perform tasks such as resolving relative paths, joining multiple paths, and extracting 
-	file extensions.
+	1. The code const path = require('path') imports the built-in Node.js path module, which provides utilities for working 
+	   with file and directory paths.
+	2. You can use the path module to manipulate file paths in a platform-independent way and perform tasks such as resolving
+	   relative paths, joining multiple paths, and extracting file extensions.
 */
 const path = require('path');
 
+/*
+	1. The code const ejs = require('ejs') imports the EJS (Embedded JavaScript) template engine into Sarai Hannah Ajai's 
+	   (the Developer) Node.js iVoteBallot web application.
+	2. Sarai Hanna Ajai (the Developer) can use the ejs module to render dynamic HTML pages by embedding JavaScript code 
+	   into iVoteballot HTML templates, allowing her to easily generate dynamic content based on data from iVoteBallot
+	   web application.
+*/
 const ejs = require('ejs');
 
 const fs = require('fs');
