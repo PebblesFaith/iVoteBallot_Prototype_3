@@ -102,14 +102,10 @@ const LocalStrategy = require('passport-local').Strategy;
 const sqliteDB = require('better-sqlite3');
 
 /*
-	The statement const session = require('express-session'); is used in JavaScript when
-	working with the Node.js framework Express to create a session middleware. The
-	express-session package provides the necessary tools for managing user sessions, 
-	including creating and destroying sessions, storing session data, and setting session
-	timeouts. Once the middleware is initialized, it can be used to maintain session data
-	throughout the user's interaction with the iVoteBallot web application. The session
-	constant is typically used, as a reference the middleware within the
-	iVoteBallot application code.
+	The code statement "const session = require('express-session')" imports the express-session library and assigns it to a constant variable named 
+	session. This library provides a middleware that allows Sarai Hanna Ajai (the Developer) to create and manage users' sessions within the 
+	iVoteBalot's index.js (server) web application. With express-session, Ms, Ajai (the Developer) can store the users' data information within a 
+	session and requests it across multiple EJS templates.
 */
 const session = require('express-session');
 
