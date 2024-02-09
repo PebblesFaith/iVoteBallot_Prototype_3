@@ -778,7 +778,7 @@ passport.deserializeUser(function (id, done) {
 				DMVDegreeSelection: user.DMVDegreeSelection,
 				DMVCategorySelection: user.DMVCategorySelection,
 				DMVSubjectSelection: user.DMVSubjectSelection,	
-				DMVCollegeYearSelection: row.DMVCollegeYearSelection,
+				DMVCollegeYearSelection: user.DMVCollegeYearSelection,
 				DMVSSN: user.DMVSSN,
 				DMVEmail: user.DMVEmail,
 				DMVConfirmEmail: user.DMVConfirmEmail,
