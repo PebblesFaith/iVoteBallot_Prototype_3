@@ -151,7 +151,7 @@
 									<br>	
 
 									<select id="gradeSchoolYearSelect" name="DMVGradeSchoolYearSelection">
-										<option id="selectBackground" value="" disable selected hidden>Year Graduate from Grade School:</option>
+										<option id="selectBackground" value="" disable selected hidden>Year Graduated from Elementary School:</option>
 										<option value = No_Graduate>No Graduate</option>
 									</select>
 									<span id = "userDMVGradeSchoolYearSelectionErrorMessage"></span>
@@ -171,7 +171,7 @@
 									<br>	
 
 									<select id="highSchoolYearSelect" name="DMVHighSchoolYearSelection">
-										<option id="selectBackground" value="" disable selected hidden>Year Graduate from High School:</option>
+										<option id="selectBackground" value="" disable selected hidden>Year Graduated from High School:</option>
 										<option value = No_Graduate>No Graduate</option>
 									</select>
 									<span id = "userDMVHighSchoolYearSelectionErrorMessage"></span>
@@ -200,10 +200,12 @@
 									<span id="userDMVSubjectSelectionErrorMessage"></span>
 									<br>  
 
-
-
-
-
+									<select id="collegeYearSelect" name="DMVCollegeYearSelection">
+										<option id="selectBackground" value="" disable selected hidden>Year Graduated from College | University | Trade School | Certifcate:</option>
+										<option value = No_Graduate>No Graduate</option>
+									</select>
+									<span id = "userDMVCollegeYearSelectionErrorMessage"></span>
+									<br>
 
 									<label>Social Security Number | Enter user's ssn in the format of xxx-xx-xxxx.</label>                                           
 									<input id="ssn" type="text" name="DMVSSN" maxlength="75"> 								                          
@@ -377,6 +379,19 @@
 				dateOption.value = currentYear_02;        
 				dateDropdown_02.add(dateOption);      
 				currentYear_02 -= 1;  
+			}
+
+			const dateDropdown_03 = document.getElementById('collegeYearSelect'); 
+       
+			let currentYear_03 = new Date().getFullYear();    
+			let  earliestYear_03 = 1900;     
+
+			while (currentYear_03 >= earliestYear_03) {      
+				let dateOption = document.createElement('option');          
+				dateOption.text = currentYear_03;      
+				dateOption.value = currentYear_03;        
+				dateDropdown_03.add(dateOption);      
+				currentYear_03 -= 1;  
 			}
 
 
