@@ -166,8 +166,19 @@ const flash = require('express-flash');
 */
 const methodOverride = require('method-override');
 
+/*
+	The line "const { v4: uuidv4 } = require('uuid');" statement within the iVoteBallot web application is using CommonJS syntax in Node.js to import the
+	version 4 of the UUID (Universally Unique Identifier) generation library from the 'uuid' package.
 
+	Here is Sarai Hannah Ajai (the Developer) breakdown of what is happening:
 
+		1. require('uuid'): This statement imports the 'uuid' module, which is a Node.js package used to generate UUIDs.
+		2. { v4: uuidv4 }: This is destructuring assignment in JavaScript coded lanaguage. It is extracting a specific property v4 from the object exported by
+		the 'uuid' library and assigning it to a variable named uuidv4.
+		3. const: This keyword declares a constant variable named uuidv4, which will hold the function for generating version 4 UUIDs.
+		
+	So, after this line of code executes, Ms. Ajai (the Developer) can use the uuidv4() function to generate users' UUIDs within the iVoteBallot web application.
+*/
 const { v4: uuidv4 } = require('uuid');
 
 /*
