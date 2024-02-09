@@ -117,6 +117,27 @@ const session = require('express-session');
 */
 const AlabamaSqlite3SessionStore = require('better-sqlite3-session-store')(session);
 
+
+/*
+	In the iVoteBallot web application, the line "const flash = require('express-flash')" is a piece of code written in JavaScript that imports
+	the 'express-flash' library and assigns it to the variable 'flash' as the following:
+
+	1. const: This keyword is used to declare a constant variable in JavaScript. Constants are variables whose values cannot be changed once they
+	   are assigned. In this case, 'flash' is declared as a constant variable.
+
+	2. flash: This is the name of the variable being declared.
+
+	3. require('express-flash'): In Node.js, the require function is used to include libraries that are available in the iVoteBallot web application. 
+	   Here, 'express-flash' is the name of the library being imported. This library is likely used for handling flash messages within the Express.js 
+	   iVoteBallot web application framework.
+
+	Flash messages are temporary messages that are typically displayed to the users for a short period, often after a specific action such as submitting
+	a iVoteBallot templates or completing a tasks. They are commonly used to provide feedback or alerts to the front-end users about the outcome of their 
+	actions. The 'express-flash' library helps manage and display these flash messages within an Express.js iVoteBallot web application.
+
+	Overall, the line "const flash = require('express-flash')" imports the 'express-flash' library and assigns it to the constant variable 'flash',
+	allowing the iVoteBallot web application to utilize the functionality provided by the library to handle flash messages effectively.
+*/
 const flash = require('express-flash');
 
 const methodOverride = require('method-override');
