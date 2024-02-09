@@ -23,6 +23,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	const DMVDegreeSelection = document.getElementById('degreeSelect').value.trim();
 	const DMVCategorySelection = document.getElementById('categorySelect').value.trim();
 	const DMVSubjectSelection = document.getElementById('subjectSelect').value.trim();
+	const DMVCollegeYearSelection = document.getElementById('collegeYearSelect').value.trim();
 	const DMVSSN = document.getElementById('ssn').value.trim(); 
 	const DMVEmail = document.getElementById('email').value.trim();
 	const DMVConfirmEmail = document.getElementById('confirmEmail').value.trim();  
@@ -260,9 +261,6 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 	}
 
-
-
-
 	if (DMVDegreeSelection === '' || DMVDegreeSelection == null) {		
 		document.getElementById('userDMVDegreeSelectionErrorMessage').textContent = 'Error Message: The user\'s college or university degree is a required select option field and you must select the user correct college or university degree from the option require field.';
 		setTimeout(function() {
@@ -289,6 +287,17 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		document.getElementById('userDMVSubjectSelectionErrorMessage').textContent = 'Error Message: The user\'s college or university degree subject is a required select option field and you must select the user correct college or university subject category from the option require field.';
 		setTimeout(function() {
 			document.getElementById('userDMVSubjectSelectionErrorMessage').textContent = '';
+		},
+		9000)    	
+
+		return false;  
+	
+	}
+
+	if (DMVCollegeYearSelection=== '' || DMVCollegeYearSelection == null) {		
+		document.getElementById('userDMVCollegeYearSelectionErrorMessage').textContent = 'Error Message: The user\'s degree year is a required select option field and you must select the user\'s degree graduate year from the option require field.';
+		setTimeout(function() {
+			document.getElementById('userDMVCollegeYearSelectionErrorMessage').textContent = '';
 		},
 		9000)    	
 
