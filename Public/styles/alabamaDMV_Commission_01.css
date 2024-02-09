@@ -368,7 +368,8 @@ span.forgot_Password {
 #degreeSelect,
 #categorySelect,
 #subjectSelect,
-#college
+#college,
+#collegeYearSelect
 {
 	outline: none; 
 	border-top-style: hidden;
@@ -425,7 +426,8 @@ span.forgot_Password {
 #degreeSelect,
 #categorySelect,
 #subjectSelect,
-#college
+#college,
+#collegeYearSelect
 {
 	display: flex;
 	flex-wrap: row wrap;
@@ -474,7 +476,8 @@ span.forgot_Password {
 #degreeSelect,
 #categorySelect,
 #subjectSelect,
-#college
+#college,
+#collegeYearSelect
 {
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
@@ -517,7 +520,8 @@ span.forgot_Password {
 #degreeSelect:focus,
 #categorySelect:focus,
 #subjectSelect:focus,
-#college:focus
+#college:focus,
+#collegeYearSelect:focus
 {
 	border:3px solid rgb(205, 214, 249);
 	border-top-style: hidden;
@@ -565,7 +569,8 @@ span.forgot_Password {
 #userDMVDegreeSelectionErrorMessage,
 #userDMVCategorySelectionErrorMessage,
 #userDMVSubjectSelectionErrorMessage,
-#userDMVCollegeErrorMessage
+#userDMVCollegeErrorMessage,
+#userDMVCollegeYearSelectionErrorMessage
 { 
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: clamp(9px, 2vw, 13px); 
