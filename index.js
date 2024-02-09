@@ -166,9 +166,25 @@ const flash = require('express-flash');
 */
 const methodOverride = require('method-override');
 
+
+
 const { v4: uuidv4 } = require('uuid');
 
-// Generate a random token using uuid
+/*
+	In the iVoteBallot web application, the line "const userId = uuidv4();" will generate an unique identifier (UUID) for each user who interacts with the
+	iVoteBallot web application. Here is Sarai Hannah Ajai (the Developer) breakdown of what each part of the code does:
+
+	1. "const userId": This declares a constant variable named "userId". This constant is a variable whose value cannot be changed once it is assigned.
+
+	2. "=": This is the assignment operator, which assigns a value to a variable.
+
+	3. "uuidv4()": This is a function call that generates a version 4 UUID (Universally Unique Identifier). These UUIDs are standardized identifiers that
+	   are intended to be unique across both space and time, meaning that it is extremely unlikely for two generated UUIDs to be the same.
+
+	Therefore, the line "const userId = uuidv4()" creates a new UUID and assigns it to the variable "userId". This UUID can then be used to uniquely identify
+	each front-end user within the iVoteBallot web application who have created an iVoteBallot's accounts, such as for tracking their interactions, maintaining
+	session state, or ensuring data information integrity.
+*/
 const userId = uuidv4();
 
 /*
