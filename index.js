@@ -117,7 +117,6 @@ const session = require('express-session');
 */
 const AlabamaSqlite3SessionStore = require('better-sqlite3-session-store')(session);
 
-
 /*
 	In the iVoteBallot web application, the line "const flash = require('express-flash')" is a piece of code written in JavaScript that imports
 	the 'express-flash' library and assigns it to the variable 'flash' as the following:
@@ -140,6 +139,31 @@ const AlabamaSqlite3SessionStore = require('better-sqlite3-session-store')(sessi
 */
 const flash = require('express-flash');
 
+/* 
+	The coded statement "const methodOverride = require('method-override')" within the a Node.js web application such as iVoteBallot imports the
+ 	'method-override' middleware into the iVoteBallot web application. This means in the context of the iVoteBallot web application:
+
+		1. Middleware in Node.js: Middleware in Node.js is software that provides services to iVoteBallot web applications outside of what is 
+		  offered by the operating system. In the iVoteBallot web applications, middleware sits between the incoming request and the application's
+		  response from the front-end users. The method-override intercept, process, and modify both the HTML requests and the responses from the 
+		  front-end users.
+
+		2. "method-override" Middleware: The "method-override" middleware allows Sarai Hannah Ajai (the Developer) to use HTTP verbs such as PUT or 
+		   DELETE in places where the back-end clients does not support it. For example, HTML forms only support GET and POST methods, so if Ms. Ajai
+		   (the Developer) want to perform actions like update or delete using an HTML form, she will need to override the method using a query parameter
+		   or a header.
+
+		3. How it Works: When included in an Express.js web application like iVoteBallot, "method-override" intercepts incoming requests and looks for a
+		   special parameter or header that tells it to override the HTTP method being used. For example, it might look for a "_method" query parameter or
+		   a "X-HTTP-Method-Override" header. If it finds one, it replaces the HTTP method of the request with the one specified in the parameter or header.
+
+		4. Use Case in iVoteBallot: In the iVoteBallot web application, the "method-override" might be used to handle situations where HTML forms need to
+		   perform actions like updating or deleting records in the database using HTTP methods other than GET or POST. By using method override, the 
+		   iVoteBallot web application can interpret these requests correctly and route them to the appropriate handlers.
+
+	Overall, the "const methodOverride = require('method-override')" library within the iVoteBallot web application sets up the middleware necessary to 
+	handle HTTP method overrides, enabling more flexibility and functionality in handling HTTP requests.
+*/
 const methodOverride = require('method-override');
 
 const { v4: uuidv4 } = require('uuid');
