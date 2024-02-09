@@ -199,11 +199,9 @@ const { v4: uuidv4 } = require('uuid');
 const userId = uuidv4();
 
 /*
-	The given Javascript coded language imports the 'nodemailer' library which is used for
-	sending email within the iVoteBallot web application. The 'require' function is a
-	built-in method in Node.js that is used to load modules or files. The 'const' keyword
-	declares a constant variable 'nodemailer' that holds the reference to the loaded 
-	'nodemailer' library.
+	The given Javascript coded language imports the 'nodemailer' library which is used for sending email within the iVoteBallot web application. The 'require'
+	function is a built-in method within Node.js that is used to load modules or files. The 'const' keyword declares a constant variable 'nodemailer' that holds
+	the reference to the loaded 'nodemailer' library.
 */
 const nodemailer = require('nodemailer');
 
