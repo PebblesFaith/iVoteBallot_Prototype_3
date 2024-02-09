@@ -110,13 +110,10 @@ const sqliteDB = require('better-sqlite3');
 const session = require('express-session');
 
 /*
-	This statement is importing and configuring a session store module called
-	"better-sqlite3-session-store" for the use with a Node.js application that
-	is utilizing the "session" middleware. The "const" keyword declares a constant
-	variable named "AlabamaSqlite3SessionStore" that assigned the result of
-	calling the "require" function with the "better-sqlite3-session-store" library
-	as its argument. The resulting module is then initialized with the "session" 
-	middleware and the resulting store object is assigned to the constant variable.
+	The code statement "const Sqlite3SessionStore = require("better-sqlite3-session-store")(session)" imports the better-sqlite3-session-store 
+	library and creates a new instance of the session store that can be used with the express-session middleware. This session store uses the 
+	better-sqlite3 library to store users' session data information in a SQLite database. By using this library, Ms. Ajai (the Developer) can 
+	store and manage users' sessions in a reliable and efficient way when users' logged in or out of iVoteBallot web application.
 */
 const AlabamaSqlite3SessionStore = require('better-sqlite3-session-store')(session);
 
