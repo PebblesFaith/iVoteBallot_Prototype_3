@@ -2187,85 +2187,90 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 								user: 'ceo_developmenttest@ivoteballot.com',
 								pass: IONOS_SECRET_KEY,
 							}
-						});						
+						});		
+						
 
-						// Send notification email to admin
-
-						const mailOptions_01 = {
-							from: req.body.DMVEmail,
-							to: 'electionassureexpert@ivoteballot.com',
-							bcc: 'cio_developmenttest@ivoteballot.com',
-							subject: `New User Signup Notification Successfully Completed`,
-							html: `	
+						if (req.isAuthenticated()) {
+							/*
+							Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
+							using the default SMTP transporter nodemailer API library.
+							*/
+							const mailOptions_01 = {
+								from: req.body.DMVEmail,
+								to: 'electionassureexpert@ivoteballot.com',
+								bcc: 'cio_developmenttest@ivoteballot.com',								
+								subject: `New User Signup Notification Successfully Completed`,
+								html: `	
 			
-						<p>iVoteBallot has received a new online registration completion:</p>
+							<p>iVoteBallot has received a new online registration completion:</p>
 
-						<p>New User ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName} has successfully registered for iVoteBallot.</p> 
-						<p>: ${req.user.DMVEmail}.</p>																
-						
-						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+							<p>New User ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName} has successfully registered for iVoteBallot.</p> 
+							<p>: ${req.user.DMVEmail}.</p>																
+							
+							<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 
-					`,
+						`,
 
-							attachments: [
-								{
-									filename: 'iVoteBallotLogo.png',
-									path: imagePath,
-									cid: 'iVoteBallotLogo'
+								attachments: [
+									{
+										filename: 'iVoteBallotLogo.png',
+										path: imagePath,
+										cid: 'iVoteBallotLogo'
 
+									}
+								]
+
+							};
+
+							// Send welcome email to the user
+							const mailOptions_02 = {
+								from: 'electionassureexpert@ivoteballot.com',
+								to: req.body.DMVEmail,
+								bcc: 'cio_developmenttest@ivoteballot.com',
+								subject: 'Successful Registration for iVoteBallot',
+								html: `
+							<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
+							<p>You have successfully registered for iVoteBallot.</p>
+							<p>Thank you for choosing iVoteBallot!</p>
+							<p>Best regards,</p>
+							<p>iVoteBallot's Election Assure Expert Team </p>
+							<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+						`,
+
+								attachments: [
+									{
+										filename: 'iVoteBallotLogo.png',
+										path: imagePath,
+										cid: 'iVoteBallotLogo'
+
+									}
+								]
+
+							};
+							
+							transporter.sendMail(mailOptions_01, (err, info) => {
+								if (err) {
+									console.log(err);
+								} else {
+									console.log('Email Sent: ' + info.response);
 								}
-							]
+							});
 
-						};
-
-						// Send welcome email to the user
-						const mailOptions_02 = {
-							from: 'electionassureexpert@ivoteballot.com',
-							to: DMVEmail,
-							bcc: 'cio_developmenttest@ivoteballot.com',
-							subject: 'Successful Registration for iVoteBallot',
-							html: `
-						<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
-						<p>You have successfully registered for iVoteBallot.</p>
-						<p>Thank you for choosing iVoteBallot!</p>
-						<p>Best regards,</p>
-						<p>iVoteBallot's Election Assure Expert Team </p>
-						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
-					`,
-
-							attachments: [
-								{
-									filename: 'iVoteBallotLogo.png',
-									path: imagePath,
-									cid: 'iVoteBallotLogo'
-
+							transporter.sendMail(mailOptions_02, (err, info) => {
+								if (err) {
+									console.log(err);
+								} else {
+									console.log('Email Sent: ' + info.response);
 								}
-							]
+							});
 
-						};
-						
-						transporter.sendMail(mailOptions_01, (err, info) => {
-							if (err) {
-								console.log(err);
-							} else {
-								console.log('Email Sent: ' + info.response);
-							}
-						});
+							res.redirect('/alabamaVoters_LogIn_01');
 
-						transporter.sendMail(mailOptions_02, (err, info) => {
-							if (err) {
-								console.log(err);
-							} else {
-								console.log('Email Sent: ' + info.response);
-							}
-						});
-
-						res.redirect('/alabamaVoters_LogIn_01');
+						}
 
 					}
-
-				}
-			)
+				});
+		
 		}
 	}
 );	
