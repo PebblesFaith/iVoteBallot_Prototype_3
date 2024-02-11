@@ -2146,7 +2146,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 		const DMVEmail = req.user.DMVEmail;
 		const Password = req.body.Password;
 		const ConfirmPassword = req.body.ConfirmPassword;
-
+		
 		console.log(req.body);
 
 		// To hash the newPassword input field using bcrypt library.
@@ -2229,13 +2229,13 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 								bcc: 'cio_developmenttest@ivoteballot.com',
 								subject: 'Successful Registration for iVoteBallot',
 								html: `
-							<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
-							<p>You have successfully registered for iVoteBallot.</p>
-							<p>Thank you for choosing iVoteBallot!</p>
-							<p>Best regards,</p>
-							<p>iVoteBallot's Election Assure Expert Team </p>
-							<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
-						`,
+									<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
+									<p>You have successfully registered for iVoteBallot.</p>
+									<p>Thank you for choosing iVoteBallot!</p>
+									<p>Best regards,</p>
+									<p>iVoteBallot's Election Assure Expert Team </p>
+									<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+								`,
 
 								attachments: [
 									{
