@@ -11,8 +11,15 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	const DMVSuffix = document.getElementById('suffix').value.trim();   
 	const DMVDateOfBirth = document.getElementById('dateOfBirth').value.trim();    
 	const DMVBirthSex = document.getElementById('birthSex').value.trim();   
-	const DMVGenderIdentity = document.getElementById('genderIdentity').value.trim();  
+	const DMVGenderIdentity = document.getElementById('genderIdentity').value.trim(); 
 	const DMVRace = document.getElementById('race').value.trim();  
+
+
+	const DMVUSResidentStatusSelection = document.getElementById('usResidentStatusSelect').value.trim();
+	const DMVUSResidentStatusCategorySelection = document.getElementById('usResidentStatusCategorySelect').value.trim();
+	const DMVUSResidentStatusSubjectSelection = document.getElementById('usResidentStatusSubjectSelect').value.trim();
+
+	
 	const DMVGradeSchool = document.getElementById('gradeSchool').value.trim();  
 	const DMVGradeSchoolSelection = document.getElementById('gradeSchoolSelect').value.trim();
 	const DMVGradeSchoolYearSelection = document.getElementById('gradeSchoolYearSelect').value.trim();
@@ -179,6 +186,39 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	
 		return false;		
 
+	}
+
+	if (DMVUSResidentStatusSelection === '' || DMVUSResidentStatusSelection == null) {		
+		document.getElementById('userDMVUSResidentStatusSelectionErrorMessage').textContent = 'Error Message: The user\'s US Resident Status is a required select option field and you must select the user correct US Resident Status from the option require field.';
+		setTimeout(function() {
+			document.getElementById('userDMVUSResidentStatusSelectionErrorMessage').textContent = '';
+		},
+		9000)    	
+
+		return false;  
+	
+	}
+
+	if (DMVUSResidentStatusCategorySelection === '' || DMVUSResidentStatusCategorySelection == null) {		
+		document.getElementById('userDMVUSResidentStatusCategorySelectionErrorMessage').textContent = 'Error Message: The user\'s US Resident Status Category is a required select option field and you must select the user correct US Resident Status Category from the option require field.';
+		setTimeout(function() {
+			document.getElementById('userDMVUSResidentStatusCategorySelectionErrorMessage').textContent = '';
+		},
+		9000)    	
+
+		return false;  
+	
+	}
+
+	if (DMVUSResidentStatusSubjectSelection === '' || DMVUSResidentStatusSubjectSelection == null) {		
+		document.getElementById('userDMVUSResidentStatusSubjectSelectionErrorMessage').textContent = 'Error Message: The user\'s US Resident Status Subject is a required select option field and you must select the user correct US Resident Status Subject from the option require field.';
+		setTimeout(function() {
+			document.getElementById('userDMVUSResidentStatusSubjectSelectionErrorMessage').textContent = '';
+		},
+		9000)    	
+
+		return false;  
+	
 	}
 
 	if (DMVGradeSchool === '' || DMVGradeSchool == null || DMVGradeSchool.length <= 2 || !DMVGradeSchool.match(regExName)) {                                                               
@@ -1957,8 +1997,40 @@ const highEducationData = {
 		'Greenville': ['36037'],
 		'McKenzie': ['36456']
 	},
-	
+
 };	
+
+
+
+
+
+const usResidentStatusData = {
+
+	'U.S. Citizen': {
+		'U.S. Citizenship': [
+
+			
+
+			
+		],
+	},
+	'U.S. Resident Alien': {
+		'Green Card': [ 
+
+			'I - 130 | Alien Relative', 
+			'I - 140 | Alien Worker', 
+			'I - 360 | Amerasian, Widow(er) or Speical Immigrant', 	
+			'I - 526 | Alien Entrepreneur', 		
+			'I - 589 | Asylum & for Withholding of Removal', 
+			'I - 730 | Refugee/Asylee Relative', 		
+			'I - 918 | U NonImmigrant Status', 
+			'I - 929 | Qualifying Family Member of a U-1 NonImmigrant'			
+				
+			],
+	},
+	
+
+};
 		
 window.onload = function (e) {
 	
@@ -2118,7 +2190,49 @@ window.onload = function (e) {
 		}
 	
 	}  	
-	
+
+	//Get user html DOM elements.
+	var userUSResidentStatusSelection = document.getElementById("usResidentStatusSelect");
+	var userUSResidentStatusCategorySelection = document.getElementById("usResidentStatusCategorySelect");
+	var userUSResidentStatusSubjectSelection = document.getElementById("usResidentStatusSubjectSelect"); 
+
+	//Load user US Resident Status.	
+	for (var residentStatusType in usResidentStatusData) {    
+		userUSResidentStatusSelection.options[userUSResidentStatusSelection.options.length] = new Option(residentStatusType, residentStatusType);
+		
+	}   
+
+	userUSResidentStatusSelection.onchange = function () {
+		
+		userUSResidentStatusCategorySelection.length = 1; // remove all options bar first
+		
+		
+		
+		if (this.selectedIndex < 1)
+				return true; // done
+			
+			for (var categoryType in usResidentStatusData[this.value]) {
+				userUSResidentStatusCategorySelection.options[userUSResidentStatusCategorySelection.options.length] = new Option(categoryType, categoryType);
+			}
+								
+		}  		
+		
+ 		/* 
+        Create function to allow users to change his/her city and zip code area. 
+    	*/	
+		userUSResidentStatusCategorySelection.onchange = function () {
+			userUSResidentStatusSubjectSelection.length = 1; // remove all options bar first
+			
+			if (this.selectedIndex < 1)
+				return; // done
+			
+			var status = usResidentStatusData[userUSResidentStatusSelection.value][this.value];
+			for (var i = 0; i < status.length; i++) {
+				userUSResidentStatusSubjectSelection.options[userUSResidentStatusSubjectSelection.options.length] = new Option(status[i], status[i]);
+			}
+		
+		} 
+			
 }
 
 
