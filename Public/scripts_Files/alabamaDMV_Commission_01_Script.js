@@ -13,13 +13,9 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	const DMVBirthSex = document.getElementById('birthSex').value.trim();   
 	const DMVGenderIdentity = document.getElementById('genderIdentity').value.trim(); 
 	const DMVRace = document.getElementById('race').value.trim();  
-
-
 	const DMVUSResidentStatusSelection = document.getElementById('usResidentStatusSelect').value.trim();
 	const DMVUSResidentStatusCategorySelection = document.getElementById('usResidentStatusCategorySelect').value.trim();
-	const DMVUSResidentStatusSubjectSelection = document.getElementById('usResidentStatusSubjectSelect').value.trim();
-
-	
+	const DMVUSResidentStatusSubjectSelection = document.getElementById('usResidentStatusSubjectSelect').value.trim();	
 	const DMVGradeSchool = document.getElementById('gradeSchool').value.trim();  
 	const DMVGradeSchoolSelection = document.getElementById('gradeSchoolSelect').value.trim();
 	const DMVGradeSchoolYearSelection = document.getElementById('gradeSchoolYearSelect').value.trim();
