@@ -308,6 +308,9 @@ db1.serialize(() => {
         DMVBirthSex VARCHAR(25) NOT NULL,
         DMVGenderIdentity VARCHAR(25) NOT NULL,
         DMVRace VARCHAR(250) NOT NULL,
+		DMVUSResidentStatusSelection VARCHAR(50) NOT NULL,
+		DMVUSResidentStatusCategorySelection VARCHAR (250) NOT NULL,
+		DMVUSResidentStatusSubjectSelection VARCHAR (250) NOT NULL,
 		DMVGradeSchool VARCHAR(300) NOT NULL,
 		DMVGradeSchoolSelection VARCHAR(10) NOT NULL,
 		DMVGradeSchoolYearSelection VARCHAR(25) NOT NULL,
@@ -488,6 +491,9 @@ passport.use(
 									DMVDateOfBirth: row.DMVDateOfBirth,
 									DMVBirthSex: row.DMVBirthSex,
 									DMVGenderIdentity: row.DMVGenderIdentity,
+									DMVUSResidentStatusSelection: row.DMVUSResidentStatusSelection,
+									DMVUSResidentStatusCategorySelection: row.DMVUSResidentStatusCategorySelection,
+									DMVUSResidentStatusSubjectSelection: row.DMVUSResidentStatusSubjectSelection,
 									DMVRace: row.DMVRace,
 									DMVGradeSchool: row.DMVGradeSchool,
 									DMVGradeSchoolSelection: row.DMVGradeSchoolSelection,
@@ -578,6 +584,9 @@ passport.use(
 							DMVBirthSex: row.DMVBirthSex,
 							DMVGenderIdentity: row.DMVGenderIdentity,
 							DMVRace: row.DMVRace,
+							DMVUSResidentStatusSelection: row.DMVUSResidentStatusSelection,
+							DMVUSResidentStatusCategorySelection: row.DMVUSResidentStatusCategorySelection,
+							DMVUSResidentStatusSubjectSelection: row.DMVUSResidentStatusSubjectSelection,
 							DMVGradeSchool: row.DMVGradeSchool,
 							DMVGradeSchoolSelection: row.DMVGradeSchoolSelection,
 							DMVGradeSchoolYearSelection: row.DMVGradeSchoolYearSelection,
@@ -664,6 +673,9 @@ passport.use(
 							DMVBirthSex: row.DMVBirthSex,
 							DMVGenderIdentity: row.DMVGenderIdentity,
 							DMVRace: row.DMVRace,
+							DMVUSResidentStatusSelection: row.DMVUSResidentStatusSelection,
+							DMVUSResidentStatusCategorySelection: row.DMVUSResidentStatusCategorySelection,
+							DMVUSResidentStatusSubjectSelection: row.DMVUSResidentStatusSubjectSelection,
 							DMVGradeSchool: row.DMVGradeSchool,
 							DMVGradeSchoolSelection: row.DMVGradeSchoolSelection,
 							DMVGradeSchoolYearSelection: row.DMVGradeSchoolYearSelection,
@@ -768,6 +780,9 @@ passport.deserializeUser(function (id, done) {
 				DMVBirthSex: user.DMVBirthSex,
 				DMVGenderIdentity: user.DMVGenderIdentity,
 				DMVRace: user.DMVRace,
+				DMVUSResidentStatusSelection: user.DMVUSResidentStatusSelection,
+				DMVUSResidentStatusCategorySelection: user.DMVUSResidentStatusCategorySelection,
+				DMVUSResidentStatusSubjectSelection: user.DMVUSResidentStatusSubjectSelection,
 				DMVGradeSchool: user.DMVGradeSchool,
 				DMVGradeSchoolSelection: user.DMVGradeSchoolSelection,
 				DMVGradeSchoolYearSelection: user.DMVGradeSchoolYearSelection,
@@ -857,6 +872,9 @@ iVoteBallotApp.get('/dashboard_01', checkAuthenticatedMiddleware(), async (req, 
 			DMVIdType: req.user.DMVIdType,		
 			DMVDateOfBirth: req.user.DMVDateOfBirth,
 			DMVBirthSex: req.user.DMVBirthSex,
+			DMVUSResidentStatusSelection: req.user.DMVUSResidentStatusSelection,
+			DMVUSResidentStatusCategorySelection: req.user.DMVUSResidentStatusCategorySelection,
+			DMVUSResidentStatusSubjectSelection: req.user.DMVUSResidentStatusSubjectSelection,
 			DMVGradeSchool: req.user.DMVGradeSchool,
 			DMVGradeSchoolSelection: req.user.DMVGradeSchoolSelection,
 			DMVGradeSchoolYearSelection: req.user.DMVGradeSchoolYearSelection,
@@ -890,6 +908,9 @@ iVoteBallotApp.get('/dashboard_01', checkAuthenticatedMiddleware(), async (req, 
 		console.log('DMVIdType:', req.user.DMVIdType);
 		console.log('DMVDateOfBirth:', req.user.DMVDateOfBirth);
 		console.log('DMVBirthSex:', req.user.DMVBirthSex);
+		console.log('DMVUSResidentStatusSelection:', req.user.DMVUSResidentStatusSelection);
+		console.log('DMVUSResidentStatusCategorySelection:', req.user.DMVUSResidentStatusCategorySelection);
+		console.log('DMVUSResidentStatusSubjectSelection:', req.user.DMVUSResidentStatusSubjectSelection);
 		console.log('DMVGradeSchool:', req.user.DMVGradeSchool);
 		console.log('DMVGradeSchoolSelection:', req.user.DMVGradeSchoolSelection);
 		console.log('DMVGradeSchoolYearSelection:', req.user.DMVGradeSchoolYearSelection);
@@ -940,6 +961,9 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', checkAuthenticatedMiddleware()
 			DMVIdType: req.user.DMVIdType,		
 			DMVDateOfBirth: req.user.DMVDateOfBirth,
 			DMVBirthSex: req.user.DMVBirthSex,
+			DMVUSResidentStatusSelection: req.user.DMVUSResidentStatusSelection,
+			DMVUSResidentStatusCategorySelection: req.user.DMVUSResidentStatusCategorySelection,
+			DMVUSResidentStatusSubjectSelection: req.user.DMVUSResidentStatusSubjectSelection,
 			DMVGradeSchool: req.user.DMVGradeSchool,
 			DMVGradeSchoolSelection: req.user.DMVGradeSchoolSelection,
 			DMVGradeSchoolYearSelection: req.user.DMVGradeSchoolYearSelection,			
@@ -970,6 +994,9 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', checkAuthenticatedMiddleware()
 		console.log('DMVIdType:', req.user.DMVIdType);
 		console.log('DMVDateOfBirth:', req.user.DMVDateOfBirth);
 		console.log('DMVBirthSex:', req.user.DMVBirthSex);
+		console.log('DMVUSResidentStatusSelection:', req.user.DMVUSResidentStatusSelection);
+		console.log('DMVUSResidentStatusCategorySelection:', req.user.DMVUSResidentStatusCategorySelection);
+		console.log('DMVUSResidentStatusSubjectSelection:', req.user.DMVUSResidentStatusSubjectSelection);
 		console.log('DMVGradeSchool:', req.user.DMVGradeSchool);
 		console.log('DMVGradeSchoolSelection:', req.user.DMVGradeSchoolSelection);
 		console.log('DMVGradeSchoolYearSelection:', req.user.DMVGradeSchoolYearSelection);
@@ -1509,6 +1536,9 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		const DMVBirthSex = req.body.DMVBirthSex;
 		const DMVGenderIdentity = req.body.DMVGenderIdentity;
 		const DMVRace = req.body.DMVRace;
+		const DMVUSResidentStatusSelection = req.body.DMVUSResidentStatusSelection;
+		const DMVUSResidentStatusCategorySelection = req.body.DMVUSResidentStatusCategorySelection;
+		const DMVUSResidentStatusSubjectSelection = req.body.DMVUSResidentStatusSubjectSelection;
 		const DMVGradeSchool = req.body.DMVGradeSchool;
 		const DMVGradeSchoolSelection = req.body.DMVGradeSchoolSelection;
 		const DMVGradeSchoolYearSelection = req.body.DMVGradeSchoolYearSelection;
@@ -1551,6 +1581,10 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		console.log('The user\'s birth sex is: ' + DMVBirthSex + '.');
 		console.log('The user\'s gender identity is: ' + DMVGenderIdentity + '.');
 		console.log('The user\'s race is: ' + DMVRace + '.');
+
+		console.log('The user\'s U.S. Resident Status is: ' + DMVUSResidentStatusSelection + '.');
+		console.log('The user\'s U.S. Resident Status Category is: ' + DMVUSResidentStatusCategorySelection + '.');
+		console.log('The user\'s U.S. Resident Status Category is: ' + DMVUSResidentStatusSubjectSelection + '.');
 
 		console.log('The user\'s Elementary School name: ' + DMVGradeSchool + '.');
 		console.log('Did the user graduated from grade school: ' + DMVGradeSchoolSelection + '.');
@@ -1668,6 +1702,9 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 			DMVBirthSex,
 			DMVGenderIdentity,
 			DMVRace,
+			DMVUSResidentStatusSelection,
+			DMVUSResidentStatusCategorySelection,
+			DMVUSResidentStatusSubjectSelection,
 			DMVGradeSchool,
 			DMVGradeSchoolSelection,
 			DMVGradeSchoolYearSelection,
@@ -1702,9 +1739,9 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		};
 
 		await db1.run(
-			`INSERT INTO alabamaDMV_Commission_01 (DMVPhoto, DMVFirstName, DMVMiddleName, DMVLastName, DMVSuffix, DMVDateOfBirth, DMVBirthSex, DMVGenderIdentity, DMVRace, DMVGradeSchool, DMVGradeSchoolSelection, DMVGradeSchoolYearSelection, DMVHighSchool, DMVHighSchoolSelection, DMVHighSchoolYearSelection, DMVCollege, DMVDegreeSelection, DMVCategorySelection, DMVSubjectSelection, DMVCollegeYearSelection, DMVSSN, DMVEmail, DMVConfirmEmail, DMVPhoneNumber, DMVAddress, DMVUnitType, DMVUnitTypeNumber, DMVCountrySelection, DMVStateSelection, DMVCountySelection, DMVCitySelection, DMVZipSelection, DMVIdType, DMVIdTypeNumber, IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode, Password, ConfirmPassword, Temporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+			`INSERT INTO alabamaDMV_Commission_01 (DMVPhoto, DMVFirstName, DMVMiddleName, DMVLastName, DMVSuffix, DMVDateOfBirth, DMVBirthSex, DMVGenderIdentity, DMVRace, DMVUSResidentStatusSelection, DMVUSResidentStatusCategorySelection, DMVUSResidentStatusSubjectSelection, DMVGradeSchool, DMVGradeSchoolSelection, DMVGradeSchoolYearSelection, DMVHighSchool, DMVHighSchoolSelection, DMVHighSchoolYearSelection, DMVCollege, DMVDegreeSelection, DMVCategorySelection, DMVSubjectSelection, DMVCollegeYearSelection, DMVSSN, DMVEmail, DMVConfirmEmail, DMVPhoneNumber, DMVAddress, DMVUnitType, DMVUnitTypeNumber, DMVCountrySelection, DMVStateSelection, DMVCountySelection, DMVCitySelection, DMVZipSelection, DMVIdType, DMVIdTypeNumber, IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode, Password, ConfirmPassword, Temporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
 
-			[Buffer.from(photoFileData), newUser.DMVFirstName, newUser.DMVMiddleName, newUser.DMVLastName, newUser.DMVSuffix, newUser.DMVDateOfBirth, newUser.DMVBirthSex, newUser.DMVGenderIdentity, newUser.DMVRace, newUser.DMVGradeSchool, newUser.DMVGradeSchoolSelection, newUser.DMVGradeSchoolYearSelection, newUser.DMVHighSchool, newUser.DMVHighSchoolSelection, newUser.DMVHighSchoolYearSelection, newUser.DMVCollege, newUser.DMVDegreeSelection, newUser.DMVCategorySelection, newUser.DMVSubjectSelection, newUser.DMVCollegeYearSelection, newUser.DMVSSN, newUser.DMVEmail, newUser.DMVConfirmEmail, newUser.DMVPhoneNumber, newUser.DMVAddress, newUser.DMVUnitType, newUser.DMVUnitTypeNumber, newUser.DMVCountrySelection, newUser.DMVStateSelection, newUser.DMVCountySelection, newUser.DMVCitySelection, newUser.DMVZipSelection, newUser.DMVIdType, newUser.DMVIdTypeNumber, newUser.IvoteBallotIdIdentifierCode, newUser.ConfirmIvoteBallotIdIdentifierCode, newUser.Password, newUser.ConfirmPassword, newUser.Temporary_Password], (err) => {
+			[Buffer.from(photoFileData), newUser.DMVFirstName, newUser.DMVMiddleName, newUser.DMVLastName, newUser.DMVSuffix, newUser.DMVDateOfBirth, newUser.DMVBirthSex, newUser.DMVGenderIdentity, newUser.DMVRace, newUser.DMVUSResidentStatusSelection, newUser.DMVUSResidentStatusCategorySelection, newUser.DMVUSResidentStatusSubjectSelection, newUser.DMVGradeSchool, newUser.DMVGradeSchoolSelection, newUser.DMVGradeSchoolYearSelection, newUser.DMVHighSchool, newUser.DMVHighSchoolSelection, newUser.DMVHighSchoolYearSelection, newUser.DMVCollege, newUser.DMVDegreeSelection, newUser.DMVCategorySelection, newUser.DMVSubjectSelection, newUser.DMVCollegeYearSelection, newUser.DMVSSN, newUser.DMVEmail, newUser.DMVConfirmEmail, newUser.DMVPhoneNumber, newUser.DMVAddress, newUser.DMVUnitType, newUser.DMVUnitTypeNumber, newUser.DMVCountrySelection, newUser.DMVStateSelection, newUser.DMVCountySelection, newUser.DMVCitySelection, newUser.DMVZipSelection, newUser.DMVIdType, newUser.DMVIdTypeNumber, newUser.IvoteBallotIdIdentifierCode, newUser.ConfirmIvoteBallotIdIdentifierCode, newUser.Password, newUser.ConfirmPassword, newUser.Temporary_Password], (err) => {
 			
 	
 				if (err) {
