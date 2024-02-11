@@ -2009,9 +2009,9 @@ const usResidentStatusData = {
 	'U.S. Citizen': {
 		'U.S. Citizenship': [
 
-			
+			'U.S. Citizenship',
+			'Permanent Resident'
 
-			
 		],
 	},
 	'U.S. Resident Alien': {
@@ -2026,9 +2026,8 @@ const usResidentStatusData = {
 			'I - 918 | U NonImmigrant Status', 
 			'I - 929 | Qualifying Family Member of a U-1 NonImmigrant'			
 				
-			],
-	},
-	
+		],
+	},	
 
 };
 		
@@ -2160,8 +2159,7 @@ window.onload = function (e) {
 	for (var degreeType in highEducationData) {    
 		userDegreeSelection.options[userDegreeSelection.options.length] = new Option(degreeType, degreeType);
 		
-	}   
-	
+	}   	
 		
 	userDegreeSelection.onchange = function () {
 		
@@ -2206,8 +2204,6 @@ window.onload = function (e) {
 		
 		userUSResidentStatusCategorySelection.length = 1; // remove all options bar first
 		
-		
-		
 		if (this.selectedIndex < 1)
 				return true; // done
 			
@@ -2232,7 +2228,7 @@ window.onload = function (e) {
 			}
 		
 		} 
-			
+
 }
 
 
