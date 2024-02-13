@@ -2143,7 +2143,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
 		console.log('req.user:', req.user.DMVEmail);
 
-		const DMVEmail = req.body.DMVEmail;
+		const DMVEmail = req.user.DMVEmail;		
 		const Password = req.body.Password;
 		const ConfirmPassword = req.body.ConfirmPassword;
 		
@@ -2160,24 +2160,26 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
 		if (passwordHashed !== confirmPasswordHashed) {
 			return res.render('alabamaVoters_CreatePasswords_01', { error: 'Your new password does not match to confirm password.' });
+			req.flash('error', 'Your new password does not match to your new confirm password.');
 
 		} else {
 
 			db1.run('UPDATE alabamaDMV_Commission_01 SET Password = ?, ConfirmPassword = ? WHERE DMVEmail = ?',
 				[
+								
 					passwordHashed,
 					confirmPasswordHashed,
 					DMVEmail
+
 				],
 				(err) => {
 
 					if (err) {
-						console.log(err.message);
-						return res.redirect('alabamaVoters_CreatePasswords_01', { error: 'An error occurred while user was updating his/her new password and confirm password from the \'alabamaVoters_CreatePasswords_01\' webpage.' });
+						console.log('alabamaVoters_CreatePasswords_01\'s POST have created either an user login authentication error or syntax POST issues: ' + err.message);
+						res.render('500');
 
 					} else {
-
-						
+							console.log('The user have successfully either created or updated he or her password.')
 							res.redirect('/alabamaVoters_LogIn_01');
 
 						}
