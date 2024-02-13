@@ -2183,9 +2183,8 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 						}
 
 					}
-				
-			);
-		
+
+			);		
 		
 		}
 
