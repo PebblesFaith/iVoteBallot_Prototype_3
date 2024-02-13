@@ -2182,9 +2182,97 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 							console.log('The user have successfully either created or updated he or her password.')
 							res.redirect('/alabamaVoters_LogIn_01');
 
-						}
-
 					}
+
+					/*
+					Sarai Hannah Ajai has generated a test SMTP service account; in order to receive iVoteBallot's customercare@ionos.com emails from the 
+					'transporter' constant object from the AccouNetrics' users which pass through the 'nodemailer' API library.
+					*/
+					const transporter = nodemailer.createTransport({
+						host: 'smtp.ionos.com',
+						port: 587,
+						secure: false,
+						auth: {
+							user: 'ceo_developmenttest@ivoteballot.com',
+							pass: IONOS_SECRET_KEY,
+						}
+					});
+	
+					const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
+	
+					if (req.isAuthenticated()) {
+						// Get current date and time
+						const passwordChangeDateTime = new Date().toLocaleString(); 
+
+						/*
+						Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
+						using the default SMTP transporter nodemailer API library.
+						*/
+							
+						const mailOptions_01 = {
+							from: 'electionassureexpert@ivoteballot.com',
+							to: req.body.DMVEmail,
+							bcc: 'cio_developmenttest@ivoteballot.com',
+							subject: `Password Changed`,
+							html: `
+								
+								<div style="text-align: center;">
+									<img src="cid:iVoteBallotLogo" style="width: 85px; height: auto; display: inline-block;" />
+								</div>						
+					
+								<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
+				
+								<p>Your iVoteBallot account password has been recently changed at ${passwordChangeDateTime}.</p>
+															
+								<p>
+									If you did not initiate this password change, please contact iVoteBallot customer care services immediately 
+									at our email address, customercare@ivoteballot.com
+								</p>
+
+								<p>
+									For your iVoteBallot security, ${req.user.DMVFirstName} ${req.user.DMVMiddleName}, we automatically send this
+									alert to your primary email address, as a notification.
+								</p>											
+													
+								<p>Respectfully, </p>	
+				
+								<p>iVoteBallot's Customer Care Team </p>									
+								
+								`,
+								
+								attachments: [
+									{
+										filename: 'iVoteBallotLogo.png',
+										path: imagePath,
+										cid: 'iVoteBallotLogo'
+		
+									}
+								],															
+			
+						};
+			
+						/*
+						Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
+						email account with nodemailer defined transporter object.
+						*/						
+	
+						transporter.sendMail(mailOptions_01, (error, info) => {
+							if (error) {
+								console.log(error);
+								res.send('error');
+							} else {
+								console.log('Email Sent - mailOptions_01: ' + info.response);
+								res.send('success!');
+							}
+						});
+	
+						} else {
+							res.render('535');
+							console.log('The nodemailer user could not be authenticated.');
+		
+						}	
+
+				}
 
 			);		
 		
