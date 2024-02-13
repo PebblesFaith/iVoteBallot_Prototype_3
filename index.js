@@ -1994,14 +1994,14 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 						subject: `New User Registration - iVoteBallot Online Voter Registration Not Yet Verified`,
 						html: `	
 		
-					<p>iVoteBallot has received a new online registration:</p>
+						<p>iVoteBallot has received a new online registration:</p>
 
-					<p>New User Registration: ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName}, has been sent a temporary password for an iVoteBallot account verification.</p> 
-					<p>The email associated with the iVoteBallot's account is: ${req.user.DMVEmail}.</p>															
-				
-					<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+						<p>New User Registration: ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName}, has been sent a temporary password for an iVoteBallot account verification.</p> 
+						<p>The email associated with the iVoteBallot's account is: ${req.user.DMVEmail}.</p>															
+					
+						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 
-				`,
+					`,
 
 						attachments: [
 							{
@@ -2143,7 +2143,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
 		console.log('req.user:', req.user.DMVEmail);
 
-		const DMVEmail = req.user.DMVEmail;
+		const DMVEmail = req.body.DMVEmail;
 		const Password = req.body.Password;
 		const ConfirmPassword = req.body.ConfirmPassword;
 		
@@ -2177,101 +2177,18 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
 					} else {
 
-						const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
-
-						const transporter = nodemailer.createTransport({
-							host: 'smtp.ionos.com',
-							port: 587,
-							secure: false,
-							auth: {
-								user: 'ceo_developmenttest@ivoteballot.com',
-								pass: IONOS_SECRET_KEY,
-							}
-						});		
 						
-
-						if (req.isAuthenticated()) {
-							/*
-							Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
-							using the default SMTP transporter nodemailer API library.
-							*/
-							const mailOptions_01 = {
-								from: req.body.DMVEmail,
-								to: 'electionassureexpert@ivoteballot.com',
-								bcc: 'cio_developmenttest@ivoteballot.com',								
-								subject: `New User Signup Notification Successfully Completed`,
-								html: `	
-			
-							<p>iVoteBallot has received a new online registration completion:</p>
-
-							<p>New User ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName} has successfully registered for iVoteBallot.</p> 
-							<p>: ${req.user.DMVEmail}.</p>																
-							
-							<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
-
-						`,
-
-								attachments: [
-									{
-										filename: 'iVoteBallotLogo.png',
-										path: imagePath,
-										cid: 'iVoteBallotLogo'
-
-									}
-								]
-
-							};
-
-							// Send welcome email to the user
-							const mailOptions_02 = {
-								from: 'electionassureexpert@ivoteballot.com',
-								to: req.body.DMVEmail,
-								bcc: 'cio_developmenttest@ivoteballot.com',
-								subject: 'Successful Registration for iVoteBallot',
-								html: `
-									<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
-									<p>You have successfully registered for iVoteBallot.</p>
-									<p>Thank you for choosing iVoteBallot!</p>
-									<p>Best regards,</p>
-									<p>iVoteBallot's Election Assure Expert Team </p>
-									<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
-								`,
-
-								attachments: [
-									{
-										filename: 'iVoteBallotLogo.png',
-										path: imagePath,
-										cid: 'iVoteBallotLogo'
-
-									}
-								]
-
-							};
-							
-							transporter.sendMail(mailOptions_01, (err, info) => {
-								if (err) {
-									console.log(err);
-								} else {
-									console.log('Email Sent: ' + info.response);
-								}
-							});
-
-							transporter.sendMail(mailOptions_02, (err, info) => {
-								if (err) {
-									console.log(err);
-								} else {
-									console.log('Email Sent: ' + info.response);
-								}
-							});
-
 							res.redirect('/alabamaVoters_LogIn_01');
 
 						}
 
 					}
-				});
+				
+			);
+		
 		
 		}
+
 	}
 );	
 
