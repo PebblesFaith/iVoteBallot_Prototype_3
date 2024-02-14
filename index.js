@@ -2021,61 +2021,61 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 						subject: `Authenticate Your iVoteBallot's Account`,
 						html: `
 			
-				<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
+						<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
 
-				<p>Thank you for choosing iVoteBallot to complete your sign-up process, please use the following temporary password:<p>
+						<p>Thank you for choosing iVoteBallot to complete your sign-up process, please use the following temporary password:<p>
 
-				<p><strong>${newPassword}</strong></p;
+						<p><strong>${newPassword}</strong></p;
 
-				<br>
+						<br>
 
-				<p>in order for iVoteBallot to verify your email address identity.</p>						
-				
-				<p>This temporary password is valid for the next 10 minutes. After, successful authentication, you can set your permanent password and confirm password.</p>
-				
-				<p>Should you have any questions or concerns, feel free to reach out to our iVoteBallot's Election Assure Expert Team Team.</p>
-				
-				<p>Respectfully, </p>	
+						<p>in order for iVoteBallot to verify your email address identity.</p>						
+						
+						<p>This temporary password is valid for the next 10 minutes. After, successful authentication, you can set your permanent password and confirm password.</p>
+						
+						<p>Should you have any questions or concerns, feel free to reach out to our iVoteBallot's Election Assure Expert Team Team.</p>
+						
+						<p>Respectfully, </p>	
 
-				<p>iVoteBallot's Election Assure Expert Team </p>
+						<p>iVoteBallot's Election Assure Expert Team </p>
 
-				<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
-				
-				`,
-				
-					attachments: [
-							{
-								filename: 'iVoteBallotLogo.png',
-								path: imagePath,
-								cid: 'iVoteBallotLogo'
+						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+						
+						`,
+						
+							attachments: [
+									{
+										filename: 'iVoteBallotLogo.png',
+										path: imagePath,
+										cid: 'iVoteBallotLogo'
 
-							}
-						]
+									}
+								]
 
-					};
+							};
 
-					/*
-					Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
-					email account with nodemailer defined transporter object.
-					*/
+				/*
+				Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
+				email account with nodemailer defined transporter object.
+				*/
 
-					transporter.sendMail(mailOptions_01, (error, info) => {
-						if (error) {
-							console.log(error);
-						} else {
-							console.log('Email Sent: ' + info.response);
-						}
-					});
+				transporter.sendMail(mailOptions_01, (error, info) => {
+					if (error) {
+						console.log(error);
+					} else {
+						console.log('Email Sent: ' + info.response);
+					}
+				});
 
-					transporter.sendMail(mailOptions_02, (error, info) => {
-						if (error) {
-							console.log(error);
-							res.send('error');
-						} else {
-							console.log('Email Sent: ' + info.response);
-							res.send('success!');
-						}
-					});
+				transporter.sendMail(mailOptions_02, (error, info) => {
+					if (error) {
+						console.log(error);
+						res.send('error');
+					} else {
+						console.log('Email Sent: ' + info.response);
+						res.send('success!');
+					}
+				});
 
 				} else {
 					res.render('/535');
