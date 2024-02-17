@@ -953,7 +953,7 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 			console.log('The user is not successfully authenticated within the session through the passport from dashboard!');	
 			
 	}	
-		
+			
 });
 
 iVoteBallotApp.get('/alabama_Candidates_2024_02', async (req, res) => {
@@ -1530,7 +1530,7 @@ iVoteBallotApp.post(
 
 /* -------------------------- The beginning of All SQLite3 databases section ----------------------------- */
 
-iVoteBallotApp.post('/alabamaDMV_Commission_01', redirectDashboard,
+iVoteBallotApp.post('/alabamaDMV_Commission_01',
 	async (req, res) => {
 		
 		const DMVPhoto = req.body.DMVPhoto;
