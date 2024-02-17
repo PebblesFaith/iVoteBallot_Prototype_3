@@ -1993,12 +1993,14 @@ const highEducationData = {
 		'Greenville': ['36037'],
 		'McKenzie': ['36456']
 	},
+	'No Degree': {
+		'No Degree Category': [			
+			'No Degree Subject',
+		],	
+		
+	},
 
 };	
-
-
-
-
 
 const usResidentStatusData = {
 
@@ -2027,8 +2029,7 @@ const usResidentStatusData = {
 
 };
 		
-window.onload = function (e) {
-	
+window.onload = function (e) {	
 		
 	//Get user html DOM elements.
 	var userCountrySelection = document.getElementById("countrySelect");
