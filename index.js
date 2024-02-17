@@ -824,18 +824,19 @@ passport.deserializeUser(function (id, done) {
 
 });
 
-function checkAuthenticatedMiddleware (req, res, next) {
+function checkMiddlewareAuthentication (req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
 	}
-	res.redirect('/alabamaVoters_LogIn_01');
+	res.redirect('/alabamaVoters_Login_01');
 }
 
-function checkNotAuthenticatedMiddleware (req, res, next) {
+function checkDeleteMiddlewareAuthentication (req, res, next) {
 	if (req.isAuthenticated()) {
-		return res.redirect('/dashboard');
+		return next();
+
 	}
-	next();
+	res.redirect('/alabamaVoters_LogOut_01');
 }
 
 const redirectDashboard = (req, res, next) => {
@@ -847,7 +848,7 @@ const redirectDashboard = (req, res, next) => {
 	}
 }
 
-iVoteBallotApp.get('/dashboard_01', async (req, res) => {
+iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, res) => {
 	
 	if (req.isAuthenticated()) {
 
@@ -956,7 +957,7 @@ iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 			
 });
 
-iVoteBallotApp.get('/alabama_Candidates_2024_02', async (req, res) => {
+iVoteBallotApp.get('/alabama_Candidates_2024_02', checkMiddlewareAuthentication, async (req, res) => {
     if (req.isAuthenticated()) {
 
 		console.log('The User had been successfully authenticated within the Session through the passport from alabama_Candidates_2024_02!');
@@ -1411,7 +1412,7 @@ iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
 });
 
 // The user route for alabamaVoters_LogIn_01.
-iVoteBallotApp.get('/alabamaVoters_LogIn_01', (req, res) => {
+iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 	console.log(req.session);
 	console.log('isUnauthenticated: ', req.isUnauthenticated);
 	// Check if user already authenticated.
@@ -1465,7 +1466,7 @@ iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
    verify that routes and middlewares are set up in the correct order to enforce authentication
    before accessing protected routes like the logout endpoint.
 */
-iVoteBallotApp.delete('/alabamaVoters_LogOut_01', (req, res) => {
+iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentication, (req, res) => {
 	
 	if (req.isAuthenticated()) {
 		
