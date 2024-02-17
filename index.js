@@ -824,17 +824,30 @@ passport.deserializeUser(function (id, done) {
 
 });
 
-function checkAuthenticatedMiddleware() {
-	return (req, res, next) => {
-		if (req.isAuthenticated())
-			return next();
-
-			res.redirect('/dashboard_01');
-	} 	
-
+function checkAuthenticatedMiddleware (req, res, next) {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+	res.redirect('/alabamaVoters_LogIn_01');
 }
 
-iVoteBallotApp.get('/dashboard_01', checkAuthenticatedMiddleware(), async (req, res) => {
+function checkNotAuthenticatedMiddleware (req, res, next) {
+	if (req.isAuthenticated()) {
+		return res.redirect('/dashboard');
+	}
+	next();
+}
+
+const redirectDashboard = (req, res, next) => {
+	if (req.session.userId) {
+		res.redirect('/dashboard_01');
+	} else {
+		next();
+		res.redirect('/alabamaVoters_LogIn_01');
+	}
+}
+
+iVoteBallotApp.get('/dashboard_01', async (req, res) => {
 	
 	if (req.isAuthenticated()) {
 
@@ -943,7 +956,7 @@ iVoteBallotApp.get('/dashboard_01', checkAuthenticatedMiddleware(), async (req, 
 		
 });
 
-iVoteBallotApp.get('/alabama_Candidates_2024_02', checkAuthenticatedMiddleware(), async (req, res) => {
+iVoteBallotApp.get('/alabama_Candidates_2024_02', async (req, res) => {
     if (req.isAuthenticated()) {
 
 		console.log('The User had been successfully authenticated within the Session through the passport from alabama_Candidates_2024_02!');
@@ -1184,14 +1197,7 @@ iVoteBallotApp.use(views_Controller);
 	request to proceed to the next middleware function. This middleware is commonly used to restrict
 	access to certain routes for authenticated users.
 */
-const redirectDashboard = (req, res, next) => {
-	if (req.session.userId) {
-		res.redirect('/dashboard_01');
-	} else {
-		next();
-		res.redirect('/alabamaVoters_LogIn_01');
-	}
-}
+
 
 /* -------------------------- The ending of the redirectDashboard section ----------------------------- */
 
@@ -1405,7 +1411,7 @@ iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
 });
 
 // The user route for alabamaVoters_LogIn_01.
-iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
+iVoteBallotApp.get('/alabamaVoters_LogIn_01', (req, res) => {
 	console.log(req.session);
 	console.log('isUnauthenticated: ', req.isUnauthenticated);
 	// Check if user already authenticated.
@@ -1512,7 +1518,7 @@ iVoteBallotApp.post(
 	));
 
 iVoteBallotApp.post(
-	'/alabamaVoters_LogIn_01',
+	'/alabamaVoters_LogIn_01', 
 	passport.authenticate('local3', {
 		successRedirect: '/dashboard_01',
 		failureRedirect: '/alabamaVoters_LogIn_01',
@@ -1524,7 +1530,7 @@ iVoteBallotApp.post(
 
 /* -------------------------- The beginning of All SQLite3 databases section ----------------------------- */
 
-iVoteBallotApp.post('/alabamaDMV_Commission_01',
+iVoteBallotApp.post('/alabamaDMV_Commission_01', redirectDashboard,
 	async (req, res) => {
 		
 		const DMVPhoto = req.body.DMVPhoto;
