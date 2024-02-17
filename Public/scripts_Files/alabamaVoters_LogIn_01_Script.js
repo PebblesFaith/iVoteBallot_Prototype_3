@@ -44,7 +44,7 @@ const validateAlabamaVotersLogInForm = (e) => {
 		return false;
 	
 	}     
-	
+
 	e.preventDefault();  
 				
 	form.addEventListener('submit', validateAlabamaVotersLogInForm);
