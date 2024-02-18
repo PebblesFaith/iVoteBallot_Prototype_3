@@ -215,6 +215,8 @@ const nodemailer = require('nodemailer');
 */
 const db = new sqliteDB('Alabama_Id_Session.db', { verbose: console.log('The Alabama_Id_Session database have been successfully created.') });
 
+const timeout = require('connect-timeout');
+
 //const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
 const port = 8080;
@@ -374,8 +376,10 @@ iVoteBallotApp.use(
 				resave: false,
 				saveUninitialized: true,
 				//proxy: true,
-				maxAge: 'SESSION_MAX_AGE' // 1 hour				
-			}
+				maxAge: 'SESSION_MAX_AGE' // 10 minutes		
+			},
+
+			rolling: true, // Resets the expiration time on each request
 		}),
 
 		secret: 'EXPRESS_SESSION_KEY'
