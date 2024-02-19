@@ -366,14 +366,13 @@ db1.serialize(() => {
 /*
 
 */
-
 db1_LoggedInHistory.serialize(() => {
-	db1.run(`CREATE TABLE IF NOT EXISTS alabamaUsers_LoggedIn_History (
+	db1_LoggedInHistory.run(`CREATE TABLE IF NOT EXISTS alabamaUsers_LoggedIn_History (
 
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-		userId INTEGER,
-		User_Login_Time DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
-		User_Logout_Time DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')) 
+		id TEXT PRIMARY KEY,
+		userId TEXT,
+		User_Login_Time DATETIME, 
+		User_Logout_Time DATETIME 
 		
 	)`), (err) => {
 
@@ -859,6 +858,16 @@ passport.deserializeUser(function (id, done) {
 
 });
 
+
+const redirectDashboard = (req, res, next) => {
+	if (req.session.userId) {
+		res.redirect('/dashboard_01');
+	} else {
+		next();
+		res.redirect('/alabamaVoters_LogIn_01');
+	}
+}
+
 function checkMiddlewareAuthentication (req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
@@ -874,14 +883,6 @@ function checkDeleteMiddlewareAuthentication (req, res, next) {
 	res.redirect('/alabamaVoters_LogOut_01');
 }
 
-const redirectDashboard = (req, res, next) => {
-	if (req.session.userId) {
-		res.redirect('/dashboard_01');
-	} else {
-		next();
-		res.redirect('/alabamaVoters_LogIn_01');
-	}
-}
 
 iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, res) => {
 	
@@ -1074,6 +1075,9 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', checkMiddlewareAuthentication,
         console.log('The user is not successfully authenticated within the session through the passport from alabamaDMV_Commission_01.');
     }
 });
+
+
+
 
 /* -------------------------- The beginning of the USE section ----------------------------- */
 
@@ -1465,10 +1469,74 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 	}
 });
 
+
+/*------------------------------------------------*/
+
+// Function to retrieve UUIDs from alabamaDMV_Commission_01.db
+function retrieveUUIDs(callback) {
+    db1.all('SELECT id FROM alabamaDMV_Commission_01', (err, rows) => {
+        if (err) {
+            console.error('Error retrieving UUIDs:', err);
+            callback(err, null);
+        } else {
+            const uuids = rows.map(row => row.uuid_column);
+            callback(null, uuids);
+        }
+    });
+}
+
+// Function to log a user's login session
+function logLoginSession(req, userId) {
+    const currentTime = new Date().toISOString();
+    const uniqueId = uuidv4(); // Generate a new UUID
+	
+
+    db1_LoggedInHistory.run(`INSERT INTO alabamaUsers_LoggedIn_History (id, userId, User_Login_Time) VALUES (?, ?, ?)`, [uniqueId, userId, currentTime], (err) => {
+        if (err) {
+            console.error('Error logging login session:', err.message);
+        } else {
+            console.log('Login session logged successfully.');
+        }
+    });
+}
+
+
+retrieveUUIDs((err, uuids, req) => {
+    if (err) {
+        console.error('Error retrieving UUIDs:', err);
+    } else {
+                
+        // Log login session for each retrieved UUID
+        uuids.forEach(uuid => {
+            logLoginSession(req, userId);
+        });
+    }
+});
+
+/*------------------------------------------------*/
+
+
+function checkMiddlewareAuthentication (req, res, next) {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+	res.redirect('/alabamaVoters_Login_01');
+}
+
+function checkDeleteMiddlewareAuthentication (req, res, next) {
+	if (req.isAuthenticated()) {
+		return next();
+
+	}
+	res.redirect('/alabamaVoters_LogOut_01');
+}
+
+
 // User route for alabamaVoters_LogOut_01
 iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
 	if (req.isUnauthenticated()) {
 		console.log('The User have successfully logged out of the dashboard!');
+		logLogoutSession(req); // Log the logout session
 		res.render('alabamaVoters_LogOut_01');
 	} else {
 		res.render('404');
@@ -1559,8 +1627,19 @@ iVoteBallotApp.post(
 		successRedirect: '/dashboard_01',
 		failureRedirect: '/alabamaVoters_LogIn_01',
 		failureFlash: true
-	}
-));
+	}),
+	function(req, res) {
+        // This function will be called only if authentication succeeds
+
+		const userId = req.body.id;
+		// You can also do additional validation or processing here if needed
+		logLoginSession(req, userId);
+
+        res.redirect('/dashboard_01');
+    }
+	
+	
+);
 
 /* -------------------------- The ending of the POST LOCAL STRATEGY section ----------------------------- */
 
@@ -2322,6 +2401,8 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
 	}
 );	
+
+
 
 //const boxicons = require('boxicons');
 /*
