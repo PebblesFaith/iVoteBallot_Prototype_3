@@ -858,7 +858,6 @@ passport.deserializeUser(function (id, done) {
 
 });
 
-
 const redirectDashboard = (req, res, next) => {
 	if (req.session.userId) {
 		res.redirect('/dashboard_01');
@@ -882,7 +881,6 @@ function checkDeleteMiddlewareAuthentication (req, res, next) {
 	}
 	res.redirect('/alabamaVoters_LogOut_01');
 }
-
 
 iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, res) => {
 	
@@ -1514,23 +1512,6 @@ retrieveUUIDs((err, uuids, req) => {
 });
 
 /*------------------------------------------------*/
-
-
-function checkMiddlewareAuthentication (req, res, next) {
-	if (req.isAuthenticated()) {
-		return next();
-	}
-	res.redirect('/alabamaVoters_Login_01');
-}
-
-function checkDeleteMiddlewareAuthentication (req, res, next) {
-	if (req.isAuthenticated()) {
-		return next();
-
-	}
-	res.redirect('/alabamaVoters_LogOut_01');
-}
-
 
 // User route for alabamaVoters_LogOut_01
 iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
