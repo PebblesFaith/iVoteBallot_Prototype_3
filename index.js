@@ -272,11 +272,21 @@ iVoteBallotApp.use(express.json());
 */
 const db1 = new sqlite3.Database('alabamaDMV_Commission_01.db', err => {
 	if (err) {
-		console.log('Sarai Hannah Ajai has created the SQLite3 database connection from her written JavaScript coded language for \'alabamaDMV_Commission_01\' which has a generated an error, as ' + err + '.');
+		console.log('Sarai Hannah Ajai has not reated the SQLite3 database connection from her written JavaScript coded language for \'alabamaDMV_Commission_01\' which has a generated an error, as ' + err + '.');
 	} else {
-		console.log('Sarai Hannah Ajai has created the SQLite3 database connection from her written JavaScript coded language which \'alabamaDMV_Commission_01\' has a generated successfully connection.');
+		console.log('Sarai Hannah Ajai has created the SQLite3 database connection from her written JavaScript coded language which \'alabamaDMV_Commission_01\' has a generated successfully connection' + Date() + '.');
 	}
 });
+
+
+const db1_LoggedInHistory = new sqlite3.Database('alabamaUsers_LoggedIn_History.db', err => {
+	if (err) {
+		console.log('Sarai Hannah Ajai has not created the SQLite3 database table named, alabamaUsers_LoggedIn_History.db with passport and session management authentications:'  + err + '.');
+	} else {
+		console.log('Sarai Hannah Ajai has successfully created the SQLite3 database table named, alabamaUsers_LoggedIn_History.db with passport and session management authentications' + Date() + '.' );
+	}
+});
+
 
 /*
 	The given JavaScript codes language creates a SQLite3 database table named 
@@ -353,6 +363,9 @@ db1.serialize(() => {
 			}
 		};
 });
+
+
+
 
 /*
 	This statement sets up a middleware function within iVoteBallot web application 
