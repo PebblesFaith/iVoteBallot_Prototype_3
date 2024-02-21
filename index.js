@@ -948,7 +948,8 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 			alabama_Candidates_2024_02: '/alabama_Candidates_2024_02', 
 			alabamaVoters_LogOut_01: '/alabamaVoters_LogOut_01',
 		});
-		
+
+		console.log('UUIDv4:', req.user.id);
 		console.log('DMVFirstName:', req.user.DMVFirstName);
 		console.log('DMVMiddleName:', req.user.DMVMiddleName);
 		console.log('DMVLastName:', req.user.DMVLastName);
@@ -980,6 +981,149 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 		console.log('DMVCitySelection:', req.user.DMVCitySelection);
 		console.log('DMVZipSelection:', req.user.DMVZipSelection);
 		console.log('DMVPhoneNumber:', req.user.DMVPhoneNumber);
+		
+		/*
+		Sarai Hannah Ajai has generated a test SMTP service account; in order to receive iVoteBallot's customercare@ionos.com emails from the 
+		'transporter' constant object from the AccouNetrics' users which pass through the 'nodemailer' API library.
+		*/
+		const transporter = nodemailer.createTransport({
+			host: 'smtp.ionos.com',
+			port: 587,
+			secure: false,
+			auth: {
+				user: 'ceo_developmenttest@ivoteballot.com',
+				pass: IONOS_SECRET_KEY,
+			}
+		});
+
+		const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
+
+		if (req.isAuthenticated()) {
+			
+			// Get current date and time
+			const passwordChangeDateTime = new Date().toLocaleString('en-US', {
+				timeZone: 'CST',
+				month: 'long',      // Full month name (e.g., January, February)
+				day: 'numeric',     // Day of the month (e.g., 1, 2, 3)
+				year: 'numeric',    // Full year (e.g., 2024)
+				hour: 'numeric',    // Hour (e.g., 1, 2, ..., 12)
+				minute: '2-digit',  // Two-digit minute (e.g., 05, 10, 15)
+				hour12: true,       // Use 12-hour clock (true) or 24-hour clock (false)
+			});
+			
+			console.log(passwordChangeDateTime + ' CST');
+
+			// Retrieve user-agent header
+			const userAgent = req.headers['user-agent'];
+
+			// Retrieve IP address of the client
+			const ipAddress = req.ip;
+			console.log(ipAddress);
+
+			// Function to asterisk the last four digits of the IP address
+			function maskIPAddress(ip) {
+			// Split the IP address by dots
+			const parts = ip.split('.');
+				
+				// Asterisk the last part (last octet) of the IP address
+				// If the IP address doesn't have at least four parts, return the original IP
+				if (parts.length < 4) {
+					return ip;
+				}
+				
+				// Replace the last part with asterisks for all characters
+				parts[3] = '***';
+				
+				// Join the parts back together
+				return parts.join('.');
+			}
+
+			// Test the function
+			const maskedIPAddress = maskIPAddress(ipAddress);
+			console.log(maskedIPAddress); // For Example Output: 192.168.0.***
+
+			// Extracting device type and browser information from user-agent
+			// You may use libraries like 'express-useragent' for more comprehensive parsing
+			const deviceType = userAgent.match(/\((.*?)\)/)[1];
+			const browserInfo = userAgent.match(/(Firefox|Chrome|Safari|Edge|MSIE|Trident|Opera)/)[0];			
+
+			/*
+			Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
+			using the default SMTP transporter nodemailer API library.
+			*/
+				
+			const mailOptions_01 = {
+				from: 'electionassureexpert@ivoteballot.com',
+				to: req.body.DMVEmail,
+				bcc: 'cio_developmenttest@ivoteballot.com',
+				subject: `An Important Security Notification from iVoteBallot`,
+				html: `
+					
+					<div style="text-align: center;">
+						<img src="cid:iVoteBallotLogo" style="width: 85px; height: auto; display: inline-block;" />
+					</div>						
+		
+					<p>Hello ${req.user.DMVFirstName} ${req.user.DMVMiddleName},</p>
+	
+					<p>We are writing to inform you about an important security update regarding your iVoteBallot account. Here are the details:</p>
+					
+					<p>Web Application: iVoteBallot.com [Website]
+					
+					<p>Device Type: ${deviceType}</p>
+
+					<p>Browser Type: ${browserInfo}</p>
+					
+					<p>Date and Time: ${passwordChangeDateTime}</p>
+
+					<p>IP Address: ${maskedIPAddress}</p>
+												
+					<p>
+						We highly recommend that you take a moment to review the security settings of your email account. Additionally, please avoid using the
+						same password across multiple online platforms. For additional tips on password safety, please <a href="https://www.cisa.gov/secure-our-world/use-strong-passwords">click here</a>.                        					
+					</p>
+
+					<p>
+						Ensuring your iVoteBallot security is our utmost priority.
+					</p>											
+										
+					<p> Best regards,</p>	
+	
+					<p>iVoteBallot's Election Assure Experts Team</p>									
+					
+					`,
+					
+					attachments: [
+						{
+							filename: 'iVoteBallotLogo.png',
+							path: imagePath,
+							cid: 'iVoteBallotLogo'
+
+						}
+					],															
+
+			};
+
+			/*
+			Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
+			email account with nodemailer defined transporter object.
+			*/						
+
+			transporter.sendMail(mailOptions_01, (error, info) => {
+				if (error) {
+					console.log(error);
+					res.send('error');
+				} else {
+					console.log('Email Sent - mailOptions_01: ' + info.response);
+					res.send('success!');
+				}
+			});
+
+			} else {
+				res.render('535');
+				console.log('The nodemailer user could not be authenticated.');
+
+			}
+
 
 		} else {		
 			
@@ -1073,9 +1217,6 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', checkMiddlewareAuthentication,
         console.log('The user is not successfully authenticated within the session through the passport from alabamaDMV_Commission_01.');
     }
 });
-
-
-
 
 /* -------------------------- The beginning of the USE section ----------------------------- */
 
@@ -1614,9 +1755,11 @@ iVoteBallotApp.post(
 
 		const userId = req.body.id;
 		// You can also do additional validation or processing here if needed
-		logLoginSession(req, userId);
+		logLoginSession(req, userId);  	
+		
 
-        res.redirect('/dashboard_01');
+		res.redirect('/dashboard_01');
+
     }
 	
 	
@@ -1627,8 +1770,8 @@ iVoteBallotApp.post(
 /* -------------------------- The beginning of All SQLite3 databases section ----------------------------- */
 
 iVoteBallotApp.post('/alabamaDMV_Commission_01',
-	async (req, res) => {
-		
+	async (req, res) => {		
+	
 		const DMVPhoto = req.body.DMVPhoto;
 		const DMVFirstName = req.body.DMVFirstName;
 		const DMVMiddleName = req.body.DMVMiddleName;
@@ -1672,8 +1815,9 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		const ConfirmPassword = req.body.ConfirmPassword;
 		const Temporary_Password = req.body.Temporary_Password;
 
-		console.log(req.body);		
-		
+		console.log(req.body);	
+
+		console.log('The user unique Id is: ' + id + '.');
 		console.log('The user\'s photograph image is: ' + DMVPhoto + '.');
 		console.log('The user\'s first name: ' + DMVFirstName + '.');
 		console.log('The user\'s middle name is: ' + DMVMiddleName + '.');
