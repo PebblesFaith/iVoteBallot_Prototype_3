@@ -992,7 +992,7 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 			secure: false,
 			auth: {
 				user: 'ceo_developmenttest@ivoteballot.com',
-				pass: IONOS_SECRET_KEY,
+				pass: process.env.IONOS_SECRET_KEY,
 			}
 		});
 
@@ -1055,7 +1055,7 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 			const mailOptions_01 = {
 				from: 'electionassureexpert@ivoteballot.com',
 				to: req.body.DMVEmail,
-				bcc: 'cio_developmenttest@ivoteballot.com',
+				bcc: 'cio_developmenttest@ivoteballot.com, envdevelopmenttest1_recipient@ivoteballot.com',
 				subject: `Important Security Notification: iVoteBallot Account Login`,
 				html: `
 					
@@ -1767,11 +1767,11 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 			Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
 			using the default SMTP transporter nodemailer API library.
 			*/
-				
+							
 			const mailOptions_01 = {
-				from: 'electionassureexpert@ivoteballot.com',
+				from: 'electionassureexpert@ivoteballot.com', 
 				to: req.body.DMVEmail,
-				bcc: 'cio_developmenttest@ivoteballot.com',
+				bcc: 'cio_developmenttest@ivoteballot.com, envdevelopmenttest1_recipient@ivoteballot.com',
 				subject: `Important Security Notification: iVoteBallot Account Logout`,
 				html: `
 					
@@ -1844,10 +1844,10 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 
 	} else {
 
-	res.redirect('/535');
+	res.redirect('535');
 
-}		
-
+}
+	
 console.log('reg.user', req.user);	
 console.log('User had been successfully logout through "passport.use passport.use local3, new LocalStrategy" authenticated within the Session Id passport from dashboard!');
 
