@@ -1960,8 +1960,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		const Temporary_Password = req.body.Temporary_Password;
 
 		console.log(req.body);	
-
-		console.log('The user unique Id is: ' + id + '.');
+	
 		console.log('The user\'s photograph image is: ' + DMVPhoto + '.');
 		console.log('The user\'s first name: ' + DMVFirstName + '.');
 		console.log('The user\'s middle name is: ' + DMVMiddleName + '.');
