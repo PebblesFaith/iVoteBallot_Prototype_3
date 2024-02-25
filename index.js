@@ -369,7 +369,7 @@ db1.serialize(() => {
 db1_LoggedInHistory.serialize(() => {
 	db1_LoggedInHistory.run(`CREATE TABLE IF NOT EXISTS alabamaUsers_LoggedIn_History (
 
-		id TEXT PRIMARY KEY,
+		uniqueId TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6)))), 
 		userId TEXT,
 		User_Login_Time DATETIME, 
 		User_Logout_Time DATETIME 
@@ -909,6 +909,10 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 			console.log('req.user', req.user);
 
 		console.groupEnd();
+
+		// Call the userHistoryLogin function to log the user's login session
+        userHistoryLogin(req, res);
+		
 		
 		const bufferData = Buffer.from(req.user.DMVPhoto, 'base64');
 
@@ -980,7 +984,7 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 		console.log('DMVCountySelection:', req.user.DMVCountySelection);
 		console.log('DMVCitySelection:', req.user.DMVCitySelection);
 		console.log('DMVZipSelection:', req.user.DMVZipSelection);
-		console.log('DMVPhoneNumber:', req.user.DMVPhoneNumber);
+		console.log('DMVPhoneNumber:', req.user.DMVPhoneNumber);		
 		
 		/*
 		Sarai Hannah Ajai has generated a test SMTP service account; in order to receive iVoteBallot's customercare@ionos.com emails from the 
@@ -1597,6 +1601,7 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 	if (req.isUnauthenticated) {
 		res.render('alabamaVoters_LogIn_01');
 		console.log('User is not logged into the dashboard!');
+	
 	} else if
 		(req.session.isAuthenticated) {
 
@@ -1608,49 +1613,56 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 	}
 });
 
-
 /*------------------------------------------------*/
 
-// Function to retrieve UUIDs from alabamaDMV_Commission_01.db
-function retrieveUUIDs(callback) {
-    db1.all('SELECT id FROM alabamaDMV_Commission_01', (err, rows) => {
-        if (err) {
-            console.error('Error retrieving UUIDs:', err);
-            callback(err, null);
-        } else {
-            const uuids = rows.map(row => row.uuid_column);
-            callback(null, uuids);
-        }
-    });
-}
-
-// Function to log a user's login session
-function logLoginSession(req, userId) {
+/*
+	The JavaScript code defines a function named userHistoryLogin, intended to log an users' login sessions within the iVoteBallot	
+	web application. When invoked, the function retrieves the current time and generates a unique identifier using UUIDv4. 
+	The function extracts the user ID from the request object which is stored under req.user.id. Subsequently, the function 
+	inserts a new record into the alabamaUsers_LoggedIn_History table, including the user ID, unique session identifier, 
+	and login timestamp. And, an error handling is incorporated to log any insertion errors and render an appropriate error page
+	if necessary. Upon successful insertion, a confirmation message is logged.
+*/
+const userHistoryLogin = function logLoginSession(req, res) {
     const currentTime = new Date().toISOString();
-    const uniqueId = uuidv4(); // Generate a new UUID
-	
+    const uniqueId = uuidv4(); // Generate a new UUIDv4 for the uniqueId column
+    const userId = req.user.id; // Use the existing userId from req.user
 
-    db1_LoggedInHistory.run(`INSERT INTO alabamaUsers_LoggedIn_History (id, userId, User_Login_Time) VALUES (?, ?, ?)`, [uniqueId, userId, currentTime], (err) => {
+    // Insert a new record into the user login history table
+    db1_LoggedInHistory.run(`INSERT INTO alabamaUsers_LoggedIn_History (userId, uniqueId, User_Login_Time) VALUES (?, ?, ?)`, [userId, uniqueId, currentTime], (err) => {
         if (err) {
-            console.error('Error logging login session:', err.message);
+            console.error('Error inserting into user login history:', err);
+            res.render('/535'); // Render appropriate error page
         } else {
-            console.log('Login session logged successfully.');
+            console.log('User login session logged successfully');
+            
         }
     });
-}
+};
 
+/*
+	The JavaScript code defines a function named userHistoryLogout, aimed at updating an users' logout session within an
+	iVoteBallot web application. When invoked, the function retrieves the current time and extracts the user ID from the 
+	request object which is stored under req.user.id. Next, the req.user.id then updates the corresponding record in the 
+	alabamaUsers_LoggedIn_History table by setting the User_Logout_Time to the current time, where the user ID matches and 
+	the User_Logout_Time is currently null. And, an error handling is included to log any update errors and render an appropriate error 
+	page if needed. Upon successful update, a confirmation message is logged.
+*/
+const userHistoryLogout = function logLogoutSession(req, res) {
+    const currentTime = new Date().toISOString();
+    const userId = req.user.id; // Use the existing userId from req.user
 
-retrieveUUIDs((err, uuids, req) => {
-    if (err) {
-        console.error('Error retrieving UUIDs:', err);
-    } else {
-                
-        // Log login session for each retrieved UUID
-        uuids.forEach(uuid => {
-            logLoginSession(req, userId);
-        });
-    }
-});
+    // Update the record in the user login history table
+    db1_LoggedInHistory.run(`UPDATE alabamaUsers_LoggedIn_History SET User_Logout_Time = ? WHERE userId = ? AND User_Logout_Time IS NULL`, [currentTime, userId], (err) => {
+        if (err) {
+            console.error('Error updating user logout history:', err);
+            res.render('/535'); // Render appropriate error page
+        } else {
+            console.log('User logout session updated successfully');         
+            //res.redirect('/logout'); // Redirect to logout page or home page
+        }
+    });
+};
 
 /*------------------------------------------------*/
 
@@ -1695,8 +1707,7 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 	
 	if (req.isAuthenticated()) {
 		
-		req.session.destroy();
-		
+		req.session.destroy();		
 		
 		/*
 		Sarai Hannah Ajai has generated a test SMTP service account; in order to receive iVoteBallot's customercare@ionos.com emails from the 
@@ -1842,6 +1853,8 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 	
 		res.redirect('/alabamaVoters_LogIn_01'); // Redirect to login page if not authenticated
 
+		userHistoryLogout(req, res);
+
 	} else {
 
 	res.redirect('535');
@@ -1895,14 +1908,12 @@ iVoteBallotApp.post(
 		failureFlash: true
 	}),
 	function(req, res) {
+
+		
         // This function will be called only if authentication succeeds
 
-		const userId = req.body.id;
-		// You can also do additional validation or processing here if needed
-		logLoginSession(req, userId);  	
-		
-
 		res.redirect('/dashboard_01');
+		
 
     }
 	
@@ -1915,7 +1926,7 @@ iVoteBallotApp.post(
 
 iVoteBallotApp.post('/alabamaDMV_Commission_01',
 	async (req, res) => {		
-	
+		
 		const DMVPhoto = req.body.DMVPhoto;
 		const DMVFirstName = req.body.DMVFirstName;
 		const DMVMiddleName = req.body.DMVMiddleName;
