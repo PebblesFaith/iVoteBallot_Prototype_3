@@ -370,9 +370,11 @@ db1_LoggedInHistory.serialize(() => {
 	db1_LoggedInHistory.run(`CREATE TABLE IF NOT EXISTS alabamaUsers_LoggedIn_History (
 
 		uniqueId TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6)))), 
-		userId TEXT,
+		url TEXT,
+		userId TEXT,		
 		User_Login_Time DATETIME, 
-		User_Logout_Time DATETIME 
+		User_Logout_Time DATETIME,
+		total_Time_Login TEXT
 		
 	)`), (err) => {
 
@@ -911,8 +913,7 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 		console.groupEnd();
 
 		// Call the userHistoryLogin function to log the user's login session
-        userHistoryLogin(req, res);
-		
+        userHistoryLogin(req, res);		
 		
 		const bufferData = Buffer.from(req.user.DMVPhoto, 'base64');
 
@@ -1127,7 +1128,6 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 				console.log('The nodemailer user could not be authenticated.');
 
 			}
-
 
 		} else {		
 			
@@ -1627,15 +1627,35 @@ const userHistoryLogin = function logLoginSession(req, res) {
     const currentTime = new Date().toISOString();
     const uniqueId = uuidv4(); // Generate a new UUIDv4 for the uniqueId column
     const userId = req.user.id; // Use the existing userId from req.user
+	//const url = req.protocol + '://' + req.get('host') + req.originalUrl;
+
+	const dashboardRoutes = {
+		dashboard_01: '/dashboard_01',
+		alabama_Candidates_2024_02: '/alabama_Candidates_2024_02',
+		
+	};
+
+	const baseUrl = req.protocol + '://' + req.get('host');
+    const url = baseUrl + req.originalUrl;
+
+    // Check if the requested route matches any routes in dashboardRoutes
+    if (req.originalUrl in dashboardRoutes) {
+        url = baseUrl + dashboardRoutes[req.originalUrl];
+    }
+
+	console.log('------------------------------------------------------')
+	console.log('The user url path:' + url);
+	console.log('______________________________________________________')
 
     // Insert a new record into the user login history table
-    db1_LoggedInHistory.run(`INSERT INTO alabamaUsers_LoggedIn_History (userId, uniqueId, User_Login_Time) VALUES (?, ?, ?)`, [userId, uniqueId, currentTime], (err) => {
+    db1_LoggedInHistory.run(`INSERT INTO alabamaUsers_LoggedIn_History (uniqueId, url, userId, User_Login_Time) VALUES (?, ?, ?, ?)`, [uniqueId, url, userId, currentTime], (err) => {
         if (err) {
             console.error('Error inserting into user login history:', err);
             res.render('/535'); // Render appropriate error page
         } else {
-            console.log('User login session logged successfully');
-            
+			console.log('------------------------------------------------------')
+            console.log('The user login time session have been logged successfully.');
+            console.log('______________________________________________________')
         }
     });
 };
@@ -1658,11 +1678,53 @@ const userHistoryLogout = function logLogoutSession(req, res) {
             console.error('Error updating user logout history:', err);
             res.render('/535'); // Render appropriate error page
         } else {
-            console.log('User logout session updated successfully');         
-            //res.redirect('/logout'); // Redirect to logout page or home page
+            console.log('------------------------------------------------------------')
+            console.log('The user logout time session has been updated successfully.');  
+            console.log('____________________________________________________________')  
+
+            // Now, fetch the necessary data after updating logout time
+            db1_LoggedInHistory.get(`SELECT uniqueId, url, userId, User_Logout_Time, User_Login_Time FROM alabamaUsers_LoggedIn_History WHERE userId = ? AND User_Logout_Time = ?`, [userId, currentTime], (err, row) => {
+                if (err) {
+                    console.error('Error fetching user login data:', err);
+                    res.render('/error_page'); // Render appropriate error page
+                } else {
+                    // Calculate total_Time_Login
+                    const totalTimeLogin = Math.round(((new Date(row.User_Logout_Time) - new Date(row.User_Login_Time)) / 1000) / 60);
+
+                    // Update total_Time_Login in the database
+                    db1_LoggedInHistory.run(`UPDATE alabamaUsers_LoggedIn_History SET total_Time_Login = ? WHERE uniqueId = ?`, [totalTimeLogin, row.uniqueId], (err) => {
+                        if (err) {
+                            console.error('Error updating total time login:', err);
+                            res.render('/error_page'); // Render appropriate error page
+                        } else {
+                            console.log('Total time login updated successfully.');
+                            //res.redirect('/logout'); // Redirect to logout page or home page
+                        }
+                    });
+                }
+            });
         }
     });
 };
+
+/*
+
+    // Update the record in the user login history table
+    db1_LoggedInHistory.run(`UPDATE alabamaUsers_LoggedIn_History SET User_Logout_Time = ? WHERE userId = ? AND User_Logout_Time IS NULL`, [currentTime, userId], (err) => {
+        if (err) {
+            console.error('Error updating user logout history:', err);
+            res.render('/535'); // Render appropriate error page
+        } else {
+			console.log('------------------------------------------------------------')
+            console.log('The user logout time session have been updated successfully.');  
+			console.log('____________________________________________________________')  
+            //res.redirect('/logout'); // Redirect to logout page or home page
+        }
+    });
+	
+};
+
+*/
 
 /*------------------------------------------------*/
 
@@ -1908,15 +1970,12 @@ iVoteBallotApp.post(
 		failureFlash: true
 	}),
 	function(req, res) {
-
 		
         // This function will be called only if authentication succeeds
 
-		res.redirect('/dashboard_01');
-		
+		res.redirect('/dashboard_01');		
 
-    }
-	
+    }	
 	
 );
 
