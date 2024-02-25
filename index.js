@@ -1689,7 +1689,7 @@ const userHistoryLogout = function logLogoutSession(req, res) {
                     res.render('/error_page'); // Render appropriate error page
                 } else {
                     // Calculate total_Time_Login
-                    const totalTimeLogin = Math.round(((new Date(row.User_Logout_Time) - new Date(row.User_Login_Time)) / 1000) / 60);
+                    const totalTimeLogin = Math.floor(((new Date(row.User_Logout_Time) - new Date(row.User_Login_Time)) / 1000) / 60);
 
                     // Update total_Time_Login in the database
                     db1_LoggedInHistory.run(`UPDATE alabamaUsers_LoggedIn_History SET total_Time_Login = ? WHERE uniqueId = ?`, [totalTimeLogin, row.uniqueId], (err) => {
@@ -1706,25 +1706,6 @@ const userHistoryLogout = function logLogoutSession(req, res) {
         }
     });
 };
-
-/*
-
-    // Update the record in the user login history table
-    db1_LoggedInHistory.run(`UPDATE alabamaUsers_LoggedIn_History SET User_Logout_Time = ? WHERE userId = ? AND User_Logout_Time IS NULL`, [currentTime, userId], (err) => {
-        if (err) {
-            console.error('Error updating user logout history:', err);
-            res.render('/535'); // Render appropriate error page
-        } else {
-			console.log('------------------------------------------------------------')
-            console.log('The user logout time session have been updated successfully.');  
-			console.log('____________________________________________________________')  
-            //res.redirect('/logout'); // Redirect to logout page or home page
-        }
-    });
-	
-};
-
-*/
 
 /*------------------------------------------------*/
 
