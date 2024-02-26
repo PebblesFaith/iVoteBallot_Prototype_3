@@ -371,10 +371,14 @@ db1_LoggedInHistory.serialize(() => {
 
 		uniqueId TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6)))), 
 		url TEXT,
+		userAgent TEXT,
 		userId TEXT,		
 		User_Login_Time DATETIME, 
-		User_Logout_Time DATETIME,
-		total_Time_Login TEXT
+		User_Logout_Time DATETIME,		
+		total_Time_Hours INTEGER,           
+		total_Time_Minutes INTEGER,        
+		total_Time_Seconds INTEGER,         
+		total_Time_Milliseconds INTEGER
 		
 	)`), (err) => {
 
@@ -1616,42 +1620,54 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 /*------------------------------------------------*/
 
 /*
-	The JavaScript code defines a function named userHistoryLogin, intended to log an users' login sessions within the iVoteBallot	
-	web application. When invoked, the function retrieves the current time and generates a unique identifier using UUIDv4. 
-	The function extracts the user ID from the request object which is stored under req.user.id. Subsequently, the function 
-	inserts a new record into the alabamaUsers_LoggedIn_History table, including the user ID, unique session identifier, 
-	and login timestamp. And, an error handling is incorporated to log any insertion errors and render an appropriate error page
-	if necessary. Upon successful insertion, a confirmation message is logged.
+	The function `userHistoryLogin` logs the user's login session. It generates a unique ID using UUIDv4 and captures the current time in ISO format. 
+	The function also constructs the user's requested URL and stores the URL along with the user's ID and user agent information. Then the function inserts 
+	data into a user login history table named `alabamaUsers_LoggedIn_History`. If the insertion is successful, the function logs a confirmation message; 
+	otherwise or the function renders an error page.
 */
 const userHistoryLogin = function logLoginSession(req, res) {
-    const currentTime = new Date().toISOString();
-    const uniqueId = uuidv4(); // Generate a new UUIDv4 for the uniqueId column
-    const userId = req.user.id; // Use the existing userId from req.user
-	//const url = req.protocol + '://' + req.get('host') + req.originalUrl;
+
+	const uniqueId = uuidv4(); // Generate a new UUIDv4 for the uniqueId column
+
+	const currentTime = new Date().toISOString();
+	
+	console.log('-----------------------------')	
+	console.log(currentTime + ' CST');
+	console.log('_____________________________')	
 
 	const dashboardRoutes = {
+
 		dashboard_01: '/dashboard_01',
 		alabama_Candidates_2024_02: '/alabama_Candidates_2024_02',
 		
-	};
+	};    
 
 	const baseUrl = req.protocol + '://' + req.get('host');
     const url = baseUrl + req.originalUrl;
 
-    // Check if the requested route matches any routes in dashboardRoutes
+    // To check if, the requested route matches any routes in dashboardRoutes
     if (req.originalUrl in dashboardRoutes) {
         url = baseUrl + dashboardRoutes[req.originalUrl];
-    }
+    }	
+
+	//const url = req.protocol + '://' + req.get('host') + req.originalUrl;
 
 	console.log('------------------------------------------------------')
 	console.log('The user url path:' + url);
-	console.log('______________________________________________________')
+	console.log('______________________________________________________')	
+   
+    // To use the existing userId from req.user
+	const userId = req.user.id; 
 
-    // Insert a new record into the user login history table
-    db1_LoggedInHistory.run(`INSERT INTO alabamaUsers_LoggedIn_History (uniqueId, url, userId, User_Login_Time) VALUES (?, ?, ?, ?)`, [uniqueId, url, userId, currentTime], (err) => {
+	const user_agent = req.headers['user-agent'];
+	req.session.user_agent = user_agent;	
+
+    // To insert a new record into the user login history table
+    db1_LoggedInHistory.run(`INSERT INTO alabamaUsers_LoggedIn_History (uniqueId, url, userId, userAgent, User_Login_Time) VALUES (?, ?, ?, ?, ?)`, [uniqueId, url, userId, user_agent, currentTime], (err) => {
         if (err) {
             console.error('Error inserting into user login history:', err);
-            res.render('/535'); // Render appropriate error page
+			// To render appropriate error page
+            res.render('/535'); 
         } else {
 			console.log('------------------------------------------------------')
             console.log('The user login time session have been logged successfully.');
@@ -1661,18 +1677,24 @@ const userHistoryLogin = function logLoginSession(req, res) {
 };
 
 /*
-	The JavaScript code defines a function named userHistoryLogout, aimed at updating an users' logout session within an
-	iVoteBallot web application. When invoked, the function retrieves the current time and extracts the user ID from the 
-	request object which is stored under req.user.id. Next, the req.user.id then updates the corresponding record in the 
-	alabamaUsers_LoggedIn_History table by setting the User_Logout_Time to the current time, where the user ID matches and 
-	the User_Logout_Time is currently null. And, an error handling is included to log any update errors and render an appropriate error 
-	page if needed. Upon successful update, a confirmation message is logged.
+	The function `userHistoryLogout` is designed to log the user's logout session. The function captures the current time and updates the user's logout 
+	time in the login history table `alabamaUsers_LoggedIn_History` where the user ID matches and where the logout time is currently null. If the update 
+	encounters an error, it renders an appropriate error page. Upon successful update or the function fetches the necessary data, calculates the total
+	login time, and updates the database with the total login time in hours, minutes, seconds, and milliseconds for the corresponding user session. If 
+	any error occurs during these calculations or updates or the function redirects to an error page.
 */
 const userHistoryLogout = function logLogoutSession(req, res) {
-    const currentTime = new Date().toISOString();
-    const userId = req.user.id; // Use the existing userId from req.user
+	// Get current date and time
+	const currentTime = new Date().toISOString();
+	
+	console.log('-----------------------------')	
+	console.log(currentTime + ' CST');
+	console.log('_____________________________')	  
 
-    // Update the record in the user login history table
+	// Use the existing userId from req.user
+    const userId = req.user.id; 
+
+    // To update the record in the user login history table
     db1_LoggedInHistory.run(`UPDATE alabamaUsers_LoggedIn_History SET User_Logout_Time = ? WHERE userId = ? AND User_Logout_Time IS NULL`, [currentTime, userId], (err) => {
         if (err) {
             console.error('Error updating user logout history:', err);
@@ -1686,21 +1708,56 @@ const userHistoryLogout = function logLogoutSession(req, res) {
             db1_LoggedInHistory.get(`SELECT uniqueId, url, userId, User_Logout_Time, User_Login_Time FROM alabamaUsers_LoggedIn_History WHERE userId = ? AND User_Logout_Time = ?`, [userId, currentTime], (err, row) => {
                 if (err) {
                     console.error('Error fetching user login data:', err);
-                    res.render('/error_page'); // Render appropriate error page
-                } else {
-                    // Calculate total_Time_Login
-                    const totalTimeLogin = Math.floor(((new Date(row.User_Logout_Time) - new Date(row.User_Login_Time)) / 1000) / 60);
 
-                    // Update total_Time_Login in the database
-                    db1_LoggedInHistory.run(`UPDATE alabamaUsers_LoggedIn_History SET total_Time_Login = ? WHERE uniqueId = ?`, [totalTimeLogin, row.uniqueId], (err) => {
-                        if (err) {
-                            console.error('Error updating total time login:', err);
-                            res.render('/error_page'); // Render appropriate error page
-                        } else {
-                            console.log('Total time login updated successfully.');
-                            //res.redirect('/logout'); // Redirect to logout page or home page
-                        }
-                    });
+ 					// To Render appropriate error page
+                    res.render('/535');
+                } else {
+
+                    // To calculate total_Time_Login                   
+					function calculateTotalTimeLogin(row) {
+						try {
+							const logoutTime = new Date(row.User_Logout_Time).getTime();
+							const loginTime = new Date(row.User_Login_Time).getTime();
+							
+							if (!isNaN(logoutTime) && !isNaN(loginTime)) {
+								const totalTimeMillis = logoutTime - loginTime;
+								const totalTimeSeconds = Math.floor(totalTimeMillis / 1000);
+								const hours = Math.floor(totalTimeSeconds / 3600);
+								const minutes = Math.floor((totalTimeSeconds % 3600) / 60);
+								const seconds = totalTimeSeconds % 60;
+					
+								return {
+									hours: hours,
+									minutes: minutes,
+									seconds: seconds,
+									milliseconds: totalTimeMillis % 1000
+								};
+							} else {
+								console.error("An invalid date format detected.");
+								return null;
+							}
+						} catch (error) {
+							console.error("An error occurred while calculating total time login:", error);
+							return null;
+						}
+					}
+					
+					const totalTimeLogin = calculateTotalTimeLogin(row);
+
+					// To update total_Time_Login in the database
+					db1_LoggedInHistory.run(`UPDATE alabamaUsers_LoggedIn_History SET total_Time_Hours = ?, total_Time_Minutes = ?, total_Time_Seconds = ?, total_Time_Milliseconds = ? WHERE uniqueId = ?`, [totalTimeLogin.hours, totalTimeLogin.minutes, totalTimeLogin.seconds, totalTimeLogin.milliseconds, row.uniqueId], (err) => {
+						if (err) {
+							console.error('Error updating total time login:', err);
+
+							// To render appropriate error page
+							res.redirect('/535'); 
+
+						} else {
+							console.log('Total time login have been updated successfully.');
+							
+						}
+					});	
+
                 }
             });
         }
