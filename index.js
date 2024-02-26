@@ -219,6 +219,13 @@ const timeout = require('connect-timeout');
 
 //const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
+
+/*
+	The function starts the iVoteBallotApp prototype 3 web application by listening to port 8080 on the IP address '0.0.0.0'. If there is an error during the
+	process, the function logs a message indicating the problem encountered while loading the iVoteBallot prototype 3 web application. Otherwise, the function
+	logs a confirmation message stating that the Node.js server, in conjunction with the Express framework, is listening on port 8080 for the iVoteBallotApp 
+	prototype 3 web application.
+*/
 const port = 8080;
 
 iVoteBallotApp.listen(port, '0.0.0.0', function (err) {
@@ -278,7 +285,13 @@ const db1 = new sqlite3.Database('alabamaDMV_Commission_01.db', err => {
 	}
 });
 
-
+/*
+	The provided JavaScript code initializes a SQLite3 database connection named `db1_LoggedInHistory`, targeting a database file named,
+	'alabamaUsers_LoggedIn_History.db'. And, if an error occurs during the connection attempt, the SQLite3 database connection logs a message 
+	indicating the failure to create the database table along with the error details. Conversely, if the connection is successful,  SQLite3 
+	database connction logs a message confirming the creation of the database table 'alabamaUsers_LoggedIn_History.db' with passport and session 
+	management authentications, appended with the current date and time.
+*/
 const db1_LoggedInHistory = new sqlite3.Database('alabamaUsers_LoggedIn_History.db', err => {
 	if (err) {
 		console.log('Sarai Hannah Ajai has not created the SQLite3 database table named, alabamaUsers_LoggedIn_History.db with passport and session management authentications:'  + err + '.');
@@ -364,7 +377,11 @@ db1.serialize(() => {
 });
 
 /*
-
+	The JavaScript lines of codes utilizes the SQLite3 database connection `db1_LoggedInHistory` to create a table named 'alabamaUsers_LoggedIn_History'. 
+	The table structure includes fields such as uniqueId, url, userAgent, userId, User_Login_Time, User_Logout_Time, total_Time_Hours, total_Time_Minutes, 
+	total_Time_Seconds, and total_Time_Milliseconds. And, if the table creation is successful, it logs a message confirming the creation along with the
+	current date and time. Otherwise, if an error occurs during the creation process, the SQLites database connection logs a message indicating the failure
+	along with the error details.
 */
 db1_LoggedInHistory.serialize(() => {
 	db1_LoggedInHistory.run(`CREATE TABLE IF NOT EXISTS alabamaUsers_LoggedIn_History (
@@ -453,6 +470,14 @@ iVoteBallotApp.use([passport.initialize()]);
 	used after Passport's authentication middleware has been invoked.
 */
 iVoteBallotApp.use(passport.session());
+
+/*
+	The provided JavaScript line configures the iVoteBallotApp to utilize the 'flash' middleware. This middleware is typically
+	used in the iVoteBallot web applications built with frameworks like Express.js to display flash messages. Flash messages 
+	are temporary messages that can be displayed to users to convey notifications or alerts, often after a specific action has 
+	been performed, such as submitting a form or completing an operation. The 'flash' middleware enables the iVoteBallotApp to 
+	handle and display these messages effectively to users interacting with the iVoteBallot web application.
+*/
 
 iVoteBallotApp.use(flash());
 
@@ -577,6 +602,22 @@ passport.use(
 	)
 );
 
+/*
+	The JavaScript code block establishes the use of Passport's 'local2' authentication strategy within the iVoteBallot application. This 
+	strategy utilizes a LocalStrategy object configured to handle authentication requests where the username field is identified as 'DMVEmail' 
+	and the password field as 'Temporary_Password'. Upon receiving a request, the passport.use strategy logs the provided email and password 
+	for debugging purposes. Subsequently, the passport.use strategy queries a SQLite database named 'alabamaDMV_Commission_01' to retrieve an 
+	user information associated with the provided email address. If an error occurs during the database query, the  the passport.use strategy 
+	returns the error to the authentication process. If no user record is found for the provided email, the passport.use strategy returns a 
+	message indicating the incorrect email address. Additionally, the passport.use strategy uses bcrypt to compare the provided temporary 
+	password with the hashed password retrieved from the database. If the passwords do not match, the passport.use strategy returns a message 
+	indicating the incorrect temporary password. However, if authentication is successful, the passport.use strategy returns the user information
+	along with authentication status as 'isAuthenticated: true'.
+
+	This strategy encapsulates the user authentication logic for the iVoteBallot web application, validating user credentials against the stored
+	information in the database. The passport.use strategy ensures that only authorized users with correct credentials can access the 
+	iVoteBallot web application's functionalities, thereby enhancing the iVoteBallot web application security and user authentication mechanisms.
+*/
 passport.use(
 	'local2',
 	new LocalStrategy({
