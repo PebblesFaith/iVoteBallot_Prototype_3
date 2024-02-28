@@ -9,7 +9,7 @@
 	   servers and APIs.
 
 	So, when you see "const express = require('express')"", this means that the server-side JavaScript code is using the Express.js
-	    framework to handle HTTP requests and responses, routing, middleware, and other web application functionalities.
+		framework to handle HTTP requests and responses, routing, middleware, and other web application functionalities.
 */
 const express = require('express');
 
@@ -141,7 +141,7 @@ const flash = require('express-flash');
 
 /* 
 	The coded statement "const methodOverride = require('method-override')" within the a Node.js web application such as iVoteBallot imports the
- 	'method-override' middleware into the iVoteBallot web application. This means in the context of the iVoteBallot web application:
+	  'method-override' middleware into the iVoteBallot web application. This means in the context of the iVoteBallot web application:
 
 		1. Middleware in Node.js: Middleware in Node.js is software that provides services to iVoteBallot web applications outside of what is 
 		  offered by the operating system. In the iVoteBallot web applications, middleware sits between the incoming request and the application's
@@ -294,9 +294,9 @@ const db1 = new sqlite3.Database('alabamaDMV_Commission_01.db', err => {
 */
 const db1_LoggedInHistory = new sqlite3.Database('alabamaUsers_LoggedIn_History.db', err => {
 	if (err) {
-		console.log('Sarai Hannah Ajai has not created the SQLite3 database table named, alabamaUsers_LoggedIn_History.db with passport and session management authentications:'  + err + '.');
+		console.log('Sarai Hannah Ajai has not created the SQLite3 database table named, alabamaUsers_LoggedIn_History.db with passport and session management authentications:' + err + '.');
 	} else {
-		console.log('Sarai Hannah Ajai has successfully created the SQLite3 database table named, alabamaUsers_LoggedIn_History.db with passport and session management authentications' + Date() + '.' );
+		console.log('Sarai Hannah Ajai has successfully created the SQLite3 database table named, alabamaUsers_LoggedIn_History.db with passport and session management authentications' + Date() + '.');
 	}
 });
 
@@ -512,7 +512,7 @@ passport.use(
 			console.log('The iVoteBallot\'s user\'s passport.use(local1) password (\'IvoteBallotIdIdentifierCode\') as: ' + IvoteBallotIdIdentifierCode);
 
 			if (!DMVEmail) {
-				return done(null, false, { message: 'You have entered an email address that already exist in iVoteBallot\'s database: ' + DMVEmail });				
+				return done(null, false, { message: 'You have entered an email address that already exist in iVoteBallot\'s database: ' + DMVEmail });
 			}
 
 			if (!IvoteBallotIdIdentifierCode) {
@@ -848,7 +848,7 @@ passport.deserializeUser(function (id, done) {
 		if (!user) {
 			return done(null, false);
 		}
-		
+
 		return done(null,
 			{
 				id: user.id,
@@ -873,7 +873,7 @@ passport.deserializeUser(function (id, done) {
 				DMVCollege: user.DMVCollege,
 				DMVDegreeSelection: user.DMVDegreeSelection,
 				DMVCategorySelection: user.DMVCategorySelection,
-				DMVSubjectSelection: user.DMVSubjectSelection,	
+				DMVSubjectSelection: user.DMVSubjectSelection,
 				DMVCollegeYearSelection: user.DMVCollegeYearSelection,
 				DMVSSN: user.DMVSSN,
 				DMVEmail: user.DMVEmail,
@@ -896,12 +896,42 @@ passport.deserializeUser(function (id, done) {
 				Temporary_Password: user.Temporary_Password,
 
 				isAuthenticated: true
-				
+
 			}
 			
 		);
 
 	});
+	
+
+	// Retrieve user data from the second table
+	/*
+    db1_LoggedInHistory.get('SELECT * FROM alabamaUsers_LoggedIn_History WHERE userId = ?', userId, (err, user2) => {
+
+        if (err) {
+            return done(err);
+        }
+        if (!user2) {
+            // If user not found in the second table, return false
+            return done(null, false);
+        }
+
+        // Return user data from the second table
+        return done(null, 
+			
+			{
+				id: user2.id,
+
+				total_Time_Seconds: user2.total_Time_Seconds,
+
+				isAuthenticated: true
+
+        	}
+		
+		);
+    });
+
+	*/
 
 });
 
@@ -914,14 +944,14 @@ const redirectDashboard = (req, res, next) => {
 	}
 }
 
-function checkMiddlewareAuthentication (req, res, next) {
+function checkMiddlewareAuthentication(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
 	}
 	res.redirect('/alabamaVoters_Login_01');
 }
 
-function checkDeleteMiddlewareAuthentication (req, res, next) {
+function checkDeleteMiddlewareAuthentication(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
 
@@ -930,44 +960,44 @@ function checkDeleteMiddlewareAuthentication (req, res, next) {
 }
 
 iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, res) => {
-	
+
 	if (req.isAuthenticated()) {
 
 		const user_agent = req.headers['user-agent'];
 		req.session.user_agent = user_agent;
 
-		const ip_address = req.ip; 
+		const ip_address = req.ip;
 		req.session.ip_address = ip_address;
-		
+
 		console.log(req.user);
 		console.log(req.session);
 		console.log('User had been successfully authenticated within the Session through the passport from dashboard!');
 
 		console.group('\n GET /user - request details:')
-			console.log('_____________________________________ \.n');
-			console.log('req.body:', req.body);
-			console.log('req.params:', req.params);
-			console.log('req.headers:', req.headers);
-			console.log('req.isAuthenticated:', req.isAuthenticated);
-			console.log('_____________________________________ \.n');
-			console.log('req.sesssion.user_agent:', req.session.user_agent);			
-			console.log('ip_address:', req.session.ip_address);
-			console.log('_____________________________________ \.n');
-			console.log('req.user', req.user);
+		console.log('_____________________________________ \.n');
+		console.log('req.body:', req.body);
+		console.log('req.params:', req.params);
+		console.log('req.headers:', req.headers);
+		console.log('req.isAuthenticated:', req.isAuthenticated);
+		console.log('_____________________________________ \.n');
+		console.log('req.sesssion.user_agent:', req.session.user_agent);
+		console.log('ip_address:', req.session.ip_address);
+		console.log('_____________________________________ \.n');
+		console.log('req.user', req.user);
 
 		console.groupEnd();
 
 		// Call the userHistoryLogin function to log the user's login session
-        userHistoryLogin(req, res);		
-		
+		userHistoryLogin(req, res);
+
 		const bufferData = Buffer.from(req.user.DMVPhoto, 'base64');
 
-		res.render('dashboard_01', { 
-			DMVFirstName: req.user.DMVFirstName, 
-			DMVMiddleName: req.user.DMVMiddleName, 
-			DMVLastName: req.user.DMVLastName, 
+		res.render('dashboard_01', {
+			DMVFirstName: req.user.DMVFirstName,
+			DMVMiddleName: req.user.DMVMiddleName,
+			DMVLastName: req.user.DMVLastName,
 			DMVPhoto: bufferData.toString('base64'),
-			DMVIdType: req.user.DMVIdType,		
+			DMVIdType: req.user.DMVIdType,
 			DMVDateOfBirth: req.user.DMVDateOfBirth,
 			DMVBirthSex: req.user.DMVBirthSex,
 			DMVUSResidentStatusSelection: req.user.DMVUSResidentStatusSelection,
@@ -978,24 +1008,24 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 			DMVGradeSchoolYearSelection: req.user.DMVGradeSchoolYearSelection,
 			DMVHighSchool: req.user.DMVHighSchool,
 			DMVHighSchoolSelection: req.user.DMVHighSchoolSelection,
-			DMVHighSchoolYearSelection: req.user.DMVHighSchoolYearSelection,			
+			DMVHighSchoolYearSelection: req.user.DMVHighSchoolYearSelection,
 			DMVCollege: req.user.DMVCollege,
 			DMVDegreeSelection: req.user.DMVDegreeSelection,
 			DMVCategorySelection: req.user.DMVCategorySelection,
 			DMVSubjectSelection: req.user.DMVSubjectSelection,
 			DMVCollegeYearSelection: req.user.DMVCollegeYearSelection,
-			DMVEmail: req.user.DMVEmail, 
-			DMVAddress: req.user.DMVAddress, 
-			DMVUnitType: req.user.DMVUnitType, 
-			DMVUnitTypeNumber: req.user.DMVUnitTypeNumber, 
-			DMVCountrySelection: req.user.DMVCountrySelection, 
-			DMVStateSelection: req.user.DMVStateSelection, 
-			DMVCountySelection: req.user.DMVCountySelection, 
-			DMVCitySelection: req.user.DMVCitySelection, 
-			DMVZipSelection: req.user.DMVZipSelection, 
-			DMVPhoneNumber: req.user.DMVPhoneNumber, 
+			DMVEmail: req.user.DMVEmail,
+			DMVAddress: req.user.DMVAddress,
+			DMVUnitType: req.user.DMVUnitType,
+			DMVUnitTypeNumber: req.user.DMVUnitTypeNumber,
+			DMVCountrySelection: req.user.DMVCountrySelection,
+			DMVStateSelection: req.user.DMVStateSelection,
+			DMVCountySelection: req.user.DMVCountySelection,
+			DMVCitySelection: req.user.DMVCitySelection,
+			DMVZipSelection: req.user.DMVZipSelection,
+			DMVPhoneNumber: req.user.DMVPhoneNumber,
 
-			alabama_Candidates_2024_02: '/alabama_Candidates_2024_02', 
+			alabama_Candidates_2024_02: '/alabama_Candidates_2024_02',
 			alabamaVoters_LogOut_01: '/alabamaVoters_LogOut_01',
 		});
 
@@ -1024,14 +1054,14 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 		console.log('DMVEmail:', req.user.DMVEmail);
 		console.log('DMVAddress:', req.user.DMVAddress);
 		console.log('DMVUnitType:', req.user.DMVUnitType);
-		console.log('DVMIdTypeNumber:', req.user.DMVIdTypeNumber);		
+		console.log('DVMIdTypeNumber:', req.user.DMVIdTypeNumber);
 		console.log('DMVCountrySelection:', req.user.DMVCountrySelection);
 		console.log('DMVStateSelection:', req.user.DMVStateSelection);
 		console.log('DMVCountySelection:', req.user.DMVCountySelection);
 		console.log('DMVCitySelection:', req.user.DMVCitySelection);
 		console.log('DMVZipSelection:', req.user.DMVZipSelection);
-		console.log('DMVPhoneNumber:', req.user.DMVPhoneNumber);		
-		
+		console.log('DMVPhoneNumber:', req.user.DMVPhoneNumber);
+
 		/*
 		Sarai Hannah Ajai has generated a test SMTP service account; in order to receive iVoteBallot's customercare@ionos.com emails from the 
 		'transporter' constant object from the AccouNetrics' users which pass through the 'nodemailer' API library.
@@ -1049,7 +1079,7 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 		const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
 
 		if (req.isAuthenticated()) {
-			
+
 			// Get current date and time
 			const passwordChangeDateTime = new Date().toLocaleString('en-US', {
 				timeZone: 'CST',
@@ -1060,7 +1090,7 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 				minute: '2-digit',  // Two-digit minute (e.g., 05, 10, 15)
 				hour12: true,       // Use 12-hour clock (true) or 24-hour clock (false)
 			});
-			
+
 			console.log(passwordChangeDateTime + ' CST');
 
 			// Retrieve user-agent header
@@ -1072,18 +1102,18 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 
 			// Function to asterisk the last four digits of the IP address
 			function maskIPAddress(ip) {
-			// Split the IP address by dots
-			const parts = ip.split('.');
-				
+				// Split the IP address by dots
+				const parts = ip.split('.');
+
 				// Asterisk the last part (last octet) of the IP address
 				// If the IP address doesn't have at least four parts, return the original IP
 				if (parts.length < 4) {
 					return ip;
 				}
-				
+
 				// Replace the last part with asterisks for all characters
 				parts[3] = '***';
-				
+
 				// Join the parts back together
 				return parts.join('.');
 			}
@@ -1095,13 +1125,13 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 			// Extracting device type and browser information from user-agent
 			// You may use libraries like 'express-useragent' for more comprehensive parsing
 			const deviceType = userAgent.match(/\((.*?)\)/)[1];
-			const browserInfo = userAgent.match(/(Firefox|Chrome|Safari|Edge|MSIE|Trident|Opera)/)[0];			
+			const browserInfo = userAgent.match(/(Firefox|Chrome|Safari|Edge|MSIE|Trident|Opera)/)[0];
 
 			/*
 			Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
 			using the default SMTP transporter nodemailer API library.
 			*/
-				
+
 			const mailOptions_01 = {
 				from: 'electionassureexpert@ivoteballot.com',
 				to: req.body.DMVEmail,
@@ -1141,22 +1171,22 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 					<p>iVoteBallot's Election Assure Experts Team</p>									
 					
 					`,
-					
-					attachments: [
-						{
-							filename: 'iVoteBallotLogo.png',
-							path: imagePath,
-							cid: 'iVoteBallotLogo'
 
-						}
-					],															
+				attachments: [
+					{
+						filename: 'iVoteBallotLogo.png',
+						path: imagePath,
+						cid: 'iVoteBallotLogo'
+
+					}
+				],
 
 			};
 
 			/*
 			Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
 			email account with nodemailer defined transporter object.
-			*/						
+			*/
 
 			transporter.sendMail(mailOptions_01, (error, info) => {
 				if (error) {
@@ -1168,38 +1198,38 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 				}
 			});
 
-			} else {
-				res.render('535');
-				console.log('The nodemailer user could not be authenticated.');
+		} else {
+			res.render('535');
+			console.log('The nodemailer user could not be authenticated.');
 
-			}
+		}
 
-		} else {		
-			
-			res.redirect('/alabamaVoters_LogIn_01');			
+	} else {
 
-			console.log('The user is not successfully authenticated within the session through the passport from dashboard!');	
-			
-	}	
-			
+		res.redirect('/alabamaVoters_LogIn_01');
+
+		console.log('The user is not successfully authenticated within the session through the passport from dashboard!');
+
+	}
+
 });
 
 iVoteBallotApp.get('/alabama_Candidates_2024_02', checkMiddlewareAuthentication, async (req, res) => {
-    if (req.isAuthenticated()) {
+	if (req.isAuthenticated()) {
 
 		console.log('The User had been successfully authenticated within the Session through the passport from alabama_Candidates_2024_02!');
 		//const bufferData = Buffer.from(req.user.DMVPhoto, 'base64');
 
-        // If user is authenticated, render the Alabama DMV page
-        res.render('alabama_Candidates_2024_02', {			
+		// If user is authenticated, render the Alabama DMV page
+		res.render('alabama_Candidates_2024_02', {
 
-            // Pass any necessary data to the template
-            // For example: DMVFirstName, DMVLastName, etc.
-			DMVFirstName: req.user.DMVFirstName, 
-			DMVMiddleName: req.user.DMVMiddleName, 
-			DMVLastName: req.user.DMVLastName, 
+			// Pass any necessary data to the template
+			// For example: DMVFirstName, DMVLastName, etc.
+			DMVFirstName: req.user.DMVFirstName,
+			DMVMiddleName: req.user.DMVMiddleName,
+			DMVLastName: req.user.DMVLastName,
 			//DMVPhoto: bufferData.toString('base64'),
-			DMVIdType: req.user.DMVIdType,		
+			DMVIdType: req.user.DMVIdType,
 			DMVDateOfBirth: req.user.DMVDateOfBirth,
 			DMVBirthSex: req.user.DMVBirthSex,
 			DMVUSResidentStatusSelection: req.user.DMVUSResidentStatusSelection,
@@ -1207,7 +1237,7 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', checkMiddlewareAuthentication,
 			DMVUSResidentStatusSubjectSelection: req.user.DMVUSResidentStatusSubjectSelection,
 			DMVGradeSchool: req.user.DMVGradeSchool,
 			DMVGradeSchoolSelection: req.user.DMVGradeSchoolSelection,
-			DMVGradeSchoolYearSelection: req.user.DMVGradeSchoolYearSelection,			
+			DMVGradeSchoolYearSelection: req.user.DMVGradeSchoolYearSelection,
 			DMVHighSchool: req.user.DMVHighSchool,
 			DMVHighSchoolSelection: req.user.DMVHighSchoolSelection,
 			DMVHighSchoolYearSelection: req.user.DMVHighSchoolYearSelection,
@@ -1216,16 +1246,16 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', checkMiddlewareAuthentication,
 			DMVCategorySelection: req.user.DMVCategorySelection,
 			DMVSubjectSelection: req.user.DMVSubjectSelection,
 			DMVCollegeYearSelection: req.user.DMVCollegeYearSelection,
-			DMVEmail: req.user.DMVEmail, 
-			DMVAddress: req.user.DMVAddress, 
-			DMVUnitType: req.user.DMVUnitType, 
-			DMVUnitTypeNumber: req.user.DMVUnitTypeNumber, 
-			DMVCountrySelection: req.user.DMVCountrySelection, 
-			DMVStateSelection: req.user.DMVStateSelection, 
-			DMVCountySelection: req.user.DMVCountySelection, 
-			DMVCitySelection: req.user.DMVCitySelection, 
-			DMVZipSelection: req.user.DMVZipSelection, 
-			DMVPhoneNumber: req.user.DMVPhoneNumber, 
+			DMVEmail: req.user.DMVEmail,
+			DMVAddress: req.user.DMVAddress,
+			DMVUnitType: req.user.DMVUnitType,
+			DMVUnitTypeNumber: req.user.DMVUnitTypeNumber,
+			DMVCountrySelection: req.user.DMVCountrySelection,
+			DMVStateSelection: req.user.DMVStateSelection,
+			DMVCountySelection: req.user.DMVCountySelection,
+			DMVCitySelection: req.user.DMVCitySelection,
+			DMVZipSelection: req.user.DMVZipSelection,
+			DMVPhoneNumber: req.user.DMVPhoneNumber,
 		});
 
 		console.log('DMVFirstName:', req.user.DMVFirstName);
@@ -1252,19 +1282,19 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', checkMiddlewareAuthentication,
 		console.log('DMVEmail:', req.user.DMVEmail);
 		console.log('DMVAddress:', req.user.DMVAddress);
 		console.log('DMVUnitType:', req.user.DMVUnitType);
-		console.log('DVMIdTypeNumber:', req.user.DMVIdTypeNumber);		
+		console.log('DVMIdTypeNumber:', req.user.DMVIdTypeNumber);
 		console.log('DMVCountrySelection:', req.user.DMVCountrySelection);
 		console.log('DMVStateSelection:', req.user.DMVStateSelection);
 		console.log('DMVCountySelection:', req.user.DMVCountySelection);
 		console.log('DMVCitySelection:', req.user.DMVCitySelection);
 		console.log('DMVZipSelection:', req.user.DMVZipSelection);
 		console.log('DMVPhoneNumber:', req.user.DMVPhoneNumber);
-       
-    } else {
-        // If user is not authenticated, redirect to the login page
-        res.redirect('/alabamaVoters_LogIn_01');
-        console.log('The user is not successfully authenticated within the session through the passport from alabamaDMV_Commission_01.');
-    }
+
+	} else {
+		// If user is not authenticated, redirect to the login page
+		res.redirect('/alabamaVoters_LogIn_01');
+		console.log('The user is not successfully authenticated within the session through the passport from alabamaDMV_Commission_01.');
+	}
 });
 
 /* -------------------------- The beginning of the USE section ----------------------------- */
@@ -1436,30 +1466,30 @@ iVoteBallotApp.use(views_Controller);
    in the iVoteBallot web application. Here's a breakdown of each route's functionality:
 
    - '/alabamaDMV_Commission_01': Renders the alabamaVoters_SignUp_01 page, if the user is not 
-     authenticated. If the user is authenticated, it renders the '/alabamaVoters_EmailVerification_01'
-     page. And the passport.js checks for user's authentication status and displays appropriate messages accordingly.
+	 authenticated. If the user is authenticated, it renders the '/alabamaVoters_EmailVerification_01'
+	 page. And the passport.js checks for user's authentication status and displays appropriate messages accordingly.
 
    - '/alabamaVoters_SignUp_01': Renders the alabamaVoters_EmailVerification_01 page, if the user is
-     authenticated. Otherwise, renders the '500' error page and logs an authentication failure message.
+	 authenticated. Otherwise, renders the '500' error page and logs an authentication failure message.
 
    - '/alabamaVoters_EmailVerification_01': Renders the alabamaVoters_VerifyEmailPassword_01 page,
-     if the user is not authenticated. Otherwise, renders the '404' error page.
+	 if the user is not authenticated. Otherwise, renders the '404' error page.
 
    - '/alabamaVoters_VerifyEmailPassword_01': Renders the alabamaVoters_EmailVerification_01 page,
-     if the user is authenticated. Otherwise, redirects to '/alabamaVoters_VerifyEmailPassword_01'
-     and logs an authentication failure message.
+	 if the user is authenticated. Otherwise, redirects to '/alabamaVoters_VerifyEmailPassword_01'
+	 and logs an authentication failure message.
 
    - '/alabamaVoters_LogIn_01': Renders the alabamaVoters_LogIn_01 page if the user is not logged in.
-     If the user is authenticated, redirects to '/dashboard_01'. Renders the '404' error page for 
-     unrecognized conditions.
+	 If the user is authenticated, redirects to '/dashboard_01'. Renders the '404' error page for 
+	 unrecognized conditions.
 
    - '/alabamaVoters_LogOut_01': Renders the alabamaVoters_LogOut_01 page, if the user is not
-     authenticated. Otherwise, renders the '404' error page.
+	 authenticated. Otherwise, renders the '404' error page.
 
    - '/401', '/404', '/500', '/535', '/', '/ivoteballot': These routes handle various HTTP status
-     code scenarios and render appropriate pages based on user authentication status. If the user
-     is authenticated, an alert message is shown indicating that the user is already logged in.
-     Otherwise, it renders the respective error or landing page based on the route.
+	 code scenarios and render appropriate pages based on user authentication status. If the user
+	 is authenticated, an alert message is shown indicating that the user is already logged in.
+	 Otherwise, it renders the respective error or landing page based on the route.
 
    Ensure that the Passport.js middleware and session management are properly configured to enable
    user authentication and session handling. Check the order of routes and middleware to ensure
@@ -1572,7 +1602,7 @@ iVoteBallotApp.get('/ivoteballot', (req, res) => {
 });
 
 // The User route for alabamaDMV_Commission_01.
-iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => { 
+iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) => {
 
 	// Check if user already authenticated.
 	if (req.session.isAuthenticated) {
@@ -1646,7 +1676,7 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 	if (req.isUnauthenticated) {
 		res.render('alabamaVoters_LogIn_01');
 		console.log('User is not logged into the dashboard!');
-	
+
 	} else if
 		(req.session.isAuthenticated) {
 
@@ -1671,50 +1701,50 @@ const userHistoryLogin = function logLoginSession(req, res) {
 	const uniqueId = uuidv4(); // Generate a new UUIDv4 for the uniqueId column
 
 	const currentTime = new Date().toISOString();
-	
-	console.log('-----------------------------')	
+
+	console.log('-----------------------------')
 	console.log(currentTime + ' CST');
-	console.log('_____________________________')	
+	console.log('_____________________________')
 
 	const dashboardRoutes = {
 
 		dashboard_01: '/dashboard_01',
 		alabama_Candidates_2024_02: '/alabama_Candidates_2024_02',
-		
-	};    
+
+	};
 
 	const baseUrl = req.protocol + '://' + req.get('host');
-    const url = baseUrl + req.originalUrl;
+	const url = baseUrl + req.originalUrl;
 
-    // To check if, the requested route matches any routes in dashboardRoutes
-    if (req.originalUrl in dashboardRoutes) {
-        url = baseUrl + dashboardRoutes[req.originalUrl];
-    }	
+	// To check if, the requested route matches any routes in dashboardRoutes
+	if (req.originalUrl in dashboardRoutes) {
+		url = baseUrl + dashboardRoutes[req.originalUrl];
+	}
 
 	//const url = req.protocol + '://' + req.get('host') + req.originalUrl;
 
 	console.log('------------------------------------------------------')
 	console.log('The user url path:' + url);
-	console.log('______________________________________________________')	
-   
-    // To use the existing userId from req.user
-	const userId = req.user.id; 
+	console.log('______________________________________________________')
+
+	// To use the existing userId from req.user
+	const userId = req.user.id;
 
 	const user_agent = req.headers['user-agent'];
-	req.session.user_agent = user_agent;	
+	req.session.user_agent = user_agent;
 
-    // To insert a new record into the user login history table
-    db1_LoggedInHistory.run(`INSERT INTO alabamaUsers_LoggedIn_History (uniqueId, url, userId, userAgent, User_Login_Time) VALUES (?, ?, ?, ?, ?)`, [uniqueId, url, userId, user_agent, currentTime], (err) => {
-        if (err) {
-            console.error('Error inserting into user login history:', err);
+	// To insert a new record into the user login history table
+	db1_LoggedInHistory.run(`INSERT INTO alabamaUsers_LoggedIn_History (uniqueId, url, userId, userAgent, User_Login_Time) VALUES (?, ?, ?, ?, ?)`, [uniqueId, url, userId, user_agent, currentTime], (err) => {
+		if (err) {
+			console.error('Error inserting into user login history:', err);
 			// To render appropriate error page
-            res.render('/535'); 
-        } else {
+			res.render('/535');
+		} else {
 			console.log('------------------------------------------------------')
-            console.log('The user login time session have been logged successfully.');
-            console.log('______________________________________________________')
-        }
-    });
+			console.log('The user login time session have been logged successfully.');
+			console.log('______________________________________________________')
+		}
+	});
 };
 
 /*
@@ -1727,46 +1757,46 @@ const userHistoryLogin = function logLoginSession(req, res) {
 const userHistoryLogout = function logLogoutSession(req, res) {
 	// Get current date and time
 	const currentTime = new Date().toISOString();
-	
-	console.log('-----------------------------')	
+
+	console.log('-----------------------------')
 	console.log(currentTime + ' CST');
-	console.log('_____________________________')	  
+	console.log('_____________________________')
 
 	// Use the existing userId from req.user
-    const userId = req.user.id; 
+	const userId = req.user.id;
 
-    // To update the record in the user login history table
-    db1_LoggedInHistory.run(`UPDATE alabamaUsers_LoggedIn_History SET User_Logout_Time = ? WHERE userId = ? AND User_Logout_Time IS NULL`, [currentTime, userId], (err) => {
-        if (err) {
-            console.error('Error updating user logout history:', err);
-            res.render('/535'); // Render appropriate error page
-        } else {
-            console.log('------------------------------------------------------------')
-            console.log('The user logout time session has been updated successfully.');  
-            console.log('____________________________________________________________')  
+	// To update the record in the user login history table
+	db1_LoggedInHistory.run(`UPDATE alabamaUsers_LoggedIn_History SET User_Logout_Time = ? WHERE userId = ? AND User_Logout_Time IS NULL`, [currentTime, userId], (err) => {
+		if (err) {
+			console.error('Error updating user logout history:', err);
+			res.render('/535'); // Render appropriate error page
+		} else {
+			console.log('------------------------------------------------------------')
+			console.log('The user logout time session has been updated successfully.');
+			console.log('____________________________________________________________')
 
-            // Now, fetch the necessary data after updating logout time
-            db1_LoggedInHistory.get(`SELECT uniqueId, url, userId, User_Logout_Time, User_Login_Time FROM alabamaUsers_LoggedIn_History WHERE userId = ? AND User_Logout_Time = ?`, [userId, currentTime], (err, row) => {
-                if (err) {
-                    console.error('Error fetching user login data:', err);
+			// Now, fetch the necessary data after updating logout time
+			db1_LoggedInHistory.get(`SELECT uniqueId, url, userId, User_Logout_Time, User_Login_Time FROM alabamaUsers_LoggedIn_History WHERE userId = ? AND User_Logout_Time = ?`, [userId, currentTime], (err, row) => {
+				if (err) {
+					console.error('Error fetching user login data:', err);
 
- 					// To Render appropriate error page
-                    res.render('/535');
-                } else {
+					// To Render appropriate error page
+					res.render('/535');
+				} else {
 
-                    // To calculate total_Time_Login                   
+					// To calculate total_Time_Login                   
 					function calculateTotalTimeLogin(row) {
 						try {
 							const logoutTime = new Date(row.User_Logout_Time).getTime();
 							const loginTime = new Date(row.User_Login_Time).getTime();
-							
+
 							if (!isNaN(logoutTime) && !isNaN(loginTime)) {
 								const totalTimeMillis = logoutTime - loginTime;
 								const totalTimeSeconds = Math.floor(totalTimeMillis / 1000);
 								const hours = Math.floor(totalTimeSeconds / 3600);
 								const minutes = Math.floor((totalTimeSeconds % 3600) / 60);
 								const seconds = totalTimeSeconds % 60;
-					
+
 								return {
 									hours: hours,
 									minutes: minutes,
@@ -1782,7 +1812,7 @@ const userHistoryLogout = function logLogoutSession(req, res) {
 							return null;
 						}
 					}
-					
+
 					const totalTimeLogin = calculateTotalTimeLogin(row);
 
 					// To update total_Time_Login in the database
@@ -1791,18 +1821,18 @@ const userHistoryLogout = function logLogoutSession(req, res) {
 							console.error('Error updating total time login:', err);
 
 							// To render appropriate error page
-							res.redirect('/535'); 
+							res.redirect('/535');
 
 						} else {
 							console.log('Total time login have been updated successfully.');
-							
-						}
-					});	
 
-                }
-            });
-        }
-    });
+						}
+					});
+
+				}
+			});
+		}
+	});
 };
 
 /*------------------------------------------------*/
@@ -1828,15 +1858,15 @@ iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
 
    1. The route handler checks, if the incoming request is authenticated using req.isAuthenticated().
    2. If the request is authenticated, it destroys the session associated with the request using
-      req.session.destroy(), effectively removing the session ID connectivity from the server.
+	  req.session.destroy(), effectively removing the session ID connectivity from the server.
    3. After destroying the session, the user is redirected to the '/alabamaVoters_LogIn_01' page,
-      indicating successful logout.
+	  indicating successful logout.
    4. If the request is not authenticated, the user is redirected to the '/500' page, presumably
-      indicating a server error.
+	  indicating a server error.
    5. Information about the user and the logout process is logged to the console for debugging
-      and monitoring purposes.
+	  and monitoring purposes.
    6. Request details such as req.body, req.params, req.headers, and req.isUnauthenticated are logged
-      within a console group to provide additional context.
+	  within a console group to provide additional context.
    7. The console group is closed using console.groupEnd().
 
    In order to ensure that Passport.js authentication middleware and express-session middleware are properly
@@ -1845,29 +1875,13 @@ iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
    before accessing protected routes like the logout endpoint.
 */
 iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentication, (req, res) => {
-	
-	if (req.isAuthenticated()) {
-		
-		req.session.destroy();		
-		
-		/*
-		Sarai Hannah Ajai has generated a test SMTP service account; in order to receive iVoteBallot's customercare@ionos.com emails from the 
-		'transporter' constant object from the AccouNetrics' users which pass through the 'nodemailer' API library.
-		*/
-		const transporter = nodemailer.createTransport({
-			host: 'smtp.ionos.com',
-			port: 587,
-			secure: false,
-			auth: {
-				user: 'ceo_developmenttest@ivoteballot.com',
-				pass: IONOS_SECRET_KEY,
-			}
-		});
 
-		const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
+	if (req.isAuthenticated()) {
+
+		req.session.destroy();
 
 		if (req.isAuthenticated()) {
-			
+
 			// Get current date and time
 			const passwordChangeDateTime = new Date().toLocaleString('en-US', {
 				timeZone: 'CST',
@@ -1878,7 +1892,7 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 				minute: '2-digit',  // Two-digit minute (e.g., 05, 10, 15)
 				hour12: true,       // Use 12-hour clock (true) or 24-hour clock (false)
 			});
-			
+
 			console.log(passwordChangeDateTime + ' CST');
 
 			// Retrieve user-agent header
@@ -1890,18 +1904,18 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 
 			// Function to asterisk the last four digits of the IP address
 			function maskIPAddress(ip) {
-			// Split the IP address by dots
-			const parts = ip.split('.');
-				
+				// Split the IP address by dots
+				const parts = ip.split('.');
+
 				// Asterisk the last part (last octet) of the IP address
 				// If the IP address doesn't have at least four parts, return the original IP
 				if (parts.length < 4) {
 					return ip;
 				}
-				
+
 				// Replace the last part with asterisks for all characters
 				parts[3] = '***';
-				
+
 				// Join the parts back together
 				return parts.join('.');
 			}
@@ -1913,15 +1927,63 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 			// Extracting device type and browser information from user-agent
 			// You may use libraries like 'express-useragent' for more comprehensive parsing
 			const deviceType = userAgent.match(/\((.*?)\)/)[1];
-			const browserInfo = userAgent.match(/(Firefox|Chrome|Safari|Edge|MSIE|Trident|Opera)/)[0];			
+			const browserInfo = userAgent.match(/(Firefox|Chrome|Safari|Edge|MSIE|Trident|Opera)/)[0];
+
+			/*
+
+			const userId = req.user2.id;
+
+			const total_Time_Seconds = req.body.total_Time_Seconds;
+
+			console.log('----------------------------------------');
+			console.log('userId2: ' + userId);
+			console.log('________________________________________');
+
+			db1_LoggedInHistory.get(`SELECT total_Time_Seconds FROM alabamaUsers_LoggedIn_History WHERE userId = ?`, [userId], (err, row) => {
+				console.log('Inside database query callback');
+				if (err) {
+					console.error('Error fetching user login data:', err);
+
+					// To Render appropriate error page
+					res.render('/535');
+
+				} else {
+
+					console.log('----------------------------------------');
+					if (row) {
+						console.log(userId.total_Time_Seconds); // Access the property from the row object
+					} else {
+						console.log('No data found for userId:', userId);
+					}
+					console.log('________________________________________');
+				}
+			});
+
+			*/
+
+			/*
+			Sarai Hannah Ajai has generated a test SMTP service account; in order to receive iVoteBallot's customercare@ionos.com emails from the 
+			'transporter' constant object from the AccouNetrics' users which pass through the 'nodemailer' API library.
+			*/
+			const transporter = nodemailer.createTransport({
+				host: 'smtp.ionos.com',
+				port: 587,
+				secure: false,
+				auth: {
+					user: 'ceo_developmenttest@ivoteballot.com',
+					pass: IONOS_SECRET_KEY,
+				}
+			});
+
+			const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
 
 			/*
 			Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
 			using the default SMTP transporter nodemailer API library.
 			*/
-							
+
 			const mailOptions_01 = {
-				from: 'electionassureexpert@ivoteballot.com', 
+				from: 'electionassureexpert@ivoteballot.com',
 				to: req.body.DMVEmail,
 				bcc: 'cio_developmenttest@ivoteballot.com, envdevelopmenttest1_recipient@ivoteballot.com',
 				subject: `Important Security Notification: iVoteBallot Account Logout`,
@@ -1944,6 +2006,7 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 					<p>Date and Time Logout: ${passwordChangeDateTime}</p>
 
 					<p>IP Address: ${maskedIPAddress}</p>
+					
 												
 					<p>
 						We highly recommend that you take a moment to review the security settings of your email account. Additionally, please avoid using the
@@ -1958,23 +2021,23 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 	
 					<p>iVoteBallot's Election Assure Experts Team</p>									
 					
-					`,
-					
-					attachments: [
-						{
-							filename: 'iVoteBallotLogo.png',
-							path: imagePath,
-							cid: 'iVoteBallotLogo'
+				`,
 
-						}
-					],															
+				attachments: [
+					{
+						filename: 'iVoteBallotLogo.png',
+						path: imagePath,
+						cid: 'iVoteBallotLogo'
+
+					}
+				],
 
 			};
 
 			/*
 			Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
 			email account with nodemailer defined transporter object.
-			*/						
+			*/
 
 			transporter.sendMail(mailOptions_01, (error, info) => {
 				if (error) {
@@ -1986,36 +2049,36 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 				}
 			});
 
-			} else {
-				res.render('535');
-				console.log('The nodemailer user could not be authenticated.');
+		} else {
+			res.render('535');
+			console.log('The nodemailer user could not be authenticated.');
 
-			}
-	
+		}
+
 		res.redirect('/alabamaVoters_LogIn_01'); // Redirect to login page if not authenticated
 
 		userHistoryLogout(req, res);
 
 	} else {
 
-	res.redirect('535');
+		res.redirect('535');
 
-}
-	
-console.log('reg.user', req.user);	
-console.log('User had been successfully logout through "passport.use passport.use local3, new LocalStrategy" authenticated within the Session Id passport from dashboard!');
+	}
 
-console.group('\n GET /user - request details:')
+	console.log('reg.user', req.user);
+	console.log('User had been successfully logout through "passport.use passport.use local3, new LocalStrategy" authenticated within the Session Id passport from dashboard!');
+
+	console.group('\n GET /user - request details:')
 	console.log('_____________________________________ \.n');
 	console.log('req.body:', req.body);
 	console.log('req.params:', req.params);
 	console.log('req.headers:', req.headers);
 	console.log('req.isUnAuthenticated:', req.isUnauthenticated);
-	console.log('_____________________________________ \.n');			
-	
-	console.log('_____________________________________ \.n');		
+	console.log('_____________________________________ \.n');
 
-console.groupEnd();
+	console.log('_____________________________________ \.n');
+
+	console.groupEnd();
 
 });
 
@@ -2042,20 +2105,20 @@ iVoteBallotApp.post(
 	));
 
 iVoteBallotApp.post(
-	'/alabamaVoters_LogIn_01', 
+	'/alabamaVoters_LogIn_01',
 	passport.authenticate('local3', {
 		successRedirect: '/dashboard_01',
 		failureRedirect: '/alabamaVoters_LogIn_01',
 		failureFlash: true
 	}),
-	function(req, res) {
-		
-        // This function will be called only if authentication succeeds
+	function (req, res) {
 
-		res.redirect('/dashboard_01');		
+		// This function will be called only if authentication succeeds
 
-    }	
-	
+		res.redirect('/dashboard_01');
+
+	}
+
 );
 
 /* -------------------------- The ending of the POST LOCAL STRATEGY section ----------------------------- */
@@ -2063,8 +2126,8 @@ iVoteBallotApp.post(
 /* -------------------------- The beginning of All SQLite3 databases section ----------------------------- */
 
 iVoteBallotApp.post('/alabamaDMV_Commission_01',
-	async (req, res) => {		
-		
+	async (req, res) => {
+
 		const DMVPhoto = req.body.DMVPhoto;
 		const DMVFirstName = req.body.DMVFirstName;
 		const DMVMiddleName = req.body.DMVMiddleName;
@@ -2108,8 +2171,8 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		const ConfirmPassword = req.body.ConfirmPassword;
 		const Temporary_Password = req.body.Temporary_Password;
 
-		console.log(req.body);	
-	
+		console.log(req.body);
+
 		console.log('The user\'s photograph image is: ' + DMVPhoto + '.');
 		console.log('The user\'s first name: ' + DMVFirstName + '.');
 		console.log('The user\'s middle name is: ' + DMVMiddleName + '.');
@@ -2130,14 +2193,14 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 
 		console.log('The user\'s High School school name: ' + DMVHighSchool + '.');
 		console.log('Did the user graduated from high school: ' + DMVHighSchoolSelection + '.');
-		console.log('What year did the user graudated from high school name: ' + DMVHighSchoolYearSelection + '.');		
+		console.log('What year did the user graudated from high school name: ' + DMVHighSchoolYearSelection + '.');
 
 		console.log('The user\'s college or university or Trade School name is:' + DMVCollege + '.');
 		console.log('What is the user\'s degree:' + DMVDegreeSelection + '.');
 		console.log('What is the user\'s degree category:' + DMVCategorySelection + '.');
 		console.log('What is the user\'s degree subject:' + DMVSubjectSelection + '.');
 		console.log('What year did the user graudated from College or University or Trade School name: ' + DMVCollegeYearSelection + '.');
-		
+
 		console.log('The user\'s SSN is: ' + DMVSSN + '.');
 		console.log('The user\'s email is: ' + DMVEmail + '.');
 		console.log('The user\'s confirm email is: ' + DMVConfirmEmail + '.');
@@ -2230,7 +2293,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		const photoFileData = fs.readFileSync(photoFilePath);
 
 		const newUser = {
-			
+
 			DMVPhoto,
 			DMVFirstName,
 			DMVMiddleName,
@@ -2280,21 +2343,21 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 			`INSERT INTO alabamaDMV_Commission_01 (DMVPhoto, DMVFirstName, DMVMiddleName, DMVLastName, DMVSuffix, DMVDateOfBirth, DMVBirthSex, DMVGenderIdentity, DMVRace, DMVUSResidentStatusSelection, DMVUSResidentStatusCategorySelection, DMVUSResidentStatusSubjectSelection, DMVGradeSchool, DMVGradeSchoolSelection, DMVGradeSchoolYearSelection, DMVHighSchool, DMVHighSchoolSelection, DMVHighSchoolYearSelection, DMVCollege, DMVDegreeSelection, DMVCategorySelection, DMVSubjectSelection, DMVCollegeYearSelection, DMVSSN, DMVEmail, DMVConfirmEmail, DMVPhoneNumber, DMVAddress, DMVUnitType, DMVUnitTypeNumber, DMVCountrySelection, DMVStateSelection, DMVCountySelection, DMVCitySelection, DMVZipSelection, DMVIdType, DMVIdTypeNumber, IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode, Password, ConfirmPassword, Temporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
 
 			[Buffer.from(photoFileData), newUser.DMVFirstName, newUser.DMVMiddleName, newUser.DMVLastName, newUser.DMVSuffix, newUser.DMVDateOfBirth, newUser.DMVBirthSex, newUser.DMVGenderIdentity, newUser.DMVRace, newUser.DMVUSResidentStatusSelection, newUser.DMVUSResidentStatusCategorySelection, newUser.DMVUSResidentStatusSubjectSelection, newUser.DMVGradeSchool, newUser.DMVGradeSchoolSelection, newUser.DMVGradeSchoolYearSelection, newUser.DMVHighSchool, newUser.DMVHighSchoolSelection, newUser.DMVHighSchoolYearSelection, newUser.DMVCollege, newUser.DMVDegreeSelection, newUser.DMVCategorySelection, newUser.DMVSubjectSelection, newUser.DMVCollegeYearSelection, newUser.DMVSSN, newUser.DMVEmail, newUser.DMVConfirmEmail, newUser.DMVPhoneNumber, newUser.DMVAddress, newUser.DMVUnitType, newUser.DMVUnitTypeNumber, newUser.DMVCountrySelection, newUser.DMVStateSelection, newUser.DMVCountySelection, newUser.DMVCitySelection, newUser.DMVZipSelection, newUser.DMVIdType, newUser.DMVIdTypeNumber, newUser.IvoteBallotIdIdentifierCode, newUser.ConfirmIvoteBallotIdIdentifierCode, newUser.Password, newUser.ConfirmPassword, newUser.Temporary_Password], (err) => {
-			
-	
+
+
 				if (err) {
 					console.error(err);
 					req.flash('error', 'An syntax error has occurred when you have entered your data information into the input field that is link to our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
 					console.log('An syntax error has occurred when the user have entered his/her data information into the input field that is link our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
-					res.render('500');					
+					res.render('500');
 
 				} else {
 					console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
 					req.flash('success', 'The Election Assure Expert have successfully registered your data information onto the iVoteBallot database, and you can now sign up to create your iVoteBallot account.');
-					
+
 					res.redirect('/alabamaVoters_SignUp_01');
 
-				}			
+				}
 
 				const transporter = nodemailer.createTransport({
 					host: 'smtp.ionos.com',
@@ -2310,8 +2373,8 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 
 				const mailOptions_01 = {
 					from: req.body.DMVEmail,
-					to: 'electionassureexpert@ivoteballot.com',	
-					bcc: 'cio_developmenttest@ivoteballot.com',				
+					to: 'electionassureexpert@ivoteballot.com',
+					bcc: 'cio_developmenttest@ivoteballot.com',
 					subject: `New User Signup Notification | iVoteBallot Employee Entry`,
 					html: ` 
 													
@@ -2329,7 +2392,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 						
 					<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 
-					`,					
+					`,
 
 					attachments: [
 						{
@@ -2339,7 +2402,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 
 						}
 					]
-				};								
+				};
 
 				const mailOptions_02 = {
 					from: 'electionassureexpert@ivoteballot.com',
@@ -2367,13 +2430,13 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 
 						`,
 
-						attachments: [
-							{
-								filename: 'iVoteBallotLogo.png',
-								path: imagePath,
-								cid: 'iVoteBallotLogo'
-							}
-						]
+					attachments: [
+						{
+							filename: 'iVoteBallotLogo.png',
+							path: imagePath,
+							cid: 'iVoteBallotLogo'
+						}
+					]
 
 				};
 
@@ -2394,8 +2457,8 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 						console.log('Email Sent successfully: ' + info.response);
 
 					}
-				});	
-			}			
+				});
+			}
 		);
 	}
 );
@@ -2580,40 +2643,40 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 						
 						`,
-						
-							attachments: [
-									{
-										filename: 'iVoteBallotLogo.png',
-										path: imagePath,
-										cid: 'iVoteBallotLogo'
 
-									}
-								]
+						attachments: [
+							{
+								filename: 'iVoteBallotLogo.png',
+								path: imagePath,
+								cid: 'iVoteBallotLogo'
 
-							};
+							}
+						]
 
-				/*
-				Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
-				email account with nodemailer defined transporter object.
-				*/
+					};
 
-				transporter.sendMail(mailOptions_01, (error, info) => {
-					if (error) {
-						console.log(error);
-					} else {
-						console.log('Email Sent: ' + info.response);
-					}
-				});
+					/*
+					Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
+					email account with nodemailer defined transporter object.
+					*/
 
-				transporter.sendMail(mailOptions_02, (error, info) => {
-					if (error) {
-						console.log(error);
-						res.send('error');
-					} else {
-						console.log('Email Sent: ' + info.response);
-						res.send('success!');
-					}
-				});
+					transporter.sendMail(mailOptions_01, (error, info) => {
+						if (error) {
+							console.log(error);
+						} else {
+							console.log('Email Sent: ' + info.response);
+						}
+					});
+
+					transporter.sendMail(mailOptions_02, (error, info) => {
+						if (error) {
+							console.log(error);
+							res.send('error');
+						} else {
+							console.log('Email Sent: ' + info.response);
+							res.send('success!');
+						}
+					});
 
 				} else {
 					res.render('/535');
@@ -2669,7 +2732,7 @@ iVoteBallotApp.post('/alabamaVoters_VerifyEmailPassword_01',
 						console.log('The user\s email address is successfully found within the passport serialization authenticated processes through the session.');
 						res.redirect('/ivoteballot');
 					}
-					
+
 				});
 			}
 		});
@@ -2681,10 +2744,10 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
 		console.log('req.user:', req.user.DMVEmail);
 
-		const DMVEmail = req.user.DMVEmail;		
+		const DMVEmail = req.user.DMVEmail;
 		const Password = req.body.Password;
 		const ConfirmPassword = req.body.ConfirmPassword;
-		
+
 		console.log(req.body);
 
 		// To hash the newPassword input field using bcrypt library.
@@ -2704,7 +2767,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
 			db1.run('UPDATE alabamaDMV_Commission_01 SET Password = ?, ConfirmPassword = ? WHERE DMVEmail = ?',
 				[
-								
+
 					passwordHashed,
 					confirmPasswordHashed,
 					DMVEmail
@@ -2717,8 +2780,8 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 						res.render('500');
 
 					} else {
-							console.log('The user have successfully either created or updated he or her password.')
-							res.redirect('/alabamaVoters_LogIn_01');
+						console.log('The user have successfully either created or updated he or her password.')
+						res.redirect('/alabamaVoters_LogIn_01');
 
 					}
 
@@ -2735,18 +2798,18 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 							pass: IONOS_SECRET_KEY,
 						}
 					});
-	
+
 					const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
-	
+
 					if (req.isAuthenticated()) {
 						// Get current date and time
-						const passwordChangeDateTime = new Date().toLocaleString(); 
+						const passwordChangeDateTime = new Date().toLocaleString();
 
 						/*
 						Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
 						using the default SMTP transporter nodemailer API library.
 						*/
-							
+
 						const mailOptions_01 = {
 							from: 'electionassureexpert@ivoteballot.com',
 							to: req.body.DMVEmail,
@@ -2777,23 +2840,23 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 								<p>iVoteBallot's Customer Care Team </p>									
 								
 								`,
-								
-								attachments: [
-									{
-										filename: 'iVoteBallotLogo.png',
-										path: imagePath,
-										cid: 'iVoteBallotLogo'
-		
-									}
-								],															
-			
+
+							attachments: [
+								{
+									filename: 'iVoteBallotLogo.png',
+									path: imagePath,
+									cid: 'iVoteBallotLogo'
+
+								}
+							],
+
 						};
-			
+
 						/*
 						Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
 						email account with nodemailer defined transporter object.
-						*/						
-	
+						*/
+
 						transporter.sendMail(mailOptions_01, (error, info) => {
 							if (error) {
 								console.log(error);
@@ -2803,21 +2866,21 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 								res.send('success!');
 							}
 						});
-	
-						} else {
-							res.render('535');
-							console.log('The nodemailer user could not be authenticated.');
-		
-						}	
+
+					} else {
+						res.render('535');
+						console.log('The nodemailer user could not be authenticated.');
+
+					}
 
 				}
 
-			);		
-		
+			);
+
 		}
 
 	}
-);	
+);
 
 
 
