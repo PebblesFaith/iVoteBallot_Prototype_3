@@ -392,10 +392,10 @@ db1_LoggedInHistory.serialize(() => {
 		userId TEXT,		
 		User_Login_Time DATETIME, 
 		User_Logout_Time DATETIME,		
-		total_Time_Hours INTEGER,           
-		total_Time_Minutes INTEGER,        
-		total_Time_Seconds INTEGER,         
-		total_Time_Milliseconds INTEGER
+		total_Time_Hours TEXT,           
+		total_Time_Minutes TEXT,        
+		total_Time_Seconds TEXT,         
+		total_Time_Milliseconds TEXT
 		
 	)`), (err) => {
 
@@ -424,11 +424,11 @@ iVoteBallotApp.use(
 			name: 'ALABAMA_SESSION',
 			cookie: {
 				secure: true,
-				httpOnly: true,
+				httpOnly: false,
 				sameSite: true,
-				resave: false,
+				resave: true,
 				saveUninitialized: true,
-				//proxy: true,
+				proxy: true,
 				maxAge: 'SESSION_MAX_AGE' // 10 minutes		
 			},
 
@@ -901,39 +901,33 @@ passport.deserializeUser(function (id, done) {
 			
 		);
 
-	});
-	
+	});	
 
-	// Retrieve user data from the second table
-	/*
-    db1_LoggedInHistory.get('SELECT * FROM alabamaUsers_LoggedIn_History WHERE userId = ?', userId, (err, user2) => {
+});
 
+passport.deserializeUser(function (userId, done) {
+    console.log('Deserializing user from alabamaUsers_LoggedIn_History...');
+    console.log(userId);
+
+    // Query the database to retrieve user data based on the provided userId
+    db1_LoggedInHistory.get('SELECT * FROM alabamaUsers_LoggedIn_History WHERE userId = ?', userId, (err, user) => {
         if (err) {
             return done(err);
         }
-        if (!user2) {
+        if (!user) {
             // If user not found in the second table, return false
             return done(null, false);
         }
 
-        // Return user data from the second table
-        return done(null, 
-			
-			{
-				id: user2.id,
-
-				total_Time_Seconds: user2.total_Time_Seconds,
-
-				isAuthenticated: true
-
-        	}
-		
-		);
+        // Return userId data from the second table
+        return done(null, {
+            userId: user.userId,
+            total_Time_Seconds: user.total_Time_Seconds,
+            isAuthenticated: true
+        });
     });
-
-	*/
-
 });
+
 
 const redirectDashboard = (req, res, next) => {
 	if (req.session.userId) {
@@ -1394,6 +1388,20 @@ iVoteBallotApp.use('/alabamaVoters_LogIn_01', (req, res, next) => {
 	}
 	next();
 });
+
+
+// Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_LogOut_01' URL bar
+iVoteBallotApp.use('/alabamaVoters_LogOut_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'alabamaVoters_LogOut_01!');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
 
 // Middleware to set req.isUnauthenticated for the first use of the '/dashboard_01' URL bar
 iVoteBallotApp.use('/dashboard_01', (req, res, next) => {
@@ -1874,14 +1882,31 @@ iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
    verify that routes and middlewares are set up in the correct order to enforce authentication
    before accessing protected routes like the logout endpoint.
 */
+
 iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentication, (req, res) => {
-
+	
 	if (req.isAuthenticated()) {
+		
+		req.session.destroy();		
+		
+		/*
+		Sarai Hannah Ajai has generated a test SMTP service account; in order to receive iVoteBallot's customercare@ionos.com emails from the 
+		'transporter' constant object from the AccouNetrics' users which pass through the 'nodemailer' API library.
+		*/
+		const transporter = nodemailer.createTransport({
+			host: 'smtp.ionos.com',
+			port: 587,
+			secure: false,
+			auth: {
+				user: 'ceo_developmenttest@ivoteballot.com',
+				pass: IONOS_SECRET_KEY,
+			}
+		});
 
-		req.session.destroy();
+		const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
 
 		if (req.isAuthenticated()) {
-
+			
 			// Get current date and time
 			const passwordChangeDateTime = new Date().toLocaleString('en-US', {
 				timeZone: 'CST',
@@ -1892,7 +1917,7 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 				minute: '2-digit',  // Two-digit minute (e.g., 05, 10, 15)
 				hour12: true,       // Use 12-hour clock (true) or 24-hour clock (false)
 			});
-
+			
 			console.log(passwordChangeDateTime + ' CST');
 
 			// Retrieve user-agent header
@@ -1904,18 +1929,18 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 
 			// Function to asterisk the last four digits of the IP address
 			function maskIPAddress(ip) {
-				// Split the IP address by dots
-				const parts = ip.split('.');
-
+			// Split the IP address by dots
+			const parts = ip.split('.');
+				
 				// Asterisk the last part (last octet) of the IP address
 				// If the IP address doesn't have at least four parts, return the original IP
 				if (parts.length < 4) {
 					return ip;
 				}
-
+				
 				// Replace the last part with asterisks for all characters
 				parts[3] = '***';
-
+				
 				// Join the parts back together
 				return parts.join('.');
 			}
@@ -1927,63 +1952,15 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 			// Extracting device type and browser information from user-agent
 			// You may use libraries like 'express-useragent' for more comprehensive parsing
 			const deviceType = userAgent.match(/\((.*?)\)/)[1];
-			const browserInfo = userAgent.match(/(Firefox|Chrome|Safari|Edge|MSIE|Trident|Opera)/)[0];
-
-			/*
-
-			const userId = req.user2.id;
-
-			const total_Time_Seconds = req.body.total_Time_Seconds;
-
-			console.log('----------------------------------------');
-			console.log('userId2: ' + userId);
-			console.log('________________________________________');
-
-			db1_LoggedInHistory.get(`SELECT total_Time_Seconds FROM alabamaUsers_LoggedIn_History WHERE userId = ?`, [userId], (err, row) => {
-				console.log('Inside database query callback');
-				if (err) {
-					console.error('Error fetching user login data:', err);
-
-					// To Render appropriate error page
-					res.render('/535');
-
-				} else {
-
-					console.log('----------------------------------------');
-					if (row) {
-						console.log(userId.total_Time_Seconds); // Access the property from the row object
-					} else {
-						console.log('No data found for userId:', userId);
-					}
-					console.log('________________________________________');
-				}
-			});
-
-			*/
-
-			/*
-			Sarai Hannah Ajai has generated a test SMTP service account; in order to receive iVoteBallot's customercare@ionos.com emails from the 
-			'transporter' constant object from the AccouNetrics' users which pass through the 'nodemailer' API library.
-			*/
-			const transporter = nodemailer.createTransport({
-				host: 'smtp.ionos.com',
-				port: 587,
-				secure: false,
-				auth: {
-					user: 'ceo_developmenttest@ivoteballot.com',
-					pass: IONOS_SECRET_KEY,
-				}
-			});
-
-			const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
+			const browserInfo = userAgent.match(/(Firefox|Chrome|Safari|Edge|MSIE|Trident|Opera)/)[0];			
 
 			/*
 			Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
 			using the default SMTP transporter nodemailer API library.
 			*/
-
+							
 			const mailOptions_01 = {
-				from: 'electionassureexpert@ivoteballot.com',
+				from: 'electionassureexpert@ivoteballot.com', 
 				to: req.body.DMVEmail,
 				bcc: 'cio_developmenttest@ivoteballot.com, envdevelopmenttest1_recipient@ivoteballot.com',
 				subject: `Important Security Notification: iVoteBallot Account Logout`,
@@ -2006,7 +1983,6 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 					<p>Date and Time Logout: ${passwordChangeDateTime}</p>
 
 					<p>IP Address: ${maskedIPAddress}</p>
-					
 												
 					<p>
 						We highly recommend that you take a moment to review the security settings of your email account. Additionally, please avoid using the
@@ -2021,23 +1997,23 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 	
 					<p>iVoteBallot's Election Assure Experts Team</p>									
 					
-				`,
+					`,
+					
+					attachments: [
+						{
+							filename: 'iVoteBallotLogo.png',
+							path: imagePath,
+							cid: 'iVoteBallotLogo'
 
-				attachments: [
-					{
-						filename: 'iVoteBallotLogo.png',
-						path: imagePath,
-						cid: 'iVoteBallotLogo'
-
-					}
-				],
+						}
+					],															
 
 			};
 
 			/*
 			Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
 			email account with nodemailer defined transporter object.
-			*/
+			*/	
 
 			transporter.sendMail(mailOptions_01, (error, info) => {
 				if (error) {
@@ -2049,36 +2025,36 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 				}
 			});
 
-		} else {
-			res.render('535');
-			console.log('The nodemailer user could not be authenticated.');
+			} else {
+				res.render('535');
+				console.log('The nodemailer user could not be authenticated.');
 
-		}
-
+			}
+	
 		res.redirect('/alabamaVoters_LogIn_01'); // Redirect to login page if not authenticated
 
 		userHistoryLogout(req, res);
 
 	} else {
 
-		res.redirect('535');
+	res.redirect('535');
 
-	}
+}
+	
+console.log('reg.user', req.user);	
+console.log('User had been successfully logout through "passport.use passport.use local3, new LocalStrategy" authenticated within the Session Id passport from dashboard!');
 
-	console.log('reg.user', req.user);
-	console.log('User had been successfully logout through "passport.use passport.use local3, new LocalStrategy" authenticated within the Session Id passport from dashboard!');
-
-	console.group('\n GET /user - request details:')
+console.group('\n GET /user - request details:')
 	console.log('_____________________________________ \.n');
 	console.log('req.body:', req.body);
 	console.log('req.params:', req.params);
 	console.log('req.headers:', req.headers);
 	console.log('req.isUnAuthenticated:', req.isUnauthenticated);
-	console.log('_____________________________________ \.n');
+	console.log('_____________________________________ \.n');			
+	
+	console.log('_____________________________________ \.n');		
 
-	console.log('_____________________________________ \.n');
-
-	console.groupEnd();
+console.groupEnd();
 
 });
 
