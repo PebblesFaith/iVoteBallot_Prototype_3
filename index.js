@@ -1746,7 +1746,7 @@ const userHistoryLogin = function logLoginSession(req, res) {
 		if (err) {
 			console.error('Error inserting into user login history:', err);
 			// To render appropriate error page
-			res.render('/535');
+			res.render('535');
 		} else {
 			console.log('------------------------------------------------------')
 			console.log('The user login time session have been logged successfully.');
@@ -1777,7 +1777,7 @@ const userHistoryLogout = function logLogoutSession(req, res) {
 	db1_LoggedInHistory.run(`UPDATE alabamaUsers_LoggedIn_History SET User_Logout_Time = ? WHERE userId = ? AND User_Logout_Time IS NULL`, [currentTime, userId], (err) => {
 		if (err) {
 			console.error('Error updating user logout history:', err);
-			res.render('/535'); // Render appropriate error page
+			res.render('535'); // Render appropriate error page
 		} else {
 			console.log('------------------------------------------------------------')
 			console.log('The user logout time session has been updated successfully.');
@@ -1882,6 +1882,7 @@ iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
    verify that routes and middlewares are set up in the correct order to enforce authentication
    before accessing protected routes like the logout endpoint.
 */
+
 iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentication, (req, res) => {
 	
 	if (req.isAuthenticated()) {
@@ -1951,8 +1952,8 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 			// Extracting device type and browser information from user-agent
 			// You may use libraries like 'express-useragent' for more comprehensive parsing
 			const deviceType = userAgent.match(/\((.*?)\)/)[1];
-			const browserInfo = userAgent.match(/(Firefox|Chrome|Safari|Edge|MSIE|Trident|Opera)/)[0];				
-			
+			const browserInfo = userAgent.match(/(Firefox|Chrome|Safari|Edge|MSIE|Trident|Opera)/)[0];			
+
 			/*
 			Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
 			using the default SMTP transporter nodemailer API library.
@@ -2030,13 +2031,13 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 
 			}
 	
-		res.redirect('/alabamaVoters_LogIn_01'); // Redirect to login page if not authenticated		
+		res.redirect('/alabamaVoters_LogIn_01'); // Redirect to login page if not authenticated
 
 		userHistoryLogout(req, res);
 
 	} else {
 
-	res.redirect('535');
+	res.render('535');
 
 }
 	
@@ -2056,7 +2057,6 @@ console.group('\n GET /user - request details:')
 console.groupEnd();
 
 });
-
 
 /* -------------------------- The ending of the DELETE ROUTE section ----------------------------- */
 
