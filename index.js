@@ -1882,7 +1882,6 @@ iVoteBallotApp.get('/alabamaVoters_LogOut_01', (req, res) => {
    verify that routes and middlewares are set up in the correct order to enforce authentication
    before accessing protected routes like the logout endpoint.
 */
-
 iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentication, (req, res) => {
 	
 	if (req.isAuthenticated()) {
@@ -1952,8 +1951,8 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 			// Extracting device type and browser information from user-agent
 			// You may use libraries like 'express-useragent' for more comprehensive parsing
 			const deviceType = userAgent.match(/\((.*?)\)/)[1];
-			const browserInfo = userAgent.match(/(Firefox|Chrome|Safari|Edge|MSIE|Trident|Opera)/)[0];			
-
+			const browserInfo = userAgent.match(/(Firefox|Chrome|Safari|Edge|MSIE|Trident|Opera)/)[0];				
+			
 			/*
 			Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
 			using the default SMTP transporter nodemailer API library.
@@ -2031,7 +2030,7 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 
 			}
 	
-		res.redirect('/alabamaVoters_LogIn_01'); // Redirect to login page if not authenticated
+		res.redirect('/alabamaVoters_LogIn_01'); // Redirect to login page if not authenticated		
 
 		userHistoryLogout(req, res);
 
@@ -2057,6 +2056,7 @@ console.group('\n GET /user - request details:')
 console.groupEnd();
 
 });
+
 
 /* -------------------------- The ending of the DELETE ROUTE section ----------------------------- */
 
