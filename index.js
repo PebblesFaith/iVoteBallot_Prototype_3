@@ -1700,11 +1700,24 @@ iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 iVoteBallotApp.get('/alabamaVoters_EmailVerification_01', (req, res) => {
 	// Check if user already authenticated.
 	if (req.isUnauthenticated) {
-		console.log('User had been successfully authenticated within the Session through the passport from forgotPassword webpage!');
+		console.log('The user attempted to verify email address without being fully authenticated via passport session from the alabamaVoters_EmailVerification_01 webpage.');
 		res.render('alabamaVoters_VerifyEmailPassword_01');
 	} else {
 		// Render signup page for new users
-		console.log('User had not been successfully authenticated within the Session through the passport from forgotPassword webpage!');
+		console.log('The user attempted to verify email address but encountered an authentication error within the passport session from the alabamaVoters_EmailVerification_01 webpage.');
+		res.render('404')
+	}
+});
+
+// The User route for alabamaVoters_EmailVerification_02.
+iVoteBallotApp.get('/alabamaVoters_ForgotPassword_01', (req, res) => {
+	// Check if user already authenticated.
+	if (req.isUnauthenticated) {
+		console.log('The user attempted to verify email address without being fully authenticated via passport session from the alabamaVoters_ForgotPassword_01 webpage.');
+		res.render('alabamaVoters_ForgotPassword_01');
+	} else {
+		// Render signup page for new users
+		console.log('The user attempted to verify email address but encountered an authentication error within the passport session from the alabamaVoters_ForgotPassword_01 webpage.');
 		res.render('404')
 	}
 });
