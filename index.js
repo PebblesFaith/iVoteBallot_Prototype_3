@@ -300,6 +300,21 @@ const db1_LoggedInHistory = new sqlite3.Database('alabamaUsers_LoggedIn_History.
 	}
 });
 
+
+
+
+const db1_LoggedPasswordChange = new sqlite3.Database('alabamaUsers_PasswordChange_History.db', err => {
+	if (err) {
+		console.log('Sarai Hannah Ajai has not created the SQLite3 database table named, alabamaUsers_PasswordChange_History.db with passport and session management authentications:' + err + '.');
+	} else {
+		console.log('Sarai Hannah Ajai has successfully created the SQLite3 database table named, alabamaUsers_PasswordChange_History.db with passport and session management authentications' + Date() + '.');
+	}
+});
+
+
+
+
+
 /*
 	The given JavaScript codes language creates a SQLite3 database table named 
 	"alabamaDMV_Commission_01",	if it does not already exist. The "alabamaDMV_Commission_01" 
@@ -406,6 +421,37 @@ db1_LoggedInHistory.serialize(() => {
 			}
 		};
 });
+
+db1_LoggedPasswordChange.serialize(() => {
+	db1_LoggedPasswordChange.run(`CREATE TABLE IF NOT EXISTS alabamaUsers_PasswordChange_History (
+
+		uniqueId TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6)))), 
+		url TEXT,
+		userAgent TEXT,
+		userId TEXT,		
+		User_PasswordChange_Time DATETIME, 		
+		total_Time_Hours TEXT,           
+		total_Time_Minutes TEXT,        
+		total_Time_Seconds TEXT,         
+		total_Time_Milliseconds TEXT
+		
+	)`), (err) => {
+
+			if (err) {
+				console.log('Sarai Hannah Ajai have not created the Sqlite3 \'alabamaUsers_LoggedIn_History\' database table which was coded successfully and she received a message: ' + err + '!');
+			} else {
+				console.log('Sarai Hannah Ajai have successfully created the Sqlite3 \'alabamaUsers_LoggedIn_History\' database table' + Date() + '.');
+			}
+		};
+});
+
+
+
+
+
+
+
+
 
 /*
 	This statement sets up a middleware function within iVoteBallot web application 
@@ -2655,7 +2701,7 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 					});
 
 				} else {
-					res.render('/535');
+					res.render('535');
 					console.log('The nodemailer user could not be authenticated.');
 
 				}
