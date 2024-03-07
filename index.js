@@ -1389,7 +1389,7 @@ iVoteBallotApp.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	next();
 });
 
-// Middleware to set req.isUnauthenticated for the first use of the '/login2' URL bar
+// Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_SignUp_01' URL bar
 iVoteBallotApp.use('/alabamaVoters_SignUp_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'alabamaVoters_SignUp_01\'.');
 	// Check if user is Already authenticated
@@ -1401,11 +1401,45 @@ iVoteBallotApp.use('/alabamaVoters_SignUp_01', (req, res, next) => {
 	next();
 });
 
-// Middleware to set req.isUnauthenticated for the first use of the '/forgotPassword' URL bar
+// Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_ForgotPasswordSignUp_01' URL bar
+iVoteBallotApp.use('/alabamaVoters_ForgotPasswordSignUp_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'alabamaVoters_ForgotPasswordSignUp_01\'.');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_EmailVerification_01' URL bar
 iVoteBallotApp.use('/alabamaVoters_EmailVerification_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'alabamaVoters_EmailVerification_01\'.');
 	// Check if user is Already authenticated
 	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_ForgotPassword_01' URL bar
+iVoteBallotApp.use('/alabamaVoters_ForgotPassword_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'alabamaVoters_ForgotPassword_01\'.');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_VerifyEmailForgotPassword_01' URL bar
+iVoteBallotApp.use('/alabamaVoters_VerifyEmailForgotPassword_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'alabamaVoters_VerifyEmailForgotPassword_01!');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
 		req.isUnauthenticated = true;
 	}
 	next();
@@ -1447,7 +1481,6 @@ iVoteBallotApp.use('/alabamaVoters_LogOut_01', (req, res, next) => {
 	}
 	next();
 });
-
 
 // Middleware to set req.isUnauthenticated for the first use of the '/dashboard_01' URL bar
 iVoteBallotApp.use('/dashboard_01', (req, res, next) => {
@@ -1684,8 +1717,27 @@ iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 		console.log(req.user);
 		console.log('Request Session:' + req.session)
 		console.log('' + req.logIn);
-		console.log('The User had been successfully authenticated within the Session through the passport from reset password webpage!');
+		console.log('The User had been successfully authenticated within the Session through the passport from reset signup password webpage!');
 		res.render('alabamaVoters_EmailVerification_01');
+
+	} else {
+
+		res.render('500')
+
+		console.log('The user is not successfully authenticated within the session through the passport from reset password webpage!');
+
+	}
+});
+
+// The User route for alabamaVoters_ForgotPasswordSignUp_01. 
+iVoteBallotApp.get('/alabamaVoters_ForgotPasswordSignUp_01', (req, res) => {
+
+	if (req.isAuthenticated()) {
+		console.log(req.user);
+		console.log('Request Session:' + req.session)
+		console.log('' + req.logIn);
+		console.log('The User had been successfully authenticated within the Session through the passport from reset password webpage!');
+		res.render('alabamaVoters_ForgotPassword_01');
 
 	} else {
 
@@ -1711,10 +1763,10 @@ iVoteBallotApp.get('/alabamaVoters_EmailVerification_01', (req, res) => {
 
 // The User route for alabamaVoters_EmailVerification_02.
 iVoteBallotApp.get('/alabamaVoters_ForgotPassword_01', (req, res) => {
-	// Check if user already authenticated.
+    // Check if user already authenticated.
 	if (req.isUnauthenticated) {
 		console.log('The user attempted to verify email address without being fully authenticated via passport session from the alabamaVoters_ForgotPassword_01 webpage.');
-		res.render('alabamaVoters_ForgotPassword_01');
+		res.render('alabamaVoters_VerifyEmailPassword_01');
 	} else {
 		// Render signup page for new users
 		console.log('The user attempted to verify email address but encountered an authentication error within the passport session from the alabamaVoters_ForgotPassword_01 webpage.');
@@ -1722,18 +1774,32 @@ iVoteBallotApp.get('/alabamaVoters_ForgotPassword_01', (req, res) => {
 	}
 });
 
+
 // The user route for alabamaVoters_VerifyEmailPassword_01.
 iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
 	if (req.isAuthenticated) {
 		console.log(req.user);
 		console.log(req.session);
-		console.log('User had been successfully authenticated within the Session through the passport from local2!');
+		console.log('The user had been successfully authenticated within the Session through the passport from local2!');
 		res.render('alabamaVoters_EmailVerification_01', { firstName: req.user.DMVFirstName, lastName: req.user.DMVLastName, email: req.user.DMVEmail });
 	} else if (req.isUnauthenticated) {
 		res.redirect('/alabamaVoters_VerifyEmailPassword_01')
-		console.log('User is not successfully authenticated within the session through the passport from local2!');
+		console.log('The user is not successfully authenticated within the session through the passport from local2!');
 	}
 });
+
+// The user route for alabamaVoters_VerifyEmailPassword_01.
+iVoteBallotApp.get('/alabamaVoters_VerifyEmailForgotPassword_01', (req, res) => {
+	if (req.isAuthenticated) {
+		console.log(req.user);
+		console.log(req.session);
+		console.log('The User had been successfully authenticated within the Session through the passport from local4!');
+		res.render('alabamaVoters_ForgotPassword_01', { firstName: req.user.DMVFirstName, lastName: req.user.DMVLastName, email: req.user.DMVEmail });
+	} else if (req.isUnauthenticated) {
+		res.redirect('/alabamaVoters_VerifyEmailForgotPassword_01')
+		console.log('The User is not successfully authenticated within the session through the passport from local4!');
+	}
+})
 
 // The user route for alabamaVoters_LogIn_01.
 iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
@@ -2128,7 +2194,7 @@ iVoteBallotApp.post(
 		failureRedirect: '/alabamaVoters_SignUp_01',
 		failureFlash: true
 	}
-	));
+));
 
 iVoteBallotApp.post(
 	'/alabamaVoters_VerifyEmailPassword_01',
@@ -2137,7 +2203,7 @@ iVoteBallotApp.post(
 		failureRedirect: '/alabamaVoters_VerifyEmailPassword_01',
 		failureFlash: true
 	}
-	));
+));
 
 iVoteBallotApp.post(
 	'/alabamaVoters_LogIn_01',
@@ -2155,6 +2221,15 @@ iVoteBallotApp.post(
 	}
 
 );
+
+iVoteBallotApp.post(
+	'/alabamaVoters_ForgotPasswordSignUp_01',
+	passport.authenticate('local1', {
+		successRedirect: '/alabamaVoters_ForgotPassword_01',
+		failureRedirect: '/alabamaVoters_ForgotPasswordSignUp_01',
+		failureFlash: true
+	}
+));
 
 /* -------------------------- The ending of the POST LOCAL STRATEGY section ----------------------------- */
 
@@ -2559,6 +2634,68 @@ iVoteBallotApp.post('/alabamaVoters_SignUp_01',
 	}
 );
 
+iVoteBallotApp.post('/alabamaVoters_ForgotPasswordSignUp_01',
+
+	async (req, res) => {
+
+		const DMVEmail = req.user.DMVEmail;
+		//const userIvoteBallotIdIdentifierCode = req.body.userIvoteBallotIdIdentifierCode;
+		const Password = req.body.Password;
+		const ConfirmPassword = req.body.ConfirmPassword;
+
+		console.log('These are the request body' + req.body);
+		console.log('The user\'s email is: ' + req.body.DMVEmail + '.');
+
+		//console.log('The user email address is: ' + userDMVEmail + '.');
+		//console.log('The user iVoteBallot Id Identifier Code is: ' + userIvoteBallotIdIdentifierCode + '.');
+		console.log('The user password is: ' + Password + '.');
+		console.log('The user confirm password is: ' + ConfirmPassword + '.');
+
+		console.log('The request session: ' + req.session + '.');
+
+		// To hash the newPassword input field using bcrypt library.
+		const salt = await bcrypt.genSalt(14);
+		const passwordHashed = await bcrypt.hash(Password, salt);
+
+		// To hash the confirmNewPassword input field using bcrypt library.
+		const confirmPasswordHashed = await bcrypt.hash(ConfirmPassword, salt);
+
+		// To check, if the user's email address exists onto the passport serialization through the session cookie id.
+		db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE DMVEmail = ?', DMVEmail, (err, user) => {
+
+			if (err) {
+
+				console.error(err);
+				console.log('The user\'s input fields for passport.use local1 Local Strategy and Session Cookie Id did not successfully executed from the internet causing an 500 error message most likely from the Developer\'s JavaScript coded written algorithm problems.');
+				res.render('500');
+
+			} else if (!user) {
+				req.flash('error', 'The user have entered the incorrect email address and/or password that were not successfully process through the passport.use local1 Local Strategy and Session Cookie Id to the SQlite3 database authentication from serialization.');
+				console.log('The user\'s email address is not found successfully through the process of the passport.use local1 Local Strategy and Session Cookie Id to the SQLite3 database for serializtion.');
+				res.render('alabamaVoters_ForgotPasswordSignUp_01');
+
+			} else {
+
+				db1.run('UPDATE alabamaDMV_Commission_01 SET Password = ?, ConfirmPassword = ? WHERE DMVEmail = ?', passwordHashed, confirmPasswordHashed, req.DMVEmail, (err) => {
+
+					if (err) {
+						console.error(err);
+						console.log('The user\s passport and session was not successfully executed causing an 500 error message due from Developer\s programmatic coding language problems.');
+						res.render('500');
+
+					} else {
+
+						console.log('The user\s email address is successfully found within the passport serialization authenticated processes through the session.');
+						res.redirect('/alabamaVoters_EmailVerification');
+					}
+
+				});
+
+			}
+		});
+	}
+);
+
 function generateNewPassword() {
 	const length = 20;
 	const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-={}[]:";?,./~';
@@ -2584,6 +2721,161 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 			req.flash('error', 'Your email address was not found in our iVoteBallot database.');
 			console.log('User/s email was not successfully found onto the SQlite3 database.')
 			res.render('alabamaVoters_EmailVerification_01');
+		} else {
+			// Generate a new password and update the user's record in the database
+
+			const newPassword = generateNewPassword();
+			const hash = bcrypt.hashSync(newPassword, 13);
+
+			db1.run('UPDATE alabamaDMV_Commission_01 SET Temporary_Password = ? WHERE DMVEmail = ?', hash, email, (err) => {
+				if (err) {
+					console.error(err);
+					console.log('SQlite3 language had not properly execute the UPDATE correctly.')
+					res.render('500');
+				} else {
+					// Send the new password to the user's email to nodemailer 
+					//sendEmail(email, 'New password', `Your new password is: ${newPassword}`);
+
+					res.redirect('/alabamaVoters_VerifyEmailPassword_01');
+					console.log('SQlite3 language had properly execute the UPDATE successfully for the user\'s Temporary Password.')
+				}
+				/*
+				Sarai Hannah Ajai has generated a test SMTP service account; in order to receive iVoteBallot's customercare@ionos.com emails from the 
+				'transporter' constant object from the AccouNetrics' users which pass through the 'nodemailer' API library.
+				*/
+				const transporter = nodemailer.createTransport({
+					host: 'smtp.ionos.com',
+					port: 587,
+					secure: false,
+					auth: {
+						user: 'ceo_developmenttest@ivoteballot.com',
+						pass: IONOS_SECRET_KEY,
+					}
+				});
+
+				const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
+
+				if (req.isAuthenticated()) {
+					/*
+					Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
+					using the default SMTP transporter nodemailer API library.
+					*/
+					const mailOptions_01 = {
+						from: req.body.DMVEmail,
+						to: 'electionassureexpert@ivoteballot.com',
+						bcc: 'cio_developmenttest@ivoteballot.com',
+						subject: `New User Registration - iVoteBallot Online Voter Registration Not Yet Verified`,
+						html: `	
+		
+						<p>iVoteBallot has received a new online registration:</p>
+
+						<p>New User Registration: ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName}, has been sent a temporary password for an iVoteBallot account verification.</p> 
+						<p>The email associated with the iVoteBallot's account is: ${req.user.DMVEmail}.</p>															
+					
+						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+
+					`,
+
+						attachments: [
+							{
+								filename: 'iVoteBallotLogo.png',
+								path: imagePath,
+								cid: 'iVoteBallotLogo'
+
+							}
+						]
+
+					};
+
+					const mailOptions_02 = {
+						from: 'electionassureexpert@ivoteballot.com',
+						to: req.body.DMVEmail,
+						bcc: 'cio_developmenttest@ivoteballot.com',
+						subject: `Authenticate Your iVoteBallot's Account`,
+						html: `
+			
+						<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
+
+						<p>Thank you for choosing iVoteBallot to complete your sign-up process, please use the following temporary password:<p>
+
+						<p><strong>${newPassword}</strong></p;
+
+						<br>
+
+						<p>in order for iVoteBallot to verify your email address identity.</p>						
+						
+						<p>This temporary password is valid for the next 10 minutes. After, successful authentication, you can set your permanent password and confirm password.</p>
+						
+						<p>Should you have any questions or concerns, feel free to reach out to our iVoteBallot's Election Assure Expert Team Team.</p>
+						
+						<p>Respectfully, </p>	
+
+						<p>iVoteBallot's Election Assure Expert Team </p>
+
+						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+						
+						`,
+
+						attachments: [
+							{
+								filename: 'iVoteBallotLogo.png',
+								path: imagePath,
+								cid: 'iVoteBallotLogo'
+
+							}
+						]
+
+					};
+
+					/*
+					Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
+					email account with nodemailer defined transporter object.
+					*/
+
+					transporter.sendMail(mailOptions_01, (error, info) => {
+						if (error) {
+							console.log(error);
+						} else {
+							console.log('Email Sent: ' + info.response);
+						}
+					});
+
+					transporter.sendMail(mailOptions_02, (error, info) => {
+						if (error) {
+							console.log(error);
+							res.send('error');
+						} else {
+							console.log('Email Sent: ' + info.response);
+							res.send('success!');
+						}
+					});
+
+				} else {
+					res.render('535');
+					console.log('The nodemailer user could not be authenticated.');
+
+				}
+			});
+		}
+	});
+});
+
+
+iVoteBallotApp.post('/alabamaVoters_ForgotPassword_01', (req, res) => {
+	const email = req.body.DMVEmail;
+
+	// Check if the email exists in the database
+	db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE DMVEmail = ?', email, (err, row) => {
+		if (err) {
+			console.error(err);
+			console.log('SQLite3 language did not successfully execute user/s email address search properly; therefore this error means a JavaScript codes language error.');
+			req.flash('error', 'This email address input field have generated an error message 500, please contact iVoteballot customer care team.');
+			res.render('500');
+
+		} else if (!row) {
+			req.flash('error', 'Your email address was not found in our iVoteBallot database.');
+			console.log('User/s email was not successfully found onto the SQlite3 database.')
+			res.render('alabamaVoters_ForgotPassword_01');
 		} else {
 			// Generate a new password and update the user's record in the database
 
@@ -2772,6 +3064,7 @@ iVoteBallotApp.post('/alabamaVoters_VerifyEmailPassword_01',
 			}
 		});
 	});
+
 
 iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
