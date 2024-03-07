@@ -2919,12 +2919,12 @@ iVoteBallotApp.post('/alabamaVoters_ForgotPassword_01', (req, res) => {
 						from: req.body.DMVEmail,
 						to: 'electionassureexpert@ivoteballot.com',
 						bcc: 'cio_developmenttest@ivoteballot.com',
-						subject: `New User Registration - iVoteBallot Online Voter Registration Not Yet Verified`,
+						subject: `The User Reset Password Requests - iVoteBallot Online Voter Reset Password Not Yet Verified`,
 						html: `	
 		
-						<p>iVoteBallot has received a new online registration:</p>
+						<p>iVoteBallot has received an user reset password requests:</p>
 
-						<p>New User Registration: ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName}, has been sent a temporary password for an iVoteBallot account verification.</p> 
+						<p>The User Reset Password Requests: ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName}, has been sent a temporary password for an iVoteBallot account verification.</p> 
 						<p>The email associated with the iVoteBallot's account is: ${req.user.DMVEmail}.</p>															
 					
 						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
@@ -2951,7 +2951,7 @@ iVoteBallotApp.post('/alabamaVoters_ForgotPassword_01', (req, res) => {
 			
 						<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
 
-						<p>Thank you for choosing iVoteBallot to complete your sign-up process, please use the following temporary password:<p>
+						<p>Thank you for choosing iVoteBallot to complete your reset password process, please use the following temporary password:<p>
 
 						<p><strong>${newPassword}</strong></p;
 
@@ -3078,6 +3078,8 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
 		console.log(req.body);
 
+
+
 		// To hash the newPassword input field using bcrypt library.
 		const salt = await bcrypt.genSalt(14);
 		const passwordHashed = await bcrypt.hash(Password, salt);
@@ -3109,7 +3111,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
 					} else {
 						console.log('The user have successfully either created or updated he or her password.')
-						res.redirect('/alabamaVoters_LogIn_01');
+						res.redirect('/alabamaVoters_LogIn_01');					
 
 					}
 
