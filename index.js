@@ -258,6 +258,7 @@ const ALABAMA_SESSION = process.env.ALABAMA_SESSION;
 const SESSION_MAX_AGE = process.env.SESSION_MAX_AGE;
 const EXPRESS_SESSION_KEY = process.env.EXPRESS_SESSION_KEY;
 const IONOS_SECRET_KEY = process.env.IONOS_SECRET_KEY;
+const BCRYPTION_SALT_KEY = process.env.BCRYPTION_SALT_KEY;
 
 iVoteBallotApp.use(express.urlencoded({ extended: false }));
 
@@ -300,9 +301,6 @@ const db1_LoggedInHistory = new sqlite3.Database('alabamaUsers_LoggedIn_History.
 	}
 });
 
-
-
-
 const db1_LoggedPasswordChange = new sqlite3.Database('alabamaUsers_PasswordChange_History.db', err => {
 	if (err) {
 		console.log('Sarai Hannah Ajai has not created the SQLite3 database table named, alabamaUsers_PasswordChange_History.db with passport and session management authentications:' + err + '.');
@@ -310,10 +308,6 @@ const db1_LoggedPasswordChange = new sqlite3.Database('alabamaUsers_PasswordChan
 		console.log('Sarai Hannah Ajai has successfully created the SQLite3 database table named, alabamaUsers_PasswordChange_History.db with passport and session management authentications' + Date() + '.');
 	}
 });
-
-
-
-
 
 /*
 	The given JavaScript codes language creates a SQLite3 database table named 
@@ -428,12 +422,10 @@ db1_LoggedPasswordChange.serialize(() => {
 		uniqueId TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6)))), 
 		url TEXT,
 		userAgent TEXT,
-		userId TEXT,		
-		User_PasswordChange_Time DATETIME, 		
-		total_Time_Hours TEXT,           
-		total_Time_Minutes TEXT,        
-		total_Time_Seconds TEXT,         
-		total_Time_Milliseconds TEXT
+		userId TEXT,	
+		Prior_HashedPassword TEXT,	
+		currentPassword_PlainText TEXT,
+		User_PasswordChange_Time DATETIME		
 		
 	)`), (err) => {
 
@@ -444,14 +436,6 @@ db1_LoggedPasswordChange.serialize(() => {
 			}
 		};
 });
-
-
-
-
-
-
-
-
 
 /*
 	This statement sets up a middleware function within iVoteBallot web application 
@@ -1457,6 +1441,19 @@ iVoteBallotApp.use('/alabamaVoters_VerifyEmailPassword_01', (req, res, next) => 
 	next();
 });
 
+// Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_CreatePassword_01' URL bar
+iVoteBallotApp.use('/alabamaVoters_CreatePasswords_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'alabamaVoters_CreatePasswords_01!');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+
 // Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_LogIn_01' URL bar
 iVoteBallotApp.use('/alabamaVoters_LogIn_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'alabamaVoters_LogIn_01!');
@@ -1596,7 +1593,7 @@ iVoteBallotApp.get('/401', (req, res) => {
 
 	} else {
 		console.log(req.flash());
-		res.render('500');
+		res.render('535');
 
 	}
 });
@@ -1614,7 +1611,7 @@ iVoteBallotApp.get('/404', (req, res) => {
 
 	} else {
 		console.log(req.flash());
-		res.render('500');
+		res.render('535');
 
 	}
 });
@@ -1667,7 +1664,7 @@ iVoteBallotApp.get('/', (req, res) => {
 
 	} else {
 		console.log(req.flash());
-		res.render('500');
+		res.render('535');
 	}
 });
 
@@ -1684,7 +1681,7 @@ iVoteBallotApp.get('/ivoteballot', (req, res) => {
 
 	} else {
 		console.log(req.flash());
-		res.render('500');
+		res.render('535');
 	}
 });
 
@@ -1722,7 +1719,7 @@ iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 
 	} else {
 
-		res.render('500')
+		res.render('535')
 
 		console.log('The user is not successfully authenticated within the session through the passport from reset password webpage!');
 
@@ -1741,7 +1738,7 @@ iVoteBallotApp.get('/alabamaVoters_ForgotPasswordSignUp_01', (req, res) => {
 
 	} else {
 
-		res.render('500')
+		res.render('535')
 
 		console.log('The user is not successfully authenticated within the session through the passport from reset password webpage!');
 
@@ -2459,7 +2456,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 					console.error(err);
 					req.flash('error', 'An syntax error has occurred when you have entered your data information into the input field that is link to our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
 					console.log('An syntax error has occurred when the user have entered his/her data information into the input field that is link our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
-					res.render('500');
+					res.render('535');
 
 				} else {
 					console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
@@ -2592,7 +2589,7 @@ iVoteBallotApp.post('/alabamaVoters_SignUp_01',
 		console.log('The request session: ' + req.session + '.');
 
 		// To hash the newPassword input field using bcrypt library.
-		const salt = await bcrypt.genSalt(14);
+		const salt = await bcrypt.genSalt(BCRYPTION_SALT_KEY);
 		const passwordHashed = await bcrypt.hash(Password, salt);
 
 		// To hash the confirmNewPassword input field using bcrypt library.
@@ -2605,7 +2602,7 @@ iVoteBallotApp.post('/alabamaVoters_SignUp_01',
 
 				console.error(err);
 				console.log('The user\'s input fields for passport.use local1 Local Strategy and Session Cookie Id did not successfully executed from the internet causing an 500 error message most likely from the Developer\'s JavaScript coded written algorithm problems.');
-				res.render('500');
+				res.render('535');
 
 			} else if (!user) {
 				req.flash('error', 'The user have entered the incorrect email address and/or password that were not successfully process through the passport.use local1 Local Strategy and Session Cookie Id to the SQlite3 database authentication from serialization.');
@@ -2619,7 +2616,7 @@ iVoteBallotApp.post('/alabamaVoters_SignUp_01',
 					if (err) {
 						console.error(err);
 						console.log('The user\s passport and session was not successfully executed causing an 500 error message due from Developer\s programmatic coding language problems.');
-						res.render('500');
+						res.render('535');
 
 					} else {
 
@@ -2667,7 +2664,7 @@ iVoteBallotApp.post('/alabamaVoters_ForgotPasswordSignUp_01',
 
 				console.error(err);
 				console.log('The user\'s input fields for passport.use local1 Local Strategy and Session Cookie Id did not successfully executed from the internet causing an 500 error message most likely from the Developer\'s JavaScript coded written algorithm problems.');
-				res.render('500');
+				res.render('535');
 
 			} else if (!user) {
 				req.flash('error', 'The user have entered the incorrect email address and/or password that were not successfully process through the passport.use local1 Local Strategy and Session Cookie Id to the SQlite3 database authentication from serialization.');
@@ -2681,7 +2678,7 @@ iVoteBallotApp.post('/alabamaVoters_ForgotPasswordSignUp_01',
 					if (err) {
 						console.error(err);
 						console.log('The user\s passport and session was not successfully executed causing an 500 error message due from Developer\s programmatic coding language problems.');
-						res.render('500');
+						res.render('535');
 
 					} else {
 
@@ -2715,7 +2712,7 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 			console.error(err);
 			console.log('SQLite3 language did not successfully execute user/s email address search properly; therefore this error means a JavaScript codes language error.');
 			req.flash('error', 'This email address input field have generated an error message 500, please contact iVoteballot customer care team.');
-			res.render('500');
+			res.render('535');
 
 		} else if (!row) {
 			req.flash('error', 'Your email address was not found in our iVoteBallot database.');
@@ -2731,7 +2728,7 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 				if (err) {
 					console.error(err);
 					console.log('SQlite3 language had not properly execute the UPDATE correctly.')
-					res.render('500');
+					res.render('535');
 				} else {
 					// Send the new password to the user's email to nodemailer 
 					//sendEmail(email, 'New password', `Your new password is: ${newPassword}`);
@@ -2869,8 +2866,8 @@ iVoteBallotApp.post('/alabamaVoters_ForgotPassword_01', (req, res) => {
 		if (err) {
 			console.error(err);
 			console.log('SQLite3 language did not successfully execute user/s email address search properly; therefore this error means a JavaScript codes language error.');
-			req.flash('error', 'This email address input field have generated an error message 500, please contact iVoteballot customer care team.');
-			res.render('500');
+			req.flash('error', 'This email address input field have generated an error message 535, please contact iVoteballot customer care team.');
+			res.render('535');
 
 		} else if (!row) {
 			req.flash('error', 'Your email address was not found in our iVoteBallot database.');
@@ -2886,7 +2883,7 @@ iVoteBallotApp.post('/alabamaVoters_ForgotPassword_01', (req, res) => {
 				if (err) {
 					console.error(err);
 					console.log('SQlite3 language had not properly execute the UPDATE correctly.')
-					res.render('500');
+					res.render('535');
 				} else {
 					// Send the new password to the user's email to nodemailer 
 					//sendEmail(email, 'New password', `Your new password is: ${newPassword}`);
@@ -3043,8 +3040,8 @@ iVoteBallotApp.post('/alabamaVoters_VerifyEmailPassword_01',
 		db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE DMVEmail = ?', DMVEmail, (err, row) => {
 			if (err) {
 				console.error(err);
-				console.log('The user\s passport and session was not successfully executed causing an 500 error message due from Developer\s programmatic coding language problems.');
-				res.render('500');
+				console.log('The user\s passport and session was not successfully executed causing an 535 error message due from Developer\s programmatic coding language problems.');
+				res.render('535');
 			} else if (!row) {
 				console.log('The user\s email address is not successfully found within the passport serialization authenticated processes through the session.');
 				res.render('alabamaVoters_VerifyEmailPassword_01');
@@ -3053,8 +3050,8 @@ iVoteBallotApp.post('/alabamaVoters_VerifyEmailPassword_01',
 				db1.run('UPDATE alabamaDMV_Commission_01 SET password = ?, confirmPassword = ? WHERE DMVEmail = ?', passwordHashed, confirmPasswordHashed, row.DMVEmail, (err) => {
 					if (err) {
 						console.error(err);
-						console.log('The user\s passport and session was not successfully executed causing an 500 error message due from Developer\s programmatic coding language problems.');
-						res.render('500');
+						console.log('The user\s passport and session was not successfully executed causing an 535 error message due from Developer\s programmatic coding language problems.');
+						res.render('535');
 					} else {
 						console.log('The user\s email address is successfully found within the passport serialization authenticated processes through the session.');
 						res.redirect('/ivoteballot');
@@ -3063,8 +3060,72 @@ iVoteBallotApp.post('/alabamaVoters_VerifyEmailPassword_01',
 				});
 			}
 		});
-	});
+	}
+	
+);
 
+const userPasswordChangeHistory = function passwordChangeSession(req, res) {
+
+	const uniqueId = uuidv4(); // Generate a new UUIDv4 for the uniqueId column
+
+	const currentTime = new Date().toISOString();
+
+	console.log('-----------------------------')
+	console.log(currentTime + ' CST');
+	console.log('_____________________________')
+
+	const passwordChangeRoutes = {
+
+		alabamaVoters_CreatePasswords: '/alabamaVoters_CreatePasswords',	
+
+	};
+
+	const baseUrl = req.protocol + '://' + req.get('host');
+	const url = baseUrl + req.originalUrl;
+
+	// To check if, the requested route matches any routes in dashboardRoutes
+	if (req.originalUrl in passwordChangeRoutes) {
+		url = baseUrl + passwordChangeRoutes[req.originalUrl];
+	}
+	
+	console.log('------------------------------------------------------')
+	console.log('The user url path:' + url);
+	console.log('______________________________________________________')
+
+	// To use the existing userId from req.user
+	const userId = req.user.id;
+
+	const user_agent = req.headers['user-agent'];
+	req.session.user_agent = user_agent;
+
+	const Prior_HashedPassword = req.user.Password;	
+	const currentPassword_PlainText = req.body.Password;
+
+	// To insert a new record into the user alabamaUsers_PasswordChange_History table
+		
+	db1_LoggedPasswordChange.run(`INSERT INTO alabamaUsers_PasswordChange_History (uniqueId, url, userId, userAgent, Prior_HashedPassword , currentPassword_PlainText, User_PasswordChange_Time) VALUES (?, ?, ?, ?, ?, ?, ?)`, [uniqueId, url, userId, user_agent, Prior_HashedPassword, currentPassword_PlainText, currentTime], (err, row) => {
+
+		if (err) {
+			console.error('An error have been inserted into user\s alabamaUsers_PasswordChange_History that generated an error message:', err);
+			// To render appropriate error page
+			res.render('535');
+
+		} else if (!row){
+			
+			console.log('The user\'s alabamaUsers_PasswordChange_History was not successfully found onto the SQlite3 database.')
+
+		} else {
+			console.log('------------------------------------------------------')
+			console.log('The user login time session have been logged successfully.');
+			console.log('______________________________________________________');
+			console.log('The user prior req.user.Password: ' + req.user.Password);
+			console.log('______________________________________________________');
+			console.log('The user current req.body.Password: ' + req.body.Password);
+
+		}
+	});
+	
+};
 
 iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
@@ -3077,8 +3138,6 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 		const ConfirmPassword = req.body.ConfirmPassword;
 
 		console.log(req.body);
-
-
 
 		// To hash the newPassword input field using bcrypt library.
 		const salt = await bcrypt.genSalt(14);
@@ -3107,11 +3166,14 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
 					if (err) {
 						console.log('alabamaVoters_CreatePasswords_01\'s POST have created either an user login authentication error or syntax POST issues: ' + err.message);
-						res.render('500');
+						res.render('535');
 
 					} else {
 						console.log('The user have successfully either created or updated he or her password.')
-						res.redirect('/alabamaVoters_LogIn_01');					
+						res.redirect('/alabamaVoters_LogIn_01');	
+						
+						// Call the userPasswordChangeHistory function to log the user's login session
+						userPasswordChangeHistory(req, res);
 
 					}
 
