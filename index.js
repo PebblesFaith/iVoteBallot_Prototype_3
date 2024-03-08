@@ -2694,13 +2694,48 @@ iVoteBallotApp.post('/alabamaVoters_ForgotPasswordSignUp_01',
 );
 
 function generateNewPassword() {
-	const length = 20;
-	const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-={}[]:";?,./~';
-	let newPassword = '';
-	for (let i = 0, n = charset.length; i < length; i++) {
-		newPassword += charset.charAt(Math.floor(Math.random() * n));
-	}
-	return newPassword;
+    const length = 25;
+
+    // Define character sets
+    const lowercaseCharset = 'abcdefghijklmnopqrstuvwxyz';
+    const uppercaseCharset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const numberCharset = '0123456789';
+    const specialCharset = '!@#$%^&*()_+-={}[]:";?,.\/~`<>';
+
+    let newPassword = '';
+
+    // Include at least one character from each set
+    newPassword += getRandomCharacter(lowercaseCharset);
+    newPassword += getRandomCharacter(uppercaseCharset);
+    newPassword += getRandomCharacter(numberCharset);
+    newPassword += getRandomCharacter(specialCharset);
+
+    // Fill the rest of the password with random characters
+    const remainingLength = length - 4; // Subtract 4 because we already added one from each set
+    const combinedCharset = lowercaseCharset + uppercaseCharset + numberCharset + specialCharset;
+    for (let i = 0; i < remainingLength; i++) {
+        newPassword += combinedCharset.charAt(Math.floor(Math.random() * combinedCharset.length));
+    }
+
+    // Shuffle the characters in the password
+    newPassword = shuffleString(newPassword);
+
+    return newPassword;
+}
+
+// Function to get a random character from a given character set
+function getRandomCharacter(charset) {
+    return charset.charAt(Math.floor(Math.random() * charset.length));
+}
+
+// Function to shuffle a string
+function shuffleString(str) {
+    const array = str.split('');
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array.join('');
 }
 
 iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
