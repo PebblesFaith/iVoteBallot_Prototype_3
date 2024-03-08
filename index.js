@@ -2916,69 +2916,56 @@ iVoteBallotApp.post('/alabamaVoters_ForgotPassword_01', (req, res) => {
 						from: req.body.DMVEmail,
 						to: 'electionassureexpert@ivoteballot.com',
 						bcc: 'cio_developmenttest@ivoteballot.com',
-						subject: `The User Reset Password Requests - iVoteBallot Online Voter Reset Password Not Yet Verified`,
+						subject: `User Reset Password Request - iVoteBallot Online Voter Password Not Yet Verified`,
 						html: `	
-		
-						<p>iVoteBallot has received an user reset password requests:</p>
-
-						<p>The User Reset Password Requests: ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName}, has been sent a temporary password for an iVoteBallot account verification.</p> 
-						<p>The email associated with the iVoteBallot's account is: ${req.user.DMVEmail}.</p>															
+							<p>iVoteBallot has received a user reset password request:</p>
 					
-						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
-
-					`,
-
+							<p>The User Reset Password Request for: ${req.user.DMVFirstName} ${req.user.DMVMiddleName || ''} ${req.user.DMVLastName}, has been sent a temporary password for verification of their iVoteBallot account.</p> 
+							<p>The email associated with the iVoteBallot account is: ${req.user.DMVEmail}.</p>
+					
+							<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+						`,
 						attachments: [
 							{
 								filename: 'iVoteBallotLogo.png',
 								path: imagePath,
 								cid: 'iVoteBallotLogo'
-
 							}
 						]
-
 					};
-
+					
 					const mailOptions_02 = {
 						from: 'electionassureexpert@ivoteballot.com',
 						to: req.body.DMVEmail,
 						bcc: 'cio_developmenttest@ivoteballot.com',
-						subject: `Authenticate Your iVoteBallot's Account`,
+						subject: `Authenticate Your iVoteBallot Account`,
 						html: `
-			
-						<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
-
-						<p>Thank you for choosing iVoteBallot to complete your reset password process, please use the following temporary password:<p>
-
-						<p><strong>${newPassword}</strong></p;
-
-						<br>
-
-						<p>in order for iVoteBallot to verify your email address identity.</p>						
-						
-						<p>This temporary password is valid for the next 10 minutes. After, successful authentication, you can set your permanent password and confirm password.</p>
-						
-						<p>Should you have any questions or concerns, feel free to reach out to our iVoteBallot's Election Assure Expert Team Team.</p>
-						
-						<p>Respectfully, </p>	
-
-						<p>iVoteBallot's Election Assure Expert Team </p>
-
-						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
-						
+							<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName || ''} ${req.user.DMVLastName},</p>
+					
+							<p>Thank you for choosing iVoteBallot to complete your reset password process. Please use the following temporary password:</p>
+					
+							<p><strong>${newPassword}</strong></p>
+					
+							<p>in order for iVoteBallot to verify your email address identity.</p>						
+							
+							<p>This temporary password is valid for the next 10 minutes. After successful authentication, you can set your permanent password.</p>
+							
+							<p>If you have any questions or concerns, feel free to reach out to our iVoteBallot Election Assure Expert Team.</p>
+							
+							<p>Respectfully,</p>
+							<p>iVoteBallot's Election Assure Expert Team</p>
+					
+							<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 						`,
-
 						attachments: [
 							{
 								filename: 'iVoteBallotLogo.png',
 								path: imagePath,
 								cid: 'iVoteBallotLogo'
-
 							}
 						]
-
 					};
-
+					
 					/*
 					Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
 					email account with nodemailer defined transporter object.
@@ -3169,7 +3156,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 						res.render('535');
 
 					} else {
-						console.log('The user have successfully either created or updated he or her password.')
+						console.log('The user have successfully either created or updated his or her password.')
 						res.redirect('/alabamaVoters_LogIn_01');	
 						
 						// Call the userPasswordChangeHistory function to log the user's login session
@@ -3200,7 +3187,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 						/*
 						Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
 						using the default SMTP transporter nodemailer API library.
-						*/
+						*/		
 
 						const mailOptions_01 = {
 							from: 'electionassureexpert@ivoteballot.com',
@@ -3208,40 +3195,34 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 							bcc: 'cio_developmenttest@ivoteballot.com',
 							subject: `Password Changed`,
 							html: `
-								
 								<div style="text-align: center;">
 									<img src="cid:iVoteBallotLogo" style="width: 85px; height: auto; display: inline-block;" />
-								</div>						
-					
-								<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName} ${req.user.DMVLastName},</p>
-				
-								<p>Your iVoteBallot account password has been recently changed at ${passwordChangeDateTime}.</p>
-															
+								</div>
+								
+								<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName || ''} ${req.user.DMVLastName},</p>
+								
+								<p>Your iVoteBallot account password was recently changed on ${passwordChangeDateTime}.</p>
+								
 								<p>
 									If you did not initiate this password change, please contact iVoteBallot customer care services immediately 
-									at our email address, customercare@ivoteballot.com
+									by emailing customercare@ivoteballot.com.
 								</p>
 
 								<p>
-									For your iVoteBallot security, ${req.user.DMVFirstName} ${req.user.DMVMiddleName}, we automatically send this
-									alert to your primary email address, as a notification.
-								</p>											
-													
-								<p>Respectfully, </p>	
-				
-								<p>iVoteBallot's Customer Care Team </p>									
-								
-								`,
+									For your iVoteBallot security, ${req.user.DMVFirstName} ${req.user.DMVMiddleName ? req.user.DMVMiddleName + ' ' : ''}we automatically send this
+									alert to your primary email address as a notification.
+								</p>
 
+								<p>Respectfully,</p>
+								<p>iVoteBallot's Customer Care Team</p>
+							`,
 							attachments: [
 								{
 									filename: 'iVoteBallotLogo.png',
 									path: imagePath,
 									cid: 'iVoteBallotLogo'
-
 								}
 							],
-
 						};
 
 						/*
