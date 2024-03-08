@@ -1096,7 +1096,7 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 			secure: false,
 			auth: {
 				user: 'ceo_developmenttest@ivoteballot.com',
-				pass: process.env.IONOS_SECRET_KEY,
+				pass: IONOS_SECRET_KEY,
 			}
 		});
 
