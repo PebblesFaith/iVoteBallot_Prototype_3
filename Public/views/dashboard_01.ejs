@@ -195,89 +195,121 @@
 									<hr id="hr_Grey_line_02">
 								</div>
 								
-								<div id="userNameProfile_02">										
+								<div id="userNameProfile_02">	
+
 									<%= DMVFirstName %> <%= DMVMiddleName %> <%= DMVLastName %> 
+									<br>
+									<br>									
 								</div>
 
-								<hr id="hr_Grey_line_02">
+								<hr id="hr_Grey_line_02">						
+										
+								<div id="clock_Image_02" >										
+
+									<img src="data:image/jpeg;base64, <%= DMVPhoto %>" alt="DMV Photo"> 
+
+								</div>	
+									
+									<div id="userDetailProfile_03">	
+										<ul class="no-bullets_01">Personal identifiable Information:
+
+											<br>
+											<br>
+
+											<li>Identification Card Type | <%= DMVIdType %></li>																											
+											<li>Date of Birth | <%= DMVDateOfBirth %></li> 											
+											<li>Birth Sex | <%= DMVBirthSex %></li>											
+											<li>Email Address | <%= DMVEmail %></li>
+											<li>Phone Number | <%= DMVPhoneNumber %></li>
+											
+											<br>
+										</ul>
+
+									</div>
+
+								<hr id="hr_Grey_line_02">								
 								
 								<div class="flex_Container">
+
 									<div class="flex_Container_Row">								
 
 										<div class="flex_Container_Column">
-											<br>
-										
-											<div id="clock_Image_02" >
-												<img src="data:image/jpeg;base64, <%= DMVPhoto %>" alt="DMV Photo"> 
+											
+											<div class="userDetailProfile_05">	
+
+												<br>
+
+												<ul class="no-bullets_02">Residential Address:
+
+													<br>
+													<br>
+
+													<li>Country | <%= DMVCountrySelection %></li>													
+													<li>Address | <%= DMVAddress %></li>													
+													<li><%= DMVUnitType %> | <%= DMVUnitTypeNumber %></li>													
+													<li>City | <%= DMVCitySelection %></li>													
+													<li>County | <%= DMVCountySelection %></li>													
+													<li>State | <%= DMVStateSelection %></li> 													
+													<li>Zip Code | <%= DMVZipSelection %></li>
+													
+													<br>
+
+												</ul>
+												
+
+												<ul class="no-bullets_02">United States Citizenship Status:
+
+													<br>
+													<br>
+
+													<li>U.S. Resident Status | <%= DMVUSResidentStatusSelection %></li>													
+													<li>U.S. Resident Status Category | <%= DMVUSResidentStatusCategorySelection %></li>													
+													<li>U.S. Resident Status Subject | <%= DMVUSResidentStatusSubjectSelection %></li>
+
+													<br>													
+												
+												</ul>
+
 											</div>
+										
+										</div>	
+										
+										<div class="verticalLine_01"></div>
+
+										<div class="flex_Container_Column">											
 											
-										</div>										
+											<div class="userDetailProfile_05">		
 
-										<div class="flex_Container_Column">
+												<br>
 
-											<br>
-											
-											<div id="userDetailProfile_03">																								
+												<ul class="no-bullets_02">Educational Attainments Status:
 
-												Identification Card Type | <%= DMVIdType %>
-												<br>																		
-												Date of Birth | <%= DMVDateOfBirth %>   
-												<br>
-												Birth Sex | <%= DMVBirthSex %>
-												<br>
-												Email Address | <%= DMVEmail %>
-												<br> 
-												<br>
-												U.S. Resident Status | <%= DMVUSResidentStatusSelection %>
-												<br>
-												U.S. Resident Status Category | <%= DMVUSResidentStatusCategorySelection %>
-												<br>
-												U.S. Resident Status Subject | <%= DMVUSResidentStatusSubjectSelection %>
-												<br>
-												<br>
-												Elementary School Name | <%= DMVGradeSchool %>
-												<br>
-												Elementary School Diploma | <%= DMVGradeSchoolSelection %> 
-												<br>
-												Elementary School Graduated Year | <%= DMVGradeSchoolYearSelection %>
-												<br>
-												<br>
-												High School Name | <%= DMVHighSchool %> 
-												<br>
-												High School Diploma | <%= DMVHighSchoolSelection %> 
-												<br>
-												High School Graduated Year  <%= DMVHighSchoolYearSelection %>
-												<br>
-												<br>
-												College/University | <%= DMVCollege %> Type of Degree 
-												<br>																																															
-												Higher Educational Degree Type | <%= DMVDegreeSelection %>
-												<br> 
-												Category of Degree | <%= DMVCategorySelection %> 
-												<br>
-												Subject of Degree | <%= DMVSubjectSelection %> 
-												<br>
-												College Graduated Year | <%=DMVCollegeYearSelection %>
-												<br>
-												<br>
-												Country | <%= DMVCountrySelection %>
-												<br>
-												Address | <%= DMVAddress %>
-												<br>
-												<%= DMVUnitType %> | <%= DMVUnitTypeNumber %>
-												<br>
-												City | <%= DMVCitySelection %> 
-												<br>
-												County | <%= DMVCountySelection %>
-												<br> 
-												State | <%= DMVStateSelection %> 
-												<br>
-												Zip Code | <%= DMVZipSelection %>
-												<br>
-												<br>
-												Phone Number | <%= DMVPhoneNumber %>
-												<br>
-												<br>								
+													<br>
+													<br>																						
+													
+													<li>Elementary School Name | <%= DMVGradeSchool %></li>												
+													<li>Elementary School Diploma | <%= DMVGradeSchoolSelection %></li>												
+													<li>Elementary School Graduated Year | <%= DMVGradeSchoolYearSelection %></li>
+
+													<br>
+													<br>
+
+													<li>High School Name | <%= DMVHighSchool %></li> 													
+													<li>High School Diploma | <%= DMVHighSchoolSelection %></li>												
+													<li>High School Graduated Year  <%= DMVHighSchoolYearSelection %></li>
+
+													<br>
+													<br>
+
+													<li>College/University | <%= DMVCollege %> Type of Degree</li> 																																																										
+													<li>Higher Educational Degree Type | <%= DMVDegreeSelection %></li>												 
+													<li>Category of Degree | <%= DMVCategorySelection %></li> 												
+													<li>Subject of Degree | <%= DMVSubjectSelection %></li> 												
+													<li>College Graduated Year | <%=DMVCollegeYearSelection %></li>										
+													
+													<br>
+													
+												</ul>
 											
 											</div>										
 
