@@ -891,6 +891,45 @@
     color: rgb(201, 24, 24);
 }
 
+.userDetailProfile_05 {
+    display: flex;
+    flex-flow: row wrap;
+    text-align: center; 
+    align-items: center; 
+    justify-content: center; 
+    margin-left: 0px;  
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 16px); 
+    color: rgb(201, 24, 24);
+}
+
+
+ul.no-bullets_01 {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+ul.no-bullets_02 {
+   
+    list-style-type: none;
+    margin-left: auto;  
+    padding: 0;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(8px, 2vw, 14px); 
+
+}
+
+.verticalLine_01 {
+    border-left: 3px solid rgba(219, 214, 214, 0.798);
+    height: auto;
+    position: absolute;
+    left: 50%;
+    margin-left: -3px;
+    top: 0;
+  }
+
 #clock_Image_02 {
     display: flex;
     align-items: center; /* Vertical centering */
