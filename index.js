@@ -958,7 +958,6 @@ passport.deserializeUser(function (userId, done) {
     });
 });
 
-
 const redirectDashboard = (req, res, next) => {
 	if (req.session.userId) {
 		res.redirect('/dashboard_01');
@@ -1319,6 +1318,7 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', checkMiddlewareAuthentication,
 		res.redirect('/alabamaVoters_LogIn_01');
 		console.log('The user is not successfully authenticated within the session through the passport from alabamaDMV_Commission_01.');
 	}
+
 });
 
 /* -------------------------- The beginning of the USE section ----------------------------- */
@@ -2366,7 +2366,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 			return res.redirect('/alabamaDMV_Commission_01');
 		}	
 		*/
-
+				
 		if (IvoteBallotIdIdentifierCode !== ConfirmIvoteBallotIdIdentifierCode) {
 			console.log('The user\' iVoteBallot Id Identifier Code have not successfully matched to the confirm iVoteBallot Id Code entered into the input fields by our Election Assure Expert.');
 			return res.redirect('/alabamaDMV_Commission_01');
