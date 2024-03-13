@@ -99,7 +99,7 @@
 	background-color: rgb(255, 255, 255); 
 	text-align: left;
 	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-	font-size: clamp(12px, 2vw, 16px);
+	font-size: clamp(16px, 2vw, 40px);
 	color: rgb(13, 65, 255);  
 	justify-content: left;  
 	border: none;	
@@ -265,22 +265,24 @@ and the text color to black for the body element when printing the iVoteBallot w
     background-color: rgb(13, 65, 255);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: rgb(255, 255, 255);
-    font-size: clamp(12px, 2vw, 16px);
+    font-size: clamp(12px, 2vw, 25px);
     text-align: center;
     border: none;  
+	padding: 5px;
 }
   
-#titleHRM_01 {
+.titleHRM_01 {
     display: flex;
     flex-wrap: row wrap;
     flex-direction: column;
     background-color: rgb(255, 255, 255); 
     text-align: center;
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: clamp(16px, 2vw, 25px);
+    font-size: clamp(16px, 2vw, 40px);
     color: rgb(201, 24, 24);  
     justify-content: center;  
     border: none;
+	padding: 10px;
   
 }
 
@@ -302,7 +304,9 @@ and the text color to black for the body element when printing the iVoteBallot w
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: clamp(12px, 2vw, 18px);
     text-align: center;
-    border: none;   
+    border: none; 
+	padding: 10px;  
+	margin-top: 25px;
 }
     
 #hrmDropDown {
