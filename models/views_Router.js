@@ -36,6 +36,9 @@ router
 
 router
     .get('/alabama_Candidates_2024_02', views_Controller.view_alabama_Candidates_2024_02);
+
+router
+    .get('/alabama_HRM_01', views_Controller.view_alabama_HRM_01);
     
 router
     .get('/alabama_SignUporLogin_01', views_Controller.view_alabama_SignUporLogIn_01),
