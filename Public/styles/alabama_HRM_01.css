@@ -9,20 +9,7 @@
 	font-weight: normal;
   }
   
-  /*
-	  The CSS rules for .hr_Red_line in footer.ejs create a solid border with a red color
-	  (rgb(201, 24, 24)) and no border on the left and right sides. Additionally, the margins
-	  on the top and bottom are set to 5 pixels.
-  */
-  .hr_Red_line_01 {
-	border-color: rgb(201, 24, 24); 
-	border-style: solid;
-	border-left: none;
-	border-right: none;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  
+    
   /*
 	  The CSS styles in this code block are used to create a flexible container with a red
 	  background color, center-aligned content, and a row direction. The "flex-wrap: wrap"
@@ -149,8 +136,8 @@
 @media only screen and (min-width: 769px) {
     /* Keep margin-top as 350px for larger screens */
     .hrmButton_01 {
-        margin-top: 230px;
-		margin-bottom: 230px;
+        margin-top: 325px;
+		margin-bottom: 325px;
     }
 
 	.hrm_Form_01 {
