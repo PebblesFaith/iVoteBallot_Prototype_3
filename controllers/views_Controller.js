@@ -47,6 +47,10 @@ const view_alabama_HRM_01 = (req, res) => {
 	res.render('alabama_HRM_01');
 }
 
+const view_alabama_Recruitment_01 = (req, res) => {
+	res.render('alabama_Recruitment_01');
+}
+
 const view_alabama_SignUporLogIn_01 = (req, res) => {
 	res.render('alabama_SignUporLogIn_01');
 }
@@ -132,6 +136,7 @@ module.exports = {
 	view_About,	
 	view_alabama_Candidates_2024_02,
 	view_alabama_HRM_01,
+	view_alabama_Recruitment_01,
 	view_alabama_SignUporLogIn_01,
 	view_alabamaDMV_Commission_01,
 	view_alabamaVoters_CreatePasswords_01,
