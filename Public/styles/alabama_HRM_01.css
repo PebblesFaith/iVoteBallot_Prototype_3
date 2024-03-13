@@ -34,7 +34,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
-	background-color: rgb(201, 24, 24);
+	background-color: rgb(13, 65, 255);
 	align-items: center;
 	justify-content: center;
   }
@@ -135,30 +135,60 @@
   @media only screen and (max-width: 550px) {
     /* Adjust margin-top for smaller screens */
     .hrmButton_01 {
-        margin-top: 25px;
+        margin-top: 30px;
+		margin-bottom: 20px;
     }
 }
 
 @media only screen and (min-width: 769px) {
     /* Keep margin-top as 350px for larger screens */
     .hrmButton_01 {
-        margin-top: 400px;
+        margin-top: 300px;
+		margin-bottom: 330px;
     }
 }
   
-  /*
-	The CSS style defined within the "@media print" rule is designed to control how a web page
-	will appear when printed. In this specific example, it sets the background color to white 
-	and the text color to black for the body element when printing the iVoteBallot webpage.
-  */
-  @media print {
+/*
+The CSS style defined within the "@media print" rule is designed to control how a web page
+will appear when printed. In this specific example, it sets the background color to white 
+and the text color to black for the body element when printing the iVoteBallot webpage.
+*/
+@media print {
 	body {        
 	 background-color: rgb(255, 255, 255);
 	 color: rgb(0, 0, 0);
 	}	    
-  }
+}
+
+.horizontal-line {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
+}
+
+#hr_Red_line_02 {
+    border-color: rgb(201, 24, 24); 
+    border-style: solid;
+    border-width: 2px; 
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    width: auto;
+}  
+
+#hr_Grey_line_02 {
+    color: rgb(195, 195, 195);
+    border-style: solid;
+    border-width: 2px;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
+}
   
-  /* HRM pop up menu--------------------------------------------------------------------------- */
+/* HRM pop up menu--------------------------------------------------------------------------- */
 
 .hrmButton_01 {
 	display: block;
@@ -174,7 +204,7 @@
 }
 
 .hrmButton_01:hover {
-    background-color: rgb(13, 65, 255); /* Adjusted blue color for hover effect */
+    background-color: rgb(201, 24, 24); /* Adjusted blue color for hover effect */
     cursor: pointer; /* Change cursor to pointer on hover */
 }
   
@@ -230,10 +260,9 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;   
-    height: 40px;
-	
+    height: 40px;	
     width: 100%;
-    background-color: rgb(201, 24, 24);
+    background-color: rgb(13, 65, 255);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: rgb(255, 255, 255);
     font-size: clamp(12px, 2vw, 16px);
