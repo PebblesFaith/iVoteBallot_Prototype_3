@@ -1,3 +1,10 @@
+/* CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 /*
     The CSS rules for .hr_Red_line in footer.ejs create a solid border with a red color
     (rgb(201, 24, 24)) and no border on the left and right sides. Additionally, the margins
@@ -26,32 +33,29 @@
     margin-bottom: 5px;
 }  
 
-/*
-    The CSS for #socialMedias_01 in the footer.ejs file on the homepage includes flexbox properties
-    to arrange the social media icons in a row with space around them, and sets font-family and
-    font-size for the text. Additionally, it sets the background-color to transparent, sets the width
-    to auto, and adds padding to the element to create space between the icons.
+/* 
+   Apply the same padding and alignment to all list items within .socialMedias_01 
 */
+.socialMedias_01 li {
+    padding: 5px 0; /* Adjusted padding */
+}
+
 .socialMedias_01 {
     display: flex;
-    flex-flow: row wrap;   
+    flex-flow: row wrap;
     align-items: center;
     justify-content: space-around;
     padding: 14px 14px;
     cursor: pointer;
     cursor: 14px;
-    list-style: none;   
-    background-color: transparent;  
-    width: auto;   
+    list-style: none;
+    background-color: transparent;
+    width: auto;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: clamp(12px, 2vw, 16px); 
-    text-align: center;    
+    font-size: clamp(12px, 2vw, 16px);
+    text-align: center;
 }
 
-/*
-    The footer social media links are styled to have no text decoration, block display,
-    inherit background color, 15px padding, and a red color (rgb(201, 24, 24)).
-*/
 .socialMedias_01 a {    
     text-decoration: none;
     display: block;
@@ -60,11 +64,7 @@
     color: rgb(201, 24, 24);
 }
 
-/*
-    The CSS rule sets the background color and text color of social media links in the
-    footer to a lighter shade of blue with a slight transparency and changes the text color
-    to a darker blue when hovered over.
-*/
+
 .socialMedias_01 a:hover {
     background-color: rgba(165, 182, 232, 0.238);
     color: rgb(13, 65, 255);
@@ -136,7 +136,8 @@
     (viewport width), whichever is smaller.
 */
 .footer_Image_01 {
-    width: clamp(10px, 2vw, 20px);    
+    width: clamp(15px, 2vw, 25px); 
+    
 }
 
 /*
