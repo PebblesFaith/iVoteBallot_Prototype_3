@@ -522,7 +522,7 @@
 
 #hr_Blue_line_02 {
     border-color: rgb(13, 65, 255); 
-    border-style: solid;
+    border-style: solid; 
     border-left: none;
     border-right: none;
     margin-top: 5px;
@@ -532,7 +532,7 @@
 
 #hr_Red_line_02 {
     border-color: rgb(201, 24, 24); 
-    border-style: solid;
+    border-style: solid; 
     border-left: none;
     border-right: none;
     margin-top: 5px;
@@ -542,7 +542,7 @@
 
 #hr_Grey_line_02 {
     color: rgb(195, 195, 195);
-    border-style: solid;
+    border-style: solid; 
     border-left: none;
     border-right: none;
     margin-top: 5px;
