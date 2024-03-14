@@ -50,7 +50,10 @@ router
     .get('/alabama_Recruitment_01', views_Controller.view_alabama_Recruitment_01);
 
 router
-    .get('/alabama_SignUporLogin_01', views_Controller.view_alabama_SignUporLogIn_01),
+    .get('/alabama_SignUporLogin_01', views_Controller.view_alabama_SignUporLogIn_01);
+
+router
+    .get('/alabama_TrainingandDevelopments_01', views_Controller.view_alabama_TrainingandDevelopments_01);
 
 router
     .get('/alabamaDMV_Commission_01', views_Controller.view_alabamaDMV_Commission_01);
