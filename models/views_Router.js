@@ -47,7 +47,7 @@ router
     .get('/alabama_HRM_01', views_Controller.view_alabama_HRM_01);
     
 router
-    .get('/alabama_Recruitment_01', views_Controller.view_alabama_Recruitment_01);
+    .get('/alabama_Recruitments_01', views_Controller.view_alabama_Recruitments_01);
 
 router
     .get('/alabama_SignUporLogin_01', views_Controller.view_alabama_SignUporLogIn_01);
