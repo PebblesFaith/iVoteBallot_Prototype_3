@@ -41,6 +41,9 @@ router
     .get('/alabama_CompensationandBenefits_01', views_Controller.view_alabama_CompensationandBenefits_01);
 
 router
+    .get('/alabama_EmployeeRelations_01', views_Controller.view_alabama_EmployeeRelations_01);
+
+router
     .get('/alabama_HRM_01', views_Controller.view_alabama_HRM_01);
     
 router
