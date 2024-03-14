@@ -63,6 +63,10 @@ const view_alabama_SignUporLogIn_01 = (req, res) => {
 	res.render('alabama_SignUporLogIn_01');
 }
 
+const view_alabama_TrainingandDevelopments_01 = (req, res) => {
+	res.render('alabama_TrainingandDevelopments_01');	
+}
+
 const view_alabamaDMV_Commission_01 = (req, res) => {
 	res.render('alabamaDMV_Commission_01');
 }
@@ -148,6 +152,7 @@ module.exports = {
 	view_alabama_HRM_01,
 	view_alabama_Recruitment_01,
 	view_alabama_SignUporLogIn_01,
+	view_alabama_TrainingandDevelopments_01,
 	view_alabamaDMV_Commission_01,
 	view_alabamaVoters_CreatePasswords_01,
 	view_alabamaVoters_EmailVerification_01,
