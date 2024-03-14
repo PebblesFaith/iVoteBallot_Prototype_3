@@ -56,7 +56,7 @@ const view_alabama_HRM_01 = (req, res) => {
 }
 
 const view_alabama_Recruitments_01 = (req, res) => {
-	res.render('alabama_Recruitment_01');
+	res.render('alabama_Recruitments_01');
 }
 
 const view_alabama_SignUporLogIn_01 = (req, res) => {
