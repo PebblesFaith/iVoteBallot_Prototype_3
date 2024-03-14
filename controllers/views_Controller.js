@@ -55,7 +55,7 @@ const view_alabama_HRM_01 = (req, res) => {
 	res.render('alabama_HRM_01');
 }
 
-const view_alabama_Recruitment_01 = (req, res) => {
+const view_alabama_Recruitments_01 = (req, res) => {
 	res.render('alabama_Recruitment_01');
 }
 
@@ -154,7 +154,7 @@ module.exports = {
 	view_alabama_CompensationandBenefits_01,
 	view_alabama_EmployeeRelations_01,
 	view_alabama_HRM_01,
-	view_alabama_Recruitment_01,
+	view_alabama_Recruitments_01,
 	view_alabama_SignUporLogIn_01,
 	view_alabama_TrainingandDevelopments_01,
 	view_alabama_WorkforceSafety_01,
