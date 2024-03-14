@@ -56,6 +56,9 @@ router
     .get('/alabama_TrainingandDevelopments_01', views_Controller.view_alabama_TrainingandDevelopments_01);
 
 router
+    .get('/alabama_WorkforceSafety_01', views_Controller.view_alabama_WorkforceSafety_01);
+
+router
     .get('/alabamaDMV_Commission_01', views_Controller.view_alabamaDMV_Commission_01);
 
 router
