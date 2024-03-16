@@ -127,6 +127,10 @@ const view_HelpCenter = (req, res) => {
 	res.render('helpCenter');
 }
 
+const view_iVoteBallot_Employees_01 = (req, res) => {
+	res.render('iVoteBallot_Employees_01');
+}
+
 const view_iVoteBallot = (req, res) => {
 	res.render('iVoteBallot');
 }
@@ -137,10 +141,6 @@ const view_Footer = (req, res) => {
 
 const view_Header = (req, res) => {
 	res.render('header');
-}
-
-const view_Test = (req, res) => {
-	res.render('test');
 }
 
 module.exports = {	
@@ -172,9 +172,10 @@ module.exports = {
 	view_ContactUs_01,
 	view_Dashboard_01,
 	view_HelpCenter,
+	view_iVoteBallot_Employees_01,
 	view_iVoteBallot,
 	view_Footer,	
 	view_Header,	
-	view_Test,	
+	
 	
 }
