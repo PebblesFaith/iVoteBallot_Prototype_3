@@ -101,6 +101,9 @@ router
     .get('/helpCenter', views_Controller.view_HelpCenter);
 
 router
+    .get('/iVoteBallot_Employees_01', views_Controller.view_iVoteBallot_Employees_01);
+
+router
     .get('/iVoteBallot', views_Controller.view_iVoteBallot);
 
 router
@@ -109,8 +112,6 @@ router
 router
     .get('/header', views_Controller.view_Header);
 
-router
-    .get('/test', views_Controller.view_Test);  
 
 
 module.exports = router;
