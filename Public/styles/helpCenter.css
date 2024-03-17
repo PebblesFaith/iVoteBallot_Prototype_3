@@ -197,7 +197,7 @@
     when the #first_Column a:hover element is in the hover state.
 */
 #first_Column a:hover {
-    color: rgb(13, 65, 255);
+    color: rgb(205, 214, 249);
 }
 
 /*
@@ -350,6 +350,12 @@
     #flex_Container_Row {
       flex: 50%;
     }
+
+    #flex_Container_Column {
+        margin-top: 10px;
+        margin-bottom: 10px;
+     }
+
   }
   
 /* 
@@ -361,3 +367,25 @@
       flex-direction: column;
     }
   }
+
+  @media only screen and (max-width: 550px) {
+    /* Adjust margin-top for smaller screens */
+    
+    #flex_Container_Column {
+       margin-top: 10px;
+       margin-bottom: 10px;
+    }
+
+}
+
+@media only screen and (min-width: 769px) {
+    /* Keep margin-top as 350px for larger screens */
+    
+
+    #flex_Container_Column {
+        margin-top: 175px;
+        margin-bottom: 200px;
+
+    }
+
+}
