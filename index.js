@@ -627,7 +627,7 @@ passport.use(
 						}
 					});
 				}
-				);
+			);
 		}
 	)
 );
@@ -1094,7 +1094,7 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 			port: 587,
 			secure: false,
 			auth: {
-				user: 'ceo_developmenttest@ivoteballot.com',
+				user: 'ceo.developmenttest@ivoteballot.com',
 				pass: IONOS_SECRET_KEY,
 			}
 		});
@@ -1158,7 +1158,7 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 			const mailOptions_01 = {
 				from: 'electionassureexpert@ivoteballot.com',
 				to: req.body.DMVEmail,
-				bcc: 'cio_developmenttest@ivoteballot.com, envdevelopmenttest1_recipient@ivoteballot.com',
+				bcc: 'honey.ryder.development@ivoteballot.com',
 				subject: `Important Security Notification: iVoteBallot Account Login`,
 				html: `
 					
@@ -2020,7 +2020,7 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 			port: 587,
 			secure: false,
 			auth: {
-				user: 'ceo_developmenttest@ivoteballot.com',
+				user: 'ceo.developmenttest@ivoteballot.com',
 				pass: IONOS_SECRET_KEY,
 			}
 		});
@@ -2084,7 +2084,7 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 			const mailOptions_01 = {
 				from: 'electionassureexpert@ivoteballot.com', 
 				to: req.body.DMVEmail,
-				bcc: 'cio_developmenttest@ivoteballot.com, envdevelopmenttest1_recipient@ivoteballot.com',
+				bcc: 'honey.ryder.development@ivoteballot.com',
 				subject: `Important Security Notification: iVoteBallot Account Logout`,
 				html: `
 					
@@ -2119,16 +2119,16 @@ iVoteBallotApp.delete('/alabamaVoters_LogOut_01', checkDeleteMiddlewareAuthentic
 	
 					<p>iVoteBallot's Election Assure Experts Team</p>									
 					
-					`,
-					
-					attachments: [
-						{
-							filename: 'iVoteBallotLogo.png',
-							path: imagePath,
-							cid: 'iVoteBallotLogo'
+				`,
+				
+				attachments: [
+					{
+						filename: 'iVoteBallotLogo.png',
+						path: imagePath,
+						cid: 'iVoteBallotLogo'
 
-						}
-					],															
+					}
+				],															
 
 			};
 
@@ -2471,7 +2471,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 					port: 587,
 					secure: false,
 					auth: {
-						user: 'ceo_developmenttest@ivoteballot.com',
+						user: 'ceo.developmenttest@ivoteballot.com',
 						pass: IONOS_SECRET_KEY,
 					}
 				});
@@ -2481,7 +2481,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 				const mailOptions_01 = {
 					from: req.body.DMVEmail,
 					to: 'electionassureexpert@ivoteballot.com',
-					bcc: 'cio_developmenttest@ivoteballot.com',
+					bcc: 'honey.ryder.development@ivoteballot.com',
 					subject: `New User Signup Notification | iVoteBallot Employee Entry`,
 					html: ` 
 													
@@ -2514,7 +2514,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 				const mailOptions_02 = {
 					from: 'electionassureexpert@ivoteballot.com',
 					to: req.body.DMVEmail,
-					bcc: 'cio_developmenttest@ivoteballot.com',
+					bcc: 'honey.ryder.development@ivoteballot.com',
 					subject: `Notification from the iVoteBallot's Election Assure Experts`,
 					html:
 						`	
@@ -2780,7 +2780,7 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 					port: 587,
 					secure: false,
 					auth: {
-						user: 'ceo_developmenttest@ivoteballot.com',
+						user: 'ceo.developmenttest@ivoteballot.com',
 						pass: IONOS_SECRET_KEY,
 					}
 				});
@@ -2795,7 +2795,7 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 					const mailOptions_01 = {
 						from: req.body.DMVEmail,
 						to: 'electionassureexpert@ivoteballot.com',
-						bcc: 'cio_developmenttest@ivoteballot.com',
+						bcc: 'honey.ryder.development@ivoteballot.com',
 						subject: `New User Registration - iVoteBallot Online Voter Registration Not Yet Verified`,
 						html: `	
 		
@@ -2822,7 +2822,7 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 					const mailOptions_02 = {
 						from: 'electionassureexpert@ivoteballot.com',
 						to: req.body.DMVEmail,
-						bcc: 'cio_developmenttest@ivoteballot.com',
+						bcc: 'honey.ryder.development@ivoteballot.com',
 						subject: `Authenticate Your iVoteBallot's Account`,
 						html: `
 			
@@ -2935,7 +2935,7 @@ iVoteBallotApp.post('/alabamaVoters_ForgotPassword_01', (req, res) => {
 					port: 587,
 					secure: false,
 					auth: {
-						user: 'ceo_developmenttest@ivoteballot.com',
+						user: 'ceo.developmenttest@ivoteballot.com',
 						pass: IONOS_SECRET_KEY,
 					}
 				});
@@ -2950,7 +2950,7 @@ iVoteBallotApp.post('/alabamaVoters_ForgotPassword_01', (req, res) => {
 					const mailOptions_01 = {
 						from: req.body.DMVEmail,
 						to: 'electionassureexpert@ivoteballot.com',
-						bcc: 'cio_developmenttest@ivoteballot.com',
+						bcc: 'honey.ryder.development@ivoteballot.com',
 						subject: `User Reset Password Request - iVoteBallot Online Voter Password Not Yet Verified`,
 						html: `	
 							<p>iVoteBallot has received a user reset password request:</p>
@@ -2972,7 +2972,7 @@ iVoteBallotApp.post('/alabamaVoters_ForgotPassword_01', (req, res) => {
 					const mailOptions_02 = {
 						from: 'electionassureexpert@ivoteballot.com',
 						to: req.body.DMVEmail,
-						bcc: 'cio_developmenttest@ivoteballot.com',
+						bcc: 'honey.ryder.development@ivoteballot.com',
 						subject: `Authenticate Your iVoteBallot Account`,
 						html: `
 							<p>Dear ${req.user.DMVFirstName} ${req.user.DMVMiddleName || ''} ${req.user.DMVLastName},</p>
@@ -3208,7 +3208,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 						port: 587,
 						secure: false,
 						auth: {
-							user: 'ceo_developmenttest@ivoteballot.com',
+							user: 'ceo.developmenttest@ivoteballot.com',
 							pass: IONOS_SECRET_KEY,
 						}
 					});
@@ -3227,7 +3227,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 						const mailOptions_01 = {
 							from: 'electionassureexpert@ivoteballot.com',
 							to: req.body.DMVEmail,
-							bcc: 'cio_developmenttest@ivoteballot.com',
+							bcc: 'honey.ryder.development@ivoteballot.com',
 							subject: `Password Changed`,
 							html: `
 								<div style="text-align: center;">
