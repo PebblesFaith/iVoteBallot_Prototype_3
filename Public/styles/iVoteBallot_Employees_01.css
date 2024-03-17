@@ -1,3 +1,383 @@
-body {
-	background-color: aqua;
+/*
+    The @font-face rule is used to declare a custom font family that can be used throughout
+    iVoteBallot contactUs_01 web page. And, in this specific code, it declares a font family
+    named "Megrim-Regular" with the font file located in the "fonts" folder and with the
+    format of TrueType font file. The font-weight property specifies the weight of the font,
+    in this case, it is set to normal.
+*/
+@font-face {
+    font-family: "Megrim-Regular";
+    src: url(fonts/Megrim-Regular.ttf) format('truetype');
+    font-weight: normal;
+}
+
+/*
+    The CSS @media rule specifies a set of styles to apply to a document based on the
+    characteristics of the device or screen CSS @media is being displayed on. In this case,
+    the styles are applied only when the screen width is at least 250 pixels wide. The body
+    element in the document will have a white background color when the screen meets this
+    condition.
+*/
+@media screen and (min-width: 250px) {
+    body {           
+        background-color: rgb(255, 255, 255);
+    }    
+}
+
+/*
+    This CSS statement applies various styles to the HTML element with the ID "employees_Title_01".
+    And, the ID "employees_Title_02" sets the display to flex and specifies a row wrapping layout,
+    centers the text horizontally  and vertically within the element, removes the bullet points 
+    for the list items, sets the background color to transparent, sets the width to 100%, adds a
+    margin at the top and bottom of the element, sets the font family to a combination of fonts,
+    adjusts the font size to be responsive based on viewport width, and sets the text color to a
+    shade of blue.
+*/
+#employees_Title_01 {
+    display: flex;
+    flex-flow: row wrap;    
+    text-align: center;    
+    justify-content: center;    
+    list-style: none;   
+    background-color: transparent;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: 5px;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(13px, 3vw, 75px);
+    color: rgb(13, 65, 255);
+}
+
+#employees_Title_02 {
+    display: flex;
+    flex-flow: row wrap;    
+    text-align: center;    
+    justify-content: center;  
+    list-style: none;   
+    background-color: transparent;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 2vw, 35px);
+    color: rgb(201, 24, 24);
+}
+
+/*
+    The CSS style code creates a horizontal line with a solid border of blue color using
+    the RGB value. The line has no borders on the left and right sides but has a top and
+    bottom margin of 5 pixels.
+*/
+#hr_Blue_line_02 {
+    border-color: rgb(13, 65, 255); 
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/*
+    The CSS styles in this code block are used to create a flexible container with a blue
+    background color, center-aligned content, and a row direction. The "flex-wrap: wrap"
+    property allows the container to wrap its items onto multiple lines if necessary. The
+    "align-items: center" and "justify-content: center" properties ensure that the items are
+    both vertically and horizontally centered within the container.
+*/
+#flex_Container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;   
+    align-items: center;
+    justify-content: center;
+}
+
+/*
+    This CSS style defines a flexible container with a horizontal layout that wraps its content
+    if necessary. It also sets the container to stretch its items to fit the full width of the
+    container. Overall, this style is designed to create a responsive and adaptive layout for
+    web page elements.
+*/
+#flex_Container_Row {
+    display: flex;
+    flex-direction: row;    
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+}
+
+/*
+    The CSS code style aims to apply the flexbox layout to all direct child div elements of a
+    container with an ID of "flex_Container_Row". The "flex: 1" property assigns equal flex grow
+    value to each child element, allowing them to fill the available horizontal space evenly.
+*/
+#flex_Container_Row > div {
+    display: flex;
+    flex: 1;  
+}
+
+/*
+    The CSS style defines how to create a flex container with a column layout. The "display:
+    flex" property specifies that the container should use flexbox layout, while "flex-direction:
+    column" arranges the flex items vertically. Finally, "flex-basis: 100%" sets the initial size
+    of the flex items to 100% of the container's width.
+*/
+#flex_Container_Column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;  
+}
+
+/*
+    This CSS style is used to create a flexible layout with a container element and multiple
+    child elements displayed as columns. The "flex" property is used to distribute the available
+    space among the child elements evenly, and the "display" property is set to "flex" to enable
+    flexbox layout.
+*/
+#flex_Container_Column > div {
+    display: flex;
+    flex: 1;
+}
+
+/*
+    The CSS style code sets the properties of an HTML element with the ID "first_Column" to create
+    a flexible container that wraps its contents in a column layout. The style also defines the
+    background color, height, width, text alignment, margin, padding, font family, size, and color
+    of the element, as well as its content justification and absence of a border.
+*/
+#first_Column {
+    display: flex;
+    flex-wrap: wrap;    
+    background-color: rgb(255, 255, 255);
+    height: auto;
+    width: auto;
+    text-align: center; 
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(14px, 3vw, 16px);
+    justify-content: center;  
+    word-wrap: break-word;
+    padding: auto;
+}
+
+
+/*
+    The CSS style code sets the properties of an HTML element with the ID "second_Column" to create
+    a flexible container that wraps its contents in a column layout. The style also defines the
+    background color, height, width, text alignment, margin, padding, font family, size, and color
+    of the element, as well as its content justification and absence of a border.
+*/
+#second_Column {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column; 
+	background-color: rgb(13, 65, 255);
+    color:rgb(255, 255, 255);
+    height: auto;
+    width: auto;
+    text-align: center;    
+    margin-top: auto;
+    margin-bottom: auto;    
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(16px, 4vw, 100px);     
+    justify-content: center;
+    border: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+/*
+    The CSS statement targets all anchor tags (a) within the second_Column element and removes
+    the underline decoration (text-decoration: none), sets the display property to block 
+    (display: block). So, the anchor takes the full width of its container, adds 5px 
+    padding around the anchor (padding: 5px), and sets the font color to white (color: 
+    rgb(255, 255, 255)).
+*/
+#second_Column a {
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+    color:rgb(255, 255, 255);
+}
+
+/*
+    This CSS statement changes the color of a hyperlink when the user hovers his/her cursor 
+    over the #second_Column a:hover element of contact us webpage. Specifically, the 
+    #first_Column a:hover element sets the color to a shade of blue defined by the RGB 
+    values (13, 65, 255). And, the ":hover" pseudo-class is used to target the hyperlink
+    when the #first_Column a:hover element is in the hover state.
+*/
+#second_Column a:hover {
+    color: rgb(205, 214, 249);
+}
+
+/*
+    This CSS style code applies a set of styles to the HTML element with the ID "flex_Box". 
+    The "flex" property sets the size of the element relative to its container, while 
+    "padding" adds space inside the element, as well as, the "align-items" and "justify-content"
+    are used to position the element's content vertically and horizontally. And, these other
+    properties such as "list-style", "background-color", "word-wrap", "font-family", "font-size",
+    "margin-top", "margin-bottom", "margin-right", "margin-left", "text-align", and "border" define
+    the element's appearance, spacing, and other visual characteristics.
+*/
+#flex_Box {
+    flex: 25%;
+    padding: 15px;
+    align-items: center;
+    justify-content: space-around;  
+    list-style: none;
+    background-color: rgb(201, 24, 24);
+    word-wrap: break-word;
+    font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(14px, 3vw, 17px);	
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    text-align: center;
+    border: none;
+   
+}
+
+/*
+    The CSS style code for the #flex_Box targets all anchor elements inside the 
+    flex box element with the ID "flex_Box". And, the text-decoration: none; property
+    removes the underline decoration from the anchor elements, and the display: block; 
+    property makes the anchor elements the block-level element, allowing them to take 
+    up the full width of their parent flex box container. The padding: 5px; property 
+    adds 5 pixels of padding to the top, right, bottom, and left sides of the anchor 
+    elements. Lastly, the color: rgb(255, 255, 255); property sets the text color of 
+    the anchor elements to white.
+*/
+#flex_Box a {
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+    color: rgb(255, 255, 255);
+}
+
+/* 
+    The CSS statement applies a hover effect on anchor tags within an element with the
+    ID "flex_Box". When a user hovers over the anchor tag, the text color changes to the
+     specified RGB value of (156, 164, 196).
+*/
+#flex_Box a:hover {
+    color: rgb(156, 164, 196);
+}
+
+/*
+    The CSS style codes are applied to four elements with IDs "name_Flex_Box_1", "name_Flex_Box_2",
+    "name_Flex_Box_3", and "name_Flex_Box_4". And, the CSS style codes sets the display property
+    to flex, which enables the use of flexbox layout, and flex-wrap to row wrap, allowing the 
+    flex items to wrap onto multiple lines when needed. The flex-direction is set to column, which 
+    stacks the items vertically then text-align is centered and the font-family is set to a list
+    of preferred font families. The font-size is set to a value that is responsive to the viewport
+    width, using the clamp() function. The justify-content property is set to center, aligning the 
+    items along the vertical axis. The word-wrap is set to break-word, breaking long words and 
+    wrapping them onto the next line if necessary. The padding property is set to auto, which sets 
+    the padding on all sides to the same value.
+*/
+#name_Flex_Box_1, #name_Flex_Box_2, #name_Flex_Box_3, #name_Flex_Box_4, #name_Flex_Box_5, #name_Flex_Box_6 {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column; 
+    text-align: center; 
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(12px, 3vw, 18px);
+    justify-content: center;  
+    word-wrap: break-word;
+    padding: auto;
+}
+
+/* 
+    Extra large devices (large laptops and desktops, 1200px and up)
+*/
+@media only screen and (min-width: 1200px) {
+    #flex_Container {
+      width: 100%;
+    }
+}
+
+/* 
+    Large devices (laptops/desktops, 992px and up) 
+*/
+@media only screen and (min-width: 992px) {
+    #flex_Container {
+      width: 100%;
+    }
+}
+
+/* 
+    Medium devices (landscape tablets, 768px and up)
+*/
+@media only screen and (min-width: 768px) {
+    #flex_Container {
+      width: 100%;
+    }
+}
+
+/* 
+    Small devices (portrait tablets and large phones, 600px and up)
+*/
+@media only screen and (min-width: 600px) {
+    #flex_Container {
+      width: 100%;
+    }
+}
+  
+/* 
+    Extra small devices (phones, 600px and down)
+*/
+@media only screen and (max-width: 600px) {
+    #flex_Container {
+      width: 100%;
+    }
+}
+
+/* 
+    On screens that are 992px wide or less, go from four columns to two columns
+*/
+@media screen and (max-width: 992px) {
+    #flex_Container_Row {
+      flex: 50%;
+    }
+
+    #flex_Container_Column {
+        margin-top: 10px;
+        margin-bottom: 10px;
+     }
+
+  }
+  
+/* 
+    On screens that are 600px wide or less, make the columns stack on top of each other instead
+    of next to each other 
+*/
+  @media screen and (max-width: 600px) {
+    #flex_Container_Column {
+      flex-direction: column;
+    }
+  }
+
+  @media only screen and (max-width: 550px) {
+    /* Adjust margin-top for smaller screens */
+    
+    #flex_Container_Column {
+       margin-top: 10px;
+       margin-bottom: 10px;
+    }
+
+}
+
+@media only screen and (min-width: 769px) {
+    /* Keep margin-top as 350px for larger screens */
+    
+
+    #flex_Container_Column {
+        margin-top: 150px;
+        margin-bottom: 182px;
+
+    }
+
 }
