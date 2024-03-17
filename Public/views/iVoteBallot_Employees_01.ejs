@@ -4,14 +4,99 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>iVoteBallot | Employees Log In</title>
+	<title>iVoteBallot | Operational Portals</title>
 
 	<link rel="stylesheet" type="text/css" href="../styles/iVoteballot_Employees_01.css" />
 	
 </head>
 	<body>
 
-		<h2>Testing</h2>
+		<!--
+	The Developer, Sarai Hannah Ajai have written her HTML coded language for the helpCenter.ejs file 
+	for which contains HTML code for the Help Center web page. It includes a title ("Help Center") 
+	and a horizontal line. And, the content includes links to several web pages, including 
+	"iVoteBallot", "Contact Us | Customer Care", "How iVoteBallot Works", and "Terms and Policies",
+	which are organized in a flexible layout container. 	
+-->
+	<body>
+		<header>
+			<%- include('../common/header') %>
+		</header>
+
+		<p id="employees_Title_01">
+			Operational Portals
+		</p>
+			
+		<p id="employees_Title_02">
+			
+		</p>
+	
+		<hr id="hr_Blue_line_02">
+		<br>
+		
+		<div id="flex_Container">
+			<div id="flex_Container_Row">
+				<div id="flex_Container_Column">
+					<div id="first_Column">
+					
+
+						<div id="flex_Box">
+							<p id="name_Flex_Box_1">
+								<a href ="#">Election Assures Department</a>
+							</p>
+						</div>
+						
+						<div id="flex_Box">
+							<p id="name_Flex_Box_2">
+								<a href ="#">Financial Department</a>
+							</p>
+						</div>  
+						
+						<div id="flex_Box">
+							<p id="name_Flex_Box_3">
+								<a href ="http://localhost:8080/alabama_HRM_01">Human Resources Department</a>
+							</p>
+						</div>  
+	
+						<div id="flex_Box">
+							<p id="name_Flex_Box_4">
+								<a href ="#">Information Technology Department</a>
+							</p>
+						</div> 
+
+						<div id="flex_Box">
+							<p id="name_Flex_Box_5">
+								<a href ="#">Marketing Department</a>
+							</p>
+						</div>
+						
+						<div id="flex_Box">
+							<p id="name_Flex_Box_6">
+								<a href ="#">Operational Department</a>
+							</p>
+						</div> 		
+						
+
+					</div>
+
+				</div>   				
+
+				<div id="flex_Container_Column">
+					<div id="second_Column">
+					   
+						<a href="http://localhost:8080/iVoteBallot">iVoteBallot</a>
+
+					</div>
+				</div>   	
+
+			</div>
+		</div>
+		<br>
+
+		<footer>
+			<%- include('../common/footer') %>
+		</footer>
+		
 		
 	</body>
 </html>
