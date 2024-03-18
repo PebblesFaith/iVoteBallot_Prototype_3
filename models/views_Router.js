@@ -104,6 +104,9 @@ router
     .get('/iVoteBallot_Employees_01', views_Controller.view_iVoteBallot_Employees_01);
 
 router
+    .get('/iVoteBallot_HRMEmployees_Registration_01', views_Controller.view_iVoteBallot_HRMEmployees_Registration_01);
+
+router
     .get('/iVoteBallot', views_Controller.view_iVoteBallot);
 
 router
