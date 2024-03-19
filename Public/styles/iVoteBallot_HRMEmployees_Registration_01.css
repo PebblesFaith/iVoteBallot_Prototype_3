@@ -27,27 +27,27 @@
 	margin-bottom: 5px;
 } 
   
-  /*
-	  The CSS styles in this code block are used to create a flexible container with a red
-	  background color, center-aligned content, and a row direction. The "flex-wrap: wrap"
-	  property allows the container to wrap its items onto multiple lines if necessary. The
-	  "align-items: center" and "justify-content: center" properties ensure that the items are
-	  both vertically and horizontally centered within the container.
-  */
+/*
+  The CSS styles in this code block are used to create a flexible container with a red
+  background color, center-aligned content, and a row direction. The "flex-wrap: wrap"
+  property allows the container to wrap its items onto multiple lines if necessary. The
+  "align-items: center" and "justify-content: center" properties ensure that the items are
+  both vertically and horizontally centered within the container.
+*/
   #flex_Container {
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: row;
-	background-color: transparent;
-	align-items: center;
-	justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center;
   }
   
   /*
-	This CSS style defines a flexible container with a horizontal layout that wraps its content
-	if necessary. It also sets the container to stretch its items to fit the full width of the
-	container. Overall, this style is designed to create a responsive and adaptive layout for
-	web page elements.
+    This CSS style defines a flexible container with a horizontal layout that wraps its content
+    if necessary. It also sets the container to stretch its items to fit the full width of the
+    container. Overall, this style is designed to create a responsive and adaptive layout for
+    web page elements.
   */
   #flex_Container_Row {
 	display: flex;
@@ -58,9 +58,9 @@
   }
   
   /*
-	The CSS code style aims to apply the flexbox layout to all direct child div elements of a
-	container with an ID of "flex_Container_Row". The "flex: 1" property assigns equal flex grow
-	value to each child element, allowing them to fill the available horizontal space evenly.
+    The CSS code style aims to apply the flexbox layout to all direct child div elements of a
+    container with an ID of "flex_Container_Row". The "flex: 1" property assigns equal flex grow
+    value to each child element, allowing them to fill the available horizontal space evenly.
   */
   #flex_Container_Row > div {
 	display: flex;
@@ -68,10 +68,10 @@
   }
   
   /*
-	The CSS style defines how to create a flex container with a column layout. The "display:
-	flex" property specifies that the container should use flexbox layout, while "flex-direction:
-	column" arranges the flex items vertically. Finally, "flex-basis: 100%" sets the initial size
-	of the flex items to 100% of the container's width.
+    The CSS style defines how to create a flex container with a column layout. The "display:
+    flex" property specifies that the container should use flexbox layout, while "flex-direction:
+    column" arranges the flex items vertically. Finally, "flex-basis: 100%" sets the initial size
+    of the flex items to 100% of the container's width.
   */
   #flex_Container_Column {
 	display: flex;
@@ -80,10 +80,10 @@
   }
   
 /*
-This CSS style is used to create a flexible layout with a container element and multiple
-child elements displayed as columns. The "flex" property is used to distribute the available
-space among the child elements evenly, and the "display" property is set to "flex" to enable
-flexbox layout.
+  This CSS style is used to create a flexible layout with a container element and multiple
+  child elements displayed as columns. The "flex" property is used to distribute the available
+  space among the child elements evenly, and the "display" property is set to "flex" to enable
+  flexbox layout.
 */
 #flex_Container_Column > div {
 	display: flex;
@@ -91,10 +91,10 @@ flexbox layout.
 }
 
 /*
-    The CSS style language codes sets a blue solid border for an HTML element identified
-    by "hr_Blue_line_02", while removing the left and right borders. Additionally, it adds
-    a top and bottom margin of 5 pixels to the element. This styling is used to
-    create a visual separation between sections on the webpage.
+  The CSS style language codes sets a blue solid border for an HTML element identified
+  by "hr_Blue_line_02", while removing the left and right borders. Additionally, it adds
+  a top and bottom margin of 5 pixels to the element. This styling is used to
+  create a visual separation between sections on the webpage.
 */
 
 .hr_Blue_line_02 {
@@ -128,10 +128,10 @@ flexbox layout.
 }
 
 /*
-    This CSS styling for the .header_Image_01 element on the homepage sets it to display as
-    a flex container with column direction, centers the content, and applies a blue color with
-    transparent background. The width is set to a minimum of 125 pixels and maximum of 250
-    pixels, with a fluid scaling between 3 viewport units.
+  This CSS styling for the .header_Image_01 element on the homepage sets it to display as
+  a flex container with column direction, centers the content, and applies a blue color with
+  transparent background. The width is set to a minimum of 125 pixels and maximum of 250
+  pixels, with a fluid scaling between 3 viewport units.
 */
 .header_Image_01 {
     display: flex;
@@ -161,3 +161,135 @@ flexbox layout.
 	border: none;  
 }
 
+/*
+	The CSS style code sets the properties of an HTML element with the ID "first_Column" to create
+	a flexible container that wraps its contents in a column layout. The style also defines the
+	background color, height, width, text alignment, margin, padding, font family, size, and color
+	of the element, as well as its content justification and absence of a border.
+*/
+#first_Column {
+  display: flex;
+  flex-wrap: row wrap;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255); 
+  text-align: left;
+  font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: clamp(12px, 2vw, 16px);
+  color: rgb(13, 65, 255);  
+  justify-content: left;  
+  border: none;
+}
+
+/* Alabama's iVoteBallot New Employees Registration pop up menu--------------------------------------------------------------------------- */
+
+  
+.hrm_RegistrationButton_01 {
+	display: block;
+	height: 40px;
+	width: 100%;
+	background-color: rgb(201, 24, 24);
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	color: rgb(255, 255, 255);
+	font-size: clamp(12px, 2vw, 16px);
+	text-align: center;
+	border: none;  
+}
+
+.hrmEmployeesRegistration_Container_01 {
+	padding: 16px;  
+}
+
+.header_Image_01 {
+	display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;   	
+	height: auto;
+	max-width: 60%;
+}
+  
+span.forgot_Password {
+	float: right;
+	padding-top: 16px;
+}
+  
+/* The HRM New Employee form (background) */
+.hrmEmployeesRegistration_Form_01 {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(255, 255, 255); /* Fallback color */
+	background-color: rgb(255, 255, 255); /* Black w/ opacity */
+	padding-top: 45px;
+}
+
+/* Form Login Content/Box */
+.form_HRMEmployees_Registration {
+	background-color: #fefefe;
+	margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+	border: 2px solid rgb(13, 65, 255);
+	width: 60%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+	position: absolute;
+	right: 25px;
+	top: 0;
+	color: rgb(201, 24, 24);
+	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	font-size: clamp(12px, 2vw, 30px);   
+	font-weight: bold;
+  }
+  
+.close:hover,
+.close:focus {
+	color: rgb(13, 65, 255);
+	cursor: pointer;
+  }
+  
+/* Add Zoom Animation */
+.animate {
+	-webkit-animation: animatezoom 0.6s;
+	animation: animatezoom 0.6s
+}
+  
+@-webkit-keyframes animatezoom {
+	from {-webkit-transform: scale(0)} 
+	to {-webkit-transform: scale(1)}
+}
+	
+@keyframes animatezoom {
+	from {transform: scale(0)} 
+	to {transform: scale(1)}
+}
+
+#titleHRMEmployees_01 {
+	display: flex;
+	flex-wrap: row wrap;
+	flex-direction: column;
+	background-color: rgb(255, 255, 255); 
+	text-align: center;
+	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	font-size: clamp(12px, 2vw, 17px);
+	color: rgb(13, 65, 255);  
+	justify-content: center;  
+	border: none;  
+}
+
+#titleHRMEmployees_02 {
+	display: flex;
+	flex-wrap: row wrap;
+	flex-direction: column;
+	background-color: rgb(255, 255, 255); 
+	text-align: center;
+	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	font-size: clamp(10px, 2vw, 15px);
+	color: rgb(201, 24, 24);  
+	justify-content: center;  
+	border: none;  
+}
