@@ -219,7 +219,6 @@ const timeout = require('connect-timeout');
 
 //const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
-
 /*
 	The function starts the iVoteBallotApp prototype 3 web application by listening to port 8080 on the IP address '0.0.0.0'. If there is an error during the
 	process, the function logs a message indicating the problem encountered while loading the iVoteBallot prototype 3 web application. Otherwise, the function
@@ -309,6 +308,15 @@ const db1_LoggedPasswordChange = new sqlite3.Database('alabamaUsers_PasswordChan
 	}
 });
 
+const db1_iVoteballot_EmployeesRegistration = new sqlite3.Database('iVoteBallotHRM_EmployeesRegistration.db', err => {
+	if (err) {
+		console.log('Sarai Hannah Ajai has not created the SQLite3 database table named, iVoteBallotHRM_EmployeesRegistration.db with passport and session management authentications:' + err + '.');
+	} else {
+		console.log('Sarai Hannah Ajai has successfully created the SQLite3 database table named, iVoteBallotHRM_EmployeesRegistration.db with passport and session management authentications' + Date() + '.');
+	}
+});
+
+
 /*
 	The given JavaScript codes language creates a SQLite3 database table named 
 	"alabamaDMV_Commission_01",	if it does not already exist. The "alabamaDMV_Commission_01" 
@@ -377,12 +385,12 @@ db1.serialize(() => {
   
 	)`), (err) => {
 
-			if (err) {
-				console.log('Sarai Hannah Ajai have created the Sqlite3 \'alabamaDMV_Commission_01\' database table which is not JavaScript programmatically coded successfully for which have generated an error message: ' + err + '!');
-			} else {
-				console.log('Sarai Hannah Ajai have created the Sqlite3 \'alabamaDMV_Commission_01\' database table which is JavaScript programmatically coded successfully!');
-			}
-		};
+		if (err) {
+			console.log('Sarai Hannah Ajai have created the Sqlite3 \'alabamaDMV_Commission_01\' database table which is not JavaScript programmatically coded successfully for which have generated an error message: ' + err + '!');
+		} else {
+			console.log('Sarai Hannah Ajai have created the Sqlite3 \'alabamaDMV_Commission_01\' database table which is JavaScript programmatically coded successfully!');
+		}
+	};
 });
 
 /*
@@ -408,12 +416,12 @@ db1_LoggedInHistory.serialize(() => {
 		
 	)`), (err) => {
 
-			if (err) {
-				console.log('Sarai Hannah Ajai have not created the Sqlite3 \'alabamaUsers_LoggedIn_History\' database table which was coded successfully and she received a message: ' + err + '!');
-			} else {
-				console.log('Sarai Hannah Ajai have successfully created the Sqlite3 \'alabamaUsers_LoggedIn_History\' database table' + Date() + '.');
-			}
-		};
+		if (err) {
+			console.log('Sarai Hannah Ajai have not created the Sqlite3 \'alabamaUsers_LoggedIn_History\' database table which was coded successfully and she received a message: ' + err + '!');
+		} else {
+			console.log('Sarai Hannah Ajai have successfully created the Sqlite3 \'alabamaUsers_LoggedIn_History\' database table' + Date() + '.');
+		}
+	};
 });
 
 db1_LoggedPasswordChange.serialize(() => {
@@ -429,13 +437,41 @@ db1_LoggedPasswordChange.serialize(() => {
 		
 	)`), (err) => {
 
-			if (err) {
-				console.log('Sarai Hannah Ajai have not created the Sqlite3 \'alabamaUsers_LoggedIn_History\' database table which was coded successfully and she received a message: ' + err + '!');
-			} else {
-				console.log('Sarai Hannah Ajai have successfully created the Sqlite3 \'alabamaUsers_LoggedIn_History\' database table' + Date() + '.');
-			}
-		};
+		if (err) {
+			console.log('Sarai Hannah Ajai have not created the Sqlite3 \'alabamaUsers_LoggedIn_History\' database table which was coded successfully and she received a message: ' + err + '!');
+		} else {
+			console.log('Sarai Hannah Ajai have successfully created the Sqlite3 \'alabamaUsers_LoggedIn_History\' database table' + Date() + '.');
+		}
+	};
 });
+
+
+db1_iVoteballot_EmployeesRegistration.serialize(() => {
+	db1_iVoteballot_EmployeesRegistration.run(`CREATE TABLE IF NOT EXISTS iVoteBallotHRM_EmployeesRegistration (
+
+		id TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6)))), 
+        Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')) 
+		
+		
+	)`), (err) => {
+
+		if (err) {
+			console.log('Sarai Hannah Ajai have not created the Sqlite3 \'alabamaUsers_LoggedIn_History\' database table which was coded successfully and she received a message: ' + err + '!');
+		} else {
+			console.log('Sarai Hannah Ajai have successfully created the Sqlite3 \'alabamaUsers_LoggedIn_History\' database table' + Date() + '.');
+		}
+	};
+});
+
+
+
+
+
+
+
+
+
+
 
 /*
 	This statement sets up a middleware function within iVoteBallot web application 
@@ -3394,7 +3430,5 @@ iVoteBallotApp.post('/create-checkout-session', async (req, res) => {
 });
 
 */
-
-
 
 
