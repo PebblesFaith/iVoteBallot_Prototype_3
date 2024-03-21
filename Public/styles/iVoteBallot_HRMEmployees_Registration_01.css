@@ -294,7 +294,13 @@ span.forgot_Password {
 	border: none;  
 }
 
-#pdf
+#pdf,
+#photo,
+#firstName,
+#middleName,
+#lastName,
+#email,
+#confirmEmail
 {
 	outline: none; 
 	border-top-style: hidden;
@@ -314,7 +320,13 @@ span.forgot_Password {
 	cursor: 14px;  
 }  
 
-#pdf
+#pdf,
+#photo,
+#firstName,
+#middleName,
+#lastName,
+#email,
+#confirmEmail
 {
 	display: flex;
 	flex-wrap: row wrap;
@@ -326,13 +338,25 @@ span.forgot_Password {
 	white-space: normal;   
 }
 
-#pdf
+#pdf,
+#photo,
+#firstName,
+#middleName,
+#lastName,
+#email,
+#confirmEmail
 {
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
 }
-  
-#pdf:focus
+
+#pdf:focus,
+#photo:focus,
+#firstName:focus,
+#middleName:focus,
+#lastName:focus,
+#email:focus,
+#confirmEmail:focus
 {
 	border:3px solid rgb(205, 214, 249);
 	border-top-style: hidden;
@@ -343,7 +367,13 @@ span.forgot_Password {
 	width: 75%;  
 }
 
-#userEmployeePDFErrorMessage
+#userEmployeePDFErrorMessage,
+#userEmployeePhotoErrorMessage,
+#userEmployeeFirstNameErrorMessage,
+#userEmployeeMiddleNameErrorMessage,
+#userEmployeeLastNameErrorMessage,
+#userEmployeeEmailErrorMessage,
+#userEmployeeConfirmEmailErrorMessage
 { 
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: clamp(9px, 2vw, 13px); 
