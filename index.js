@@ -449,29 +449,27 @@ db1_LoggedPasswordChange.serialize(() => {
 db1_iVoteballot_EmployeesRegistration.serialize(() => {
 	db1_iVoteballot_EmployeesRegistration.run(`CREATE TABLE IF NOT EXISTS iVoteBallotHRM_EmployeesRegistration (
 
-		id TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6)))), 
-        Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')) 
+		id TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-2' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-4' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(4)))), 
+        Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
+		EmployeePDF BLOB (250) NOT NULL,
+		EmployeePhoto BLOB (250) NOT NULL,
+        EmployeeFirstName VARCHAR (100) NOT NULL, 
+        EmployeeMiddleName VARCHAR (100) NOT NULL, 
+        EmployeeLastName VARCHAR(100) NOT NULL,
+
+		EmployeeEmail VARCHAR(150) NOT NULL,
+        EmployeeConfirmEmail VARCHAR(150) NOT NULL
 		
 		
 	)`), (err) => {
 
 		if (err) {
-			console.log('Sarai Hannah Ajai have not created the Sqlite3 \'alabamaUsers_LoggedIn_History\' database table which was coded successfully and she received a message: ' + err + '!');
+			console.log('Sarai Hannah Ajai have not created the Sqlite3 \'iVoteBallotHRM_EmployeesRegistration\' database table which was coded successfully and she received a message: ' + err + '!');
 		} else {
-			console.log('Sarai Hannah Ajai have successfully created the Sqlite3 \'alabamaUsers_LoggedIn_History\' database table' + Date() + '.');
+			console.log('Sarai Hannah Ajai have successfully created the Sqlite3 \'iVoteBallotHRM_EmployeesRegistration\' database table' + Date() + '.');
 		}
 	};
 });
-
-
-
-
-
-
-
-
-
-
 
 /*
 	This statement sets up a middleware function within iVoteBallot web application 
@@ -1409,6 +1407,17 @@ iVoteBallotApp.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	next();
 });
 
+// Middleware to set req.isUnauthenticated for the first use of the '/iVoteBallot_HRMEmployees_Registration_01' URL bar.
+iVoteBallotApp.use('/iVoteBallot_HRMEmployees_Registration_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'iVoteBallot_HRMEmployees_Registration_01\'.');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+
 // Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_SignUp_01' URL bar
 iVoteBallotApp.use('/alabamaVoters_SignUp_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'alabamaVoters_SignUp_01\'.');
@@ -1736,6 +1745,28 @@ iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) =>
 		console.log(req.flash());
 		req.flash('error', 'You have not manually updated user\'s data information.');
 		res.render('/alabamaDMV_Commission_01');
+
+	} else {
+		res.render('535');
+
+	}
+});
+
+// The User route for iVoteBallot_HRMEmployees_Registration_01.
+iVoteBallotApp.get('/iVoteBallot_HRMEmployees_Registration_01.', (req, res) => {
+
+	// Check if user already authenticated.
+	if (req.session.isAuthenticated) {
+		console.log('Another Election Assure Expert have already created the user iVoteBallot\'s account.');
+		req.flash('success', 'Another Election Assure Expert have already created the user iVoteBallot\'s account.');
+		res.render('/iVoteBallot');
+	}
+	console.log(req.session);
+	// Check if this is the first use of '/alabamaDMV_Commission_01' route URL bar
+	if (req.isUnauthenticated) {
+		console.log(req.flash());
+		req.flash('error', 'You have not manually updated user\'s data information.');
+		res.render('/iVoteBallot_HRMEmployees_Registration_01.');
 
 	} else {
 		res.render('535');
@@ -3327,6 +3358,180 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 );
 
 
+iVoteBallotApp.post('/hrmEmployees_Registration_01',
+	async (req, res) => {
+
+		const EmployeePDF = req.body.EmployeePDF;
+		const EmployeePhoto = req.body.EmployeePhoto;
+		const EmployeeFirstName = req.body.EmployeeFirstName;
+		const EmployeeMiddleName = req.body.EmployeeMiddleName;
+		const EmployeeLastName = req.body.EmployeeLastName;
+
+		const EmployeeEmail = req.body.EmployeeEmail;
+		const EmployeeConfirmEmail = req.body.EmployeeConfirmEmail;
+
+		console.log(req.body);
+
+		console.log('The user\'s PDF Files are: ' + EmployeePDF + '.');
+		console.log('The user\'s photograph image is: ' + EmployeePhoto + '.');
+		console.log('The user\'s first name: ' + EmployeeFirstName + '.');
+		console.log('The user\'s middle name is: ' + EmployeeMiddleName + '.');
+		console.log('The user\'s last name is: ' + EmployeeLastName + '.');
+
+		console.log('The user\'s email is: ' + EmployeeEmail + '.');
+		console.log('The user\'s confirm email is: ' + EmployeeConfirmEmail + '.');
+
+		console.log(req.session);
+
+
+		// Read the photo file as binary data
+		const pdfFilePath = `/Users/saraihannahajai/Documents/iVoteBallot_Prototype_3/iVoteBallot_HRM_EmployeesDataInformation/iVoteBallotHRM_Employees_PDFHiredInfo/${EmployeePDF}`;
+		const pdfFileData = fs.readFileSync(pdfFilePath);
+
+		
+		// Read the photo file as binary data
+		const photoFilePath = `/Users/saraihannahajai/Documents/iVoteBallot_Prototype_3/iVoteBallot_HRM_EmployeesDataInformation/iVoteBallotHRM_Employees_IDImages/${EmployeePhoto}`;
+		const photoFileData = fs.readFileSync(photoFilePath);
+
+		const newUser = {
+
+			EmployeePDF,
+			EmployeePhoto,
+			EmployeeFirstName,
+			EmployeeMiddleName,
+			EmployeeLastName,
+			EmployeeEmail,
+			EmployeeConfirmEmail
+			
+		};
+
+		await db1_iVoteballot_EmployeesRegistration.run(
+			
+			`INSERT INTO iVoteBallotHRM_EmployeesRegistration (EmployeePDF, EmployeePhoto, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail) VALUES (?,?,?,?,?,?,?)`,
+
+			[Buffer.from(pdfFileData), Buffer.from(photoFileData), newUser.EmployeeFirstName, newUser.EmployeeMiddleName, newUser.EmployeeLastName, newUser.EmployeeEmail, newUser.EmployeeConfirmEmail], (err) => {
+
+
+				if (err) {
+					console.error(err);
+					req.flash('error', 'An syntax error has occurred when you have entered your data information into the input field that is link to our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
+					console.log('An syntax error has occurred when the user have entered his/her data information into the input field that is link our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
+					res.render('535');
+
+				} else {
+
+					console.log('db1_iVoteBallot_EmployeesRegistration is about to run.');
+					console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
+					req.flash('success', 'The Election Assure Expert have successfully registered your data information onto the iVoteBallot database, and you can now sign up to create your iVoteBallot account.');
+
+					res.redirect('/iVoteBallot_HRMEmployees_Registration_01');
+
+				}
+
+				const transporter = nodemailer.createTransport({
+					host: 'smtp.ionos.com',
+					port: 587,
+					secure: false,
+					auth: {
+						user: 'ceo.developmenttest@ivoteballot.com',
+						pass: IONOS_SECRET_KEY,
+					}
+				});
+
+				const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
+
+				const mailOptions_01 = {
+					from: req.body.EmployeeEmail,
+					to: 'electionassureexpert@ivoteballot.com',
+					bcc: 'honey.ryder.development@ivoteballot.com',
+					subject: `New Employee Notification | iVoteBallot Employee Entry`,
+					html: ` 
+													
+					<p>Dear CEO/CIO/Manager,</p>
+					<p>An iVoteBallot employee has manually entered a new Employee into the iVoteBallot database. Here are the details:</p>
+			
+						<ul>
+							<li>
+								Name: ${req.body.EmployeeFirstName} ${req.body.EmployeeMiddleName} ${req.body.EmployeeLastName}
+							</li>
+							<li>
+								Email: ${req.body.EmployeeEmail}
+							</li>					
+						</ul>					
+						
+					<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+
+					`,
+
+					attachments: [
+						{
+							filename: 'iVoteBallotLogo.png',
+							path: imagePath,
+							cid: 'iVoteBallotLogo'
+
+						}
+					]
+				};
+
+				const mailOptions_02 = {
+					from: 'electionassureexpert@ivoteballot.com',
+					to: req.body.EmployeeEmail,
+					bcc: 'honey.ryder.development@ivoteballot.com',
+					subject: `Notification from the iVoteBallot's Election Assure Experts`,
+					html:
+						`	
+					
+						<p>Dear ${req.body.EmployeeFirstName} ${req.body.EmployeeMiddleName} ${req.body.EmployeeLastName},</p>
+						<p>Congratulations! Your iVoteballot Employee account has been successfully set up by our dedicated Human Resource Manager.</p>
+
+						<p>
+							At iVoteBallot, we are committed to providing you with a seamless employee experience. And, your account is now ready for you to sign up, and we encourage you to explore our platform.
+						</p>
+
+						<p>
+							Thank you for choosing iVoteBallot. We wish you a fantastic voting journey and hope you have a great day, ${req.body.EmployeeFirstName}.
+						</p>
+
+						<p>Best Regards,</p>
+						<p>iVoteBallot's Election Assure Expert Team</p>
+
+						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+
+						`,
+
+					attachments: [
+						{
+							filename: 'iVoteBallotLogo.png',
+							path: imagePath,
+							cid: 'iVoteBallotLogo'
+						}
+					]
+
+				};
+				
+				transporter.sendMail(mailOptions_01, (error, info) => {
+					if (error) {
+						console.log('The nodemailer have received an error message for the mailOptions_01:' + error + '.');
+						res.render('535');
+					} else {
+						console.log('Email Sent successfully: ' + info.response);
+					}
+				});
+
+				transporter.sendMail(mailOptions_02, (error, info) => {
+					if (error) {
+						console.log('The nodemailer have received an error message for the mailOptions_02:' + error + '.');
+						res.render('535');
+					} else {
+						console.log('Email Sent successfully: ' + info.response);
+
+					}
+				});
+			}
+		);
+	}
+);
+
 
 //const boxicons = require('boxicons');
 /*
@@ -3430,5 +3635,8 @@ iVoteBallotApp.post('/create-checkout-session', async (req, res) => {
 });
 
 */
+
+
+
 
 
