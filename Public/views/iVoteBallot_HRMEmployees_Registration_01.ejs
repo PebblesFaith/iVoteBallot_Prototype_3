@@ -73,21 +73,52 @@
 
 					<div class="hrmEmployeesRegistration_Container_01">  
 
-						<label>Upload New Employee Documentations |</label>
-							<br>
-							<input id="pdf" type="file"  name="employeePDF" accept=".pdf" multiple >
-							<span id="userEmployeePDFErrorMessage"></span>
-							<br>
+						<label>Upload New Employee PDF File |</label>
+						<br>
+						<input id="pdf" type="file"  name="EmployeePDF" accept=".pdf" multiple >
+						<span id="userEmployeePDFrrorMessage"></span>
+						<br>
+													
+						<label>Upload New Employee Photograph |</label>
+						<br>
+						<input id="photo" type="file"  name="EmployeePhoto" accept="image/*" capture="camera" >
+						<span id="userEmployeePhotoErrorMessage"></span>
+						<br>
+
+						<label>First Name |</label>                                           
+						<input id="firstName" type="text" name="EmployeeFirstName" maxlength="75"> 								                          
+						<span id="userEmployeeFirstNameErrorMessage"></span>
+						<br>
+
+						<label>Middle Name |</label>                            
+						<input id="middleName" type="text" name="EmployeeMiddleName" maxlength="75">                            
+						<span id="userEmployeeMiddleNameErrorMessage"></span>
+						<br>
+					
+						<label>Last Name |</label>                            
+						<input id="lastName" type="text" name="EmployeeLastName" maxlength="75">                           
+						<span id="userEmployeeLastNameErrorMessage"></span>
+						<br>
+
+						<label>Email Address |</label> 									
+						<input id="email" type="text" name="EmployeeEmail" maxlength="75">									
+						<span id="userEmployeeEmailErrorMessage"></span>
+						<br>
+
+						<label>Confirm Email Address |</label>									
+						<input id="confirmEmail" type="text" name="EmployeeConfirmEmail" maxlength="75">									
+						<span id="userEmployeeConfirmEmailErrorMessage"></span>
+						<br>
 
 
 
 
 
 
-							<br>
-							<br>
-							<input id="hrm_EmployeesRegistrationButton" type="submit" value="ADD NEW EMPLOYEE INFORMATION"></button>
-							<br> 
+						<br>
+						<br>
+						<input id="hrm_EmployeesRegistrationButton" type="submit" value="ADD NEW EMPLOYEE INFORMATION"></button>
+						<br> 
 
 
 
@@ -96,38 +127,9 @@
 
 				</form>
 
-			</div>
-							
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+			</div>	
 
 		</div>
-
-
-
-
-
-
-
-
-
-
-
-
 		
 	</body>
 
