@@ -91,6 +91,49 @@
 }
 
 /*
+	The CSS code style below uses a media query to target devices with a maximum screen width
+	of 992 pixels. It then applies a style to the element with the ID "flex_Container", setting
+	its width to 100% of the viewport. This is done to ensure that the element expands to fill
+	the width of the screen on smaller devices, improving the user experience for mobile and
+	tablet devices.
+*/
+@media all and (max-width: 992px) {
+	#flex_Container {
+	  width: 100%;
+	}
+}
+  
+/*
+	The CSS code style below uses a media query to target devices with a maximum screen width
+	of 600 pixels. It then applies a style to the element with the ID "flex_Container", setting
+	its width to 100% of the viewport. This is done to ensure that the element expands to fill
+	the width of the screen on smaller devices, improving the user experience for mobile and
+	tablet devices.
+*/
+  @media all and (max-width: 600px) {
+	#flex_Container {
+	  width: 100%;
+	  
+	}
+  }
+
+  @media only screen and (max-width: 550px) {
+    /* Adjust margin-top for smaller screens */
+    .hrm_RegistrationButton_01 {
+        margin-top: 30px;
+		margin-bottom: 20px;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    /* Keep margin-top as 350px for larger screens */
+    .hrm_RegistrationButton_01 {
+        margin-top: 325px;
+		margin-bottom: 325px;
+    }
+}
+
+/*
   The CSS style language codes sets a blue solid border for an HTML element identified
   by "hr_Blue_line_02", while removing the left and right borders. Additionally, it adds
   a top and bottom margin of 5 pixels to the element. This styling is used to
@@ -181,19 +224,24 @@
 }
 
 /* Alabama's iVoteBallot New Employees Registration pop up menu--------------------------------------------------------------------------- */
-
-  
+ 
 .hrm_RegistrationButton_01 {
 	display: block;
 	height: 40px;
 	width: 100%;
-	background-color: rgb(201, 24, 24);
+	background-color: rgb(13, 65, 255);
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	color: rgb(255, 255, 255);
 	font-size: clamp(12px, 2vw, 16px);
 	text-align: center;
 	border: none;  
+
 }
+
+.hrm_RegistrationButton_01:hover {
+    background-color: rgb(201, 24, 24); /* Adjusted blue color for hover effect */
+    cursor: pointer; /* Change cursor to pointer on hover */
+} 
 
 .hrmEmployeesRegistration_Container_01 {
 	padding: 16px;  
@@ -244,13 +292,13 @@ span.forgot_Password {
 	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: clamp(12px, 2vw, 30px);   
 	font-weight: bold;
-  }
+}
   
 .close:hover,
 .close:focus {
 	color: rgb(13, 65, 255);
 	cursor: pointer;
-  }
+}
   
 /* Add Zoom Animation */
 .animate {
@@ -294,6 +342,7 @@ span.forgot_Password {
 	border: none;  
 }
 
+#division,
 #pdf,
 #photo,
 #firstName,
@@ -320,6 +369,7 @@ span.forgot_Password {
 	cursor: 14px;  
 }  
 
+#division,
 #pdf,
 #photo,
 #firstName,
@@ -338,6 +388,7 @@ span.forgot_Password {
 	white-space: normal;   
 }
 
+#division,
 #pdf,
 #photo,
 #firstName,
@@ -350,6 +401,7 @@ span.forgot_Password {
 	transition: 0.5s;
 }
 
+#division:focus,
 #pdf:focus,
 #photo:focus,
 #firstName:focus,
@@ -367,6 +419,7 @@ span.forgot_Password {
 	width: 75%;  
 }
 
+#userDivisionErrorMessage,
 #userEmployeePDFErrorMessage,
 #userEmployeePhotoErrorMessage,
 #userEmployeeFirstNameErrorMessage,
@@ -407,11 +460,6 @@ span.forgot_Password {
 	border-radius: 5px;
 }
 
-
-
-
-
-
 #hrm_EmployeesRegistrationButton {
 	display: block;
 	height: 40px;
@@ -423,3 +471,7 @@ span.forgot_Password {
 	text-align: center;
 	border: none;  
 }
+
+
+
+
