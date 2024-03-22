@@ -73,10 +73,21 @@
 
 					<div class="hrmEmployeesRegistration_Container_01">  
 
+						<label>Divisional Department |</label>
+							<select id="division" name="EmployeeDivision">
+							
+								<option value="AL">Alabama</option>
+								<option value="CA">California</option>
+								<option value="NY">New York</option>
+								
+							</select>
+						<span id="userDivisionErrorMessage"></span>
+						<br>
+
 						<label>Upload New Employee PDF File |</label>
 						<br>
 						<input id="pdf" type="file"  name="EmployeePDF" accept=".pdf" multiple >
-						<span id="userEmployeePDFrrorMessage"></span>
+						<span id="userEmployeePDFErrorMessage"></span>
 						<br>
 													
 						<label>Upload New Employee Photograph |</label>
