@@ -445,13 +445,12 @@ db1_LoggedPasswordChange.serialize(() => {
 	};
 });
 
-
 db1_iVoteballot_EmployeesRegistration.serialize(() => {
 	db1_iVoteballot_EmployeesRegistration.run(`CREATE TABLE IF NOT EXISTS iVoteBallotHRM_EmployeesRegistration (
 
-		id TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-2' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-4' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(4)))), 
+		EmployeeDivision TEXT NOT NULL,
         Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
-		EmployeePDF BLOB (250) NOT NULL,
+		EmployeePDF BLOB NOT NULL,
 		EmployeePhoto BLOB (250) NOT NULL,
         EmployeeFirstName VARCHAR (100) NOT NULL, 
         EmployeeMiddleName VARCHAR (100) NOT NULL, 
@@ -3357,10 +3356,10 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 	}
 );
 
-
 iVoteBallotApp.post('/hrmEmployees_Registration_01',
 	async (req, res) => {
 
+		const EmployeeDivision = req.body.EmployeeDivision;
 		const EmployeePDF = req.body.EmployeePDF;
 		const EmployeePhoto = req.body.EmployeePhoto;
 		const EmployeeFirstName = req.body.EmployeeFirstName;
@@ -3372,6 +3371,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 		console.log(req.body);
 
+		console.log('The user\'s employee divsion is: ' + EmployeeDivision + '.');
 		console.log('The user\'s PDF Files are: ' + EmployeePDF + '.');
 		console.log('The user\'s photograph image is: ' + EmployeePhoto + '.');
 		console.log('The user\'s first name: ' + EmployeeFirstName + '.');
@@ -3383,18 +3383,23 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 		console.log(req.session);
 
+		// Generate a shorter version of UUID (version 4)
+		const shortUUID = uuidv4().substring(0, 14); // Using first 8 characters
+
+		// Append the division code (e.g., 'AL' for Alabama)
+		const employeeID = shortUUID + EmployeeDivision;
 
 		// Read the photo file as binary data
 		const pdfFilePath = `/Users/saraihannahajai/Documents/iVoteBallot_Prototype_3/iVoteBallot_HRM_EmployeesDataInformation/iVoteBallotHRM_Employees_PDFHiredInfo/${EmployeePDF}`;
 		const pdfFileData = fs.readFileSync(pdfFilePath);
 
-		
 		// Read the photo file as binary data
 		const photoFilePath = `/Users/saraihannahajai/Documents/iVoteBallot_Prototype_3/iVoteBallot_HRM_EmployeesDataInformation/iVoteBallotHRM_Employees_IDImages/${EmployeePhoto}`;
 		const photoFileData = fs.readFileSync(photoFilePath);
 
 		const newUser = {
 
+			EmployeeDivision: employeeID,
 			EmployeePDF,
 			EmployeePhoto,
 			EmployeeFirstName,
@@ -3407,10 +3412,9 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 		await db1_iVoteballot_EmployeesRegistration.run(
 			
-			`INSERT INTO iVoteBallotHRM_EmployeesRegistration (EmployeePDF, EmployeePhoto, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail) VALUES (?,?,?,?,?,?,?)`,
+			`INSERT INTO iVoteBallotHRM_EmployeesRegistration (EmployeeDivision, EmployeePDF, EmployeePhoto, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail) VALUES (?,?,?,?,?,?,?,?)`,
 
-			[Buffer.from(pdfFileData), Buffer.from(photoFileData), newUser.EmployeeFirstName, newUser.EmployeeMiddleName, newUser.EmployeeLastName, newUser.EmployeeEmail, newUser.EmployeeConfirmEmail], (err) => {
-
+			[newUser.EmployeeDivision, Buffer.from(pdfFileData), Buffer.from(photoFileData), newUser.EmployeeFirstName, newUser.EmployeeMiddleName, newUser.EmployeeLastName, newUser.EmployeeEmail, newUser.EmployeeConfirmEmail], (err) => {
 
 				if (err) {
 					console.error(err);
@@ -3456,7 +3460,8 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 							</li>
 							<li>
 								Email: ${req.body.EmployeeEmail}
-							</li>					
+							</li>						
+							
 						</ul>					
 						
 					<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
