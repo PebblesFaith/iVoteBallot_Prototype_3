@@ -449,16 +449,16 @@ db1_iVoteballot_EmployeesRegistration.serialize(() => {
 	db1_iVoteballot_EmployeesRegistration.run(`CREATE TABLE IF NOT EXISTS iVoteBallotHRM_EmployeesRegistration (
 
 		EmployeeDivision TEXT NOT NULL,
+		EmployeeDepartment TEXT NOT NULL,
+		EmployeeCountry TEXT NOT NULL,
         Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
 		EmployeePDF BLOB NOT NULL,
 		EmployeePhoto BLOB (250) NOT NULL,
         EmployeeFirstName VARCHAR (100) NOT NULL, 
         EmployeeMiddleName VARCHAR (100) NOT NULL, 
         EmployeeLastName VARCHAR(100) NOT NULL,
-
 		EmployeeEmail VARCHAR(150) NOT NULL,
-        EmployeeConfirmEmail VARCHAR(150) NOT NULL
-		
+        EmployeeConfirmEmail VARCHAR(150) NOT NULL		
 		
 	)`), (err) => {
 
@@ -3360,6 +3360,8 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 	async (req, res) => {
 
 		const EmployeeDivision = req.body.EmployeeDivision;
+		const EmployeeDepartment = req.body.EmployeeDepartment;		
+		const EmployeeCountry = req.body.EmployeeCountry;
 		const EmployeePDF = req.body.EmployeePDF;
 		const EmployeePhoto = req.body.EmployeePhoto;
 		const EmployeeFirstName = req.body.EmployeeFirstName;
@@ -3371,7 +3373,9 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 		console.log(req.body);
 
-		console.log('The user\'s employee divsion is: ' + EmployeeDivision + '.');
+		console.log('The user\'s employee divisional region is: ' + EmployeeDivision + '.');
+		console.log('The user\'s employee department region is: ' + EmployeeDepartment + '.');
+		console.log('The user\'s employee country location is: ' + EmployeeCountry + '.');
 		console.log('The user\'s PDF Files are: ' + EmployeePDF + '.');
 		console.log('The user\'s photograph image is: ' + EmployeePhoto + '.');
 		console.log('The user\'s first name: ' + EmployeeFirstName + '.');
@@ -3387,7 +3391,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 		const shortUUID = uuidv4().substring(0, 14); // Using first 8 characters
 
 		// Append the division code (e.g., 'AL' for Alabama)
-		const employeeID = shortUUID + EmployeeDivision;
+		const employeeID = shortUUID + EmployeeDepartment + '-' + EmployeeDivision + '-' + EmployeeCountry;
 
 		// Read the photo file as binary data
 		const pdfFilePath = `/Users/saraihannahajai/Documents/iVoteBallot_Prototype_3/iVoteBallot_HRM_EmployeesDataInformation/iVoteBallotHRM_Employees_PDFHiredInfo/${EmployeePDF}`;
@@ -3400,6 +3404,8 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 		const newUser = {
 
 			EmployeeDivision: employeeID,
+			EmployeeDepartment,
+			EmployeeCountry,
 			EmployeePDF,
 			EmployeePhoto,
 			EmployeeFirstName,
@@ -3412,9 +3418,9 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 		await db1_iVoteballot_EmployeesRegistration.run(
 			
-			`INSERT INTO iVoteBallotHRM_EmployeesRegistration (EmployeeDivision, EmployeePDF, EmployeePhoto, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail) VALUES (?,?,?,?,?,?,?,?)`,
+			`INSERT INTO iVoteBallotHRM_EmployeesRegistration (EmployeeDivision, EmployeeDepartment, EmployeeCountry, EmployeePDF, EmployeePhoto, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail) VALUES (?,?,?,?,?,?,?,?,?,?)`,
 
-			[newUser.EmployeeDivision, Buffer.from(pdfFileData), Buffer.from(photoFileData), newUser.EmployeeFirstName, newUser.EmployeeMiddleName, newUser.EmployeeLastName, newUser.EmployeeEmail, newUser.EmployeeConfirmEmail], (err) => {
+			[newUser.EmployeeDivision, newUser.EmployeeDepartment, newUser.EmployeeCountry, Buffer.from(pdfFileData), Buffer.from(photoFileData), newUser.EmployeeFirstName, newUser.EmployeeMiddleName, newUser.EmployeeLastName, newUser.EmployeeEmail, newUser.EmployeeConfirmEmail], (err) => {
 
 				if (err) {
 					console.error(err);
