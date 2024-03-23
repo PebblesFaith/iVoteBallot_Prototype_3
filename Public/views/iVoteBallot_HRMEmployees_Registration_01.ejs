@@ -71,17 +71,66 @@
 						<span class="close" onclick="document.getElementById('popUpHRM_EmployeesRegistrationMenu').style.display='none'" title="Close Sign Up Form">&times;</span>
 					</div>
 
-					<div class="hrmEmployeesRegistration_Container_01">  
+					<div class="hrmEmployeesRegistration_Container_01"> 
 
-						<label>Divisional Department |</label>
+						<label>Regional Location |</label>
 							<select id="division" name="EmployeeDivision">
+
+								<option id="selectBackground" value="" disable selected hidden>Regional Location</option>
 							
 								<option value="AL">Alabama</option>
 								<option value="CA">California</option>
 								<option value="NY">New York</option>
 								
 							</select>
-						<span id="userDivisionErrorMessage"></span>
+						<span id="userEmployeeDivisionErrorMessage"></span>
+						<br>
+						
+						<label>Divisional Department |</label>
+							<select id="department" name="EmployeeDepartment">
+
+								<option id="selectBackground" value="" disable selected hidden>Divisional Department</option>
+							
+								<option value="El-Emp">Election Assures Expert</option>
+								<option value="Ex-Emp">Executive Officer Administrator</option>
+								<option value="Ex-Pre">Executive Officer</option>
+								<option value="Fi-Dir">Finance Director</option>
+								<option value="Fi-Emp">Finance Employee</option>
+								<option value="Fi-Mgr">Finance Manager</option>
+								<option value="HR-Dir">Human Resource Director</option>
+								<option value="HR-Emp">Human Resource Employee</option>								
+								<option value="HR-Mgr">Human Resource Manager</option>
+								<option value="IT-Dir">Information Technology Director</option>
+								<option value="IT-Emp">Information Technology Employee</option>								
+								<option value="IT-Mgr">Information Technology Manager</option>
+								<option value="Ma-Dir">Marketing Director</option>
+								<option value="Ma-Emp">Marketing Employee</option>								
+								<option value="Ma-Mgr">Marketing Manager</option>
+								<option value="Op-Dir">Operation Director</option>
+								<option value="Op-Emp">Operation Employee</option>								
+								<option value="Op-Mgr">Operation Manager</option>
+								<option value="Op-Sr">Operation Senior</option>
+								
+							</select>
+						<span id="userEmployeeDepartmentErrorMessage"></span>
+						<br>						
+
+						<label>Country Location |</label>
+							<select id="country" name="EmployeeCountry">
+
+								<option id="selectBackground" value="" disable selected hidden>Country Location</option>
+							
+								<option value="IRL">Ireland</option>
+								<option value="ISR">Israel</option>
+								<option value="ITA">Italy</option>
+								<option value="JPN">Japan</option>
+								<option value="SWE">Sweden</option>
+								<option value="CHE">Switzerland</option>
+								<option value="GBR">United Kingdom of Great Britain and Northen Ireland</option>
+								<option value="USA">United States of America</option>
+								
+							</select>
+						<span id="userEmployeeCountryErrorMessage"></span>
 						<br>
 
 						<label>Upload New Employee PDF File |</label>
