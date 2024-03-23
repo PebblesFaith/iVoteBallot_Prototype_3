@@ -2,8 +2,11 @@
 const validateHRMEmployees_RegistrationForm = (e) => {    
 
 	console.log('Sarai Hannah Ajai is testing her written JavaScript programmatic codes; in order to validate her contact us form has opened up correctly within the HTML webpage.')
-
+	
+	
 	const EmployeeDivision = document.getElementById('division').value.trim();
+	const EmployeeDepartment = document.getElementById('department').value.trim();	
+	const EmployeeCountry = document.getElementById('country').value.trim();
 	const EmployeePDF = document.getElementById('pdf').value.trim(); 	
 	const EmployeePhoto = document.getElementById('photo').value.trim(); 
 	const EmployeeFirstName = document.getElementById('firstName').value.trim(); 
@@ -16,18 +19,40 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	const regExName = /^[A-Za-z\s]+$/;
 
 	const regExEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;      
-
+	
 	
 	if (EmployeeDivision === '' || EmployeeDivision == null) {		
-		document.getElementById('userDivisionErrorMessage').textContent = 'Error Message: The user\'s photograph is a required select field and you must upload the user correct photograph from the photo selection require field.';
+		document.getElementById('userEmployeeDivisionErrorMessage').textContent = 'Error Message: The user\'s photograph is a required select field and you must upload the user correct photograph from the photo selection require field.';
 		setTimeout(function() {
-			document.getElementById('userDivisionErrorMessage').textContent = '';
+			document.getElementById('userEmployeeDivisionErrorMessage').textContent = '';
+		},
+		9000)    	
+
+		return false;  
+	
+	}	
+	
+	if (EmployeeDepartment === '' || EmployeeDepartment == null) {		
+		document.getElementById('userEmployeeDepartmentErrorMessage').textContent = 'Error Message: The user\'s photograph is a required select field and you must upload the user correct photograph from the photo selection require field.';
+		setTimeout(function() {
+			document.getElementById('userEmployeeDepartmentErrorMessage').textContent = '';
 		},
 		9000)    	
 
 		return false;  
 	
 	}
+	
+	if (EmployeeCountry === '' || EmployeeCountry == null) {		
+		document.getElementById('userEmployeeCountryErrorMessage').textContent = 'Error Message: The user\'s photograph is a required select field and you must upload the user correct photograph from the photo selection require field.';
+		setTimeout(function() {
+			document.getElementById('userEmployeeCountryErrorMessage').textContent = '';
+		},
+		9000)    	
+
+		return false;  
+	
+	}	
 	
 	if (EmployeePDF === '' || EmployeePDF == null) {		
 		document.getElementById('userEmployeePDFErrorMessage').textContent = 'Error Message: The user\'s photograph is a required select field and you must upload the user correct photograph from the photo selection require field.';
