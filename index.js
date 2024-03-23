@@ -448,8 +448,8 @@ db1_LoggedPasswordChange.serialize(() => {
 db1_iVoteballot_EmployeesRegistration.serialize(() => {
 	db1_iVoteballot_EmployeesRegistration.run(`CREATE TABLE IF NOT EXISTS iVoteBallotHRM_EmployeesRegistration (
 
-		EmployeeDivision TEXT NOT NULL,
-		EmployeeDepartment TEXT NOT NULL,
+		EmployeeDivision TEXT NOT NULL,	
+		EmployeeDepartment TEXT NOT NULL,		
 		EmployeeCountry TEXT NOT NULL,
         Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
 		EmployeePDF BLOB NOT NULL,
@@ -3404,7 +3404,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 		const newUser = {
 
 			EmployeeDivision: employeeID,
-			EmployeeDepartment,
+			EmployeeDepartment,	
 			EmployeeCountry,
 			EmployeePDF,
 			EmployeePhoto,
@@ -3415,7 +3415,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 			EmployeeConfirmEmail
 			
 		};
-
+						
 		await db1_iVoteballot_EmployeesRegistration.run(
 			
 			`INSERT INTO iVoteBallotHRM_EmployeesRegistration (EmployeeDivision, EmployeeDepartment, EmployeeCountry, EmployeePDF, EmployeePhoto, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail) VALUES (?,?,?,?,?,?,?,?,?,?)`,
