@@ -343,6 +343,8 @@ span.forgot_Password {
 }
 
 #division,
+#department,
+#country,
 #pdf,
 #photo,
 #firstName,
@@ -370,6 +372,8 @@ span.forgot_Password {
 }  
 
 #division,
+#department,
+#country,
 #pdf,
 #photo,
 #firstName,
@@ -389,6 +393,8 @@ span.forgot_Password {
 }
 
 #division,
+#department,
+#country,
 #pdf,
 #photo,
 #firstName,
@@ -402,6 +408,8 @@ span.forgot_Password {
 }
 
 #division:focus,
+#department:focus,
+#country:focus,
 #pdf:focus,
 #photo:focus,
 #firstName:focus,
@@ -419,6 +427,9 @@ span.forgot_Password {
 	width: 75%;  
 }
 
+#userEmployeeDivisionErrorMessage,
+#userEmployeeDepartmentErrorMessage,
+#userEmployeeCountryErrorMessage,
 #userDivisionErrorMessage,
 #userEmployeePDFErrorMessage,
 #userEmployeePhotoErrorMessage,
