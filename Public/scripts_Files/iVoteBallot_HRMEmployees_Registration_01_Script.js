@@ -169,3 +169,150 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	return true; 	
 		
 }
+
+/*
+const internationalState = {
+
+    'Alabama': 'AL',
+    'Alaska': 'AK',
+    'American Samoa': 'AS',
+    'Arizona': 'AZ',
+    'Arkansas': 'AR',
+    'California': 'CA',
+    'Colorado': 'CO',
+    'Connecticut': 'CT',
+    'Delaware': 'DE',
+    'District of Columbia': 'DC',
+	'Florida': 'FL',
+	'Georgia': 'GA',
+	'Guam': 'GU',
+	'Hawaii': 'HI',
+	'Idaho': 'ID',
+	'Illinois': 'IL',
+	'Indiana': 'IN',
+	'Iowa': 'IA',
+	'Kansas': 'KS',
+	'Kentucky': 'KY',
+	'Louisiana': 'LA',
+	'Maine': 'ME',
+	'Maryland': 'MD',
+	'Massachusetts': 'MA',
+	'Michigan': 'MI',
+	'Minnesota': 'MN',
+	'Mississippi': 'MS',
+	'Missouri': 'MO',
+	'Montana': 'MT',
+	'Nebraska': 'NE',
+	'Nevada': 'NV',
+	'New Hamsphire': 'NH',
+	'New Jersey': 'NJ',
+	'New Mexico': 'NM',
+	'New York': 'NY',
+	'North Carolina': 'NC',
+	'North Dakota': 'ND',
+	'Northern Maraiana Islands': 'MP',
+	'Ohio': 'OH',
+	'Oklahoma': 'OK',
+	'Oregon': 'OR',
+	'Pennsylvania': 'PA',
+	'Puerto Rico': 'PR',
+	'Rhode Island': 'RI',
+	'South Carolina': 'SC',
+	'South Dakota': 'SD',
+	'Tennessee': 'TN',
+	'Texas': 'TX',
+	'United States Minor Outlying Islands': 'UM',
+	'Utah': 'UT',
+	'Vermont': 'VT',
+	'Virgin Islands U.S.': 'VI',
+	'Virginia': 'VA',
+	'Washington': 'WA',
+	'West Virginia': 'WV',
+	'Wisconsin': 'WI',
+	'Wyoming': 'WY'
+
+};
+
+
+
+window.onload = function () {
+    const division = document.getElementById('division');
+    const department = document.getElementById('department');
+
+    // Populate division dropdown
+    for (var state in internationalState) {
+        division.options[division.options.length] = new Option(state, internationalState[state]);
+    }
+
+	division.onchange = function () {
+        
+        department.length = 1; // remove all options bar first
+       
+        
+        if (this.selectedIndex < 1)
+                return true; // done
+            
+            for (var departmentDiv in internationalState[this.value]) {
+                department.options[department.options.length] = new Option(departmentDiv, departmentDiv);
+            }
+                                
+        } 
+            
+
+};
+
+*/
+
+
+document.getElementById("country").addEventListener("change", function() {
+    var country = this.value;
+    var divisionSelect = document.getElementById("division");
+    var departmentSelect = document.getElementById("department");
+
+    divisionSelect.innerHTML = '<option value="" disabled selected hidden>Regional Location</option>';
+    departmentSelect.innerHTML = '<option value="" disabled selected hidden>Divisional Department</option>';
+
+    if (country === "USA") {
+        // Populate divisions for USA
+        var divisions = {
+            "AL": "Alabama",
+            "CA": "California",
+            "NY": "New York"
+            // Add more divisions as needed
+        };
+        for (var code in divisions) {
+            var option = document.createElement("option");
+            option.value = code;
+            option.text = divisions[code];
+            divisionSelect.appendChild(option);
+        }
+    }
+
+    divisionSelect.disabled = false;
+    departmentSelect.disabled = true; // Disable department dropdown until a division is selected
+});
+
+document.getElementById("division").addEventListener("change", function() {
+    var division = this.value;
+    var departmentSelect = document.getElementById("department");
+
+    departmentSelect.innerHTML = '<option value="" disabled selected hidden>Divisional Department</option>';
+
+    if (division) {
+        // Populate departments based on division selection
+        var departments = {
+            "El-Emp": "Election Assures Expert",
+            "Ex-Emp": "Executive Officer Administrator",
+            "Ex-Pre": "Executive Officer",
+            // Add more departments as needed
+        };
+        for (var code in departments) {
+            var option = document.createElement("option");
+            option.value = code;
+            option.text = departments[code];
+            departmentSelect.appendChild(option);
+        }
+    }
+
+    departmentSelect.disabled = false;
+});
