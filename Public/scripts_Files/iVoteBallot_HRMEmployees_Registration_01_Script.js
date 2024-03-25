@@ -263,7 +263,7 @@ window.onload = function () {
 
 */
 
-
+/*
 document.getElementById("country").addEventListener("change", function() {
     var country = this.value;
     var divisionSelect = document.getElementById("division");
@@ -305,6 +305,311 @@ document.getElementById("division").addEventListener("change", function() {
             "Ex-Emp": "Executive Officer Administrator",
             "Ex-Pre": "Executive Officer",
             // Add more departments as needed
+        };
+        for (var code in departments) {
+            var option = document.createElement("option");
+            option.value = code;
+            option.text = departments[code];
+            departmentSelect.appendChild(option);
+        }
+    }
+
+    departmentSelect.disabled = false;
+});
+
+*/
+
+
+document.getElementById("country").addEventListener("change", function() {
+    var country = this.value;
+    var divisionSelect = document.getElementById("division");
+    var departmentSelect = document.getElementById("department");
+
+    divisionSelect.innerHTML = '<option value="" disabled selected hidden>Regional Location</option>';
+    departmentSelect.innerHTML = '<option value="" disabled selected hidden>Divisional Department</option>';
+
+    if (country === "USA") {
+        // Populate divisions for USA
+        var divisions = {
+            "AL": "Alabama",
+            "CA": "California",
+            "NY": "New York"
+            // Add more divisions as needed
+        };
+        for (var code in divisions) {
+            var option = document.createElement("option");
+            option.value = code;
+            option.text = divisions[code];
+            divisionSelect.appendChild(option);
+			
+        }
+
+	} else if (country === "CAN") {
+        // Populate provinces for Canada
+        var provinces = {
+            "AB": "Alberta",
+            "BC": "British Columbia",
+            "MB": "Manitoba",
+            "NB": "New Brunswick",
+            "NL": "Newfoundland and Labrador",
+            "NS": "Nova Scotia",
+            "ON": "Ontario",
+            "PE": "Prince Edward Island",
+            "QC": "Quebec",
+            "SK": "Saskatchewan"
+            // Add more provinces as needed
+        };
+        for (var code in provinces) {
+            var option = document.createElement("option");
+            option.value = code;
+            option.text = provinces[code];
+            divisionSelect.appendChild(option);
+        }
+		
+	} else if (country === "DEU") {
+        // Populate states for Germany
+        var states = {
+            "BW": "Baden-Württemberg",
+            "BY": "Bavaria",
+            "BE": "Berlin",
+            "BB": "Brandenburg",
+            "HB": "Bremen",
+            "HH": "Hamburg",
+            "HE": "Hesse",
+            "MV": "Mecklenburg-Vorpommern",
+            "NI": "Lower Saxony",
+            "NW": "North Rhine-Westphalia",
+            "RP": "Rhineland-Palatinate",
+            "SL": "Saarland",
+            "SN": "Saxony",
+            "ST": "Saxony-Anhalt",
+            "SH": "Schleswig-Holstein",
+            "TH": "Thuringia"
+            // Add more states as needed
+        };
+        for (var code in states) {
+            var option = document.createElement("option");
+            option.value = code;
+            option.text = states[code];
+            divisionSelect.appendChild(option);
+        }
+
+    } else if (country === "IRL") {
+        // Populate divisions for Ireland
+        var divisions = {
+            "DB": "Dublin",
+            "CC": "Cork",
+            "GA": "Galway"
+            // Add more divisions as needed
+        };
+        for (var code in divisions) {
+            var option = document.createElement("option");
+            option.value = code;
+            option.text = divisions[code];
+            divisionSelect.appendChild(option);
+        }    
+
+	} else if (country === "ISR") {
+        // Populate divisions for Israel
+        var divisions = {
+            "TA": "Tel Aviv",
+            "JR": "Jerusalem",
+            "HA": "Haifa"
+            // Add more divisions as needed
+        };
+        for (var code in divisions) {
+            var option = document.createElement("option");
+            option.value = code;
+            option.text = divisions[code];
+            divisionSelect.appendChild(option);
+        }
+
+	} else if (country === "ITA") {
+        // Populate regions for Italy
+        var regions = {
+            "LZ": "Lazio",
+            "LM": "Lombardy",
+            "CM": "Campania"
+            // Add more regions as needed
+        };
+        for (var code in regions) {
+            var option = document.createElement("option");
+            option.value = code;
+            option.text = regions[code];
+            divisionSelect.appendChild(option);
+        }  
+    
+	} else if (country === "JPN") {
+        // Populate divisions for Japan
+        var divisions = {
+            "TK": "Tokyo",
+            "OS": "Osaka",
+            "NK": "Nagoya"
+            // Add more divisions as needed
+        };
+        for (var code in divisions) {
+            var option = document.createElement("option");
+            option.value = code;
+            option.text = divisions[code];
+            divisionSelect.appendChild(option);
+        }
+
+	} else if (country === "MEX") {
+        // Populate states for Mexico
+        var states = {
+            "AGU": "Aguascalientes",
+            "BCN": "Baja California",
+            "BCS": "Baja California Sur",
+            "CAM": "Campeche",
+            "CHP": "Chiapas",
+            "CHH": "Chihuahua",
+            "COA": "Coahuila",
+            "COL": "Colima",
+            "DUR": "Durango",
+            "GUA": "Guanajuato",
+            "GRO": "Guerrero",
+            "HID": "Hidalgo",
+            "JAL": "Jalisco",
+            "MEX": "México",
+            "MIC": "Michoacán",
+            "MOR": "Morelos",
+            "NAY": "Nayarit",
+            "NLE": "Nuevo León",
+            "OAX": "Oaxaca",
+            "PUE": "Puebla",
+            "QUE": "Querétaro",
+            "ROO": "Quintana Roo",
+            "SLP": "San Luis Potosí",
+            "SIN": "Sinaloa",
+            "SON": "Sonora",
+            "TAB": "Tabasco",
+            "TAM": "Tamaulipas",
+            "TLA": "Tlaxcala",
+            "VER": "Veracruz",
+            "YUC": "Yucatán",
+            "ZAC": "Zacatecas"
+            // Add more states as needed
+        };
+        for (var code in states) {
+            var option = document.createElement("option");
+            option.value = code;
+            option.text = states[code];
+            divisionSelect.appendChild(option);
+        }
+
+	} else if (country === "QAT") {
+        // Populate regions for Qatar
+        var regions = {
+            "DOH": "Doha",
+            "WD": "Al Wakrah",
+            "MS": "Mesaieed"
+            // Add more regions as needed
+        };
+        for (var code in regions) {
+            var option = document.createElement("option");
+            option.value = code;
+            option.text = regions[code];
+            divisionSelect.appendChild(option);
+        }
+    
+	} else if (country === "SWE") {
+        // Populate counties for Sweden
+        var counties = {
+            "ST": "Stockholm",
+            "GB": "Gothenburg",
+            "MH": "Malmö"
+            // Add more counties as needed
+        };
+        for (var code in counties) {
+            var option = document.createElement("option");
+            option.value = code;
+            option.text = counties[code];
+            divisionSelect.appendChild(option);
+        }
+
+	} else if (country === "SWZ") {
+        // Populate cantons for Switzerland
+        var cantons = {
+            "ZH": "Zürich",
+            "BE": "Bern",
+            "VD": "Vaud"
+            // Add more cantons as needed
+        };
+        for (var code in cantons) {
+            var option = document.createElement("option");
+            option.value = code;
+            option.text = cantons[code];
+            divisionSelect.appendChild(option);
+        }
+
+	} else if (country === "THA") {
+        // Populate provinces for Thailand
+        var provinces = {
+            "BKK": "Bangkok",
+            "CMI": "Chiang Mai",
+            "PHU": "Phuket"
+            // Add more provinces as needed
+        };
+        for (var code in provinces) {
+            var option = document.createElement("option");
+            option.value = code;
+            option.text = provinces[code];
+            divisionSelect.appendChild(option);
+        }
+
+	} else if (country === "GBR") {
+        // Populate regions for UK
+        var regions = {
+            "ENG": "England",
+            "SCO": "Scotland",
+            "WAL": "Wales",
+            "NIR": "Northern Ireland"
+            // Add more regions as needed
+        };
+        for (var code in regions) {
+            var option = document.createElement("option");
+            option.value = code;
+            option.text = regions[code];
+            divisionSelect.appendChild(option);
+        }
+	
+    }
+  
+
+    divisionSelect.disabled = false;
+    departmentSelect.disabled = true; // Disable department dropdown until a division is selected
+});
+
+document.getElementById("division").addEventListener("change", function() {
+    var division = this.value;
+    var departmentSelect = document.getElementById("department");
+
+    departmentSelect.innerHTML = '<option value="" disabled selected hidden>Divisional Department</option>';
+
+    if (division) {
+        // Populate departments based on division selection
+        var departments = {
+
+            'El-Emp': 'Election Assures Expert',
+            'Ex-Emp': 'Executive Officer Administrator',
+            'Ex-Off': 'Executive Officer',
+			'Fi-Dir': 'Finance Director',
+			'Fi-Emp': 'Finance Employee',
+			'Fi-Mgr': 'Finance Manager',
+			'HR-Dir': 'Human Resources Director',
+			'HR-Emp': 'Human Resources Employee',
+			'HR-Mgr': 'Human Resources Manager', 
+			'IT-Dir': 'Information Technology Director',
+			'IT-Emp': 'Information Technology Employee',
+			'IT-Mgr': 'Information Technology Manager',  
+			'MA-Dir': 'Marketing Director',
+			'MA-Emp': 'Marketing Employee',
+			'MA-Mgr': 'Marketing Manager',
+			'OP-Dir': 'Operations Director',
+			'OP-Emp': 'Operations Employee',
+			'OP-Mgr': 'Operations Manager',
+			'OP-Sr': 'Operation Senior',     
+			
         };
         for (var code in departments) {
             var option = document.createElement("option");
