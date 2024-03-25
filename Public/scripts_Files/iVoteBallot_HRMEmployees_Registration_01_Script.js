@@ -170,100 +170,6 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 		
 }
 
-/*
-const internationalState = {
-
-    'Alabama': 'AL',
-    'Alaska': 'AK',
-    'American Samoa': 'AS',
-    'Arizona': 'AZ',
-    'Arkansas': 'AR',
-    'California': 'CA',
-    'Colorado': 'CO',
-    'Connecticut': 'CT',
-    'Delaware': 'DE',
-    'District of Columbia': 'DC',
-	'Florida': 'FL',
-	'Georgia': 'GA',
-	'Guam': 'GU',
-	'Hawaii': 'HI',
-	'Idaho': 'ID',
-	'Illinois': 'IL',
-	'Indiana': 'IN',
-	'Iowa': 'IA',
-	'Kansas': 'KS',
-	'Kentucky': 'KY',
-	'Louisiana': 'LA',
-	'Maine': 'ME',
-	'Maryland': 'MD',
-	'Massachusetts': 'MA',
-	'Michigan': 'MI',
-	'Minnesota': 'MN',
-	'Mississippi': 'MS',
-	'Missouri': 'MO',
-	'Montana': 'MT',
-	'Nebraska': 'NE',
-	'Nevada': 'NV',
-	'New Hamsphire': 'NH',
-	'New Jersey': 'NJ',
-	'New Mexico': 'NM',
-	'New York': 'NY',
-	'North Carolina': 'NC',
-	'North Dakota': 'ND',
-	'Northern Maraiana Islands': 'MP',
-	'Ohio': 'OH',
-	'Oklahoma': 'OK',
-	'Oregon': 'OR',
-	'Pennsylvania': 'PA',
-	'Puerto Rico': 'PR',
-	'Rhode Island': 'RI',
-	'South Carolina': 'SC',
-	'South Dakota': 'SD',
-	'Tennessee': 'TN',
-	'Texas': 'TX',
-	'United States Minor Outlying Islands': 'UM',
-	'Utah': 'UT',
-	'Vermont': 'VT',
-	'Virgin Islands U.S.': 'VI',
-	'Virginia': 'VA',
-	'Washington': 'WA',
-	'West Virginia': 'WV',
-	'Wisconsin': 'WI',
-	'Wyoming': 'WY'
-
-};
-
-
-
-window.onload = function () {
-    const division = document.getElementById('division');
-    const department = document.getElementById('department');
-
-    // Populate division dropdown
-    for (var state in internationalState) {
-        division.options[division.options.length] = new Option(state, internationalState[state]);
-    }
-
-	division.onchange = function () {
-        
-        department.length = 1; // remove all options bar first
-       
-        
-        if (this.selectedIndex < 1)
-                return true; // done
-            
-            for (var departmentDiv in internationalState[this.value]) {
-                department.options[department.options.length] = new Option(departmentDiv, departmentDiv);
-            }
-                                
-        } 
-            
-
-};
-
-*/
-
-/*
 document.getElementById("country").addEventListener("change", function() {
     var country = this.value;
     var divisionSelect = document.getElementById("division");
@@ -275,66 +181,65 @@ document.getElementById("country").addEventListener("change", function() {
     if (country === "USA") {
         // Populate divisions for USA
         var divisions = {
-            "AL": "Alabama",
-            "CA": "California",
-            "NY": "New York"
-            // Add more divisions as needed
-        };
-        for (var code in divisions) {
-            var option = document.createElement("option");
-            option.value = code;
-            option.text = divisions[code];
-            divisionSelect.appendChild(option);
-        }
-    }
-
-    divisionSelect.disabled = false;
-    departmentSelect.disabled = true; // Disable department dropdown until a division is selected
-});
-
-document.getElementById("division").addEventListener("change", function() {
-    var division = this.value;
-    var departmentSelect = document.getElementById("department");
-
-    departmentSelect.innerHTML = '<option value="" disabled selected hidden>Divisional Department</option>';
-
-    if (division) {
-        // Populate departments based on division selection
-        var departments = {
-            "El-Emp": "Election Assures Expert",
-            "Ex-Emp": "Executive Officer Administrator",
-            "Ex-Pre": "Executive Officer",
-            // Add more departments as needed
-        };
-        for (var code in departments) {
-            var option = document.createElement("option");
-            option.value = code;
-            option.text = departments[code];
-            departmentSelect.appendChild(option);
-        }
-    }
-
-    departmentSelect.disabled = false;
-});
-
-*/
-
-
-document.getElementById("country").addEventListener("change", function() {
-    var country = this.value;
-    var divisionSelect = document.getElementById("division");
-    var departmentSelect = document.getElementById("department");
-
-    divisionSelect.innerHTML = '<option value="" disabled selected hidden>Regional Location</option>';
-    departmentSelect.innerHTML = '<option value="" disabled selected hidden>Divisional Department</option>';
-
-    if (country === "USA") {
-        // Populate divisions for USA
-        var divisions = {
-            "AL": "Alabama",
-            "CA": "California",
-            "NY": "New York"
-            // Add more divisions as needed
+            
+			'AL': 'Alabama', 
+			'AK': 'Alaska', 
+			'AS': 'American Samoa', 
+			'AZ': 'Arizona', 
+			'AR': 'Arkansas', 
+			'CA': 'California', 
+			'CO': 'Colorado', 
+			'CT': 'Connecticut', 
+			'DE': 'Delaware', 
+			'DC': 'District of Columbia', 
+			'FL': 'Florida', 
+			'GA': 'Georgia', 
+			'GU': 'Guam',			
+			'HI': 'Hawaii', 
+			'ID': 'Idaho', 
+			'IL': 'Illinois', 
+			'IN': 'Indiana', 
+			'IA': 'Iowa', 
+			'KS': 'Kansas',
+			'KY': 'Kentucky', 
+			'LA': 'Louisiana', 
+			'ME': 'Maine', 
+			'MD': 'Maryland', 
+			'MA': 'Massachusetts', 
+			'MI': 'Michigan', 
+			'MN': 'Minnesota',
+			'MS': 'Mississippi', 
+			'MO': 'Missouri', 
+			'MT': 'Montana', 
+			'NE': 'Nebraska',
+			'NV': 'Nevada', 
+			'NH': 'New Hamsphire', 
+			'NJ': 'New Jersey', 
+			'NM': 'New Mexico', 
+			'NY': 'New York',
+			'NC': 'North Carolina', 
+			'ND': 'North Dakota', 
+			'MP': 'Northern Maraiana Islands', 
+			'OH': 'Ohio', 
+			'OK': 'Oklahoma', 
+			'OR': 'Oregon', 
+			'PA': 'Pennsylvania', 
+			'PR': 'Puerto Rico',
+			'RI': 'Rhode Island', 
+			'SC': 'South Carolina', 
+			'SD': 'South Dakota', 
+			'TN': 'Tennessee',
+			'TX': 'Texas',
+			'UM': 'United States Minor Outlying Islands',
+			'UT': 'Utah',
+			'VT': 'Vermont', 
+			'VI': 'Virgin Islands U.S.', 
+			'VA': 'Virginia', 
+			'WA': 'Washington', 
+			'WV': 'West Virginia',
+			'WI': 'Wisconsin', 
+			'WY': 'Wyoming', 	
+		            
         };
         for (var code in divisions) {
             var option = document.createElement("option");
@@ -357,7 +262,7 @@ document.getElementById("country").addEventListener("change", function() {
             "PE": "Prince Edward Island",
             "QC": "Quebec",
             "SK": "Saskatchewan"
-            // Add more provinces as needed
+           
         };
         for (var code in provinces) {
             var option = document.createElement("option");
@@ -385,7 +290,7 @@ document.getElementById("country").addEventListener("change", function() {
             "ST": "Saxony-Anhalt",
             "SH": "Schleswig-Holstein",
             "TH": "Thuringia"
-            // Add more states as needed
+          
         };
         for (var code in states) {
             var option = document.createElement("option");
@@ -400,7 +305,7 @@ document.getElementById("country").addEventListener("change", function() {
             "DB": "Dublin",
             "CC": "Cork",
             "GA": "Galway"
-            // Add more divisions as needed
+          
         };
         for (var code in divisions) {
             var option = document.createElement("option");
@@ -415,7 +320,7 @@ document.getElementById("country").addEventListener("change", function() {
             "TA": "Tel Aviv",
             "JR": "Jerusalem",
             "HA": "Haifa"
-            // Add more divisions as needed
+           
         };
         for (var code in divisions) {
             var option = document.createElement("option");
@@ -430,7 +335,7 @@ document.getElementById("country").addEventListener("change", function() {
             "LZ": "Lazio",
             "LM": "Lombardy",
             "CM": "Campania"
-            // Add more regions as needed
+           
         };
         for (var code in regions) {
             var option = document.createElement("option");
@@ -445,7 +350,7 @@ document.getElementById("country").addEventListener("change", function() {
             "TK": "Tokyo",
             "OS": "Osaka",
             "NK": "Nagoya"
-            // Add more divisions as needed
+           
         };
         for (var code in divisions) {
             var option = document.createElement("option");
@@ -488,7 +393,7 @@ document.getElementById("country").addEventListener("change", function() {
             "VER": "Veracruz",
             "YUC": "Yucatán",
             "ZAC": "Zacatecas"
-            // Add more states as needed
+           
         };
         for (var code in states) {
             var option = document.createElement("option");
@@ -503,7 +408,7 @@ document.getElementById("country").addEventListener("change", function() {
             "DOH": "Doha",
             "WD": "Al Wakrah",
             "MS": "Mesaieed"
-            // Add more regions as needed
+           
         };
         for (var code in regions) {
             var option = document.createElement("option");
@@ -518,7 +423,7 @@ document.getElementById("country").addEventListener("change", function() {
             "ST": "Stockholm",
             "GB": "Gothenburg",
             "MH": "Malmö"
-            // Add more counties as needed
+           
         };
         for (var code in counties) {
             var option = document.createElement("option");
@@ -528,7 +433,7 @@ document.getElementById("country").addEventListener("change", function() {
         }
 
 	} else if (country === "SWZ") {
-        // Populate cantons for Switzerland
+        // Populate provinces for Switzerland
         var cantons = {
             "ZH": "Zürich",
             "BE": "Bern",
@@ -548,7 +453,7 @@ document.getElementById("country").addEventListener("change", function() {
             "BKK": "Bangkok",
             "CMI": "Chiang Mai",
             "PHU": "Phuket"
-            // Add more provinces as needed
+            
         };
         for (var code in provinces) {
             var option = document.createElement("option");
@@ -564,7 +469,7 @@ document.getElementById("country").addEventListener("change", function() {
             "SCO": "Scotland",
             "WAL": "Wales",
             "NIR": "Northern Ireland"
-            // Add more regions as needed
+           
         };
         for (var code in regions) {
             var option = document.createElement("option");
