@@ -73,6 +73,15 @@
 
 					<div class="hrmEmployeesRegistration_Container_01"> 
 						
+						<!--
+
+							Sarai Hannah Ajai successfully customized the new employee IDs within the 'iVoteBallot_HRMEmployees_Registration_01' EJS
+							template. This involved incorporating country, division (regional location), and department information using a UUID library
+							algorithm. Additionally, I had implemented a JavaScript-based cascade dropdown with custom option tag values. Upon submission
+							of the form by HR employees, the database is automatically updated with the abbreviated JavaScript options values into SQLite3
+							database file.
+
+						-->
 
 						<label for="Country">Country |</label>
 						<select id="country" name="EmployeeCountry">
@@ -108,9 +117,6 @@
 						</select>
 						<span id="userEmployeeDepartmentErrorMessage"></span>
 						<br>
-						
-
-
 
 
 
@@ -152,6 +158,30 @@
 						<br>
 
 
+
+						<label>Talent Acquisition Coordinator Name |</label>									
+						<input id="hiredPerson" type="text" name="EmployeeHiredPerson" maxlength="75">									
+						<span id="userEmployeeHiredPersonErrorMessage"></span>
+						<br>
+
+						<label>Talent Acquisition Coordinator Job Title |</label>
+						<select id="hiredPersonTitle" name="EmployeeHiredPersonTitle">
+							<option id="selectBackground" value="" disabled selected hidden>Job Title</option>
+							<option value="Executive Officer">Executive Officer</option>
+							<option value="Finance Director">Finance Director</option>
+							<option value="Finance Manager">Finance Manager</option>
+							<option value="HR Director">HR Director</option>
+							<option value="HR Manager">HR Manager</option>
+							<option value="IT Director">IT Director</option>
+							<option value="IT Manager">IT Manager</option>
+							<option value="Marketing Director">Marketing Director</option>
+							<option value="Marketing Manager">Marketing Manager</option>
+							<option value="Operations Director">Operations Director</option>
+							<option value="Operations Manager">Operations Manager</option>
+							
+						</select>
+						<span id="userEmployeeHiredPersonTitleErrorMessage"></span>
+						<br>
 
 
 
