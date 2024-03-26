@@ -351,7 +351,10 @@ span.forgot_Password {
 #middleName,
 #lastName,
 #email,
-#confirmEmail
+#confirmEmail,
+#hiredPerson,
+#hiredPersonTitle
+
 {
 	outline: none; 
 	border-top-style: hidden;
@@ -380,7 +383,9 @@ span.forgot_Password {
 #middleName,
 #lastName,
 #email,
-#confirmEmail
+#confirmEmail,
+#hiredPerson,
+#hiredPersonTitle
 {
 	display: flex;
 	flex-wrap: row wrap;
@@ -401,7 +406,9 @@ span.forgot_Password {
 #middleName,
 #lastName,
 #email,
-#confirmEmail
+#confirmEmail,
+#hiredPerson,
+#hiredPersonTitle
 {
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
@@ -416,7 +423,9 @@ span.forgot_Password {
 #middleName:focus,
 #lastName:focus,
 #email:focus,
-#confirmEmail:focus
+#confirmEmail:focus,
+#hiredPerson:focus,
+#hiredPersonTitle:focus
 {
 	border:3px solid rgb(205, 214, 249);
 	border-top-style: hidden;
@@ -437,7 +446,10 @@ span.forgot_Password {
 #userEmployeeMiddleNameErrorMessage,
 #userEmployeeLastNameErrorMessage,
 #userEmployeeEmailErrorMessage,
-#userEmployeeConfirmEmailErrorMessage
+#userEmployeeConfirmEmailErrorMessage,
+#userEmployeeHiredPersonErrorMessage,
+#userEmployeeHiredPersonTitleErrorMessage
+
 { 
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: clamp(9px, 2vw, 13px); 
