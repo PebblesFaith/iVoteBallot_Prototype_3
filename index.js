@@ -458,7 +458,9 @@ db1_iVoteballot_EmployeesRegistration.serialize(() => {
         EmployeeMiddleName VARCHAR (100) NOT NULL, 
         EmployeeLastName VARCHAR(100) NOT NULL,
 		EmployeeEmail VARCHAR(150) NOT NULL,
-        EmployeeConfirmEmail VARCHAR(150) NOT NULL		
+        EmployeeConfirmEmail VARCHAR(150) NOT NULL,
+		EmployeeHiredPerson VARCHAR(150) NOT NULL,
+		EmployeeHiredPersonTitle VARCHAR(150) NOT NULL	
 		
 	)`), (err) => {
 
@@ -3371,19 +3373,25 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 		const EmployeeEmail = req.body.EmployeeEmail;
 		const EmployeeConfirmEmail = req.body.EmployeeConfirmEmail;
 
+		const EmployeeHiredPerson = req.body.EmployeeHiredPerson;
+		const EmployeeHiredPersonTitle = req.body.EmployeeHiredPersonTitle;
+
 		console.log(req.body);
 
-		console.log('The user\'s employee divisional region is: ' + EmployeeDivision + '.');
-		console.log('The user\'s employee department region is: ' + EmployeeDepartment + '.');
-		console.log('The user\'s employee country location is: ' + EmployeeCountry + '.');
-		console.log('The user\'s PDF Files are: ' + EmployeePDF + '.');
-		console.log('The user\'s photograph image is: ' + EmployeePhoto + '.');
-		console.log('The user\'s first name: ' + EmployeeFirstName + '.');
-		console.log('The user\'s middle name is: ' + EmployeeMiddleName + '.');
-		console.log('The user\'s last name is: ' + EmployeeLastName + '.');
+		console.log('The new employee divisional region is: ' + EmployeeDivision + '.');
+		console.log('The new employee department region is: ' + EmployeeDepartment + '.');
+		console.log('The new employee country location is: ' + EmployeeCountry + '.');
+		console.log('The new employee PDF Files are: ' + EmployeePDF + '.');
+		console.log('The new employee photograph image is: ' + EmployeePhoto + '.');
+		console.log('The new employee first name is: ' + EmployeeFirstName + '.');
+		console.log('The new employee middle name is: ' + EmployeeMiddleName + '.');
+		console.log('The new employee last name is: ' + EmployeeLastName + '.');
 
-		console.log('The user\'s email is: ' + EmployeeEmail + '.');
-		console.log('The user\'s confirm email is: ' + EmployeeConfirmEmail + '.');
+		console.log('The new employee email is: ' + EmployeeEmail + '.');
+		console.log('The new employee confirm email is: ' + EmployeeConfirmEmail + '.');
+
+		console.log('The new employee\'s Talent Acquisition Coordinator Name is: ' + EmployeeHiredPerson + '.');
+		console.log('The new employee\'s Talent Acquisition Coordinator Title is: ' + EmployeeHiredPersonTitle + '.');
 
 		console.log(req.session);
 
@@ -3412,15 +3420,17 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 			EmployeeMiddleName,
 			EmployeeLastName,
 			EmployeeEmail,
-			EmployeeConfirmEmail
+			EmployeeConfirmEmail,
+			EmployeeHiredPerson,
+			EmployeeHiredPersonTitle
 			
 		};
 						
 		await db1_iVoteballot_EmployeesRegistration.run(
 			
-			`INSERT INTO iVoteBallotHRM_EmployeesRegistration (EmployeeDivision, EmployeeDepartment, EmployeeCountry, EmployeePDF, EmployeePhoto, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail) VALUES (?,?,?,?,?,?,?,?,?,?)`,
+			`INSERT INTO iVoteBallotHRM_EmployeesRegistration (EmployeeDivision, EmployeeDepartment, EmployeeCountry, EmployeePDF, EmployeePhoto, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail, EmployeeHiredPerson, EmployeeHiredPersonTitle) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`,
 
-			[newUser.EmployeeDivision, newUser.EmployeeDepartment, newUser.EmployeeCountry, Buffer.from(pdfFileData), Buffer.from(photoFileData), newUser.EmployeeFirstName, newUser.EmployeeMiddleName, newUser.EmployeeLastName, newUser.EmployeeEmail, newUser.EmployeeConfirmEmail], (err) => {
+			[newUser.EmployeeDivision, newUser.EmployeeDepartment, newUser.EmployeeCountry, Buffer.from(pdfFileData), Buffer.from(photoFileData), newUser.EmployeeFirstName, newUser.EmployeeMiddleName, newUser.EmployeeLastName, newUser.EmployeeEmail, newUser.EmployeeConfirmEmail, newUser.EmployeeHiredPerson, newUser.EmployeeHiredPersonTitle], (err) => {
 
 				if (err) {
 					console.error(err);
@@ -3448,7 +3458,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 					}
 				});
 
-				const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
+				const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';				
 
 				const mailOptions_01 = {
 					from: req.body.EmployeeEmail,
@@ -3461,12 +3471,19 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 					<p>An iVoteBallot employee has manually entered a new Employee into the iVoteBallot database. Here are the details:</p>
 			
 						<ul>
+
 							<li>
 								Name: ${req.body.EmployeeFirstName} ${req.body.EmployeeMiddleName} ${req.body.EmployeeLastName}
 							</li>
 							<li>
 								Email: ${req.body.EmployeeEmail}
-							</li>						
+							</li>	
+							<li>
+								Talent Acquisition Coordinator Name (Hiring Person): ${req.body.EmployeeHiredPerson}
+							</li>
+							<li>
+								Talent Acquisition Coordinator Title): ${req.body.EmployeeHiredPersonTitle}
+							</li>
 							
 						</ul>					
 						
@@ -3483,7 +3500,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 						}
 					]
 				};
-
+				
 				const mailOptions_02 = {
 					from: 'electionassureexpert@ivoteballot.com',
 					to: req.body.EmployeeEmail,
