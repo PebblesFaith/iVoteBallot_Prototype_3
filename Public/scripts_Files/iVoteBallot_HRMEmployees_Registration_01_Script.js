@@ -14,7 +14,10 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	const EmployeeLastName = document.getElementById('lastName').value.trim(); 
 
 	const EmployeeEmail = document.getElementById('email').value.trim();
-	const EmployeeConfirmEmail = document.getElementById('confirmEmail').value.trim();  
+	const EmployeeConfirmEmail = document.getElementById('confirmEmail').value.trim(); 
+    
+    const EmployeeHiredPerson = document.getElementById('hiredPerson').value.trim();
+    const EmployeeHiredPersonTitle = document.getElementById('hiredPersonTitle').value.trim();
 
 	const regExName = /^[A-Za-z\s]+$/;
 
@@ -155,6 +158,29 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 		return false;
 
 	}
+
+    if (EmployeeHiredPerson === '' || EmployeeHiredPerson == null || EmployeeHiredPerson.length <= 2 || !EmployeeHiredPerson.match(regExName)) {                                                               
+		document.getElementById('userEmployeeHiredPersonErrorMessage').textContent  = 'Error Message: The New Employee hired Talent Acquisition Coordinator Name is a required input field or you must enter more than two characters into the New Employee hired Talent Acquisition Coordinator Name input field.';
+	
+		setTimeout(function() {
+			document.getElementById('userEmployeeHiredPersonErrorMessage').textContent  = '';
+		},
+		9000)
+	
+		return false;		
+
+	}
+
+    if (EmployeeHiredPersonTitle === '' || EmployeeHiredPersonTitle == null) {		
+		document.getElementById('userEmployeeHiredPersonTitleErrorMessage').textContent = 'Error Message: The New Employee hired Talent Acquisition Coordinator Title is a required input field or you must enter the New Employee hired Talent Acquisition Coordinator Title from the selection menu .';
+		setTimeout(function() {
+			document.getElementById('userEmployeeHiredPersonTitleErrorMessage').textContent = '';
+		},
+		9000)    	
+
+		return false;  
+	
+	}	
 
 
 
