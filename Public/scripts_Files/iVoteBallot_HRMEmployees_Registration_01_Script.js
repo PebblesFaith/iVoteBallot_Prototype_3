@@ -25,9 +25,19 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 
 	const regExEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;      
 	
+	if (EmployeeCountry === '' || EmployeeCountry == null) {		
+		document.getElementById('userEmployeeCountryErrorMessage').textContent = 'Error Message: The New Employee\'s Country is required. Please select New Employee\'s Country from the menu.';
+		setTimeout(function() {
+			document.getElementById('userEmployeeCountryErrorMessage').textContent = '';
+		},
+		9000)    	
+
+		return false;  
 	
+	}	
+
 	if (EmployeeDivision === '' || EmployeeDivision == null) {		
-		document.getElementById('userEmployeeDivisionErrorMessage').textContent = 'Error Message: The user\'s photograph is a required select field and you must upload the user correct photograph from the photo selection require field.';
+		document.getElementById('userEmployeeDivisionErrorMessage').textContent = 'Error Message: The New Employee\'s State or Province is required. Please select New Employee\'s State or Province from the menu.';
 		setTimeout(function() {
 			document.getElementById('userEmployeeDivisionErrorMessage').textContent = '';
 		},
@@ -38,7 +48,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	}	
 	
 	if (EmployeeDepartment === '' || EmployeeDepartment == null) {		
-		document.getElementById('userEmployeeDepartmentErrorMessage').textContent = 'Error Message: The user\'s photograph is a required select field and you must upload the user correct photograph from the photo selection require field.';
+		document.getElementById('userEmployeeDepartmentErrorMessage').textContent = 'Error Message: The New Employee\'s Department is required. Please select New Employee\'s Department from the menu.';
 		setTimeout(function() {
 			document.getElementById('userEmployeeDepartmentErrorMessage').textContent = '';
 		},
@@ -48,16 +58,6 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	
 	}
 	
-	if (EmployeeCountry === '' || EmployeeCountry == null) {		
-		document.getElementById('userEmployeeCountryErrorMessage').textContent = 'Error Message: The user\'s photograph is a required select field and you must upload the user correct photograph from the photo selection require field.';
-		setTimeout(function() {
-			document.getElementById('userEmployeeCountryErrorMessage').textContent = '';
-		},
-		9000)    	
-
-		return false;  
-	
-	}	
 	
 	if (EmployeePDF === '' || EmployeePDF == null) {		
 		document.getElementById('userEmployeePDFErrorMessage').textContent = 'Error Message: Uploading the New Employee\'s PDF file is required. Please select and upload the correct PDF file from the provided options.';
@@ -91,9 +91,6 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 		return false;  
 	
 	}
-
-
-
 	
 	if (EmployeeFirstName === '' || EmployeeFirstName == null || EmployeeFirstName.length <= 2 || !EmployeeFirstName.match(regExName)) {                                                               
 		document.getElementById('userEmployeeFirstNameErrorMessage').textContent  = 'Error Message: The New Employee\'s first name is required. Please enter more than two characters into the first name input field.';
@@ -209,9 +206,6 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 		return false;		
 
 	}
-
-
-
 	
 	
 	// Your e event handling code here
