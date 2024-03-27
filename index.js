@@ -460,7 +460,8 @@ db1_iVoteballot_EmployeesRegistration.serialize(() => {
 		EmployeeEmail VARCHAR(150) NOT NULL,
         EmployeeConfirmEmail VARCHAR(150) NOT NULL,
 		EmployeeHiredPerson VARCHAR(150) NOT NULL,
-		EmployeeHiredPersonTitle VARCHAR(150) NOT NULL	
+		EmployeeHiredPersonTitle VARCHAR(150) NOT NULL,
+		EmployeeHiredDate VARCHAR(150) NOT NULL
 		
 	)`), (err) => {
 
@@ -3359,7 +3360,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 );
 
 iVoteBallotApp.post('/hrmEmployees_Registration_01',
-	async (req, res) => {
+	async (req, res) => {	
 
 		const EmployeeDivision = req.body.EmployeeDivision;
 		const EmployeeDepartment = req.body.EmployeeDepartment;		
@@ -3368,13 +3369,14 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 		const EmployeePhoto = req.body.EmployeePhoto;
 		const EmployeeFirstName = req.body.EmployeeFirstName;
 		const EmployeeMiddleName = req.body.EmployeeMiddleName;
-		const EmployeeLastName = req.body.EmployeeLastName;
+		const EmployeeLastName = req.body.EmployeeLastName;		
 
 		const EmployeeEmail = req.body.EmployeeEmail;
 		const EmployeeConfirmEmail = req.body.EmployeeConfirmEmail;
 
 		const EmployeeHiredPerson = req.body.EmployeeHiredPerson;
 		const EmployeeHiredPersonTitle = req.body.EmployeeHiredPersonTitle;
+		const EmployeeHiredDate = req.body.EmployeeHiredDate;
 
 		console.log(req.body);
 
@@ -3392,6 +3394,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 		console.log('The new employee\'s Talent Acquisition Coordinator Name is: ' + EmployeeHiredPerson + '.');
 		console.log('The new employee\'s Talent Acquisition Coordinator Title is: ' + EmployeeHiredPersonTitle + '.');
+		console.log('The new employee hired date is: ' + EmployeeHiredDate + '.');
 
 		console.log(req.session);
 
@@ -3399,7 +3402,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 		const shortUUID = uuidv4().substring(0, 14); // Using first 8 characters
 
 		// Append the division code (e.g., 'AL' for Alabama)
-		const employeeID = shortUUID + EmployeeDepartment + '-' + EmployeeDivision + '-' + EmployeeCountry;
+		const employeeID = shortUUID + EmployeeDepartment + '-' + EmployeeDivision + '-' + EmployeeCountry;		
 
 		// Read the photo file as binary data
 		const pdfFilePath = `/Users/saraihannahajai/Documents/iVoteBallot_Prototype_3/iVoteBallot_HRM_EmployeesDataInformation/iVoteBallotHRM_Employees_PDFHiredInfo/${EmployeePDF}`;
@@ -3422,15 +3425,16 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 			EmployeeEmail,
 			EmployeeConfirmEmail,
 			EmployeeHiredPerson,
-			EmployeeHiredPersonTitle
+			EmployeeHiredPersonTitle,
+			EmployeeHiredDate
 			
 		};
-						
+								
 		await db1_iVoteballot_EmployeesRegistration.run(
 			
-			`INSERT INTO iVoteBallotHRM_EmployeesRegistration (EmployeeDivision, EmployeeDepartment, EmployeeCountry, EmployeePDF, EmployeePhoto, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail, EmployeeHiredPerson, EmployeeHiredPersonTitle) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`,
+			`INSERT INTO iVoteBallotHRM_EmployeesRegistration (EmployeeDivision, EmployeeDepartment, EmployeeCountry, EmployeePDF, EmployeePhoto, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail, EmployeeHiredPerson, EmployeeHiredPersonTitle, EmployeeHiredDate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
 
-			[newUser.EmployeeDivision, newUser.EmployeeDepartment, newUser.EmployeeCountry, Buffer.from(pdfFileData), Buffer.from(photoFileData), newUser.EmployeeFirstName, newUser.EmployeeMiddleName, newUser.EmployeeLastName, newUser.EmployeeEmail, newUser.EmployeeConfirmEmail, newUser.EmployeeHiredPerson, newUser.EmployeeHiredPersonTitle], (err) => {
+			[newUser.EmployeeDivision, newUser.EmployeeDepartment, newUser.EmployeeCountry, Buffer.from(pdfFileData), Buffer.from(photoFileData), newUser.EmployeeFirstName, newUser.EmployeeMiddleName, newUser.EmployeeLastName, newUser.EmployeeEmail, newUser.EmployeeConfirmEmail, newUser.EmployeeHiredPerson, newUser.EmployeeHiredPersonTitle, newUser.EmployeeHiredDate], (err) => {
 
 				if (err) {
 					console.error(err);
@@ -3446,7 +3450,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 					res.redirect('/iVoteBallot_HRMEmployees_Registration_01');
 
-				}
+				}			
 
 				const transporter = nodemailer.createTransport({
 					host: 'smtp.ionos.com',
@@ -3482,7 +3486,10 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 								Talent Acquisition Coordinator Name (Hiring Person): ${req.body.EmployeeHiredPerson}
 							</li>
 							<li>
-								Talent Acquisition Coordinator Title): ${req.body.EmployeeHiredPersonTitle}
+								Talent Acquisition Coordinator Title: ${req.body.EmployeeHiredPersonTitle}
+							</li>
+							<li>
+								New Employee Hired Date: ${req.body.EmployeeHiredDate}
 							</li>
 							
 						</ul>					
@@ -3555,8 +3562,9 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 					}
 				});
-			}
-		);
+			}				
+		);	
+
 	}
 );
 
