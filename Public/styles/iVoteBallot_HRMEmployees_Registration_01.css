@@ -353,7 +353,8 @@ span.forgot_Password {
 #email,
 #confirmEmail,
 #hiredPerson,
-#hiredPersonTitle
+#hiredPersonTitle,
+#hiredDate
 
 {
 	outline: none; 
@@ -385,7 +386,8 @@ span.forgot_Password {
 #email,
 #confirmEmail,
 #hiredPerson,
-#hiredPersonTitle
+#hiredPersonTitle,
+#hiredDate
 {
 	display: flex;
 	flex-wrap: row wrap;
@@ -408,7 +410,8 @@ span.forgot_Password {
 #email,
 #confirmEmail,
 #hiredPerson,
-#hiredPersonTitle
+#hiredPersonTitle,
+#hiredDate
 {
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
@@ -425,7 +428,8 @@ span.forgot_Password {
 #email:focus,
 #confirmEmail:focus,
 #hiredPerson:focus,
-#hiredPersonTitle:focus
+#hiredPersonTitle:focus,
+#hiredDate:focus
 {
 	border:3px solid rgb(205, 214, 249);
 	border-top-style: hidden;
@@ -448,7 +452,8 @@ span.forgot_Password {
 #userEmployeeEmailErrorMessage,
 #userEmployeeConfirmEmailErrorMessage,
 #userEmployeeHiredPersonErrorMessage,
-#userEmployeeHiredPersonTitleErrorMessage
+#userEmployeeHiredPersonTitleErrorMessage,
+#userEmployeeHiredPersonErrorMessage
 
 { 
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -496,5 +501,16 @@ span.forgot_Password {
 }
 
 
-
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
 
