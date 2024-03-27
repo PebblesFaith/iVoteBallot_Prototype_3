@@ -9,6 +9,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	const EmployeeCountry = document.getElementById('country').value.trim();
 	const EmployeePDF = document.getElementById('pdf').value.trim(); 	
 	const EmployeePhoto = document.getElementById('photo').value.trim(); 
+    const EmployeeJobTitle = document.getElementById('jobTitle').value.trim(); 
 	const EmployeeFirstName = document.getElementById('firstName').value.trim(); 
 	const EmployeeMiddleName = document.getElementById('middleName').value.trim();  
 	const EmployeeLastName = document.getElementById('lastName').value.trim(); 
@@ -59,7 +60,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	}	
 	
 	if (EmployeePDF === '' || EmployeePDF == null) {		
-		document.getElementById('userEmployeePDFErrorMessage').textContent = 'Error Message: The user\'s photograph is a required select field and you must upload the user correct photograph from the photo selection require field.';
+		document.getElementById('userEmployeePDFErrorMessage').textContent = 'Error Message: Uploading the New Employee\'s PDF file is required. Please select and upload the correct PDF file from the provided options.';
 		setTimeout(function() {
 			document.getElementById('userEmployeePDFErrorMessage').textContent = '';
 		},
@@ -70,7 +71,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	}
 
 	if (EmployeePhoto === '' || EmployeePhoto == null) {		
-		document.getElementById('userEmployeePhotoErrorMessage').textContent = 'Error Message: The user\'s photograph is a required select field and you must upload the user correct photograph from the photo selection require field.';
+		document.getElementById('userEmployeePhotoErrorMessage').textContent = 'Error Message: Uploading the New Employee\'s photograph is required. Please select and upload the correct photograph from the provided options.';
 		setTimeout(function() {
 			document.getElementById('userEmployeePhotoErrorMessage').textContent = '';
 		},
@@ -79,9 +80,23 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 		return false;  
 	
 	}
+
+    if (EmployeeJobTitle === '' || EmployeeJobTitle == null) {		
+		document.getElementById('userEmployeeJobTitleErrorMessage').textContent = 'Error Message: The New Employee Job Title is a required field. Please select a job title from the options provided.';
+		setTimeout(function() {
+			document.getElementById('userEmployeeJobTitleErrorMessage').textContent = '';
+		},
+		9000)    	
+
+		return false;  
+	
+	}
+
+
+
 	
 	if (EmployeeFirstName === '' || EmployeeFirstName == null || EmployeeFirstName.length <= 2 || !EmployeeFirstName.match(regExName)) {                                                               
-		document.getElementById('userEmployeeFirstNameErrorMessage').textContent  = 'Error Message: The user first name is a required input field or you must enter more than two characters into the userfirst name required input field.';
+		document.getElementById('userEmployeeFirstNameErrorMessage').textContent  = 'Error Message: The New Employee\'s first name is required. Please enter more than two characters into the first name input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userEmployeeFirstNameErrorMessage').textContent  = '';
@@ -93,7 +108,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	}
 
 	if (EmployeeMiddleName === '' || EmployeeMiddleName == null) {
-		document.getElementById('userEmployeeMiddleNameErrorMessage').textContent = 'Error Message: Do the user have a middle name? If so, please type in the user middle name into the input field or skip the user middle name input field entirety.';
+		document.getElementById('userEmployeeMiddleNameErrorMessage').textContent = 'Error Message: The New Employee\'s middle name is required. Please enter more than two characters into the first name input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userEmployeeMiddleNameErrorMessage').textContent = '';
@@ -101,7 +116,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 		9000)                                           
 							
 		} else if (EmployeeMiddleName.length <= 2 || !EmployeeMiddleName.match(regExName)) {
-		document.getElementById('userEmployeeMiddleNameErrorMessage').textContent = 'Error Message: The user middle name is an optional input field; however, you must enter more than two characters into the user middle name required input field.';
+		document.getElementById('userEmployeeMiddleNameErrorMessage').textContent = 'Error Message: The New Employee\'s middle name is an optional input field; however, you must enter more than two characters into the New Employee\'s middle name required input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userEmployeeMiddleNameErrorMessage').textContent  = '';
@@ -113,7 +128,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	} 
 	
 	if (EmployeeLastName === '' || EmployeeLastName == null || EmployeeLastName.length <= 2 || !EmployeeLastName.match(regExName)) {
-		document.getElementById('userEmployeeLastNameErrorMessage').textContent  = 'Error Message: The user last name is a required input field or you must enter more than two characters into the user last name required input field.';
+		document.getElementById('userEmployeeLastNameErrorMessage').textContent  = 'Error Message: The New Employee\'s last name is required. Please enter more than two characters into the first name input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userEmployeeLastNameErrorMessage').textContent  = '';
@@ -125,7 +140,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	}
 
 	if (EmployeeEmail === '' || EmployeeEmail == null || EmployeeEmail.length <= 6 || !EmployeeEmail.match(regExEmail)) {
-		document.getElementById('userEmployeeEmailErrorMessage').textContent = 'Error Message: The user\'s email address is a required input field and you must enter the correct user\s email address format into the require input field.';
+		document.getElementById('userEmployeeEmailErrorMessage').textContent = 'Error Message: The New Employee\'s email address is required. Please enter the email address in the correct format into the required input field.';
 
 		setTimeout(function() {
 			document.getElementById('userEmployeeEmailErrorMessage').textContent = '';
@@ -137,7 +152,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	}
 
 	if (EmployeeConfirmEmail === '' || EmployeeConfirmEmail == null || EmployeeConfirmEmail.length <= 6 || !EmployeeConfirmEmail.match(regExEmail)) {
-		document.getElementById('userEmployeeConfirmEmailErrorMessage').textContent = 'Error Message: The user\'s confirm email address is a required input field and you must enter the correct user confirm email address format into the require input field.';
+		document.getElementById('userEmployeeConfirmEmailErrorMessage').textContent = 'Error Message: The New Employee\'s confirm email address is required. Please enter the email address in the correct format into the required input field.';
 
 		setTimeout(function() {
 			document.getElementById('userEmployeeConfirmEmailErrorMessage').textContent = '';
@@ -149,7 +164,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	}
 	
 	if (EmployeeEmail != EmployeeConfirmEmail) {
-		document.getElementById('userEmployeeConfirmEmailErrorMessage').textContent = 'Error Message: The user\'s email address does not match to his/her confirm email address which are required input fields.';
+		document.getElementById('userEmployeeConfirmEmailErrorMessage').textContent = 'Error Message: The New Employee\'s email address does not match the confirm email address. Both fields are required.';
 
 		setTimeout(function() {
 			document.getElementById('userEmployeeConfirmEmailErrorMessage').textContent = '';
@@ -161,7 +176,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	}
 
     if (EmployeeHiredPerson === '' || EmployeeHiredPerson == null || EmployeeHiredPerson.length <= 2 || !EmployeeHiredPerson.match(regExName)) {                                                               
-		document.getElementById('userEmployeeHiredPersonErrorMessage').textContent  = 'Error Message: The New Employee hired Talent Acquisition Coordinator Name is a required input field or you must enter more than two characters into the New Employee hired Talent Acquisition Coordinator Name input field.';
+		document.getElementById('userEmployeeHiredPersonErrorMessage').textContent  = 'Error Message: The New Employee\'s Talent Acquisition Coordinator Name is required. Please enter more than two characters into the Talent Acquisition Coordinator Name input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userEmployeeHiredPersonErrorMessage').textContent  = '';
@@ -173,7 +188,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	}
 
     if (EmployeeHiredPersonTitle === '' || EmployeeHiredPersonTitle == null) {		
-		document.getElementById('userEmployeeHiredPersonTitleErrorMessage').textContent = 'Error Message: The New Employee hired Talent Acquisition Coordinator Title is a required input field or you must enter the New Employee hired Talent Acquisition Coordinator Title from the selection menu .';
+		document.getElementById('userEmployeeHiredPersonTitleErrorMessage').textContent = 'Error Message: The New Employee\'s Talent Acquisition Coordinator Title is required. Please select the Talent Acquisition Coordinator Title from the menu.';
 		setTimeout(function() {
 			document.getElementById('userEmployeeHiredPersonTitleErrorMessage').textContent = '';
 		},
@@ -184,7 +199,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	}	
 
     if (EmployeehHiredDate === '' || EmployeehHiredDate == null) {                                                               
-		document.getElementById('userEmployeeHiredDateErrorMessage').textContent  = 'Error Message: The New Empployee Hired Date is a required input field.';
+		document.getElementById('userEmployeeHiredDateErrorMessage').textContent  = 'Error Message: The New Employee\'s Hired Date is required.';
 	
 		setTimeout(function() {
 			document.getElementById('userEmployeeHiredDateErrorMessage').textContent  = '';
