@@ -18,6 +18,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
     
     const EmployeeHiredPerson = document.getElementById('hiredPerson').value.trim();
     const EmployeeHiredPersonTitle = document.getElementById('hiredPersonTitle').value.trim();
+    const EmployeehHiredDate = document.getElementById('hiredDate').value.trim();
 
 	const regExName = /^[A-Za-z\s]+$/;
 
@@ -181,6 +182,18 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 		return false;  
 	
 	}	
+
+    if (EmployeehHiredDate === '' || EmployeehHiredDate == null) {                                                               
+		document.getElementById('userEmployeeHiredDateErrorMessage').textContent  = 'Error Message: The New Empployee Hired Date is a required input field.';
+	
+		setTimeout(function() {
+			document.getElementById('userEmployeeHiredDateErrorMessage').textContent  = '';
+		},
+		9000)
+	
+		return false;		
+
+	}
 
 
 
