@@ -347,6 +347,7 @@ span.forgot_Password {
 #country,
 #pdf,
 #photo,
+#jobTitle,
 #firstName,
 #middleName,
 #lastName,
@@ -355,7 +356,6 @@ span.forgot_Password {
 #hiredPerson,
 #hiredPersonTitle,
 #hiredDate
-
 {
 	outline: none; 
 	border-top-style: hidden;
@@ -380,6 +380,7 @@ span.forgot_Password {
 #country,
 #pdf,
 #photo,
+#jobTitle,
 #firstName,
 #middleName,
 #lastName,
@@ -404,6 +405,7 @@ span.forgot_Password {
 #country,
 #pdf,
 #photo,
+#jobTitle,
 #firstName,
 #middleName,
 #lastName,
@@ -422,6 +424,7 @@ span.forgot_Password {
 #country:focus,
 #pdf:focus,
 #photo:focus,
+#jobTitle:focus,
 #firstName:focus,
 #middleName:focus,
 #lastName:focus,
@@ -446,6 +449,7 @@ span.forgot_Password {
 #userDivisionErrorMessage,
 #userEmployeePDFErrorMessage,
 #userEmployeePhotoErrorMessage,
+#userEmployeeJobTitleErrorMessage,
 #userEmployeeFirstNameErrorMessage,
 #userEmployeeMiddleNameErrorMessage,
 #userEmployeeLastNameErrorMessage,
