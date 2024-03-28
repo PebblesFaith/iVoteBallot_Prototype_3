@@ -84,7 +84,7 @@
 						-->
 
 						<label for="Country">Country |</label>
-						<select id="country" name="EmployeeCountry">
+						<select id="country" name="EmployeeCountry" maxlength="75">
 							<option id="selectBackground" value="" disabled selected hidden>Country Location</option>
 							<option value="CAN">Canada</option>
 							<option value="DEU">Germany</option>
@@ -118,8 +118,6 @@
 						<span id="userEmployeeDepartmentErrorMessage"></span>
 						<br>
 
-
-
 						<label>Upload New Employee PDF File |</label>
 						<br>
 						<input id="pdf" type="file"  name="EmployeePDF" accept=".pdf" multiple >
@@ -130,6 +128,56 @@
 						<br>
 						<input id="photo" type="file"  name="EmployeePhoto" accept="image/*" capture="camera" >
 						<span id="userEmployeePhotoErrorMessage"></span>
+						<br>
+
+						<label>Job Title |</label>                                           
+						<select id="jobTitle" name="EmployeeJobTitle" maxlength="75">
+
+							<option id="selectBackground" value="" disabled selected hidden>Job Title</option>
+
+							<optgroup id="optGroupStyle_01" label="Executive Officers' Job Titles">
+								<option value="Chief Executive Officer">Chief Executive Officer</option>
+								<option value="Chief Financial Officer">Chief Financial Officer</option>
+								<option value="Chief Information Technology Officer">Chief Information Technology Officer</option>
+								<option value="Chief Marketing Officer">Chief Marketing Officer</option>
+								<option value="Chief Operations Officer">Chief Operations Officer</option>
+							</optgroup>
+
+							<optgroup id="optGroupStyle_01" label="Election Assures' Job Titles">
+								<option value="Election Assure Agent">Election Assure Agent</option>
+								<option value="Election Assure Director">Election Assure Director</option>
+								<option value="Election Assure Manager">Election Assure Manager</option>								
+							</optgroup>
+
+							<optgroup id="optGroupStyle_01" label="Financial's Job Titles">
+								<option value="Accountant">Accountant</option>
+								<option value="Accounting Director">Accounting Director</option>
+								<option value="Accounts Payable Clerk">Accounts Payable Clerk</option>
+								<option value="Accounts Receivable Clerk">Accounts Receivable Clerk</option>
+								<option value="Auditor">Auditor</option>
+								<option value="Controllor">Controllor</option>
+								<option value="Financial Analyst">Financial Analyst</option>
+							</optgroup>
+
+							<optgroup id="optGroupStyle_01" label="Information Technology's Job Titles">
+								<option value="Business Intelligence Developer">Business Intelligence Developer</option>
+								<option value="Computer Programmer">Computer Programmer</option>
+								<option value="Data Architect Analytic">Data Architect Analytic</option>
+								<option value="Database Manager">Database Manager</option>
+								<option value="Information Cyber Security Analyst">Information Cyber Security Analyst</option>
+								<option value="IT Compliance Auditor">IT Compliance Auditor</option>
+								<option value="IT Director">IT Director</option>
+								<option value="IT Manager">IT Manager</option>
+								<option value="IT Manager">IT Manager</option>
+								<option value="Software Developer">Software Developer</option>
+								<option value="Software Engineer">Software Engineer</option>
+								<option value="SQLite3 Developer">SQLite3 Developer</option>
+								<option value="UI Developer">UI Developer</option>
+								<option value="UX Designer">UX Designer</option>								
+							</optgroup>							
+							
+						</select>
+						<span id="userEmployeeJobTitleErrorMessage"></span>
 						<br>
 
 						<label>First Name |</label>                                           
