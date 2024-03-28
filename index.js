@@ -454,8 +454,9 @@ db1_iVoteballot_EmployeesRegistration.serialize(() => {
         Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
 		EmployeePDF BLOB NOT NULL,
 		EmployeePhoto BLOB (250) NOT NULL,
-        EmployeeFirstName VARCHAR (100) NOT NULL, 
-        EmployeeMiddleName VARCHAR (100) NOT NULL, 
+		EmployeeJobTitle VARCHAR(150) NOT NULL,
+        EmployeeFirstName VARCHAR(100) NOT NULL, 
+        EmployeeMiddleName VARCHAR(100) NOT NULL, 
         EmployeeLastName VARCHAR(100) NOT NULL,
 		EmployeeEmail VARCHAR(150) NOT NULL,
         EmployeeConfirmEmail VARCHAR(150) NOT NULL,
@@ -3367,6 +3368,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 		const EmployeeCountry = req.body.EmployeeCountry;
 		const EmployeePDF = req.body.EmployeePDF;
 		const EmployeePhoto = req.body.EmployeePhoto;
+		const EmployeeJobTitle = req.body.EmployeeJobTitle;
 		const EmployeeFirstName = req.body.EmployeeFirstName;
 		const EmployeeMiddleName = req.body.EmployeeMiddleName;
 		const EmployeeLastName = req.body.EmployeeLastName;		
@@ -3385,6 +3387,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 		console.log('The new employee country location is: ' + EmployeeCountry + '.');
 		console.log('The new employee PDF Files are: ' + EmployeePDF + '.');
 		console.log('The new employee photograph image is: ' + EmployeePhoto + '.');
+		console.log('The new employee job title is: ' + EmployeeJobTitle + '.');
 		console.log('The new employee first name is: ' + EmployeeFirstName + '.');
 		console.log('The new employee middle name is: ' + EmployeeMiddleName + '.');
 		console.log('The new employee last name is: ' + EmployeeLastName + '.');
@@ -3419,6 +3422,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 			EmployeeCountry,
 			EmployeePDF,
 			EmployeePhoto,
+			EmployeeJobTitle,
 			EmployeeFirstName,
 			EmployeeMiddleName,
 			EmployeeLastName,
@@ -3432,9 +3436,9 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 								
 		await db1_iVoteballot_EmployeesRegistration.run(
 			
-			`INSERT INTO iVoteBallotHRM_EmployeesRegistration (EmployeeDivision, EmployeeDepartment, EmployeeCountry, EmployeePDF, EmployeePhoto, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail, EmployeeHiredPerson, EmployeeHiredPersonTitle, EmployeeHiredDate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+			`INSERT INTO iVoteBallotHRM_EmployeesRegistration (EmployeeDivision, EmployeeDepartment, EmployeeCountry, EmployeePDF, EmployeePhoto, EmployeeJobTitle, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail, EmployeeHiredPerson, EmployeeHiredPersonTitle, EmployeeHiredDate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
 
-			[newUser.EmployeeDivision, newUser.EmployeeDepartment, newUser.EmployeeCountry, Buffer.from(pdfFileData), Buffer.from(photoFileData), newUser.EmployeeFirstName, newUser.EmployeeMiddleName, newUser.EmployeeLastName, newUser.EmployeeEmail, newUser.EmployeeConfirmEmail, newUser.EmployeeHiredPerson, newUser.EmployeeHiredPersonTitle, newUser.EmployeeHiredDate], (err) => {
+			[newUser.EmployeeDivision, newUser.EmployeeDepartment, newUser.EmployeeCountry, Buffer.from(pdfFileData), Buffer.from(photoFileData), newUser.EmployeeJobTitle, newUser.EmployeeFirstName, newUser.EmployeeMiddleName, newUser.EmployeeLastName, newUser.EmployeeEmail, newUser.EmployeeConfirmEmail, newUser.EmployeeHiredPerson, newUser.EmployeeHiredPersonTitle, newUser.EmployeeHiredDate], (err) => {
 
 				if (err) {
 					console.error(err);
@@ -3443,7 +3447,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 					res.render('535');
 
 				} else {
-
+					
 					console.log('db1_iVoteBallot_EmployeesRegistration is about to run.');
 					console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
 					req.flash('success', 'The Election Assure Expert have successfully registered your data information onto the iVoteBallot database, and you can now sign up to create your iVoteBallot account.');
@@ -3478,6 +3482,9 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 							<li>
 								Name: ${req.body.EmployeeFirstName} ${req.body.EmployeeMiddleName} ${req.body.EmployeeLastName}
+							</li>
+							<li>
+								Job Title: ${req.body.EmployeeJobTitle}
 							</li>
 							<li>
 								Email: ${req.body.EmployeeEmail}
