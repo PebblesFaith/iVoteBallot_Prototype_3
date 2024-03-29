@@ -11,7 +11,7 @@ function toggle_InputPasswordCheckBox() {
 	}
 }
 
-const validateAlabamaVotersLogInForm = (e) => { 	
+const validateHRMLogIn_01Form = (e) => { 	
 
 	console.log('Sarai Hannah Ajai is testing her written JavaScript programmatic codes; in order to validate her \'validateAlabamaVotersSignUpForm()\' form has opened up correctly within the HTML webpage.')
 	
@@ -47,7 +47,7 @@ const validateAlabamaVotersLogInForm = (e) => {
 
 	e.preventDefault();  
 				
-	form.addEventListener('submit', validateAlabamaVotersLogInForm);
+	form.addEventListener('submit', validateHRMLogIn_01Form);
 
 	return true;     		
 
