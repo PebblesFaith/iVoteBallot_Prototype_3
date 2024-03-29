@@ -131,6 +131,10 @@ const view_hrm_Dashboard_01 = (req, res) => {
 	res.render('hrm_Dashboard_01');
 }
 
+const view_HRM_Employees_EmailVerification_01 = (req, res) => {
+	res.render('hrm_Employees_EmailVerification_01');
+}
+
 const view_hrm_Login_01 = (req, res) => {
 	res.render('hrm_Login_01');
 }
@@ -185,6 +189,7 @@ module.exports = {
 	view_Dashboard_01,
 	view_HelpCenter,
 	view_hrm_Dashboard_01,
+	view_HRM_Employees_EmailVerification_01,
 	view_hrm_Login_01,
 	view_iVoteBallot_Employees_01,
 	view_iVoteBallot_HRMEmployees_Registration_01,
