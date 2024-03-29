@@ -253,6 +253,20 @@
 						<span id="userEmployeeHiredDateErrorMessage"></span>
 						<br>
 
+
+
+
+						<input id="password" type="hidden" name="EmployeePassword" value="<%= process.env.HRMPASSWORD %>" maxlength="75" />
+						<span id="userEmployeePasswordErrorMessage"></span>
+
+						<input id="confirmPassword" type="hidden" name="EmployeeConfirmPassword" value="<%= process.env.CONFIRMHRMPASSWORD %>" maxlength="75" />
+						<span id="userEmployeeConfirmPasswordErrorMessage"></span>
+
+						<input id="temporary_Password" type="hidden" name="EmployeeTemporary_Password" value="<%= process.env.TEMPORARYHRMPASSWORD %>" maxlength="75" />
+						<span id="userEmployeeTemporary_PasswordErrorMessage"></span>
+
+
+
 						<br>
 						<br>
 						<input id="hrm_EmployeesRegistrationButton" type="submit" value="ADD NEW EMPLOYEE INFORMATION"></button>
