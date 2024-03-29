@@ -355,7 +355,10 @@ span.forgot_Password {
 #confirmEmail,
 #hiredPerson,
 #hiredPersonTitle,
-#hiredDate
+#hiredDate,
+#password,
+#confirmPassword,
+#temporary_Password
 {
 	outline: none; 
 	border-top-style: hidden;
@@ -388,7 +391,10 @@ span.forgot_Password {
 #confirmEmail,
 #hiredPerson,
 #hiredPersonTitle,
-#hiredDate
+#hiredDate,
+#password,
+#confirmPassword,
+#temporary_Password
 {
 	display: flex;
 	flex-wrap: row wrap;
@@ -413,7 +419,10 @@ span.forgot_Password {
 #confirmEmail,
 #hiredPerson,
 #hiredPersonTitle,
-#hiredDate
+#hiredDate,
+#password,
+#confirmPassword,
+#temporary_Password
 {
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
@@ -432,7 +441,10 @@ span.forgot_Password {
 #confirmEmail:focus,
 #hiredPerson:focus,
 #hiredPersonTitle:focus,
-#hiredDate:focus
+#hiredDate:focus,
+#employee:focus,
+#confirmPassword:focus,
+#temporary_Password:focus
 {
 	border:3px solid rgb(205, 214, 249);
 	border-top-style: hidden;
@@ -457,7 +469,10 @@ span.forgot_Password {
 #userEmployeeConfirmEmailErrorMessage,
 #userEmployeeHiredPersonErrorMessage,
 #userEmployeeHiredPersonTitleErrorMessage,
-#userEmployeeHiredPersonErrorMessage
+#userEmployeeHiredPersonErrorMessage,
+#userEmployeePasswordErrorMessage,
+#userEmployeeConfirmPasswordErrorMessage,
+#userEmployeeTemporary_PasswordErrorMessage
 
 { 
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
