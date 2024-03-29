@@ -875,94 +875,70 @@ passport.use(
 passport.use(
 	'local4',
 	new LocalStrategy({
-		usernameField: 'DMVEmail',
-		passwordField: 'IvoteBallotIdIdentifierCode',
+		usernameField: 'EmployeeEmail',
+		passwordField: 'EmployeePassword',
 		passReqToCallback: true // To allow request object to be passed to callback
 	},
-		async (req, DMVEmail, IvoteBallotIdIdentifierCode, done) => {
+		async (req, EmployeeEmail, EmployeePassword, done) => {
 
-			console.log('The iVoteBallot\'s user\'s passport.use(local1) email (\'DMVEmail\') as: ' + DMVEmail);
-			console.log('The iVoteBallot\'s user\'s passport.use(local1) password (\'IvoteBallotIdIdentifierCode\') as: ' + IvoteBallotIdIdentifierCode);
+			console.log('The iVoteBallot\'s new employee\'s passport.use(local4) email (\'EmployeeEmail\') as: ' + EmployeeEmail);
+			console.log('The iVoteBallot\'s new employee\'s passport.use(local4) password (\'EmployeePassword\') as: ' + EmployeePassword);
 
-			if (!DMVEmail) {
-				return done(null, false, { message: 'You have entered an email address that already exist in iVoteBallot\'s database: ' + DMVEmail });
+			if (!EmployeeEmail) {
+				return done(null, false, { message: 'You have entered an email address that already exist in iVoteBallot\'s Human Resource Management database: ' + EmployeeEmail });
 			}
 
-			if (!IvoteBallotIdIdentifierCode) {
-				console.log('The user\'s iVoteBallot Id Identifier Code entered into the input field is: ' + IvoteBallotIdIdentifierCode + '.');
-				console.log('The user\'s iVoteBallot Id Identifier Code does not match to the Session cookie id\'s database.');
-				return done(null, false, { message: 'Your iVoteBallot Id Identifier Code does not match to our iVoteballot\'s database.' });
+			if (!EmployeePassword) {
+				console.log('The new employee\'s iVoteBallot password entered into the input field is: ' + EmployeePassword + '.');
+				console.log('The new employee\'s iVoteBallot password does not match to the Session Management\'s Human Resources database.');
+				return done(null, false, { message: 'Your iVoteBallot\'s Employee password does not match to our iVoteballot\'s Human Resources database.' });
 
 			} else
 
-				await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE DMVEmail = ?`, DMVEmail, (err, row) => {
+				await db1.get(`SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE EmployeeEmail = ?`, EmployeeEmail, (err, row) => {
 
 					if (err) {
 						return done(err);
 					}
 
 					if (!row) {
-						console.log('The user\'s have entered the incorrect email address for local1: ' + DMVEmail);
-						return done(null, false, { message: 'You have entered the incorrect email address: ' + DMVEmail });
+						console.log('The employee have entered the incorrect email address for local4: ' + EmployeeEmail + '.' );
+						return done(null, false, { message: 'You have entered an incorrect email address: ' + EmployeeEmail + '.' });
 					}
 
-					bcrypt.compare(IvoteBallotIdIdentifierCode, row.IvoteBallotIdIdentifierCode, (err, result) => {
+					bcrypt.compare(EmployeePassword, row.EmployeePassword, (err, result) => {
 
 						if (err) {
 							return done(err);
 						}
 						if (!result) {
-							console.log('The user\'s iVoteBallot Id Identifier Code was entered incorrectly for local1: ' + IvoteBallotIdIdentifierCode);
-							return done(null, false, { message: 'You have entered the incorrect iVoteBallot Id Identifier Code: ' + IvoteBallotIdIdentifierCode });
+							console.log('The employee have entered the incorrectly password for local4: ' + EmployeePassword + '.' );
+							return done(null, false, { message: 'You have entered an incorrect iVoteBallot\'s employee password: ' + EmployeePassword + '.' });
 						} else {
 
 							//return done(null, user);
 
 							return done(null,
 								{
-									id: row.id,
-									DMVPhoto: row.DMVPhoto,
-									DMVFirstName: row.DMVFirstName,
-									DMVMiddleName: row.DMVMiddleName,
-									DMVLastName: row.DMVLastName,
-									DMVSuffix: row.DMVSuffix,
-									DMVDateOfBirth: row.DMVDateOfBirth,
-									DMVBirthSex: row.DMVBirthSex,
-									DMVGenderIdentity: row.DMVGenderIdentity,
-									DMVUSResidentStatusSelection: row.DMVUSResidentStatusSelection,
-									DMVUSResidentStatusCategorySelection: row.DMVUSResidentStatusCategorySelection,
-									DMVUSResidentStatusSubjectSelection: row.DMVUSResidentStatusSubjectSelection,
-									DMVRace: row.DMVRace,
-									DMVGradeSchool: row.DMVGradeSchool,
-									DMVGradeSchoolSelection: row.DMVGradeSchoolSelection,
-									DMVGradeSchoolYearSelection: row.DMVGradeSchoolYearSelection,
-									DMVHighSchool: row.DMVHighSchool,
-									DMVHighSchoolSelection: row.DMVHighSchoolSelection,
-									DMVHighSchoolYearSelection: row.DMVHighSchoolYearSelection,
-									DMVCollege: row.DMVCollege,
-									DMVDegreeSelection: row.DMVDegreeSelection,
-									DMVCategorySelection: row.DMVCategorySelection,
-									DMVSubjectSelection: row.DMVSubjectSelection,
-									DMVCollegeYearSelection: row.DMVCollegeYearSelection,
-									DMVSSN: row.DMVSSN,
-									DMVEmail: row.DMVEmail,
-									DMVConfirmEmail: row.DMVConfirmEmail,
-									DMVPhoneNumber: row.DMVPhoneNumber,
-									DMVAddress: row.DMVAddress,
-									DMVUnitType: row.DMVUnitType,
-									DMVUnitTypeNumber: row.DMVUnitType,
-									DMVCountrySelection: row.DMVCountrySelection,
-									DMVStateSelection: row.DMVStateSelection,
-									DMVCountySelection: row.DMVCountySelection,
-									DMVCitySelection: row.DMVCitySelection,
-									DMVZipSelection: row.DMVZipSelection,
-									DMVIdType: row.DMVIdType,
-									DMVIdTypeNumber: row.DMVIdTypeNumber,
-									IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode,
-									ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode,
-									Password: row.Password,
-									ConfirmPassword: row.ConfirmPassword,
-									Temporary_Password: row.Temporary_Password,
+									id: row.EmployeeDepartment,
+									EmployeeDepartment: row.EmployeeDepartment,
+									EmployeeCountry: row.EmployeeCountry,
+									Date: row.Date,
+									EmployeePDF: row.EmployeePDF,
+									EmployeePhoto: row.EmployeePhoto,
+									EmployeeJobTitle: row.EmployeeJobTitle,
+									EmployeeFirstName: row.EmployeeFirstName,
+									EmployeeMiddleName: row.EmployeeMiddleName,
+									EmployeeLastName: row.EmployeeLastName,
+									EmployeeEmail: row.EmployeeEmail,
+									EmployeeConfirmEmail: row.EmployeeConfirmEmail,
+									EmployeeHiredPerson: row.EmployeeHiredPerson,
+									EmployeeHiredPersonTitle: row.EmployeeHiredPersonTitle,
+									EmployeeHiredDate: row.EmployeeHiredDate,
+									EmployeePassword: row.EmployeePassword,
+									EmployeeConfirmPassword: row.EmployeeConfirmPassword,
+									EmployeeTemporary_Password: row.EmployeeTemporary_Password,
+
 
 									isAuthenticated: true
 								}
@@ -1027,6 +1003,7 @@ passport.deserializeUser(function (id, done) {
 
 		return done(null,
 			{
+
 				id: user.id,
 				DMVPhoto: user.DMVPhoto,
 				DMVFirstName: user.DMVFirstName,
@@ -1104,6 +1081,52 @@ passport.deserializeUser(function (userId, done) {
     });
 });
 
+
+passport.deserializeUser(function (id, done) {
+	console.log('Deserializing users...')
+	console.log(id);
+	const user = db1.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE id = ?', id, (err, user) => {
+
+		if (err) {
+			return done(err);
+		}
+		if (!user) {
+			return done(null, false);
+		}
+
+		return done(null,
+			{
+				
+				id: user.EmployeeDepartment,
+				EmployeeDepartment: user.EmployeeDepartment,
+				EmployeeCountry: user.EmployeeCountry,
+				Date: user.Date,
+				EmployeePDF: user.EmployeePDF,
+				EmployeePhoto: user.EmployeePhoto,
+				EmployeeJobTitle: user.EmployeeJobTitle,
+				EmployeeFirstName: user.EmployeeFirstName,
+				EmployeeMiddleName: user.EmployeeMiddleName,
+				EmployeeLastName: user.EmployeeLastName,
+				EmployeeEmail: user.EmployeeEmail,
+				EmployeeConfirmEmail: user.EmployeeConfirmEmail,
+				EmployeeHiredPerson: user.EmployeeHiredPerson,
+				EmployeeHiredPersonTitle: user.EmployeeHiredPersonTitle,
+				EmployeeHiredDate: user.EmployeeHiredDate,
+				EmployeePassword: user.EmployeePassword,
+				EmployeeConfirmPassword: user.EmployeeConfirmPassword,
+				EmployeeTemporary_Password: user.EmployeeTemporary_Password,
+
+				isAuthenticated: true
+
+			}
+			
+		);
+
+	});	
+
+});
+
+
 const redirectDashboard = (req, res, next) => {
 	if (req.session.userId) {
 		res.redirect('/dashboard_01');
@@ -1118,7 +1141,7 @@ const redirectHRMDashboard = (req, res, next) => {
 		res.redirect('/hrm_Dashboard_01');
 	} else {
 		next();
-		res.redirect('/hrm_LogIn_01');
+		res.redirect('/hrm_Login_01');
 	}
 }
 
@@ -1679,6 +1702,19 @@ iVoteBallotApp.use('/alabamaVoters_LogOut_01', (req, res, next) => {
 	next();
 });
 
+// Middleware to set req.isUnauthenticated for the first use of the '/hrm_Login_01' URL bar
+iVoteBallotApp.use('/hrm_Login_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'hrm_Login_01!');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+
 iVoteBallotApp.set('views', './Public/views');
 iVoteBallotApp.set('common', './Public/common');
 
@@ -1876,13 +1912,13 @@ iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) =>
 });
 
 // The User route for iVoteBallot_HRMEmployees_Registration_01.
-iVoteBallotApp.get('/iVoteBallot_HRMEmployees_Registration_01.', (req, res) => {
+iVoteBallotApp.get('/iVoteBallot_HRMEmployees_Registration_01.', redirectHRMDashboard, (req, res) => {
 
 	// Check if user already authenticated.
 	if (req.session.isAuthenticated) {
 		console.log('Human Resources employee have already created the new employee iVoteBallot\'s account.');
 		req.flash('success', 'Human Resource employee have already created the new employee iVoteBallot\'s account.');
-		res.render('/iVoteBallot');
+		res.render('/ivoteballot');
 	}
 	console.log(req.session);
 	// Check if this is the first use of 'iVoteBallot_HRMEmployees_Registration_01' route URL bar
@@ -2002,6 +2038,26 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 
 		res.redirect('/dashboard_01');
 		console.log('User is logged into the dashboard!');
+
+	} else {
+		res.render('404');
+	}
+});
+
+// The user route for hrm_Login_01.
+iVoteBallotApp.get('/hrm_Login_01', redirectHRMDashboard, (req, res) => {
+	console.log(req.session);
+	console.log('isUnauthenticated: ', req.isUnauthenticated);
+	// Check if user already authenticated.
+	if (req.isUnauthenticated) {
+		res.render('hrm_Login_01');
+		console.log('The employee is not logged into the dashboard.');
+
+	} else if
+		(req.session.isAuthenticated) {
+
+		res.redirect('/hrm_Dashboard_01');
+		console.log('The Human Resources Employee is logged into the Recruitment dashboard!');
 
 	} else {
 		res.render('404');
@@ -2410,10 +2466,10 @@ iVoteBallotApp.post(
 );
 
 iVoteBallotApp.post(
-	'/hrm_LogIn_01',
+	'/hrm_Login_01',
 	passport.authenticate('local4', {
 		successRedirect: '/hrm_Dashboard_01',
-		failureRedirect: '/hrm_LogIn_01',
+		failureRedirect: '/hrm_Login_01',
 		failureFlash: true
 	}),
 	function (req, res) {
@@ -3582,7 +3638,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 		const photoFileData = fs.readFileSync(photoFilePath);
 
 		const newUser = {
-
+			
 			EmployeeDivision: employeeID,
 			EmployeeDepartment,	
 			EmployeeCountry,
