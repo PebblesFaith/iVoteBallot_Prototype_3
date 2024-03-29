@@ -51,8 +51,8 @@ const view_alabama_EmployeeRelations_01 = (req, res) => {
 	res.render('alabama_EmployeeRelations_01');
 }
 
-const view_alabama_HRM_01 = (req, res) => {
-	res.render('alabama_HRM_01');
+const view_HRM_01 = (req, res) => {
+	res.render('HRM_01');
 }
 
 const view_alabama_Recruitments_01 = (req, res) => {
@@ -127,6 +127,14 @@ const view_HelpCenter = (req, res) => {
 	res.render('helpCenter');
 }
 
+const view_hrm_Dashboard_01 = (req, res) => {
+	res.render('hrm_Dashboard_01');
+}
+
+const view_hrm_Login_01 = (req, res) => {
+	res.render('hrm_Login_01');
+}
+
 const view_iVoteBallot_Employees_01 = (req, res) => {
 	res.render('iVoteBallot_Employees_01');
 }
@@ -157,7 +165,7 @@ module.exports = {
 	view_alabama_Candidates_2024_02,
 	view_alabama_CompensationandBenefits_01,
 	view_alabama_EmployeeRelations_01,
-	view_alabama_HRM_01,
+	view_HRM_01,
 	view_alabama_Recruitments_01,
 	view_alabama_SignUporLogIn_01,
 	view_alabama_TrainingandDevelopments_01,
@@ -176,6 +184,8 @@ module.exports = {
 	view_ContactUs_01,
 	view_Dashboard_01,
 	view_HelpCenter,
+	view_hrm_Dashboard_01,
+	view_hrm_Login_01,
 	view_iVoteBallot_Employees_01,
 	view_iVoteBallot_HRMEmployees_Registration_01,
 	view_iVoteBallot,
