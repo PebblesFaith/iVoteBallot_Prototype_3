@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>iVoteBallot | Human Resources Log In</title>
+
+	<link rel="stylesheet" type="text/css" href="../styles/hrm_Login_01.css" />
+
+	<script defer src="../scripts_Files/hrm_Login_01_Script.js"></script>	
+
+</head>
+	<body>
+
+		<div id="flex_Container">
+			<div id="flex_Container_Row">
+				<div id="flex_Container_Column">
+					<div id="first_Column">
+						<br>
+	
+						<form 
+							class="form_LogIn_01 animate" 
+							name="loginForm" 
+							onsubmit="return validateAlabamaVotersLogInForm()" 
+							action="/alabamaVoters_LogIn_01" 
+							method="POST"
+						>
+							<div class="imageContainer">
+								<a href="http://localhost:8080/iVoteBallot"><img class="header_Image_01" src="../images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png" /></a>
+								<p id="titleLogIn_01"> Log In | Human Resources Management</p>
+								<!--<span class="close" onclick="document.getElementById('popUpSignUpMenu').style.display='none'" title="Close Sign Up Form">&times;</span>-->
+							
+							</div>
+							<div class="flash_Message_01">	
+										
+								 <% if (messages.success) { %>
+									<div class="alert alert-success">
+									  <% messages.success.forEach(function(message) { %>
+										<%= message %>
+									  <% }); %>
+									</div>
+								  <% } %>
+								  
+								  <% if (messages.error) { %>
+									<div class="alert alert-danger">
+									  <% messages.error.forEach(function(message) { %>
+										<%= message %>
+									  <% }); %>
+									</div>
+								  <% } %>
+
+							</div>
+	
+							<div class="signUp_Container_01">  									   
+								<label>Email Address | </label> 									
+								<input id="email" type="text" name="DMVEmail" maxlength="75">									
+								<span id="userDMVEmailErrorMessage"></span>
+								<br>		
+								
+								<div class="password_Container">
+									<label>Password |</label>									
+									<input id="password" type="password" name="Password" maxlength="75" />
+									<a href="#" id="showHide_01" onclick="toggle_InputPasswordCheckBox()">Show</a>
+								</div>
+								<span id="userPasswordErrorMessage"></span>											
+								<br>									
+							
+								<hr id="hr_Red_line_02">
+	
+								<a class="forgotPassword_SignUp_01" href="http://localhost:8080/alabamaVoters_ForgotPasswordSignUp_01">Forgot Password?</a>
+	
+								<hr id="hr_Blue_line_02">
+								<p id="memberQuestion_01">
+									If you are not an iVoteBallot's member?
+									<a class="signUp_LogIn_01" href="http://localhost:8080/alabamaVoters_SignUp_01">Sign Up for an account.</a>
+								</p>		
+								
+								<br>									
+							
+								<button id="logInSubmitButton" type="submit">LOG IN</button>
+								
+							</div>						
+	
+						</form>
+	
+					</div>			
+				</div>
+			</div>
+		</div>	
+		
+	</body>
+</html>
