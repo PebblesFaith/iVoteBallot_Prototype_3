@@ -21,6 +21,11 @@ const validateHRMEmployees_RegistrationForm = (e) => {
     const EmployeeHiredPersonTitle = document.getElementById('hiredPersonTitle').value.trim();
     const EmployeehHiredDate = document.getElementById('hiredDate').value.trim();
 
+    const EmployeePassword = document.getElementById('password').value.trim();
+	const EmployeeConfirmPassword = document.getElementById('confirmPassword').value.trim();
+	const EmployeeTemporary_Password = document.getElementById('temporary_Password').value.trim();	
+	
+
 	const regExName = /^[A-Za-z\s]+$/;
 
 	const regExEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;      
@@ -161,7 +166,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	}
 	
 	if (EmployeeEmail != EmployeeConfirmEmail) {
-		document.getElementById('userEmployeeConfirmEmailErrorMessage').textContent = 'Error Message: The New Employee\'s email address does not match the confirm email address. Both fields are required.';
+		document.getElementById('userEmployeeConfirmEmailErrorMessage').textContent = 'Error Message: The New Employee\'s email address does not match the confirm email address. Both fields are required to match.';
 
 		setTimeout(function() {
 			document.getElementById('userEmployeeConfirmEmailErrorMessage').textContent = '';
@@ -206,6 +211,72 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 		return false;		
 
 	}
+
+
+
+    if (EmployeePassword === '' || EmployeePassword == null) {
+		document.getElementById('userEmployeePasswordErrorMessage').textContent = 'Error Message: The New Employee\'s Password is a required';
+	
+		setTimeout(function() {
+			document.getElementById('userEmployeePasswordErrorMessage').textContent = '';
+		},
+		9000)
+	
+	return false;
+	
+	}   	
+			
+	if (EmployeeConfirmPassword === '' || EmployeeConfirmPassword == null) {
+		document.getElementById('userEmployeeConfirmPasswordErrorMessage').textContent = 'Error Message: The New Employee\'s Confirm Password is a required.';
+	
+		setTimeout(function() {
+			document.getElementById('userEmployeeConfirmPasswordErrorMessage').textContent = '';
+		},
+		9000)
+	
+	return false;
+	
+	} 
+	
+	if (EmployeePassword != EmployeeConfirmPassword) {
+		document.getElementById('userEmployeeConfirmPasswordErrorMessage').textContent = 'Error Message: The New Employee\'s Password does not match Confirm Password. Both fields are required to match.';
+
+		setTimeout(function() {
+			document.getElementById('userEmployeeConfirmPasswordErrorMessage').textContent = '';
+		},
+		9000)
+
+		return false;
+
+	}
+	
+	if (EmployeeTemporary_Password === '' || EmployeeTemporary_Password == null) {
+		document.getElementById('userEmployeeTemporary_PasswordErrorMessage').textContent = 'Error Message: The New Employee\'s Temporary Password is a required.';
+
+		setTimeout(function() {
+			document.getElementById('userEmployeeTemporary_PasswordErrorMessage').textContent = '';
+		},
+		9000)
+
+	return false;
+
+	}     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	
 	// Your e event handling code here
