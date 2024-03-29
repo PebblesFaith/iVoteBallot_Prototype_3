@@ -104,6 +104,9 @@ router
     .get('/hrm_Dashboard_01', views_Controller.view_hrm_Dashboard_01);
 
 router
+    .get('/hrm_Employees_EmailVerification_01', views_Controller.view_HRM_Employees_EmailVerification_01);
+
+router
     .get('/hrm_Login_01', views_Controller.view_hrm_Login_01);
 
 router
