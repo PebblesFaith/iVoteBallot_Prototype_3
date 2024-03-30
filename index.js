@@ -308,7 +308,7 @@ const db1_LoggedPasswordChange = new sqlite3.Database('alabamaUsers_PasswordChan
 	}
 });
 
-const db1_iVoteballot_EmployeesRegistration = new sqlite3.Database('iVoteBallotHRM_EmployeesRegistration.db', err => {
+const db1_iVoteballot_EmployeesRegistration = new sqlite3.Database('iVoteBallot_HRMEmployees_Registration_01.db', err => {
 	if (err) {
 		console.log('Sarai Hannah Ajai has not created the SQLite3 database table named, iVoteBallotHRM_EmployeesRegistration.db with passport and session management authentications:' + err + '.');
 	} else {
@@ -446,7 +446,7 @@ db1_LoggedPasswordChange.serialize(() => {
 });
 
 db1_iVoteballot_EmployeesRegistration.serialize(() => {
-	db1_iVoteballot_EmployeesRegistration.run(`CREATE TABLE IF NOT EXISTS iVoteBallotHRM_EmployeesRegistration (
+	db1_iVoteballot_EmployeesRegistration.run(`CREATE TABLE IF NOT EXISTS iVoteBallot_HRMEmployees_Registration_01 (
 
 		EmployeeDivision TEXT NOT NULL,	
 		EmployeeDepartment TEXT NOT NULL,		
@@ -471,9 +471,9 @@ db1_iVoteballot_EmployeesRegistration.serialize(() => {
 	)`), (err) => {
 
 		if (err) {
-			console.log('Sarai Hannah Ajai have not created the Sqlite3 \'iVoteBallotHRM_EmployeesRegistration\' database table which was coded successfully and she received a message: ' + err + '!');
+			console.log('Sarai Hannah Ajai have not created the Sqlite3 \'iVoteBallot_HRMEmployees_Registration_01\' database table which was coded successfully and she received a message: ' + err + '!');
 		} else {
-			console.log('Sarai Hannah Ajai have successfully created the Sqlite3 \'iVoteBallotHRM_EmployeesRegistration\' database table' + Date() + '.');
+			console.log('Sarai Hannah Ajai have successfully created the Sqlite3 \'iVoteBallot_HRMEmployees_Registration_01\' database table' + Date() + '.');
 		}
 	};
 });
@@ -1085,7 +1085,7 @@ passport.deserializeUser(function (userId, done) {
 passport.deserializeUser(function (id, done) {
 	console.log('Deserializing users...')
 	console.log(id);
-	const user = db1.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE id = ?', id, (err, user) => {
+	const user = db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE id = ?', id, (err, user) => {
 
 		if (err) {
 			return done(err);
@@ -1714,6 +1714,16 @@ iVoteBallotApp.use('/hrm_Login_01', (req, res, next) => {
 	next();
 });
 
+// Middleware to set req.isUnauthenticated for the first use of the '/hrm_Employees_EmailVerification_01' URL bar
+iVoteBallotApp.use('/hrm_Employees_EmailVerification_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'hrm_Employees_EmailVerification_01\'.');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
 
 iVoteBallotApp.set('views', './Public/views');
 iVoteBallotApp.set('common', './Public/common');
@@ -2061,6 +2071,19 @@ iVoteBallotApp.get('/hrm_Login_01', redirectHRMDashboard, (req, res) => {
 
 	} else {
 		res.render('404');
+	}
+});
+
+// The User route for hrm_Employees_EmailVerification_01.
+iVoteBallotApp.get('/hrm_Employees_EmailVerification_01', (req, res) => {
+	// Check if user already authenticated.
+	if (req.isUnauthenticated) {
+		console.log('The user attempted to verify email address without being fully authenticated via passport session from the alabamaVoters_EmailVerification_01 webpage.');
+		res.render('alabamaVoters_VerifyEmailPassword_01');
+	} else {
+		// Render signup page for new users
+		console.log('The user attempted to verify email address but encountered an authentication error within the passport session from the alabamaVoters_EmailVerification_01 webpage.');
+		res.render('404')
 	}
 });
 
@@ -2466,6 +2489,15 @@ iVoteBallotApp.post(
 );
 
 iVoteBallotApp.post(
+	'/alabamaVoters_ForgotPasswordSignUp_01',
+	passport.authenticate('local1', {
+		successRedirect: '/alabamaVoters_ForgotPassword_01',
+		failureRedirect: '/alabamaVoters_ForgotPasswordSignUp_01',
+		failureFlash: true
+	}
+));
+
+iVoteBallotApp.post(
 	'/hrm_Login_01',
 	passport.authenticate('local4', {
 		successRedirect: '/hrm_Dashboard_01',
@@ -2481,15 +2513,6 @@ iVoteBallotApp.post(
 	}
 
 );
-
-iVoteBallotApp.post(
-	'/alabamaVoters_ForgotPasswordSignUp_01',
-	passport.authenticate('local1', {
-		successRedirect: '/alabamaVoters_ForgotPassword_01',
-		failureRedirect: '/alabamaVoters_ForgotPasswordSignUp_01',
-		failureFlash: true
-	}
-));
 
 /* -------------------------- The ending of the POST LOCAL STRATEGY section ----------------------------- */
 
@@ -3658,10 +3681,10 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 			EmployeeTemporary_Password: Temporary_PasswordHashed
 			
 		};
-								
+												
 		await db1_iVoteballot_EmployeesRegistration.run(
 			
-			`INSERT INTO iVoteBallotHRM_EmployeesRegistration (EmployeeDivision, EmployeeDepartment, EmployeeCountry, EmployeePDF, EmployeePhoto, EmployeeJobTitle, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail, EmployeeHiredPerson, EmployeeHiredPersonTitle, EmployeeHiredDate, EmployeePassword, EmployeeConfirmPassword, EmployeeTemporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+			`INSERT INTO iVoteBallot_HRMEmployees_Registration_01 (EmployeeDivision, EmployeeDepartment, EmployeeCountry, EmployeePDF, EmployeePhoto, EmployeeJobTitle, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail, EmployeeHiredPerson, EmployeeHiredPersonTitle, EmployeeHiredDate, EmployeePassword, EmployeeConfirmPassword, EmployeeTemporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
 
 			[newUser.EmployeeDivision, newUser.EmployeeDepartment, newUser.EmployeeCountry, Buffer.from(pdfFileData), Buffer.from(photoFileData), newUser.EmployeeJobTitle, newUser.EmployeeFirstName, newUser.EmployeeMiddleName, newUser.EmployeeLastName, newUser.EmployeeEmail, newUser.EmployeeConfirmEmail, newUser.EmployeeHiredPerson, newUser.EmployeeHiredPersonTitle, newUser.EmployeeHiredDate, newUser.EmployeePassword, newUser.EmployeeConfirmPassword, newUser.EmployeeTemporary_Password], (err) => {
 
@@ -3675,9 +3698,9 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 					
 					console.log('db1_iVoteBallot_EmployeesRegistration is about to run.');
 					console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
-					req.flash('success', 'The Election Assure Expert have successfully registered your data information onto the iVoteBallot database, and you can now sign up to create your iVoteBallot account.');
+					req.flash('success', 'The Human Resources Manager have successfully registered your employee data information onto the iVoteBallot\'s HRM database, and you can now sign up to create your iVoteBallot\'s employment job orders account.');
 
-					res.redirect('/iVoteBallot_HRMEmployees_Registration_01');
+					res.redirect('/hrm_Employees_EmailVerification_01');
 
 				}			
 
@@ -3799,6 +3822,161 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 	}
 );
+
+iVoteBallotApp.post('/hrm_Employees_EmailVerification_01', (req, res) => {
+	const EmployeeEmail = req.body.EmployeeEmail;
+
+	// Check if the email exists in the database
+	db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE EmployeeEmail = ?', EmployeeEmail, (err, row) => {
+		if (err) {
+			console.error(err);
+			console.log('SQLite3 language did not successfully execute employee\'s email address search properly; therefore this error means a JavaScript codes language error.');
+			req.flash('error', 'Your data information for iVoteBallot\'s employment email address have generated an error message 535, please contact iVoteballot\'s Human Resources Manager.');
+			res.render('535');
+
+		} else if (!row) {
+			req.flash('error', 'Your email address was not found in our iVoteBallot Human Resources database.');
+			console.log('User/s email was not successfully found onto the SQlite3 database.')
+			res.render('hrm_Employees_EmailVerification_01');
+		} else {
+			// Generate a new password and update the user's record in the database
+
+			const newPassword = generateNewPassword();
+			const hash = bcrypt.hashSync(newPassword, 13);
+			
+			db1_iVoteballot_EmployeesRegistration.run('UPDATE iVoteBallot_HRMEmployees_Registration_01 SET EmployeeTemporary_Password = ? WHERE EmployeeEmail = ?', hash, EmployeeEmail, (err) => {
+				if (err) {
+					console.error(err);
+					console.log('SQlite3 language had not properly execute the UPDATE correctly.')
+					res.render('535');
+				} else {
+					// Send the new password to the user's email to nodemailer 
+					//sendEmail(email, 'New password', `Your new password is: ${newPassword}`);
+
+					res.redirect('/alabamaVoters_VerifyEmailPassword_01');
+					console.log('SQlite3 language had properly execute the UPDATE successfully for the user\'s Temporary Password.')
+				}
+				/*
+				Sarai Hannah Ajai has generated a test SMTP service account; in order to receive iVoteBallot's customercare@ionos.com emails from the 
+				'transporter' constant object from the AccouNetrics' users which pass through the 'nodemailer' API library.
+				*/
+				const transporter = nodemailer.createTransport({
+					host: 'smtp.ionos.com',
+					port: 587,
+					secure: false,
+					auth: {
+						user: 'ceo.developmenttest@ivoteballot.com',
+						pass: IONOS_SECRET_KEY,
+					}
+				});
+
+				const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
+
+				if (req.isAuthenticated()) {
+					/*
+					Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
+					using the default SMTP transporter nodemailer API library.
+					*/
+					const mailOptions_01 = {
+						from: req.body.EmployeeEmail,
+						to: 'electionassureexpert@ivoteballot.com',
+						bcc: 'honey.ryder.development@ivoteballot.com',
+						subject: `New User Registration - iVoteBallot Online Voter Registration Not Yet Verified`,
+						html: `	
+		
+						<p>iVoteBallot has received a new online registration:</p>
+
+						<p>New User Registration: ${req.user.EmployeeFirstName} ${req.user.EmployeeMiddleName} ${req.user.EmployeeLastName}, has been sent a temporary password for an iVoteBallot account verification.</p> 
+						<p>The email associated with the iVoteBallot's account is: ${req.user.EmployeeEmail}.</p>															
+					
+						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+
+					`,
+
+						attachments: [
+							{
+								filename: 'iVoteBallotLogo.png',
+								path: imagePath,
+								cid: 'iVoteBallotLogo'
+
+							}
+						]
+
+					};
+
+					const mailOptions_02 = {
+						from: 'electionassureexpert@ivoteballot.com',
+						to: req.body.EmployeeEmail,
+						bcc: 'honey.ryder.development@ivoteballot.com',
+						subject: `Authenticate Your iVoteBallot's Account`,
+						html: `
+			
+						<p>Dear ${req.user.EmployeeFirstName} ${req.user.EmployeeMiddleName} ${req.user.EmployeeLastName},</p>
+
+						<p>Thank you for choosing iVoteBallot to complete your sign-up process, please use the following temporary password:<p>
+
+						<p><strong>${newPassword}</strong></p;
+
+						<br>
+
+						<p>in order for iVoteBallot to verify your email address identity.</p>						
+						
+						<p>This temporary password is valid for the next 10 minutes. After, successful authentication, you can set your permanent password and confirm password.</p>
+						
+						<p>Should you have any questions or concerns, feel free to reach out to our iVoteBallot's Election Assure Expert Team Team.</p>
+						
+						<p>Respectfully, </p>	
+
+						<p>iVoteBallot's Election Assure Expert Team </p>
+
+						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+						
+						`,
+
+						attachments: [
+							{
+								filename: 'iVoteBallotLogo.png',
+								path: imagePath,
+								cid: 'iVoteBallotLogo'
+
+							}
+						]
+
+					};
+					
+					/*
+					Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
+					email account with nodemailer defined transporter object.
+					*/
+
+					transporter.sendMail(mailOptions_01, (error, info) => {
+						if (error) {
+							console.log(error);
+						} else {
+							console.log('Email Sent: ' + info.response);
+						}
+					});
+
+					transporter.sendMail(mailOptions_02, (error, info) => {
+						if (error) {
+							console.log(error);
+							res.send('error');
+						} else {
+							console.log('Email Sent: ' + info.response);
+							res.send('success!');
+						}
+					});
+
+				} else {
+					res.render('535');
+					console.log('The nodemailer user could not be authenticated.');
+
+				}
+			});
+		}
+	});
+});
+
 
 
 //const boxicons = require('boxicons');
