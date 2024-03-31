@@ -110,6 +110,9 @@ router
     .get('/hrm_Login_01', views_Controller.view_hrm_Login_01);
 
 router
+    .get('/hrm_VerifyEmailPassword_01', views_Controller.view_hrm_VerifyEmailPassword_01);
+
+router
     .get('/iVoteBallot_Employees_01', views_Controller.view_iVoteBallot_Employees_01);
 
 router
