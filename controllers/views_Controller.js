@@ -51,10 +51,6 @@ const view_alabama_EmployeeRelations_01 = (req, res) => {
 	res.render('alabama_EmployeeRelations_01');
 }
 
-const view_HRM_01 = (req, res) => {
-	res.render('HRM_01');
-}
-
 const view_alabama_Recruitments_01 = (req, res) => {
 	res.render('alabama_Recruitments_01');
 }
@@ -127,6 +123,14 @@ const view_HelpCenter = (req, res) => {
 	res.render('helpCenter');
 }
 
+const view_HRM_01 = (req, res) => {
+	res.render('HRM_01');
+}
+
+const view_HRM_CreatePasswords_01 = (req, res) => {
+	res.render('hrm_CreatePasswords_01');
+}
+
 const view_hrm_Dashboard_01 = (req, res) => {
 	res.render('hrm_Dashboard_01');
 }
@@ -172,8 +176,7 @@ module.exports = {
 	view_About,	
 	view_alabama_Candidates_2024_02,
 	view_alabama_CompensationandBenefits_01,
-	view_alabama_EmployeeRelations_01,
-	view_HRM_01,
+	view_alabama_EmployeeRelations_01,	
 	view_alabama_Recruitments_01,
 	view_alabama_SignUporLogIn_01,
 	view_alabama_TrainingandDevelopments_01,
@@ -192,6 +195,8 @@ module.exports = {
 	view_ContactUs_01,
 	view_Dashboard_01,
 	view_HelpCenter,
+	view_HRM_01,
+	view_HRM_CreatePasswords_01,
 	view_hrm_Dashboard_01,
 	view_HRM_Employees_EmailVerification_01,
 	view_hrm_Login_01,
