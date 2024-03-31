@@ -3907,70 +3907,64 @@ iVoteBallotApp.post('/hrm_Employees_EmailVerification_01', (req, res) => {
 					*/
 					const mailOptions_01 = {
 						from: req.body.EmployeeEmail,
-						to: 'electionassureexpert@ivoteballot.com',
+						to: 'chris.anthemum.development@ivoteballot.com',
 						bcc: 'honey.ryder.development@ivoteballot.com',
-						subject: `New User Registration - iVoteBallot Online Voter Registration Not Yet Verified`,
+						subject: `Employee Account - Verification Required for iVoteBallot Change Password`,
 						html: `	
-		
-						<p>iVoteBallot has received a new online registration:</p>
-
-						<p>Employee Verification: ${row.EmployeeFirstName} ${row.EmployeeMiddleName} ${row.EmployeeLastName}, has been sent a temporary password for an your iVoteBallot employment account verification.</p> 
-						<p>The email associated with the iVoteBallot's account is: ${row.EmployeeEmail}.</p>															
+							<p>Dear HR Management Team,</p>
 					
-						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+							<p>This is to inform you that iVoteBallot has received a request regarding the account of an employee:</p>
+					
+							<p>Employee Name: ${row.EmployeeFirstName} ${row.EmployeeMiddleName ? row.EmployeeMiddleName + ' ' : ''}${row.EmployeeLastName}</p>
 
-					`,
-
+							<p>The employee has requested a temporary password for their iVoteBallot employment account. The associated email for the iVoteBallot account is: ${row.EmployeeEmail}.</p>
+							
+							<p>This request may be due to a forgotten password or the employee's decision to change their employment password. Please take necessary action to verify and update the account information accordingly, if there any email address discrepancies.</p>
+					
+							<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+						`,
 						attachments: [
 							{
 								filename: 'iVoteBallotLogo.png',
 								path: imagePath,
 								cid: 'iVoteBallotLogo'
-
 							}
 						]
-
 					};
-
+					
 					const mailOptions_02 = {
-						from: 'electionassureexpert@ivoteballot.com',
+						from: 'chris.anthemum.development@ivoteballot.com',
 						to: req.body.EmployeeEmail,
 						bcc: 'honey.ryder.development@ivoteballot.com',
-						subject: `Authenticate Your iVoteBallot's Account`,
+						subject: `Authenticate Your iVoteBallot Employment Account`,
 						html: `
-			
-						<p>Dear ${row.EmployeeFirstName} ${row.EmployeeMiddleName} ${row.EmployeeLastName},</p>
-
-						<p>Thank you for choosing iVoteBallot to complete your sign-up process, please use the following temporary password:<p>
-
-						<p><strong>${newPassword}</strong></p;
-
-						<br>
-
-						<p>in order for iVoteBallot to verify your employement email address identity.</p>						
-						
-						<p>This temporary password is valid for the next 10 minutes. After, successful authentication, you can set your permanent password and confirm password.</p>
-						
-						<p>Should you have any questions or concerns, feel free to reach out to your iVoteBallot's Human Resources Management Team.</p>
-						
-						<p>Respectfully, </p>	
-
-						<p>iVoteBallot's Human Resources Management Team </p>
-
-						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
-						
+							<p>Dear ${row.EmployeeFirstName} ${row.EmployeeMiddleName ? row.EmployeeMiddleName + ' ' : ''}${row.EmployeeLastName},</p>
+					
+							<p>Here is your temporary password process information. Please use the following temporary password:</p>
+					
+							<p><strong>${newPassword}</strong></p>
+					
+							<p>This temporary password is valid for the next 10 minutes for iVoteBallot to verify your employment email address identity.</p>
+							
+							<p>After successful authentication, you can set your permanent password and confirm it.</p>
+							
+							<p>If you have any questions or concerns, feel free to reach out to iVoteBallot's Human Resources Management Team.</p>
+							
+							<p>Respectfully,</p>
+							
+							<p>iVoteBallot's Human Resources Management Team</p>
+					
+							<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
 						`,
-
 						attachments: [
 							{
 								filename: 'iVoteBallotLogo.png',
 								path: imagePath,
 								cid: 'iVoteBallotLogo'
-
 							}
 						]
-
 					};
+					
 
 					/*
 					Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
