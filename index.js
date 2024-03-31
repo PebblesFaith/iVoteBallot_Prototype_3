@@ -895,7 +895,7 @@ passport.use(
 
 			} else
 
-				await db1.get(`SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE EmployeeEmail = ?`, EmployeeEmail, (err, row) => {
+				await db1_iVoteballot_EmployeesRegistration.get(`SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE EmployeeEmail = ?`, EmployeeEmail, (err, row) => {
 
 					if (err) {
 						return done(err);
@@ -951,7 +951,71 @@ passport.use(
 	)
 );
 
+passport.use(
+	'local05',
+	new LocalStrategy({
+		usernameField: 'EmployeeEmail',
+		passwordField: 'EmployeeTemporary_Password',
+		passReqToCallback: true // To allow request object to be passed to callback
+	},
+		async (req, EmployeeEmail, EmployeeTemporary_Password, done) => {
 
+			console.log('The iVoteBallot\'s user\'s passport.use(local05) email (\'EmployeeEmail\') as: ' + EmployeeEmail);
+			console.log('The iVoteBallot\'s user\'s passport.use(local05) password (\'EmployeeTemporary_Password\') as: ' + EmployeeTemporary_Password);
+
+
+			await db1_iVoteballot_EmployeesRegistration.get(`SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE EmployeeEmail = ?`, EmployeeEmail, (err, row) => {
+
+				if (err) {
+					return done(err);
+				}
+
+				if (!row) {
+					console.log('The employee\'s have entered the incorrect email address from local05: ' + EmployeeEmail);
+					return done(null, false, { message: 'You have entered the incorrect email address: ' + EmployeeEmail });
+				}
+
+				bcrypt.compare(EmployeeTemporary_Password, row.EmployeeTemporary_Password, (err, result) => {
+
+					if (err) {
+						return done(err);
+					}
+					if (!result) {
+						console.log('The employee\'s temporary password was entered incorrectly from local05: ' + EmployeeTemporary_Password);
+						return done(null, false, { message: 'You have entered the incorrect temporary password: ' + EmployeeTemporary_Password });
+					}
+					//return done(null, row);
+
+					return done(null,
+						{
+							
+							id: row.EmployeeDepartment,
+							EmployeeDepartment: row.EmployeeDepartment,
+							EmployeeCountry: row.EmployeeCountry,
+							Date: row.Date,
+							EmployeePDF: row.EmployeePDF,
+							EmployeePhoto: row.EmployeePhoto,
+							EmployeeJobTitle: row.EmployeeJobTitle,
+							EmployeeFirstName: row.EmployeeFirstName,
+							EmployeeMiddleName: row.EmployeeMiddleName,
+							EmployeeLastName: row.EmployeeLastName,
+							EmployeeEmail: row.EmployeeEmail,
+							EmployeeConfirmEmail: row.EmployeeConfirmEmail,
+							EmployeeHiredPerson: row.EmployeeHiredPerson,
+							EmployeeHiredPersonTitle: row.EmployeeHiredPersonTitle,
+							EmployeeHiredDate: row.EmployeeHiredDate,
+							EmployeePassword: row.EmployeePassword,
+							EmployeeConfirmPassword: row.EmployeeConfirmPassword,
+							EmployeeTemporary_Password: row.EmployeeTemporary_Password,
+
+							isAuthenticated: true
+						}
+					);
+				});
+			});
+		}
+	)
+);
 
 /*
 	The code passport.serializeUser(function (user, done) { done(null, user.id); }) is a function
@@ -2540,10 +2604,9 @@ iVoteBallotApp.post(
 
 );
 
-
 iVoteBallotApp.post(
 	'/hrm_VerifyEmailPassword_01',
-	passport.authenticate('local4', {
+	passport.authenticate('local05', {
 		successRedirect: 'hrm_CreatePasswords_01',
 		failureRedirect: '/hrm_VerifyEmailPassword_01',
 		failureFlash: true
@@ -3951,7 +4014,7 @@ iVoteBallotApp.post('/hrm_Employees_EmailVerification_01', (req, res) => {
 							<p>If you have any questions or concerns, feel free to reach out to iVoteBallot's Human Resources Management Team.</p>
 							
 							<p>Respectfully,</p>
-							
+
 							<p>iVoteBallot's Human Resources Management Team</p>
 					
 							<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
@@ -4039,7 +4102,7 @@ iVoteBallotApp.post('/hrm_VerifyEmailPassword_01',
 						res.render('535');
 					} else {
 						console.log('The user\s email address is successfully found within the passport serialization authenticated processes through the session.');
-						res.redirect('/ivoteballot');
+						res.redirect('/hrm_CreatePassword_01');
 					}
 
 				});
