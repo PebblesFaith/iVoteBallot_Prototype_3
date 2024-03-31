@@ -3859,10 +3859,6 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 	}
 );
 
-
-
-
-
 iVoteBallotApp.post('/hrm_Employees_EmailVerification_01', (req, res) => {
     const EmployeeEmail = req.body.EmployeeEmail;
 
@@ -3870,15 +3866,15 @@ iVoteBallotApp.post('/hrm_Employees_EmailVerification_01', (req, res) => {
     db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE EmployeeEmail = ?', EmployeeEmail, (err, row) => {
         if (err) {
             console.error(err);
-            console.log('SQLite3 language did not successfully execute user/s email address search properly; therefore this error means a JavaScript codes language error.');
-            req.flash('error', 'This email address input field have generated an error message 500, please contact iVoteballot customer care team.');
+            console.log('SQLite3 language did not successfully execute iVoteBallot\'s employee email address search properly; therefore this error means a JavaScript codes language error.');
+            req.flash('error', 'This iVoteBallot\'s employee email address input field have generated an error message 535, please contact iVoteballot customer care team.');
             res.render('535');
         } else if (!row) {
-            req.flash('error', 'Your email address was not found in our human resource management database.');
-            console.log('User/s email was not successfully found onto the SQlite3 database.')
+            req.flash('error', 'Your iVoteBallot\'s employment email address was not found in our human resource management database.');
+            console.log('The iVoteBallot\'s employee email address was not successfully found onto the Human Resources Management database.')
             res.render('hrm_Employees_EmailVerification_01');
         } else {
-            // Generate a new password and update the user's record in the database
+            // Generate a new password and update the iVoteBallot's employee record in the database
             const newPassword = generateNewPassword();
             const hash = bcrypt.hashSync(newPassword, 13);
 
@@ -3888,6 +3884,10 @@ iVoteBallotApp.post('/hrm_Employees_EmailVerification_01', (req, res) => {
                     console.log('SQlite3 language had not properly execute the UPDATE correctly.')
                     res.render('535');
                 } else {
+
+					res.redirect('/hrm_VerifyEmailPassword_01');
+					console.log('The Human Resources Management\'s SQlite3 language had properly execute the UPDATE successfully for the iVoteBallot\'s employee Temporary Password.')
+
                     // Send the new password to the user's email using nodemailer
                     const transporter = nodemailer.createTransport({
                         host: 'smtp.ionos.com',
