@@ -44,9 +44,6 @@ router
     .get('/alabama_EmployeeRelations_01', views_Controller.view_alabama_EmployeeRelations_01);
 
 router
-    .get('/HRM_01', views_Controller.view_HRM_01);
-    
-router
     .get('/alabama_Recruitments_01', views_Controller.view_alabama_Recruitments_01);
 
 router
@@ -99,6 +96,12 @@ router
 
 router
     .get('/helpCenter', views_Controller.view_HelpCenter);
+
+router
+    .get('/HRM_01', views_Controller.view_HRM_01);
+
+router
+    .get('/hrm_CreatePasswords_01', views_Controller.view_HRM_CreatePasswords_01);   
 
 router
     .get('/hrm_Dashboard_01', views_Controller.view_hrm_Dashboard_01);
