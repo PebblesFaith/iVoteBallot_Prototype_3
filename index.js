@@ -873,26 +873,29 @@ passport.use(
 	)
 );
 
+
+// hrm_Signup_01.ejs
+
 passport.use(
 	'local4',
 	new LocalStrategy({
 		usernameField: 'EmployeeEmail',
-		passwordField: 'EmployeeTemporary_Password',
+		passwordField: 'EmployeeId',
 		passReqToCallback: true // To allow request object to be passed to callback
 	},
-		async (req, EmployeeEmail, EmployeeTemporary_Password, done) => {
+		async (req, EmployeeEmail, EmployeeId, done) => {
 
-			console.log('The iVoteBallot\'s new employee\'s passport.use(local4) email (\'EmployeeEmail\') as: ' + EmployeeEmail);
-			console.log('The iVoteBallot\'s new employee\'s passport.use(local4) password (\'EmployeeTemporary_Password\') as: ' + EmployeeTemporary_Password);
+			console.log('The iVoteBallot\'s user\'s passport.use(local4) email (\'EmployeeEmail\') as: ' + EmployeeEmail);
+			console.log('The iVoteBallot\'s user\'s passport.use(local4) password (\'EmployeeId\') as: ' + employeeID);
 
 			if (!EmployeeEmail) {
-				return done(null, false, { message: 'You have entered an email address that already exist in iVoteBallot\'s Human Resource Management database: ' + EmployeeEmail });
+				return done(null, false, { message: 'You have entered an email address that already exist in iVoteBallot\'s Human Resources Management database: ' + EmployeeEmail });
 			}
 
-			if (!EmployeeTemporary_Password) {
-				console.log('The new employee\'s iVoteBallot temporary password entered into the input field is: ' + EmployeeTemporary_Password + '.');
-				console.log('The new employee\'s iVoteBallot temporary password does not match to the Session Management\'s Human Resources database.');
-				return done(null, false, { message: 'Your iVoteBallot\'s Employee temporary password does not match to our iVoteballot\'s Human Resources database.' });
+			if (!EmployeeId) {
+				console.log('The user\'s iVoteBallot Id Code entered into the input field is: ' + EmployeeId + '.');
+				console.log('The user\'s iVoteBallot Id Code does not match to the Session cookie id\'s database.');
+				return done(null, false, { message: 'Your iVoteBallot Id Code does not match to our iVoteballot\'s Human Resources Management database.' });
 
 			} else
 
@@ -903,26 +906,26 @@ passport.use(
 					}
 
 					if (!row) {
-						console.log('The employee have entered the incorrect email address for local4: ' + EmployeeEmail + '.' );
-						return done(null, false, { message: 'You have entered an incorrect email address: ' + EmployeeEmail + '.' });
+						console.log('The user\'s have entered the incorrect email address for local4: ' + EmployeeEmail);
+						return done(null, false, { message: 'You have entered the incorrect email address: ' + EmployeeEmail });
 					}
 
-					bcrypt.compare(EmployeeTemporary_Password, row.EmployeeTemporary_Password, (err, result) => {
+					bcrypt.compare(EmployeeId, row.EmployeeId, (err, result) => {
 
 						if (err) {
 							return done(err);
 						}
 						if (!result) {
-							console.log('The employee have entered the incorrectly temporary password for local4: ' + EmployeeTemporary_Password + '.' );
-							return done(null, false, { message: 'You have entered an incorrect iVoteBallot\'s employee temporary password: ' + EmployeeTemporary_Password + '.' });
+							console.log('The user\'s iVoteBallot Id Code was entered incorrectly for local4: ' + EmployeeId);
+							return done(null, false, { message: 'You have entered the incorrect iVoteBallot Id Code: ' + EmployeeId });
 						} else {
 
 							//return done(null, user);
 
 							return done(null,
 								{
-									
 									id: row.id,
+
 									EmployeeId: row.EmployeeId,
 									EmployeeDepartment: row.EmployeeDepartment,
 									EmployeeCountry: row.EmployeeCountry,
@@ -941,7 +944,7 @@ passport.use(
 									EmployeePassword: row.EmployeePassword,
 									EmployeeConfirmPassword: row.EmployeeConfirmPassword,
 									EmployeeTemporary_Password: row.EmployeeTemporary_Password,
-
+											
 
 									isAuthenticated: true
 								}
@@ -953,7 +956,11 @@ passport.use(
 		}
 	)
 );
-/*
+
+
+
+
+
 passport.use(
 	'local5',
 	new LocalStrategy({
@@ -1019,7 +1026,7 @@ passport.use(
 		}
 	)
 );
-*/
+
 
 /*
 	The code passport.serializeUser(function (user, done) { done(null, user.id); }) is a function
