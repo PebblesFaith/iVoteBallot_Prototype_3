@@ -449,7 +449,7 @@ db1_iVoteballot_EmployeesRegistration.serialize(() => {
 	db1_iVoteballot_EmployeesRegistration.run(`CREATE TABLE IF NOT EXISTS iVoteBallot_HRMEmployees_Registration_01 (
 
 		id TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6)))), 
-		EmployeeDivision TEXT NOT NULL,	
+		EmployeeId TEXT NOT NULL,	
 		EmployeeDepartment TEXT NOT NULL,		
 		EmployeeCountry TEXT NOT NULL,
         Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
@@ -923,7 +923,7 @@ passport.use(
 								{
 									
 									id: row.id,
-									EmployeeDivision: row.EmployeeDivision,
+									EmployeeId: row.EmployeeId,
 									EmployeeDepartment: row.EmployeeDepartment,
 									EmployeeCountry: row.EmployeeCountry,
 									Date: row.Date,
@@ -992,7 +992,7 @@ passport.use(
 					return done(null,
 						{
 							id: row.id,
-							EmployeeeDivision: row.EmployeeDivision,
+							EmployeeId: row.EmployeeId,
 							EmployeeDepartment: row.EmployeeDepartment,
 							EmployeeCountry: row.EmployeeCountry,
 							Date: row.Date,
@@ -1164,7 +1164,7 @@ passport.deserializeUser(function (id, done) {
 		return done(null,
 			{
 				id: user.id,
-				EmployeeDivision: user.EmployeeDivision,
+				EmployeeId: user.EmployeeId,
 				EmployeeDepartment: user.EmployeeDepartment,
 				EmployeeCountry: user.EmployeeCountry,
 				Date: user.Date,
@@ -3723,7 +3723,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 iVoteBallotApp.post('/hrmEmployees_Registration_01',
 	async (req, res) => {	
 
-		const EmployeeDivision = req.body.EmployeeDivision;
+		const EmployeeId = req.body.EmployeeId;
 		const EmployeeDepartment = req.body.EmployeeDepartment;		
 		const EmployeeCountry = req.body.EmployeeCountry;
 		const EmployeePDF = req.body.EmployeePDF;
@@ -3746,7 +3746,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 		console.log(req.body);
 
-		console.log('The new employee divisional region is: ' + EmployeeDivision + '.');
+		console.log('The new employee divisional region is: ' + EmployeeId + '.');
 		console.log('The new employee\'s department region is: ' + EmployeeDepartment + '.');
 		console.log('The new employee\'s country location is: ' + EmployeeCountry + '.');
 		console.log('The new employee\'s PDF Files are: ' + EmployeePDF + '.');
@@ -3773,7 +3773,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 		const shortUUID = uuidv4().substring(0, 14); // Using first 8 characters
 
 		// Append the division code (e.g., 'AL' for Alabama)
-		const employeeID = shortUUID + EmployeeDepartment + '-' + EmployeeDivision + '-' + EmployeeCountry;		
+		const employeeID = shortUUID + EmployeeDepartment + '-' + EmployeeId + '-' + EmployeeCountry;		
 			
 		// To hash the New Employee input field using bcryption.
 		const salt = await bcrypt.genSalt(14);
@@ -3806,7 +3806,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 		const newUser = {
 			
-			EmployeeDivision: employeeID,
+			EmployeeId: employeeID,
 			EmployeeDepartment,	
 			EmployeeCountry,
 			EmployeePDF,
@@ -3828,9 +3828,9 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 												
 		await db1_iVoteballot_EmployeesRegistration.run(
 			
-			`INSERT INTO iVoteBallot_HRMEmployees_Registration_01 (EmployeeDivision, EmployeeDepartment, EmployeeCountry, EmployeePDF, EmployeePhoto, EmployeeJobTitle, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail, EmployeeHiredPerson, EmployeeHiredPersonTitle, EmployeeHiredDate, EmployeePassword, EmployeeConfirmPassword, EmployeeTemporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+			`INSERT INTO iVoteBallot_HRMEmployees_Registration_01 (EmployeeId, EmployeeDepartment, EmployeeCountry, EmployeePDF, EmployeePhoto, EmployeeJobTitle, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail, EmployeeHiredPerson, EmployeeHiredPersonTitle, EmployeeHiredDate, EmployeePassword, EmployeeConfirmPassword, EmployeeTemporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
 
-			[newUser.EmployeeDivision, newUser.EmployeeDepartment, newUser.EmployeeCountry, Buffer.from(pdfFileData), Buffer.from(photoFileData), newUser.EmployeeJobTitle, newUser.EmployeeFirstName, newUser.EmployeeMiddleName, newUser.EmployeeLastName, newUser.EmployeeEmail, newUser.EmployeeConfirmEmail, newUser.EmployeeHiredPerson, newUser.EmployeeHiredPersonTitle, newUser.EmployeeHiredDate, newUser.EmployeePassword, newUser.EmployeeConfirmPassword, newUser.EmployeeTemporary_Password], (err) => {
+			[newUser.EmployeeId, newUser.EmployeeDepartment, newUser.EmployeeCountry, Buffer.from(pdfFileData), Buffer.from(photoFileData), newUser.EmployeeJobTitle, newUser.EmployeeFirstName, newUser.EmployeeMiddleName, newUser.EmployeeLastName, newUser.EmployeeEmail, newUser.EmployeeConfirmEmail, newUser.EmployeeHiredPerson, newUser.EmployeeHiredPersonTitle, newUser.EmployeeHiredDate, newUser.EmployeePassword, newUser.EmployeeConfirmPassword, newUser.EmployeeTemporary_Password], (err) => {
 
 				if (err) {
 					console.error(err);
