@@ -2111,6 +2111,19 @@ iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
 	}
 });
 
+// The user route for hrm_VerifyEmailPassword_01.
+iVoteBallotApp.get('/hrm_VerifyEmailPassword_01', (req, res) => {
+	if (req.isAuthenticated) {
+		console.log(req.user);
+		console.log(req.session);
+		console.log('The iVoteBallot\'s employee have been successfully authenticated within the Session through the passport from local4!');
+		res.render('hrm_Employees_EmailVerification_01', { firstName: req.user.EmployeeFirstName, lastName: req.user.EmployeeLastName, email: req.user.EmployeeEmail });
+	} else if (req.isUnauthenticated) {
+		res.redirect('/hrm_VerifyEmailPassword_01')
+		console.log('The iVoteBallot\'s employee is not successfully authenticated within the session through the passport from local4!');
+	}
+});
+
 // The user route for alabamaVoters_VerifyEmailPassword_01.
 /*
 iVoteBallotApp.get('/alabamaVoters_VerifyEmailForgotPassword_01', (req, res) => {
@@ -2145,7 +2158,7 @@ iVoteBallotApp.get('/hrm_CreatePasswords_01', (req, res) => {
 		console.log(req.user);
 		console.log(req.session);
 		console.log('The iVoteBallot\'s employee had been successfully authenticated within the Session through the passport from local4!');
-		res.render('hrm_Login_01', {  });
+		res.render('hrm_Login_01');
 	} else if (req.isUnauthenticated) {
 		res.redirect('/hrm_CreatePasswords_01')
 		console.log('The iVoteBallot\' employee is not successfully authenticated within the session through the passport from local4!');
@@ -2205,18 +2218,7 @@ iVoteBallotApp.get('/hrm_Employees_EmailVerification_01', (req, res) => {
 	}
 });
 
-// The user route for hrm_VerifyEmailPassword_01.
-iVoteBallotApp.get('/hrm_VerifyEmailPassword_01', (req, res) => {
-	if (req.isAuthenticated) {
-		console.log(req.user_Local04);
-		console.log(req.session);
-		console.log('The iVoteBallot\'s employee have been successfully authenticated within the Session through the passport from local4!');
-		res.render('hrm_Employees_EmailVerification_01', { firstName: req.user_Local04.DMVFirstName, lastName: req.user_Local04.DMVLastName, email: req.user_Local04.DMVEmail });
-	} else if (req.isUnauthenticated) {
-		res.redirect('/hrm_VerifyEmailPassword_01')
-		console.log('The iVoteBallot\'s employee is not successfully authenticated within the session through the passport from local4!');
-	}
-});
+
 
 
 
@@ -4152,7 +4154,6 @@ iVoteBallotApp.post('/hrm_VerifyEmailPassword_01',
 	}
 	
 );
-
 
 iVoteBallotApp.post('/hrm_CreatePasswords_01',
 
