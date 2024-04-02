@@ -953,7 +953,7 @@ passport.use(
 		}
 	)
 );
-
+/*
 passport.use(
 	'local5',
 	new LocalStrategy({
@@ -1019,6 +1019,7 @@ passport.use(
 		}
 	)
 );
+*/
 
 /*
 	The code passport.serializeUser(function (user, done) { done(null, user.id); }) is a function
@@ -1151,7 +1152,7 @@ passport.deserializeUser(function (userId, done) {
 passport.deserializeUser(function (id, done) {
 	console.log('Deserializing users...')
 	console.log(id);
-	const user = db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 = ?', id, (err, user) => {
+	const user = db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE id = ?', id, (err, user) => {
 
 		if (err) {
 			return done(err);
@@ -2634,7 +2635,7 @@ iVoteBallotApp.post(
 
 iVoteBallotApp.post(
 	'/hrm_Login_01',
-	passport.authenticate('local4', {
+	passport.authenticate('local5', {
 		successRedirect: '/hrm_Dashboard_01',
 		failureRedirect: '/hrm_Login_01',
 		failureFlash: true
