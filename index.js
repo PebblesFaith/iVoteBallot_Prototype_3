@@ -877,22 +877,22 @@ passport.use(
 	'local4',
 	new LocalStrategy({
 		usernameField: 'EmployeeEmail',
-		passwordField: 'EmployeePassword',
+		passwordField: 'EmployeeTemporary_Password',
 		passReqToCallback: true // To allow request object to be passed to callback
 	},
-		async (req, EmployeeEmail, EmployeePassword, done) => {
+		async (req, EmployeeEmail, EmployeeTemporary_Password, done) => {
 
 			console.log('The iVoteBallot\'s new employee\'s passport.use(local4) email (\'EmployeeEmail\') as: ' + EmployeeEmail);
-			console.log('The iVoteBallot\'s new employee\'s passport.use(local4) password (\'EmployeePassword\') as: ' + EmployeePassword);
+			console.log('The iVoteBallot\'s new employee\'s passport.use(local4) password (\'EmployeeTemporary_Password\') as: ' + EmployeeTemporary_Password);
 
 			if (!EmployeeEmail) {
 				return done(null, false, { message: 'You have entered an email address that already exist in iVoteBallot\'s Human Resource Management database: ' + EmployeeEmail });
 			}
 
-			if (!EmployeePassword) {
-				console.log('The new employee\'s iVoteBallot password entered into the input field is: ' + EmployeePassword + '.');
-				console.log('The new employee\'s iVoteBallot password does not match to the Session Management\'s Human Resources database.');
-				return done(null, false, { message: 'Your iVoteBallot\'s Employee password does not match to our iVoteballot\'s Human Resources database.' });
+			if (!EmployeeTemporary_Password) {
+				console.log('The new employee\'s iVoteBallot temporary password entered into the input field is: ' + EmployeeTemporary_Password + '.');
+				console.log('The new employee\'s iVoteBallot temporary password does not match to the Session Management\'s Human Resources database.');
+				return done(null, false, { message: 'Your iVoteBallot\'s Employee temporary password does not match to our iVoteballot\'s Human Resources database.' });
 
 			} else
 
@@ -907,14 +907,14 @@ passport.use(
 						return done(null, false, { message: 'You have entered an incorrect email address: ' + EmployeeEmail + '.' });
 					}
 
-					bcrypt.compare(EmployeePassword, row.EmployeePassword, (err, result) => {
+					bcrypt.compare(EmployeeTemporary_Password, row.EmployeeTemporary_Password, (err, result) => {
 
 						if (err) {
 							return done(err);
 						}
 						if (!result) {
-							console.log('The employee have entered the incorrectly password for local4: ' + EmployeePassword + '.' );
-							return done(null, false, { message: 'You have entered an incorrect iVoteBallot\'s employee password: ' + EmployeePassword + '.' });
+							console.log('The employee have entered the incorrectly temporary password for local4: ' + EmployeeTemporary_Password + '.' );
+							return done(null, false, { message: 'You have entered an incorrect iVoteBallot\'s employee temporary password: ' + EmployeeTemporary_Password + '.' });
 						} else {
 
 							//return done(null, user);
@@ -2651,7 +2651,7 @@ iVoteBallotApp.post(
 
 iVoteBallotApp.post(
 	'/hrm_VerifyEmailPassword_01',
-	passport.authenticate('local5', {
+	passport.authenticate('local4', {
 		successRedirect: '/hrm_CreatePasswords_01',
 		failureRedirect: '/hrm_VerifyEmailPassword_01',
 		failureFlash: true
