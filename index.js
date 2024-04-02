@@ -448,6 +448,7 @@ db1_LoggedPasswordChange.serialize(() => {
 db1_iVoteballot_EmployeesRegistration.serialize(() => {
 	db1_iVoteballot_EmployeesRegistration.run(`CREATE TABLE IF NOT EXISTS iVoteBallot_HRMEmployees_Registration_01 (
 
+		id TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6)))), 
 		EmployeeDivision TEXT NOT NULL,	
 		EmployeeDepartment TEXT NOT NULL,		
 		EmployeeCountry TEXT NOT NULL,
@@ -920,7 +921,9 @@ passport.use(
 
 							return done(null,
 								{
-									id: row.EmployeeDepartment,
+									
+									id: row.id,
+									EmployeeDivision: row.EmployeeDivision,
 									EmployeeDepartment: row.EmployeeDepartment,
 									EmployeeCountry: row.EmployeeCountry,
 									Date: row.Date,
@@ -952,7 +955,7 @@ passport.use(
 );
 
 passport.use(
-	'local05',
+	'local5',
 	new LocalStrategy({
 		usernameField: 'EmployeeEmail',
 		passwordField: 'EmployeeTemporary_Password',
@@ -988,8 +991,8 @@ passport.use(
 
 					return done(null,
 						{
-							
-							id: row.EmployeeDepartment,
+							id: row.id,
+							EmployeeeDivision: row.EmployeeDivision,
 							EmployeeDepartment: row.EmployeeDepartment,
 							EmployeeCountry: row.EmployeeCountry,
 							Date: row.Date,
@@ -1145,11 +1148,10 @@ passport.deserializeUser(function (userId, done) {
     });
 });
 
-
-passport.deserializeUser(function (userId, done) {
+passport.deserializeUser(function (id, done) {
 	console.log('Deserializing users...')
 	console.log(id);
-	const user = db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE userId = ?', userId, (err, user_Local04) => {
+	const user = db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 = ?', id, (err, user) => {
 
 		if (err) {
 			return done(err);
@@ -1160,25 +1162,25 @@ passport.deserializeUser(function (userId, done) {
 
 		return done(null,
 			{
-				
-				id: user_Local04.EmployeeDepartment,
-				EmployeeDepartment: user_Local04.EmployeeDepartment,
-				EmployeeCountry: user_Local04.EmployeeCountry,
-				Date: user_Local04.Date,
-				EmployeePDF: user_Local04.EmployeePDF,
-				EmployeePhoto: user_Local04.EmployeePhoto,
-				EmployeeJobTitle: user_Local04.EmployeeJobTitle,
-				EmployeeFirstName: user_Local04.EmployeeFirstName,
-				EmployeeMiddleName: user_Local04.EmployeeMiddleName,
-				EmployeeLastName: user_Local04.EmployeeLastName,
-				EmployeeEmail: user_Local04.EmployeeEmail,
-				EmployeeConfirmEmail: user_Local04.EmployeeConfirmEmail,
-				EmployeeHiredPerson: user_Local04.EmployeeHiredPerson,
-				EmployeeHiredPersonTitle: user_Local04.EmployeeHiredPersonTitle,
-				EmployeeHiredDate: user_Local04.EmployeeHiredDate,
-				EmployeePassword: user_Local04.EmployeePassword,
-				EmployeeConfirmPassword: user_Local04.EmployeeConfirmPassword,
-				EmployeeTemporary_Password: user_Local04.EmployeeTemporary_Password,
+				id: user.id,
+				EmployeeDivision: user.EmployeeDivision,
+				EmployeeDepartment: user.EmployeeDepartment,
+				EmployeeCountry: user.EmployeeCountry,
+				Date: user.Date,
+				EmployeePDF: user.EmployeePDF,
+				EmployeePhoto: user.EmployeePhoto,
+				EmployeeJobTitle: user.EmployeeJobTitle,
+				EmployeeFirstName: user.EmployeeFirstName,
+				EmployeeMiddleName: user.EmployeeMiddleName,
+				EmployeeLastName: user.EmployeeLastName,
+				EmployeeEmail: user.EmployeeEmail,
+				EmployeeConfirmEmail: user.EmployeeConfirmEmail,
+				EmployeeHiredPerson: user.EmployeeHiredPerson,
+				EmployeeHiredPersonTitle: user.EmployeeHiredPersonTitle,
+				EmployeeHiredDate: user.EmployeeHiredDate,
+				EmployeePassword: user.EmployeePassword,
+				EmployeeConfirmPassword: user.EmployeeConfirmPassword,
+				EmployeeTemporary_Password: user.EmployeeTemporary_Password,
 
 				isAuthenticated: true
 
@@ -1189,7 +1191,6 @@ passport.deserializeUser(function (userId, done) {
 	});	
 
 });
-
 
 const redirectDashboard = (req, res, next) => {
 	if (req.session.userId) {
@@ -1208,8 +1209,6 @@ const redirectHRMDashboard = (req, res, next) => {
 		res.redirect('/hrm_Login_01');
 	}
 }
-
-
 
 function checkMiddlewareAuthentication(req, res, next) {
 	if (req.isAuthenticated()) {
@@ -1801,6 +1800,20 @@ iVoteBallotApp.use('/hrm_VerifyEmailPassword_01', (req, res, next) => {
 });
 
 
+// Middleware to set req.isUnauthenticated for the first use of the '/hrm_CreatePassword_01' URL bar
+iVoteBallotApp.use('/hrm_CreatePasswords_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'hrm_CreatePasswords_01!');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+
+
 
 iVoteBallotApp.set('views', './Public/views');
 iVoteBallotApp.set('common', './Public/common');
@@ -2099,6 +2112,7 @@ iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
 });
 
 // The user route for alabamaVoters_VerifyEmailPassword_01.
+/*
 iVoteBallotApp.get('/alabamaVoters_VerifyEmailForgotPassword_01', (req, res) => {
 	if (req.isAuthenticated) {
 		console.log(req.user);
@@ -2108,6 +2122,33 @@ iVoteBallotApp.get('/alabamaVoters_VerifyEmailForgotPassword_01', (req, res) => 
 	} else if (req.isUnauthenticated) {
 		res.redirect('/alabamaVoters_VerifyEmailForgotPassword_01')
 		console.log('The User is not successfully authenticated within the session through the passport from local4!');
+	}
+})
+*/
+
+// The user route for alabamaVoters_CreatePasswords_01.
+iVoteBallotApp.get('/alabamaVoters_CreatePasswords_01', (req, res) => {
+	if (req.isAuthenticated) {
+		console.log(req.user);
+		console.log(req.session);
+		console.log('The user had been successfully authenticated within the Session through the passport from local4!');
+		res.render('alabamaVoters_LogIn_01', { firstName: req.user.DMVFirstName, lastName: req.user.DMVLastName, email: req.user.DMVEmail });
+	} else if (req.isUnauthenticated) {
+		res.redirect('/alabamaVoters_CreatePasswords_01')
+		console.log('The user is not successfully authenticated within the session through the passport from local4!');
+	}
+})
+
+// The user route for hrm_CreatePasswords_01.
+iVoteBallotApp.get('/hrm_CreatePasswords_01', (req, res) => {
+	if (req.isAuthenticated) {
+		console.log(req.user);
+		console.log(req.session);
+		console.log('The iVoteBallot\'s employee had been successfully authenticated within the Session through the passport from local4!');
+		res.render('hrm_Login_01', {  });
+	} else if (req.isUnauthenticated) {
+		res.redirect('/hrm_CreatePasswords_01')
+		console.log('The iVoteBallot\' employee is not successfully authenticated within the session through the passport from local4!');
 	}
 })
 
@@ -2176,6 +2217,8 @@ iVoteBallotApp.get('/hrm_VerifyEmailPassword_01', (req, res) => {
 		console.log('The iVoteBallot\'s employee is not successfully authenticated within the session through the passport from local4!');
 	}
 });
+
+
 
 /*------------------------------------------------*/
 
@@ -2555,7 +2598,7 @@ iVoteBallotApp.post(
 iVoteBallotApp.post(
 	'/alabamaVoters_VerifyEmailPassword_01',
 	passport.authenticate('local2', {
-		successRedirect: 'alabamaVoters_CreatePasswords_01',
+		successRedirect: '/alabamaVoters_CreatePasswords_01',
 		failureRedirect: '/alabamaVoters_VerifyEmailPassword_01',
 		failureFlash: true
 	}
@@ -2606,8 +2649,8 @@ iVoteBallotApp.post(
 
 iVoteBallotApp.post(
 	'/hrm_VerifyEmailPassword_01',
-	passport.authenticate('local05', {
-		successRedirect: 'hrm_CreatePasswords_01',
+	passport.authenticate('local5', {
+		successRedirect: '/hrm_CreatePasswords_01',
 		failureRedirect: '/hrm_VerifyEmailPassword_01',
 		failureFlash: true
 	}
@@ -3277,7 +3320,6 @@ iVoteBallotApp.post('/alabamaVoters_EmailVerification_01', (req, res) => {
 	});
 });
 
-
 iVoteBallotApp.post('/alabamaVoters_ForgotPassword_01', (req, res) => {
 	const email = req.body.DMVEmail;
 
@@ -3561,7 +3603,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 
 		} else {
 
-			db1.run('UPDATE alabamaDMV_Commission_01 SET Password = ?, ConfirmPassword = ? WHERE DMVEmail = ?',
+			await db1.run('UPDATE alabamaDMV_Commission_01 SET Password = ?, ConfirmPassword = ? WHERE DMVEmail = ?',
 				[
 
 					passwordHashed,
@@ -3868,8 +3910,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 					bcc: 'honey.ryder.development@ivoteballot.com',
 					subject: `Notification from the iVoteBallot's Election Assure Experts`,
 					html:
-						`	
-					
+						`						
 						<p>Dear ${req.body.EmployeeFirstName} ${req.body.EmployeeMiddleName} ${req.body.EmployeeLastName},</p>
 						<p>Congratulations! Your iVoteballot Employee account has been successfully set up by our dedicated Human Resource Manager.</p>
 
@@ -4113,7 +4154,65 @@ iVoteBallotApp.post('/hrm_VerifyEmailPassword_01',
 );
 
 
+iVoteBallotApp.post('/hrm_CreatePasswords_01',
 
+	async (req, res) => {
+
+		console.log('req.user:', req.user.EmployeeEmail);
+
+		const EmployeeEmail = req.user.EmployeeEmail;
+		const EmployeePassword = req.body.EmployeePassword;
+		const EmployeeConfirmPassword = req.body.EmployeeConfirmPassword;
+
+		console.log(req.body);
+
+		// To hash the newPassword input field using bcrypt library.
+		const salt = await bcrypt.genSalt(14);
+		const passwordHashed = await bcrypt.hash(EmployeePassword, salt);
+
+		// To hash the confirmNewPassword input field using bcrypt library.
+		const confirmPasswordHashed = await bcrypt.hash(EmployeeConfirmPassword, salt);
+
+		console.log('The employee employment\'s email is: ' + EmployeeEmail + '.');
+		console.log('The employee employment\'s password is: ' + EmployeePassword + '.');
+		console.log('The employee employment\'s confirm password is: ' + EmployeeConfirmPassword + '.');
+
+		if (passwordHashed !== confirmPasswordHashed) {
+			return res.render('hrm_CreatePasswords_01', { error: 'Your new password does not match to confirm password.' });
+			req.flash('error', 'Your new password does not match to your new confirm password.');
+
+		} else {
+
+			db1_iVoteballot_EmployeesRegistration.run('UPDATE iVoteBallot_HRMEmployees_Registration_01 SET EmployeePassword = ?, EmployeeConfirmPassword = ? WHERE EmployeeEmail = ?',
+				[
+
+					passwordHashed,
+					confirmPasswordHashed,
+					EmployeeEmail
+
+				],
+				(err) => {
+
+					if (err) {
+						console.log('hrm_CreatePasswords_01\'s POST have been created either an user login authentication error or syntax POST issues: ' + err.message);
+						res.render('535');
+
+					} else {
+						console.log('The iVoteBallot\'s employee have successfully either created or updated his or her employment password.')
+						res.redirect('/hrm_Login_01');						
+						
+
+					}
+
+				}
+
+					
+			);
+
+		}
+
+	}
+);
 
 
 //const boxicons = require('boxicons');
