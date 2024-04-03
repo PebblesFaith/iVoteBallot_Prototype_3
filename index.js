@@ -3768,7 +3768,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 		const EmployeeHiredDate = req.body.EmployeeHiredDate;
 
 		const EmployeePassword = req.body.EmployeePassword;
-		const EmployeeConfirmPassword = req.body.ConfirmPassword;
+		const EmployeeConfirmPassword = req.body.EmployeeConfirmPassword;
 		const EmployeeTemporary_Password = req.body.EmployeeTemporary_Password;
 
 		console.log(req.body);
@@ -3792,8 +3792,8 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 		console.log('The new employee\'s password is: ' + EmployeePassword + '.');
 		console.log('The new employee\'s confirm password is: ' + EmployeeConfirmPassword + '.');
-		console.log('The new employee\'s temporary password is: ' + EmployeeTemporary_Password + '.');
-
+		console.log('The new employee\'s temporary password is: ' + EmployeeTemporary_Password + '.');		
+		
 		console.log(req.session);
 
 		// Generate a shorter version of UUID (version 4)
@@ -3823,7 +3823,8 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 		// To hash the user's Confirm Password input field using bcryption.	
 		const Temporary_PasswordHashed = await bcrypt.hash(req.body.EmployeeTemporary_Password, salt);
 
-
+		console.log('The new employee\'s concatenation employee Id is: ' + employeeID + '.');
+		
 		// Read the photo file as binary data
 		const pdfFilePath = `/Users/saraihannahajai/Documents/iVoteBallot_Prototype_3/iVoteBallot_HRM_EmployeesDataInformation/iVoteBallotHRM_Employees_PDFHiredInfo/${EmployeePDF}`;
 		const pdfFileData = fs.readFileSync(pdfFilePath);
@@ -3855,7 +3856,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 		};		
 												
 		await db1_iVoteballot_EmployeesRegistration.run(
-			
+						
 			`INSERT INTO iVoteBallot_HRMEmployees_Registration_01 (EmployeeId, EmployeeDepartment, EmployeeCountry, EmployeePDF, EmployeePhoto, EmployeeJobTitle, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail, EmployeeHiredPerson, EmployeeHiredPersonTitle, EmployeeHiredDate, EmployeePassword, EmployeeConfirmPassword, EmployeeTemporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
 
 			[newUser.EmployeeId, newUser.EmployeeDepartment, newUser.EmployeeCountry, Buffer.from(pdfFileData), Buffer.from(photoFileData), newUser.EmployeeJobTitle, newUser.EmployeeFirstName, newUser.EmployeeMiddleName, newUser.EmployeeLastName, newUser.EmployeeEmail, newUser.EmployeeConfirmEmail, newUser.EmployeeHiredPerson, newUser.EmployeeHiredPersonTitle, newUser.EmployeeHiredDate, newUser.EmployeePassword, newUser.EmployeeConfirmPassword, newUser.EmployeeTemporary_Password], (err) => {
@@ -3869,7 +3870,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 				} else {
 					
 					console.log('db1_iVoteBallot_EmployeesRegistration is about to run.');
-					console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
+					console.log('The user data information typed into the \'iVoteBallot_HRMEmployees_Registration_01\' input fields have been successfully parsed into the \'iVoteBallot_HRMEmployees_Registration_01\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
 					req.flash('success', 'The Human Resources Manager have successfully registered your employee data information onto the iVoteBallot\'s HRM database, and you can now sign up to create your iVoteBallot\'s employment job orders account.');
 					
 					res.redirect('/hrm_SignUp_01');
