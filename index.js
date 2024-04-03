@@ -957,10 +957,6 @@ passport.use(
 	)
 );
 
-
-
-
-
 passport.use(
 	'local5',
 	new LocalStrategy({
@@ -1624,17 +1620,6 @@ iVoteBallotApp.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	next();
 });
 
-// Middleware to set req.isUnauthenticated for the first use of the '/iVoteBallot_HRMEmployees_Registration_01' URL bar.
-iVoteBallotApp.use('/iVoteBallot_HRMEmployees_Registration_01', (req, res, next) => {
-	console.log('The middleware have been call for the user\'s \'iVoteBallot_HRMEmployees_Registration_01\'.');
-	// Check if user is Already authenticated
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-	next();
-});
-
-
 // Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_SignUp_01' URL bar
 iVoteBallotApp.use('/alabamaVoters_SignUp_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'alabamaVoters_SignUp_01\'.');
@@ -1768,6 +1753,16 @@ iVoteBallotApp.use('/alabamaVoters_LogOut_01', (req, res, next) => {
 	if (!req.session.isAuthenticated) {
 
 		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/iVoteBallot_HRMEmployees_Registration_01' URL bar.
+iVoteBallotApp.use('/iVoteBallot_HRMEmployees_Registration_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'iVoteBallot_HRMEmployees_Registration_01\'.');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
 		req.isUnauthenticated = true;
 	}
 	next();
@@ -2025,8 +2020,8 @@ iVoteBallotApp.get('/iVoteBallot_HRMEmployees_Registration_01.', redirectHRMDash
 	// Check if user already authenticated.
 	if (req.session.isAuthenticated) {
 		console.log('Human Resources employee have already created the new employee iVoteBallot\'s account.');
-		req.flash('success', 'Human Resource employee have already created the new employee iVoteBallot\'s account.');
-		res.render('/ivoteballot');
+		req.flash('success', 'You have already created the new employee iVoteBallot\'s account.');
+		res.render('/hrm_SignUp_01');
 	}
 	console.log(req.session);
 	// Check if this is the first use of 'iVoteBallot_HRMEmployees_Registration_01' route URL bar
@@ -2641,6 +2636,32 @@ iVoteBallotApp.post(
 ));
 
 iVoteBallotApp.post(
+	'/alabamaVoters_LogIn_01',
+	passport.authenticate('local3', {
+		successRedirect: '/dashboard_01',
+		failureRedirect: '/alabamaVoters_LogIn_01',
+		failureFlash: true
+	}),
+	function (req, res) {
+
+		// This function will be called only if authentication succeeds
+
+		res.redirect('/dashboard_01');
+
+	}
+
+);
+
+iVoteBallotApp.post(
+	'/hrm_SignUp_01',
+	passport.authenticate('local4', {
+		successRedirect: '/hrm_Employees_EmailVerification_01',
+		failureRedirect: '/hrm_SignUp_01',
+		failureFlash: true
+	}
+));
+
+iVoteBallotApp.post(
 	'/hrm_Login_01',
 	passport.authenticate('local5', {
 		successRedirect: '/hrm_Dashboard_01',
@@ -2659,7 +2680,7 @@ iVoteBallotApp.post(
 
 iVoteBallotApp.post(
 	'/hrm_VerifyEmailPassword_01',
-	passport.authenticate('local4', {
+	passport.authenticate('local5', {
 		successRedirect: '/hrm_CreatePasswords_01',
 		failureRedirect: '/hrm_VerifyEmailPassword_01',
 		failureFlash: true
