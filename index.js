@@ -873,7 +873,6 @@ passport.use(
 	)
 );
 
-
 // hrm_Signup_01.ejs
 
 passport.use(
@@ -886,7 +885,7 @@ passport.use(
 		async (req, EmployeeEmail, EmployeeId, done) => {
 
 			console.log('The iVoteBallot\'s user\'s passport.use(local4) email (\'EmployeeEmail\') as: ' + EmployeeEmail);
-			console.log('The iVoteBallot\'s user\'s passport.use(local4) password (\'EmployeeId\') as: ' + employeeID);
+			console.log('The iVoteBallot\'s user\'s passport.use(local4) password (\'EmployeeId\') as: ' + EmployeeId);
 
 			if (!EmployeeEmail) {
 				return done(null, false, { message: 'You have entered an email address that already exist in iVoteBallot\'s Human Resources Management database: ' + EmployeeEmail });
@@ -3774,7 +3773,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 		console.log(req.body);
 
-		console.log('The new employee divisional region is: ' + EmployeeId + '.');
+		console.log('The new employee divisional Id region is: ' + EmployeeId + '.');
 		console.log('The new employee\'s department region is: ' + EmployeeDepartment + '.');
 		console.log('The new employee\'s country location is: ' + EmployeeCountry + '.');
 		console.log('The new employee\'s PDF Files are: ' + EmployeePDF + '.');
@@ -3808,8 +3807,9 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 		//const DMVSSNHashed = await bcrypt.hash(req.body.DMVSSN, salt);
 		//const DMVIdTypeNumberHashed = await bcrypt.hash(req.body.DMVIdTypeNumber, salt);
 
-		// To hash the user's IvoteBallotIdIdentifierCode input field using bcryption.		
-		//const IvoteBallotIdIdentifierCodeHashed = await bcrypt.hash(req.body.IvoteBallotIdIdentifierCode, salt);
+		// To hash the user's Employee Id input field using bcryption.	
+		
+		const IdHashed = await bcrypt.hash(employeeID, salt);
 
 		// To hash the user's IvoteBallotIdIdentifierCode input field using bcryption.	
 		//const ConfirmIvoteBallotIdIdentifierCodeHashed = await bcrypt.hash(req.body.ConfirmIvoteBallotIdIdentifierCode, salt);
@@ -3834,7 +3834,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 		const newUser = {
 			
-			EmployeeId: employeeID,
+			EmployeeId: IdHashed,
 			EmployeeDepartment,	
 			EmployeeCountry,
 			EmployeePDF,
@@ -3852,7 +3852,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 			EmployeeConfirmPassword: ConfirmPasswordHashed,
 			EmployeeTemporary_Password: Temporary_PasswordHashed
 			
-		};
+		};		
 												
 		await db1_iVoteballot_EmployeesRegistration.run(
 			
@@ -3871,8 +3871,8 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 					console.log('db1_iVoteBallot_EmployeesRegistration is about to run.');
 					console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
 					req.flash('success', 'The Human Resources Manager have successfully registered your employee data information onto the iVoteBallot\'s HRM database, and you can now sign up to create your iVoteBallot\'s employment job orders account.');
-
-					res.redirect('/hrm_Employees_EmailVerification_01');
+					
+					res.redirect('/hrm_SignUp_01');
 
 				}			
 
@@ -3993,6 +3993,68 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 	}
 );
+
+iVoteBallotApp.post('/hrm_SignUp_01',
+
+	async (req, res) => {
+
+		const DMVEmail = req.user.EmployeeEmail;
+		//const userIvoteBallotIdIdentifierCode = req.body.userIvoteBallotIdIdentifierCode;
+		const Password = req.body.EmployeePassword;
+		const ConfirmPassword = req.body.EmployeeConfirmPassword;
+
+		console.log('These are the request body' + req.body);
+
+		//console.log('The user email address is: ' + userDMVEmail + '.');
+		//console.log('The user iVoteBallot Id Identifier Code is: ' + userIvoteBallotIdIdentifierCode + '.');
+		console.log('The user password is: ' + EmployeePassword + '.');
+		console.log('The user confirm password is: ' + EmployeeConfirmPassword + '.');
+
+		console.log('The request session: ' + req.session + '.');
+
+		// To hash the newPassword input field using bcrypt library.
+		const salt = await bcrypt.genSalt(BCRYPTION_SALT_KEY);
+		const passwordHashed = await bcrypt.hash(EmployeePassword, salt);
+
+		// To hash the confirmNewPassword input field using bcrypt library.
+		const confirmPasswordHashed = await bcrypt.hash(EmployeeConfirmPassword, salt);
+
+		// To check, if the user's email address exists onto the passport serialization through the session cookie id.
+		db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE EmployeeEmail = ?', EmployeeEmail, (err, user) => {
+
+			if (err) {
+
+				console.error(err);
+				console.log('The user\'s input fields for passport.use local1 Local Strategy and Session Cookie Id did not successfully executed from the internet causing an 500 error message most likely from the Developer\'s JavaScript coded written algorithm problems.');
+				res.render('535');
+
+			} else if (!user) {
+				req.flash('error', 'The user have entered the incorrect email address and/or password that were not successfully process through the passport.use local1 Local Strategy and Session Cookie Id to the SQlite3 database authentication from serialization.');
+				console.log('The user\'s email address is not found successfully through the process of the passport.use local1 Local Strategy and Session Cookie Id to the SQLite3 database for serializtion.');
+				res.render('hrm_SignUp_01');
+
+			} else {
+
+				db1_iVoteballot_EmployeesRegistration.run('UPDATE iVoteBallot_HRMEmployees_Registration_01 SET EmployeePassword = ?, EmployeeConfirmPassword = ? WHERE EmployeeEmail = ?', passwordHashed, confirmPasswordHashed, req.EmployeeEmail, (err) => {
+
+					if (err) {
+						console.error(err);
+						console.log('The user\s passport and session was not successfully executed causing an 500 error message due from Developer\s programmatic coding language problems.');
+						res.render('535');
+
+					} else {
+
+						console.log('The user\s email address is successfully found within the passport serialization authenticated processes through the session.');
+						res.redirect('/hrm_Employees_EmailVerification');
+					}
+
+				});
+
+			}
+		});
+	}
+);
+
 
 iVoteBallotApp.post('/hrm_Employees_EmailVerification_01', (req, res) => {
     const EmployeeEmail = req.body.EmployeeEmail;
