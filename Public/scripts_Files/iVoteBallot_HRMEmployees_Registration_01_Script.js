@@ -4,7 +4,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	console.log('Sarai Hannah Ajai is testing her written JavaScript programmatic codes; in order to validate her contact us form has opened up correctly within the HTML webpage.')
 	
 	
-	const EmployeeDivision = document.getElementById('division').value.trim();
+	const EmployeeId = document.getElementById('division').value.trim();
 	const EmployeeDepartment = document.getElementById('department').value.trim();	
 	const EmployeeCountry = document.getElementById('country').value.trim();
 	const EmployeePDF = document.getElementById('pdf').value.trim(); 	
@@ -41,7 +41,7 @@ const validateHRMEmployees_RegistrationForm = (e) => {
 	
 	}	
 
-	if (EmployeeDivision === '' || EmployeeDivision == null) {		
+	if (EmployeeId === '' || EmployeeId == null) {		
 		document.getElementById('userEmployeeDivisionErrorMessage').textContent = 'Error Message: The New Employee\'s State or Province is required. Please select New Employee\'s State or Province from the menu.';
 		setTimeout(function() {
 			document.getElementById('userEmployeeDivisionErrorMessage').textContent = '';
