@@ -449,7 +449,7 @@ db1_iVoteballot_EmployeesRegistration.serialize(() => {
 	db1_iVoteballot_EmployeesRegistration.run(`CREATE TABLE IF NOT EXISTS iVoteBallot_HRMEmployees_Registration_01 (
 
 		id TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6)))), 
-		EmployeeId TEXT NOT NULL,		
+		EmployeeId TEXT NOT NULL,	
 		EmployeeDepartment TEXT NOT NULL,		
 		EmployeeCountry TEXT NOT NULL,
         Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
@@ -925,7 +925,7 @@ passport.use(
 								{
 									id: row.id,
 
-									EmployeeId: row.EmployeeId,							
+									EmployeeId: row.EmployeeId,
 									EmployeeDepartment: row.EmployeeDepartment,
 									EmployeeCountry: row.EmployeeCountry,
 									Date: row.Date,
@@ -994,7 +994,7 @@ passport.use(
 					return done(null,
 						{
 							id: row.id,
-							EmployeeId: row.EmployeeId,						
+							EmployeeId: row.EmployeeId,
 							EmployeeDepartment: row.EmployeeDepartment,
 							EmployeeCountry: row.EmployeeCountry,
 							Date: row.Date,
@@ -1166,7 +1166,7 @@ passport.deserializeUser(function (id, done) {
 		return done(null,
 			{
 				id: user.id,
-				EmployeeId: user.EmployeeId,			
+				EmployeeId: user.EmployeeId,
 				EmployeeDepartment: user.EmployeeDepartment,
 				EmployeeCountry: user.EmployeeCountry,
 				Date: user.Date,
@@ -3750,7 +3750,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 iVoteBallotApp.post('/hrmEmployees_Registration_01',
 	async (req, res) => {	
 
-		const EmployeeId = req.body.EmployeeId;		
+		const EmployeeId = req.body.EmployeeId;
 		const EmployeeDepartment = req.body.EmployeeDepartment;		
 		const EmployeeCountry = req.body.EmployeeCountry;
 		const EmployeePDF = req.body.EmployeePDF;
@@ -3773,7 +3773,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 		console.log(req.body);
 
-		console.log('The new employee employment Id by country region bycrpted is: ' + EmployeeId + '.');
+		console.log('The new employee divisional Id region is: ' + EmployeeId + '.');
 		console.log('The new employee\'s department region is: ' + EmployeeDepartment + '.');
 		console.log('The new employee\'s country location is: ' + EmployeeCountry + '.');
 		console.log('The new employee\'s PDF Files are: ' + EmployeePDF + '.');
@@ -3835,7 +3835,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 
 		const newUser = {
 			
-			EmployeeId: IdHashed,		
+			EmployeeId: IdHashed,
 			EmployeeDepartment,	
 			EmployeeCountry,
 			EmployeePDF,
@@ -3854,7 +3854,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 			EmployeeTemporary_Password: Temporary_PasswordHashed
 			
 		};		
-														
+												
 		await db1_iVoteballot_EmployeesRegistration.run(
 						
 			`INSERT INTO iVoteBallot_HRMEmployees_Registration_01 (EmployeeId, EmployeeDepartment, EmployeeCountry, EmployeePDF, EmployeePhoto, EmployeeJobTitle, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail, EmployeeHiredPerson, EmployeeHiredPersonTitle, EmployeeHiredDate, EmployeePassword, EmployeeConfirmPassword, EmployeeTemporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
@@ -3906,9 +3906,6 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 							</li>
 							<li>
 								Job Title: ${req.body.EmployeeJobTitle}
-							</li>
-							<li>
-								Country Location: ${req.body.EmployeeCountry}
 							</li>
 							<li>
 								Email: ${req.body.EmployeeEmail}
