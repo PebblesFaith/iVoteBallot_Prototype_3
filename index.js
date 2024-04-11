@@ -943,8 +943,7 @@ passport.use(
 									EmployeeHiredDate: row.EmployeeHiredDate,
 									EmployeePassword: row.EmployeePassword,
 									EmployeeConfirmPassword: row.EmployeeConfirmPassword,
-									EmployeeTemporary_Password: row.EmployeeTemporary_Password,
-											
+									EmployeeTemporary_Password: row.EmployeeTemporary_Password,											
 
 									isAuthenticated: true
 								}
@@ -995,6 +994,7 @@ passport.use(
 					return done(null,
 						{
 							id: row.id,
+
 							EmployeeId: row.EmployeeId,
 							EmployeeDepartment: row.EmployeeDepartment,
 							EmployeeCountry: row.EmployeeCountry,
@@ -1024,84 +1024,61 @@ passport.use(
 );
 
 passport.use(
-	'local3',
+	'local6',
 	new LocalStrategy({
-		usernameField: 'DMVEmail',
-		passwordField: 'Password',
+		usernameField: 'EmployeeEmail',
+		passwordField: 'EmployeePassword',
 		passReqToCallback: true // To allow request object to be passed to callback
 	},
-		async (req, DMVEmail, Password, done) => {
+		async (req, EmployeeEmail, EmployeePassword, done) => {
 
-			console.log('The iVoteBallot\'s user\'s passport.use(local3) email (\'DMVEmail\') as: ' + DMVEmail);
-			console.log('The iVoteBallot\'s user\'s passport.use(local3) password (\'Password\') as: ' + Password);
+			console.log('The HRM\'s employee passport.use(local6) email (\'EmployeeEmail\') as: ' + EmployeeEmail);
+			console.log('The HRM\'s employee passport.use(local6) password (\'EmployeePassword\') as: ' + EmployeePassword);
 
-			await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE DMVEmail = ?`, DMVEmail, (err, row) => {
+			await db1_iVoteballot_EmployeesRegistration.get(`SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE EmployeeEmail = ?`, EmployeeEmail, (err, row) => {
 
 				if (err) {
 					return done(err);
 				}
 
 				if (!row) {
-					console.log('The user\'s have entered the incorrect email address from local3: ' + DMVEmail);
-					return done(null, false, { message: 'You have entered the incorrect email address: ' + DMVEmail + '.' });
+					console.log('The employee\'s have entered the incorrect email address from local6: ' + EmployeeEmail);
+					return done(null, false, { message: 'You have entered the incorrect email address: ' + EmployeeEmail + '.' });
 				}
 
-				bcrypt.compare(Password, row.Password, (err, result) => {
+				bcrypt.compare(EmployeePassword, row.EmployeeEmail, (err, result) => {
 
 					if (err) {
 						return done(err);
 					}
 					if (!result) {
-						console.log('The user\'s password was entered incorrectly for local3: ' + Password + '.');
-						return done(null, false, { message: 'You have entered the incorrect password: ' + Password + '.' });
+						console.log('The employee\'s password was entered incorrectly for local6: ' + EmployeePassword + '.');
+						return done(null, false, { message: 'You have entered the incorrect password: ' + EmployeePassword + '.' });
 					}
 					//return done(null, row);
 
 					return done(null,
 						{
+							
 							id: row.id,
-							DMVPhoto: row.DMVPhoto,
-							DMVFirstName: row.DMVFirstName,
-							DMVMiddleName: row.DMVMiddleName,
-							DMVLastName: row.DMVLastName,
-							DMVSuffix: row.DMVSuffix,
-							DMVDateOfBirth: row.DMVDateOfBirth,
-							DMVBirthSex: row.DMVBirthSex,
-							DMVGenderIdentity: row.DMVGenderIdentity,
-							DMVRace: row.DMVRace,
-							DMVUSResidentStatusSelection: row.DMVUSResidentStatusSelection,
-							DMVUSResidentStatusCategorySelection: row.DMVUSResidentStatusCategorySelection,
-							DMVUSResidentStatusSubjectSelection: row.DMVUSResidentStatusSubjectSelection,
-							DMVGradeSchool: row.DMVGradeSchool,
-							DMVGradeSchoolSelection: row.DMVGradeSchoolSelection,
-							DMVGradeSchoolYearSelection: row.DMVGradeSchoolYearSelection,
-							DMVHighSchool: row.DMVHighSchool,
-							DMVHighSchoolSelection: row.DMVHighSchoolSelection,
-							DMVHighSchoolYearSelection: row.DMVHighSchoolYearSelection,
-							DMVCollege: row.DMVCollege,
-							DMVDegreeSelection: row.DMVDegreeSelection,
-							DMVCategorySelection: row.DMVCategorySelection,
-							DMVSubjectSelection: row.DMVSubjectSelection,
-							DMVCollegeYearSelection: row.DMVCollegeYearSelection,
-							DMVSSN: row.DMVSSN,
-							DMVEmail: row.DMVEmail,
-							DMVConfirmEmail: row.DMVConfirmEmail,
-							DMVPhoneNumber: row.DMVPhoneNumber,
-							DMVAddress: row.DMVAddress,
-							DMVUnitType: row.DMVUnitType,
-							DMVUnitTypeNumber: row.DMVUnitType,
-							DMVCountrySelection: row.DMVCountrySelection,
-							DMVStateSelection: row.DMVStateSelection,
-							DMVCountySelection: row.DMVCountySelection,
-							DMVCitySelection: row.DMVCitySelection,
-							DMVZipSelection: row.DMVZipSelection,
-							DMVIdType: row.DMVIdType,
-							DMVIdTypeNumber: row.DMVIdTypeNumber,
-							IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode,
-							ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode,
-							Password: row.Password,
-							ConfirmPassword: row.ConfirmPassword,
-							Temporary_Password: row.Temporary_Password,
+							EmployeeId: row.EmployeeId,
+							EmployeeDepartment: row.EmployeeDepartment,
+							EmployeeCountry: row.EmployeeCountry,
+							Date: row.Date,
+							EmployeePDF: row.EmployeePDF,
+							EmployeePhoto: row.EmployeePhoto,
+							EmployeeJobTitle: row.EmployeeJobTitle,
+							EmployeeFirstName: row.EmployeeFirstName,
+							EmployeeMiddleName: row.EmployeeMiddleName,
+							EmployeeLastName: row.EmployeeLastName,
+							EmployeeEmail: row.EmployeeEmail,
+							EmployeeConfirmEmail: row.EmployeeConfirmEmail,
+							EmployeeHiredPerson: row.EmployeeHiredPerson,
+							EmployeeHiredPersonTitle: row.EmployeeHiredPersonTitle,
+							EmployeeHiredDate: row.EmployeeHiredDate,
+							EmployeePassword: row.EmployeePassword,
+							EmployeeConfirmPassword: row.EmployeeConfirmPassword,
+							EmployeeTemporary_Password: row.EmployeeTemporary_Password,
 
 							isAuthenticated: true
 						}
@@ -2801,7 +2778,7 @@ iVoteBallotApp.post(
 
 iVoteBallotApp.post(
 	'/hrm_VerifyEmailPassword_01',
-	passport.authenticate('local5', {
+	passport.authenticate('local4', {
 		successRedirect: '/hrm_CreatePasswords_01',
 		failureRedirect: '/hrm_VerifyEmailPassword_01',
 		failureFlash: true
