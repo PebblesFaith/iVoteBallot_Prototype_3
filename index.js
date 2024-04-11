@@ -1023,6 +1023,99 @@ passport.use(
 	)
 );
 
+passport.use(
+	'local3',
+	new LocalStrategy({
+		usernameField: 'DMVEmail',
+		passwordField: 'Password',
+		passReqToCallback: true // To allow request object to be passed to callback
+	},
+		async (req, DMVEmail, Password, done) => {
+
+			console.log('The iVoteBallot\'s user\'s passport.use(local3) email (\'DMVEmail\') as: ' + DMVEmail);
+			console.log('The iVoteBallot\'s user\'s passport.use(local3) password (\'Password\') as: ' + Password);
+
+			await db1.get(`SELECT * FROM alabamaDMV_Commission_01 WHERE DMVEmail = ?`, DMVEmail, (err, row) => {
+
+				if (err) {
+					return done(err);
+				}
+
+				if (!row) {
+					console.log('The user\'s have entered the incorrect email address from local3: ' + DMVEmail);
+					return done(null, false, { message: 'You have entered the incorrect email address: ' + DMVEmail + '.' });
+				}
+
+				bcrypt.compare(Password, row.Password, (err, result) => {
+
+					if (err) {
+						return done(err);
+					}
+					if (!result) {
+						console.log('The user\'s password was entered incorrectly for local3: ' + Password + '.');
+						return done(null, false, { message: 'You have entered the incorrect password: ' + Password + '.' });
+					}
+					//return done(null, row);
+
+					return done(null,
+						{
+							id: row.id,
+							DMVPhoto: row.DMVPhoto,
+							DMVFirstName: row.DMVFirstName,
+							DMVMiddleName: row.DMVMiddleName,
+							DMVLastName: row.DMVLastName,
+							DMVSuffix: row.DMVSuffix,
+							DMVDateOfBirth: row.DMVDateOfBirth,
+							DMVBirthSex: row.DMVBirthSex,
+							DMVGenderIdentity: row.DMVGenderIdentity,
+							DMVRace: row.DMVRace,
+							DMVUSResidentStatusSelection: row.DMVUSResidentStatusSelection,
+							DMVUSResidentStatusCategorySelection: row.DMVUSResidentStatusCategorySelection,
+							DMVUSResidentStatusSubjectSelection: row.DMVUSResidentStatusSubjectSelection,
+							DMVGradeSchool: row.DMVGradeSchool,
+							DMVGradeSchoolSelection: row.DMVGradeSchoolSelection,
+							DMVGradeSchoolYearSelection: row.DMVGradeSchoolYearSelection,
+							DMVHighSchool: row.DMVHighSchool,
+							DMVHighSchoolSelection: row.DMVHighSchoolSelection,
+							DMVHighSchoolYearSelection: row.DMVHighSchoolYearSelection,
+							DMVCollege: row.DMVCollege,
+							DMVDegreeSelection: row.DMVDegreeSelection,
+							DMVCategorySelection: row.DMVCategorySelection,
+							DMVSubjectSelection: row.DMVSubjectSelection,
+							DMVCollegeYearSelection: row.DMVCollegeYearSelection,
+							DMVSSN: row.DMVSSN,
+							DMVEmail: row.DMVEmail,
+							DMVConfirmEmail: row.DMVConfirmEmail,
+							DMVPhoneNumber: row.DMVPhoneNumber,
+							DMVAddress: row.DMVAddress,
+							DMVUnitType: row.DMVUnitType,
+							DMVUnitTypeNumber: row.DMVUnitType,
+							DMVCountrySelection: row.DMVCountrySelection,
+							DMVStateSelection: row.DMVStateSelection,
+							DMVCountySelection: row.DMVCountySelection,
+							DMVCitySelection: row.DMVCitySelection,
+							DMVZipSelection: row.DMVZipSelection,
+							DMVIdType: row.DMVIdType,
+							DMVIdTypeNumber: row.DMVIdTypeNumber,
+							IvoteBallotIdIdentifierCode: row.IvoteBallotIdIdentifierCode,
+							ConfirmIvoteBallotIdIdentifierCode: row.ConfirmIvoteBallotIdIdentifierCode,
+							Password: row.Password,
+							ConfirmPassword: row.ConfirmPassword,
+							Temporary_Password: row.Temporary_Password,
+
+							isAuthenticated: true
+						}
+					);
+
+				});
+
+			});
+
+		}
+
+	)
+);
+
 
 /*
 	The code passport.serializeUser(function (user, done) { done(null, user.id); }) is a function
@@ -1768,6 +1861,18 @@ iVoteBallotApp.use('/iVoteBallot_HRMEmployees_Registration_01', (req, res, next)
 	next();
 });
 
+// Middleware to set req.isUnauthenticated for the first use of the '/hrm_SignUp_01' URL bar
+iVoteBallotApp.use('/hrm_SignUp_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'hrm_SignUp_01\'.');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
 // Middleware to set req.isUnauthenticated for the first use of the '/hrm_Login_01' URL bar
 iVoteBallotApp.use('/hrm_Login_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'hrm_Login_01!');
@@ -2100,7 +2205,6 @@ iVoteBallotApp.get('/alabamaVoters_ForgotPassword_01', (req, res) => {
 	}
 });
 
-
 // The user route for alabamaVoters_VerifyEmailPassword_01.
 iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
 	if (req.isAuthenticated) {
@@ -2111,6 +2215,25 @@ iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
 	} else if (req.isUnauthenticated) {
 		res.redirect('/alabamaVoters_VerifyEmailPassword_01')
 		console.log('The user is not successfully authenticated within the session through the passport from local2!');
+	}
+});
+
+// The User route for hrm_SignUp_01. 
+iVoteBallotApp.get('/hrm_SignUp_01', (req, res) => {
+
+	if (req.isAuthenticated()) {
+		console.log(req.user);
+		console.log('Request Session:' + req.session)
+		console.log('' + req.logIn);
+		console.log('The User had been successfully authenticated within the Session through the passport from reset signup password webpage!');
+		res.render('hrm_Employees_EmailVerification_01');
+
+	} else {
+
+		res.render('535')
+
+		console.log('The user is not successfully authenticated within the session through the passport from reset password webpage!');
+
 	}
 });
 
@@ -2161,7 +2284,7 @@ iVoteBallotApp.get('/hrm_CreatePasswords_01', (req, res) => {
 		console.log(req.user);
 		console.log(req.session);
 		console.log('The iVoteBallot\'s employee had been successfully authenticated within the Session through the passport from local4!');
-		res.render('hrm_Login_01');
+		res.render('hrm_Login_01', {EmployeeFirstName: req.user.EmployeeFirstName, EmployeeMiddleName: req.user.EmployeeMiddleName, EmployeeLastName: req.user.EmployeeLastName, EmployeeEmail: req.user.EmployeeEmail});
 	} else if (req.isUnauthenticated) {
 		res.redirect('/hrm_CreatePasswords_01')
 		console.log('The iVoteBallot\' employee is not successfully authenticated within the session through the passport from local4!');
@@ -2220,8 +2343,6 @@ iVoteBallotApp.get('/hrm_Employees_EmailVerification_01', (req, res) => {
 		res.render('404')
 	}
 });
-
-
 
 
 
