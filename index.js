@@ -110,6 +110,7 @@ const hrmSqliteDB = require('better-sqlite3');
 	session and requests it across multiple EJS templates.
 */
 const session = require('express-session');
+const session02 =require("express-session");
 
 /*
 	The code statement "const Sqlite3SessionStore = require("better-sqlite3-session-store")(session)" imports the better-sqlite3-session-store 
@@ -119,7 +120,7 @@ const session = require('express-session');
 */
 const AlabamaSqlite3SessionStore = require('better-sqlite3-session-store')(session);
 
-const HRMSqlite3SessionStore = require('better-sqlite3-session-store')(session);
+const HRMSqlite3SessionStore = require('better-sqlite3-session-store')(session02);
 
 /*
 	In the iVoteBallot web application, the line "const flash = require('express-flash')" is a piece of code written in JavaScript that imports
@@ -496,7 +497,7 @@ db1_iVoteballot_EmployeesRegistration.serialize(() => {
 	to sign the session ID cookie.
 */
 iVoteBallotApp.use(
-	session({
+	session ({
 		store: new AlabamaSqlite3SessionStore({
 
 			client: db,
@@ -521,12 +522,13 @@ iVoteBallotApp.use(
 )
 
 iVoteBallotApp.use(
-	session({
+	session02 ({
 		store: new HRMSqlite3SessionStore({
 
 			client: hrmDB,
 			dir: 'HRM_Id_Session.hrmDB',
 			name: 'HRM_SESSION',
+			expires: 86400,
 			cookie: {
 				secure: true,
 				httpOnly: false,
@@ -540,7 +542,7 @@ iVoteBallotApp.use(
 			rolling: true, // Resets the expiration time on each request
 		}),
 
-		secret: 'EXPRESS_SESSION_KEY'
+		secret: 'HRM_SESSION_KEY'
 
 	})
 )
@@ -1124,7 +1126,6 @@ passport.use(
 
 	)
 );
-
 
 /*
 	The code passport.serializeUser(function (user, done) { done(null, user.id); }) is a function
