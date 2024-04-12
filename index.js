@@ -101,6 +101,8 @@ const LocalStrategy = require('passport-local').Strategy;
 */
 const sqliteDB = require('better-sqlite3');
 
+const hrmSqliteDB = require('better-sqlite3');
+
 /*
 	The code statement "const session = require('express-session')" imports the express-session library and assigns it to a constant variable named 
 	session. This library provides a middleware that allows Sarai Hanna Ajai (the Developer) to create and manage users' sessions within the 
@@ -116,6 +118,8 @@ const session = require('express-session');
 	store and manage users' sessions in a reliable and efficient way when users' logged in or out of iVoteBallot web application.
 */
 const AlabamaSqlite3SessionStore = require('better-sqlite3-session-store')(session);
+
+const HRMSqlite3SessionStore = require('better-sqlite3-session-store')(session);
 
 /*
 	In the iVoteBallot web application, the line "const flash = require('express-flash')" is a piece of code written in JavaScript that imports
@@ -215,6 +219,8 @@ const nodemailer = require('nodemailer');
 */
 const db = new sqliteDB('Alabama_Id_Session.db', { verbose: console.log('The Alabama_Id_Session database have been successfully created.') });
 
+const hrmDB = new hrmSqliteDB('HRM_Id_Session.db', { verbose: console.log('The HRM_Id_Session database have been successfully created.') });
+
 const timeout = require('connect-timeout');
 
 //const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
@@ -254,6 +260,7 @@ if (process.env.NODE_ !== 'production') {
 	sensitive data or services protected by an nodemailer API key or other credentials.
 */
 const ALABAMA_SESSION = process.env.ALABAMA_SESSION;
+const HRM_SESSION = process.env.HRM_SESSION;
 const SESSION_MAX_AGE = process.env.SESSION_MAX_AGE;
 const EXPRESS_SESSION_KEY = process.env.EXPRESS_SESSION_KEY;
 const IONOS_SECRET_KEY = process.env.IONOS_SECRET_KEY;
@@ -308,11 +315,11 @@ const db1_LoggedPasswordChange = new sqlite3.Database('alabamaUsers_PasswordChan
 	}
 });
 
-const db1_iVoteballot_EmployeesRegistration = new sqlite3.Database('iVoteBallot_HRMEmployees_Registration_01.db', err => {
+const db1_iVoteballot_EmployeesRegistration = new sqlite3.Database('iVoteBallot_HRMEmployees_Registration_01.hrmDB', err => {
 	if (err) {
-		console.log('Sarai Hannah Ajai has not created the SQLite3 database table named, iVoteBallotHRM_EmployeesRegistration.db with passport and session management authentications:' + err + '.');
+		console.log('Sarai Hannah Ajai has not created the SQLite3 database table named, iVoteBallotHRM_EmployeesRegistration.hrmDB with passport and session management authentications:' + err + '.');
 	} else {
-		console.log('Sarai Hannah Ajai has successfully created the SQLite3 database table named, iVoteBallotHRM_EmployeesRegistration.db with passport and session management authentications' + Date() + '.');
+		console.log('Sarai Hannah Ajai has successfully created the SQLite3 database table named, iVoteBallotHRM_EmployeesRegistration.hrmDB with passport and session management authentications' + Date() + '.');
 	}
 });
 
@@ -495,6 +502,31 @@ iVoteBallotApp.use(
 			client: db,
 			dir: 'Alabama_Id_Session.db',
 			name: 'ALABAMA_SESSION',
+			cookie: {
+				secure: true,
+				httpOnly: false,
+				sameSite: true,
+				resave: true,
+				saveUninitialized: true,
+				proxy: true,
+				maxAge: 'SESSION_MAX_AGE' // 10 minutes		
+			},
+
+			rolling: true, // Resets the expiration time on each request
+		}),
+
+		secret: 'EXPRESS_SESSION_KEY'
+
+	})
+)
+
+iVoteBallotApp.use(
+	session({
+		store: new HRMSqlite3SessionStore({
+
+			client: hrmDB,
+			dir: 'HRM_Id_Session.hrmDB',
+			name: 'HRM_SESSION',
 			cookie: {
 				secure: true,
 				httpOnly: false,
@@ -1222,10 +1254,10 @@ passport.deserializeUser(function (userId, done) {
     });
 });
 
-passport.deserializeUser(function (id, done) {
+passport.deserializeUser(function (empId, done) {
 	console.log('Deserializing users...')
-	console.log(id);
-	const user = db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE id = ?', id, (err, user) => {
+	console.log(empId);
+	const user = db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE id = ?', empId, (err, user) => {
 
 		if (err) {
 			return done(err);
@@ -1236,7 +1268,7 @@ passport.deserializeUser(function (id, done) {
 
 		return done(null,
 			{
-				id: user.id,
+				empId: user.id,
 				EmployeeId: user.EmployeeId,
 				EmployeeDepartment: user.EmployeeDepartment,
 				EmployeeCountry: user.EmployeeCountry,
@@ -1276,7 +1308,7 @@ const redirectDashboard = (req, res, next) => {
 }
 
 const redirectHRMDashboard = (req, res, next) => {
-	if (req.session.userId) {
+	if (req.session.empId) {
 		res.redirect('/hrm_Dashboard_01');
 	} else {
 		next();
@@ -1690,9 +1722,31 @@ iVoteBallotApp.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	next();
 });
 
+// Middleware to set req.isUnauthenticated for the first use of the '/iVoteBallot_HRMEmployees_Registration_01' URL bar.
+iVoteBallotApp.use('/iVoteBallot_HRMEmployees_Registration_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'iVoteBallot_HRMEmployees_Registration_01\'.');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
 // Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_SignUp_01' URL bar
 iVoteBallotApp.use('/alabamaVoters_SignUp_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'alabamaVoters_SignUp_01\'.');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/hrm_SignUp_01' URL bar
+iVoteBallotApp.use('/hrm_SignUp_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'hrm_SignUp_01\'.');
 	// Check if user is Already authenticated
 	if (!req.session.isAuthenticated) {
 
@@ -1717,6 +1771,16 @@ iVoteBallotApp.use('/alabamaVoters_ForgotPasswordSignUp_01', (req, res, next) =>
 // Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_EmailVerification_01' URL bar
 iVoteBallotApp.use('/alabamaVoters_EmailVerification_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'alabamaVoters_EmailVerification_01\'.');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/hrm_Employees_EmailVerification_01' URL bar
+iVoteBallotApp.use('/hrm_Employees_EmailVerification_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'hrm_Employees_EmailVerification_01\'.');
 	// Check if user is Already authenticated
 	if (!req.session.isAuthenticated) {
 		req.isUnauthenticated = true;
@@ -1758,6 +1822,18 @@ iVoteBallotApp.use('/alabamaVoters_VerifyEmailPassword_01', (req, res, next) => 
 	next();
 });
 
+// Middleware to set req.isUnauthenticated for the first use of the '/hrm_VerifyEmailPassword_01' URL bar
+iVoteBallotApp.use('/hrm_VerifyEmailPassword_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'hrm_VerifyEmailPassword_01!');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
 // Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_CreatePassword_01' URL bar
 iVoteBallotApp.use('/alabamaVoters_CreatePasswords_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'alabamaVoters_CreatePasswords_01!');
@@ -1770,6 +1846,17 @@ iVoteBallotApp.use('/alabamaVoters_CreatePasswords_01', (req, res, next) => {
 	next();
 });
 
+// Middleware to set req.isUnauthenticated for the first use of the '/hrm_CreatePassword_01' URL bar
+iVoteBallotApp.use('/hrm_CreatePasswords_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'hrm_CreatePasswords_01!');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
 
 // Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_LogIn_01' URL bar
 iVoteBallotApp.use('/alabamaVoters_LogIn_01', (req, res, next) => {
@@ -1783,6 +1870,17 @@ iVoteBallotApp.use('/alabamaVoters_LogIn_01', (req, res, next) => {
 	next();
 });
 
+// Middleware to set req.isUnauthenticated for the first use of the '/hrm_Login_01' URL bar
+iVoteBallotApp.use('/hrm_Login_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'hrm_Login_01!');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
 
 // Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_LogOut_01' URL bar
 iVoteBallotApp.use('/alabamaVoters_LogOut_01', (req, res, next) => {
@@ -1827,78 +1925,6 @@ iVoteBallotApp.use('/alabamaVoters_LogOut_01', (req, res, next) => {
 	}
 	next();
 });
-
-// Middleware to set req.isUnauthenticated for the first use of the '/iVoteBallot_HRMEmployees_Registration_01' URL bar.
-iVoteBallotApp.use('/iVoteBallot_HRMEmployees_Registration_01', (req, res, next) => {
-	console.log('The middleware have been call for the user\'s \'iVoteBallot_HRMEmployees_Registration_01\'.');
-	// Check if user is Already authenticated
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-	next();
-});
-
-// Middleware to set req.isUnauthenticated for the first use of the '/hrm_SignUp_01' URL bar
-iVoteBallotApp.use('/hrm_SignUp_01', (req, res, next) => {
-	console.log('The middleware have been call for the user\'s \'hrm_SignUp_01\'.');
-	// Check if user is Already authenticated
-	if (!req.session.isAuthenticated) {
-
-		// User of '/login' URL
-		req.isUnauthenticated = true;
-	}
-	next();
-});
-
-// Middleware to set req.isUnauthenticated for the first use of the '/hrm_Login_01' URL bar
-iVoteBallotApp.use('/hrm_Login_01', (req, res, next) => {
-	console.log('The middleware have been call for the user\'s \'hrm_Login_01!');
-	// Check if user is Already authenticated
-	if (!req.session.isAuthenticated) {
-
-		// User of '/login' URL
-		req.isUnauthenticated = true;
-	}
-	next();
-});
-
-// Middleware to set req.isUnauthenticated for the first use of the '/hrm_Employees_EmailVerification_01' URL bar
-iVoteBallotApp.use('/hrm_Employees_EmailVerification_01', (req, res, next) => {
-	console.log('The middleware have been call for the user\'s \'hrm_Employees_EmailVerification_01\'.');
-	// Check if user is Already authenticated
-	if (!req.session.isAuthenticated) {
-		req.isUnauthenticated = true;
-	}
-	next();
-});
-
-// Middleware to set req.isUnauthenticated for the first use of the '/hrm_VerifyEmailPassword_01' URL bar
-iVoteBallotApp.use('/hrm_VerifyEmailPassword_01', (req, res, next) => {
-	console.log('The middleware have been call for the user\'s \'hrm_VerifyEmailPassword_01!');
-	// Check if user is Already authenticated
-	if (!req.session.isAuthenticated) {
-
-		// User of '/login' URL
-		req.isUnauthenticated = true;
-	}
-	next();
-});
-
-
-// Middleware to set req.isUnauthenticated for the first use of the '/hrm_CreatePassword_01' URL bar
-iVoteBallotApp.use('/hrm_CreatePasswords_01', (req, res, next) => {
-	console.log('The middleware have been call for the user\'s \'hrm_CreatePasswords_01!');
-	// Check if user is Already authenticated
-	if (!req.session.isAuthenticated) {
-
-		// User of '/login' URL
-		req.isUnauthenticated = true;
-	}
-	next();
-});
-
-
-
 
 iVoteBallotApp.set('views', './Public/views');
 iVoteBallotApp.set('common', './Public/common');
@@ -2137,6 +2163,25 @@ iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 	}
 });
 
+// The User route for hrm_SignUp_01. 
+iVoteBallotApp.get('/hrm_SignUp_01', (req, res) => {
+
+	if (req.isAuthenticated()) {
+		console.log(req.user);
+		console.log('Request Session:' + req.session)
+		console.log('' + req.logIn);
+		console.log('The User had been successfully authenticated within the Session through the passport from reset signup password webpage!');
+		res.render('hrm_Employees_EmailVerification_01');
+
+	} else {
+
+		res.render('535')
+
+		console.log('The user is not successfully authenticated within the session through the passport from reset password webpage!');
+
+	}
+});
+
 // The User route for alabamaVoters_ForgotPasswordSignUp_01. 
 iVoteBallotApp.get('/alabamaVoters_ForgotPasswordSignUp_01', (req, res) => {
 
@@ -2169,6 +2214,19 @@ iVoteBallotApp.get('/alabamaVoters_EmailVerification_01', (req, res) => {
 	}
 });
 
+// The User route for hrm_Employees_EmailVerification_01.
+iVoteBallotApp.get('/hrm_Employees_EmailVerification_01', (req, res) => {
+	// Check if user already authenticated.
+	if (req.isUnauthenticated) {
+		console.log('The user attempted to verify email address without being fully authenticated via passport session from the hrm_Employees_EmailVerification_01 webpage.');
+		res.render('hrm_VerifyEmailPassword_01');
+	} else {
+		// Render signup page for new users
+		console.log('The user attempted to verify email address but encountered an authentication error within the passport session from the hrm_Employees_EmailVerification_01 webpage.');
+		res.render('404')
+	}
+});
+
 // The User route for alabamaVoters_EmailVerification_02.
 iVoteBallotApp.get('/alabamaVoters_ForgotPassword_01', (req, res) => {
     // Check if user already authenticated.
@@ -2192,25 +2250,6 @@ iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
 	} else if (req.isUnauthenticated) {
 		res.redirect('/alabamaVoters_VerifyEmailPassword_01')
 		console.log('The user is not successfully authenticated within the session through the passport from local2!');
-	}
-});
-
-// The User route for hrm_SignUp_01. 
-iVoteBallotApp.get('/hrm_SignUp_01', (req, res) => {
-
-	if (req.isAuthenticated()) {
-		console.log(req.user);
-		console.log('Request Session:' + req.session)
-		console.log('' + req.logIn);
-		console.log('The User had been successfully authenticated within the Session through the passport from reset signup password webpage!');
-		res.render('hrm_Employees_EmailVerification_01');
-
-	} else {
-
-		res.render('535')
-
-		console.log('The user is not successfully authenticated within the session through the passport from reset password webpage!');
-
 	}
 });
 
@@ -2308,18 +2347,6 @@ iVoteBallotApp.get('/hrm_Login_01', redirectHRMDashboard, (req, res) => {
 	}
 });
 
-// The User route for hrm_Employees_EmailVerification_01.
-iVoteBallotApp.get('/hrm_Employees_EmailVerification_01', (req, res) => {
-	// Check if user already authenticated.
-	if (req.isUnauthenticated) {
-		console.log('The user attempted to verify email address without being fully authenticated via passport session from the hrm_Employees_EmailVerification_01 webpage.');
-		res.render('hrm_VerifyEmailPassword_01');
-	} else {
-		// Render signup page for new users
-		console.log('The user attempted to verify email address but encountered an authentication error within the passport session from the hrm_Employees_EmailVerification_01 webpage.');
-		res.render('404')
-	}
-});
 
 
 
@@ -2760,6 +2787,15 @@ iVoteBallotApp.post(
 ));
 
 iVoteBallotApp.post(
+	'/hrm_VerifyEmailPassword_01',
+	passport.authenticate('local5', {
+		successRedirect: '/hrm_CreatePasswords_01',
+		failureRedirect: '/hrm_VerifyEmailPassword_01',
+		failureFlash: true
+	}
+));
+
+iVoteBallotApp.post(
 	'/hrm_Login_01',
 	passport.authenticate('local5', {
 		successRedirect: '/hrm_Dashboard_01',
@@ -2776,14 +2812,9 @@ iVoteBallotApp.post(
 
 );
 
-iVoteBallotApp.post(
-	'/hrm_VerifyEmailPassword_01',
-	passport.authenticate('local4', {
-		successRedirect: '/hrm_CreatePasswords_01',
-		failureRedirect: '/hrm_VerifyEmailPassword_01',
-		failureFlash: true
-	}
-));
+
+
+
 
 /* -------------------------- The ending of the POST LOCAL STRATEGY section ----------------------------- */
 
@@ -4158,10 +4189,10 @@ iVoteBallotApp.post('/hrm_SignUp_01',
 
 
 iVoteBallotApp.post('/hrm_Employees_EmailVerification_01', (req, res) => {
-    const EmployeeEmail = req.body.EmployeeEmail;
+    const Email = req.body.EmployeeEmail;
 
     // Check if the email exists in the database
-    db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE EmployeeEmail = ?', EmployeeEmail, (err, row) => {
+    db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE EmployeeEmail = ?', Email, (err, row) => {
         if (err) {
             console.error(err);
             console.log('SQLite3 language did not successfully execute iVoteBallot\'s employee email address search properly; therefore this error means a JavaScript codes language error.');
@@ -4176,7 +4207,7 @@ iVoteBallotApp.post('/hrm_Employees_EmailVerification_01', (req, res) => {
             const newPassword = generateNewPassword();
             const hash = bcrypt.hashSync(newPassword, 13);
 
-            db1_iVoteballot_EmployeesRegistration.run('UPDATE iVoteBallot_HRMEmployees_Registration_01 SET EmployeeTemporary_Password = ? WHERE EmployeeEmail = ?', hash, EmployeeEmail, (err) => {
+            db1_iVoteballot_EmployeesRegistration.run('UPDATE iVoteBallot_HRMEmployees_Registration_01 SET EmployeeTemporary_Password = ? WHERE EmployeeEmail = ?', hash, Email, (err) => {
                 if (err) {
                     console.error(err);
                     console.log('SQlite3 language had not properly execute the UPDATE correctly.')
