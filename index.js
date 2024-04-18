@@ -203,6 +203,12 @@ const { v4: uuidv4 } = require('uuid');
 */
 const userId = uuidv4();
 
+
+
+const sessionTimeout = require('idle-session-timeout');
+
+
+
 /*
 	The given Javascript coded language imports the 'nodemailer' library which is used for sending email within the iVoteBallot web application. The 'require'
 	function is a built-in method within Node.js that is used to load modules or files. The 'const' keyword declares a constant variable 'nodemailer' that holds
@@ -323,7 +329,6 @@ const db1_iVoteballot_EmployeesRegistration = new sqlite3.Database('iVoteBallot_
 		console.log('Sarai Hannah Ajai has successfully created the SQLite3 database table named, iVoteBallotHRM_EmployeesRegistration.hrmDB with passport and session management authentications' + Date() + '.');
 	}
 });
-
 
 /*
 	The given JavaScript codes language creates a SQLite3 database table named 
@@ -488,6 +493,13 @@ db1_iVoteballot_EmployeesRegistration.serialize(() => {
 	};
 });
 
+
+
+// Set the timeout duration in milliseconds (e.g., 30 minutes)
+const timeoutDuration = 60000; // 1 minutes
+
+
+
 /*
 	This statement sets up a middleware function within iVoteBallot web application 
 	in the Node.js router that uses the session package to manage user sessions. 
@@ -505,12 +517,12 @@ iVoteBallotApp.use(
 			name: 'ALABAMA_SESSION',
 			cookie: {
 				secure: true,
-				httpOnly: false,
+				httpOnly: true,
 				sameSite: true,
 				resave: true,
 				saveUninitialized: true,
 				proxy: true,
-				maxAge: 'SESSION_MAX_AGE' // 10 minutes		
+				maxAge: 'timeoutDuration' // 10 minutes		
 			},
 
 			rolling: true, // Resets the expiration time on each request
@@ -531,12 +543,12 @@ iVoteBallotApp.use(
 			expires: 86400,
 			cookie: {
 				secure: true,
-				httpOnly: false,
+				httpOnly: true,
 				sameSite: true,
 				resave: true,
 				saveUninitialized: true,
 				proxy: true,
-				maxAge: 'SESSION_MAX_AGE' // 10 minutes		
+				maxAge: 'HRM_MAX_AGE' // 10 minutes		
 			},
 
 			rolling: true, // Resets the expiration time on each request
@@ -577,6 +589,37 @@ iVoteBallotApp.use([passport.initialize()]);
 	used after Passport's authentication middleware has been invoked.
 */
 iVoteBallotApp.use(passport.session());
+
+
+/*
+
+iVoteBallotApp.use((req, res, next) => {
+    if (req.session && req.session.lastActivity) {
+        const currentTime = new Date().getTime();
+        const elapsedTime = currentTime - req.session.lastActivity;
+        if (elapsedTime > timeoutDuration) {
+            req.session.destroy((err) => {
+                if (err) {
+                    console.error('Error destroying session:', err);
+                }
+            });
+            // Redirect to login page or perform any other action
+            return res.redirect('/login');
+        }
+    }
+    req.session.lastActivity = new Date().getTime();
+    next();
+});
+
+*
+
+
+
+
+
+
+
+
 
 /*
 	The provided JavaScript line configures the iVoteBallotApp to utilize the 'flash' middleware. This middleware is typically
