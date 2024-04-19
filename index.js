@@ -110,7 +110,6 @@ const hrmSqliteDB = require('better-sqlite3');
 	session and requests it across multiple EJS templates.
 */
 const session = require('express-session');
-const session02 =require("express-session");
 
 /*
 	The code statement "const Sqlite3SessionStore = require("better-sqlite3-session-store")(session)" imports the better-sqlite3-session-store 
@@ -120,7 +119,9 @@ const session02 =require("express-session");
 */
 const AlabamaSqlite3SessionStore = require('better-sqlite3-session-store')(session);
 
-const HRMSqlite3SessionStore = require('better-sqlite3-session-store')(session02);
+const HRMSqlite3SessionStore = require('better-sqlite3-session-store')(session);
+
+
 
 /*
 	In the iVoteBallot web application, the line "const flash = require('express-flash')" is a piece of code written in JavaScript that imports
@@ -493,11 +494,8 @@ db1_iVoteballot_EmployeesRegistration.serialize(() => {
 	};
 });
 
-
-
 // Set the timeout duration in milliseconds (e.g., 30 minutes)
 const timeoutDuration = 60000; // 1 minutes
-
 
 
 /*
@@ -514,7 +512,8 @@ iVoteBallotApp.use(
 
 			client: db,
 			dir: 'Alabama_Id_Session.db',
-			name: 'ALABAMA_SESSION',
+			collection: 'ALABAMA_DMV_SESSION',
+			name: 'ALABAMA_DMV_SESSION',
 			cookie: {
 				secure: true,
 				httpOnly: true,
@@ -534,11 +533,12 @@ iVoteBallotApp.use(
 )
 
 iVoteBallotApp.use(
-	session02 ({
+	session ({
 		store: new HRMSqlite3SessionStore({
 
 			client: hrmDB,
-			dir: 'HRM_Id_Session.hrmDB',
+			dir: 'HRM_Id_Session.db',
+			collection: 'HRM_HIRED_SESSION',
 			name: 'HRM_SESSION',
 			expires: 86400,
 			cookie: {
@@ -612,14 +612,6 @@ iVoteBallotApp.use((req, res, next) => {
 });
 
 *
-
-
-
-
-
-
-
-
 
 /*
 	The provided JavaScript line configures the iVoteBallotApp to utilize the 'flash' middleware. This middleware is typically
