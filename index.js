@@ -18,6 +18,7 @@ const express = require('express');
 	constant iVoteBallotApp, allowing the iVoteBallot web application to define routes and middleware management.
 */
 const iVoteBallotApp = express();
+const hrmApp = express();
 
 /*
 	1. The code statement "const path = require('path')" imports the built-in Node.js path module, which provides utilities for working 
@@ -121,8 +122,6 @@ const AlabamaSqlite3SessionStore = require('better-sqlite3-session-store')(sessi
 
 const HRMSqlite3SessionStore = require('better-sqlite3-session-store')(session);
 
-
-
 /*
 	In the iVoteBallot web application, the line "const flash = require('express-flash')" is a piece of code written in JavaScript that imports
 	the 'express-flash' library and assigns it to the variable 'flash' as the following:
@@ -204,11 +203,7 @@ const { v4: uuidv4 } = require('uuid');
 */
 const userId = uuidv4();
 
-
-
 const sessionTimeout = require('idle-session-timeout');
-
-
 
 /*
 	The given Javascript coded language imports the 'nodemailer' library which is used for sending email within the iVoteBallot web application. The 'require'
@@ -232,6 +227,7 @@ const hrmDB = new hrmSqliteDB('HRM_Id_Session.db', { verbose: console.log('The H
 const timeout = require('connect-timeout');
 
 //const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
+const http = require('http');
 
 /*
 	The function starts the iVoteBallotApp prototype 3 web application by listening to port 8080 on the IP address '0.0.0.0'. If there is an error during the
@@ -239,8 +235,10 @@ const timeout = require('connect-timeout');
 	logs a confirmation message stating that the Node.js server, in conjunction with the Express framework, is listening on port 8080 for the iVoteBallotApp 
 	prototype 3 web application.
 */
-const port = 8080;
 
+const port_01 = 8080;
+const port_02 = 1090;
+/*
 iVoteBallotApp.listen(port, '0.0.0.0', function (err) {
 	if (err) {
 		console.log('There is a problem loading iVoteBallot prototype 3 port 8080' + err);
@@ -248,6 +246,24 @@ iVoteBallotApp.listen(port, '0.0.0.0', function (err) {
 		console.log('The Nodejs in conjunction with Express framework is listening onto port ' + port + ' from express\' iVoteBallotApp prototype 3.');
 	}
 });
+*/
+
+http.createServer(iVoteBallotApp).listen(port_01, '0.0.0.0', (err) => {
+	if (err) {
+		console.log('There is a problem loading iVoteBallot prototype 3 port 8080' + err);
+	} else {
+		console.log('The Nodejs in conjunction with Express framework is listening onto port_01 ' + port_01 + ' from express\' iVoteBallotApp prototype 3 | iVoteBallot Users.');
+	}
+
+})
+
+http.createServer(hrmApp).listen(port_02, '0.0.0.0', (err) => {
+	if (err) {
+		console.log('There is a problem loading iVoteBallot prototype 3 port 1090' + err);
+	} else {
+		console.log('The Nodejs in conjunction with Express framework is listening onto port_02 ' + port_02 + ' from express\' iVoteBallotApp prototype 3 | Human Resource Managemenet System.');
+	}
+})
 
 /*
 	The if (process.env.NODE_ !== 'production') block checks whether the application is running
@@ -532,7 +548,7 @@ iVoteBallotApp.use(
 	})
 )
 
-iVoteBallotApp.use(
+hrmApp.use(
 	session ({
 		store: new HRMSqlite3SessionStore({
 
@@ -573,6 +589,7 @@ iVoteBallotApp.use(
 */
 
 iVoteBallotApp.use([passport.initialize()]);
+hrmApp.use([passport.initialize()]);
 
 /*
 	The statement router.use(passport.session()) is used within the iVoteBallot web
@@ -589,6 +606,7 @@ iVoteBallotApp.use([passport.initialize()]);
 	used after Passport's authentication middleware has been invoked.
 */
 iVoteBallotApp.use(passport.session());
+hrmApp.use(passport.session());
 
 
 /*
@@ -622,6 +640,7 @@ iVoteBallotApp.use((req, res, next) => {
 */
 
 iVoteBallotApp.use(flash());
+hrmApp.use(flash());
 
 /*
 	The JavaScript codes language sets up a local1, LocalStrategy for Passport, which is a popular
@@ -1759,7 +1778,7 @@ iVoteBallotApp.use('/alabamaDMV_Commission_01', (req, res, next) => {
 });
 
 // Middleware to set req.isUnauthenticated for the first use of the '/iVoteBallot_HRMEmployees_Registration_01' URL bar.
-iVoteBallotApp.use('/iVoteBallot_HRMEmployees_Registration_01', (req, res, next) => {
+hrmApp.use('/iVoteBallot_HRMEmployees_Registration_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'iVoteBallot_HRMEmployees_Registration_01\'.');
 	// Check if user is Already authenticated
 	if (!req.session.isAuthenticated) {
@@ -1781,7 +1800,7 @@ iVoteBallotApp.use('/alabamaVoters_SignUp_01', (req, res, next) => {
 });
 
 // Middleware to set req.isUnauthenticated for the first use of the '/hrm_SignUp_01' URL bar
-iVoteBallotApp.use('/hrm_SignUp_01', (req, res, next) => {
+hrmApp.use('/hrm_SignUp_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'hrm_SignUp_01\'.');
 	// Check if user is Already authenticated
 	if (!req.session.isAuthenticated) {
@@ -1815,7 +1834,7 @@ iVoteBallotApp.use('/alabamaVoters_EmailVerification_01', (req, res, next) => {
 });
 
 // Middleware to set req.isUnauthenticated for the first use of the '/hrm_Employees_EmailVerification_01' URL bar
-iVoteBallotApp.use('/hrm_Employees_EmailVerification_01', (req, res, next) => {
+hrmApp.use('/hrm_Employees_EmailVerification_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'hrm_Employees_EmailVerification_01\'.');
 	// Check if user is Already authenticated
 	if (!req.session.isAuthenticated) {
@@ -1859,7 +1878,7 @@ iVoteBallotApp.use('/alabamaVoters_VerifyEmailPassword_01', (req, res, next) => 
 });
 
 // Middleware to set req.isUnauthenticated for the first use of the '/hrm_VerifyEmailPassword_01' URL bar
-iVoteBallotApp.use('/hrm_VerifyEmailPassword_01', (req, res, next) => {
+hrmApp.use('/hrm_VerifyEmailPassword_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'hrm_VerifyEmailPassword_01!');
 	// Check if user is Already authenticated
 	if (!req.session.isAuthenticated) {
@@ -1883,7 +1902,7 @@ iVoteBallotApp.use('/alabamaVoters_CreatePasswords_01', (req, res, next) => {
 });
 
 // Middleware to set req.isUnauthenticated for the first use of the '/hrm_CreatePassword_01' URL bar
-iVoteBallotApp.use('/hrm_CreatePasswords_01', (req, res, next) => {
+hrmApp.use('/hrm_CreatePasswords_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'hrm_CreatePasswords_01!');
 	// Check if user is Already authenticated
 	if (!req.session.isAuthenticated) {
@@ -1907,7 +1926,7 @@ iVoteBallotApp.use('/alabamaVoters_LogIn_01', (req, res, next) => {
 });
 
 // Middleware to set req.isUnauthenticated for the first use of the '/hrm_Login_01' URL bar
-iVoteBallotApp.use('/hrm_Login_01', (req, res, next) => {
+hrmApp.use('/hrm_Login_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'hrm_Login_01!');
 	// Check if user is Already authenticated
 	if (!req.session.isAuthenticated) {
@@ -1978,6 +1997,23 @@ const { ErrorCreate } = require('session/lib/session/storage/base');
 
 iVoteBallotApp.use('/', require('./models/views_Router'));
 iVoteBallotApp.use(views_Controller);
+
+
+
+
+hrmApp.set('views', './Public/views');
+hrmApp.set('common', './Public/common');
+
+hrmApp.set('view engine', 'ejs');
+hrmApp.use(express.static(path.join(__dirname, 'public')));
+
+// Use method-override middleware
+hrmApp.use(methodOverride('_method'));
+
+hrmApp.use('/', require('./models/views_Router'));
+hrmApp.use(views_Controller);
+
+
 
 /* -------------------------- The ending of the USE section ----------------------------- */
 
@@ -2159,7 +2195,7 @@ iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) =>
 });
 
 // The User route for iVoteBallot_HRMEmployees_Registration_01.
-iVoteBallotApp.get('/iVoteBallot_HRMEmployees_Registration_01.', redirectHRMDashboard, (req, res) => {
+hrmApp.get('/iVoteBallot_HRMEmployees_Registration_01.', redirectHRMDashboard, (req, res) => {
 
 	// Check if user already authenticated.
 	if (req.session.isAuthenticated) {
@@ -2200,7 +2236,7 @@ iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 });
 
 // The User route for hrm_SignUp_01. 
-iVoteBallotApp.get('/hrm_SignUp_01', (req, res) => {
+hrmApp.get('/hrm_SignUp_01', (req, res) => {
 
 	if (req.isAuthenticated()) {
 		console.log(req.user);
@@ -2251,7 +2287,7 @@ iVoteBallotApp.get('/alabamaVoters_EmailVerification_01', (req, res) => {
 });
 
 // The User route for hrm_Employees_EmailVerification_01.
-iVoteBallotApp.get('/hrm_Employees_EmailVerification_01', (req, res) => {
+hrmApp.get('/hrm_Employees_EmailVerification_01', (req, res) => {
 	// Check if user already authenticated.
 	if (req.isUnauthenticated) {
 		console.log('The user attempted to verify email address without being fully authenticated via passport session from the hrm_Employees_EmailVerification_01 webpage.');
@@ -2290,7 +2326,7 @@ iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
 });
 
 // The user route for hrm_VerifyEmailPassword_01.
-iVoteBallotApp.get('/hrm_VerifyEmailPassword_01', (req, res) => {
+hrmApp.get('/hrm_VerifyEmailPassword_01', (req, res) => {
 	if (req.isAuthenticated) {
 		console.log(req.user);
 		console.log(req.session);
@@ -2331,7 +2367,7 @@ iVoteBallotApp.get('/alabamaVoters_CreatePasswords_01', (req, res) => {
 })
 
 // The user route for hrm_CreatePasswords_01.
-iVoteBallotApp.get('/hrm_CreatePasswords_01', (req, res) => {
+hrmApp.get('/hrm_CreatePasswords_01', (req, res) => {
 	if (req.isAuthenticated) {
 		console.log(req.user);
 		console.log(req.session);
@@ -2364,7 +2400,7 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 });
 
 // The user route for hrm_Login_01.
-iVoteBallotApp.get('/hrm_Login_01', redirectHRMDashboard, (req, res) => {
+hrmApp.get('/hrm_Login_01', redirectHRMDashboard, (req, res) => {
 	console.log(req.session);
 	console.log('isUnauthenticated: ', req.isUnauthenticated);
 	// Check if user already authenticated.
@@ -2813,7 +2849,7 @@ iVoteBallotApp.post(
 
 );
 
-iVoteBallotApp.post(
+hrmApp.post(
 	'/hrm_SignUp_01',
 	passport.authenticate('local4', {
 		successRedirect: '/hrm_Employees_EmailVerification_01',
@@ -2822,7 +2858,7 @@ iVoteBallotApp.post(
 	}
 ));
 
-iVoteBallotApp.post(
+hrmApp.post(
 	'/hrm_VerifyEmailPassword_01',
 	passport.authenticate('local5', {
 		successRedirect: '/hrm_CreatePasswords_01',
@@ -2831,7 +2867,7 @@ iVoteBallotApp.post(
 	}
 ));
 
-iVoteBallotApp.post(
+hrmApp.post(
 	'/hrm_Login_01',
 	passport.authenticate('local5', {
 		successRedirect: '/hrm_Dashboard_01',
@@ -3913,7 +3949,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 	}
 );
 
-iVoteBallotApp.post('/hrmEmployees_Registration_01',
+hrmApp.post('/hrmEmployees_Registration_01',
 	async (req, res) => {	
 
 		const EmployeeId = req.body.EmployeeId;		
@@ -4162,7 +4198,7 @@ iVoteBallotApp.post('/hrmEmployees_Registration_01',
 	}
 );
 
-iVoteBallotApp.post('/hrm_SignUp_01',
+hrmApp.post('/hrm_SignUp_01',
 
 	async (req, res) => {
 
@@ -4224,7 +4260,7 @@ iVoteBallotApp.post('/hrm_SignUp_01',
 );
 
 
-iVoteBallotApp.post('/hrm_Employees_EmailVerification_01', (req, res) => {
+hrmApp.post('/hrm_Employees_EmailVerification_01', (req, res) => {
     const Email = req.body.EmployeeEmail;
 
     // Check if the email exists in the database
@@ -4362,7 +4398,7 @@ iVoteBallotApp.post('/hrm_Employees_EmailVerification_01', (req, res) => {
 });
 
 
-iVoteBallotApp.post('/hrm_VerifyEmailPassword_01',
+hrmApp.post('/hrm_VerifyEmailPassword_01',
 	async (req, res) => {
 
 		const EmployeeEmail = req.body.EmployeeEmail;
@@ -4414,7 +4450,7 @@ iVoteBallotApp.post('/hrm_VerifyEmailPassword_01',
 	
 );
 
-iVoteBallotApp.post('/hrm_CreatePasswords_01',
+hrmApp.post('/hrm_CreatePasswords_01',
 
 	async (req, res) => {
 
@@ -4473,7 +4509,6 @@ iVoteBallotApp.post('/hrm_CreatePasswords_01',
 
 	}
 );
-
 
 //const boxicons = require('boxicons');
 /*
