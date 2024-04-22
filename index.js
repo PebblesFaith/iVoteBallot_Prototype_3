@@ -294,6 +294,10 @@ iVoteBallotApp.use(express.urlencoded({ extended: false }));
 
 iVoteBallotApp.use(express.json());
 
+hrmApp.use(express.urlencoded({ extended: false }));
+
+hrmApp.use(express.json());
+
 /*
 	The code creates a new instance of the SQLite3 Database using the sqlite3 module in JavaScript. 
 	The first argument passed to the constructor is the name of the database file to create or 
