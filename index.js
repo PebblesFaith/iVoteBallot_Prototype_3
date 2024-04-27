@@ -81,6 +81,7 @@ const bcrypt = require('bcrypt');
 	   social authentication, and token-based authentication, to secure iVoteballot web application's resources.
 */
 const passport = require('passport');
+const passport2 = require ('passport');
 
 /*
 	1. The code statement "const LocalStrategy = require('passport-local').Strategy" is a library that provides a local authentication strategy for
@@ -222,7 +223,7 @@ const nodemailer = require('nodemailer');
 */
 const db = new sqliteDB('Alabama_Id_Session.db', { verbose: console.log('The Alabama_Id_Session database have been successfully created.') });
 
-const hrmDB = new hrmSqliteDB('HRM_Id_Session.db', { verbose: console.log('The HRM_Id_Session database have been successfully created.') });
+const hrmDB = new hrmSqliteDB('HRM_Id_Session.hrmDB', { verbose: console.log('The HRM_Id_Session database have been successfully created.') });
 
 const timeout = require('connect-timeout');
 
@@ -230,9 +231,9 @@ const timeout = require('connect-timeout');
 const http = require('http');
 
 /*
-	The function starts the iVoteBallotApp prototype 3 web application by listening to port 8080 on the IP address '0.0.0.0'. If there is an error during the
+	The function starts the iVoteBallotApp prototype 3 web application by listening to ports 8080 and 1090 on the IP address '0.0.0.0'. If there is an error during the
 	process, the function logs a message indicating the problem encountered while loading the iVoteBallot prototype 3 web application. Otherwise, the function
-	logs a confirmation message stating that the Node.js server, in conjunction with the Express framework, is listening on port 8080 for the iVoteBallotApp 
+	logs a confirmation message stating that the Node.js server, in conjunction with the Express framework, is listening on ports 8080 and 1090 for the iVoteBallotApp 
 	prototype 3 web application.
 */
 
@@ -557,10 +558,9 @@ hrmApp.use(
 		store: new HRMSqlite3SessionStore({
 
 			client: hrmDB,
-			dir: 'HRM_Id_Session.db',
+			dir: 'HRM_Id_Session.hrmDB',
 			collection: 'HRM_HIRED_SESSION',
-			name: 'HRM_SESSION',
-			expires: 86400,
+			name: 'HRM_SESSION',		
 			cookie: {
 				secure: true,
 				httpOnly: true,
@@ -968,7 +968,7 @@ passport.use(
 
 // hrm_Signup_01.ejs
 
-passport.use(
+passport2.use(
 	'local4',
 	new LocalStrategy({
 		usernameField: 'EmployeeEmail',
@@ -1017,7 +1017,6 @@ passport.use(
 							return done(null,
 								{
 									id: row.id,
-
 									EmployeeId: row.EmployeeId,
 									EmployeeDepartment: row.EmployeeDepartment,
 									EmployeeCountry: row.EmployeeCountry,
@@ -1048,7 +1047,7 @@ passport.use(
 	)
 );
 
-passport.use(
+passport2.use(
 	'local5',
 	new LocalStrategy({
 		usernameField: 'EmployeeEmail',
@@ -1115,7 +1114,7 @@ passport.use(
 	)
 );
 
-passport.use(
+passport2.use(
 	'local6',
 	new LocalStrategy({
 		usernameField: 'EmployeeEmail',
@@ -1138,7 +1137,7 @@ passport.use(
 					return done(null, false, { message: 'You have entered the incorrect email address: ' + EmployeeEmail + '.' });
 				}
 
-				bcrypt.compare(EmployeePassword, row.EmployeeEmail, (err, result) => {
+				bcrypt.compare(EmployeePassword, row.EmployeePassword, (err, result) => {
 
 					if (err) {
 						return done(err);
@@ -1203,7 +1202,13 @@ passport.use(
 */
 passport.serializeUser(function (user, done) {
 	console.log('Serializing user...');
-	console.log('user');
+	console.log(user);
+	done(null, user.id);
+});
+
+passport2.serializeUser(function (user, done) {
+	console.log('Serializing user...');
+	console.log(user);
 	done(null, user.id);
 });
 
@@ -1222,7 +1227,7 @@ passport.serializeUser(function (user, done) {
 	and use it to authenticate requests.
 */
 passport.deserializeUser(function (id, done) {
-	console.log('Deserializing users...')
+	console.log('Deserializing users...');
 	console.log(id);
 	const user = db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE id = ?', id, (err, user) => {
 
@@ -1313,10 +1318,10 @@ passport.deserializeUser(function (userId, done) {
     });
 });
 
-passport.deserializeUser(function (empId, done) {
-	console.log('Deserializing users...')
-	console.log(empId);
-	const user = db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE id = ?', empId, (err, user) => {
+passport2.deserializeUser(function (id, done) {
+	console.log('Deserializing HRM users...');
+	console.log(id);
+	const user = db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE id = ?', id, (err, user) => {
 
 		if (err) {
 			return done(err);
@@ -1327,7 +1332,7 @@ passport.deserializeUser(function (empId, done) {
 
 		return done(null,
 			{
-				empId: user.id,
+				id: user.id,
 				EmployeeId: user.EmployeeId,
 				EmployeeDepartment: user.EmployeeDepartment,
 				EmployeeCountry: user.EmployeeCountry,
@@ -1367,7 +1372,7 @@ const redirectDashboard = (req, res, next) => {
 }
 
 const redirectHRMDashboard = (req, res, next) => {
-	if (req.session.empId) {
+	if (req.session.id) {
 		res.redirect('/hrm_Dashboard_01');
 	} else {
 		next();
@@ -2001,9 +2006,6 @@ const { ErrorCreate } = require('session/lib/session/storage/base');
 
 iVoteBallotApp.use('/', require('./models/views_Router'));
 iVoteBallotApp.use(views_Controller);
-
-
-
 
 hrmApp.set('views', './Public/views');
 hrmApp.set('common', './Public/common');
@@ -2801,11 +2803,30 @@ iVoteBallotApp.post(
 	}
 ));
 
+hrmApp.post(
+	'/hrm_SignUp_01',
+	passport2.authenticate('local4', {
+		successRedirect: '/hrm_Employees_EmailVerification_01',
+		failureRedirect: '/hrm_SignUp_01',
+		failureFlash: true
+	}
+));
+
+
 iVoteBallotApp.post(
 	'/alabamaVoters_VerifyEmailPassword_01',
 	passport.authenticate('local2', {
 		successRedirect: '/alabamaVoters_CreatePasswords_01',
 		failureRedirect: '/alabamaVoters_VerifyEmailPassword_01',
+		failureFlash: true
+	}
+));
+
+hrmApp.post(
+	'/hrm_VerifyEmailPassword_01',
+	passport2.authenticate('local5', {
+		successRedirect: '/hrm_CreatePasswords_01',
+		failureRedirect: '/hrm_VerifyEmailPassword_01',
 		failureFlash: true
 	}
 ));
@@ -2862,18 +2883,11 @@ hrmApp.post(
 	}
 ));
 
-hrmApp.post(
-	'/hrm_VerifyEmailPassword_01',
-	passport.authenticate('local5', {
-		successRedirect: '/hrm_CreatePasswords_01',
-		failureRedirect: '/hrm_VerifyEmailPassword_01',
-		failureFlash: true
-	}
-));
+
 
 hrmApp.post(
 	'/hrm_Login_01',
-	passport.authenticate('local5', {
+	passport2.authenticate('local5', {
 		successRedirect: '/hrm_Dashboard_01',
 		failureRedirect: '/hrm_Login_01',
 		failureFlash: true
