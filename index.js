@@ -112,6 +112,7 @@ const hrmSqliteDB = require('better-sqlite3');
 	session and requests it across multiple EJS templates.
 */
 const session = require('express-session');
+const session2 = require('express-session');
 
 /*
 	The code statement "const Sqlite3SessionStore = require("better-sqlite3-session-store")(session)" imports the better-sqlite3-session-store 
@@ -121,7 +122,7 @@ const session = require('express-session');
 */
 const AlabamaSqlite3SessionStore = require('better-sqlite3-session-store')(session);
 
-const HRMSqlite3SessionStore = require('better-sqlite3-session-store')(session);
+const HRMSqlite3SessionStore = require('better-sqlite3-session-store')(session2);
 
 /*
 	In the iVoteBallot web application, the line "const flash = require('express-flash')" is a piece of code written in JavaScript that imports
@@ -553,32 +554,6 @@ iVoteBallotApp.use(
 	})
 )
 
-hrmApp.use(
-	session ({
-		store: new HRMSqlite3SessionStore({
-
-			client: hrmDB,
-			dir: 'HRM_Id_Session.hrmDB',
-			collection: 'HRM_HIRED_SESSION',
-			name: 'HRM_SESSION',		
-			cookie: {
-				secure: true,
-				httpOnly: true,
-				sameSite: true,
-				resave: true,
-				saveUninitialized: true,
-				proxy: true,
-				maxAge: 'HRM_MAX_AGE' // 10 minutes		
-			},
-
-			rolling: true, // Resets the expiration time on each request
-		}),
-
-		secret: 'HRM_SESSION_KEY'
-
-	})
-)
-
 /*
 	The statement router.use([passport.initialize()]); is used to initialize Passport.js
 	middleware on a router within the iVoteBallot web application from the Node.js API. 
@@ -593,7 +568,6 @@ hrmApp.use(
 */
 
 iVoteBallotApp.use([passport.initialize()]);
-hrmApp.use([passport.initialize()]);
 
 /*
 	The statement router.use(passport.session()) is used within the iVoteBallot web
@@ -610,41 +584,8 @@ hrmApp.use([passport.initialize()]);
 	used after Passport's authentication middleware has been invoked.
 */
 iVoteBallotApp.use(passport.session());
-hrmApp.use(passport.session());
-
-
-/*
-
-iVoteBallotApp.use((req, res, next) => {
-    if (req.session && req.session.lastActivity) {
-        const currentTime = new Date().getTime();
-        const elapsedTime = currentTime - req.session.lastActivity;
-        if (elapsedTime > timeoutDuration) {
-            req.session.destroy((err) => {
-                if (err) {
-                    console.error('Error destroying session:', err);
-                }
-            });
-            // Redirect to login page or perform any other action
-            return res.redirect('/login');
-        }
-    }
-    req.session.lastActivity = new Date().getTime();
-    next();
-});
-
-*
-
-/*
-	The provided JavaScript line configures the iVoteBallotApp to utilize the 'flash' middleware. This middleware is typically
-	used in the iVoteBallot web applications built with frameworks like Express.js to display flash messages. Flash messages 
-	are temporary messages that can be displayed to users to convey notifications or alerts, often after a specific action has 
-	been performed, such as submitting a form or completing an operation. The 'flash' middleware enables the iVoteBallotApp to 
-	handle and display these messages effectively to users interacting with the iVoteBallot web application.
-*/
 
 iVoteBallotApp.use(flash());
-hrmApp.use(flash());
 
 /*
 	The JavaScript codes language sets up a local1, LocalStrategy for Passport, which is a popular
@@ -966,6 +907,196 @@ passport.use(
 	)
 );
 
+/*
+	The code passport.serializeUser(function (user, done) { done(null, user.id); }) is a function
+	that is used by Passport to serialize the user object for storage in a session.
+
+	The serializeUser function takes in a callback function that receives the user object and a
+	done callback function as its parameters. The done function is called with null and the
+	user's id property as arguments, which is then used to serialize the user object to a string
+	representation only once for authentication process through the session cookie id.
+
+	This serialized user data information is then stored in the session, allowing the server to
+	persist the user's authentication state across requests.
+
+	Overall, serializeUser is an essential function for Passport-based authentication, as it enables
+	the back-end server to efficiently manage user sessions cookie id and keep track of user's
+	authentication.
+*/
+passport.serializeUser(function (user, done) {
+	console.log('Serializing user...');
+	console.log(user);
+	done(null, user.id);
+});
+
+/*
+	The code passport.deserializeUser is used by Passport to deserialize the user object from a 
+	session cookie. This function takes in the user's id and a callback function done as parameters.
+
+	The deserializeUser function first queries the database using the user's id to retrieve
+	the user's data information. If the user is not found, the function returns a false value to 
+	the done callback function. If the user is found, the function returns an object containing 
+	the user's id, userDMVFirstName, userDMVMiddleName, userDMVLastName, userDMVDateOfBirth, 
+	userDMVBirthSex and etc to the done callback function.
+
+	Overall, deserializeUser is an important function in the Passport-based authentication, as it 
+	allows the index.js (server) to retrieve user data information from the sessions cookie id
+	and use it to authenticate requests.
+*/
+passport.deserializeUser(function (id, done) {
+	console.log('Deserializing users...');
+	console.log(id);
+	const user = db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE id = ?', id, (err, user) => {
+
+		if (err) {
+			return done(err);
+		}
+		if (!user) {
+			return done(null, false);
+		}
+
+		return done(null,
+			{
+
+				id: user.id,
+				DMVPhoto: user.DMVPhoto,
+				DMVFirstName: user.DMVFirstName,
+				DMVMiddleName: user.DMVMiddleName,
+				DMVLastName: user.DMVLastName,
+				DMVSuffix: user.DMVSuffix,
+				DMVDateOfBirth: user.DMVDateOfBirth,
+				DMVBirthSex: user.DMVBirthSex,
+				DMVGenderIdentity: user.DMVGenderIdentity,
+				DMVRace: user.DMVRace,
+				DMVUSResidentStatusSelection: user.DMVUSResidentStatusSelection,
+				DMVUSResidentStatusCategorySelection: user.DMVUSResidentStatusCategorySelection,
+				DMVUSResidentStatusSubjectSelection: user.DMVUSResidentStatusSubjectSelection,
+				DMVGradeSchool: user.DMVGradeSchool,
+				DMVGradeSchoolSelection: user.DMVGradeSchoolSelection,
+				DMVGradeSchoolYearSelection: user.DMVGradeSchoolYearSelection,
+				DMVHighSchool: user.DMVHighSchool,
+				DMVHighSchoolSelection: user.DMVHighSchoolSelection,
+				DMVHighSchoolYearSelection: user.DMVHighSchoolYearSelection,
+				DMVCollege: user.DMVCollege,
+				DMVDegreeSelection: user.DMVDegreeSelection,
+				DMVCategorySelection: user.DMVCategorySelection,
+				DMVSubjectSelection: user.DMVSubjectSelection,
+				DMVCollegeYearSelection: user.DMVCollegeYearSelection,
+				DMVSSN: user.DMVSSN,
+				DMVEmail: user.DMVEmail,
+				DMVConfirmEmail: user.DMVConfirmEmail,
+				DMVPhoneNumber: user.DMVPhoneNumber,
+				DMVAddress: user.DMVAddress,
+				DMVUnitType: user.DMVUnitType,
+				DMVUnitTypeNumber: user.DMVUnitTypeNumber,
+				DMVCountrySelection: user.DMVCountrySelection,
+				DMVStateSelection: user.DMVStateSelection,
+				DMVCountySelection: user.DMVCountySelection,
+				DMVCitySelection: user.DMVCitySelection,
+				DMVZipSelection: user.DMVZipSelection,
+				DMVIdType: user.DMVIdType,
+				DMVIdTypeNumber: user.DMVIdTypeNumber,
+				IvoteBallotIdIdentifierCode: user.IvoteBallotIdIdentifierCode,
+				ConfirmIvoteBallotIdIdentifierCode: user.ConfirmIvoteBallotIdIdentifierCode,
+				Password: user.Password,
+				ConfirmPassword: user.ConfirmPassword,
+				Temporary_Password: user.Temporary_Password,
+
+				isAuthenticated: true
+
+			}
+			
+		);
+
+	});	
+
+});
+
+passport.deserializeUser(function (userId, done) {
+    console.log('Deserializing user from alabamaUsers_LoggedIn_History...');
+    console.log(userId);
+
+    // Query the database to retrieve user data based on the provided userId
+    db1_LoggedInHistory.get('SELECT * FROM alabamaUsers_LoggedIn_History WHERE userId = ?', userId, (err, user) => {
+        if (err) {
+            return done(err);
+        }
+        if (!user) {
+            // If user not found in the second table, return false
+            return done(null, false);
+        }
+
+        // Return userId data from the second table
+        return done(null, {
+            userId: user.userId,
+            total_Time_Seconds: user.total_Time_Seconds,
+            isAuthenticated: true
+        });
+    });
+});
+
+hrmApp.use(
+	session2 ({
+		store: new HRMSqlite3SessionStore({
+
+			client: hrmDB,
+			dir: 'HRM_Id_Session.hrmDB',
+			collection: 'HRM_HIRED_SESSION',
+			name: 'HRM_SESSION',		
+			cookie: {
+				secure: true,
+				httpOnly: true,
+				sameSite: true,
+				resave: true,
+				saveUninitialized: true,
+				proxy: true,
+				maxAge: 'HRM_MAX_AGE' // 10 minutes		
+			},
+
+			rolling: true, // Resets the expiration time on each request
+		}),
+
+		secret: 'HRM_SESSION_KEY'
+
+	})
+)
+
+hrmApp.use([passport2.initialize()]);
+hrmApp.use(passport2.session());
+
+hrmApp.use(flash());
+
+/*
+
+iVoteBallotApp.use((req, res, next) => {
+    if (req.session && req.session.lastActivity) {
+        const currentTime = new Date().getTime();
+        const elapsedTime = currentTime - req.session.lastActivity;
+        if (elapsedTime > timeoutDuration) {
+            req.session.destroy((err) => {
+                if (err) {
+                    console.error('Error destroying session:', err);
+                }
+            });
+            // Redirect to login page or perform any other action
+            return res.redirect('/login');
+        }
+    }
+    req.session.lastActivity = new Date().getTime();
+    next();
+});
+
+*
+
+/*
+	The provided JavaScript line configures the iVoteBallotApp to utilize the 'flash' middleware. This middleware is typically
+	used in the iVoteBallot web applications built with frameworks like Express.js to display flash messages. Flash messages 
+	are temporary messages that can be displayed to users to convey notifications or alerts, often after a specific action has 
+	been performed, such as submitting a form or completing an operation. The 'flash' middleware enables the iVoteBallotApp to 
+	handle and display these messages effectively to users interacting with the iVoteBallot web application.
+*/
+
+
 // hrm_Signup_01.ejs
 
 passport2.use(
@@ -1184,144 +1315,16 @@ passport2.use(
 	)
 );
 
-/*
-	The code passport.serializeUser(function (user, done) { done(null, user.id); }) is a function
-	that is used by Passport to serialize the user object for storage in a session.
-
-	The serializeUser function takes in a callback function that receives the user object and a
-	done callback function as its parameters. The done function is called with null and the
-	user's id property as arguments, which is then used to serialize the user object to a string
-	representation only once for authentication process through the session cookie id.
-
-	This serialized user data information is then stored in the session, allowing the server to
-	persist the user's authentication state across requests.
-
-	Overall, serializeUser is an essential function for Passport-based authentication, as it enables
-	the back-end server to efficiently manage user sessions cookie id and keep track of user's
-	authentication.
-*/
-passport.serializeUser(function (user, done) {
+passport2.serializeUser(function (user2, done) {
 	console.log('Serializing user...');
-	console.log(user);
-	done(null, user.id);
-});
-
-passport2.serializeUser(function (user, done) {
-	console.log('Serializing user...');
-	console.log(user);
-	done(null, user.id);
-});
-
-/*
-	The code passport.deserializeUser is used by Passport to deserialize the user object from a 
-	session cookie. This function takes in the user's id and a callback function done as parameters.
-
-	The deserializeUser function first queries the database using the user's id to retrieve
-	the user's data information. If the user is not found, the function returns a false value to 
-	the done callback function. If the user is found, the function returns an object containing 
-	the user's id, userDMVFirstName, userDMVMiddleName, userDMVLastName, userDMVDateOfBirth, 
-	userDMVBirthSex and etc to the done callback function.
-
-	Overall, deserializeUser is an important function in the Passport-based authentication, as it 
-	allows the index.js (server) to retrieve user data information from the sessions cookie id
-	and use it to authenticate requests.
-*/
-passport.deserializeUser(function (id, done) {
-	console.log('Deserializing users...');
-	console.log(id);
-	const user = db1.get('SELECT * FROM alabamaDMV_Commission_01 WHERE id = ?', id, (err, user) => {
-
-		if (err) {
-			return done(err);
-		}
-		if (!user) {
-			return done(null, false);
-		}
-
-		return done(null,
-			{
-
-				id: user.id,
-				DMVPhoto: user.DMVPhoto,
-				DMVFirstName: user.DMVFirstName,
-				DMVMiddleName: user.DMVMiddleName,
-				DMVLastName: user.DMVLastName,
-				DMVSuffix: user.DMVSuffix,
-				DMVDateOfBirth: user.DMVDateOfBirth,
-				DMVBirthSex: user.DMVBirthSex,
-				DMVGenderIdentity: user.DMVGenderIdentity,
-				DMVRace: user.DMVRace,
-				DMVUSResidentStatusSelection: user.DMVUSResidentStatusSelection,
-				DMVUSResidentStatusCategorySelection: user.DMVUSResidentStatusCategorySelection,
-				DMVUSResidentStatusSubjectSelection: user.DMVUSResidentStatusSubjectSelection,
-				DMVGradeSchool: user.DMVGradeSchool,
-				DMVGradeSchoolSelection: user.DMVGradeSchoolSelection,
-				DMVGradeSchoolYearSelection: user.DMVGradeSchoolYearSelection,
-				DMVHighSchool: user.DMVHighSchool,
-				DMVHighSchoolSelection: user.DMVHighSchoolSelection,
-				DMVHighSchoolYearSelection: user.DMVHighSchoolYearSelection,
-				DMVCollege: user.DMVCollege,
-				DMVDegreeSelection: user.DMVDegreeSelection,
-				DMVCategorySelection: user.DMVCategorySelection,
-				DMVSubjectSelection: user.DMVSubjectSelection,
-				DMVCollegeYearSelection: user.DMVCollegeYearSelection,
-				DMVSSN: user.DMVSSN,
-				DMVEmail: user.DMVEmail,
-				DMVConfirmEmail: user.DMVConfirmEmail,
-				DMVPhoneNumber: user.DMVPhoneNumber,
-				DMVAddress: user.DMVAddress,
-				DMVUnitType: user.DMVUnitType,
-				DMVUnitTypeNumber: user.DMVUnitTypeNumber,
-				DMVCountrySelection: user.DMVCountrySelection,
-				DMVStateSelection: user.DMVStateSelection,
-				DMVCountySelection: user.DMVCountySelection,
-				DMVCitySelection: user.DMVCitySelection,
-				DMVZipSelection: user.DMVZipSelection,
-				DMVIdType: user.DMVIdType,
-				DMVIdTypeNumber: user.DMVIdTypeNumber,
-				IvoteBallotIdIdentifierCode: user.IvoteBallotIdIdentifierCode,
-				ConfirmIvoteBallotIdIdentifierCode: user.ConfirmIvoteBallotIdIdentifierCode,
-				Password: user.Password,
-				ConfirmPassword: user.ConfirmPassword,
-				Temporary_Password: user.Temporary_Password,
-
-				isAuthenticated: true
-
-			}
-			
-		);
-
-	});	
-
-});
-
-passport.deserializeUser(function (userId, done) {
-    console.log('Deserializing user from alabamaUsers_LoggedIn_History...');
-    console.log(userId);
-
-    // Query the database to retrieve user data based on the provided userId
-    db1_LoggedInHistory.get('SELECT * FROM alabamaUsers_LoggedIn_History WHERE userId = ?', userId, (err, user) => {
-        if (err) {
-            return done(err);
-        }
-        if (!user) {
-            // If user not found in the second table, return false
-            return done(null, false);
-        }
-
-        // Return userId data from the second table
-        return done(null, {
-            userId: user.userId,
-            total_Time_Seconds: user.total_Time_Seconds,
-            isAuthenticated: true
-        });
-    });
+	console.log(user2);
+	done(null, user2.id);
 });
 
 passport2.deserializeUser(function (id, done) {
 	console.log('Deserializing HRM users...');
 	console.log(id);
-	const user = db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE id = ?', id, (err, user) => {
+	const user = db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM iVoteBallot_HRMEmployees_Registration_01 WHERE id = ?', id, (err, user2) => {
 
 		if (err) {
 			return done(err);
@@ -1332,25 +1335,25 @@ passport2.deserializeUser(function (id, done) {
 
 		return done(null,
 			{
-				id: user.id,
-				EmployeeId: user.EmployeeId,
-				EmployeeDepartment: user.EmployeeDepartment,
-				EmployeeCountry: user.EmployeeCountry,
-				Date: user.Date,
-				EmployeePDF: user.EmployeePDF,
-				EmployeePhoto: user.EmployeePhoto,
-				EmployeeJobTitle: user.EmployeeJobTitle,
-				EmployeeFirstName: user.EmployeeFirstName,
-				EmployeeMiddleName: user.EmployeeMiddleName,
-				EmployeeLastName: user.EmployeeLastName,
-				EmployeeEmail: user.EmployeeEmail,
-				EmployeeConfirmEmail: user.EmployeeConfirmEmail,
-				EmployeeHiredPerson: user.EmployeeHiredPerson,
-				EmployeeHiredPersonTitle: user.EmployeeHiredPersonTitle,
-				EmployeeHiredDate: user.EmployeeHiredDate,
-				EmployeePassword: user.EmployeePassword,
-				EmployeeConfirmPassword: user.EmployeeConfirmPassword,
-				EmployeeTemporary_Password: user.EmployeeTemporary_Password,
+				id: user2.id,
+				EmployeeId: user2.EmployeeId,
+				EmployeeDepartment: user2.EmployeeDepartment,
+				EmployeeCountry: user2.EmployeeCountry,
+				Date: user2.Date,
+				EmployeePDF: user2.EmployeePDF,
+				EmployeePhoto: user2.EmployeePhoto,
+				EmployeeJobTitle: user2.EmployeeJobTitle,
+				EmployeeFirstName: user2.EmployeeFirstName,
+				EmployeeMiddleName: user2.EmployeeMiddleName,
+				EmployeeLastName: user2.EmployeeLastName,
+				EmployeeEmail: user2.EmployeeEmail,
+				EmployeeConfirmEmail: user2.EmployeeConfirmEmail,
+				EmployeeHiredPerson: user2.EmployeeHiredPerson,
+				EmployeeHiredPersonTitle: user2.EmployeeHiredPersonTitle,
+				EmployeeHiredDate: user2.EmployeeHiredDate,
+				EmployeePassword: user2.EmployeePassword,
+				EmployeeConfirmPassword: user2.EmployeeConfirmPassword,
+				EmployeeTemporary_Password: user2.EmployeeTemporary_Password,
 
 				isAuthenticated: true
 
@@ -2204,7 +2207,7 @@ iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) =>
 hrmApp.get('/iVoteBallot_HRMEmployees_Registration_01.', redirectHRMDashboard, (req, res) => {
 
 	// Check if user already authenticated.
-	if (req.session.isAuthenticated) {
+	if (req.session2.isAuthenticated) {
 		console.log('Human Resources employee have already created the new employee iVoteBallot\'s account.');
 		req.flash('success', 'You have already created the new employee iVoteBallot\'s account.');
 		res.render('/hrm_SignUp_01');
@@ -2246,7 +2249,7 @@ hrmApp.get('/hrm_SignUp_01', (req, res) => {
 
 	if (req.isAuthenticated()) {
 		console.log(req.user);
-		console.log('Request Session:' + req.session)
+		console.log('Request Session2:' + req.session)
 		console.log('' + req.logIn);
 		console.log('The User had been successfully authenticated within the Session through the passport from reset signup password webpage!');
 		res.render('hrm_Employees_EmailVerification_01');
@@ -2335,7 +2338,7 @@ iVoteBallotApp.get('/alabamaVoters_VerifyEmailPassword_01', (req, res) => {
 hrmApp.get('/hrm_VerifyEmailPassword_01', (req, res) => {
 	if (req.isAuthenticated) {
 		console.log(req.user);
-		console.log(req.session);
+		console.log(req.session2);
 		console.log('The iVoteBallot\'s employee have been successfully authenticated within the Session through the passport from local4!');
 		res.render('hrm_Employees_EmailVerification_01', {  });
 	} else if (req.isUnauthenticated) {
@@ -2376,7 +2379,7 @@ iVoteBallotApp.get('/alabamaVoters_CreatePasswords_01', (req, res) => {
 hrmApp.get('/hrm_CreatePasswords_01', (req, res) => {
 	if (req.isAuthenticated) {
 		console.log(req.user);
-		console.log(req.session);
+		console.log(req.session2);
 		console.log('The iVoteBallot\'s employee had been successfully authenticated within the Session through the passport from local4!');
 		res.render('hrm_Login_01', {EmployeeFirstName: req.user.EmployeeFirstName, EmployeeMiddleName: req.user.EmployeeMiddleName, EmployeeLastName: req.user.EmployeeLastName, EmployeeEmail: req.user.EmployeeEmail});
 	} else if (req.isUnauthenticated) {
@@ -2407,7 +2410,7 @@ iVoteBallotApp.get('/alabamaVoters_LogIn_01', redirectDashboard, (req, res) => {
 
 // The user route for hrm_Login_01.
 hrmApp.get('/hrm_Login_01', redirectHRMDashboard, (req, res) => {
-	console.log(req.session);
+	console.log(req.session2);
 	console.log('isUnauthenticated: ', req.isUnauthenticated);
 	// Check if user already authenticated.
 	if (req.isUnauthenticated) {
@@ -4458,7 +4461,7 @@ hrmApp.post('/hrm_VerifyEmailPassword_01',
 						res.render('535');
 					} else {
 						console.log('The user\s email address is successfully found within the passport serialization authenticated processes through the session.');
-						res.redirect('/hrm_CreatePassword_01');
+						res.redirect('/hrm_CreatePasswords_01');
 					}
 
 				});
@@ -4468,28 +4471,27 @@ hrmApp.post('/hrm_VerifyEmailPassword_01',
 	
 );
 
+
 hrmApp.post('/hrm_CreatePasswords_01',
 
 	async (req, res) => {
 
-		console.log('req.user:', req.user.EmployeeEmail);
+		console.log('req.user:', req.user2.EmployeeEmail);
 
-		const EmployeeEmail = req.user.EmployeeEmail;
-		const EmployeePassword = req.body.EmployeePassword;
-		const EmployeeConfirmPassword = req.body.EmployeeConfirmPassword;
+		const EmployeeEmail = req.user2.EmployeeEmail;
+		const Password = req.body.EmployeePassword;
+		const ConfirmPassword = req.body.EmployeeConfirmPassword;
 
 		console.log(req.body);
 
 		// To hash the newPassword input field using bcrypt library.
 		const salt = await bcrypt.genSalt(14);
-		const passwordHashed = await bcrypt.hash(EmployeePassword, salt);
+		const passwordHashed = await bcrypt.hash(Password, salt);
 
 		// To hash the confirmNewPassword input field using bcrypt library.
-		const confirmPasswordHashed = await bcrypt.hash(EmployeeConfirmPassword, salt);
+		const confirmPasswordHashed = await bcrypt.hash(ConfirmPassword, salt);
 
-		console.log('The employee employment\'s email is: ' + EmployeeEmail + '.');
-		console.log('The employee employment\'s password is: ' + EmployeePassword + '.');
-		console.log('The employee employment\'s confirm password is: ' + EmployeeConfirmPassword + '.');
+		console.log('The user\'s email is: ' + DMVEmail + '.');
 
 		if (passwordHashed !== confirmPasswordHashed) {
 			return res.render('hrm_CreatePasswords_01', { error: 'Your new password does not match to confirm password.' });
@@ -4497,7 +4499,7 @@ hrmApp.post('/hrm_CreatePasswords_01',
 
 		} else {
 
-			db1_iVoteballot_EmployeesRegistration.run('UPDATE iVoteBallot_HRMEmployees_Registration_01 SET EmployeePassword = ?, EmployeeConfirmPassword = ? WHERE EmployeeEmail = ?',
+			await db1_iVoteballot_EmployeesRegistration.run('UPDATE iVoteBallot_HRMEmployees_Registration_01 SET Password = ?, ConfirmPassword = ? WHERE EmployeeEmail = ?',
 				[
 
 					passwordHashed,
@@ -4508,25 +4510,114 @@ hrmApp.post('/hrm_CreatePasswords_01',
 				(err) => {
 
 					if (err) {
-						console.log('hrm_CreatePasswords_01\'s POST have been created either an user login authentication error or syntax POST issues: ' + err.message);
+						console.log('hrm_CreatePasswords_01\'s POST have created either an user login authentication error or syntax POST issues: ' + err.message);
 						res.render('535');
 
 					} else {
-						console.log('The iVoteBallot\'s employee have successfully either created or updated his or her employment password.')
-						res.redirect('/hrm_Login_01');						
+						console.log('The user have successfully either created or updated his or her password.')
+						res.redirect('/hrm_Login_01');	
 						
+						// Call the userPasswordChangeHistory function to log the user's login session
+						//userPasswordChangeHistory(req, res);
+
+					}
+
+					/*
+					Sarai Hannah Ajai has generated a test SMTP service account; in order to receive iVoteBallot's customercare@ionos.com emails from the 
+					'transporter' constant object from the AccouNetrics' users which pass through the 'nodemailer' API library.
+					*/
+					const transporter = nodemailer.createTransport({
+						host: 'smtp.ionos.com',
+						port: 587,
+						secure: false,
+						auth: {
+							user: 'ceo.developmenttest@ivoteballot.com',
+							pass: IONOS_SECRET_KEY,
+						}
+					});
+
+					const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
+
+					if (req.isAuthenticated()) {
+						// Get current date and time
+						const passwordChangeDateTime = new Date().toLocaleString();
+
+						/*
+						Sarai Hannah Ajai has written her JavaScript programmatic codes for creating a usable 'transporter' constant object by ways of
+						using the default SMTP transporter nodemailer API library.
+						*/		
+
+						const mailOptions_01 = {
+							from: 'electionassureexpert@ivoteballot.com',
+							to: req.body.EmployeeEmail,
+							bcc: 'honey.ryder.development@ivoteballot.com',
+							subject: `Password Changed`,
+							html: `
+								<div style="text-align: center;">
+									<img src="cid:iVoteBallotLogo" style="width: 85px; height: auto; display: inline-block;" />
+								</div>
+								
+								<p>Dear ${req.user2.EmployeeFirstName} ${req.user2.EmployeeMiddleName || ''} ${req.user2.EmployeeLastName},</p>
+								
+								
+								
+								<p>
+									If you did not initiate this password change, please contact iVoteBallot customer care services immediately 
+									by emailing customercare@ivoteballot.com.
+								</p>
+
+								<p>
+									For your iVoteBallot security, ${req.user2.EmployeeFirstName} ${req.user2.EmployeeMiddleName ? req.user2.EmployeeLastName + ' ' : ''}we automatically send this
+									alert to your primary email address as a notification.
+								</p>
+
+								<p>Respectfully,</p>
+								<p>iVoteBallot's Customer Care Team</p>
+							`,
+							attachments: [
+								{
+									filename: 'iVoteBallotLogo.png',
+									path: imagePath,
+									cid: 'iVoteBallotLogo'
+								}
+							],
+						};
+
+						/*
+						Sarai Hannah Ajai has written her JavaScript programmatic codes to send an user test email to AccouNetrics' customercare@accounetrics.com
+						email account with nodemailer defined transporter object.
+						*/
+
+						transporter.sendMail(mailOptions_01, (error, info) => {
+							if (error) {
+								console.log(error);
+								res.send('error');
+							} else {
+								console.log('Email Sent - mailOptions_01: ' + info.response);
+								res.send('success!');
+							}
+						});
+
+					} else {
+						res.render('535');
+						console.log('The nodemailer user could not be authenticated.');
 
 					}
 
 				}
 
-					
 			);
 
 		}
 
 	}
 );
+
+
+
+
+
+
 
 //const boxicons = require('boxicons');
 /*
