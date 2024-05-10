@@ -139,6 +139,10 @@ const view_HRM_Employees_EmailVerification_01 = (req, res) => {
 	res.render('hrm_Employees_EmailVerification_01');
 }
 
+const view_HRM_Employees_Registration_01 = (req, res) => {
+	res.render('hrm_Employees_Registration_01');
+}
+
 const view_hrm_Login_01 = (req, res) => {
 	res.render('hrm_Login_01');
 }
@@ -153,10 +157,6 @@ const view_hrm_VerifyEmailPassword_01 = (req, res) => {
 
 const view_iVoteBallot_Employees_01 = (req, res) => {
 	res.render('iVoteBallot_Employees_01');
-}
-
-const view_iVoteBallot_HRMEmployees_Registration_01 = (req, res) => {
-	res.render('iVoteBallot_HRMEmployees_Registration_01');
 }
 
 const view_iVoteBallot = (req, res) => {
@@ -203,11 +203,11 @@ module.exports = {
 	view_HRM_CreatePasswords_01,
 	view_hrm_Dashboard_01,
 	view_HRM_Employees_EmailVerification_01,
+	view_HRM_Employees_Registration_01,
 	view_hrm_Login_01,
 	view_HRM_SignUp_01,
 	view_hrm_VerifyEmailPassword_01,
-	view_iVoteBallot_Employees_01,
-	view_iVoteBallot_HRMEmployees_Registration_01,
+	view_iVoteBallot_Employees_01,	
 	view_iVoteBallot,
 	view_Footer,	
 	view_Header,
