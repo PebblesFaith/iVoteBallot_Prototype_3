@@ -239,6 +239,7 @@ const http = require('http');
 
 const port_01 = 8080;
 const port_02 = 1090;
+
 /*
 iVoteBallotApp.listen(port, '0.0.0.0', function (err) {
 	if (err) {
@@ -285,12 +286,15 @@ if (process.env.NODE_ !== 'production') {
 	sensitive data or services protected by an nodemailer API key or other credentials.
 */
 const ALABAMA_SESSION = process.env.ALABAMA_SESSION;
-const HRM_SESSION = process.env.HRM_SESSION;
 const SESSION_MAX_AGE = process.env.SESSION_MAX_AGE;
 const EXPRESS_SESSION_KEY = process.env.EXPRESS_SESSION_KEY;
+
 const IONOS_SECRET_KEY = process.env.IONOS_SECRET_KEY;
 const BCRYPTION_SALT_KEY = process.env.BCRYPTION_SALT_KEY;
+
+const HRM_SESSION = process.env.HRM_SESSION;
 const HRM_SESSION_KEY = process.env.HRM_SESSION_KEY;
+const HRM_MAX_AGE = process.env.HRM_MAX_AGE;
 
 iVoteBallotApp.use(express.urlencoded({ extended: false }));
 
@@ -345,11 +349,11 @@ const db1_LoggedPasswordChange = new sqlite3.Database('alabamaUsers_PasswordChan
 	}
 });
 
-const db1_iVoteballot_EmployeesRegistration = new sqlite3.Database('iVoteBallot_HRMEmployees_Registration_01.db', err => {
+const db1_HRM_EmployeesRegistration = new sqlite3.Database('hrm_Employees_Registration_01.db', err => {
 	if (err) {
-		console.log('Sarai Hannah Ajai has not created the SQLite3 database table named, iVoteBallotHRM_EmployeesRegistration.db with passport and session management authentications:' + err + '.');
+		console.log('Sarai Hannah Ajai has not created the SQLite3 database table named, hrm__EmployeesRegistration.db with passport and session management authentications:' + err + '.');
 	} else {
-		console.log('Sarai Hannah Ajai has successfully created the SQLite3 database table named, iVoteBallotHRM_EmployeesRegistration.db with passport and session management authentications' + Date() + '.');
+		console.log('Sarai Hannah Ajai has successfully created the SQLite3 database table named, hrm_EmployeesRegistration.db with passport and session management authentications' + Date() + '.');
 	}
 });
 
@@ -481,8 +485,8 @@ db1_LoggedPasswordChange.serialize(() => {
 	};
 });
 
-db1_iVoteballot_EmployeesRegistration.serialize(() => {
-	db1_iVoteballot_EmployeesRegistration.run(`CREATE TABLE IF NOT EXISTS iVoteBallot_HRMEmployees_Registration_01 (
+db1_HRM_EmployeesRegistration.serialize(() => {
+	db1_HRM_EmployeesRegistration.run(`CREATE TABLE IF NOT EXISTS hrm_Employees_Registration_01 (
 
 		id TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6)))), 
 		EmployeeId TEXT NOT NULL,	
@@ -501,17 +505,16 @@ db1_iVoteballot_EmployeesRegistration.serialize(() => {
 		EmployeeHiredPerson VARCHAR(150) NOT NULL,
 		EmployeeHiredPersonTitle VARCHAR(150) NOT NULL,
 		EmployeeHiredDate VARCHAR(150) NOT NULL,
-
 		EmployeePassword VARCHAR(50) NOT NULL,
 		EmployeeConfirmPassword VARCHAR(50) NOT NULL,
-		EmployeeTemporary_Password VARCHAR(50) NOT NULL  
+		EmployeeTemporary_Password VARCHAR(100) NOT NULL  
 		
 	)`), (err) => {
 
 		if (err) {
-			console.log('Sarai Hannah Ajai have not created the Sqlite3 \'iVoteBallot_HRMEmployees_Registration_01\' database table which was coded successfully and she received a message: ' + err + '!');
+			console.log('Sarai Hannah Ajai have not created the Sqlite3 \'hrm_Employees_Registration_01\' database table which was coded successfully and she received a message: ' + err + '!');
 		} else {
-			console.log('Sarai Hannah Ajai have successfully created the Sqlite3 \'iVoteBallot_HRMEmployees_Registration_01\' database table' + Date() + '.');
+			console.log('Sarai Hannah Ajai have successfully created the Sqlite3 \'hrm_Employees_Registration_01\' database table' + Date() + '.');
 		}
 	};
 });
@@ -588,6 +591,38 @@ iVoteBallotApp.use(passport.session());
 iVoteBallotApp.use(flash());
 
 
+hrmApp.use(
+	session ({
+		store: new HRMSqlite3SessionStore ({
+
+			client: hrmDB,
+			dir: 'HRM_Employees_Session.db',
+			collection: 'HRM_EMPLOYEES_SESSION',
+			name: 'HRM_EMPLOYEES_SESSION',
+			cookie: {
+				secure: true,
+				httpOnly: true,
+				sameSite: true,
+				resave: true,
+				saveUninitialized: true,
+				proxy: true,
+				maxAge: 'timeoutDuration' // 10 minutes		
+			},
+
+			rolling: true, // Resets the expiration time on each request
+		}),
+
+		secret: 'HRM_SESSION_KEY'
+
+	})
+)
+
+hrmApp.use([passport.initialize()]);
+
+hrmApp.use(passport.session());
+
+hrmApp.use(flash());
+
 /*
 	The JavaScript codes language sets up a local1, LocalStrategy for Passport, which is a popular
 	authentication middleware for Node.js. It defines a function that will be called when an
@@ -605,6 +640,7 @@ iVoteBallotApp.use(flash());
 	parameters, if necessary. This code provides a simple but effective way to authenticate users
 	and ensurethe security of their iVoteballot data information.
 */
+
 
 passport.use(
 	'local1',
@@ -944,6 +980,7 @@ passport.serializeUser(function (user, done) {
 	allows the index.js (server) to retrieve user data information from the sessions cookie id
 	and use it to authenticate requests.
 */
+
 passport.deserializeUser(function (id, done) {
 	console.log('Deserializing users...');
 	console.log(id);
@@ -1037,6 +1074,156 @@ passport.deserializeUser(function (userId, done) {
 });
 
 
+
+
+
+
+
+passport.use(
+	'local4',
+	new LocalStrategy({
+		usernameField: 'EmployeeEmail',
+		passwordField: 'EmployeeId_PlainText',
+		passReqToCallback: true // To allow request object to be passed to callback
+	},
+		async (req, EmployeeEmail, EmployeeId_PlainText, done) => {
+
+			console.log('The iVoteBallot\'s user\'s passport.use(local4) email (\'EmployeeEmail\') as: ' + EmployeeEmail);
+			console.log('The iVoteBallot\'s user\'s passport.use(local4) password (\'EmployeeId_PlainText\') as: ' + EmployeeId_PlainText);
+
+			if (!EmployeeEmail) {
+				return done(null, false, { message: 'You have entered an employee email address that already exist in iVoteBallot\'s HRM database: ' + EmployeeEmail });
+			}
+
+			if (!EmployeeId_PlainText) {
+				console.log('The employee\'s iVoteBallot Id Identifer Code entered into the input field is: ' + EmployeeId_PlainText + '.');
+				console.log('The employee\'s iVoteBallot Id Identifier Code does not match to the Session cookie id\'s database.');
+				return done(null, false, { message: 'Your employee\'s iVoteBallot Id Identifier Code does not match to our iVoteballot\'s HRM database.' });
+
+			} else
+
+				await db1_HRM_EmployeesRegistration.get(`SELECT * FROM hrm_Employees_Registration_01 WHERE EmployeeEmail = ?`, EmployeeEmail, (err, row) => {
+
+					if (err) {
+						return done(err);
+					}
+
+					if (!row) {
+						console.log('The employee have entered the incorrect email address for local4: ' + EmployeeEmail);
+						return done(null, false, { message: 'You have entered the incorrect email address: ' + EmployeeEmail });
+					}
+
+					bcrypt.compare(EmployeeId_PlainText, row.EmployeeId_PlainText, (err, result) => {
+
+						if (err) {
+							return done(err);
+						}
+						if (!result) {
+							console.log('The employee\'s iVoteBallot Id Identifier Code was entered incorrectly for local4: ' + EmployeeId_PlainText);
+							return done(null, false, { message: 'You have entered the incorrect iVoteBallot Id Identifier Code: ' + EmployeeId_PlainText });
+						} else {
+
+							//return done(null, user);
+
+							return done(null,
+								{
+									id: row.id,
+									EmployeeId: row.EmployeeId,
+									EmployeeId_PlainText: row.EmployeeId_PlainText,
+									EmployeeDepartment: row.EmployeeDepartment,
+									EmployeeCountry: row.EmployeeCountry,
+									Date: row.Date,
+									EmployeePDF: row.EmployeePDF,
+									EmployeePhoto: row.EmployeePhoto,
+									EmployeeJobTitle: row.EmployeeJobTitle,
+									EmployeeFirstName: row.EmployeeFirstName,
+									EmployeeMiddleName: row.EmployeeMiddleName,
+									EmployeeLastName: row.EmployeeLastName,									
+									EmployeeEmail: row.EmployeeEmail,
+									EmployeeConfirmEmail: row.EmployeeConfirmEmail,
+									EmployeeHiredPerson: row.EmployeeHiredPerson,
+									EmployeeHiredPersonTitle: row.EmployeeHiredPersonTitle,	
+									EmployeeHiredDate: row.EmployeeHiredDate,								
+									EmployeePassword: row.EmployeePassword,
+									EmployeeConfirmPassword: row.EmployeeConfirmPassword,
+									EmployeeTemporary_Password: row.EmployeeTemporary_Password,
+
+									isAuthenticated: true
+								}
+							);
+						}
+					});
+				}
+			);
+		}
+	)
+);
+
+/******** */
+passport.serializeUser(function (user, done) {
+	console.log('Serializing user...');
+	console.log(user);
+	done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+	console.log('Deserializing users...');
+	console.log(id);
+	const user = db1_HRM_EmployeesRegistration.get('SELECT * FROM hrm_Employees_Registration_01 WHERE id = ?', id, (err, user) => {
+
+		if (err) {
+			return done(err);
+		}
+		if (!user) {
+			return done(null, false);
+		}
+
+		return done(null,
+
+			{
+
+				id: user.id,
+
+				EmployeeId: user.EmployeeId,
+				EmployeeId_PlainText: user.EmployeeId_PlainText,
+				EmployeeDepartment: user.EmployeeDepartment,
+				EmployeeCountry: user.EmployeeCountry,
+				Date: user.Date,
+				EmployeePDF: user.EmployeePDF,
+				EmployeePhoto: user.EmployeePhoto,
+				EmployeeJobTitle: user.EmployeeJobTitle,
+				EmployeeFirstName: user.EmployeeFirstName,
+				EmployeeMiddleName: user.EmployeeMiddleName,
+				EmployeeLastName: user.EmployeeLastName,									
+				EmployeeEmail: user.EmployeeEmail,
+				EmployeeConfirmEmail: user.EmployeeConfirmEmail,
+				EmployeeHiredPerson: user.EmployeeHiredPerson,
+				EmployeeHiredPersonTitle: user.EmployeeHiredPersonTitle,
+				EmployeeHiredDate: user.EmployeeHiredDate,									
+				EmployeePassword: user.EmployeePassword,
+				EmployeeConfirmPassword: user.EmployeeConfirmPassword,
+				EmployeeTemporary_Password: user.EmployeeTemporary_Password,
+
+				isAuthenticated: true
+
+			}
+			
+		);
+
+	});	
+
+});
+
+
+
+
+
+
+
+
+
+
+
 /*
 
 iVoteBallotApp.use((req, res, next) => {
@@ -1069,7 +1256,6 @@ iVoteBallotApp.use((req, res, next) => {
 
 
 // hrm_Signup_01.ejs
-
 
 const redirectDashboard = (req, res, next) => {
 	if (req.session.userId) {
@@ -1495,6 +1681,16 @@ iVoteBallotApp.use('/alabamaDMV_Commission_01', (req, res, next) => {
 	next();
 });
 
+// Middleware to set req.isUnauthenticated for the first use of the '/hrm_Employees_Registration_01' URL bar.
+hrmApp.use('/hrm_Employees_Registration_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'hrm_Employees_Registration_01\'.');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
 // Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_SignUp_01' URL bar
 iVoteBallotApp.use('/alabamaVoters_SignUp_01', (req, res, next) => {
 	console.log('The middleware have been call for the user\'s \'alabamaVoters_SignUp_01\'.');
@@ -1835,6 +2031,28 @@ iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) =>
 		console.log(req.flash());
 		req.flash('error', 'The Election Assure Expert have not manually updated user\'s data information.');
 		res.render('/alabamaDMV_Commission_01');
+
+	} else {
+		res.render('535');
+
+	}
+});
+
+// The User route for hrm_Employees_Registration_01.
+hrmApp.get('/hrm_Employees_Registration_01', (req, res) => {
+
+	// Check if user already authenticated.
+	if (req.session.isAuthenticated) {
+		console.log('The Human Resource Employee have already created the new employee iVoteBallot\'s HRM account.');
+		req.flash('success', 'The Human Resource Employee have already created the new employee iVoteBallot\'s HRM account.');
+		res.render('/hrm_SignUp_01');
+	}
+	console.log(req.session);
+	// Check if this is the first use of '/hrm_Employees_Registration_01' route URL bar
+	if (req.isUnauthenticated) {
+		console.log(req.flash());
+		req.flash('error', 'The Human Resource Employee have not successfully created the new employee iVoteBallot\'s HRM account.');
+		res.render('/hrm_Employees_Registration_01');
 
 	} else {
 		res.render('535');
@@ -3469,7 +3687,254 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 	}
 );
 
+hrmApp.post('/hrm_Employees_Registration_01',
+	async (req, res) => {
 
+		const EmployeeId = req.body.EmployeeId;		
+		const EmployeeDepartment = req.body.EmployeeDepartment;		
+		const EmployeeCountry = req.body.EmployeeCountry;
+		const EmployeePDF = req.body.EmployeePDF;
+		const EmployeePhoto = req.body.EmployeePhoto;
+		const EmployeeJobTitle = req.body.EmployeeJobTitle;
+		const EmployeeFirstName = req.body.EmployeeFirstName;
+		const EmployeeMiddleName = req.body.EmployeeMiddleName;
+		const EmployeeLastName = req.body.EmployeeLastName;		
+
+		const EmployeeEmail = req.body.EmployeeEmail;
+		const EmployeeConfirmEmail = req.body.EmployeeConfirmEmail;
+
+		const EmployeeHiredPerson = req.body.EmployeeHiredPerson;
+		const EmployeeHiredPersonTitle = req.body.EmployeeHiredPersonTitle;
+		const EmployeeHiredDate = req.body.EmployeeHiredDate;
+
+		const EmployeePassword = req.body.EmployeePassword;
+		const EmployeeConfirmPassword = req.body.EmployeeConfirmPassword;
+		const EmployeeTemporary_Password = req.body.EmployeeTemporary_Password;
+
+		console.log(req.body);
+
+		console.log('The new employee divisional Id region is: ' + EmployeeId + '.');
+		console.log('The new employee\'s department region is: ' + EmployeeDepartment + '.');
+		console.log('The new employee\'s country location is: ' + EmployeeCountry + '.');
+		console.log('The new employee\'s PDF Files are: ' + EmployeePDF + '.');
+		console.log('The new employee\'s photograph image is: ' + EmployeePhoto + '.');
+		console.log('The new employee\'s job title is: ' + EmployeeJobTitle + '.');
+		console.log('The new employee\'s first name is: ' + EmployeeFirstName + '.');
+		console.log('The new employee\'s middle name is: ' + EmployeeMiddleName + '.');
+		console.log('The new employee\'s last name is: ' + EmployeeLastName + '.');
+
+		console.log('The new employee\'s email is: ' + EmployeeEmail + '.');
+		console.log('The new employee\'s confirm email is: ' + EmployeeConfirmEmail + '.');
+
+		console.log('The new employee\'s Talent Acquisition Coordinator Name is: ' + EmployeeHiredPerson + '.');
+		console.log('The new employee\'s Talent Acquisition Coordinator Title is: ' + EmployeeHiredPersonTitle + '.');
+		console.log('The new employee hired date is: ' + EmployeeHiredDate + '.');
+
+		console.log('The new employee\'s password is: ' + EmployeePassword + '.');
+		console.log('The new employee\'s confirm password is: ' + EmployeeConfirmPassword + '.');
+		console.log('The new employee\'s temporary password is: ' + EmployeeTemporary_Password + '.');		
+		
+		console.log(req.session);
+
+		// Generate a shorter version of UUID (version 4)
+		const shortUUID = uuidv4().substring(0, 14); // Using first 8 characters
+
+		// Append the division code (e.g., 'AL' for Alabama)
+		const employeeID = shortUUID + EmployeeDepartment + '-' + EmployeeId + '-' + EmployeeCountry;		
+			
+		// To hash the New Employee input field using bcryption.
+		const salt = await bcrypt.genSalt(14);
+		//const DMVSSNHashed = await bcrypt.hash(req.body.DMVSSN, salt);
+		//const DMVIdTypeNumberHashed = await bcrypt.hash(req.body.DMVIdTypeNumber, salt);
+
+		// To hash the user's Employee Id input field using bcryption.	
+		
+		const IdHashed = await bcrypt.hash(employeeID, salt);
+
+		// To hash the user's IvoteBallotIdIdentifierCode input field using bcryption.	
+		//const ConfirmIvoteBallotIdIdentifierCodeHashed = await bcrypt.hash(req.body.ConfirmIvoteBallotIdIdentifierCode, salt);
+
+		// To hash the user's Password input field using bcryption.	
+		const PasswordHashed = await bcrypt.hash(req.body.EmployeePassword, salt);
+
+		// To hash the user's Confirm Password input field using bcryption.	
+		const ConfirmPasswordHashed = await bcrypt.hash(req.body.EmployeeConfirmPassword, salt);
+
+		// To hash the user's Confirm Password input field using bcryption.	
+		const Temporary_PasswordHashed = await bcrypt.hash(req.body.EmployeeTemporary_Password, salt);
+
+		console.log('The new employee\'s concatenation employee Id is: ' + employeeID + '.');
+		
+		// Read the photo file as binary data
+		const pdfFilePath = `/Users/saraihannahajai/Documents/iVoteBallot_Prototype_3/iVoteBallot_HRM_EmployeesDataInformation/iVoteBallotHRM_Employees_PDFHiredInfo/${EmployeePDF}`;
+		const pdfFileData = fs.readFileSync(pdfFilePath);
+
+		// Read the photo file as binary data
+		const photoFilePath = `/Users/saraihannahajai/Documents/iVoteBallot_Prototype_3/iVoteBallot_HRM_EmployeesDataInformation/iVoteBallotHRM_Employees_IDImages/${EmployeePhoto}`;
+		const photoFileData = fs.readFileSync(photoFilePath);
+
+		const newUser = {
+			
+			EmployeeId: IdHashed,
+			EmployeeId_PlainText: employeeID,
+			EmployeeDepartment,	
+			EmployeeCountry,
+			EmployeePDF,
+			EmployeePhoto,
+			EmployeeJobTitle,
+			EmployeeFirstName,
+			EmployeeMiddleName,
+			EmployeeLastName,
+			EmployeeEmail,
+			EmployeeConfirmEmail,
+			EmployeeHiredPerson,
+			EmployeeHiredPersonTitle,
+			EmployeeHiredDate,
+			EmployeePassword: PasswordHashed,
+			EmployeeConfirmPassword: ConfirmPasswordHashed,
+			EmployeeTemporary_Password: Temporary_PasswordHashed
+			
+		};	
+		
+		await db1_HRM_EmployeesRegistration.run(
+						
+			`INSERT INTO hrm_Employees_Registration_01 (EmployeeId, EmployeeId_PlainText, EmployeeDepartment, EmployeeCountry, EmployeePDF, EmployeePhoto, EmployeeJobTitle, EmployeeFirstName, EmployeeMiddleName, EmployeeLastName, EmployeeEmail, EmployeeConfirmEmail, EmployeeHiredPerson, EmployeeHiredPersonTitle, EmployeeHiredDate, EmployeePassword, EmployeeConfirmPassword, EmployeeTemporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+
+			[newUser.EmployeeId, newUser.EmployeeId_PlainText, newUser.EmployeeDepartment, newUser.EmployeeCountry, Buffer.from(pdfFileData), Buffer.from(photoFileData), newUser.EmployeeJobTitle, newUser.EmployeeFirstName, newUser.EmployeeMiddleName, newUser.EmployeeLastName, newUser.EmployeeEmail, newUser.EmployeeConfirmEmail, newUser.EmployeeHiredPerson, newUser.EmployeeHiredPersonTitle, newUser.EmployeeHiredDate, newUser.EmployeePassword, newUser.EmployeeConfirmPassword, newUser.EmployeeTemporary_Password], (err) => {
+
+				if (err) {
+					console.error(err);
+					req.flash('error', 'An syntax error has occurred when you have entered your data information into the input field that is link to our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
+					console.log('An syntax error has occurred when the user have entered his/her data information into the input field that is link our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
+					res.render('535');
+
+				} else {
+					
+					console.log('db1_HRM_EmployeesRegistration is about to run.');
+					console.log('The user data information typed into the \'iVoteBallot_HRMEmployees_Registration_01\' input fields have been successfully parsed into the \'iVoteBallot_HRMEmployees_Registration_01\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
+					req.flash('success', 'The Human Resources Manager have successfully registered your employee data information onto the iVoteBallot\'s HRM database, and you can now sign up to create your iVoteBallot\'s employment job orders account.');
+					
+					res.redirect('/hrm_SignUp_01');
+
+				}			
+
+				const transporter = nodemailer.createTransport({
+					host: 'smtp.ionos.com',
+					port: 587,
+					secure: false,
+					auth: {
+						user: 'ceo.developmenttest@ivoteballot.com',
+						pass: IONOS_SECRET_KEY,
+					}
+				});
+				
+				const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';				
+
+				const mailOptions_01 = {
+					from: req.body.EmployeeEmail,
+					to: 'electionassureexpert@ivoteballot.com',
+					bcc: 'honey.ryder.development@ivoteballot.com',
+					subject: `New Employee Notification | iVoteBallot Employee Entry`,
+					html: ` 
+													
+					<p>Dear CEO/CIO/Manager,</p>
+					<p>An iVoteBallot employee has manually entered a new Employee into the iVoteBallot database. Here are the details:</p>
+			
+						<ul>
+
+							<li>
+								Name: ${req.body.EmployeeFirstName} ${req.body.EmployeeMiddleName} ${req.body.EmployeeLastName}
+							</li>
+							<li>
+								Job Title: ${req.body.EmployeeJobTitle}
+							</li>
+							<li>
+								Email: ${req.body.EmployeeEmail}
+							</li>	
+							<li>
+								Talent Acquisition Coordinator Name (Hiring Person): ${req.body.EmployeeHiredPerson}
+							</li>
+							<li>
+								Talent Acquisition Coordinator Title: ${req.body.EmployeeHiredPersonTitle}
+							</li>
+							<li>
+								New Employee Hired Date: ${req.body.EmployeeHiredDate}
+							</li>
+							
+						</ul>					
+						
+					<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+
+					`,
+
+					attachments: [
+						{
+							filename: 'iVoteBallotLogo.png',
+							path: imagePath,
+							cid: 'iVoteBallotLogo'
+
+						}
+					]
+				};
+				
+				const mailOptions_02 = {
+					from: 'electionassureexpert@ivoteballot.com',
+					to: req.body.EmployeeEmail,
+					bcc: 'honey.ryder.development@ivoteballot.com',
+					subject: `Notification from the iVoteBallot's Election Assure Experts`,
+					html:
+						`						
+						<p>Dear ${req.body.EmployeeFirstName} ${req.body.EmployeeMiddleName} ${req.body.EmployeeLastName},</p>
+						<p>Congratulations! Your iVoteballot Employee account has been successfully set up by our dedicated Human Resource Manager.</p>
+
+						<p>
+							At iVoteBallot, we are committed to providing you with a seamless employee experience. And, your account is now ready for you to sign up, and we encourage you to explore our platform.
+						</p>
+
+						<p>
+							Thank you for choosing iVoteBallot. We wish you a fantastic voting journey and hope you have a great day, ${req.body.EmployeeFirstName}.
+						</p>
+
+						<p>Best Regards,</p>
+						<p>iVoteBallot's Election Assure Expert Team</p>
+
+						<img src="cid:iVoteBallotLogo" style="width: 100px; height: auto;" />
+
+						`,
+
+					attachments: [
+						{
+							filename: 'iVoteBallotLogo.png',
+							path: imagePath,
+							cid: 'iVoteBallotLogo'
+						}
+					]
+
+				};
+				
+				transporter.sendMail(mailOptions_01, (error, info) => {
+					if (error) {
+						console.log('The nodemailer have received an error message for the mailOptions_01:' + error + '.');
+						res.render('535');
+					} else {
+						console.log('Email Sent successfully: ' + info.response);
+					}
+				});
+
+				transporter.sendMail(mailOptions_02, (error, info) => {
+					if (error) {
+						console.log('The nodemailer have received an error message for the mailOptions_02:' + error + '.');
+						res.render('535');
+					} else {
+						console.log('Email Sent successfully: ' + info.response);
+
+					}
+				});
+			}				
+		);	
+
+	}
+);
 
 
 
