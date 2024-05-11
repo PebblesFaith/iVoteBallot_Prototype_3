@@ -1083,20 +1083,20 @@ passport.use(
 	'local4',
 	new LocalStrategy({
 		usernameField: 'EmployeeEmail',
-		passwordField: 'EmployeeId_PlainText',
+		passwordField: 'EmployeeId',
 		passReqToCallback: true // To allow request object to be passed to callback
 	},
-		async (req, EmployeeEmail, EmployeeId_PlainText, done) => {
+		async (req, EmployeeEmail, EmployeeId, done) => {
 
 			console.log('The iVoteBallot\'s user\'s passport.use(local4) email (\'EmployeeEmail\') as: ' + EmployeeEmail);
-			console.log('The iVoteBallot\'s user\'s passport.use(local4) password (\'EmployeeId_PlainText\') as: ' + EmployeeId_PlainText);
+			console.log('The iVoteBallot\'s user\'s passport.use(local4) password (\'EmployeeId_\') as: ' + EmployeeId);
 
 			if (!EmployeeEmail) {
 				return done(null, false, { message: 'You have entered an employee email address that already exist in iVoteBallot\'s HRM database: ' + EmployeeEmail });
 			}
 
-			if (!EmployeeId_PlainText) {
-				console.log('The employee\'s iVoteBallot Id Identifer Code entered into the input field is: ' + EmployeeId_PlainText + '.');
+			if (!EmployeeId) {
+				console.log('The employee\'s iVoteBallot Id Identifer Code entered into the input field is: ' + EmployeeId + '.');
 				console.log('The employee\'s iVoteBallot Id Identifier Code does not match to the Session cookie id\'s database.');
 				return done(null, false, { message: 'Your employee\'s iVoteBallot Id Identifier Code does not match to our iVoteballot\'s HRM database.' });
 
@@ -1113,14 +1113,14 @@ passport.use(
 						return done(null, false, { message: 'You have entered the incorrect email address: ' + EmployeeEmail });
 					}
 
-					bcrypt.compare(EmployeeId_PlainText, row.EmployeeId_PlainText, (err, result) => {
+					bcrypt.compare(EmployeeId, row.EmployeeId, (err, result) => {
 
 						if (err) {
 							return done(err);
 						}
 						if (!result) {
-							console.log('The employee\'s iVoteBallot Id Identifier Code was entered incorrectly for local4: ' + EmployeeId_PlainText);
-							return done(null, false, { message: 'You have entered the incorrect iVoteBallot Id Identifier Code: ' + EmployeeId_PlainText });
+							console.log('The employee\'s iVoteBallot Id Identifier Code was entered incorrectly for local4: ' + EmployeeId);
+							return done(null, false, { message: 'You have entered the incorrect iVoteBallot Id Identifier Code: ' + EmployeeId });
 						} else {
 
 							//return done(null, user);
@@ -1160,11 +1160,13 @@ passport.use(
 );
 
 /******** */
+
 passport.serializeUser(function (user, done) {
 	console.log('Serializing user...');
 	console.log(user);
 	done(null, user.id);
 });
+
 
 passport.deserializeUser(function (id, done) {
 	console.log('Deserializing users...');
@@ -1703,6 +1705,18 @@ iVoteBallotApp.use('/alabamaVoters_SignUp_01', (req, res, next) => {
 	next();
 });
 
+// Middleware to set req.isUnauthenticated for the first use of the '/hrm_SignUp_01' URL bar
+hrmApp.use('/hrm_SignUp_01', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'hrm_SignUp_01\'.');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+	next();
+});
+
 
 // Middleware to set req.isUnauthenticated for the first use of the '/alabamaVoters_ForgotPasswordSignUp_01' URL bar
 iVoteBallotApp.use('/alabamaVoters_ForgotPasswordSignUp_01', (req, res, next) => {
@@ -2075,6 +2089,25 @@ iVoteBallotApp.get('/alabamaVoters_SignUp_01', (req, res) => {
 		res.render('535')
 
 		console.log('The user is not successfully authenticated within the session through the passport from reset password webpage!');
+
+	}
+});
+
+// The User route for alabamaVoters_SignUp_01. 
+hrmApp.get('/hrm_SignUp_01', (req, res) => {
+
+	if (req.isAuthenticated()) {
+		console.log(req.user);
+		console.log('Request Session:' + req.session)
+		console.log('' + req.logIn);
+		console.log('The Employee had been successfully authenticated within the Session through the passport from reset signup password webpage!');
+		res.render('hrm_Employees_EmailVerification_01');
+
+	} else {
+
+		res.render('535')
+
+		console.log('The employee is not successfully authenticated within the session through the passport from reset password webpage!');
 
 	}
 });
@@ -2570,6 +2603,15 @@ iVoteBallotApp.post(
 	passport.authenticate('local1', {
 		successRedirect: '/alabamaVoters_EmailVerification_01',
 		failureRedirect: '/alabamaVoters_SignUp_01',
+		failureFlash: true
+	}
+));
+
+hrmApp.post(
+	'/hrm_SignUp_01',
+	passport.authenticate('local4', {
+		successRedirect: '/hrm_Employees_EmailVerification_01',
+		failureRedirect: '/hrm_SignUp_01',
 		failureFlash: true
 	}
 ));
@@ -3937,6 +3979,67 @@ hrmApp.post('/hrm_Employees_Registration_01',
 );
 
 
+
+
+hrmApp.post('/hrm_SignUp_01',
+
+	async (req, res) => {
+
+		const DMVEmail = req.user.EmployeeEmail;
+		//const userIvoteBallotIdIdentifierCode = req.body.userIvoteBallotIdIdentifierCode;
+		const Password = req.body.EmployeePassword;
+		const ConfirmPassword = req.body.EmployeeConfirmPassword;
+
+		console.log('These are the request body' + req.body);
+
+		//console.log('The user email address is: ' + userDMVEmail + '.');
+		//console.log('The user iVoteBallot Id Identifier Code is: ' + userIvoteBallotIdIdentifierCode + '.');
+		console.log('The user password is: ' + EmployeePassword + '.');
+		console.log('The user confirm password is: ' + EmployeeConfirmPassword + '.');
+
+		console.log('The request session: ' + req.session + '.');
+
+		// To hash the newPassword input field using bcrypt library.
+		const salt = await bcrypt.genSalt(BCRYPTION_SALT_KEY);
+		const passwordHashed = await bcrypt.hash(EmployeePassword, salt);
+
+		// To hash the confirmNewPassword input field using bcrypt library.
+		const confirmPasswordHashed = await bcrypt.hash(EmployeeConfirmPassword, salt);
+
+		// To check, if the user's email address exists onto the passport serialization through the session cookie id.
+		db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM hrm_Employees_Registration_01 WHERE EmployeeEmail = ?', EmployeeEmail, (err, user) => {
+
+			if (err) {
+
+				console.error(err);
+				console.log('The user\'s input fields for passport.use local1 Local Strategy and Session Cookie Id did not successfully executed from the internet causing an 500 error message most likely from the Developer\'s JavaScript coded written algorithm problems.');
+				res.render('535');
+			} else if (!user) {
+				req.flash('error', 'The user have entered the incorrect email address and/or password that were not successfully process through the passport.use local1 Local Strategy and Session Cookie Id to the SQlite3 database authentication from serialization.');
+				console.log('The user\'s email address is not found successfully through the process of the passport.use local1 Local Strategy and Session Cookie Id to the SQLite3 database for serializtion.');
+				res.render('hrm_SignUp_01');
+
+			} else {
+
+				db1_iVoteballot_EmployeesRegistration.run('UPDATE hrm_Employees_Registration_01 SET EmployeePassword = ?, EmployeeConfirmPassword = ? WHERE EmployeeEmail = ?', passwordHashed, confirmPasswordHashed, req.EmployeeEmail, (err) => {
+
+					if (err) {
+						console.error(err);
+						console.log('The user\s passport and session was not successfully executed causing an 500 error message due from Developer\s programmatic coding language problems.');
+						res.render('535');
+
+					} else {
+
+						console.log('The user\s email address is successfully found within the passport serialization authenticated processes through the session.');
+						res.redirect('/hrm_Employees_EmailVerification');
+					}
+
+				});
+
+			}
+		});
+	}
+);
 
 
 
