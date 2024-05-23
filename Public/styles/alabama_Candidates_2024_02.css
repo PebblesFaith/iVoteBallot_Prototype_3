@@ -318,7 +318,7 @@ body{
 
 
 .radio_Buttons_01 {  
-	width: 75px;
+	width: 100px;
 	height: 175px;
 	border-radius: 15px;	
 	text-align: center;
@@ -340,8 +340,8 @@ p {
 	
 }
 .radio_Buttons_01 > img {
-	width: 80px;
-	height: 80px;
+	width: 79px;
+	height: 79px;
 }
 
 #userSelectedCandidates_2024 {
