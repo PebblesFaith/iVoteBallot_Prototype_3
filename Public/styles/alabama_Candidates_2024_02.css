@@ -315,7 +315,14 @@ body{
     
 }
 
-
+.labelExpanded_01 input:not(checked) + .radio_Buttons_01 {        
+	display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column; 
+	background-color: rgba(255, 255, 255, 0.3);
+	color: rgb(255, 255, 255);	  
+    
+}
 
 .radio_Buttons_01 {  
 	width: 100px;
