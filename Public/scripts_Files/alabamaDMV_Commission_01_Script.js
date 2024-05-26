@@ -5,9 +5,11 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	console.log('Sarai Hannah Ajai is testing her written JavaScript programmatic codes; in order to validate her contact us form has opened up correctly within the HTML webpage.')
 
 	const DMVPhoto = document.getElementById('photo').value.trim(); 
+	const DMVPrefix = document.getElementById('prefix').value.trim();
 	const DMVFirstName = document.getElementById('firstName').value.trim(); 
 	const DMVMiddleName = document.getElementById('middleName').value.trim();  
 	const DMVLastName = document.getElementById('lastName').value.trim(); 
+	const DMVGeneration = document.getElementById('generation').value.trim();
 	const DMVSuffix = document.getElementById('suffix').value.trim();   
 	const DMVDateOfBirth = document.getElementById('dateOfBirth').value.trim();    
 	const DMVBirthSex = document.getElementById('birthSex').value.trim();   
@@ -46,8 +48,10 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	const Password = document.getElementById('password').value.trim();
 	const ConfirmPassword = document.getElementById('confirmPassword').value.trim();
 	const Temporary_Password = document.getElementById('temporary_Password').value.trim();	
-	
+
+	const regPrefix = /^[A-Za-z\s]+.+$/	
 	const regExName = /^[A-Za-z\s]+$/;
+	const regSuffix = /^[A-Za-z\s]+.+$/
 	const regExSSN =  /^\d{3}\-\d{2}\-\d{4}$/;  
 	const regExEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;      
 	const regExPhoneNumber = /^\d{3}\-\d{3}\-\d{4}$/; 	
@@ -70,6 +74,26 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 
 		return false;  
 	
+	}
+
+	if (DMVPrefix === '' || DMVPrefix == null) {
+		document.getElementById('userDMVPrefixErrorMessage').textContent = 'Error Message: Do the user have a prefix name? If so, please type in the user prefix name into the input field or skip the user prefix name input field entirety.';
+
+		setTimeout(function() {
+			document.getElementById('userDMVPrefixErrorMessage').textContent = '';
+		},
+		9000)                                           
+							
+		} else if (DMVPrefix.length <= 0 || !DMVPrefix.match(regPrefix)) {
+		document.getElementById('userDMVPrefixErrorMessage').textContent = 'Error Message: The user prefix name is an optional input field; however, you must enter more than one characters into the user prefix name required input field.';
+
+		setTimeout(function() {
+			document.getElementById('userDMVPrefixErrorMessage').textContent = '';
+		},
+		9000)
+	
+		return false;  
+
 	}
 	
 	if (DMVFirstName === '' || DMVFirstName == null || DMVFirstName.length <= 2 || !DMVFirstName.match(regExName)) {                                                               
@@ -116,6 +140,26 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	
 	}
 
+	if (DMVGeneration === '' || DMVGeneration == null) {
+		document.getElementById('userDMVGenerationErrorMessage').textContent = 'Error Message: Do the user have a generational name? If so, please type in the user generational name into the input field or skip the user generational name input field entirety.';
+
+		setTimeout(function() {
+			document.getElementById('userDMVSuffixErrorMessage').textContent = '';
+		},
+		9000)                                           
+							
+		} else if (DMVGeneration.length <= 0 || !DMVGeneration.match(regExName)) {
+		document.getElementById('userDMVGenerationErrorMessage').textContent = 'Error Message: The user generational name is an optional input field; however, you must enter more than one characters into the user generational name required input field.';
+
+		setTimeout(function() {
+			document.getElementById('userDMVGenerationErrorMessage').textContent = '';
+		},
+		9000)
+	
+		return false;  
+
+	}
+
 	if (DMVSuffix === '' || DMVSuffix == null) {
 		document.getElementById('userDMVSuffixErrorMessage').textContent = 'Error Message: Do the user have a suffix name? If so, please type in the user suffix name into the input field or skip the user suffix name input field entirety.';
 
@@ -124,7 +168,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		},
 		9000)                                           
 							
-		} else if (DMVSuffix.length <= 0 || !DMVSuffix.match(regExName)) {
+		} else if (DMVSuffix.length <= 0 || !DMVSuffix.match(regSuffix)) {
 		document.getElementById('userDMVSuffixErrorMessage').textContent = 'Error Message: The user suffix name is an optional input field; however, you must enter more than one characters into the user suffix name required input field.';
 
 		setTimeout(function() {
