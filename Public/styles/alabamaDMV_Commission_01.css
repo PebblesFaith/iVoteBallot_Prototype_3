@@ -332,9 +332,11 @@ span.forgot_Password {
 }
 
 #photo,
+#prefix,
 #firstName,
 #middleName,
 #lastName,
+#generation,
 #suffix,
 #dateOfBirth,
 #birthSex,
@@ -393,9 +395,11 @@ span.forgot_Password {
 }  
 
 #photo,
+#prefix,
 #firstName,
 #middleName,
 #lastName,
+#generation,
 #suffix,
 #dateOfBirth,
 #birthSex,
@@ -446,9 +450,11 @@ span.forgot_Password {
 }
 
 #photo,
+#prefix,
 #firstName,
 #middleName,
 #lastName,
+#generation,
 #suffix,
 #dateOfBirth,
 #birthSex,
@@ -493,9 +499,11 @@ span.forgot_Password {
 }
   
 #photo:focus,
+#prefix:focus,
 #firstName:focus,
 #middleName:focus,
 #lastName:focus,
+#generation:focus,
 #suffix:focus,
 #dateOfBirth:focus,
 #birthSex:focus,
@@ -545,9 +553,11 @@ span.forgot_Password {
 }
 
 #userDMVPhotoErrorMessage,
+#userDMVPrefixErrorMessage,
 #userDMVFirstNameErrorMessage,
 #userDMVMiddleNameErrorMessage,
 #userDMVLastNameErrorMessage,
+#userDMVGenerationErrorMessage,
 #userDMVSuffixErrorMessage,
 #userDMVDateOfBirthErrorMessage,
 #userDMVBirthSexErrorMessage,
