@@ -71,6 +71,21 @@
 									<span id="userDMVPhotoErrorMessage"></span>
 									<br>
 
+									<select id="prefix" name="DMVPrefix">
+										<option id="selectBackground" value="" disable selected hidden>Generational (optional)</option>
+											<option value = Doctor>Doctor</option>
+											<option value = Honorable>Honorable</option>
+											<option value = Miss>Miss</option>
+											<option value = Mrs.>Mr.</option>
+											<option value = Mrs.>Mrs.</option>
+											<option value = Ms.>Ms</option>
+											<option value = Professor>Professor</option>
+											<option value = Sir>Sir</option>
+											
+									</select>																
+									<span id = "userDMVPrefixErrorMessage"></span>
+									<br>
+
 									<label>First Name |</label>                                           
 									<input id="firstName" type="text" name="DMVFirstName" maxlength="75"> 								                          
 									<span id="userDMVFirstNameErrorMessage"></span>
@@ -86,15 +101,26 @@
 									<span id="userDMVLastNameErrorMessage"></span>
 									<br>
 
-									<select id="suffix" name="DMVSuffix">
-										<option id="selectBackground" value="" disable selected hidden>Suffix (optional)</option>
-											<option value = JR>JR</option>
-											<option value = SR>SR</option>
+									<select id="generation" name="DMVGeneration">
+										<option id="selectBackground" value="" disable selected hidden>Generational (optional)</option>
 											<option value = I>I</option>
 											<option value = II>II</option>
 											<option value = III>III</option>
 											<option value = IV>IV</option>
 											<option value = V>V</option>
+											<option value = JR>JR</option>
+											<option value = SR>SR</option>
+											
+									</select>																
+									<span id = "userDMVGenerationErrorMessage"></span>
+									<br>
+
+									<select id="suffix" name="DMVSuffix">
+										<option id="selectBackground" value="" disable selected hidden>Suffix (optional)</option>
+											<option value = Esquire>Esquire</option>
+											<option value = M.D.>M.D.</option>
+											<option value = Ph.D>Ph.D</option>
+											
 									</select>																
 									<span id = "userDMVSuffixErrorMessage"></span>
 									<br>
