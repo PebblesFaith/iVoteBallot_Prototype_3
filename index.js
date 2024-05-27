@@ -38,7 +38,6 @@ const path = require('path');
 const ejs = require('ejs');
 
 /*
-
 	The code statement "const fs = require('fs')" imports the File System module into Sarai Hannah Ajai's (the Developer) Node.js iVoteBallot
 	web application, enabling her to work with the file system in order to perform operations such as, reading from and writing to files, and 
 	enhancing the functionality of the iVoteBallot web application.
@@ -82,6 +81,8 @@ const bcrypt = require('bcrypt');
 */
 const passport = require('passport');
 
+//const passport2 = require('passport');
+
 /*
 	1. The code statement "const LocalStrategy = require('passport-local').Strategy" is a library that provides a local authentication strategy for
 	   the passport middleware.
@@ -91,6 +92,7 @@ const passport = require('passport');
 	   error handlings logic for the authentication flow.
 */
 const LocalStrategy = require('passport-local').Strategy;
+//const LocalStrategy2 = require('passport-local').Strategy;
 
 /*
 	1. The code statement "const sqliteDB = require('better-sqlite3')" is a library that provides a more efficient and convenient way to work with
@@ -237,8 +239,8 @@ const http = require('http');
 	prototype 3 web application.
 */
 
-const port_01 = 8080;
-const port_02 = 1090;
+const PORT_01 = 8080;
+const PORT_02 = 1090;
 
 /*
 iVoteBallotApp.listen(port, '0.0.0.0', function (err) {
@@ -250,20 +252,20 @@ iVoteBallotApp.listen(port, '0.0.0.0', function (err) {
 });
 */
 
-http.createServer(iVoteBallotApp).listen(port_01, '0.0.0.0', (err) => {
+http.createServer(iVoteBallotApp).listen(PORT_01, '0.0.0.0', (err) => {
 	if (err) {
 		console.log('There is a problem loading iVoteBallot prototype 3 port 8080' + err);
 	} else {
-		console.log('The Nodejs in conjunction with Express framework is listening onto port_01 ' + port_01 + ' from express\' iVoteBallotApp prototype 3 | iVoteBallot Users.');
+		console.log('The Nodejs in conjunction with Express framework is listening onto port_01 ' + PORT_01 + ' from express\' iVoteBallotApp prototype 3 | iVoteBallot Users.');
 	}
 
 })
 
-http.createServer(hrmApp).listen(port_02, '0.0.0.0', (err) => {
+http.createServer(hrmApp).listen(PORT_02, '0.0.0.0', (err) => {
 	if (err) {
 		console.log('There is a problem loading iVoteBallot prototype 3 port 1090' + err);
 	} else {
-		console.log('The Nodejs in conjunction with Express framework is listening onto port_02 ' + port_02 + ' from express\' iVoteBallotApp prototype 3 | Human Resource Managemenet System.');
+		console.log('The Nodejs in conjunction with Express framework is listening onto port_02 ' + PORT_02 + ' from express\' iVoteBallotApp prototype 3 | Human Resource Managemenet System.');
 	}
 })
 
@@ -285,6 +287,9 @@ if (process.env.NODE_ !== 'production') {
 	keys used to secure sessions data. And, the IONOS_SECRET_KEY constant is used for accessing
 	sensitive data or services protected by an nodemailer API key or other credentials.
 */
+//const PORT_01 = process.env.PORT_01;
+//const PORT_02 = process.env.PORT_02;
+
 const ALABAMA_SESSION = process.env.ALABAMA_SESSION;
 const SESSION_MAX_AGE = process.env.SESSION_MAX_AGE;
 const EXPRESS_SESSION_KEY = process.env.EXPRESS_SESSION_KEY;
@@ -381,47 +386,50 @@ db1.serialize(() => {
         id TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6)))), 
         Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
 		DMVPhoto BLOB (250) NOT NULL,
+		DMVPrefix VARCHAR (50) NOT NULL,
         DMVFirstName VARCHAR (100) NOT NULL, 
         DMVMiddleName VARCHAR (100) NOT NULL, 
-        DMVLastName VARCHAR(100) NOT NULL,
-        DMVSuffix VARCHAR(25) NOT NULL,
-        DMVDateOfBirth VARCHAR(50) NOT NULL,
-        DMVBirthSex VARCHAR(25) NOT NULL,
-        DMVGenderIdentity VARCHAR(25) NOT NULL,
-        DMVRace VARCHAR(250) NOT NULL,
-		DMVUSResidentStatusSelection VARCHAR(50) NOT NULL,
+        DMVLastName VARCHAR (100) NOT NULL,
+		DMVGeneration VARCHAR (15) NOT NULL,
+        DMVSuffix VARCHAR (25) NOT NULL,
+        DMVDateOfBirth VARCHAR (50) NOT NULL,
+        DMVBirthSex VARCHAR (25) NOT NULL,
+        DMVGenderIdentity VARCHAR (25) NOT NULL,
+        DMVRace VARCHAR (250) NOT NULL,
+		DMVUSResidentStatusSelection VARCHAR (50) NOT NULL,
 		DMVUSResidentStatusCategorySelection VARCHAR (250) NOT NULL,
 		DMVUSResidentStatusSubjectSelection VARCHAR (250) NOT NULL,
-		DMVGradeSchool VARCHAR(300) NOT NULL,
-		DMVGradeSchoolSelection VARCHAR(10) NOT NULL,
-		DMVGradeSchoolYearSelection VARCHAR(25) NOT NULL,
-		DMVHighSchool VARCHAR(300) NOT NULL,
-		DMVHighSchoolSelection VARCHAR(10) NOT NULL,
-		DMVHighSchoolYearSelection VARCHAR(25) NOT NULL,
-		DMVCollege VARCHAR(300) NOT NULL,
-		DMVDegreeSelection VARCHAR(100) NOT NULL,
-		DMVCategorySelection VARCHAR(100) NOT NULL,
-		DMVSubjectSelection VARCHAR(100) NOT NULL,
-		DMVCollegeYearSelection VARCHAR(25) NOT NULL,
-        DMVSSN VARCHAR(25) NOT NULL,
-        DMVEmail VARCHAR(150) NOT NULL,
-        DMVConfirmEmail VARCHAR(150) NOT NULL,
-        DMVPhoneNumber VARCHAR(50) NOT NULL,
-        DMVAddress VARCHAR(200) NOT NULL,
-        DMVUnitType VARCHAR(100) NOT NULL,
-        DMVUnitTypeNumber VARCHAR(15) NOT NULL,
-        DMVCountrySelection VARCHAR(100) NOT NULL,
-        DMVStateSelection VARCHAR(100) NOT NULL,
-        DMVCountySelection VARCHAR(100) NOT NULL,
-        DMVCitySelection VARCHAR(100) NOT NULL,
-        DMVZipSelection VARCHAR(25) NOT NULL,
-        DMVIdType VARCHAR(100) NOT NULL,
-        DMVIdTypeNumber VARCHAR(25) NOT NULL,
-        IvoteBallotIdIdentifierCode VARCHAR(50) NOT NULL,
-        ConfirmIvoteBallotIdIdentifierCode VARCHAR(50) NOT NULL,
-		Password VARCHAR(50) NOT NULL,
-		ConfirmPassword VARCHAR(50) NOT NULL,
-		Temporary_Password VARCHAR(50) NOT NULL        
+		DMVGradeSchool VARCHAR (300) NOT NULL,
+		DMVGradeSchoolSelection VARCHAR (10) NOT NULL,
+		DMVGradeSchoolYearSelection VARCHAR (25) NOT NULL,
+		DMVHighSchool VARCHAR (300) NOT NULL,
+		DMVHighSchoolSelection VARCHAR (10) NOT NULL,
+		DMVHighSchoolYearSelection VARCHAR (25) NOT NULL,
+		DMVCollege VARCHAR (300) NOT NULL,
+		DMVDegreeSelection VARCHAR (100) NOT NULL,
+		DMVCategorySelection VARCHAR (100) NOT NULL,
+		DMVSubjectSelection VARCHAR (100) NOT NULL,
+		DMVCollegeYearSelection VARCHAR (25) NOT NULL,
+		DMVBirthCertificate VARCHAR (25) NOT NULL,
+        DMVSSN VARCHAR (25) NOT NULL,
+        DMVEmail VARCHAR (150) NOT NULL,
+        DMVConfirmEmail VARCHAR (150) NOT NULL,
+        DMVPhoneNumber VARCHAR (50) NOT NULL,
+        DMVAddress VARCHAR (200) NOT NULL,
+        DMVUnitType VARCHAR (100) NOT NULL,
+        DMVUnitTypeNumber VARCHAR (15) NOT NULL,
+        DMVCountrySelection VARCHAR (100) NOT NULL,
+        DMVStateSelection VARCHAR (100) NOT NULL,
+        DMVCountySelection VARCHAR (100) NOT NULL,
+        DMVCitySelection VARCHAR (100) NOT NULL,
+        DMVZipSelection VARCHAR (25) NOT NULL,
+        DMVIdType VARCHAR (100) NOT NULL,
+        DMVIdTypeNumber VARCHAR (25) NOT NULL,
+        IvoteBallotIdIdentifierCode VARCHAR (50) NOT NULL,
+        ConfirmIvoteBallotIdIdentifierCode VARCHAR (50) NOT NULL,
+		Password VARCHAR (50) NOT NULL,
+		ConfirmPassword VARCHAR (50) NOT NULL,
+		Temporary_Password VARCHAR (50) NOT NULL        
   
 	)`), (err) => {
 
@@ -590,39 +598,6 @@ iVoteBallotApp.use(passport.session());
 
 iVoteBallotApp.use(flash());
 
-
-hrmApp.use(
-	session ({
-		store: new HRMSqlite3SessionStore ({
-
-			client: hrmDB,
-			dir: 'HRM_Employees_Session.db',
-			collection: 'HRM_EMPLOYEES_SESSION',
-			name: 'HRM_EMPLOYEES_SESSION',
-			cookie: {
-				secure: true,
-				httpOnly: true,
-				sameSite: true,
-				resave: true,
-				saveUninitialized: true,
-				proxy: true,
-				maxAge: 'timeoutDuration' // 10 minutes		
-			},
-
-			rolling: true, // Resets the expiration time on each request
-		}),
-
-		secret: 'HRM_SESSION_KEY'
-
-	})
-)
-
-hrmApp.use([passport.initialize()]);
-
-hrmApp.use(passport.session());
-
-hrmApp.use(flash());
-
 /*
 	The JavaScript codes language sets up a local1, LocalStrategy for Passport, which is a popular
 	authentication middleware for Node.js. It defines a function that will be called when an
@@ -640,7 +615,6 @@ hrmApp.use(flash());
 	parameters, if necessary. This code provides a simple but effective way to authenticate users
 	and ensurethe security of their iVoteballot data information.
 */
-
 
 passport.use(
 	'local1',
@@ -692,9 +666,11 @@ passport.use(
 								{
 									id: row.id,
 									DMVPhoto: row.DMVPhoto,
+									DMVPrefix: row.DMVPrefix,
 									DMVFirstName: row.DMVFirstName,
 									DMVMiddleName: row.DMVMiddleName,
 									DMVLastName: row.DMVLastName,
+									DMVGeneration: row.DMVGeneration,
 									DMVSuffix: row.DMVSuffix,
 									DMVDateOfBirth: row.DMVDateOfBirth,
 									DMVBirthSex: row.DMVBirthSex,
@@ -714,6 +690,7 @@ passport.use(
 									DMVCategorySelection: row.DMVCategorySelection,
 									DMVSubjectSelection: row.DMVSubjectSelection,
 									DMVCollegeYearSelection: row.DMVCollegeYearSelection,
+									DMVBirthCertificate: row.DMVBirthCertificate,
 									DMVSSN: row.DMVSSN,
 									DMVEmail: row.DMVEmail,
 									DMVConfirmEmail: row.DMVConfirmEmail,
@@ -800,9 +777,11 @@ passport.use(
 						{
 							id: row.id,
 							DMVPhoto: row.DMVPhoto,
+							DMVPrefix: row.DMVPrefix,
 							DMVFirstName: row.DMVFirstName,
 							DMVMiddleName: row.DMVMiddleName,
 							DMVLastName: row.DMVLastName,
+							DMVGeneration: row.DMVGeneration,
 							DMVSuffix: row.DMVSuffix,
 							DMVDateOfBirth: row.DMVDateOfBirth,
 							DMVBirthSex: row.DMVBirthSex,
@@ -822,6 +801,7 @@ passport.use(
 							DMVCategorySelection: row.DMVCategorySelection,
 							DMVSubjectSelection: row.DMVSubjectSelection,
 							DMVCollegeYearSelection: row.DMVCollegeYearSelection,
+							DMVBirthCertificate: row.DMVBirthCertificate,
 							DMVSSN: row.DMVSSN,
 							DMVEmail: row.DMVEmail,
 							DMVConfirmEmail: row.DMVConfirmEmail,
@@ -889,9 +869,11 @@ passport.use(
 						{
 							id: row.id,
 							DMVPhoto: row.DMVPhoto,
+							DMVPrefix: row.DMVPrefix,
 							DMVFirstName: row.DMVFirstName,
 							DMVMiddleName: row.DMVMiddleName,
 							DMVLastName: row.DMVLastName,
+							DMVGeneration: row.DMVGeneration,
 							DMVSuffix: row.DMVSuffix,
 							DMVDateOfBirth: row.DMVDateOfBirth,
 							DMVBirthSex: row.DMVBirthSex,
@@ -911,6 +893,7 @@ passport.use(
 							DMVCategorySelection: row.DMVCategorySelection,
 							DMVSubjectSelection: row.DMVSubjectSelection,
 							DMVCollegeYearSelection: row.DMVCollegeYearSelection,
+							DMVBirthCertificate: row.DMVBirthCertificate,
 							DMVSSN: row.DMVSSN,
 							DMVEmail: row.DMVEmail,
 							DMVConfirmEmail: row.DMVConfirmEmail,
@@ -998,9 +981,11 @@ passport.deserializeUser(function (id, done) {
 
 				id: user.id,
 				DMVPhoto: user.DMVPhoto,
+				DMVPrefix: user.DMVPrefix,
 				DMVFirstName: user.DMVFirstName,
 				DMVMiddleName: user.DMVMiddleName,
 				DMVLastName: user.DMVLastName,
+				DMVGeneration: user.DMVGeneration,
 				DMVSuffix: user.DMVSuffix,
 				DMVDateOfBirth: user.DMVDateOfBirth,
 				DMVBirthSex: user.DMVBirthSex,
@@ -1020,6 +1005,7 @@ passport.deserializeUser(function (id, done) {
 				DMVCategorySelection: user.DMVCategorySelection,
 				DMVSubjectSelection: user.DMVSubjectSelection,
 				DMVCollegeYearSelection: user.DMVCollegeYearSelection,
+				DMVBirthCertificate: user.DMVBirthCertificate,
 				DMVSSN: user.DMVSSN,
 				DMVEmail: user.DMVEmail,
 				DMVConfirmEmail: user.DMVConfirmEmail,
@@ -1074,10 +1060,37 @@ passport.deserializeUser(function (userId, done) {
 });
 
 
+hrmApp.use(
+	session ({
+		store: new HRMSqlite3SessionStore ({
 
+			client: hrmDB,
+			dir: 'HRM_Employees_Session.db',
+			collection: 'HRM_EMPLOYEES_SESSION',
+			name: 'HRM_EMPLOYEES_SESSION',
+			cookie: {
+				secure: true,
+				httpOnly: true,
+				sameSite: true,
+				resave: true,
+				saveUninitialized: true,
+				proxy: true,
+				maxAge: 'HRM_MAX_AGE' // 10 minutes		
+			},
 
+			rolling: true, // Resets the expiration time on each request
+		}),
 
+		secret: 'HRM_SESSION_KEY'
 
+	})
+)
+
+hrmApp.use([passport.initialize()]);
+
+hrmApp.use(passport.session());
+
+hrmApp.use(flash());
 
 passport.use(
 	'local4',
@@ -1159,14 +1172,13 @@ passport.use(
 	)
 );
 
-/******** */
+
 
 passport.serializeUser(function (user, done) {
 	console.log('Serializing user...');
 	console.log(user);
 	done(null, user.id);
 });
-
 
 passport.deserializeUser(function (id, done) {
 	console.log('Deserializing users...');
@@ -1319,16 +1331,19 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 		console.log('req.user', req.user);
 
 		console.groupEnd();
-
+		
 		// Call the userHistoryLogin function to log the user's login session
 		userHistoryLogin(req, res);
 
 		const bufferData = Buffer.from(req.user.DMVPhoto, 'base64');
 
 		res.render('dashboard_01', {
+			DMVPrefix: req.user.DMVPrefix,
 			DMVFirstName: req.user.DMVFirstName,
 			DMVMiddleName: req.user.DMVMiddleName,
 			DMVLastName: req.user.DMVLastName,
+			DMVGeneration: req.user.DMVGeneration,
+			DMVSuffix: req.user.DMVSuffix,
 			DMVPhoto: bufferData.toString('base64'),
 			DMVIdType: req.user.DMVIdType,
 			DMVDateOfBirth: req.user.DMVDateOfBirth,
@@ -1363,9 +1378,12 @@ iVoteBallotApp.get('/dashboard_01', checkMiddlewareAuthentication, async (req, r
 		});
 
 		console.log('UUIDv4:', req.user.id);
+		console.log('DMVPrefix:', req.user.DMVPrefix);
 		console.log('DMVFirstName:', req.user.DMVFirstName);
 		console.log('DMVMiddleName:', req.user.DMVMiddleName);
 		console.log('DMVLastName:', req.user.DMVLastName);
+		console.log('DMVGenerational:', req.user.DMVGeneration);
+		console.log('DMVSuffix:', req.user.DMVSuffix);
 		console.log('DMVPhoto:', req.user.DMVPhoto);
 		console.log('DMVIdType:', req.user.DMVIdType);
 		console.log('DMVDateOfBirth:', req.user.DMVDateOfBirth);
@@ -1558,9 +1576,12 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', checkMiddlewareAuthentication,
 
 			// Pass any necessary data to the template
 			// For example: DMVFirstName, DMVLastName, etc.
+			DMVPrefix: req.user.DMVPrefix,
 			DMVFirstName: req.user.DMVFirstName,
 			DMVMiddleName: req.user.DMVMiddleName,
 			DMVLastName: req.user.DMVLastName,
+			DMVGeneration: req.user.DMVGeneration,
+			DMVSuffix: req.user.DMVSuffix,
 			//DMVPhoto: bufferData.toString('base64'),
 			DMVIdType: req.user.DMVIdType,
 			DMVDateOfBirth: req.user.DMVDateOfBirth,
@@ -2053,7 +2074,7 @@ iVoteBallotApp.get('/alabamaDMV_Commission_01', redirectDashboard, (req, res) =>
 });
 
 // The User route for hrm_Employees_Registration_01.
-hrmApp.get('/hrm_Employees_Registration_01', (req, res) => {
+hrmApp.get('/hrm_Employees_Registration_01', redirectHRMDashboard, (req, res) => {
 
 	// Check if user already authenticated.
 	if (req.session.isAuthenticated) {
@@ -2676,9 +2697,11 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 	async (req, res) => {
 
 		const DMVPhoto = req.body.DMVPhoto;
+		const DMVPrefix = req.body.DMVPrefix;
 		const DMVFirstName = req.body.DMVFirstName;
 		const DMVMiddleName = req.body.DMVMiddleName;
 		const DMVLastName = req.body.DMVLastName;
+		const DMVGeneration = req.body.DMVGeneration;
 		const DMVSuffix = req.body.DMVSuffix;
 		const DMVDateOfBirth = req.body.DMVDateOfBirth;
 		const DMVBirthSex = req.body.DMVBirthSex;
@@ -2698,6 +2721,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		const DMVCategorySelection = req.body.DMVCategorySelection;
 		const DMVSubjectSelection = req.body.DMVSubjectSelection;
 		const DMVCollegeYearSelection = req.body.DMVCollegeYearSelection;
+		const DMVBirthCertificate = req.body.DMVBirthCertificate;
 		const DMVSSN = req.body.DMVSSN;
 		const DMVEmail = req.body.DMVEmail;
 		const DMVConfirmEmail = req.body.DMVConfirmEmail;
@@ -2721,9 +2745,11 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		console.log(req.body);
 
 		console.log('The user\'s photograph image is: ' + DMVPhoto + '.');
+		console.log('The user\'s Prefix name: ' + DMVPrefix + '.');
 		console.log('The user\'s first name: ' + DMVFirstName + '.');
 		console.log('The user\'s middle name is: ' + DMVMiddleName + '.');
 		console.log('The user\'s last name is: ' + DMVLastName + '.');
+		console.log('The user\'s Generational name: ' + DMVGeneration + '.');
 		console.log('The user\'s suffix is: ' + DMVSuffix + '.');
 		console.log('The user\'s date of birth is: ' + DMVDateOfBirth + '.');
 		console.log('The user\'s birth sex is: ' + DMVBirthSex + '.');
@@ -2748,6 +2774,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		console.log('What is the user\'s degree subject:' + DMVSubjectSelection + '.');
 		console.log('What year did the user graudated from College or University or Trade School name: ' + DMVCollegeYearSelection + '.');
 
+		console.log('The user\'s Birth Certificate is: ' + DMVBirthCertificate + '.');
 		console.log('The user\'s SSN is: ' + DMVSSN + '.');
 		console.log('The user\'s email is: ' + DMVEmail + '.');
 		console.log('The user\'s confirm email is: ' + DMVConfirmEmail + '.');
@@ -2842,9 +2869,11 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		const newUser = {
 
 			DMVPhoto,
+			DMVPrefix,
 			DMVFirstName,
 			DMVMiddleName,
 			DMVLastName,
+			DMVGeneration,
 			DMVSuffix,
 			DMVDateOfBirth,
 			DMVBirthSex,
@@ -2864,6 +2893,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 			DMVCategorySelection,
 			DMVSubjectSelection,
 			DMVCollegeYearSelection,
+			DMVBirthCertificate,
 			DMVSSN: DMVSSNHashed,
 			DMVEmail,
 			DMVConfirmEmail,
@@ -2887,9 +2917,9 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 		};
 
 		await db1.run(
-			`INSERT INTO alabamaDMV_Commission_01 (DMVPhoto, DMVFirstName, DMVMiddleName, DMVLastName, DMVSuffix, DMVDateOfBirth, DMVBirthSex, DMVGenderIdentity, DMVRace, DMVUSResidentStatusSelection, DMVUSResidentStatusCategorySelection, DMVUSResidentStatusSubjectSelection, DMVGradeSchool, DMVGradeSchoolSelection, DMVGradeSchoolYearSelection, DMVHighSchool, DMVHighSchoolSelection, DMVHighSchoolYearSelection, DMVCollege, DMVDegreeSelection, DMVCategorySelection, DMVSubjectSelection, DMVCollegeYearSelection, DMVSSN, DMVEmail, DMVConfirmEmail, DMVPhoneNumber, DMVAddress, DMVUnitType, DMVUnitTypeNumber, DMVCountrySelection, DMVStateSelection, DMVCountySelection, DMVCitySelection, DMVZipSelection, DMVIdType, DMVIdTypeNumber, IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode, Password, ConfirmPassword, Temporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+			`INSERT INTO alabamaDMV_Commission_01 (DMVPhoto, DMVPrefix, DMVFirstName, DMVMiddleName, DMVLastName, DMVGeneration, DMVSuffix, DMVDateOfBirth, DMVBirthSex, DMVGenderIdentity, DMVRace, DMVUSResidentStatusSelection, DMVUSResidentStatusCategorySelection, DMVUSResidentStatusSubjectSelection, DMVGradeSchool, DMVGradeSchoolSelection, DMVGradeSchoolYearSelection, DMVHighSchool, DMVHighSchoolSelection, DMVHighSchoolYearSelection, DMVCollege, DMVDegreeSelection, DMVCategorySelection, DMVSubjectSelection, DMVCollegeYearSelection, DMVBirthCertificate, DMVSSN, DMVEmail, DMVConfirmEmail, DMVPhoneNumber, DMVAddress, DMVUnitType, DMVUnitTypeNumber, DMVCountrySelection, DMVStateSelection, DMVCountySelection, DMVCitySelection, DMVZipSelection, DMVIdType, DMVIdTypeNumber, IvoteBallotIdIdentifierCode, ConfirmIvoteBallotIdIdentifierCode, Password, ConfirmPassword, Temporary_Password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
 
-			[Buffer.from(photoFileData), newUser.DMVFirstName, newUser.DMVMiddleName, newUser.DMVLastName, newUser.DMVSuffix, newUser.DMVDateOfBirth, newUser.DMVBirthSex, newUser.DMVGenderIdentity, newUser.DMVRace, newUser.DMVUSResidentStatusSelection, newUser.DMVUSResidentStatusCategorySelection, newUser.DMVUSResidentStatusSubjectSelection, newUser.DMVGradeSchool, newUser.DMVGradeSchoolSelection, newUser.DMVGradeSchoolYearSelection, newUser.DMVHighSchool, newUser.DMVHighSchoolSelection, newUser.DMVHighSchoolYearSelection, newUser.DMVCollege, newUser.DMVDegreeSelection, newUser.DMVCategorySelection, newUser.DMVSubjectSelection, newUser.DMVCollegeYearSelection, newUser.DMVSSN, newUser.DMVEmail, newUser.DMVConfirmEmail, newUser.DMVPhoneNumber, newUser.DMVAddress, newUser.DMVUnitType, newUser.DMVUnitTypeNumber, newUser.DMVCountrySelection, newUser.DMVStateSelection, newUser.DMVCountySelection, newUser.DMVCitySelection, newUser.DMVZipSelection, newUser.DMVIdType, newUser.DMVIdTypeNumber, newUser.IvoteBallotIdIdentifierCode, newUser.ConfirmIvoteBallotIdIdentifierCode, newUser.Password, newUser.ConfirmPassword, newUser.Temporary_Password], (err) => {
+			[Buffer.from(photoFileData), newUser.DMVPrefix, newUser.DMVFirstName, newUser.DMVMiddleName, newUser.DMVLastName, newUser.DMVGeneration, newUser.DMVSuffix, newUser.DMVDateOfBirth, newUser.DMVBirthSex, newUser.DMVGenderIdentity, newUser.DMVRace, newUser.DMVUSResidentStatusSelection, newUser.DMVUSResidentStatusCategorySelection, newUser.DMVUSResidentStatusSubjectSelection, newUser.DMVGradeSchool, newUser.DMVGradeSchoolSelection, newUser.DMVGradeSchoolYearSelection, newUser.DMVHighSchool, newUser.DMVHighSchoolSelection, newUser.DMVHighSchoolYearSelection, newUser.DMVCollege, newUser.DMVDegreeSelection, newUser.DMVCategorySelection, newUser.DMVSubjectSelection, newUser.DMVCollegeYearSelection, newUser.DMVBirthCertificate, newUser.DMVSSN, newUser.DMVEmail, newUser.DMVConfirmEmail, newUser.DMVPhoneNumber, newUser.DMVAddress, newUser.DMVUnitType, newUser.DMVUnitTypeNumber, newUser.DMVCountrySelection, newUser.DMVStateSelection, newUser.DMVCountySelection, newUser.DMVCitySelection, newUser.DMVZipSelection, newUser.DMVIdType, newUser.DMVIdTypeNumber, newUser.IvoteBallotIdIdentifierCode, newUser.ConfirmIvoteBallotIdIdentifierCode, newUser.Password, newUser.ConfirmPassword, newUser.Temporary_Password], (err) => {
 
 
 				if (err) {
@@ -2930,7 +2960,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 			
 						<ul>
 							<li>
-								Name: ${req.body.DMVFirstName} ${req.body.DMVMiddleName} ${req.body.DMVLastName}
+								Name: ${req.body.DMVPrefix} ${req.body.DMVFirstName} ${req.body.DMVMiddleName} ${req.body.DMVLastName} ${req.body.DMVGeneration} ${req.body.DMVSuffix}
 							</li>
 							<li>
 								Email: ${req.body.DMVEmail}
@@ -2959,7 +2989,7 @@ iVoteBallotApp.post('/alabamaDMV_Commission_01',
 					html:
 						`	
 					
-						<p>Dear ${req.body.DMVFirstName} ${req.body.DMVMiddleName} ${req.body.DMVLastName},</p>
+						<p>Dear ${req.body.DMVPrefix} ${req.body.DMVFirstName} ${req.body.DMVMiddleName} ${req.body.DMVLastName} ${req.body.DMVGeneration} ${req.body.DMVSuffix},</p>
 						<p>Congratulations! Your iVoteballot account has been successfully set up by our dedicated Election Assure Experts.</p>
 
 						<p>
@@ -3378,7 +3408,7 @@ iVoteBallotApp.post('/alabamaVoters_ForgotPassword_01', (req, res) => {
 						pass: IONOS_SECRET_KEY,
 					}
 				});
-
+				
 				const imagePath = './Public/images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png';
 
 				if (req.isAuthenticated()) {
@@ -3729,6 +3759,7 @@ iVoteBallotApp.post('/alabamaVoters_CreatePasswords_01',
 	}
 );
 
+
 hrmApp.post('/hrm_Employees_Registration_01',
 	async (req, res) => {
 
@@ -3858,7 +3889,9 @@ hrmApp.post('/hrm_Employees_Registration_01',
 					
 					res.redirect('/hrm_SignUp_01');
 
-				}			
+				}	
+				
+				
 
 				const transporter = nodemailer.createTransport({
 					host: 'smtp.ionos.com',
@@ -3977,70 +4010,6 @@ hrmApp.post('/hrm_Employees_Registration_01',
 
 	}
 );
-
-
-
-
-hrmApp.post('/hrm_SignUp_01',
-
-	async (req, res) => {
-
-		const DMVEmail = req.user.EmployeeEmail;
-		//const userIvoteBallotIdIdentifierCode = req.body.userIvoteBallotIdIdentifierCode;
-		const Password = req.body.EmployeePassword;
-		const ConfirmPassword = req.body.EmployeeConfirmPassword;
-
-		console.log('These are the request body' + req.body);
-
-		//console.log('The user email address is: ' + userDMVEmail + '.');
-		//console.log('The user iVoteBallot Id Identifier Code is: ' + userIvoteBallotIdIdentifierCode + '.');
-		console.log('The user password is: ' + EmployeePassword + '.');
-		console.log('The user confirm password is: ' + EmployeeConfirmPassword + '.');
-
-		console.log('The request session: ' + req.session + '.');
-
-		// To hash the newPassword input field using bcrypt library.
-		const salt = await bcrypt.genSalt(BCRYPTION_SALT_KEY);
-		const passwordHashed = await bcrypt.hash(EmployeePassword, salt);
-
-		// To hash the confirmNewPassword input field using bcrypt library.
-		const confirmPasswordHashed = await bcrypt.hash(EmployeeConfirmPassword, salt);
-
-		// To check, if the user's email address exists onto the passport serialization through the session cookie id.
-		db1_iVoteballot_EmployeesRegistration.get('SELECT * FROM hrm_Employees_Registration_01 WHERE EmployeeEmail = ?', EmployeeEmail, (err, user) => {
-
-			if (err) {
-
-				console.error(err);
-				console.log('The user\'s input fields for passport.use local1 Local Strategy and Session Cookie Id did not successfully executed from the internet causing an 500 error message most likely from the Developer\'s JavaScript coded written algorithm problems.');
-				res.render('535');
-			} else if (!user) {
-				req.flash('error', 'The user have entered the incorrect email address and/or password that were not successfully process through the passport.use local1 Local Strategy and Session Cookie Id to the SQlite3 database authentication from serialization.');
-				console.log('The user\'s email address is not found successfully through the process of the passport.use local1 Local Strategy and Session Cookie Id to the SQLite3 database for serializtion.');
-				res.render('hrm_SignUp_01');
-
-			} else {
-
-				db1_iVoteballot_EmployeesRegistration.run('UPDATE hrm_Employees_Registration_01 SET EmployeePassword = ?, EmployeeConfirmPassword = ? WHERE EmployeeEmail = ?', passwordHashed, confirmPasswordHashed, req.EmployeeEmail, (err) => {
-
-					if (err) {
-						console.error(err);
-						console.log('The user\s passport and session was not successfully executed causing an 500 error message due from Developer\s programmatic coding language problems.');
-						res.render('535');
-
-					} else {
-
-						console.log('The user\s email address is successfully found within the passport serialization authenticated processes through the session.');
-						res.redirect('/hrm_Employees_EmailVerification');
-					}
-
-				});
-
-			}
-		});
-	}
-);
-
 
 
 
