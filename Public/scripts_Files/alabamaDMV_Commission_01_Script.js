@@ -29,6 +29,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	const DMVCategorySelection = document.getElementById('categorySelect').value.trim();
 	const DMVSubjectSelection = document.getElementById('subjectSelect').value.trim();
 	const DMVCollegeYearSelection = document.getElementById('collegeYearSelect').value.trim();
+	const DMVBirthCertificate = document.getElementById('birthCertificate').value.trim();
 	const DMVSSN = document.getElementById('ssn').value.trim(); 
 	const DMVEmail = document.getElementById('email').value.trim();
 	const DMVConfirmEmail = document.getElementById('confirmEmail').value.trim();  
@@ -49,9 +50,10 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	const ConfirmPassword = document.getElementById('confirmPassword').value.trim();
 	const Temporary_Password = document.getElementById('temporary_Password').value.trim();	
 
-	const regPrefix = /^[A-Za-z\s]+.+$/	
+	const regExPrefix = /^[A-Za-z\s]+.+$/	
 	const regExName = /^[A-Za-z\s]+$/;
-	const regSuffix = /^[A-Za-z\s]+.+$/
+	const regExSuffix = /^[A-Za-z\s]+.+$/
+	const reqExBirthCertificate = /^\d{3}\-\d{2,4}\-\d{5,8}$/;
 	const regExSSN =  /^\d{3}\-\d{2}\-\d{4}$/;  
 	const regExEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;      
 	const regExPhoneNumber = /^\d{3}\-\d{3}\-\d{4}$/; 	
@@ -84,7 +86,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		},
 		9000)                                           
 							
-		} else if (DMVPrefix.length <= 0 || !DMVPrefix.match(regPrefix)) {
+		} else if (DMVPrefix.length <= 0 || !DMVPrefix.match(regExPrefix)) {
 		document.getElementById('userDMVPrefixErrorMessage').textContent = 'Error Message: The user prefix name is an optional input field; however, you must enter more than one characters into the user prefix name required input field.';
 
 		setTimeout(function() {
@@ -168,7 +170,7 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 		},
 		9000)                                           
 							
-		} else if (DMVSuffix.length <= 0 || !DMVSuffix.match(regSuffix)) {
+		} else if (DMVSuffix.length <= 0 || !DMVSuffix.match(regExSuffix)) {
 		document.getElementById('userDMVSuffixErrorMessage').textContent = 'Error Message: The user suffix name is an optional input field; however, you must enter more than one characters into the user suffix name required input field.';
 
 		setTimeout(function() {
@@ -385,8 +387,20 @@ const validateAlabamaDMV_CommissionForm = (e) => {
 	
 	}
 
+	if (DMVBirthCertificate  === '' || DMVBirthCertificate  == null || !DMVBirthCertificate .match(reqExBirthCertificate)) {                                                               
+		document.getElementById('userDMVBirthCertificateErrorMessage').textContent  = 'Error Message: The user\'s birth certificate is a required input field or you must enter the user correct birth certificate into the require input field.';
+	
+		setTimeout(function() {
+			document.getElementById('userDMVBirthCertificateErrorMessage').textContent = '';
+		},
+		9000)
+	
+		return false;		
+
+	}
+
 	if (DMVSSN === '' || DMVSSN == null || !DMVSSN.match(regExSSN)) {                                                               
-		document.getElementById('userDMVSSNErrorMessage').textContent  = 'Error Message: The user SSN is a required input field or you must enter the user correct SSN into the require input field.';
+		document.getElementById('userDMVSSNErrorMessage').textContent  = 'Error Message: The user\'s SSN is a required input field or you must enter the user correct SSN into the require input field.';
 	
 		setTimeout(function() {
 			document.getElementById('userDMVSSNErrorMessage').textContent = '';
