@@ -5848,3 +5848,25 @@ hr.hr_White_line_03 {
     margin-bottom: 5px;
     width: auto;
 }
+
+#userPresidentMessage,
+#userGovernorMessage
+
+{
+    display: flex;
+	flex-wrap: row wrap;
+	flex-direction: column;
+	background-color: rgb(255, 255, 255); 
+	text-align: center;
+	font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	font-size: clamp(10px, 2vw, 16px);
+	color: rgb(201, 24, 24);  
+	justify-content: center;  
+	border: none;  
+    
+    
+   
+
+
+
+}
