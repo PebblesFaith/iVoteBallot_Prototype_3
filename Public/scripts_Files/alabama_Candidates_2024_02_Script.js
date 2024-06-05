@@ -1039,6 +1039,8 @@ function addToCart() {
 	const form = document.getElementById('alabamaSelected_Candidates2024_Form');
 	
 	const selectedCandidate = form.querySelector('input[type="radio"]:checked');  
+
+
 	
 	if (!selectedCandidate) {
 	  alert("Please select a candidate before adding to the cart.");
@@ -1048,6 +1050,8 @@ function addToCart() {
 	const category = selectedCandidate.getAttribute('data-category');
 	const candidateText = selectedCandidate.parentElement.textContent.trim();
 	const candidateImageSrc = selectedCandidate.parentElement.querySelector('img').src;	
+	
+	
   
 	const selectedCandidateData = selectedCandidates[category];
  
@@ -1078,6 +1082,53 @@ function addToCart() {
 	// Update the total number of selected candidates and the total cost
 	updateTotalSelectedCandidates();
 	updateTotalCostForAllCandidates();
+
+	// Add the selected President candidate name to the panel for an users' review.
+
+	const userPresident = selectedCandidate ? selectedCandidate.value.trim() : null;
+	
+	if (userPresident === '' || userPresident == null) {
+		// If no president is selected, inform the user to select one.
+		document.getElementById('userPresidentMessage').textContent = 'Please select a U.S. presidential candidate.';
+
+		setTimeout(function() {
+			document.getElementById('userPresidentMessage').textContent = '';
+		}, 10000); 
+	} else {
+		// If a president is selected, show the selected president's name.
+		document.getElementById('userPresidentMessage').textContent = `Selected U.S. Presidential Candidate: ${userPresident}`;
+
+		setTimeout(function() {
+			document.getElementById('userPresidentMessage').textContent = '';
+		}, 9000);
+
+		console.log(`Added ${userPresident}} to the cart.`);
+	}
+
+	const userGovernor = selectedCandidate ? selectedCandidate.value.trim() : null;
+
+	if (userGovernor === '' || userGovernor == null) {
+		// If no president is selected, inform the user to select one.
+		document.getElementById('userGovernorMessage').textContent = 'Please select an Alabama State\'s Governor candidate.';
+
+		setTimeout(function() {
+			document.getElementById('userGovernorMessage').textContent = '';
+		}, 10000); 
+	} else {
+		// If a president is selected, show the selected president's name.
+		document.getElementById('userGovernorMessage').textContent = `Selected Governor State\'s Governor Candidate: ${userGovernor}`;
+
+		setTimeout(function() {
+			document.getElementById('userGovernorMessage').textContent = '';
+		}, 9000);
+
+		console.log(`Added ${userGovernor} to the cart.`);
+	}
+
+	
+	
+
+
 
 }
 
@@ -1283,6 +1334,7 @@ function checkAllCategoriesSelected() {
 	const userCountySelection = document.getElementById('countySelect').value.trim();
 	const userCitySelection = document.getElementById('citySelect').value.trim();
 	const userZipSelection = document.getElementById('zipSelect').value.trim();
+	const userPresident = document.getElementById('president').value.trim();
                     
 	const regExName = /^[A-Za-z\s]+$/;
 	const regExAddress = /^\d+\s[\d\w]+\s(.*)$/;
@@ -1463,7 +1515,17 @@ function checkAllCategoriesSelected() {
 	
 		return false;  
 
-	}    
+	} 	
+	
+	if (userPresident === '' || userPresident == null) {
+
+			// do nothing
+			document.getElementById('userPresidentMessage').textContent = '';
+	
+		}
+
+		return false;
+
   
 	// If candidates from all categories are selected, allow checkout.
 	return true;
@@ -2307,15 +2369,6 @@ userCountrySelection.onchange = function () {
 		}                   
 
 }
-
-
-
-
-
-
-
-
-
 
 
 /* Get Presidential Candidates ScoreSheet Modals. */
@@ -3633,7 +3686,4 @@ function removeFromCart(button) {
     }
 }
 */
-
-
-
 
