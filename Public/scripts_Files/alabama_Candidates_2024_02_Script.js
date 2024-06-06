@@ -1107,25 +1107,8 @@ function addToCart() {
 
 	const userGovernor = selectedCandidate ? selectedCandidate.value.trim() : null;
 
-	if (userGovernor === '' || userGovernor == null) {
-		// If no president is selected, inform the user to select one.
-		document.getElementById('userGovernorMessage').textContent = 'Please select an Alabama State\'s Governor candidate.';
-
-		setTimeout(function() {
-			document.getElementById('userGovernorMessage').textContent = '';
-		}, 10000); 
-	} else {
-		// If a president is selected, show the selected president's name.
-		document.getElementById('userGovernorMessage').textContent = `Selected Governor State\'s Governor Candidate: ${userGovernor}`;
-
-		setTimeout(function() {
-			document.getElementById('userGovernorMessage').textContent = '';
-		}, 9000);
-
-		console.log(`Added ${userGovernor} to the cart.`);
-	}
-
-	
+	// Call checkAllCategoriesSelected and pass userPresident
+	checkAllCategoriesSelected(userPresident);
 	
 
 
@@ -1287,7 +1270,7 @@ function removeFromCart(button) {
 
 }
 
-function checkAllCategoriesSelected() {
+function checkAllCategoriesSelected(e) {
 	const categories = [
 	  "President",
 	  "Governor",
@@ -1334,7 +1317,10 @@ function checkAllCategoriesSelected() {
 	const userCountySelection = document.getElementById('countySelect').value.trim();
 	const userCitySelection = document.getElementById('citySelect').value.trim();
 	const userZipSelection = document.getElementById('zipSelect').value.trim();
-	const userPresident = document.getElementById('president').value.trim();
+
+	const userPresident = checkAllCategoriesSelected(e);
+
+
                     
 	const regExName = /^[A-Za-z\s]+$/;
 	const regExAddress = /^\d+\s[\d\w]+\s(.*)$/;
@@ -1516,18 +1502,24 @@ function checkAllCategoriesSelected() {
 		return false;  
 
 	} 	
+
+
+	function checkAllCategoriesSelected(e) {
+	// Your existing function code
 	
-	if (userPresident === '' || userPresident == null) {
+	// Retrieve userPresident value and store it in the variable
+	userPresident = document.getElementById('president').value.trim();
+	}
 
-			// do nothing
-			document.getElementById('userPresidentMessage').textContent = '';
 	
-		}
-
-		return false;
-
   
-	// If candidates from all categories are selected, allow checkout.
+	
+
+	e.preventDefault();
+
+	form.addEventListener('submit', checkAllCategoriesSelected);
+
+
 	return true;
 
   }
