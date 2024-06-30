@@ -224,8 +224,6 @@ const alabamaSelectedCandidates2024Form = (e) => {
 */
 
 
-
-
 // Add event listener for the submit button
 const submitButton = document.getElementById('submitButton');
 submitButton.addEventListener('click', userCandidatesVerification_2024);	
@@ -1035,12 +1033,12 @@ const selectedCandidates = {
 
 };
 
+
+
 function addToCart() {
 	const form = document.getElementById('alabamaSelected_Candidates2024_Form');
 	
-	const selectedCandidate = form.querySelector('input[type="radio"]:checked');  
-
-
+	const selectedCandidate = form.querySelector('input[type="radio"]:checked'); 
 	
 	if (!selectedCandidate) {
 	  alert("Please select a candidate before adding to the cart.");
@@ -1051,7 +1049,6 @@ function addToCart() {
 	const candidateText = selectedCandidate.parentElement.textContent.trim();
 	const candidateImageSrc = selectedCandidate.parentElement.querySelector('img').src;	
 	
-	
   
 	const selectedCandidateData = selectedCandidates[category];
  
@@ -1060,7 +1057,15 @@ function addToCart() {
 	  return;
 	}
 
-/* Add the selected candidate to the shopping cart. */
+	// Confirmation before adding to cart
+    const confirmed = confirm(`You are about to add ${candidateText} to your shopping cart.`);
+    if (!confirmed) {
+        // User cancelled, uncheck the selected radio button
+        selectedCandidate.checked = false;
+        return;
+    }
+
+	/* Add the selected candidate to the shopping cart. */
 	selectedCandidates[category] = {
 	  candidateText: candidateText,
 	  candidateImageSrc: candidateImageSrc,
@@ -1069,49 +1074,16 @@ function addToCart() {
 	const cart = document.getElementById('shoppingCart');
 	const listItem = createListItem(candidateText, candidateImageSrc, category);
 	cart.appendChild(listItem);
-
-
   	
 	// Reset the radio buttons for each category after adding to the cart	
 	const radioButtons = form.querySelectorAll(`input[type="radio"][data-category="${category}"]`);
 	for (const radioButton of radioButtons) {
 	  radioButton.checked = false;
-	}	
-	
+	}		
 
 	// Update the total number of selected candidates and the total cost
 	updateTotalSelectedCandidates();
 	updateTotalCostForAllCandidates();
-
-	// Add the selected President candidate name to the panel for an users' review.
-
-	const userPresident = selectedCandidate ? selectedCandidate.value.trim() : null;
-	
-	if (userPresident === '' || userPresident == null) {
-		// If no president is selected, inform the user to select one.
-		document.getElementById('userPresidentMessage').textContent = 'Please select a U.S. presidential candidate.';
-
-		setTimeout(function() {
-			document.getElementById('userPresidentMessage').textContent = '';
-		}, 10000); 
-	} else {
-		// If a president is selected, show the selected president's name.
-		document.getElementById('userPresidentMessage').textContent = `Selected U.S. Presidential Candidate: ${userPresident}`;
-
-		setTimeout(function() {
-			document.getElementById('userPresidentMessage').textContent = '';
-		}, 9000);
-
-		console.log(`Added ${userPresident}} to the cart.`);
-	}
-
-	const userGovernor = selectedCandidate ? selectedCandidate.value.trim() : null;
-
-	// Call checkAllCategoriesSelected and pass userPresident
-	checkAllCategoriesSelected(userPresident);
-	
-
-
 
 }
 
@@ -3679,3 +3651,68 @@ function removeFromCart(button) {
 }
 */
 
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+const checkAllCategoriesSelected = (e) => {    
+
+	console.log('Sarai Hannah Ajai is testing her written JavaScript programmatic codes; in order to validate her contact us form has opened up correctly within the HTML webpage.')
+
+	
+	const userPresident = document.getElementById('president').value.trim(); 
+	const userGovernor = document.getElementById('governer').value.trim(); 
+	
+
+
+	const regExName = /^[A-Za-z\s]+$/;
+	
+
+	
+	if (userPresident === '' || userPresident == null || userPresident.length <= 2 || !userPresident.match(regExName)) {                                                               
+		document.getElementById('userPresidentMessage').textContent  = 'Error Message: You have not selected the President of the United State is a required input field.';
+	
+		setTimeout(function() {
+			document.getElementById('userDMVFirstNameErrorMessage').textContent  = '';
+		},
+		9000)
+	
+		return false;		
+
+	}
+
+
+	if (userGovernor === '' || userGovernor == null || userGovernor.length <= 2 || !userGovernor.match(regExName)) {                                                               
+			document.getElementById('userGovernorMessage').textContent  = 'Error Message: You have not selected the Governor of the State of Alabama is a required input field.';
+		
+			setTimeout(function() {
+				document.getElementById('userDMVFirstNameErrorMessage').textContent  = '';
+			},
+			9000)
+		
+			return false;		
+
+	}
+
+	
+	
+	// Your e event handling code here
+	e.preventDefault(); // Prevent default action for e event
+	                              
+	
+	form.addEventListner('submit', checkAllCategoriesSelected);
+	return true; 	
+		
+}
+*/
