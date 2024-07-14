@@ -234,9 +234,6 @@ const timeout = require('connect-timeout');
 */
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
-
-
-
 const http = require('http');
 
 /*
@@ -312,6 +309,8 @@ iVoteBallotApp.use(express.urlencoded({ extended: false }));
 
 iVoteBallotApp.use(express.json());
 
+iVoteBallotApp.use(bodyParser.json());
+
 hrmApp.use(express.urlencoded({ extended: false }));
 
 hrmApp.use(express.json());
@@ -362,11 +361,19 @@ const db1_LoggedPasswordChange = new sqlite3.Database('alabamaUsers_PasswordChan
 });
 
 
-const db1_AlabamaUsersSelectedCandidates = new sqlite3.Database('alabamaUsers_SelectedCandidates_Purchases.db', err => {
+const db1_AlabamaUsersPersonalDataInformation = new sqlite3.Database('alabamaUsers_IVoteBallot_ElectionPurchases.db', err => {
 	if (err) {
-		console.log('Sarai Hannah Ajai has not created the SQLite3 database table named, alabamaUsers_SelectedCandidates_Purchases.db with passport and session management authentications:' + err + '.');
+		console.log('Sarai Hannah Ajai has not created the SQLite3 database table named, alabamaUsers_IVoteBallot_ElectionPurchases.db with passport and session management authentications:' + err + '.');
 	} else {
-		console.log('Sarai Hannah Ajai has successfully created the SQLite3 database table named, alabamaUsers_SelectedCandidates_Purchases.db with passport and session management authentications' + Date() + '.');
+		console.log('Sarai Hannah Ajai has successfully created the SQLite3 database table named, alabamaUsers_IVoteBallot_ElectionPurchases.db with passport and session management authentications' + Date() + '.');
+	}
+});
+
+const db1_AlabamaUsersSelectedCandidates = new sqlite3.Database('alabamaUsers_SelectedCandidates_IvoteBallot_Purchases.db', err => {
+	if (err) {
+		console.log('Sarai Hannah Ajai has not created the SQLite3 database table named, alabamaUsers_SelectedCandidates_IvoteBallot_Purchases.db with passport and session management authentications:' + err + '.');
+	} else {
+		console.log('Sarai Hannah Ajai has successfully created the SQLite3 database table named, alabamaUsers_SelectedCandidates_IvoteBallot_Purchases.db with passport and session management authentications' + Date() + '.');
 	}
 });
 
@@ -509,13 +516,13 @@ db1_LoggedPasswordChange.serialize(() => {
 	};
 });
 
+/*
 db1_AlabamaUsersSelectedCandidates.serialize(() => {
 	db1_AlabamaUsersSelectedCandidates.run(`CREATE TABLE IF NOT EXISTS alabamaUsers_SelectedCandidates_Purchases (
 
-		userId TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6)))), 
-		userPresident VARCHAR (100) NOT NULL,
-		userGovernor VARCHAR (100) NOT NULL	
-	
+		userId TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6))) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6))) ), 
+		userPresident TEXT	
+		
 		
 	)`), (err) => {
 
@@ -526,6 +533,82 @@ db1_AlabamaUsersSelectedCandidates.serialize(() => {
 		}
 	};
 });
+
+*/
+
+db1_AlabamaUsersPersonalDataInformation.serialize(() => {
+    db1_AlabamaUsersPersonalDataInformation.run(`
+
+        CREATE TABLE IF NOT EXISTS alabamaUsers_IVoteBallot_ElectionPurchases (
+            uniqueId TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6))) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6))) ), 
+            Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
+            userId TEXT,
+            userFirstName VARCHAR (100) NOT NULL, 
+            userMiddleName VARCHAR (100) NOT NULL, 
+            userLastName VARCHAR (100) NOT NULL,
+            userSuffix VARCHAR (25) NOT NULL,
+            userAddress VARCHAR (200) NOT NULL,
+            userUnitType VARCHAR (100) NOT NULL,
+            userUnitTypeNumber VARCHAR (15) NOT NULL,
+            userCountrySelection VARCHAR (100) NOT NULL,
+            userStateSelection VARCHAR (100) NOT NULL,
+            userCountySelection VARCHAR (100) NOT NULL,
+            userCitySelection VARCHAR (100) NOT NULL,
+            userZipSelection VARCHAR (25) NOT NULL           
+		
+            
+		)`), (err) => {
+
+				if (err) {
+					console.log('Sarai Hannah Ajai have not created the Sqlite3 \'alabamaUsers_SelectedCandidates_Purchases\' database table which was coded successfully and she received a message: ' + err + '!');
+				} else {
+					console.log('Sarai Hannah Ajai have successfully created the Sqlite3 \'alabamaUsers_SelectedCandidates_Purchases\' database table' + Date() + '.');
+				}
+			};
+		});
+
+db1_AlabamaUsersSelectedCandidates.serialize(() => {
+	db1_AlabamaUsersSelectedCandidates.run(`
+
+		CREATE TABLE IF NOT EXISTS alabamaUsers_SelectedCandidates_IVoteBallot_Purchases (
+			uniqueId TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6))) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6))) ), 
+			Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
+			userId TEXT,					
+			userPresident TEXT,
+			userGovernor TEXT,
+			userLieutenantGovernor TEXT,
+			userAttorneyGeneral TEXT,
+			userSecretaryOfState TEXT,
+			userStateTreasurer TEXT,
+			userStateAuditor TEXT,
+			userAgriculture TEXT,
+			userSenator TEXT,
+			userCongressionalDistrict1 TEXT,
+			userCongressionalDistrict2 TEXT,
+			userCongressionalDistrict3 TEXT,
+			userCongressionalDistrict4 TEXT,
+			userCongressionalDistrict5 TEXT,
+			userCongressionalDistrict6 TEXT,
+			userCongressionalDistrict7 TEXT,
+			userPublicServiceCommissionPlace1 TEXT,
+			userPublicServiceCommissionPlace2 TEXT,
+			userStateBoardOfEducationPlace2 TEXT,
+			userStateBoardOfEducationPlace4 TEXT,
+			userStateBoardOfEducationPlace6 TEXT,
+			userStateBoardOfEducationPlace8 TEXT,
+			userSupremeCourtPlace5 TEXT,
+			userSupremeCourtPlace6 TEXT
+		
+			
+		)`), (err) => {
+
+				if (err) {
+					console.log('Sarai Hannah Ajai have not created the Sqlite3 \'alabamaUsers_SelectedCandidates_Purchases\' database table which was coded successfully and she received a message: ' + err + '!');
+				} else {
+					console.log('Sarai Hannah Ajai have successfully created the Sqlite3 \'alabamaUsers_SelectedCandidates_Purchases\' database table' + Date() + '.');
+				}
+			};
+		});
 
 db1_HRM_EmployeesRegistration.serialize(() => {
 	db1_HRM_EmployeesRegistration.run(`CREATE TABLE IF NOT EXISTS hrm_Employees_Registration_01 (
@@ -1092,31 +1175,59 @@ passport.deserializeUser(function (userId, done) {
     });
 });
 
+
 passport.deserializeUser(function (userId, done) {
-    console.log('Deserializing user from alabamaUsers_SelectedCandidates_Purchases...');
-    console.log(id);
+    console.log('Deserializing user from alabamaUsers_IVoteBallot_ElectionPurchases...');
+    console.log(userId); // Corrected from 'id' to 'userId'
 
     // Query the database to retrieve user data based on the provided userId
-    db1_AlabamaUsersSelectedCandidates.get('SELECT * FROM alabamaUsers_SelectedCandidates_Purchases WHERE id = ?', userId, (err, user) => {
+    db1_AlabamaUsersSelectedCandidates.get('SELECT * FROM alabamaUsers_IVoteBallot_ElectionPurchases WHERE userId = ?', userId, (err, user) => {
         if (err) {
-            return done(err);
+            return done(err); // Handle database query error
         }
         if (!user) {
-            // If user not found in the second table, return false
-            return done(null, false);
+            return done(null, false); // User not found, return false
         }
 
-        // Return userId data from the second table
+        // Return user data found in the database
         return done(null, {
-            userId: user.id,
-			userPresident: user.userPresident,
-			userGovernor: user.userGovernor,
-            
+            userId: user.userId, // Assuming userId is the correct column name in your table
+            userFirstName: user.userFirstName,
             isAuthenticated: true
         });
     });
 });
 
+
+
+
+/*
+passport.deserializeUser(function (userId, done) {
+    console.log('Deserializing user from alabamaUsers_SelectedCandidates_IvoteBallot_Purchases...');
+    console.log(userId); // Corrected from 'id' to 'userId'
+
+    // Query the database to retrieve user data based on the provided userId
+    db1_AlabamaUsersSelectedCandidates.get('SELECT * FROM alabamaUsers_SelectedCandidates_IvoteBallot_Purchases WHERE userId = ?', userId, (err, user) => {
+        if (err) {
+            return done(err); // Handle database query error
+        }
+        if (!user) {
+            return done(null, false); // User not found, return false
+        }
+
+        // Return user data found in the database
+        return done(null, {
+            userId: user.userId, // Assuming userId is the correct column name in your table
+            userPresident: user.selectedCandidates.userPresident,
+            isAuthenticated: true
+        });
+    });
+});
+*/
+
+/*
+
+alabamaUsers_IVoteBallot_ElectionPurchases 
 hrmApp.use(
 	session ({
 		store: new HRMSqlite3SessionStore ({
@@ -1148,6 +1259,8 @@ hrmApp.use([passport.initialize()]);
 hrmApp.use(passport.session());
 
 hrmApp.use(flash());
+
+*/
 
 passport.use(
 	'local4',
@@ -1660,12 +1773,10 @@ iVoteBallotApp.get('/alabama_Candidates_2024_02', checkMiddlewareAuthentication,
 			DMVZipSelection: req.user.DMVZipSelection,
 			DMVPhoneNumber: req.user.DMVPhoneNumber,
 
+			userPresident: req.user.userPresident,
+
 					
 		});
-		
-		
-
-
 
 		console.log('DMVFirstName:', req.user.DMVFirstName);
 		console.log('DMVMiddleName:', req.user.DMVMiddleName);
@@ -1903,6 +2014,19 @@ iVoteBallotApp.use('/dashboard_01', (req, res, next) => {
 			};
 		}
 	}
+	next();
+});
+
+// Middleware to set req.isUnauthenticated for the first use of the '/alabama_Candidates_2024_02' URL bar
+iVoteBallotApp.use('/alabama_Candidates_2024_02', (req, res, next) => {
+	console.log('The middleware have been call for the user\'s \'alabama_Candidates_2024_02!');
+	// Check if user is Already authenticated
+	if (!req.session.isAuthenticated) {
+
+		// User of '/login' URL
+		req.isUnauthenticated = true;
+	}
+
 	next();
 });
 
@@ -4611,16 +4735,466 @@ iVoteBallotApp.post('/create-checkout-session', async (req, res) => {
 
 */
 
-
-
-
-
-
+/*
 
 iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication,
+
 	async (req, res) => {
 
+		const userPresident = req.body.userPresident;		
 		
+		console.log(req.body);
+
+		console.log('The user\'s selected candidates are: ' + userPresident + '.');
+		
+
+		const newUser = {
+
+			userPresident,
+					
+
+		};	
+
+		await db1_AlabamaUsersSelectedCandidates.run(
+			`INSERT INTO alabamaUsers_SelectedCandidates_Purchases (userPresident) VALUES (?)`,
+
+			[newUser.candidateText], (err) => {
+
+				if (err) {
+					console.error(err);
+					req.flash('error', 'An syntax error has occurred when you have entered your data information into the input field that is link to our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
+					console.log('An syntax error has occurred when the user have entered his/her data information into the input field that is link our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
+					console.error('Error inserting candidate:', + err.message);
+					res.render('535');
+
+				} else {
+					console.log('The user data information typed into the \'alabamaDMV_Commission_01\' input fields have been successfully parsed into the \'alabamaDMV_Commission_01\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
+					req.flash('success', 'The Election Assure Expert have successfully registered your data information onto the iVoteBallot database, and you can now sign up to create your iVoteBallot account.');
+					//console.log(`A candidate for ${category} has been added to the SQLite3 database alabamaUsers_SelectedCandidates_Purchases.`);
+					res.redirect('/alabama_Candidates_2024_02');
+
+				}
+
+			}
+		);		
 		
 	}
 );
+
+*/
+
+/*
+
+iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication, async (req, res) => {
+    const userId = req.user.id;
+    const selectedCandidates = req.body;
+
+    console.log('Received form data:', selectedCandidates); // Add this line to inspect received data
+
+    const newUser = {
+        userId,
+        userPresident: selectedCandidates.President,
+        userGovernor: selectedCandidates.Governor,
+        userLieutenantGovernor: selectedCandidates["Lieutenant Governor"],
+        userAttorneyGeneral: selectedCandidates["Attorney General"],
+        userSecretaryofState: selectedCandidates["Secretary of State"],
+        userStateTreasurer: selectedCandidates["State Treasurer"],
+        userStateAuditor: selectedCandidates["State Auditor"],
+        userAgriculture: selectedCandidates.Agriculture,
+        userSenator: selectedCandidates.Senator,
+        userUS1stCongressionalDist: selectedCandidates["U.S. 1st Congressional District"],
+        userUS2ndCongressionalDist: selectedCandidates["U.S. 2nd Congressional District"],
+        userUS3rdCongressionalDist: selectedCandidates["U.S. 3rd Congressional District"],
+        userUS4thCongressionalDist: selectedCandidates["U.S. 4th Congressional District"],
+        userUS5thCongressionalDist: selectedCandidates["U.S. 5th Congressional District"],
+        userUS6thCongressionalDist: selectedCandidates["U.S. 6th Congressional District"],
+        userUS7thCongressionalDist: selectedCandidates["U.S. 7th Congressional District"],
+        userPublicServiceCommission_Place_1: selectedCandidates["Public Service Commission - Place 1"],
+        userPublicServiceCommission_Place_2: selectedCandidates["Public Service Commission - Place 2"],
+        userStateBoardofEducation_Place_2: selectedCandidates["State Board of Education - Place 2"],
+        userStateBoardofEducation_Place_4: selectedCandidates["State Board of Education - Place 4"],
+        userStateBoardofEducation_Place_6: selectedCandidates["State Board of Education - Place 6"],
+        userStateBoardofEducation_Place_8: selectedCandidates["State Board of Education - Place 8"],
+        userSupremeCourt_Place_5: selectedCandidates["Supreme Court - Place 5"],
+        userSupremeCourt_Place_6: selectedCandidates["Supreme Court - Place 6"]
+    };
+
+    console.log('New User Data:', newUser); // Add this line to inspect new user data
+
+    const placeholders = Object.keys(newUser).map(() => '?').join(',');
+    const columns = Object.keys(newUser).join(',');
+
+    await db1_AlabamaUsersSelectedCandidates.run(
+        `INSERT INTO alabamaUsers_SelectedCandidates_Purchases (${columns}) VALUES (${placeholders})`,
+        Object.values(newUser),
+        (err) => {
+            if (err) {
+                console.error('Error inserting data:', err);
+                res.status(500).send('An error occurred while saving your data.');
+            } else {
+                console.log('Data inserted successfully');
+                res.redirect('/alabama_Candidates_2024_02');
+            }
+        }
+    );
+});
+
+*/
+
+/*
+iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication, async (req, res) => {
+    const userId = req.user.id;
+    const selectedCandidates = req.body;
+
+
+
+	const userPresident = req.body.userPresident;
+
+    console.log('Received form data:', selectedCandidates); // Check received data
+
+    // Construct newUser object with userId and selected candidates
+    const newUser = {
+        userId,
+        userPresident: selectedCandidates,
+        userGovernor: selectedCandidates,
+        userLieutenantGovernor: selectedCandidates,
+        userAttorneyGeneral: selectedCandidates,
+        userSecretaryofState: selectedCandidates,
+        userStateTreasurer: selectedCandidates,
+        userStateAuditor: selectedCandidates,
+        userAgriculture: selectedCandidates,
+        userSenator: selectedCandidates,
+        userUS1stCongressionalDist: selectedCandidates,
+        userUS2ndCongressionalDist: selectedCandidates,
+        userUS3rdCongressionalDist: selectedCandidates,
+        userUS4thCongressionalDist: selectedCandidates,
+        userUS5thCongressionalDist: selectedCandidates,
+        userUS6thCongressionalDist: selectedCandidates,
+        userUS7thCongressionalDist: selectedCandidates,
+        userPublicServiceCommission_Place_1: selectedCandidates,
+        userPublicServiceCommission_Place_2: selectedCandidates,
+        userStateBoardofEducation_Place_2: selectedCandidates,
+        userStateBoardofEducation_Place_4: selectedCandidates,
+        userStateBoardofEducation_Place_6: selectedCandidates,
+        userStateBoardofEducation_Place_8: selectedCandidates,
+        userSupremeCourt_Place_5: selectedCandidates,
+        userSupremeCourt_Place_6: selectedCandidates,
+    };
+
+    console.log('New User Data:', newUser); // Check constructed newUser object
+
+    // Insert user data into SQLite3 database
+    await db1_AlabamaUsersSelectedCandidates.run(
+        `INSERT INTO alabamaUsers_SelectedCandidates_Purchases (${Object.keys(newUser).join(',')}) VALUES (${Object.keys(newUser).map(() => '?').join(',')})`,
+        Object.values(newUser), // Pass values as array
+        (err) => {
+            if (err) {
+                console.error('Error inserting data:', err);
+                res.status(500).send('An error occurred while saving your data.');
+            } else {
+                console.log('Data inserted successfully');
+                res.redirect('/alabama_Candidates_2024_02');
+            }
+        }
+    );
+});
+
+*/
+
+
+iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication, 
+	
+	async (req, res) => {		
+		
+		const userId = req.user.id;
+		const userFirstName = req.body.userFirstName; 
+		const userMiddleName = req.body.userMiddleName; 
+		const userLastName = req.body.userLastName;
+		const userSuffix = req.body.userSuffix;
+		const userAddress = req.body.userAddress;
+		const userUnitType = req.body.userUnitType;
+		const userUnitTypeNumber = req.body.userUnitTypeNumber;
+		const userCountrySelection = req.body.userCountrySelection;
+		const userStateSelection = req.body.userStateSelection;
+		const userCountySelection = req.body.userCountySelection;
+		const userCitySelection = req.body.userCitySelection;
+		const userZipSelection = req.body.userZipSelection;
+		
+		console.log('Received form data: User Checkout');
+
+		console.log('The user\'s first name: ' + userFirstName + '.');
+		console.log('The user\'s middle name is: ' + userMiddleName + '.');
+		console.log('The user\'s last name is: ' + userLastName + '.');
+		
+		console.log('The user\'s suffix is: ' + userSuffix + '.');
+		
+		console.log('The user\'s country selection is: ' + userCountrySelection + '.');
+		console.log('The user\'s state selection is: ' + userStateSelection + '.');
+		console.log('The user\'s county selection is: ' + userCountySelection + '.');
+		console.log('The user\'s city selection is: ' + userCitySelection + '.');	
+		console.log('The user\'s zip code selection is: ' + userZipSelection + '.');
+
+		const newUser = {		
+			
+			userId,
+			userFirstName,
+			userMiddleName,
+			userLastName,
+			userSuffix,
+			userAddress,
+			userUnitType,
+			userUnitTypeNumber,
+			userCountrySelection,
+			userStateSelection,
+			userCountySelection,
+			userCitySelection,
+			userZipSelection,				
+			
+		};
+		
+		console.log('New User\'s iVoteBallot Personal Data:', newUser);		
+				
+		await db1_AlabamaUsersPersonalDataInformation.run( 
+            `INSERT INTO alabamaUsers_IVoteBallot_ElectionPurchases (
+                userId, userFirstName, userMiddleName, userLastName, userSuffix, userAddress, userUnitType, 
+                userUnitTypeNumber, userCountrySelection, userStateSelection, userCountySelection, userCitySelection, 
+                userZipSelection
+
+            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+            [
+                newUser.userId, newUser.userFirstName, newUser.userMiddleName, newUser.userLastName, 
+                newUser.userSuffix, newUser.userAddress, newUser.userUnitType, newUser.userUnitTypeNumber, 
+                newUser.userCountrySelection, newUser.userStateSelection, newUser.userCountySelection, 
+                newUser.userCitySelection, newUser.userZipSelection 
+            ],
+			(err) => {	
+				
+			if (err) {
+				console.error(err);
+				req.flash('error', 'An syntax error has occurred when you have entered your data information into the input field that is link to our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
+				console.log('An syntax error has occurred when the user have entered his/her data information into the input field that is link our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
+				res.render('535');
+
+			} else {
+				
+				console.log('db1_AlabamaUsersPersonalDataInformation is about to run.');
+				console.log('The user data information typed into the \'alabama_Candidates_2024_02\' input fields have been successfully parsed into the \'alabama_Candidates_2024_02\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
+				req.flash('success', 'The Human Resources Manager have successfully registered your employee data information onto the db1_AlabamaUsersPersonalDataInformation database, and you can now sign up to create your iVoteBallot\'s employment job orders account.');
+				
+				res.redirect('/alabama_Candidates_2024_02');
+
+			}
+
+
+			const userId = this.lastID;
+
+
+
+			const categories = [
+
+				"userPresident", "userGovernor", "userLieutenantGovernor", "userAttorneyGeneral", 
+                "userSecretaryOfState", "userStateTreasurer", "userStateAuditor", "userAgriculture", "userSenator", 
+                "userCongressionalDistrict1", "userCongressionalDistrict2", "userCongressionalDistrict3", 
+                "userCongressionalDistrict4", "userCongressionalDistrict5", "userCongressionalDistrict6", 
+                "userCongressionalDistrict7", "userPublicServiceCommissionPlace1", "userPublicServiceCommissionPlace2", 
+                "userStateBoardOfEducationPlace2", "userStateBoardOfEducationPlace4", "userStateBoardOfEducationPlace6", 
+                "userStateBoardOfEducationPlace8", "userSupremeCourtPlace5", "userSupremeCourtPlace6"
+
+			];
+
+			
+			const selectedCandidate = {};
+
+			categories.forEach(category => {
+
+				selectedCandidates[category] = req.body[category] || null;				
+
+			});
+
+			const insertCandidaesSQLite3 = `
+
+				INSERT INTO SelectedCanidates (userId, ${categories.join(',')})
+
+					VALUES (${Array(categories.length + 1).fill('?').join(',')})
+
+			`;
+
+			db1_AlabamaUsersSelectedCandidates.run(insertCandidaesSQLite3, [
+
+				userId, userPresident, userGovernor, userLieutenantGovernor, userAttorneyGeneral, 
+                userSecretaryOfState, userStateTreasurer, userStateAuditor, userAgriculture, userSenator, 
+                userCongressionalDistrict1, userCongressionalDistrict2, userCongressionalDistrict3, 
+                userCongressionalDistrict4, userCongressionalDistrict5, userCongressionalDistrict6, 
+                userCongressionalDistrict7, userPublicServiceCommissionPlace1, userPublicServiceCommissionPlace2, 
+                userStateBoardOfEducationPlace2, userStateBoardOfEducationPlace4, userStateBoardOfEducationPlace6, 
+                userStateBoardOfEducationPlace8, userSupremeCourtPlace5, userSupremeCourtPlace6, 
+				categories.map(category => selectedCandidates[category])
+			],
+
+				function(err) {
+
+					if (err) {
+						console.error(err);
+						req.flash('error', 'An syntax error has occurred when you have entered your data information into the input field that is link to our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
+						console.log('An syntax error has occurred when the user have entered his/her data information into the input field that is link our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
+						res.render('535');
+		
+					} else {
+						
+						console.log('db1_AlabamaUsersSelectedCandidate is about to run.');
+						console.log('The user data information typed into the \'alabama_Candidates_2024_02\' input fields have been successfully parsed into the \'alabama_Candidates_2024_02\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
+						req.flash('success', 'The Human Resources Manager have successfully registered your employee data information onto the db1_AlabamaUsersSelectedCandidate database, and you can now sign up to create your iVoteBallot\'s employment job orders account.');
+						
+						res.redirect('/alabama_Candidates_2024_02');
+		
+					}
+
+			});
+
+		});		
+			
+	}
+			
+);
+
+
+
+/*
+ userPresident, userGovernor, userLieutenantGovernor, userAttorneyGeneral, 
+                userSecretaryOfState, userStateTreasurer, userStateAuditor, userAgriculture, userSenator, 
+                userCongressionalDistrict1, userCongressionalDistrict2, userCongressionalDistrict3, 
+                userCongressionalDistrict4, userCongressionalDistrict5, userCongressionalDistrict6, 
+                userCongressionalDistrict7, userPublicServiceCommissionPlace1, userPublicServiceCommissionPlace2, 
+                userStateBoardOfEducationPlace2, userStateBoardOfEducationPlace4, userStateBoardOfEducationPlace6, 
+                userStateBoardOfEducationPlace8, userSupremeCourtPlace5, userSupremeCourtPlace6
+
+				newUser.userPresident, newUser.userGovernor, 
+                newUser.userLieutenantGovernor, newUser.userAttorneyGeneral, newUser.userSecretaryOfState, 
+                newUser.userStateTreasurer, newUser.userStateAuditor, newUser.userAgriculture, newUser.userSenator, 
+                newUser.userCongressionalDistrict1, newUser.userCongressionalDistrict2, newUser.userCongressionalDistrict3, 
+                newUser.userCongressionalDistrict4, newUser.userCongressionalDistrict5, newUser.userCongressionalDistrict6, 
+                newUser.userCongressionalDistrict7, newUser.userPublicServiceCommissionPlace1, newUser.userPublicServiceCommissionPlace2, 
+                newUser.userStateBoardOfEducationPlace2, newUser.userStateBoardOfEducationPlace4, newUser.userStateBoardOfEducationPlace6, 
+                newUser.userStateBoardOfEducationPlace8, newUser.userSupremeCourtPlace5, newUser.userSupremeCourtPlace6
+
+*/
+
+
+
+/*
+iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication, async (req, res) => {		
+    const userId = req.user.id;
+    const userFirstName = req.body.userFirstName; 
+    const userMiddleName = req.body.userMiddleName; 
+    const userLastName = req.body.userLastName;
+    const userSuffix = req.body.userSuffix;
+    const userAddress = req.body.userAddress;
+    const userUnitType = req.body.userUnitType;
+    const userUnitTypeNumber = req.body.userUnitTypeNumber;
+    const userCountrySelection = req.body.userCountrySelection;
+    const userStateSelection = req.body.userStateSelection;
+    const userCountySelection = req.body.userCountySelection;
+    const userCitySelection = req.body.userCitySelection;
+    const userZipSelection = req.body.userZipSelection;
+    const userPresident = req.body.userPresident;
+    const userGovernor = req.body.userGovernor;
+    const userLieutenantGovernor = req.body.userLieutenantGovernor;
+    const userAttorneyGeneral = req.body.userAttorneyGeneral;
+    const userSecretaryOfState = req.body.userSecretaryOfState;
+    const userStateTreasurer = req.body.userStateTreasurer;
+    const userStateAuditor = req.body.userStateAuditor;
+    const userAgriculture = req.body.userAgriculture;
+    const userSenator = req.body.userSenator;
+    const userCongressionalDistrict1 = req.body.userCongressionalDistrict1;
+    const userCongressionalDistrict2 = req.body.userCongressionalDistrict2;
+    const userCongressionalDistrict3 = req.body.userCongressionalDistrict3;
+    const userCongressionalDistrict4 = req.body.userCongressionalDistrict4;
+    const userCongressionalDistrict5 = req.body.userCongressionalDistrict5;
+    const userCongressionalDistrict6 = req.body.userCongressionalDistrict6;
+    const userCongressionalDistrict7 = req.body.userCongressionalDistrict7;
+    const userPublicServiceCommissionPlace1 = req.body.userPublicServiceCommissionPlace1;
+    const userPublicServiceCommissionPlace2 = req.body.userPublicServiceCommissionPlace2;
+    const userStateBoardOfEducationPlace2 = req.body.userStateBoardOfEducationPlace2;
+    const userStateBoardOfEducationPlace4 = req.body.userStateBoardOfEducationPlace4;
+    const userStateBoardOfEducationPlace6 = req.body.userStateBoardOfEducationPlace6;
+    const userStateBoardOfEducationPlace8 = req.body.userStateBoardOfEducationPlace8;
+    const userSupremeCourtPlace5 = req.body.userSupremeCourtPlace5;
+    const userSupremeCourtPlace6 = req.body.userSupremeCourtPlace6;
+
+    const newUser = {		
+        userId,
+        userFirstName,
+        userMiddleName,
+        userLastName,
+        userSuffix,
+        userAddress,
+        userUnitType,
+        userUnitTypeNumber,
+        userCountrySelection,
+        userStateSelection,
+        userCountySelection,
+        userCitySelection,
+        userZipSelection,
+        userPresident,
+        userGovernor,
+        userLieutenantGovernor,
+        userAttorneyGeneral,
+        userSecretaryOfState,
+        userStateTreasurer,
+        userStateAuditor,
+        userAgriculture,
+        userSenator,
+        userCongressionalDistrict1,
+        userCongressionalDistrict2,
+        userCongressionalDistrict3,
+        userCongressionalDistrict4,
+        userCongressionalDistrict5,
+        userCongressionalDistrict6,
+        userCongressionalDistrict7,
+        userPublicServiceCommissionPlace1,
+        userPublicServiceCommissionPlace2,
+        userStateBoardOfEducationPlace2,
+        userStateBoardOfEducationPlace4,
+        userStateBoardOfEducationPlace6,
+        userStateBoardOfEducationPlace8,
+        userSupremeCourtPlace5,
+        userSupremeCourtPlace6
+    };
+
+    console.log('New User Data:', newUser);
+
+    try {
+        await  db1_AlabamaUsersSelectedCandidates.run(db1_AlabamaUsersSelectedCandidates, `
+            INSERT INTO alabamaUsers_SelectedCandidates_Purchases (
+                userId, userFirstName, userMiddleName, userLastName, userSuffix, userAddress, userUnitType, 
+                userUnitTypeNumber, userCountrySelection, userStateSelection, userCountySelection, userCitySelection, 
+                userZipSelection, userPresident, userGovernor, userLieutenantGovernor, userAttorneyGeneral, 
+                userSecretaryOfState, userStateTreasurer, userStateAuditor, userAgriculture, userSenator, 
+                userCongressionalDistrict1, userCongressionalDistrict2, userCongressionalDistrict3, 
+                userCongressionalDistrict4, userCongressionalDistrict5, userCongressionalDistrict6, 
+                userCongressionalDistrict7, userPublicServiceCommissionPlace1, userPublicServiceCommissionPlace2, 
+                userStateBoardOfEducationPlace2, userStateBoardOfEducationPlace4, userStateBoardOfEducationPlace6, 
+                userStateBoardOfEducationPlace8, userSupremeCourtPlace5, userSupremeCourtPlace6
+            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+            [
+                newUser.userId, newUser.userFirstName, newUser.userMiddleName, newUser.userLastName, 
+                newUser.userSuffix, newUser.userAddress, newUser.userUnitType, newUser.userUnitTypeNumber, 
+                newUser.userCountrySelection, newUser.userStateSelection, newUser.userCountySelection, 
+                newUser.userCitySelection, newUser.userZipSelection, newUser.userPresident, newUser.userGovernor, 
+                newUser.userLieutenantGovernor, newUser.userAttorneyGeneral, newUser.userSecretaryOfState, 
+                newUser.userStateTreasurer, newUser.userStateAuditor, newUser.userAgriculture, newUser.userSenator, 
+                newUser.userCongressionalDistrict1, newUser.userCongressionalDistrict2, newUser.userCongressionalDistrict3, 
+                newUser.userCongressionalDistrict4, newUser.userCongressionalDistrict5, newUser.userCongressionalDistrict6, 
+                newUser.userCongressionalDistrict7, newUser.userPublicServiceCommissionPlace1, newUser.userPublicServiceCommissionPlace2, 
+                newUser.userStateBoardOfEducationPlace2, newUser.userStateBoardOfEducationPlace4, newUser.userStateBoardOfEducationPlace6, 
+                newUser.userStateBoardOfEducationPlace8, newUser.userSupremeCourtPlace5, newUser.userSupremeCourtPlace6
+            ]
+        );
+        console.log('New user data inserted successfully.');
+        res.redirect('/alabama_Candidates_2024_02');
+    } catch (err) {
+        console.error('Error inserting new user data:', err.message);
+        res.status(500).send('An error occurred while saving your data.');
+    }
+});
+*/
