@@ -289,7 +289,7 @@
 											
 											<p id="shoppingCart_Title_01"> Your Shopping Cart</p>								
 								
-											<!-- <p id="selectedCandidatesShoppingCart"></p> -->
+											<p id="selectedCandidatesShoppingCart"></p>
 
 											<hr id="hr_Red_line_02">
 										
@@ -376,7 +376,7 @@
 													
 												<p id="partiesRed_Title_01">Republicans</p>												
 
-												<ul class="alignCandidates_01">									
+												<ul class="alignCandidates_01">																	
 
 													<li>
 														<label class="labelExpanded_01">
@@ -389,7 +389,7 @@
 															</div>
 
 														</label>	
-														
+																																										
 														<!-- Trigger/Open candidate ScoreSheet modal. -->
 														<button id="candidateButton_FC001_24">Score Sheet</button>
 									
@@ -11326,7 +11326,49 @@
 			<%- include('../common/footer') %>
 		</footer>
 
-		<script defer src="../scripts_Files/alabama_Candidates_2024_02_Script.js"></script>	
+		<script defer src="../scripts_Files/alabama_Candidates_2024_02_Script.js">
+
+											
+
+
+		document.getElementById('alabamaSelected_Candidates2024_Form').addEventListener('submit', async (e) => {
+			e.preventDefault();
+
+			const formData = new FormData(e.target);
+			const formObject = Object.fromEntries(formData.entries());
+
+			console.log('Form Object:', formObject);  // Debugging line to check captured data
+
+			try {
+				const response = await fetch('/alabama_Candidates_2024_02', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(formObject)
+				});
+
+				if (response.ok) {
+					window.location.href = '/alabama_Candidates_2024_02';
+				} else {
+					const errorMessage = await response.text();
+					console.error('Error:', errorMessage);
+					alert('An error occurred while saving your data.');
+				}
+			} catch (error) {
+				console.error('Error:', error);
+				alert('An error occurred while saving your data.');
+			}
+		});
+
+
+
+
+
+
+
+
+		</script>	
 		
 	</body>
 
