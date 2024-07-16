@@ -574,30 +574,8 @@ db1_AlabamaUsersSelectedCandidates.serialize(() => {
 			uniqueId TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6))) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6))) ), 
 			Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
 			userId TEXT,					
-			userPresident TEXT,
-			userGovernor TEXT,
-			userLieutenantGovernor TEXT,
-			userAttorneyGeneral TEXT,
-			userSecretaryOfState TEXT,
-			userStateTreasurer TEXT,
-			userStateAuditor TEXT,
-			userAgriculture TEXT,
-			userSenator TEXT,
-			userCongressionalDistrict1 TEXT,
-			userCongressionalDistrict2 TEXT,
-			userCongressionalDistrict3 TEXT,
-			userCongressionalDistrict4 TEXT,
-			userCongressionalDistrict5 TEXT,
-			userCongressionalDistrict6 TEXT,
-			userCongressionalDistrict7 TEXT,
-			userPublicServiceCommissionPlace1 TEXT,
-			userPublicServiceCommissionPlace2 TEXT,
-			userStateBoardOfEducationPlace2 TEXT,
-			userStateBoardOfEducationPlace4 TEXT,
-			userStateBoardOfEducationPlace6 TEXT,
-			userStateBoardOfEducationPlace8 TEXT,
-			userSupremeCourtPlace5 TEXT,
-			userSupremeCourtPlace6 TEXT
+			userPresident TEXT
+			
 		
 			
 		)`), (err) => {
@@ -609,7 +587,7 @@ db1_AlabamaUsersSelectedCandidates.serialize(() => {
 				}
 			};
 		});
-
+		
 db1_HRM_EmployeesRegistration.serialize(() => {
 	db1_HRM_EmployeesRegistration.run(`CREATE TABLE IF NOT EXISTS hrm_Employees_Registration_01 (
 
@@ -1181,7 +1159,7 @@ passport.deserializeUser(function (userId, done) {
     console.log(userId); // Corrected from 'id' to 'userId'
 
     // Query the database to retrieve user data based on the provided userId
-    db1_AlabamaUsersSelectedCandidates.get('SELECT * FROM alabamaUsers_IVoteBallot_ElectionPurchases WHERE userId = ?', userId, (err, user) => {
+    db1_AlabamaUsersPersonalDataInformation.get('SELECT * FROM alabamaUsers_IVoteBallot_ElectionPurchases WHERE userId = ?', userId, (err, user) => {
         if (err) {
             return done(err); // Handle database query error
         }
@@ -1201,7 +1179,7 @@ passport.deserializeUser(function (userId, done) {
 
 
 
-/*
+
 passport.deserializeUser(function (userId, done) {
     console.log('Deserializing user from alabamaUsers_SelectedCandidates_IvoteBallot_Purchases...');
     console.log(userId); // Corrected from 'id' to 'userId'
@@ -1223,7 +1201,7 @@ passport.deserializeUser(function (userId, done) {
         });
     });
 });
-*/
+
 
 /*
 
@@ -4846,8 +4824,6 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
     const userId = req.user.id;
     const selectedCandidates = req.body;
 
-
-
 	const userPresident = req.body.userPresident;
 
     console.log('Received form data:', selectedCandidates); // Check received data
@@ -4901,7 +4877,6 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 
 */
 
-
 iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication, 
 	
 	async (req, res) => {		
@@ -4919,6 +4894,7 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 		const userCountySelection = req.body.userCountySelection;
 		const userCitySelection = req.body.userCitySelection;
 		const userZipSelection = req.body.userZipSelection;
+		const userPresident = req.body.userPresident;
 		
 		console.log('Received form data: User Checkout');
 
@@ -4933,6 +4909,7 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 		console.log('The user\'s county selection is: ' + userCountySelection + '.');
 		console.log('The user\'s city selection is: ' + userCitySelection + '.');	
 		console.log('The user\'s zip code selection is: ' + userZipSelection + '.');
+		console.log('The user\'s president is: ' + userPresident + '.');
 
 		const newUser = {		
 			
@@ -4948,7 +4925,8 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 			userStateSelection,
 			userCountySelection,
 			userCitySelection,
-			userZipSelection,				
+			userZipSelection,
+			userPresident,				
 			
 		};
 		
@@ -4985,51 +4963,57 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 
 			}
 
-
-			const userId = this.lastID;
-
-
-
-			const categories = [
-
-				"userPresident", "userGovernor", "userLieutenantGovernor", "userAttorneyGeneral", 
-                "userSecretaryOfState", "userStateTreasurer", "userStateAuditor", "userAgriculture", "userSenator", 
-                "userCongressionalDistrict1", "userCongressionalDistrict2", "userCongressionalDistrict3", 
-                "userCongressionalDistrict4", "userCongressionalDistrict5", "userCongressionalDistrict6", 
-                "userCongressionalDistrict7", "userPublicServiceCommissionPlace1", "userPublicServiceCommissionPlace2", 
-                "userStateBoardOfEducationPlace2", "userStateBoardOfEducationPlace4", "userStateBoardOfEducationPlace6", 
-                "userStateBoardOfEducationPlace8", "userSupremeCourtPlace5", "userSupremeCourtPlace6"
-
-			];
+			
 
 			
-			const selectedCandidate = {};
 
-			categories.forEach(category => {
+			db1_AlabamaUsersSelectedCandidates.run(
+				`INSERT INTO alabamaUsers_SelectedCandidates_IVoteBallot_Purchases (
 
-				selectedCandidates[category] = req.body[category] || null;				
+					userId, userPresident
+				
+				) VALUES (?,?)`,
 
-			});
+				[
+					newUser.userId, newUser.userPresident
+				],
+			)
 
-			const insertCandidaesSQLite3 = `
 
-				INSERT INTO SelectedCanidates (userId, ${categories.join(',')})
 
-					VALUES (${Array(categories.length + 1).fill('?').join(',')})
 
+
+
+/*
+			const userId = this.lastID;
+			const categories = [
+				"userPresident", "Governor", "LieutenantGovernor", "AttorneyGeneral", 
+				"SecretaryOfState", "StateTreasurer", "StateAuditor", "Agriculture", 
+				"Senator", "US1stCongressionalDistrict", "US2ndCongressionalDistrict", 
+				"US3rdCongressionalDistrict", "US4thCongressionalDistrict", 
+				"US5thCongressionalDistrict", "US6thCongressionalDistrict", 
+				"US7thCongressionalDistrict", "PublicServiceCommissionPlace1", 
+				"PublicServiceCommissionPlace2", "StateBoardOfEducationPlace2", 
+				"StateBoardOfEducationPlace4", "StateBoardOfEducationPlace6", 
+				"StateBoardOfEducationPlace8", "SupremeCourtPlace5", 
+				"SupremeCourtPlace6"
+			];
+	
+			const insertCandidatesSql = `
+				INSERT INTO SelectedCandidates (userId, ${categories.join(', ')})
+				VALUES (${Array(categories.length + 1).fill('?').join(', ')})
 			`;
+	
+			db1_AlabamaUsersSelectedCandidates.run(insertCandidatesSql, [
+				userId,
+				...categories.map(category => selectedCandidates[category]?.candidateText || null)
+			], 
 
-			db1_AlabamaUsersSelectedCandidates.run(insertCandidaesSQLite3, [
 
-				userId, userPresident, userGovernor, userLieutenantGovernor, userAttorneyGeneral, 
-                userSecretaryOfState, userStateTreasurer, userStateAuditor, userAgriculture, userSenator, 
-                userCongressionalDistrict1, userCongressionalDistrict2, userCongressionalDistrict3, 
-                userCongressionalDistrict4, userCongressionalDistrict5, userCongressionalDistrict6, 
-                userCongressionalDistrict7, userPublicServiceCommissionPlace1, userPublicServiceCommissionPlace2, 
-                userStateBoardOfEducationPlace2, userStateBoardOfEducationPlace4, userStateBoardOfEducationPlace6, 
-                userStateBoardOfEducationPlace8, userSupremeCourtPlace5, userSupremeCourtPlace6, 
-				categories.map(category => selectedCandidates[category])
-			],
+*/
+
+/*
+
 
 				function(err) {
 
@@ -5051,12 +5035,14 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 
 			});
 
+			
+*/
+
 		});		
 			
 	}
 			
 );
-
 
 
 /*
