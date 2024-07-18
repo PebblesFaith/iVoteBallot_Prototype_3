@@ -17,6 +17,7 @@ toggleMenu.forEach(function (items) {
   });
 });
 
+
 function displaySelections() {
 	const alabamaUserSelections_Candidates2024 = document.getElementById('alabamaSelected_Candidates2024_Form');
 	const userSelected_President = alabamaUserSelections_Candidates2024.elements['userPresident'].value;
@@ -87,8 +88,6 @@ function displaySelections() {
 
 }
 
-/*
-
 function printContent() {
 	
 	var printWindow = window.open('', '_blank');
@@ -147,9 +146,6 @@ function printContent() {
 	printWindow.print();
 
 }
-
-*/
-
 
 /*
 const alabamaSelectedCandidates2024Form = (e) => { 
@@ -246,9 +242,6 @@ function displayShoppingCart() {
 	const userSelectedShoppingCart_President = alabamaUserSelectionsShoppingCart_Candidates2024.elements['userPresident'].value;
 	const userSelectedShoppingCart_AlabamaGovernor = alabamaUserSelectionsShoppingCart_Candidates2024.elements['userGovernor'].value;
 
-	
-	
-
 
 
 	let selectedCandidatesShoppingCart = '1 |  President of the United States: ' + userSelectedShoppingCart_President + '<br>';
@@ -276,670 +269,6 @@ function displayShoppingCart() {
 
 }
 */
-
-
-/*
-function printShoppingCartContent() {
-	
-	var printWindow = window.open('', '_blank');
-	var selectedCandidatesShoppingCart = document.getElementById('selectedCandidatesShoppingCart').innerHTML;	
-	
-	var htmlContent = '<html>' +
-		'<head>' +	
-			'<style>' +
-				'@font-face {' +
-				'	font-family: "Megrim-Regular";' +
-				'	src: url(../fonts/Source_Code_Pro/SourceCodePro-SemiBold.ttf) format("truetype");' +
-				' 	font-weight: normal;' +				
-				'}' +
-				'#header_Image_01 {' +
-				'	display: inline-block;' +										
-				'}' +
-				'#wrapImage {' +
-				'	display: flex;' +
-				'	justify-content: center;' +
-				'	align-items: center;' +
-				'}' +
-				'#imageTitle {' +
-				'   color: #0d41ff;' +
-				'   font-family: Megrim-Regular, Cambria, Cochin, Georgia, Times, serif;' +
-				'	font-size: clamp(16px, 2vw, 18px);' +
-				'	text-align: center;' +
-				'}' +
-				'#section_Title {' +
-				'   color: #c91818;' +
-				'   font-family: Megrim-Regular, Cambria, Cochin, Georgia, Times, serif;' +
-				'	font-size: clamp(14px, 2vw, 16px);' +
-				'	text-align: center;' +
-				'}' +
-				'#selectedCandidatesText {' +
-				'   color: #0d41ff;' +
-				'   font-family: Megrim-Regular, Cambria, Cochin, Georgia, Times, serif;' +
-				'	font-size: clamp(10px, 2vw, 12px);' +
-				'}' +
-			'</style>' +							
-		'</head>' +
-		'<body>' +	
-
-			'<div id="wrapImage">' +
-				'<img id="header_Image_01" src="../images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png" alt="Image" width="100" height="100" />' +										
-			'</div>' +
-			'<div id="imageHeader">' +
-				'<p id="imageTitle">2024 Selected Candidates</p>' +
-			'</div>' +
-			'<p id="section_Title">Here are Your Federal and Alabama State Selected 2024 Candidates</p>' +
-			'<p id="selectedCandidatesText">' + selectedCandidatesShoppingCart + '</p>' +
-		'</body>' +
-		'</html>';	
-
-	printWindow.document.write(htmlContent);			
-	printWindow.document.close('');
-	printWindow.print();
-
-}
-
-
-function displayShoppingCart() {
-	// Get the selected Presidential candidate
-	const selectedPresident = document.querySelector('input[name="userPresident"]:checked');
-	const presidentName = selectedPresident ? selectedPresident.value : '';
-	const presidentImage = selectedPresident ? selectedPresident.parentNode.querySelector('img').src : '';
-  
-	// Get the selected Governor candidate
-	const selectedGovernor = document.querySelector('input[name="userGovernor"]:checked');
-	const governorName = selectedGovernor ? selectedGovernor.value : '';
-	const governorImage = selectedGovernor ? selectedGovernor.parentNode.querySelector('img').src : '';
-
-	// Get the selected Lieutentant Governor candidate
-	const selectedLieutenantGovernor = document.querySelector('input[name="userLieutenantGovernor"]:checked');
-	const LieutenantGovernorName = selectedLieutenantGovernor ? selectedLieutenantGovernor.value : '';
-	const LieutenantGovernorImage = selectedLieutenantGovernor ? selectedLieutenantGovernor.parentNode.querySelector('img').src : '';
-
-	// Get the selected Attorney General candidate
-	const selectedAttorneyGeneral = document.querySelector('input[name="userAttorneyGeneral"]:checked');
-	const AttorneyGeneralName = selectedAttorneyGeneral ? selectedAttorneyGeneral.value : '';
-	const AttorneyGeneralImage = selectedAttorneyGeneral ? selectedAttorneyGeneral.parentNode.querySelector('img').src : '';
-
-	// Get the selected Secretary of State candidate
-	const selectedSecretaryofState = document.querySelector('input[name="userSecretaryofState"]:checked');
-	const secretaryofStateName = selectedSecretaryofState ? selectedSecretaryofState.value : '';
-	const secretaryofStateImage = selectedSecretaryofState ? selectedSecretaryofState.parentNode.querySelector('img').src : '';
-
-	// Get the selected State Treasurer candidate
-	const selectedStateTreasurer = document.querySelector('input[name="userStateTreasurer"]:checked');
-	const stateTreasurerName = selectedStateTreasurer ? selectedStateTreasurer.value : '';
-	const stateTreasurerImage = selectedStateTreasurer ? selectedStateTreasurer.parentNode.querySelector('img').src : '';
-
-	// Get the selected State Auditor candidate
-	const selectedStateAuditor = document.querySelector('input[name="userStateAuditor"]:checked');
-	const stateAuditorName = selectedStateAuditor ? selectedStateAuditor.value : '';
-	const stateAuditorImage = selectedStateAuditor ? selectedStateAuditor.parentNode.querySelector('img').src : '';
-
-	// Get the selected State Argriculture candidate
-	const selectedAgriculture = document.querySelector('input[name="userAgriculture"]:checked');
-	const agricultureName = selectedAgriculture ? selectedAgriculture.value : '';
-	const agricultureImage = selectedAgriculture ? selectedAgriculture.parentNode.querySelector('img').src : '';
-
-	// Get the selected State Senator candidate
-	const selectedSenator = document.querySelector('input[name="userSenator"]:checked');
-	const senatorName = selectedSenator ? selectedSenator.value : '';
-	const senatorImage = selectedSenator ? selectedSenator.parentNode.querySelector('img').src : '';
-
-	// Get the United States 1st Congressional District candidate
-	const selectedUS1stCongressionalDist = document.querySelector('input[name="userUS1stCongressionalDist"]:checked');
-	const us1stCongressionalDistName = selectedUS1stCongressionalDist ? selectedUS1stCongressionalDist.value : '';
-	const us1stCongressionalDistImage = selectedUS1stCongressionalDist ? selectedUS1stCongressionalDist.parentNode.querySelector('img').src : '';
-
-	// Get the United States 2nd Congressional District candidate
-	const selectedUS2ndCongressionalDist = document.querySelector('input[name="userUS2ndCongressionalDist"]:checked');
-	const us2ndCongressionalDistName = selectedUS2ndCongressionalDist ? selectedUS2ndCongressionalDist.value : '';
-	const us2ndCongressionalDistImage = selectedUS2ndCongressionalDist ? selectedUS2ndCongressionalDist.parentNode.querySelector('img').src : '';
-
-	// Get the United States 3rd Congressional District candidate
-	const selectedUS3rdCongressionalDist = document.querySelector('input[name="userUS3rdCongressionalDist"]:checked');
-	const us3rdCongressionalDistName = selectedUS3rdCongressionalDist ? selectedUS3rdCongressionalDist.value : '';
-	const us3rdCongressionalDistImage = selectedUS3rdCongressionalDist ? selectedUS3rdCongressionalDist.parentNode.querySelector('img').src : '';
-
-	// Get the United States 4th Congressional District candidate
-	const selectedUS4thCongressionalDist = document.querySelector('input[name="userUS4thCongressionalDist"]:checked');
-	const us4thCongressionalDistName = selectedUS4thCongressionalDist ? selectedUS4thCongressionalDist.value : '';
-	const us4thCongressionalDistImage = selectedUS4thCongressionalDist ? selectedUS4thCongressionalDist.parentNode.querySelector('img').src : '';
-
-	// Get the United States 5th Congressional District candidate
-	const selectedUS5thCongressionalDist = document.querySelector('input[name="userUS5thCongressionalDist"]:checked');
-	const us5thCongressionalDistName = selectedUS5thCongressionalDist ? selectedUS5thCongressionalDist.value : '';
-	const us5thCongressionalDistImage = selectedUS5thCongressionalDist ? selectedUS5thCongressionalDist.parentNode.querySelector('img').src : '';
-
-	// Get the United States 6th Congressional District candidate
-	const selectedUS6thCongressionalDist = document.querySelector('input[name="userUS6thCongressionalDist"]:checked');
-	const us6thCongressionalDistName = selectedUS6thCongressionalDist ? selectedUS6thCongressionalDist.value : '';
-	const us6thCongressionalDistImage = selectedUS6thCongressionalDist ? selectedUS6thCongressionalDist.parentNode.querySelector('img').src : '';
-
-	// Get the United States 7th Congressional District candidate
-	const selectedUS7thCongressionalDist = document.querySelector('input[name="userUS7thCongressionalDist"]:checked');
-	const us7thCongressionalDistName = selectedUS7thCongressionalDist ? selectedUS7thCongressionalDist.value : '';
-	const us7thCongressionalDistImage = selectedUS7thCongressionalDist ? selectedUS7thCongressionalDist.parentNode.querySelector('img').src : '';
-
-	// Get the Public Service Commission Place 1 candidate
-	const selectedPublicServiceCommissionPlace_1 = document.querySelector('input[name="userPublicServiceCommission_Place_1"]:checked');
-	const publicServiceCommissionPlace_1Name = selectedPublicServiceCommissionPlace_1 ? selectedPublicServiceCommissionPlace_1.value : '';
-	const publicServiceCommissionPlace_1Image = selectedPublicServiceCommissionPlace_1 ? selectedPublicServiceCommissionPlace_1.parentNode.querySelector('img').src : '';
-
-	// Get the Public Service Commission Place 2 candidate
-	const selectedPublicServiceCommissionPlace_2 = document.querySelector('input[name="userPublicServiceCommission_Place_2"]:checked');
-	const publicServiceCommissionPlace_2Name = selectedPublicServiceCommissionPlace_2 ? selectedPublicServiceCommissionPlace_2.value : '';
-	const publicServiceCommissionPlace_2Image = selectedPublicServiceCommissionPlace_2 ? selectedPublicServiceCommissionPlace_2.parentNode.querySelector('img').src : '';
-
-	// Get the State Board of Education - Place 2 candidate
-	const selectedStateBoardofEdu_Place_2 = document.querySelector('input[name="userStateBoardofEducation_Place_2"]:checked');
-	const stateBoardofEdu_Place_2Name = selectedStateBoardofEdu_Place_2 ? selectedStateBoardofEdu_Place_2.value : '';
-	const stateBoardofEdu_Place_2Image = selectedStateBoardofEdu_Place_2 ? selectedStateBoardofEdu_Place_2.parentNode.querySelector('img').src : '';
-
-	// Get the State Board of Education - Place 4 candidate
-	const selectedStateBoardofEdu_Place_4 = document.querySelector('input[name="userStateBoardofEducation_Place_4"]:checked');
-	const stateBoardofEdu_Place_4Name = selectedStateBoardofEdu_Place_4 ? selectedStateBoardofEdu_Place_4.value : '';
-	const stateBoardofEdu_Place_4Image = selectedStateBoardofEdu_Place_4 ? selectedStateBoardofEdu_Place_4.parentNode.querySelector('img').src : '';
-
-	// Get the State Board of Education - Place 6 candidate
-	const selectedStateBoardofEdu_Place_6 = document.querySelector('input[name="userStateBoardofEducation_Place_6"]:checked');
-	const stateBoardofEdu_Place_6Name = selectedStateBoardofEdu_Place_6 ? selectedStateBoardofEdu_Place_6.value : '';
-	const stateBoardofEdu_Place_6Image = selectedStateBoardofEdu_Place_6 ? selectedStateBoardofEdu_Place_6.parentNode.querySelector('img').src : '';
-
-	// Get the State Board of Education - Place 8 candidate
-	const selectedStateBoardofEdu_Place_8 = document.querySelector('input[name="userStateBoardofEducation_Place_8"]:checked');
-	const stateBoardofEdu_Place_8Name = selectedStateBoardofEdu_Place_8 ? selectedStateBoardofEdu_Place_8.value : '';
-	const stateBoardofEdu_Place_8Image = selectedStateBoardofEdu_Place_8 ? selectedStateBoardofEdu_Place_8.parentNode.querySelector('img').src : '';
-
-	// Get the Supreme Court - Place 5 candidate
-	const selectedSupremeCourt_Place_5 = document.querySelector('input[name="userSupremeCourt_Place_5"]:checked');
-	const supremeCourt_Place_5Name = selectedSupremeCourt_Place_5 ? selectedSupremeCourt_Place_5.value : '';
-	const supremeCourt_Place_5Image = selectedSupremeCourt_Place_5 ? selectedSupremeCourt_Place_5.parentNode.querySelector('img').src : '';
-
-	// Get the Supreme Court - Place 6 candidate
-	const selectedSupremeCourt_Place_6 = document.querySelector('input[name="userSupremeCourt_Place_6"]:checked');
-	const supremeCourt_Place_6Name = selectedSupremeCourt_Place_6 ? selectedSupremeCourt_Place_6.value : '';
-	const supremeCourt_Place_6Image = selectedSupremeCourt_Place_6 ? selectedSupremeCourt_Place_6.parentNode.querySelector('img').src : '';
-
-	// Calculate the total number of selected candidates
-	const totalCandidates = (selectedPresident ? 1 : 0) + 
-		(selectedGovernor ? 1 : 0) + 
-		(selectedLieutenantGovernor ? 1 : 0) + 
-		(selectedAttorneyGeneral ? 1 : 0) + 
-		(selectedSecretaryofState ? 1 : 0) +
-		(selectedStateTreasurer ? 1 : 0) +
-		(selectedStateAuditor ? 1 : 0) + 
-		(selectedAgriculture ? 1 : 0) +
-		(selectedSenator ? 1 : 0) +
-		(selectedUS1stCongressionalDist ? 1 : 0) +
-		(selectedUS2ndCongressionalDist ? 1 : 0) +
-		(selectedUS3rdCongressionalDist ? 1 : 0) +
-		(selectedUS4thCongressionalDist ? 1 : 0) +
-		(selectedUS5thCongressionalDist ? 1 : 0) +
-		(selectedUS6thCongressionalDist ? 1 : 0) +
-		(selectedUS7thCongressionalDist ? 1 : 0) +
-		(selectedPublicServiceCommissionPlace_1 ? 1 : 0) +
-		(selectedPublicServiceCommissionPlace_2 ? 1 : 0) +
-		(selectedStateBoardofEdu_Place_2 ? 1 : 0) +
-		(selectedStateBoardofEdu_Place_4 ? 1 : 0) +
-		(selectedStateBoardofEdu_Place_6 ? 1 : 0) +
-		(selectedStateBoardofEdu_Place_8 ? 1 : 0) +
-		(selectedSupremeCourt_Place_5 ? 1 : 0) +
-		(selectedSupremeCourt_Place_6 ? 1 : 0) 
-							
-	;
-
-	// Calculate the total cost per candidate
-	const totalCostPerCandidate = totalCandidates > 0 ? 15 / totalCandidates : 0;
-
-	// Calculate total cost equal to the total cost per candidate times total number of candidates an iVoteBallot users must paid for our online voting services.
-	const totalCost = totalCandidates > 0 ? .625 * totalCandidates : 0;
-  
-	// Display the selected candidates in the shopping cart
-	const selectedCandidatesShoppingCart = document.getElementById('selectedCandidatesShoppingCart');
-	selectedCandidatesShoppingCart.innerHTML = `	
-
-	<p style=" font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: clamp(12px, 2vw, 16px); text-align: center; ">Selected Candidates:</p>
-
-	<ul style="list-style-type: none; padding-left: 0;">
-
-		<div class="flex_ShoppingCart_Containter" style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: stretch; width: 100%;">
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center; >
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px">
-					
-						<img src="${presidentImage}" alt="${presidentName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-				
-						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">Presidential:</span>
-						<span style=style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${presidentName}</span>
-
-					</div>
-
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-				
-						<img src="${governorImage}" alt="${governorName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-									
-						<span style="font-weight: bold; margin-left: 0px margin-top: 5px; display: block;">Governor:</span>
-						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${governorName}</span>
-
-					</div>
-
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${LieutenantGovernorImage}" alt="${LieutenantGovernorName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-
-						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">Lieutenant Governor:</span>
-						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${LieutenantGovernorName}</span>
-
-					</div>
-
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-					<img src="${AttorneyGeneralImage}" alt="${AttorneyGeneralName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-
-					<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">Attorney General:</span>
-					<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${AttorneyGeneralName}</span>
-
-					</div>
-
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${secretaryofStateImage}" alt="${secretaryofStateName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-
-						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">Secretary of State:</span>
-						<span style="font-style: italic; margin-left:0px; margin-top: 5px; display: block;">${secretaryofStateName}</span>
-
-					</div>
-
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-					<img src="${stateTreasurerImage}" alt="${stateTreasurerName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-					<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">State Treasurer:</span>
-					<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${stateTreasurerName}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-			
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${stateAuditorImage}" alt="${stateAuditorName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">State Auditor:</span>
-						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${stateAuditorName}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-				<div style="margin-right: 5px;">
-				
-					<img src="${agricultureImage}" alt="${agricultureName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-
-					<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">Agriculture:</span>
-					<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${agricultureName}</span>
-
-				</div>
-			
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${senatorImage}" alt="${senatorName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-
-						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">Senator:</span>
-						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${senatorName}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${us1stCongressionalDistImage}" alt="${us1stCongressionalDistName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-
-						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The United States 1st Congressional District:</span>
-						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${us1stCongressionalDistName}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${us2ndCongressionalDistImage}" alt="${us2ndCongressionalDistName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The United States 2nd Congressional District:</span>
-						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${us2ndCongressionalDistName}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${us3rdCongressionalDistImage}" alt="${us3rdCongressionalDistName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-						
-						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The United States 3rd Congressional District:</span>
-						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${us3rdCongressionalDistName}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-			
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${us4thCongressionalDistImage}" alt="${us4thCongressionalDistName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-
-						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The United States 4th Congressional District:</span>
-						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${us4thCongressionalDistName}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${us5thCongressionalDistImage}" alt="${us5thCongressionalDistName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-
-						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The United States 5th Congressional District:</span>
-						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${us5thCongressionalDistName}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${us6thCongressionalDistImage}" alt="${us6thCongressionalDistName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-
-						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The United States 6th Congressional District:</span>
-						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${us6thCongressionalDistName}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${us7thCongressionalDistImage}" alt="${us7thCongressionalDistName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-						
-						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The United States 7th Congressional District:</span>
-						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${us7thCongressionalDistName}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${publicServiceCommissionPlace_1Image}" alt="${publicServiceCommissionPlace_1Name}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-
-						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The Public Service Commission Place 1:</span>
-						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${publicServiceCommissionPlace_1Name}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${publicServiceCommissionPlace_2Image}" alt="${publicServiceCommissionPlace_2Name}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-
-						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The Public Service Commission Place 2:</span>
-						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${publicServiceCommissionPlace_2Name}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${stateBoardofEdu_Place_2Image}" alt="${stateBoardofEdu_Place_2Name}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-						
-						<span style="font-weight: bold; margin-left: 0px; display: block;">The State Board of Education - Place 2:</span>
-						<span style="font-style: italic; margin-left: 0px; display: block;">${stateBoardofEdu_Place_2Name}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${stateBoardofEdu_Place_4Image}" alt="${stateBoardofEdu_Place_4Name}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-
-						<span style="font-weight: bold; margin-left: 0px; display: block;">The State Board of Education - Place 4:</span>
-						<span style="font-style: italic; margin-left: 0px; display: block;">${stateBoardofEdu_Place_4Name}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${stateBoardofEdu_Place_6Image}" alt="${stateBoardofEdu_Place_6Name}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-
-						<span style="font-weight: bold; margin-left: 0px; display: block;">The State Board of Education - Place 6:</span>
-						<span style="font-style: italic; margin-left: 0px; display: block;">${stateBoardofEdu_Place_6Name}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${stateBoardofEdu_Place_8Image}" alt="${stateBoardofEdu_Place_8Name}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-
-						<span style="font-weight: bold; margin-left: 0px; display: block;">The State Board of Education - Place 8:</span>
-						<span style="font-style: italic; margin-left: 0px; display: block;">${stateBoardofEdu_Place_8Name}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-				<div style="margin-right: 5px;">
-				
-					<img src="${supremeCourt_Place_5Image}" alt="${supremeCourt_Place_5Name}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-
-					<span style="font-weight: bold; margin-left: 0px; display: block;">The Supreme Court - Place 5:</span>
-					<span style="font-style: italic; margin-left: 0px; display: block;">${supremeCourt_Place_5Name}</span>
-
-				</div>
-		
-				</li>
-
-			</div>
-
-			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
-
-				<li style="text-decoration: none; display: flex; align-items: center;">
-
-					<div style="margin-right: 5px;">
-					
-						<img src="${supremeCourt_Place_6Image}" alt="${supremeCourt_Place_6Name}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
-
-						<span style="font-weight: bold; margin-left: 0px; display: block;">The Supreme Court - Place 6:</span>
-						<span style="font-style: italic; margin-left: 0px; display: block;">${supremeCourt_Place_6Name}</span>
-
-					</div>
-		
-				</li>
-
-			</div>
-
-		</div>	
-
-	</ul>
-
-	<hr id="hr_Blue_line_02">	
-	  
-	<p style=" font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: clamp(12px, 2vw, 16px); text-align: center; " >Total Number of Candidates: ${totalCandidates}</p>
-	
-	<p style=" font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: clamp(12px, 2vw, 16px); text-align: center; " >Total Cost per Candidate: $${totalCostPerCandidate.toFixed(2)}</p>
-	
-	<p style=" font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: clamp(12px, 2vw, 16px); text-align: center; " >Total Cost: $${totalCost.toFixed(2)}</p>
-
-	<hr id="hr_Blue_line_02">
-
-	<br>
-
-	<ul id="shoppingCart"></ul>	
-
-	<div class="cart_Button">
-		<button id="emptyCart">Empty Cart</button>
-		<button id="checkOut">Check Out</button>
-		
-	</div>
-		
-		`;		 
-	 
-  }
-   
-  window.onload = function() {
-	displayShoppingCart();
-  };
 
 /*
 
@@ -1033,31 +362,34 @@ const selectedCandidates = {
 
 };
 
-
-
 function addToCart() {
-	const form = document.getElementById('alabamaSelected_Candidates2024_Form');
-	
-	const selectedCandidate = form.querySelector('input[type="radio"]:checked'); 
-	
-	if (!selectedCandidate) {
-	  alert("Please select a candidate before adding to the cart.");
-	  return;
-	}		  
-  
-	const category = selectedCandidate.getAttribute('data-category');
-	const candidateText = selectedCandidate.parentElement.textContent.trim();
-	const candidateImageSrc = selectedCandidate.parentElement.querySelector('img').src;	
-	
-  
-	const selectedCandidateData = selectedCandidates[category];
- 
-	if (selectedCandidateData !== null) {
-	  alert(`A candidate for ${category} is already selected. If you want to update your selected ${category}, go to your shopping cart and remove your selected ${category} than you are able select a new ${category}.`);
-	  return;
-	}
+    const form = document.getElementById('alabamaSelected_Candidates2024_Form');	
+    const selectedCandidate = form.querySelector('input[type="radio"]:checked'); 
 
-	// Confirmation before adding to cart
+    if (!selectedCandidate) {
+        alert("Please select a candidate before adding to the cart.");
+        return;
+    }		  
+  
+    const category = selectedCandidate.getAttribute('data-category');
+    const candidateText = selectedCandidate.parentElement.textContent.trim();
+    const candidateImageSrc = selectedCandidate.parentElement.querySelector('img').src;
+
+	console.log('Category:', category);
+	console.log('Candidate Name:', candidateText);
+	console.log('Candidate Image:', candidateImageSrc);
+
+    if (!selectedCandidates.hasOwnProperty(category)) {
+        console.error(`Category ${category} does not exist in selectedCandidates.`);
+        return;
+    }
+
+    if (selectedCandidates[category] !== null) {
+        alert(`A candidate for ${category} is already selected. If you want to update your selected ${category}, go to your shopping cart and remove your selected ${category} then you can select a new ${category}.`);
+        return;
+    }
+
+    // Confirmation before adding to cart
     const confirmed = confirm(`You are about to add ${candidateText} to your shopping cart.`);
     if (!confirmed) {
         // User cancelled, uncheck the selected radio button
@@ -1065,25 +397,46 @@ function addToCart() {
         return;
     }
 
-	/* Add the selected candidate to the shopping cart. */
-	selectedCandidates[category] = {
-	  candidateText: candidateText,
-	  candidateImageSrc: candidateImageSrc,
-	}; 
+    // Add the selected candidate to the shopping cart
+    selectedCandidates[category] = {
+        candidateText: candidateText,
+        candidateImageSrc: candidateImageSrc,
+    }; 
 
-	const cart = document.getElementById('shoppingCart');
-	const listItem = createListItem(candidateText, candidateImageSrc, category);
-	cart.appendChild(listItem);
-  	
-	// Reset the radio buttons for each category after adding to the cart	
-	const radioButtons = form.querySelectorAll(`input[type="radio"][data-category="${category}"]`);
-	for (const radioButton of radioButtons) {
-	  radioButton.checked = false;
-	}		
+	 // Send data to server
+	 fetch('/alabama_Candidates_2024_02', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            category: category,
+            candidateText: candidateText,
+            candidateImageSrc: candidateImageSrc
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        // Optionally, handle success response from server
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 
-	// Update the total number of selected candidates and the total cost
-	updateTotalSelectedCandidates();
-	updateTotalCostForAllCandidates();
+    const cart = document.getElementById('shoppingCart');
+    const listItem = createListItem(candidateText, candidateImageSrc, category);
+    cart.appendChild(listItem);
+
+    // Reset the radio buttons for each category after adding to the cart  
+    const radioButtons = form.querySelectorAll(`input[type="radio"][data-category="${category}"]`);
+    for (const radioButton of radioButtons) {
+        radioButton.checked = false;
+    }
+
+    // Update the total number of selected candidates and the total cost
+    updateTotalSelectedCandidates();
+    updateTotalCostForAllCandidates();
 
 }
 
@@ -1147,7 +500,7 @@ function createListItem(candidateText, candidateImageSrc, category) {
 	const trashOpenIcon = document.createElement('img');
 	trashOpenIcon.className = 'trash_Open_Icon';
 	trashOpenIcon.src = '../images/paid_Icon_Finder/2254914_bin_full_trash_dustbin_garbage_icon-3 32px.png';
-  
+
 	trashOpenIconLink.appendChild(trashOpenIcon);
 	trashOpenOverlay.appendChild(trashOpenIconLink);
 	trashContainer.appendChild(trashCloseIcon);
@@ -1268,14 +621,14 @@ function checkAllCategoriesSelected(e) {
 	  "State Board of Education - Place 8",
 	  "Supreme Court - Place 5",
 	  "Supreme Court - Place 6",
-	];
-  
+	];  
+
 	for (const category of categories) {
 	  if (!isCategorySelected(category)) {
 		alert(`Please select a candidate for the ${category} category.`);
 		return false;
 	  }
-	}
+	}	
 
 	const userFirstName = document.getElementById('firstName').value.trim();
 	const userMiddleName = document.getElementById('middleName').value.trim();
@@ -1288,12 +641,8 @@ function checkAllCategoriesSelected(e) {
 	const userStateSelection = document.getElementById('stateSelect').value.trim();
 	const userCountySelection = document.getElementById('countySelect').value.trim();
 	const userCitySelection = document.getElementById('citySelect').value.trim();
-	const userZipSelection = document.getElementById('zipSelect').value.trim();
-
-	const userPresident = checkAllCategoriesSelected(e);
-
-
-                    
+	const userZipSelection = document.getElementById('zipSelect').value.trim();	
+                  
 	const regExName = /^[A-Za-z\s]+$/;
 	const regExAddress = /^\d+\s[\d\w]+\s(.*)$/;
 	const regExUnitTypeNumber = /^[0-9a-zA-Z-]+$/;
@@ -1386,7 +735,7 @@ function checkAllCategoriesSelected(e) {
 		return false;  
 
 	}
-
+	
 	if (userUnitTypeNumber === '' || userUnitTypeNumber == null || userUnitTypeNumber.match(regExUnitTypeNumber))  {                                                               
 		document.getElementById('userUnitTypeNumberErrorMessage').textContent =  'Your address unit type number is a required field unless you own your home or other residential property which does not have an address unit type number.';
 
@@ -1473,28 +822,16 @@ function checkAllCategoriesSelected(e) {
 	
 		return false;  
 
-	} 	
-
-
-	function checkAllCategoriesSelected(e) {
-	// Your existing function code
+	} 		
 	
-	// Retrieve userPresident value and store it in the variable
-	userPresident = document.getElementById('president').value.trim();
-	}
-
-	
-  
-	
-
 	e.preventDefault();
 
-	form.addEventListener('submit', checkAllCategoriesSelected);
+	form.addEventListener('submit', checkAllCategoriesSelected, uncheckedCandidates);
 
 
 	return true;
 
-  }
+}
   
   function isCategorySelected(category) {
 	const selectedCandidate = selectedCandidates[category];
@@ -1505,8 +842,28 @@ function checkAllCategoriesSelected(e) {
   document.getElementById('checkoutButton').addEventListener('click', function() {
 	if (checkAllCategoriesSelected()) {
 	  // Proceed to checkout.
+	  submitForm();
+	  
 	}
-  });  
+  }); 
+
+  const checked = false;
+
+  function uncheckedCandidates() {
+
+	  if (checked) {
+
+		  const userPresident = document.querySelector("input[name='userPresident']:checked").value;
+		  
+		  checked = false;
+
+		  return;
+
+	  }
+
+	  checked = true;
+  }
+
 
 /* 
 	Sarai Hannah Ajai have written her JavaScript coded languages in order to define a hierarchical
@@ -3715,4 +3072,675 @@ const checkAllCategoriesSelected = (e) => {
 	return true; 	
 		
 }
+*/
+
+
+
+
+
+
+
+
+function printShoppingCartContent() {
+	
+	var printWindow = window.open('', '_blank');
+	var selectedCandidatesShoppingCart = document.getElementById('selectedCandidatesShoppingCart').innerHTML;	
+	
+	var htmlContent = '<html>' +
+		'<head>' +	
+			'<style>' +
+				'@font-face {' +
+				'	font-family: "Megrim-Regular";' +
+				'	src: url(../fonts/Source_Code_Pro/SourceCodePro-SemiBold.ttf) format("truetype");' +
+				' 	font-weight: normal;' +				
+				'}' +
+				'#header_Image_01 {' +
+				'	display: inline-block;' +										
+				'}' +
+				'#wrapImage {' +
+				'	display: flex;' +
+				'	justify-content: center;' +
+				'	align-items: center;' +
+				'}' +
+				'#imageTitle {' +
+				'   color: #0d41ff;' +
+				'   font-family: Megrim-Regular, Cambria, Cochin, Georgia, Times, serif;' +
+				'	font-size: clamp(16px, 2vw, 18px);' +
+				'	text-align: center;' +
+				'}' +
+				'#section_Title {' +
+				'   color: #c91818;' +
+				'   font-family: Megrim-Regular, Cambria, Cochin, Georgia, Times, serif;' +
+				'	font-size: clamp(14px, 2vw, 16px);' +
+				'	text-align: center;' +
+				'}' +
+				'#selectedCandidatesText {' +
+				'   color: #0d41ff;' +
+				'   font-family: Megrim-Regular, Cambria, Cochin, Georgia, Times, serif;' +
+				'	font-size: clamp(10px, 2vw, 12px);' +
+				'}' +
+			'</style>' +							
+		'</head>' +
+		'<body>' +	
+
+			'<div id="wrapImage">' +
+				'<img id="header_Image_01" src="../images/free_Canva_Created_Images/iVoteBallot Canva - Logo Dated 05-05-23 copy.png" alt="Image" width="100" height="100" />' +										
+			'</div>' +
+			'<div id="imageHeader">' +
+				'<p id="imageTitle">2024 Selected Candidates</p>' +
+			'</div>' +
+			'<p id="section_Title">Here are Your Federal and Alabama State Selected 2024 Candidates</p>' +
+			'<p id="selectedCandidatesText">' + selectedCandidatesShoppingCart + '</p>' +
+		'</body>' +
+		'</html>';	
+
+	printWindow.document.write(htmlContent);			
+	printWindow.document.close('');
+	printWindow.print();
+
+}
+
+/*
+function displayShoppingCart() {
+	// Get the selected Presidential candidate
+	const selectedPresident = document.querySelector('input[name="userPresident"]:checked');
+	const presidentName = selectedPresident ? selectedPresident.value : '';
+	const presidentImage = selectedPresident ? selectedPresident.parentNode.querySelector('img').src : '';
+  
+	// Get the selected Governor candidate
+	const selectedGovernor = document.querySelector('input[name="userGovernor"]:checked');
+	const governorName = selectedGovernor ? selectedGovernor.value : '';
+	const governorImage = selectedGovernor ? selectedGovernor.parentNode.querySelector('img').src : '';
+
+	// Get the selected Lieutentant Governor candidate
+	const selectedLieutenantGovernor = document.querySelector('input[name="userLieutenantGovernor"]:checked');
+	const LieutenantGovernorName = selectedLieutenantGovernor ? selectedLieutenantGovernor.value : '';
+	const LieutenantGovernorImage = selectedLieutenantGovernor ? selectedLieutenantGovernor.parentNode.querySelector('img').src : '';
+
+	// Get the selected Attorney General candidate
+	const selectedAttorneyGeneral = document.querySelector('input[name="userAttorneyGeneral"]:checked');
+	const AttorneyGeneralName = selectedAttorneyGeneral ? selectedAttorneyGeneral.value : '';
+	const AttorneyGeneralImage = selectedAttorneyGeneral ? selectedAttorneyGeneral.parentNode.querySelector('img').src : '';
+
+	// Get the selected Secretary of State candidate
+	const selectedSecretaryofState = document.querySelector('input[name="userSecretaryofState"]:checked');
+	const secretaryofStateName = selectedSecretaryofState ? selectedSecretaryofState.value : '';
+	const secretaryofStateImage = selectedSecretaryofState ? selectedSecretaryofState.parentNode.querySelector('img').src : '';
+
+	// Get the selected State Treasurer candidate
+	const selectedStateTreasurer = document.querySelector('input[name="userStateTreasurer"]:checked');
+	const stateTreasurerName = selectedStateTreasurer ? selectedStateTreasurer.value : '';
+	const stateTreasurerImage = selectedStateTreasurer ? selectedStateTreasurer.parentNode.querySelector('img').src : '';
+
+	// Get the selected State Auditor candidate
+	const selectedStateAuditor = document.querySelector('input[name="userStateAuditor"]:checked');
+	const stateAuditorName = selectedStateAuditor ? selectedStateAuditor.value : '';
+	const stateAuditorImage = selectedStateAuditor ? selectedStateAuditor.parentNode.querySelector('img').src : '';
+
+	// Get the selected State Argriculture candidate
+	const selectedAgriculture = document.querySelector('input[name="userAgriculture"]:checked');
+	const agricultureName = selectedAgriculture ? selectedAgriculture.value : '';
+	const agricultureImage = selectedAgriculture ? selectedAgriculture.parentNode.querySelector('img').src : '';
+
+	// Get the selected State Senator candidate
+	const selectedSenator = document.querySelector('input[name="userSenator"]:checked');
+	const senatorName = selectedSenator ? selectedSenator.value : '';
+	const senatorImage = selectedSenator ? selectedSenator.parentNode.querySelector('img').src : '';
+
+	// Get the United States 1st Congressional District candidate
+	const selectedUS1stCongressionalDist = document.querySelector('input[name="userUS1stCongressionalDist"]:checked');
+	const us1stCongressionalDistName = selectedUS1stCongressionalDist ? selectedUS1stCongressionalDist.value : '';
+	const us1stCongressionalDistImage = selectedUS1stCongressionalDist ? selectedUS1stCongressionalDist.parentNode.querySelector('img').src : '';
+
+	// Get the United States 2nd Congressional District candidate
+	const selectedUS2ndCongressionalDist = document.querySelector('input[name="userUS2ndCongressionalDist"]:checked');
+	const us2ndCongressionalDistName = selectedUS2ndCongressionalDist ? selectedUS2ndCongressionalDist.value : '';
+	const us2ndCongressionalDistImage = selectedUS2ndCongressionalDist ? selectedUS2ndCongressionalDist.parentNode.querySelector('img').src : '';
+
+	// Get the United States 3rd Congressional District candidate
+	const selectedUS3rdCongressionalDist = document.querySelector('input[name="userUS3rdCongressionalDist"]:checked');
+	const us3rdCongressionalDistName = selectedUS3rdCongressionalDist ? selectedUS3rdCongressionalDist.value : '';
+	const us3rdCongressionalDistImage = selectedUS3rdCongressionalDist ? selectedUS3rdCongressionalDist.parentNode.querySelector('img').src : '';
+
+	// Get the United States 4th Congressional District candidate
+	const selectedUS4thCongressionalDist = document.querySelector('input[name="userUS4thCongressionalDist"]:checked');
+	const us4thCongressionalDistName = selectedUS4thCongressionalDist ? selectedUS4thCongressionalDist.value : '';
+	const us4thCongressionalDistImage = selectedUS4thCongressionalDist ? selectedUS4thCongressionalDist.parentNode.querySelector('img').src : '';
+
+	// Get the United States 5th Congressional District candidate
+	const selectedUS5thCongressionalDist = document.querySelector('input[name="userUS5thCongressionalDist"]:checked');
+	const us5thCongressionalDistName = selectedUS5thCongressionalDist ? selectedUS5thCongressionalDist.value : '';
+	const us5thCongressionalDistImage = selectedUS5thCongressionalDist ? selectedUS5thCongressionalDist.parentNode.querySelector('img').src : '';
+
+	// Get the United States 6th Congressional District candidate
+	const selectedUS6thCongressionalDist = document.querySelector('input[name="userUS6thCongressionalDist"]:checked');
+	const us6thCongressionalDistName = selectedUS6thCongressionalDist ? selectedUS6thCongressionalDist.value : '';
+	const us6thCongressionalDistImage = selectedUS6thCongressionalDist ? selectedUS6thCongressionalDist.parentNode.querySelector('img').src : '';
+
+	// Get the United States 7th Congressional District candidate
+	const selectedUS7thCongressionalDist = document.querySelector('input[name="userUS7thCongressionalDist"]:checked');
+	const us7thCongressionalDistName = selectedUS7thCongressionalDist ? selectedUS7thCongressionalDist.value : '';
+	const us7thCongressionalDistImage = selectedUS7thCongressionalDist ? selectedUS7thCongressionalDist.parentNode.querySelector('img').src : '';
+
+	// Get the Public Service Commission Place 1 candidate
+	const selectedPublicServiceCommissionPlace_1 = document.querySelector('input[name="userPublicServiceCommission_Place_1"]:checked');
+	const publicServiceCommissionPlace_1Name = selectedPublicServiceCommissionPlace_1 ? selectedPublicServiceCommissionPlace_1.value : '';
+	const publicServiceCommissionPlace_1Image = selectedPublicServiceCommissionPlace_1 ? selectedPublicServiceCommissionPlace_1.parentNode.querySelector('img').src : '';
+
+	// Get the Public Service Commission Place 2 candidate
+	const selectedPublicServiceCommissionPlace_2 = document.querySelector('input[name="userPublicServiceCommission_Place_2"]:checked');
+	const publicServiceCommissionPlace_2Name = selectedPublicServiceCommissionPlace_2 ? selectedPublicServiceCommissionPlace_2.value : '';
+	const publicServiceCommissionPlace_2Image = selectedPublicServiceCommissionPlace_2 ? selectedPublicServiceCommissionPlace_2.parentNode.querySelector('img').src : '';
+
+	// Get the State Board of Education - Place 2 candidate
+	const selectedStateBoardofEdu_Place_2 = document.querySelector('input[name="userStateBoardofEducation_Place_2"]:checked');
+	const stateBoardofEdu_Place_2Name = selectedStateBoardofEdu_Place_2 ? selectedStateBoardofEdu_Place_2.value : '';
+	const stateBoardofEdu_Place_2Image = selectedStateBoardofEdu_Place_2 ? selectedStateBoardofEdu_Place_2.parentNode.querySelector('img').src : '';
+
+	// Get the State Board of Education - Place 4 candidate
+	const selectedStateBoardofEdu_Place_4 = document.querySelector('input[name="userStateBoardofEducation_Place_4"]:checked');
+	const stateBoardofEdu_Place_4Name = selectedStateBoardofEdu_Place_4 ? selectedStateBoardofEdu_Place_4.value : '';
+	const stateBoardofEdu_Place_4Image = selectedStateBoardofEdu_Place_4 ? selectedStateBoardofEdu_Place_4.parentNode.querySelector('img').src : '';
+
+	// Get the State Board of Education - Place 6 candidate
+	const selectedStateBoardofEdu_Place_6 = document.querySelector('input[name="userStateBoardofEducation_Place_6"]:checked');
+	const stateBoardofEdu_Place_6Name = selectedStateBoardofEdu_Place_6 ? selectedStateBoardofEdu_Place_6.value : '';
+	const stateBoardofEdu_Place_6Image = selectedStateBoardofEdu_Place_6 ? selectedStateBoardofEdu_Place_6.parentNode.querySelector('img').src : '';
+
+	// Get the State Board of Education - Place 8 candidate
+	const selectedStateBoardofEdu_Place_8 = document.querySelector('input[name="userStateBoardofEducation_Place_8"]:checked');
+	const stateBoardofEdu_Place_8Name = selectedStateBoardofEdu_Place_8 ? selectedStateBoardofEdu_Place_8.value : '';
+	const stateBoardofEdu_Place_8Image = selectedStateBoardofEdu_Place_8 ? selectedStateBoardofEdu_Place_8.parentNode.querySelector('img').src : '';
+
+	// Get the Supreme Court - Place 5 candidate
+	const selectedSupremeCourt_Place_5 = document.querySelector('input[name="userSupremeCourt_Place_5"]:checked');
+	const supremeCourt_Place_5Name = selectedSupremeCourt_Place_5 ? selectedSupremeCourt_Place_5.value : '';
+	const supremeCourt_Place_5Image = selectedSupremeCourt_Place_5 ? selectedSupremeCourt_Place_5.parentNode.querySelector('img').src : '';
+
+	// Get the Supreme Court - Place 6 candidate
+	const selectedSupremeCourt_Place_6 = document.querySelector('input[name="userSupremeCourt_Place_6"]:checked');
+	const supremeCourt_Place_6Name = selectedSupremeCourt_Place_6 ? selectedSupremeCourt_Place_6.value : '';
+	const supremeCourt_Place_6Image = selectedSupremeCourt_Place_6 ? selectedSupremeCourt_Place_6.parentNode.querySelector('img').src : '';
+
+	// Calculate the total number of selected candidates
+	const totalCandidates = (selectedPresident ? 1 : 0) + 
+		(selectedGovernor ? 1 : 0) + 
+		(selectedLieutenantGovernor ? 1 : 0) + 
+		(selectedAttorneyGeneral ? 1 : 0) + 
+		(selectedSecretaryofState ? 1 : 0) +
+		(selectedStateTreasurer ? 1 : 0) +
+		(selectedStateAuditor ? 1 : 0) + 
+		(selectedAgriculture ? 1 : 0) +
+		(selectedSenator ? 1 : 0) +
+		(selectedUS1stCongressionalDist ? 1 : 0) +
+		(selectedUS2ndCongressionalDist ? 1 : 0) +
+		(selectedUS3rdCongressionalDist ? 1 : 0) +
+		(selectedUS4thCongressionalDist ? 1 : 0) +
+		(selectedUS5thCongressionalDist ? 1 : 0) +
+		(selectedUS6thCongressionalDist ? 1 : 0) +
+		(selectedUS7thCongressionalDist ? 1 : 0) +
+		(selectedPublicServiceCommissionPlace_1 ? 1 : 0) +
+		(selectedPublicServiceCommissionPlace_2 ? 1 : 0) +
+		(selectedStateBoardofEdu_Place_2 ? 1 : 0) +
+		(selectedStateBoardofEdu_Place_4 ? 1 : 0) +
+		(selectedStateBoardofEdu_Place_6 ? 1 : 0) +
+		(selectedStateBoardofEdu_Place_8 ? 1 : 0) +
+		(selectedSupremeCourt_Place_5 ? 1 : 0) +
+		(selectedSupremeCourt_Place_6 ? 1 : 0) 
+							
+	;
+
+	// Calculate the total cost per candidate
+	const totalCostPerCandidate = totalCandidates > 0 ? 15 / totalCandidates : 0;
+
+	// Calculate total cost equal to the total cost per candidate times total number of candidates an iVoteBallot users must paid for our online voting services.
+	const totalCost = totalCandidates > 0 ? .625 * totalCandidates : 0;
+  
+	// Display the selected candidates in the shopping cart
+	const selectedCandidatesShoppingCart = document.getElementById('selectedCandidatesShoppingCart');
+	selectedCandidatesShoppingCart.innerHTML = `	
+
+	<p style=" font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: clamp(12px, 2vw, 16px); text-align: center; ">Selected Candidates:</p>
+
+	<ul style="list-style-type: none; padding-left: 0;">
+
+		<div class="flex_ShoppingCart_Containter" style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: stretch; width: 100%;">
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center; >
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px">
+					
+						<img src="${presidentImage}" alt="${presidentName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+				
+						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">Presidential:</span>
+						<span style=style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${presidentName}</span>
+
+					</div>
+
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+				
+						<img src="${governorImage}" alt="${governorName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+									
+						<span style="font-weight: bold; margin-left: 0px margin-top: 5px; display: block;">Governor:</span>
+						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${governorName}</span>
+
+					</div>
+
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${LieutenantGovernorImage}" alt="${LieutenantGovernorName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+
+						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">Lieutenant Governor:</span>
+						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${LieutenantGovernorName}</span>
+
+					</div>
+
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+					<img src="${AttorneyGeneralImage}" alt="${AttorneyGeneralName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+
+					<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">Attorney General:</span>
+					<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${AttorneyGeneralName}</span>
+
+					</div>
+
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${secretaryofStateImage}" alt="${secretaryofStateName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+
+						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">Secretary of State:</span>
+						<span style="font-style: italic; margin-left:0px; margin-top: 5px; display: block;">${secretaryofStateName}</span>
+
+					</div>
+
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+					<img src="${stateTreasurerImage}" alt="${stateTreasurerName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+					<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">State Treasurer:</span>
+					<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${stateTreasurerName}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+			
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${stateAuditorImage}" alt="${stateAuditorName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">State Auditor:</span>
+						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${stateAuditorName}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+				<div style="margin-right: 5px;">
+				
+					<img src="${agricultureImage}" alt="${agricultureName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+
+					<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">Agriculture:</span>
+					<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${agricultureName}</span>
+
+				</div>
+			
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${senatorImage}" alt="${senatorName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+
+						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">Senator:</span>
+						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${senatorName}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${us1stCongressionalDistImage}" alt="${us1stCongressionalDistName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+
+						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The United States 1st Congressional District:</span>
+						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${us1stCongressionalDistName}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${us2ndCongressionalDistImage}" alt="${us2ndCongressionalDistName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The United States 2nd Congressional District:</span>
+						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${us2ndCongressionalDistName}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${us3rdCongressionalDistImage}" alt="${us3rdCongressionalDistName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+						
+						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The United States 3rd Congressional District:</span>
+						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${us3rdCongressionalDistName}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+			
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${us4thCongressionalDistImage}" alt="${us4thCongressionalDistName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+
+						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The United States 4th Congressional District:</span>
+						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${us4thCongressionalDistName}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${us5thCongressionalDistImage}" alt="${us5thCongressionalDistName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+
+						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The United States 5th Congressional District:</span>
+						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${us5thCongressionalDistName}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${us6thCongressionalDistImage}" alt="${us6thCongressionalDistName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+
+						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The United States 6th Congressional District:</span>
+						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${us6thCongressionalDistName}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${us7thCongressionalDistImage}" alt="${us7thCongressionalDistName}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+						
+						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The United States 7th Congressional District:</span>
+						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${us7thCongressionalDistName}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${publicServiceCommissionPlace_1Image}" alt="${publicServiceCommissionPlace_1Name}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+
+						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The Public Service Commission Place 1:</span>
+						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${publicServiceCommissionPlace_1Name}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${publicServiceCommissionPlace_2Image}" alt="${publicServiceCommissionPlace_2Name}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+
+						<span style="font-weight: bold; margin-left: 0px; margin-top: 5px; display: block;">The Public Service Commission Place 2:</span>
+						<span style="font-style: italic; margin-left: 0px; margin-top: 5px; display: block;">${publicServiceCommissionPlace_2Name}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${stateBoardofEdu_Place_2Image}" alt="${stateBoardofEdu_Place_2Name}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+						
+						<span style="font-weight: bold; margin-left: 0px; display: block;">The State Board of Education - Place 2:</span>
+						<span style="font-style: italic; margin-left: 0px; display: block;">${stateBoardofEdu_Place_2Name}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${stateBoardofEdu_Place_4Image}" alt="${stateBoardofEdu_Place_4Name}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+
+						<span style="font-weight: bold; margin-left: 0px; display: block;">The State Board of Education - Place 4:</span>
+						<span style="font-style: italic; margin-left: 0px; display: block;">${stateBoardofEdu_Place_4Name}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${stateBoardofEdu_Place_6Image}" alt="${stateBoardofEdu_Place_6Name}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+
+						<span style="font-weight: bold; margin-left: 0px; display: block;">The State Board of Education - Place 6:</span>
+						<span style="font-style: italic; margin-left: 0px; display: block;">${stateBoardofEdu_Place_6Name}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${stateBoardofEdu_Place_8Image}" alt="${stateBoardofEdu_Place_8Name}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+
+						<span style="font-weight: bold; margin-left: 0px; display: block;">The State Board of Education - Place 8:</span>
+						<span style="font-style: italic; margin-left: 0px; display: block;">${stateBoardofEdu_Place_8Name}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+				<div style="margin-right: 5px;">
+				
+					<img src="${supremeCourt_Place_5Image}" alt="${supremeCourt_Place_5Name}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+
+					<span style="font-weight: bold; margin-left: 0px; display: block;">The Supreme Court - Place 5:</span>
+					<span style="font-style: italic; margin-left: 0px; display: block;">${supremeCourt_Place_5Name}</span>
+
+				</div>
+		
+				</li>
+
+			</div>
+
+			<div style="display: flex; flex: 1 0 calc(20%); background-color: rgb(255, 255, 255); margin: 10px; text-align: center; line-height: 20px; justify-content: center;>
+
+				<li style="text-decoration: none; display: flex; align-items: center;">
+
+					<div style="margin-right: 5px;">
+					
+						<img src="${supremeCourt_Place_6Image}" alt="${supremeCourt_Place_6Name}" style="width: 75px; height: 75px; margin-bottom: 5px;" />
+
+						<span style="font-weight: bold; margin-left: 0px; display: block;">The Supreme Court - Place 6:</span>
+						<span style="font-style: italic; margin-left: 0px; display: block;">${supremeCourt_Place_6Name}</span>
+
+					</div>
+		
+				</li>
+
+			</div>
+
+		</div>	
+
+	</ul>
+
+	<hr id="hr_Blue_line_02">	
+	  
+	<p style=" font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: clamp(12px, 2vw, 16px); text-align: center; " >Total Number of Candidates: ${totalCandidates}</p>
+	
+	<p style=" font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: clamp(12px, 2vw, 16px); text-align: center; " >Total Cost per Candidate: $${totalCostPerCandidate.toFixed(2)}</p>
+	
+	<p style=" font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: clamp(12px, 2vw, 16px); text-align: center; " >Total Cost: $${totalCost.toFixed(2)}</p>
+
+	<hr id="hr_Blue_line_02">
+
+	<br>
+
+	<ul id="shoppingCart"></ul>	
+
+	<div class="cart_Button">
+		<button id="emptyCart">Empty Cart</button>
+		<button id="checkOut">Check Out</button>
+		
+	</div>
+		
+		`;		 
+	 
+  }
+   
+  window.onload = function() {
+	displayShoppingCart();
+  };
+
 */
