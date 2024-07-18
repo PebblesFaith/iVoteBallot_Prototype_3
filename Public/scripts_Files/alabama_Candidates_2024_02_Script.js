@@ -17,7 +17,6 @@ toggleMenu.forEach(function (items) {
   });
 });
 
-
 function displaySelections() {
 	const alabamaUserSelections_Candidates2024 = document.getElementById('alabamaSelected_Candidates2024_Form');
 	const userSelected_President = alabamaUserSelections_Candidates2024.elements['userPresident'].value;
@@ -219,7 +218,6 @@ const alabamaSelectedCandidates2024Form = (e) => {
 
 */
 
-
 // Add event listener for the submit button
 const submitButton = document.getElementById('submitButton');
 submitButton.addEventListener('click', userCandidatesVerification_2024);	
@@ -404,12 +402,14 @@ function addToCart() {
     }; 
 
 	 // Send data to server
+	
 	 fetch('/alabama_Candidates_2024_02', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+			
             category: category,
             candidateText: candidateText,
             candidateImageSrc: candidateImageSrc
@@ -417,13 +417,16 @@ function addToCart() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Success:', data);
+        console.log('Success Message:', data);
         // Optionally, handle success response from server
+		// Mark category as submitted.
+		
+		selectedCandidates.submitted[category] = true; 
     })
     .catch((error) => {
-        console.error('Error:', error);
+        console.error('Error Message:', error);
     });
-
+	
     const cart = document.getElementById('shoppingCart');
     const listItem = createListItem(candidateText, candidateImageSrc, category);
     cart.appendChild(listItem);
@@ -591,6 +594,26 @@ function removeFromCart(button) {
 	  // Update the total number of selected candidates and the total cost
 	  updateTotalSelectedCandidates();
 	  updateTotalCostForAllCandidates();
+
+	// Send delete request to server
+	fetch('/alabama_Candidates_2024_02', {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			category: categoryToRemove,
+		})
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log('Success:', data);
+		// Optionally, handle success response from server
+	})
+	.catch((error) => {
+		console.error('Error:', error);
+	});
+
 	}
 
 }
@@ -826,8 +849,7 @@ function checkAllCategoriesSelected(e) {
 	
 	e.preventDefault();
 
-	form.addEventListener('submit', checkAllCategoriesSelected, uncheckedCandidates);
-
+	form.addEventListener('submit', checkAllCategoriesSelected);
 
 	return true;
 
@@ -846,24 +868,6 @@ function checkAllCategoriesSelected(e) {
 	  
 	}
   }); 
-
-  const checked = false;
-
-  function uncheckedCandidates() {
-
-	  if (checked) {
-
-		  const userPresident = document.querySelector("input[name='userPresident']:checked").value;
-		  
-		  checked = false;
-
-		  return;
-
-	  }
-
-	  checked = true;
-  }
-
 
 /* 
 	Sarai Hannah Ajai have written her JavaScript coded languages in order to define a hierarchical
