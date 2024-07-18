@@ -385,6 +385,9 @@ const db1_HRM_EmployeesRegistration = new sqlite3.Database('hrm_Employees_Regist
 	}
 });
 
+
+let db2 = new sqlite3.Database('mydatabase.db');
+
 /*
 	The given JavaScript codes language creates a SQLite3 database table named 
 	"alabamaDMV_Commission_01",	if it does not already exist. The "alabamaDMV_Commission_01" 
@@ -554,7 +557,7 @@ db1_AlabamaUsersPersonalDataInformation.serialize(() => {
             userStateSelection VARCHAR (100) NOT NULL,
             userCountySelection VARCHAR (100) NOT NULL,
             userCitySelection VARCHAR (100) NOT NULL,
-            userZipSelection VARCHAR (25) NOT NULL           
+            userZipSelection VARCHAR (25) NOT NULL          
 		
             
 		)`), (err) => {
@@ -572,11 +575,11 @@ db1_AlabamaUsersSelectedCandidates.serialize(() => {
 
 		CREATE TABLE IF NOT EXISTS alabamaUsers_SelectedCandidates_IVoteBallot_Purchases (
 			uniqueId TEXT DEFAULT (lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6))) || '-6' || substr(lower(hex(randomblob(2))), 2) || lower(hex(randomblob(6))) ), 
-			Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 
-			userId TEXT,					
-			userPresident TEXT
-			
-		
+			Date DATETIME NOT NULL DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')), 	
+			userId TEXT,
+			category TEXT,
+            candidateText TEXT,
+            candidateImageSrc TEXT		
 			
 		)`), (err) => {
 
@@ -621,6 +624,20 @@ db1_HRM_EmployeesRegistration.serialize(() => {
 		}
 	};
 });
+
+
+
+db2.serialize(() => {
+	db2.run(`CREATE TABLE IF NOT EXISTS electionResults (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		userId TEXT,
+		president TEXT,
+   		governor TEXT
+	)
+`);
+});
+
+
 
 // Set the timeout duration in milliseconds (e.g., 30 minutes)
 const timeoutDuration = 60000; // 1 minutes
@@ -4894,7 +4911,8 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 		const userCountySelection = req.body.userCountySelection;
 		const userCitySelection = req.body.userCitySelection;
 		const userZipSelection = req.body.userZipSelection;
-		const userPresident = req.body.userPresident;
+		
+		const { category, candidateText, candidateImageSrc } = req.body;
 		
 		console.log('Received form data: User Checkout');
 
@@ -4909,7 +4927,7 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 		console.log('The user\'s county selection is: ' + userCountySelection + '.');
 		console.log('The user\'s city selection is: ' + userCitySelection + '.');	
 		console.log('The user\'s zip code selection is: ' + userZipSelection + '.');
-		console.log('The user\'s president is: ' + userPresident + '.');
+		
 
 		const newUser = {		
 			
@@ -4925,8 +4943,7 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 			userStateSelection,
 			userCountySelection,
 			userCitySelection,
-			userZipSelection,
-			userPresident,				
+			userZipSelection,						
 			
 		};
 		
@@ -4961,65 +4978,17 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 				
 				res.redirect('/alabama_Candidates_2024_02');
 
-			}
-
-			
-
-			
+			}			
 
 			db1_AlabamaUsersSelectedCandidates.run(
-				`INSERT INTO alabamaUsers_SelectedCandidates_IVoteBallot_Purchases (
-
-					userId, userPresident
+				`INSERT INTO alabamaUsers_SelectedCandidates_IVoteBallot_Purchases (userId, category, candidateText, candidateImageSrc) VALUES (?, ?, ?, ?)`,
+				[userId, category, candidateText, candidateImageSrc],
 				
-				) VALUES (?,?)`,
-
-				[
-					newUser.userId, newUser.userPresident
-				],
-			)
-
-
-
-
-
-
-/*
-			const userId = this.lastID;
-			const categories = [
-				"userPresident", "Governor", "LieutenantGovernor", "AttorneyGeneral", 
-				"SecretaryOfState", "StateTreasurer", "StateAuditor", "Agriculture", 
-				"Senator", "US1stCongressionalDistrict", "US2ndCongressionalDistrict", 
-				"US3rdCongressionalDistrict", "US4thCongressionalDistrict", 
-				"US5thCongressionalDistrict", "US6thCongressionalDistrict", 
-				"US7thCongressionalDistrict", "PublicServiceCommissionPlace1", 
-				"PublicServiceCommissionPlace2", "StateBoardOfEducationPlace2", 
-				"StateBoardOfEducationPlace4", "StateBoardOfEducationPlace6", 
-				"StateBoardOfEducationPlace8", "SupremeCourtPlace5", 
-				"SupremeCourtPlace6"
-			];
-	
-			const insertCandidatesSql = `
-				INSERT INTO SelectedCandidates (userId, ${categories.join(', ')})
-				VALUES (${Array(categories.length + 1).fill('?').join(', ')})
-			`;
-	
-			db1_AlabamaUsersSelectedCandidates.run(insertCandidatesSql, [
-				userId,
-				...categories.map(category => selectedCandidates[category]?.candidateText || null)
-			], 
-
-
-*/
-
-/*
-
-
-				function(err) {
+				(err) => {			
 
 					if (err) {
 						console.error(err);
-						req.flash('error', 'An syntax error has occurred when you have entered your data information into the input field that is link to our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
+						//req.flash('error', 'An syntax error has occurred when you have entered your data information into the input field that is link to our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
 						console.log('An syntax error has occurred when the user have entered his/her data information into the input field that is link our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
 						res.render('535');
 		
@@ -5027,16 +4996,13 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 						
 						console.log('db1_AlabamaUsersSelectedCandidate is about to run.');
 						console.log('The user data information typed into the \'alabama_Candidates_2024_02\' input fields have been successfully parsed into the \'alabama_Candidates_2024_02\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
-						req.flash('success', 'The Human Resources Manager have successfully registered your employee data information onto the db1_AlabamaUsersSelectedCandidate database, and you can now sign up to create your iVoteBallot\'s employment job orders account.');
+						//req.flash('success', 'The Human Resources Manager have successfully registered your employee data information onto the db1_AlabamaUsersSelectedCandidate database, and you can now sign up to create your iVoteBallot\'s employment job orders account.');
 						
-						res.redirect('/alabama_Candidates_2024_02');
-		
+						res.render('/alabama_Candidates_2024_02');
+					
 					}
 
-			});
-
-			
-*/
+				});		
 
 		});		
 			
@@ -5184,3 +5150,39 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
     }
 });
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Endpoint to save data
+iVoteBallotApp.post('/saveData', (req, res) => {
+	const { president, governor } = req.body;
+
+    // Insert data into SQLite database
+    db2.run(`INSERT INTO electionResults (president, governor) VALUES (?, ?)`, [president, governor], function(err) {
+        if (err) {
+            console.error(err.message);
+            res.status(500).json({ error: 'Failed to save data' });
+        } else {
+            console.log(`Row inserted with ID: ${this.lastID}`);
+            res.json({ success: true });
+        }
+    });
+});
