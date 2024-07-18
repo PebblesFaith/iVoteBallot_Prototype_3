@@ -557,8 +557,7 @@ db1_AlabamaUsersPersonalDataInformation.serialize(() => {
             userStateSelection VARCHAR (100) NOT NULL,
             userCountySelection VARCHAR (100) NOT NULL,
             userCitySelection VARCHAR (100) NOT NULL,
-            userZipSelection VARCHAR (25) NOT NULL          
-		
+            userZipSelection VARCHAR (25) NOT NULL    
             
 		)`), (err) => {
 
@@ -579,7 +578,7 @@ db1_AlabamaUsersSelectedCandidates.serialize(() => {
 			userId TEXT,
 			category TEXT,
             candidateText TEXT,
-            candidateImageSrc TEXT		
+            candidateImageSrc TEXT
 			
 		)`), (err) => {
 
@@ -590,7 +589,7 @@ db1_AlabamaUsersSelectedCandidates.serialize(() => {
 				}
 			};
 		});
-		
+						
 db1_HRM_EmployeesRegistration.serialize(() => {
 	db1_HRM_EmployeesRegistration.run(`CREATE TABLE IF NOT EXISTS hrm_Employees_Registration_01 (
 
@@ -625,8 +624,6 @@ db1_HRM_EmployeesRegistration.serialize(() => {
 	};
 });
 
-
-
 db2.serialize(() => {
 	db2.run(`CREATE TABLE IF NOT EXISTS electionResults (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -636,8 +633,6 @@ db2.serialize(() => {
 	)
 `);
 });
-
-
 
 // Set the timeout duration in milliseconds (e.g., 30 minutes)
 const timeoutDuration = 60000; // 1 minutes
@@ -4505,8 +4500,6 @@ hrmApp.post('/hrm_Employees_Registration_01',
 					res.redirect('/hrm_SignUp_01');
 
 				}	
-				
-				
 
 				const transporter = nodemailer.createTransport({
 					host: 'smtp.ionos.com',
@@ -4926,8 +4919,7 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 		console.log('The user\'s state selection is: ' + userStateSelection + '.');
 		console.log('The user\'s county selection is: ' + userCountySelection + '.');
 		console.log('The user\'s city selection is: ' + userCitySelection + '.');	
-		console.log('The user\'s zip code selection is: ' + userZipSelection + '.');
-		
+		console.log('The user\'s zip code selection is: ' + userZipSelection + '.');		
 
 		const newUser = {		
 			
@@ -4978,7 +4970,19 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 				
 				res.redirect('/alabama_Candidates_2024_02');
 
-			}			
+			}
+			
+			// Check if the user has already submitted a vote for this category
+			
+			const alreadySubmitted =  db1_AlabamaUsersSelectedCandidates.get(
+				`SELECT * FROM alabamaUsers_SelectedCandidates_IVoteBallot_Purchases WHERE userId = ? AND category = ?`,
+				[userId, category]
+			);
+
+			if (alreadySubmitted) {
+				//return res.status(400).json({ error: 'You have already submitted a vote for this category.' });
+				req.flash('error', 'You have already submitted, your 2024 iVoteBallot vote.');
+			}		
 
 			db1_AlabamaUsersSelectedCandidates.run(
 				`INSERT INTO alabamaUsers_SelectedCandidates_IVoteBallot_Purchases (userId, category, candidateText, candidateImageSrc) VALUES (?, ?, ?, ?)`,
@@ -5009,6 +5013,24 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 	}
 			
 );
+
+iVoteBallotApp.delete('/alabama_Candidates_2024_02', checkMiddlewareAuthentication, async (req, res) => {
+    const userId = req.user.id;
+    const { category } = req.body;
+
+    db1_AlabamaUsersSelectedCandidates.run(
+        `DELETE FROM alabamaUsers_SelectedCandidates_IVoteBallot_Purchases WHERE userId = ? AND category = ?`,
+        [userId, category],
+        (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: 'Failed to remove the candidate from the database.' });
+            }
+
+            res.json({ success: true, message: `Candidate for category ${category} removed successfully.` });
+        }
+    );
+});
 
 
 /*
