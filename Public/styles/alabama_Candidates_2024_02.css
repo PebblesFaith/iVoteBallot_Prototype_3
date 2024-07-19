@@ -487,7 +487,7 @@ p {
     align-content: center;    
     height: 40px;
     width: 100%;
-    background-color: rgb(201, 24, 24);
+    background-color: rgb(13, 65, 255);
     font-family: 'Megrim-Regular', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: rgb(255, 255, 255);
     font-size: clamp(12px, 2vw, 16px);
@@ -5863,10 +5863,23 @@ hr.hr_White_line_03 {
 	color: rgb(201, 24, 24);  
 	justify-content: center;  
 	border: none;  
-    
-    
-   
 
+}
 
+.alert-success {
+
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    font-size: clamp(16px, 2vw, 25px); 
+    color: rgb(165, 163, 163);
+
+}
+
+.alert-danger {
+
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    font-size: clamp(16px, 2vw, 25px); 
+    color: rgb(165, 163, 163);
 
 }
