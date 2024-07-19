@@ -4938,7 +4938,7 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 			userZipSelection,						
 			
 		};
-		
+				
 		console.log('New User\'s iVoteBallot Personal Data:', newUser);		
 				
 		await db1_AlabamaUsersPersonalDataInformation.run( 
@@ -4958,7 +4958,7 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 				
 			if (err) {
 				console.error(err);
-				req.flash('error', 'An syntax error has occurred when you have entered your data information into the input field that is link to our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
+				req.flash('error', 'An error have occurred during your iVoteBallot vote submission.');
 				console.log('An syntax error has occurred when the user have entered his/her data information into the input field that is link our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
 				res.render('535');
 
@@ -4966,7 +4966,7 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 				
 				console.log('db1_AlabamaUsersPersonalDataInformation is about to run.');
 				console.log('The user data information typed into the \'alabama_Candidates_2024_02\' input fields have been successfully parsed into the \'alabama_Candidates_2024_02\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
-				req.flash('success', 'The Human Resources Manager have successfully registered your employee data information onto the db1_AlabamaUsersPersonalDataInformation database, and you can now sign up to create your iVoteBallot\'s employment job orders account.');
+				req.flash('success', 'You have successfully submitted your iVoteBallot Vote.');
 				
 				res.redirect('/alabama_Candidates_2024_02');
 
@@ -4980,8 +4980,9 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 			);
 
 			if (alreadySubmitted) {
-				//return res.status(400).json({ error: 'You have already submitted a vote for this category.' });
+				
 				req.flash('error', 'You have already submitted, your 2024 iVoteBallot vote.');
+
 			}		
 
 			db1_AlabamaUsersSelectedCandidates.run(
@@ -4992,7 +4993,7 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 
 					if (err) {
 						console.error(err);
-						//req.flash('error', 'An syntax error has occurred when you have entered your data information into the input field that is link to our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
+						req.flash('error', 'An error have occurred during your iVoteBallot vote submission.');
 						console.log('An syntax error has occurred when the user have entered his/her data information into the input field that is link our iVoteBallot database submission that cause our 500 error message display onto your device screen.');
 						res.render('535');
 		
@@ -5000,7 +5001,7 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 						
 						console.log('db1_AlabamaUsersSelectedCandidate is about to run.');
 						console.log('The user data information typed into the \'alabama_Candidates_2024_02\' input fields have been successfully parsed into the \'alabama_Candidates_2024_02\', SQLite3 database for user to create his/her iVoteBallot account. ' + Date());
-						//req.flash('success', 'The Human Resources Manager have successfully registered your employee data information onto the db1_AlabamaUsersSelectedCandidate database, and you can now sign up to create your iVoteBallot\'s employment job orders account.');
+						req.flash('success', 'You have successfully submitted your iVoteBallot Vote.');
 						
 						res.render('/alabama_Candidates_2024_02');
 					
@@ -5011,7 +5012,7 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
 		});		
 			
 	}
-			
+
 );
 
 iVoteBallotApp.delete('/alabama_Candidates_2024_02', checkMiddlewareAuthentication, async (req, res) => {
@@ -5031,7 +5032,6 @@ iVoteBallotApp.delete('/alabama_Candidates_2024_02', checkMiddlewareAuthenticati
         }
     );
 });
-
 
 /*
  userPresident, userGovernor, userLieutenantGovernor, userAttorneyGeneral, 
@@ -5134,7 +5134,7 @@ iVoteBallotApp.post('/alabama_Candidates_2024_02', checkMiddlewareAuthentication
         userSupremeCourtPlace5,
         userSupremeCourtPlace6
     };
-
+	
     console.log('New User Data:', newUser);
 
     try {
