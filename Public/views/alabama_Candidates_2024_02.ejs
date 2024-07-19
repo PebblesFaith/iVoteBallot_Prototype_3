@@ -358,7 +358,24 @@
 						<hr class="hr_Red_line">
 
 						<p class="stateElection_Title_01">Federal and Alabama State 2024 Elections Candidates</p>
-						<div id="errorMessageContainer"></div>	
+						<div id="errorMessageContainer"></div>							
+
+						<% if (messages.success) { %>
+							<div class="alert alert-success">
+							  <% messages.success.forEach(function(message) { %>
+								<%= message %>
+							  <% }); %>
+							</div>
+						<% } %>
+						  
+						<% if (messages.error) { %>
+							<div class="alert alert-danger">
+							  <% messages.error.forEach(function(message) { %>
+								<%= message %>
+							  <% }); %>
+							</div>
+						<% } %>						
+
 						<div class="panels">
 					
 						<div class="relative">
@@ -11199,7 +11216,7 @@
 																				</div>
 
 																			</div>																	
-
+																			
 																			<div class="scoreSheet_Flex_Container_Column">
 
 																				<div class="rightSide_ScoreSheet">
@@ -11241,30 +11258,36 @@
 												</ul>
 
 											</div>						
-
+											
 											<div id="second_Column">
 
 												<hr id="hr_Grey_line_02">
-
+												<!--
 												<p id="partiesGrey_Title_01">Independant</p>
-
+												
 												<ul class="alignCandidates_01">
 													
 												</ul>
+
+												-->
 
 											</div>
 
 											<div id="third_Column">
 
 												<hr id="hr_Blue_line_02">
+												<!--
 
 												<p id="partiesBlue_Title_01">Democrat</p>
+											
 
 												<ul class="alignCandidates_01">	
 													
-												</ul>						
+												</ul>
+												
+												-->
 
-											</div>
+											</div>										
 
 										</div>
 											
@@ -11280,7 +11303,7 @@
 
 						<br>
 
-						<input id="resetButton" type="reset" name="submit_Button"  value="CLEAR All CANDIDATES" />		
+						<!-- <input id="resetButton" type="reset" name="submit_Button"  value="CLEAR All CANDIDATES" /> -->	
 						
 						<span
 						
